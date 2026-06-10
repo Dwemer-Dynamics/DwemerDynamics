@@ -3,7 +3,7 @@ var menuIsOpen = false;
 const leftSidebarConfigs = {
     chim: {
         pageLinks: [
-            { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home", emoji: "\u2302\uFE0F" },
+            { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
             { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
             { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
             { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
@@ -30,7 +30,7 @@ const leftSidebarConfigs = {
     },
     stobe: {
         pageLinks: [
-            { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home", emoji: "\u2302\uFE0F" },
+            { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
             { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
             { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
             { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
