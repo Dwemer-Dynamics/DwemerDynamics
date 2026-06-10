@@ -97,3 +97,48 @@
 .guide-links-list p {
     margin: 0.55em 0;
 }
+
+.copyable-guide .card,
+.copyable-guide .card-green,
+.copyable-guide .card-yellow,
+.copyable-guide .card-red {
+    position: relative;
+}
+
+.guide-copy-button {
+    float: right;
+    margin: 0.85em 0 0.75em 1em;
+    padding: 0.42em 0.72em;
+    border: 1px solid rgba(242, 124, 17, 0.38);
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(42, 42, 42, 0.96), rgba(28, 28, 28, 0.98));
+    color: #f0c68a;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+    transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.guide-copy-button:hover {
+    border-color: rgba(242, 124, 17, 0.72);
+    color: #ffdca8;
+    transform: translateY(-1px);
+}
+
+.guide-copy-button:disabled {
+    cursor: default;
+    color: #a8efb2;
+    border-color: rgba(108, 188, 110, 0.55);
+    transform: none;
+}
+
+@media only screen and (max-width: 520px) {
+    .guide-copy-button {
+        float: none;
+        display: inline-flex;
+        margin: 0.8em 0 0.15em 0;
+    }
+}

@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     createLeftSidebar();
     createRightSidebar();
     markActivePage();
+    createGuideCopyButtons();
 });
 window.onscroll = updateProgressBarAndFadeIn;
 
@@ -227,6 +228,158 @@ function markActivePage() {
             link.classList.add("active");
         }
     });
+}
+
+function createGuideCopyButtons() {
+    if (!document.body.classList.contains("copyable-guide")) {
+        return;
+    }
+
+    const cards = document.querySelectorAll(".content .section > .card, .content .section > .card-green, .content .section > .card-yellow, .content .section > .card-red");
+    cards.forEach(function (card) {
+        if (card.classList.contains("hero-card")) {
+            return;
+        }
+
+        if (card.querySelector(".guide-copy-button")) {
+            return;
+        }
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "guide-copy-button";
+        button.textContent = "Copy section";
+        button.setAttribute("aria-label", "Copy this guide section to clipboard");
+
+        button.addEventListener("click", function () {
+            const text = buildGuideCopyText(card);
+            copyTextToClipboard(text).then(function () {
+                setGuideCopyButtonState(button, "Copied");
+            }).catch(function () {
+                setGuideCopyButtonState(button, "Copy failed");
+            });
+        });
+
+        card.insertBefore(button, card.firstChild);
+    });
+}
+
+function setGuideCopyButtonState(button, text) {
+    const originalText = "Copy section";
+    button.textContent = text;
+    button.disabled = text === "Copied";
+
+    window.setTimeout(function () {
+        button.textContent = originalText;
+        button.disabled = false;
+    }, 1600);
+}
+
+function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise(function (resolve, reject) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            const copied = document.execCommand("copy");
+            document.body.removeChild(textarea);
+            copied ? resolve() : reject(new Error("Copy command failed"));
+        } catch (error) {
+            document.body.removeChild(textarea);
+            reject(error);
+        }
+    });
+}
+
+function buildGuideCopyText(card) {
+    const clone = card.cloneNode(true);
+    clone.querySelectorAll(".guide-copy-button, script, style").forEach(function (node) {
+        node.remove();
+    });
+
+    return serializeGuideNode(clone)
+        .replace(/\n{3,}/g, "\n\n")
+        .replace(/[ \t]+\n/g, "\n")
+        .trim();
+}
+
+function serializeGuideNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent.replace(/\s+/g, " ");
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+        return "";
+    }
+
+    const tag = node.tagName.toLowerCase();
+
+    if (tag === "br") {
+        return "\n";
+    }
+
+    if (tag === "img") {
+        const alt = node.getAttribute("alt") || "";
+        return alt ? "\n[Image: " + alt.trim() + "]\n" : "";
+    }
+
+    if (tag === "a") {
+        const linkText = Array.from(node.childNodes).map(serializeGuideNode).join("").trim();
+        const href = node.getAttribute("href") || "";
+        if (href.startsWith("http")) {
+            return linkText ? linkText + " (" + href + ")" : href;
+        }
+
+        return linkText;
+    }
+
+    if (tag === "pre") {
+        return "\n\n```\n" + node.textContent.trim() + "\n```\n\n";
+    }
+
+    const childText = Array.from(node.childNodes).map(serializeGuideNode).join("").trim();
+    if (childText === "") {
+        return "";
+    }
+
+    if (tag === "h1") {
+        return "\n\n# " + childText + "\n\n";
+    }
+
+    if (tag === "h2") {
+        return "\n\n## " + childText + "\n\n";
+    }
+
+    if (tag === "h3") {
+        return "\n\n### " + childText + "\n\n";
+    }
+
+    if (tag === "h4") {
+        return "\n\n#### " + childText + "\n\n";
+    }
+
+    if (tag === "p" || tag === "figcaption") {
+        return "\n\n" + childText + "\n\n";
+    }
+
+    if (tag === "li") {
+        return "\n- " + childText;
+    }
+
+    if (tag === "ul" || tag === "ol") {
+        return "\n" + childText + "\n";
+    }
+
+    return childText;
 }
 
 document.addEventListener("click", function (event) {

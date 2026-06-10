@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Modders Guide | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260610a"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20260610a">
 </head>
-<body class="theme chim-theme">
+<body class="theme chim-theme copyable-guide">
     <div class="progress-container">
         <div class="progress-bar chim-progress"></div>
     </div>
@@ -85,6 +85,9 @@
                     </ul>
                     <p>
                         Those five file types are the current server-imported data mod formats. They are uploaded by the plugin to the CHIM server automatically, so the player does not need to rebuild them by hand in HerikaServer.
+                    </p>
+                    <p>
+                        The current CHIM download includes sample CSV files you can use as a starting point. Get them from the <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">CHIM Nexus files page</a>.
                     </p>
                     <h3>Voice Files</h3>
                     <ul>
@@ -180,7 +183,7 @@
                     </p>
                     <ul>
                         <li><b><code>globals.php</code>:</b> early global setup.</li>
-                        <li><b><code>functions.php</code>:</b> add or change AI-callable functions and actions.</li>
+                        <li><b>AI actions:</b> add or change AI-callable actions through the Action Editor/action catalog. Current action loading is data-driven rather than a separate plugin hook file.</li>
                         <li><b><code>preprocessing.php</code>:</b> early request preprocessing.</li>
                         <li><b><code>prerequest.php</code>:</b> run logic before the main request is sent.</li>
                         <li><b><code>context_pre.php</code>:</b> inject or change context before the system prompt is built.</li>
@@ -199,71 +202,209 @@
                         CHIM plugins can hook into more than one layer of the server. The useful way to think about it is: you are not limited to just adding a menu page. A plugin can affect prompt building, request handling, available actions, and CHIM's stored data.
                     </p>
                     <ul>
-                        <li><b>Early request preprocessing:</b> <code>preprocessing.php</code> runs near the start of request handling, before most of the main processing path. This is where a plugin can normalize or prepare incoming data early.</li>
-                        <li><b>Pre-request logic:</b> <code>prerequest.php</code> runs before the main request processor. This is a good place to inspect or alter request state before CHIM builds the rest of the response flow.</li>
-                        <li><b>Prompt context before system prompt build:</b> <code>context_pre.php</code> runs before the system prompt is assembled. Plugins can use this to inject extra nearby context or other support information before CHIM locks the main prompt together.</li>
-                        <li><b>Prompt context after system prompt build:</b> <code>context.php</code> runs after the system prompt is built. This is useful when you want to append or adjust extra context after the main structure already exists.</li>
-                        <li><b>Historic context building:</b> <code>context_building.php</code> can alter the built conversation/history context itself. This is the layer to use if you need to reshape what old context CHIM carries forward.</li>
-                        <li><b>Prompt text and dialogue templates:</b> <code>prompts.php</code> and <code>dialogue_prompt.php</code> let a plugin extend or override prompt text rather than only adding raw context blocks.</li>
-                        <li><b>LLM actions and callable functions:</b> <code>functions.php</code> is where plugins can add or change the AI-callable action/function layer. This is the main path if your plugin wants CHIM to expose new things the AI can do.</li>
-                        <li><b>Post-request behavior:</b> <code>prepostrequest.php</code> and <code>postrequest.php</code> run after request processing. Use this layer if the plugin needs to react to the result of a request, save extra data, or trigger follow-up behavior.</li>
-                        <li><b>JSON response shaping:</b> <code>json_response_custom.php</code> can customize structured response templates when your plugin needs to alter how JSON-side output is prepared.</li>
-                        <li><b>Web UI and control pages:</b> a plugin can expose its own page through <code>config_url</code> in the manifest. That can be a settings page, dashboard, monitor, visualizer, or tool panel.</li>
-                        <li><b>Background helpers and services:</b> a plugin can ship its own runtime script or worker process if it needs to keep doing work outside the normal page request cycle.</li>
-                        <li><b>Database schema:</b> a plugin can create and update its own tables with <code>migrations</code>, instead of depending only on existing CHIM tables.</li>
-                        <li><b>Existing CHIM data:</b> plugins can read existing CHIM-side data such as memories, logs, rolemaster state, NPC data, and other stored runtime information if they are building tooling or integrations around it.</li>
+                        <li>
+                            <b>Early request preprocessing:</b> <code>preprocessing.php</code> runs near the start of request handling, before most of the main processing path. This is where a plugin can normalize or prepare incoming data early.
+                            <br><em>Source: <code>HerikaServer/main.php</code></em>
+                            <pre><code>// Call extension's preprocessing files
+requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"preprocessing.php");</code></pre>
+                        </li>
+                        <li>
+                            <b>Pre-request logic:</b> <code>prerequest.php</code> runs before the main request processor. This is a good place to inspect or alter request state before CHIM builds the rest of the response flow.
+                            <br><em>Source: <code>HerikaServer/main.php</code></em>
+                            <pre><code>requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"prerequest.php");
+
+// Non-LLM request handling.
+require(__DIR__.DIRECTORY_SEPARATOR."processor".DIRECTORY_SEPARATOR."comm.php");</code></pre>
+                        </li>
+                        <li>
+                            <b>Prompt context before system prompt build:</b> <code>context_pre.php</code> runs before the system prompt is assembled. Plugins can use this to inject extra nearby context or other support information before CHIM locks the main prompt together.
+                            <br><em>Source: <code>CHIM-Twitch-Bot/context_pre.php</code></em>
+                            <pre><code>$currentNearby = $GLOBALS["PROMPT_NEARBY_SECTIONS"] ?? "";
+$GLOBALS["PROMPT_NEARBY_SECTIONS"] = twitchContextInjectIntoNearbySections($currentNearby, $contextBlock);</code></pre>
+                        </li>
+                        <li>
+                            <b>Prompt context after system prompt build:</b> <code>context.php</code> runs after the system prompt is built. This is useful when you want to append or adjust extra context after the main structure already exists.
+                            <br><em>Source: <code>HerikaServer/main.php</code></em>
+                            <pre><code>$head[] = array('role' => 'system', 'content' => $systemPrompt);
+
+// Check for context overrides on ext dir (plugins) after system prompt build
+requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"context.php");</code></pre>
+                        </li>
+                        <li>
+                            <b>Historic context building:</b> <code>context_building.php</code> can alter the built conversation/history context itself. This is the layer to use if you need to reshape what old context CHIM carries forward.
+                            <br><em>Source: <code>HerikaServer/lib/data_functions.php</code></em>
+                            <pre><code>$GLOBALS["CONTEXT_BUILDING_DATA"]=$orderedData;
+requireFilesRecursively(__DIR__."/../ext/","context_building.php");
+
+return $GLOBALS["CONTEXT_BUILDING_DATA"];</code></pre>
+                        </li>
+                        <li>
+                            <b>Prompt text and dialogue templates:</b> <code>prompts.php</code> and <code>dialogue_prompt.php</code> let a plugin extend or override prompt text rather than only adding raw context blocks.
+                            <br><em>Source: <code>HerikaServer/prompts/prompts.php</code> and <code>HerikaServer/prompts/dialogue_prompt.php</code></em>
+                            <pre><code>// Prompts provided by plugins
+requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"prompts.php");
+
+requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"dialogue_prompt.php");</code></pre>
+                        </li>
+                        <li>
+                            <b>LLM actions and callable functions:</b> the current action layer is data-driven through the Action Editor/action catalog. Use this path when your plugin or data package wants CHIM to expose new things the AI can do.
+                            <br><em>Source: <code>HerikaServer/data/core_action_seed.sql</code></em>
+                            <pre><code>('WaitHere',
+ 'Wait_Here',
+ '#HERIKA_NAME# waits and loiters at the current location.',
+ '#HERIKA_NAME# waits and stands at the place.',
+ TRUE,
+ TRUE,
+ FALSE,
+ FALSE,
+ '{"type":"object","required":[""],"properties":{"target":{"type":"string","description":""}}}'::jsonb,
+ '{"source":"functions.php","status":"active","builtin":true,"dispatch":"plugin_command","cooldown_seconds":300}'::jsonb,
+ TRUE,
+ 0,
+ NULL)</code></pre>
+                        </li>
+                        <li>
+                            <b>Post-request behavior:</b> <code>prepostrequest.php</code> and <code>postrequest.php</code> run after request processing. Use this layer if the plugin needs to react to the result of a request, save extra data, or trigger follow-up behavior.
+                            <br><em>Source: <code>HerikaServer/main.php</code></em>
+                            <pre><code>requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"prepostrequest.php");
+require(__DIR__.DIRECTORY_SEPARATOR."processor".DIRECTORY_SEPARATOR."postrequest.php");
+requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"postrequest.php");</code></pre>
+                        </li>
+                        <li>
+                            <b>JSON response shaping:</b> <code>json_response_custom.php</code> can customize structured response templates when your plugin needs to alter how JSON-side output is prepared.
+                            <br><em>Source: <code>HerikaServer/functions/json_response.php</code></em>
+                            <pre><code>chimEnsureRecursiveRequireHelper();
+requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"json_response_custom.php");
+$GLOBALS["CHIM_JSON_RESPONSE_EXT_LOADED"] = true;</code></pre>
+                        </li>
+                        <li>
+                            <b>Web UI and control pages:</b> a plugin can expose its own page through <code>config_url</code> in the manifest. That can be a settings page, dashboard, monitor, visualizer, or tool panel.
+                            <br><em>Source: <code>CHIM-Twitch-Bot/manifest.json</code></em>
+                            <pre><code>{
+    "name":"CHIM-Twitch-Bot",
+    "description":"Allows viewers to control AI NPC's via Twitch chat.",
+    "config_url":"/HerikaServer/ext/CHIM-Twitch-Bot/index.php",
+    "config_url_target": "_blank"
+}</code></pre>
+                        </li>
+                        <li>
+                            <b>Background helpers and services:</b> a plugin can ship its own runtime script or worker process if it needs to keep doing work outside the normal page request cycle.
+                            <br><em>Source: <code>CHIM-Twitch-Bot/command.php</code></em>
+                            <pre><code>$cmd = sprintf('%s %s %s %s %s',
+    escapeshellarg($this->php_path),
+    escapeshellarg($this->manager_script),
+    escapeshellarg($task),
+    escapeshellarg($type),
+    escapeshellarg($sanitizedFreeText)
+);
+
+exec($cmd, $output, $returnCode);</code></pre>
+                        </li>
+                        <li>
+                            <b>Database schema:</b> a plugin can create and update its own tables with <code>migrations</code>, instead of depending only on existing CHIM tables.
+                            <br><em>Source: <code>HerikaServer/ext/generic_installer.php</code></em>
+                            <pre><code>$migrationsDir = $targetDir . "/migrations";
+if (!is_dir($migrationsDir)) {
+    return true;
+}
+
+$migrations = glob($migrationsDir . "/*.sql");
+sort($migrations);</code></pre>
+                        </li>
+                        <li>
+                            <b>Existing CHIM data:</b> plugins can read existing CHIM-side data such as memories, logs, rolemaster state, NPC data, and other stored runtime information if they are building tooling or integrations around it.
+                            <br><em>Source: <code>CHIM-MindMap/api.php</code></em>
+                            <pre><code>$sql = 'SELECT uid, summary, embedding, companions, gamets_truncated FROM memory_summary';
+$params = [];
+$conditions = [];</code></pre>
+                        </li>
                     </ul>
                     <p>
                         In short, CHIM plugins can interface with both <b>runtime behavior</b> and <b>stored data</b>. Some plugins mainly change what the AI sees or can do, while others mainly add external integrations or build tools on top of CHIM's existing data.
                     </p>
 
+                    <h3>Relationship System As A Plugin Reference</h3>
                     <p>
-                        Here are a few real examples of what that looks like in practice:
+                        The built-in <code>HerikaServer/ext/relationship_system</code> folder is a useful reference for larger CHIM plugins. It is not just a settings page. It uses hook files, an embedded UI component, async queue tables, a background worker, and a dedicated helper class to keep heavier relationship analysis out of the main chat response path.
+                    </p>
+                    <p>
+                        You do not need this much structure for every plugin. The useful lesson is how the work is split: hook files connect into CHIM, UI files let users manage data, queue tables avoid blocking gameplay, and a worker handles expensive processing.
                     </p>
 
-                    <p><b>Manifest and plugin page</b></p>
-                    <pre><code>{
-  "name": "CHIM-Twitch-Bot",
-  "config_url": "/HerikaServer/ext/CHIM-Twitch-Bot/index.php",
-  "git_repo": "Dwemer-Dynamics/CHIM-Twitch-Bot",
-  "version": "1.3.0",
-  "schema_version": 2
+                    <p><b>Prompt-time hook</b></p>
+                    <p>
+                        <code>context_pre.php</code> checks whether the relationship system is enabled, loads shared helpers, and starts the worker when a dedicated relationship connector is configured.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/ext/relationship_system/context_pre.php</code></em></p>
+                    <pre><code>if (empty($GLOBALS['RELATIONSHIP_SYSTEM_ENABLED'])) {
+    return;
+}
+
+require_once $GLOBALS["ENGINE_PATH"] . "lib/relationship_manager.php";
+require_once $GLOBALS["ENGINE_PATH"] . "lib/logger.php";
+
+$useRelLLM = !empty($GLOBALS['RELLLM_CONNECTOR']) && $GLOBALS['RELLLM_CONNECTOR'] > 0;
+if ($useRelLLM) {
+    _relEnsureWorkerRunning();
 }</code></pre>
-                    <p>
-                        This is the basic interface between your plugin and the CHIM plugin manager. It tells CHIM what the plugin is called, where its page lives, and how the installer updates it.
-                    </p>
 
-                    <p><b>Prompt context injection</b></p>
-                    <pre><code>$currentNearby = $GLOBALS["PROMPT_NEARBY_SECTIONS"] ?? "";
-$contextBlock = "&lt;twitch_chat&gt;\n" .
-    "# TWITCH CHAT CONTEXT\n" .
-    "## viewer1: say hello to Lydia\n" .
-    "&lt;/twitch_chat&gt;";
-
-$GLOBALS["PROMPT_NEARBY_SECTIONS"] = $currentNearby . "\n" . $contextBlock;</code></pre>
+                    <p><b>Post-request hook</b></p>
                     <p>
-                        This is the same kind of pattern used by the Twitch Bot plugin in <code>context_pre.php</code>. The plugin adds off-screen Twitch chat into the context CHIM gives the AI.
+                        <code>postrequest.php</code> runs after a response and queues relationship work instead of making the player wait for another LLM call during chat.
                     </p>
+                    <p><em>Source: <code>HerikaServer/ext/relationship_system/postrequest.php</code></em></p>
+                    <pre><code>if (empty($GLOBALS['RELATIONSHIP_SYSTEM_ENABLED'])) {
+    return;
+}
 
-                    <p><b>Background service and command handoff</b></p>
-                    <pre><code>$cmd = sprintf('%s %s %s %s %s',
-    escapeshellarg($this->php_path),
-    escapeshellarg($this->manager_script),
-    escapeshellarg('rolemaster'),
-    escapeshellarg('suggestion'),
-    escapeshellarg($sanitizedFreeText)
-);</code></pre>
-                    <p>
-                        This is the runtime pattern used by CHIM-Twitch-Bot. The plugin is not just a page, it also runs its own service and forwards accepted viewer commands into CHIM's existing rolemaster pipeline.
-                    </p>
+require_once $GLOBALS["ENGINE_PATH"] . "lib/logger.php";
 
-                    <p><b>Reading CHIM memory data</b></p>
-                    <pre><code>$sql = 'SELECT uid, summary, embedding, companions, gamets_truncated
-FROM memory_summary
-ORDER BY gamets_truncated ASC';</code></pre>
+$_relEntryNpcName = $GLOBALS["HERIKA_NAME"] ?? 'NULL';
+Logger::debug("[REL-ENTRY] postrequest.php loaded for HERIKA_NAME='{$_relEntryNpcName}'");</code></pre>
+
+                    <p><b>Plugin-owned queue table</b></p>
                     <p>
-                        This is the kind of pattern used by CHIM-MindMap. It reads CHIM data that already exists in the database and builds its own tool on top of that data instead of changing gameplay directly.
+                        The relationship plugin creates its own queue table and keeps migration-style changes close to the feature that owns them.
                     </p>
+                    <p><em>Source: <code>HerikaServer/ext/relationship_system/async_queue.php</code></em></p>
+                    <pre><code>$GLOBALS['db']->query("
+    CREATE TABLE IF NOT EXISTS relationship_eval_queue (
+        id SERIAL PRIMARY KEY,
+        npc_id INTEGER NOT NULL UNIQUE,
+        eval_data JSONB NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW(),
+        retry_count INTEGER DEFAULT 0,
+        last_error TEXT
+    )
+");</code></pre>
+
+                    <p><b>Embeddable UI component</b></p>
+                    <p>
+                        <code>relationship_editor.php</code> is written as a component that can be included from an existing CHIM page. This is a good pattern when your plugin extends an existing workflow instead of needing a full standalone dashboard.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/ext/relationship_system/relationship_editor.php</code></em></p>
+                    <pre><code>if (!isset($editItem) || !is_array($editItem)) {
+    return;
+}
+
+require_once $GLOBALS["ENGINE_PATH"] . "lib/relationship_manager.php";
+
+$extendedData = json_decode($editItem['extended_data'] ?? '{}', true) ?: [];
+$jsonbRelationships = $extendedData['relationships'] ?? [];</code></pre>
+
+                    <p><b>Background worker</b></p>
+                    <p>
+                        <code>worker.php</code> is a CLI script that can run once or as a daemon. This is the pattern to copy when a plugin has work that should not block a normal web request.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/ext/relationship_system/worker.php</code></em></p>
+                    <pre><code>$daemon = in_array('--daemon', $argv);
+$interval = 2;
+
+foreach ($argv as $arg) {
+    if (strpos($arg, '--interval=') === 0) {
+        $interval = max(1, intval(substr($arg, 11)));
+    }
+}</code></pre>
 
                     <h3>Packaging And Deployment</h3>
                     <p>
@@ -307,12 +448,12 @@ ORDER BY gamets_truncated ASC';</code></pre>
                     </p>
                     <ul>
                         <li><b>Name:</b> the action name CHIM exposes in the catalog.</li>
-                        <li><b>Description:</b> the main instruction text telling the AI what the action is for.</li>
-                        <li><b>Return message:</b> the short result text CHIM gets back after the action runs.</li>
+                        <li><b>Prompt:</b> the main instruction text telling the AI what the action is for. In the CSV and database this is still stored in the <code>description</code> column.</li>
+                        <li><b>Return message:</b> the readable result text CHIM can add to logs/context after the action reports back. This is separate from the optional follow-up response.</li>
                         <li><b>Enabled state:</b> whether the action is currently active.</li>
                         <li><b>Scope flags:</b> who the action is available to.</li>
                         <li><b>Parameter schema:</b> the structured arguments the action accepts.</li>
-                        <li><b>Metadata:</b> extra behavior settings such as dispatch style, follow-up behavior, and editor fields.</li>
+                        <li><b>Metadata:</b> extra behavior settings such as dispatch style, follow-up behavior, cooldowns, requirements, and editor fields.</li>
                     </ul>
 
                     <h3>Scopes</h3>
@@ -335,7 +476,7 @@ ORDER BY gamets_truncated ASC';</code></pre>
                     </p>
                     <ul>
                         <li><b>Enable or Disable:</b> turns the action on or off by writing a persistent custom override row.</li>
-                        <li><b>Text fields:</b> edits the action name, description, and return message without changing the original built-in row.</li>
+                        <li><b>Text fields:</b> edits the action name, prompt, and return message without changing the original built-in row.</li>
                         <li><b>Config:</b> edits metadata-backed settings that the page knows how to render as normal form fields.</li>
                         <li><b>Parameters:</b> edits the full <code>parameters_json</code> schema for structured action arguments.</li>
                         <li><b>Metadata preview:</b> shows the current metadata block so you can inspect how the action is wired.</li>
@@ -345,16 +486,70 @@ ORDER BY gamets_truncated ASC';</code></pre>
 
                     <h3>What The Config Section Means</h3>
                     <p>
-                        The config area is driven by editor field definitions in the action metadata. Every action can inherit the shared follow-up settings, and some built-in actions also add their own extra fields such as gold cost or allowed NPC lists.
+                        The config area is driven by editor field definitions in the action metadata. Every action can inherit the shared follow-up settings, and some built-in actions also add their own extra fields such as gold cost, cooldown, requirement, or allowed NPC settings.
                     </p>
                     <ul>
                         <li><b>Follow-up Enabled:</b> allows CHIM to generate a second response after the action result comes back.</li>
-                        <li><b>Follow-up Argument Name:</b> tells CHIM which argument name to reuse when building that follow-up request.</li>
+                        <li><b>Follow-up Argument Name:</b> tells CHIM which argument from the original action call should be reused when building that follow-up request. If this is blank, CHIM falls back to the required schema field, then common names like <code>target</code>, <code>location</code>, <code>item</code>, <code>amount</code>, or <code>speed</code>.</li>
                         <li><b>Follow-up Prompt:</b> the extra instruction CHIM prepends when it asks for the follow-up line.</li>
-                        <li><b>Allow Follow-up Actions:</b> lets the follow-up response call another action again, within CHIM's follow-up chain limits.</li>
+                        <li><b>Allow Follow-up Actions:</b> lets the follow-up response call another action again, within CHIM's follow-up chain limit. The current shared limit is one chained follow-up action.</li>
                     </ul>
                     <p>
-                        Not every action has editable config. If an action does not define editor fields, the page simply shows that there is no editable config for that row.
+                        Actions can also define their own config fields through <code>metadata.editor_fields</code>. Those fields appear in the Action Editor under the shared follow-up controls. This is how actions like <code>Hire_Ferry</code> expose <b>Gold Cost</b> and <b>Allowed NPCs</b> without hardcoding those values into the prompt text.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/lib/core/action_catalog.php</code></em></p>
+                    <pre><code>'HireFerry' => [
+    [
+        'key' => 'cost_gold',
+        'label' => 'Gold Cost',
+        'type' => 'integer',
+        'default' => 50,
+        'minimum' => 1,
+        'format' => 'gold',
+    ],
+    [
+        'key' => 'allowed_npc_names',
+        'label' => 'Allowed NPCs',
+        'type' => 'textarea',
+        'default' => "Gort\nHarlaug\nJolf",
+        'format' => 'name_list',
+    ],
+]</code></pre>
+                    <p>
+                        The saved config can then be reused by requirements and parameter templates. For <code>Hire_Ferry</code>, <code>allowed_npc_names</code> limits which NPCs can offer ferry travel, and <code>cost_gold</code> is copied into the action amount.
+                    </p>
+                    <pre><code>'HireFerry' => [
+    'npc_name_in_action_config_list' => [
+        'config_key' => 'allowed_npc_names',
+    ],
+]
+
+'HireFerry' => [
+    'target' => '{{parameter_target}}',
+    'amount' => '{{config.cost_gold}}',
+]</code></pre>
+                    <p>
+                        Not every action has editable config. If an action does not define editor fields, the page simply shows that there is no editable config for that row. Also note that follow-up is not the same thing as the return message: the return message is the action result text CHIM can place into context, while follow-up asks the LLM for another in-character line after that result.
+                    </p>
+
+                    <h3>Prompt, Return Message, And Placeholders</h3>
+                    <p>
+                        The editor shows the AI-facing instruction as <b>Prompt</b>, but custom action CSVs still use the historical <code>description</code> column name. Keep prompt text short, direct, and specific about when the AI should use the action.
+                    </p>
+                    <p>
+                        Return messages should describe the completed action in plain text. CHIM can template common placeholders before the message is logged or used as action-result context:
+                    </p>
+                    <ul>
+                        <li><code>#HERIKA_NAME#</code>: the acting NPC.</li>
+                        <li><code>#PLAYER_NAME#</code>: the player.</li>
+                        <li><code>#TARGET#</code>: the main target argument, usually an actor or NPC.</li>
+                        <li><code>#LOCATION#</code>: the destination or location argument when one exists.</li>
+                        <li><code>#ITEM#</code>: the item argument when one exists.</li>
+                        <li><code>#AMOUNT#</code>: the amount argument when one exists.</li>
+                        <li><code>#RESULT#</code>: the raw result text returned by the action bridge when available.</li>
+                    </ul>
+                    <p>
+                        For game-side actions, the Papyrus or DLL bridge should still report a result back to CHIM, commonly through a <code>funcret</code> message. For server-side script-proxy actions, HerikaServer can execute the script proxy and write the action result itself.
                     </p>
 
                     <h3>How Custom Actions Are Shipped</h3>
@@ -376,8 +571,10 @@ ORDER BY gamets_truncated ASC';</code></pre>
                         <li><b><code>return_message</code>:</b> the result text returned after the action runs.</li>
                         <li><b><code>available_to_npc</code>, <code>available_to_followers</code>, <code>available_to_narrator</code>:</b> the scope flags.</li>
                         <li><b><code>is_activated</code>:</b> whether the action starts enabled.</li>
+                        <li><b><code>game_function</code>:</b> whether the action is treated as a game-side action in the editor's Dispatch filter. Defaults to enabled for imported custom actions.</li>
                         <li><b><code>parameters_json</code>:</b> the JSON schema for action arguments.</li>
                         <li><b><code>metadata</code>:</b> extra action wiring such as dispatch type, source, follow-up settings, and bridge details.</li>
+                        <li><b><code>import_version</code>:</b> optional numeric version for imported action rows. A row only overwrites an existing imported custom row when its version is higher.</li>
                         <li><b><code>script_proxy_program</code>:</b> optional server-side runtime logic for script-proxy actions.</li>
                     </ul>
 
@@ -386,16 +583,119 @@ ORDER BY gamets_truncated ASC';</code></pre>
                         The useful split is not "simple versus advanced". The real split is <b>who executes the action</b>.
                     </p>
                     <ul>
-                        <li><b>Plugin-command actions:</b> CHIM exposes the action in the catalog, but the actual execution happens through game-side code such as Papyrus or a DLL-backed bridge.</li>
-                        <li><b>Script-proxy actions:</b> the catalog row includes a server-side script-proxy program, and HerikaServer can run that action logic itself.</li>
+                        <li><b>Plugin-command actions:</b> CHIM exposes the action in the catalog, but the actual execution happens through game-side code such as Papyrus or a DLL-backed bridge. This is the normal model when the action needs the game client to do the work.</li>
+                        <li><b>Script-proxy actions:</b> the catalog row includes a server-side script-proxy program, and HerikaServer can run that action logic itself. This is useful for server-side command batches, database writes, or simple runtime helper behavior.</li>
                     </ul>
                     <p>
-                        If the action needs to manipulate Skyrim gameplay directly, a plugin-command action is usually the right model. If it only needs server-side logic, data updates, or helper behavior, a script-proxy action can be enough.
+                        If the action needs to manipulate Skyrim gameplay directly, a plugin-command action is usually the right model. If it only needs server-side logic, data updates, or helper behavior, a script-proxy action can be enough. If a custom action includes <code>script_proxy_program</code> and does not explicitly set <code>metadata.dispatch</code>, CHIM treats it as <code>script_proxy</code>; otherwise imported custom actions default to <code>plugin_command</code>.
                     </p>
+
+                    <h3>What Script Proxy Can And Cannot Do</h3>
+                    <p>
+                        Script Proxy is a small server-side action runner. It lets an action row describe simple work that HerikaServer can perform directly instead of handing the action to a Papyrus or DLL bridge.
+                    </p>
+                    <ul>
+                        <li><b>What it can do:</b> send supported command-builder messages, insert known server database rows, and update supported NPC metadata using values from the action context.</li>
+                        <li><b>What it is good for:</b> simple repeatable action sequences, lightweight server bookkeeping, and actions where the server already has enough context to do the work.</li>
+                        <li><b>What it is limited by:</b> it is not a general scripting language, it should not replace complex Papyrus/game-side logic, and it can only use the command, database, and metadata operations the action catalog runner supports.</li>
+                        <li><b>How results work:</b> if the row has a return message, CHIM can log a readable action result after the script-proxy program runs. Follow-up behavior is still controlled separately by the action metadata.</li>
+                    </ul>
+
+                    <h3>Existing Script Proxy Actions</h3>
+                    <p>
+                        Current built-in script-proxy actions include <code>Drink</code>, <code>Make_A_Toast</code>, <code>Start_Ritual_Ceremony</code>, and <code>End_Ritual_Ceremony</code>. They show the main patterns Script Proxy supports: choose a case from context, send command-builder messages, write bookkeeping rows, and update NPC metadata.
+                    </p>
+
+                    <p><b>Drink: choose behavior from actor state</b></p>
+                    <p>
+                        <code>Drink</code> switches on <code>actor_furniture</code>. If the actor is in a chair, it sends one idle command; otherwise it uses the default idle. It also inserts an <code>actions_issued</code> row so the server records that the action happened.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/data/core_action_seed.sql</code></em></p>
+                    <pre><code>{
+  "switch_on": "actor_furniture",
+  "cases": {
+    "Chair": {
+      "commands": [
+        {"cmd_id": 34, "args": {"akIdle": "0x00065d07", "targetObjectFormId": "{{actor_refid}}"}}
+      ]
+    },
+    "__default": {
+      "commands": [
+        {"cmd_id": 34, "args": {"akIdle": "0x00103656", "targetObjectFormId": "{{actor_refid}}"}}
+      ]
+    }
+  }
+}</code></pre>
+
+                    <p><b>Make_A_Toast: run a short command sequence</b></p>
+                    <p>
+                        <code>Make_A_Toast</code> sends two command-builder messages. The second command uses <code>delay_seconds</code>, so Script Proxy can model a small repeatable sequence without creating a custom Papyrus bridge for that action.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/data/core_action_seed.sql</code></em></p>
+                    <pre><code>{
+  "commands": [
+    {"cmd_id": 34, "args": {"akIdle": "0x0010528a", "targetObjectFormId": "{{actor_refid}}"}},
+    {"cmd_id": 34, "delay_seconds": "{{toast_delay_seconds}}", "args": {"akIdle": "0x00103656", "targetObjectFormId": "{{actor_refid}}"}}
+  ],
+  "db_inserts": [
+    {"table": "actions_issued", "data": {"action": "Toast", "actorname": "{{actor_name}}"}}
+  ]
+}</code></pre>
+
+                    <p><b>Start_Ritual_Ceremony: branch on the action parameter</b></p>
+                    <p>
+                        <code>Start_Ritual_Ceremony</code> switches on <code>parameter_target</code>. That lets one action support variants such as <code>Magical</code> or <code>Blood</code> while still using one action row and one parameter schema.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/data/core_action_seed.sql</code></em></p>
+                    <pre><code>{
+  "switch_on": "parameter_target",
+  "cases": {
+    "Magical": {
+      "commands": [
+        {"cmd_id": 34, "args": {"akIdle": "0x000f11e2", "targetObjectFormId": "{{actor_refid}}"}},
+        {"cmd_id": 300, "args": {"akObject": "{{actor_refid}}", "afDuration": 20, "targetObjectFormId": "0x0005fb82"}}
+      ]
+    },
+    "Blood": {
+      "commands": [
+        {"cmd_id": 34, "args": {"akIdle": "0x000af886", "targetObjectFormId": "{{actor_refid}}"}}
+      ]
+    }
+  }
+}</code></pre>
+
+                    <p><b>Start and end ritual: update server-side NPC state</b></p>
+                    <p>
+                        Ritual actions also show the metadata pattern. Starting a ritual sets <code>ritual_state</code> and <code>activity_status</code>; ending it clears that state and marks the NPC idle again.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/data/core_action_seed.sql</code></em></p>
+                    <pre><code>{
+  "npc_metadata_updates": {
+    "ritual_state": {
+      "type": "{{parameter_target}}",
+      "active": true,
+      "gamets": "{{game_ts}}",
+      "started_at": "{{local_ts}}"
+    },
+    "activity_status": {
+      "current_use": "{{parameter_target}}",
+      "current_action": "ritual"
+    }
+  }
+}</code></pre>
+
+                    <p><b>What the runner actually executes</b></p>
+                    <p>
+                        The action catalog runner handles these program sections directly. This is the hard limit of Script Proxy: if the work is not expressible as cases, commands, database inserts, or NPC metadata updates, it belongs in game-side code or a dedicated server plugin.
+                    </p>
+                    <p><em>Source: <code>HerikaServer/lib/core/action_catalog.php</code></em></p>
+                    <pre><code>$executed = herikaActionCatalogExecuteScriptProxyCommands($program['commands'] ?? [], $context) || $executed;
+$executed = herikaActionCatalogExecuteScriptProxyDbInserts($program['db_inserts'] ?? [], $context) || $executed;
+$executed = herikaActionCatalogExecuteScriptProxyNpcMetadataUpdates($program['npc_metadata_updates'] ?? [], $context) || $executed;</code></pre>
 
                     <h3>CHIM-NFF Example</h3>
                     <p>
-                        CHIM-NFF is the clearest current example of how a custom gameplay action is built. The CSV in <code>CHIM-NFF/CHIM/nff_actions.csv</code> defines the actions CHIM should expose, and the Papyrus script in <code>CHIM-NFF/Source/Scripts/CHIMNFF.psc</code> is the runtime bridge that actually performs the follower-framework command.
+                        <a href="https://www.nexusmods.com/skyrimspecialedition/mods/182050" target="_blank" rel="noopener">CHIM-NFF</a> is the clearest current example of how a custom gameplay action is built. The CSV in <code>CHIM-NFF/CHIM/nff_actions.csv</code> defines the actions CHIM should expose, and the Papyrus script in <code>CHIM-NFF/Source/Scripts/CHIMNFF.psc</code> is the runtime bridge that actually performs the follower-framework command.
                     </p>
 
                     <p><b>Example action row</b></p>
@@ -430,12 +730,26 @@ EndFunction</code></pre>
                         This is the key pattern. The CSV row defines the AI-facing action, the Papyrus bridge decides whether it handles that command, and then it reports the result back to CHIM through a <code>funcret</code> message.
                     </p>
 
+                    <h3>Examples From Current Action Rows</h3>
+                    <p>
+                        The built-in action rows use the same framework a modded action uses. These examples are useful because they show the different jobs an action row can do without requiring a custom plugin.
+                    </p>
+                    <ul>
+                        <li><b>Information lookup actions:</b> actions like <code>Inspect</code>, <code>Inspect_Surroundings</code>, or <code>Check_Inventory</code> expose a prompt and parameter schema, then depend on a result coming back from the game or server. Their return text or follow-up prompt tells CHIM how to turn that result into useful context.</li>
+                        <li><b>Parameterized gameplay actions:</b> actions like <code>Give_Item_To</code> show how the parameter schema controls what the AI must provide. The schema can require fields such as <code>target</code>, <code>item</code>, or <code>amount</code>, and the return message can template those values into a readable result.</li>
+                        <li><b>Server-side script-proxy actions:</b> actions like <code>Make_A_Toast</code> show the other execution style. Instead of waiting for an external bridge to handle the command, the action row can include a script-proxy program that HerikaServer executes directly.</li>
+                        <li><b>External bridge actions:</b> CHIM-NFF actions show the custom mod pattern. The action row tells CHIM what the AI can call, while a Papyrus bridge in the mod decides how to perform the command and reports the result back.</li>
+                    </ul>
+                    <p>
+                        The common pattern is: the action row describes what the AI can call, the parameter schema describes what data the AI must provide, the dispatch metadata decides who executes it, and the return/follow-up settings decide how the result is fed back into CHIM.
+                    </p>
+
                     <h3>How Follow-Up Actions Fit In</h3>
                     <p>
                         CHIM-NFF's <code>TeachRightHandSpell</code> row is a good example of the follow-up system. Its metadata enables a follow-up prompt so CHIM can produce one short in-character reaction after the spell-learning action succeeds.
                     </p>
                     <p>
-                        This is what the shared follow-up config fields in the Action Editor are for. They do not make the gameplay action itself happen. They control what CHIM should do with the result <b>after</b> the action has already run and returned.
+                        This is what the shared follow-up config fields in the Action Editor are for. They do not make the gameplay action itself happen, and they are not required for CHIM to record the action result. They only control whether CHIM should ask the LLM for another in-character response <b>after</b> the action has already run and returned.
                     </p>
 
                 </div>
