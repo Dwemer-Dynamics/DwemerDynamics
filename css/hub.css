@@ -32,12 +32,18 @@
 
 .hubTileArtwork {
     width: 100%;
-    flex: 1 1 auto;
+    flex: 0 0 auto;
+    aspect-ratio: 1 / 1;
     min-height: 0;
-    background-size: 100% auto;
-    background-position: center center;
-    background-repeat: no-repeat;
+    overflow: hidden;
     background-color: var(--site-bg-secondary);
+}
+
+.hubTileArtwork img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 }
 
 .hubTileLink {
@@ -177,27 +183,57 @@
     min-height: 64px;
     padding: 0.95em 1.1em;
     border-radius: 8px;
-    background-color: var(--site-bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    background-color: rgba(30, 35, 45, 0.8);
+    border: 1px solid rgba(138, 155, 182, 0.3);
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
     text-decoration: none;
     font-size: 1.05em;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     text-align: center;
-    transition: background-color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px rgba(255, 255, 255, 0.1);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
 }
 
 .hubResourceButton:hover {
-    background-color: #242424;
-    border-color: rgba(255, 255, 255, 0.16);
+    background-color: rgb(1 43 135 / 95%);
+    border-color: rgba(96, 165, 250, 0.4);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px rgba(255, 255, 255, 0.15);
 }
 
-#chimHub .hubTileArtwork {
-    background-image: url("../img/chim_home_tile.jpg");
+.hubResourceButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2),
+        inset 0 1px rgba(255, 255, 255, 0.1);
 }
 
-#stobeHub .hubTileArtwork {
-    background-image: url("../img/stobe_home_tile.jpg");
+.hubResourceButtonChim {
+    background-color: rgb(1 53 166 / 90%);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.hubResourceButtonChim:hover {
+    background-color: rgb(1 43 135 / 95%);
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+.hubResourceButtonStobe {
+    background-color: rgba(173, 120, 46, 0.9);
+    border-color: rgba(230, 183, 108, 0.38);
+}
+
+.hubResourceButtonStobe:hover {
+    background-color: rgba(147, 101, 36, 0.95);
+    border-color: rgba(230, 183, 108, 0.5);
 }
 
 .hubFooter {
@@ -247,7 +283,8 @@
     }
 
     .hubTileArtwork {
-        min-height: 22vh;
+        width: min(100%, 520px);
+        margin: 0 auto;
     }
 
     .hubColumn h2 {
