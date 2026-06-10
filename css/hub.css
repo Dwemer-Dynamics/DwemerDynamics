@@ -43,7 +43,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: contain;
+    object-position: center center;
 }
 
 .hubTileLink {
@@ -203,8 +204,6 @@
 }
 
 .hubResourceButton:hover {
-    background-color: rgb(1 43 135 / 95%);
-    border-color: rgba(96, 165, 250, 0.4);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 1px rgba(255, 255, 255, 0.15);
@@ -217,23 +216,23 @@
 }
 
 .hubResourceButtonChim {
-    background-color: rgb(1 53 166 / 90%);
-    border-color: rgba(96, 165, 250, 0.3);
+    background-color: rgb(242, 124, 17);
+    border-color: rgba(242, 124, 17, 0.95);
 }
 
 .hubResourceButtonChim:hover {
-    background-color: rgb(1 43 135 / 95%);
-    border-color: rgba(96, 165, 250, 0.4);
+    background-color: rgb(221, 106, 6);
+    border-color: rgba(221, 106, 6, 0.95);
 }
 
 .hubResourceButtonStobe {
-    background-color: rgba(173, 120, 46, 0.9);
-    border-color: rgba(230, 183, 108, 0.38);
+    background-color: #e6b76c;
+    border-color: #e6b76c;
 }
 
 .hubResourceButtonStobe:hover {
-    background-color: rgba(147, 101, 36, 0.95);
-    border-color: rgba(230, 183, 108, 0.5);
+    background-color: #d2a45a;
+    border-color: #d2a45a;
 }
 
 .hubFooter {
