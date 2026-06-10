@@ -1,12 +1,12 @@
 .hubPicker {
     display: flex;
     flex-wrap: wrap;
-    height: 60vh;
-    width: 98%;
+    width: min(980px, calc(100% - 2em));
     margin-left: auto;
     margin-right: auto;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.25em;
     overflow-x: hidden;
     position: relative;
     border-bottom-left-radius: 8px;
@@ -18,8 +18,9 @@
 }
 
 .hubColumn {
-    flex-basis: 15%;
-    flex-grow: 1;
+    flex: 0 0 440px;
+    width: 440px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,10 +32,10 @@
 }
 
 .hubTileArtwork {
-    width: 100%;
+    width: 440px;
     flex: 0 0 auto;
-    aspect-ratio: 1 / 1;
-    min-height: 0;
+    height: 440px;
+    max-width: 100%;
     overflow: hidden;
     background-color: var(--site-bg-secondary);
 }
@@ -204,15 +205,12 @@
 }
 
 .hubResourceButton:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
-        inset 0 1px rgba(255, 255, 255, 0.15);
+    border-color: rgba(230, 183, 108, 0.5);
+    color: #f1c88c;
 }
 
 .hubResourceButton:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2),
-        inset 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .hubResourceButtonChim {
@@ -271,18 +269,19 @@
 @media (max-width: 1220px) {
     .hubPicker {
         flex-direction: column;
-        height: 50%;
         width: 100%;
         min-height: auto;
+        align-items: center;
     }
 
     .hubColumn {
-        flex-basis: 30%;
-        min-height: 25vh;
+        flex: 0 0 auto;
+        width: min(100%, 520px);
     }
 
     .hubTileArtwork {
-        width: min(100%, 520px);
+        width: min(calc(100vw - 2em), 520px);
+        height: min(calc(100vw - 2em), 520px);
         margin: 0 auto;
     }
 
