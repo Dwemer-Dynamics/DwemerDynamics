@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Configuration | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="Configuration" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Configuration</h1>
+                    <p>
+                        This page is the practical map of the main CHIM configuration tabs in HerikaServer.
+                        Use it after your base install is already working.
+                    </p>
+                    <p>
+                        These summaries are based on the current HerikaServer UI, not just the older wiki layout.
+                    </p>
+                </div>
+
+                <div class="card" id="GeneralSettings">
+                    <h2>Configuration</h2>
+                    <h3>General Settings</h3>
+                    <p>
+                        This is the global rules page for CHIM. Changes here apply broadly across conversations instead of only to one NPC or one profile.
+                    </p>
+                    <ul>
+                        <li><b>Prompt and Rechat:</b> Controls prompt head text, mood formatting, and how rechat targeting behaves.</li>
+                        <li><b>Memory:</b> Handles memory embedding, text2vec usage, and summary creation timing.</li>
+                        <li><b>Global Connectors:</b> Picks shared large language model connectors for background systems like summaries, dynamic profiles, scene classification, and director logic.</li>
+                        <li><b>Context and Prompt Context:</b> Controls what categories of game information are injected into prompts and lets you trim noisy context.</li>
+                        <li><b>Misc and Translation:</b> Covers automation, lock behavior, background-life cooldowns, and DeepL translation settings.</li>
+                    </ul>
+                    <p>
+                        In practice, this is where you shape overall roleplay behavior and the shared backend logic CHIM uses outside of individual NPC profile choices.
+                    </p>
+                </div>
+
+                <div class="card" id="Profiles">
+                    <h3>Profiles</h3>
+                    <p>
+                        Profiles are the main grouping system for CHIM NPCs. Instead of configuring every character from scratch, you create reusable profile bundles and assign NPCs to them.
+                    </p>
+                    <ul>
+                        <li><b>Core profile settings:</b> Label, quick slot, default NPC behavior, default narrator behavior, dynamic profile options, and profile prompt text.</li>
+                        <li><b>Connector assignment:</b> Each profile can point to its own Standard, Fast, Powerful, Experimental, Diary, Formatter, Text-to-Speech, and Image-to-Text connectors.</li>
+                        <li><b>Workflow tools:</b> Create, clone, export, import, test all profiles, and manage profile rules.</li>
+                        <li><b>Gameplay use:</b> Profile slots support in-game hot swapping through the CHIM settings wheel.</li>
+                    </ul>
+                    <p>
+                        If you want different NPC groups to roleplay differently, this is usually the most important page after installation.
+                    </p>
+                </div>
+
+                <div class="card" id="ApiKeys">
+                    <h3>API Keys</h3>
+                    <p>
+                        API Keys is the shared credential hub for CHIM. Connectors and services point back to keys saved here instead of asking you to paste the same credential over and over.
+                    </p>
+                    <ul>
+                        <li><b>Preset providers:</b> Includes first-class entries like OpenRouter, OpenAI, Deepgram, Google, Azure, and ElevenLabs.</li>
+                        <li><b>Custom keys:</b> Lets you save additional provider labels for non-default services.</li>
+                        <li><b>Usage model:</b> Keys are stored globally, then selected by the large language model, text-to-speech, speech-to-text, or other connector pages.</li>
+                        <li><b>Testing:</b> The current page can test some providers directly so you can catch bad credentials early.</li>
+                    </ul>
+                    <p>
+                        This page is simple by design. Get the keys right here first, then do the real provider setup on the connector and profile pages.
+                    </p>
+                </div>
+
+                <div class="card" id="PlaythroughManager">
+                    <h3>Playthrough Manager</h3>
+                    <p>
+                        Playthrough Manager is the CHIM database snapshot tool. It is used to create, switch, and manage full playthrough states instead of just changing one setting or one NPC profile.
+                    </p>
+                    <ul>
+                        <li><b>Public schema versus snapshots:</b> Your active CHIM database lives in the public schema, while saved playthrough snapshots are stored separately.</li>
+                        <li><b>Create snapshots:</b> You can save the current playthrough state with a name and notes so you can come back to it later.</li>
+                        <li><b>Switch playthroughs:</b> Using <b>Copy to Public</b> replaces the live database with that snapshot and automatically saves your current public state first.</li>
+                        <li><b>Restart required:</b> After switching, the CHIM server needs to be restarted for the new playthrough state to fully take effect.</li>
+                        <li><b>Safety and cleanup:</b> The page prevents deleting the active profile and keeps a default baseline snapshot in place.</li>
+                    </ul>
+                    <p>
+                        This is mainly for advanced use cases like separate characters, testing different story branches, rolling back after bad save states, or handling major timeline breaks without rebuilding CHIM from scratch.
+                    </p>
+                </div>
+
+                <div class="card" id="Narration">
+                    <h3>Narration</h3>
+                    <p>
+                        This section maps to the HerikaServer <b>Narrator Management</b> page. It controls how The Narrator behaves, sounds, and participates in the playthrough.
+                    </p>
+                    <ul>
+                        <li><b>Core narrator behavior:</b> Enables or disables narrator features like welcome lines, random comments, bored comments, and diary-related behavior.</li>
+                        <li><b>Inline narration:</b> Controls whether asterisked narration is spoken by The Narrator voice, stays on the NPC voice, or is disabled.</li>
+                        <li><b>Quest comments:</b> Lets the narrator react to quest objective updates with chance and cooldown controls.</li>
+                        <li><b>Profile and voice:</b> Assigns the narrator profile, text-to-speech voice id, and related Oghma knowledge tags.</li>
+                        <li><b>Advanced control:</b> Includes narrator action toggles, dynamic profile behavior, and narrator-specific prompt overrides.</li>
+                    </ul>
+                    <p>
+                        Use this page when you want to tune narration flow specifically, rather than changing all NPC roleplay globally.
+                    </p>
+                </div>
+
+                <div class="card" id="PlayerRoleplay">
+                    <h3>Player Roleplay</h3>
+                    <p>
+                        This section maps to the HerikaServer <b>Player</b> page. It is the player-facing roleplay sheet CHIM uses for your character identity, how NPCs understand you, and how your own speech and diary behavior are framed.
+                    </p>
+                    <ul>
+                        <li><b>Player identity:</b> You can define the player name, appearance, and bio so CHIM has a stable roleplay description of who your character is.</li>
+                        <li><b>Who knows your bio:</b> The page includes a visibility toggle for whether that bio is broadly known or treated as more limited context.</li>
+                        <li><b>Speech style:</b> You can write your own player speech style or generate one from recent dialogue so CHIM better preserves your character voice.</li>
+                        <li><b>Player diary and voice:</b> It also controls player diary participation plus player-specific text-to-speech connector and voice overrides.</li>
+                        <li><b>Tracked character state:</b> The page surfaces live equipment, inventory, skills, and categorized Skyrim stats so the player profile stays grounded in the current playthrough.</li>
+                    </ul>
+                    <p>
+                        Use this page when you want CHIM to treat the player as a more defined roleplay character instead of only a generic input source.
+                    </p>
+                </div>
+
+                <div class="card" id="ActionEditor">
+                    <h3>Action Editor</h3>
+                    <p>
+                        Action Editor controls which gameplay actions CHIM can expose to AI and in which scopes those actions are allowed to run.
+                    </p>
+                    <ul>
+                        <li><b>Enable or disable actions:</b> Persistent overrides let you turn individual actions on or off without touching the shipped base catalog.</li>
+                        <li><b>Scope management:</b> Actions can be filtered by NPC, follower, narrator, and dynamic scopes.</li>
+                        <li><b>Dispatch and metadata:</b> The page surfaces how actions are routed, including server-side versus game-side execution details.</li>
+                        <li><b>Catalog visibility:</b> You can inspect active actions, descriptions, and state before changing them.</li>
+                    </ul>
+                    <p>
+                        This is not usually a first-run page. It matters when you want to limit, expand, or debug what CHIM is allowed to actually do beyond speaking.
+                    </p>
+                </div>
+
+                <div class="card" id="PromptsManager">
+                    <h3>Prompts Manager</h3>
+                    <p>
+                        Prompts Manager is the advanced prompt override system for CHIM. It lets you inspect default prompts, add custom replacements, and revert when needed.
+                    </p>
+                    <ul>
+                        <li><b>Default versus custom:</b> You can compare the shipped baseline prompt against your own override.</li>
+                        <li><b>Prompt browsing:</b> The table is searchable by key, description, status, and preview text.</li>
+                        <li><b>Edit and clear workflow:</b> You can override only the prompts you care about, then clear them later to fall back to default behavior.</li>
+                        <li><b>Import and export:</b> Custom prompt overrides can be moved around by CSV.</li>
+                    </ul>
+                    <p>
+                        This page is for advanced tuning. Small prompt changes can have large roleplay effects, so it is best used after the rest of the setup is already stable.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

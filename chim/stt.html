@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Speech-to-Text Services | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="SpeechToText" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Speech-to-Text Services</h1>
+                    <p>
+                        This page documents the current speech-to-text services still actively used by HerikaServer for CHIM.
+                        The split below follows the current quickstart flow: recommended first, then the other valid services.
+                    </p>
+                </div>
+
+                <div class="card-green" id="RecommendedStt">
+                    <h2>Recommended</h2>
+                    <h3>Deepgram</h3>
+                    <p>
+                        Hosted speech-to-text and one of the current recommended baseline choices. The current schema supports language selection and a
+                        model picker, including newer Deepgram model entries.
+                    </p>
+                    <ul>
+                        <li>Best for: recommended hosted microphone transcription.</li>
+                        <li>Needs: Deepgram API key.</li>
+                        <li>Current model examples: <code>nova-3</code>, <code>nova-2</code>, <code>whisper-medium</code>.</li>
+                    </ul>
+                    <p><a href="https://deepgram.com/" target="_blank" rel="noopener noreferrer"><b>Deepgram</b></a></p>
+                </div>
+
+                <div class="card-green" id="Parakeet">
+                    <h3>Parakeet</h3>
+                    <p>
+                        The other current recommended speech-to-text option in HerikaServer. It is treated as a first-class recommended service in the
+                        speech-to-text connector grouping.
+                    </p>
+                    <ul>
+                        <li>Best for: recommended alternative speech-to-text path.</li>
+                        <li>Current schema focus: language selection.</li>
+                        <li>Good fit when you want the current CHIM-recommended non-Deepgram route.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Whisper">
+                    <h2>Other Services</h2>
+                    <h3>OpenAI Whisper</h3>
+                    <p>
+                        Hosted OpenAI Whisper speech-to-text. Supports language selection and an optional translate-to-English behavior in the current schema.
+                    </p>
+                    <p><a href="https://platform.openai.com/docs/guides/speech-to-text" target="_blank" rel="noopener noreferrer"><b>OpenAI Speech-to-Text</b></a></p>
+                </div>
+
+                <div class="card" id="LocalWhisper">
+                    <h3>Local Whisper</h3>
+                    <p>
+                        The DwemerDistro-installed local Whisper endpoint. This is the route to use if you want your speech recognition to stay
+                        on your own machine instead of using a hosted speech-to-text provider.
+                    </p>
+                </div>
+
+                <div class="card" id="Gemini">
+                    <h3>Gemini</h3>
+                    <p>
+                        Google Gemini speech-to-text plus emotion detection. The current schema supports Google AI API credentials, language selection, and
+                        current Gemini model choices.
+                    </p>
+                    <p><a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer"><b>Google AI Studio</b></a></p>
+                </div>
+
+                <div class="card" id="Azure">
+                    <h3>Azure</h3>
+                    <p>
+                        Azure speech-to-text with language and profanity handling controls. Use this if Azure is already your preferred speech stack.
+                    </p>
+                    <p><a href="https://azure.microsoft.com/en-us/products/ai-services/speech-to-text" target="_blank" rel="noopener noreferrer"><b>Azure Speech-to-Text</b></a></p>
+                </div>
+
+                <div class="card" id="Inworld">
+                    <h3>Inworld</h3>
+                    <p>
+                        Inworld speech-to-text with provider/model identifiers and BCP-47 language codes. This is the speech-to-text path to use if you are already
+                        building around Inworld services.
+                    </p>
+                    <p><a href="https://inworld.ai/" target="_blank" rel="noopener noreferrer"><b>Inworld</b></a></p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

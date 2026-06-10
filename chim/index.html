@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="Overview" class="section">
+                <div class="card hero-card logo-container">
+                    <div>
+                        <h1>CHIM</h1>
+                        <h2 class="magic-subtitle">Meaningful AI Gameplay</h2>
+                        <p>
+                            CHIM turns Skyrim NPC interaction into a broader AI gameplay layer with dynamic dialogue, world awareness,
+                            lore-aware roleplay, narration, and in-game actions.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="../img/chim-logo.png" alt="CHIM logo">
+                    </div>
+                </div>
+
+                <div class="card" id="WhatCHIMIsFor">
+                    <h2>Overview</h2>
+                    <p>
+                        CHIM is a large AI framework for Skyrim built around meaningful gameplay with NPCs rather than just isolated chatbot conversations.
+                    </p>
+                    <ul>
+                        <li>Talk to vanilla NPCs, modded NPCs, followers, and even stranger edge cases like creatures or horses.</li>
+                        <li>Use voice or chat-box input while CHIM tracks live world context around the conversation.</li>
+                        <li>Customize personalities, voices, and behavior per NPC or per profile.</li>
+                        <li>Integrate your own mods into the framework with custom biographies, Oghma data, and roleplay rules.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="AllNpcs">
+                    <h3>All NPCs</h3>
+                    <p>
+                        CHIM is designed so AI control is not limited to one hand-picked companion. Around the player, NPCs can be brought into the system automatically, with biographies and profile data used to keep their roleplay grounded.
+                    </p>
+                    <p>
+                        Generic NPCs also benefit from naming support like Real Names Extended and Tamrielic Names, which helps CHIM treat them more like actual characters instead of disposable background actors.
+                    </p>
+                </div>
+
+                <div class="card" id="BackgroundLife">
+                    <h3>Background Life</h3>
+                    <p>
+                        CHIM's Background Life systems let NPCs keep doing things when you are not directly talking to them. They can form inner thoughts, send letters, spread rumors, and move between major locations based on what is happening in the world.
+                    </p>
+                    <p>
+                        The result is that characters feel less frozen in place and more like they have a life outside the player.
+                    </p>
+                </div>
+
+                <div class="card" id="RelationshipsAndGrowth">
+                    <h3>Relationships And Growth</h3>
+                    <p>
+                        CHIM tracks more than dialogue lines. NPCs can build and lose trust, change their view of people and groups, and evolve over time through memories, roleplay systems, and ongoing interaction.
+                    </p>
+                    <p>
+                        This includes relationship tracking, diaries, memories, and the broader systems that let characters develop their own arc during a playthrough.
+                    </p>
+                </div>
+
+                <div class="card" id="AiControl">
+                    <h3>Total AI Control</h3>
+                    <p>
+                        CHIM gives you broad control over how AI is used in your game. You can pick different service providers, tune settings deeply, and assign different rules or model behavior to different NPC groups or profiles.
+                    </p>
+                    <p>
+                        The framework is meant to support very different play styles, from grounded roleplay to faster combat-friendly setups to stranger experimental behavior.
+                    </p>
+                </div>
+
+                <div class="card" id="DirectorMode">
+                    <h3>Director Mode And Actions</h3>
+                    <p>
+                        CHIM is not only about talking. Through actions and Director Mode, NPCs can carry out requests, react to situations, and create unscripted moments in the world.
+                    </p>
+                    <p>
+                        That can mean things like social scenes, follower behavior changes, movement requests, or broader player-directed chaos using nearby NPCs.
+                    </p>
+                </div>
+
+                <div class="card" id="OghmaAndNarrator">
+                    <h3>Oghma, Narrator, And Extra Systems</h3>
+                    <p>
+                        Oghma Infinium gives NPCs lore knowledge that fits their background instead of making everyone equally omniscient. The Narrator adds a separate AI presence that can recap, guide, and comment on your adventure.
+                    </p>
+                    <p>
+                        CHIM also includes support for speech, voice generation, Soulgaze image features, Prisma UI, plugins, and custom tiny-model helpers like Minime-T5.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

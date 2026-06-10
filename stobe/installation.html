@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Installation | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="Installation" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Installation</h1>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" target="_blank" rel="noopener noreferrer"><b>VIDEO GUIDE HERE</b></a>
+                    </p>
+                    <p>
+                        The installation process will assume you are using OpenRouter (LLM) ($5).
+                    </p>
+                    <p>
+                        You will need to put $5 only into OpenRouter. Then generate an API key.
+                    </p>
+                    <p>
+                        <b>It is by far the easiest way to setup the mod for the first time!</b>
+                    </p>
+                    <p>
+                        <u>You can use alternate AI services later once you get it working.</u>
+                    </p>
+                </div>
+
+                <div class="card" id="InstallDistro">
+                    <h2 id="InstallingDwemerDistro">Installing DwemerDistro</h2>
+                    <ul>
+                        <li>Ensure you have <b>virtualization</b> enabled in your <b>PC BIOS</b> menu (<a href="https://s1gr1d.medium.com/how-to-set-up-linux-on-windows-with-wsl-2-debe2a64d20d" target="_blank" rel="noopener noreferrer"><u>Here is a good guide if you are having issues</u></a>).</li>
+                        <li>Open <b>Control Panel</b> - <b>Programs and Features</b>, and click <i><b>Turn windows features on or off</b></i>.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/control_panel.jpg" alt="Control Panel - Programs and Features - Turn Windows features on or off">
+                        <figcaption>Control Panel - Programs and Features - Turn Windows features on or off</figcaption>
+                    </figure>
+
+                    <ul>
+                        <li>Ensure you have <i><b>Virtual Machine Platform</b></i>, <b>Windows Hypervisor Platform</b>, and <i><b>Windows Subsystem for Linux</b></i> enabled.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 420px;">
+                        <img src="../img/installation/windows_features.jpg" alt="Ensure these features are enabled">
+                        <figcaption>Ensure these features are enabled.</figcaption>
+                    </figure>
+
+                    <figure class="guide-figure" style="max-width: 500px;">
+                        <img src="../img/installation/hyper-v_win11.jpg" alt="Windows 11 Hyper-V note">
+                        <figcaption>For Windows 11 Windows Hypervisor Platform may just be called Hyper-V.</figcaption>
+                    </figure>
+
+                    <ul>
+                        <li><b>Restart your PC.</b></li>
+                        <li>Download the DwemerDistro from the mod page.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 760px;">
+                        <img src="../img/installation/stobe_dwemer_distro_install.png" alt="DwemerDistro download page">
+                    </figure>
+
+                    <ul>
+                        <li>Extract the <code>.exe</code> anywhere on your PC.</li>
+                        <li>Run the <code>DwemerDistroInstaller.exe</code>.</li>
+                        <li>Simply follow the installation guide and wait for it to finish.</li>
+                        <li>Leave <b>Create desktop shortcut</b> enabled, and click finish once it is complete.</li>
+                        <li>Run the <code>DwemerDistro.exe</code> shortcut on your desktop.</li>
+                    </ul>
+                </div>
+
+                <blockquote class="guide-note note-warning">
+                    <p><b>Why does Windows Defender say it's a virus? Are you trying to hack me!</b></p>
+                    <p>No we are not!</p>
+                    <p>Most anti virus programs automatically untrust and false flag less popular <code>.exe</code>s.</p>
+                    <p>We have ALL the source code to the launcher on our <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher" target="_blank" rel="noopener noreferrer">Github</a>. If you know Python you can compile it yourself!</p>
+                </blockquote>
+
+                <div class="card" id="UpdateDistro">
+                    <ul>
+                        <li>Click <b>Update Launcher</b> first.</li>
+                        <li>Wait for it to restart, then click <b>Update</b>.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 620px;">
+                        <img src="../img/installation/distro_launcher_update.png" alt="DwemerDistro launcher update">
+                        <figcaption>Make sure the Launcher and Mod is fully updated.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="card" id="InstallComponents">
+                    <ul>
+                        <li>Under <b>Install Components</b> install any you wish to use.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 560px;">
+                        <img src="../img/installation/new_comp_menu.png" alt="The Components Menu">
+                        <figcaption>The Components Menu</figcaption>
+                    </figure>
+
+                    <blockquote class="guide-note note-tip">
+                        <p><i><b>Component Installation Guide:</b></i></p>
+                        <ul>
+                            <li><i>If you have a powerful <b>NVIDIA GPU</b> install <b>CUDA</b>, <b>Minime&amp;TXT2VEC</b> (GPU) &amp; <b>Chatterbox</b>.</i></li>
+                            <li><i>If you have a less powerful <b>NVIDIA GPU</b> install <b>CUDA</b>, <b>Minime&amp;TXT2VEC</b> (GPU) &amp; <b>Pocket-TTS</b> (GPU).</i></li>
+                            <li><i>If you have an <b>AMD GPU</b>, download <b>Minime&amp;TXT2VEC</b> (CPU) &amp; <b>Pocket-TTS</b> (CPU).</i></li>
+                        </ul>
+                        <p><i><b>For Pocket TTS and Chatterbox you must setup a Hugging Face account and accept the terms of service for it here:</b></i></p>
+                        <p><i>Pocket TTS: <a href="https://huggingface.co/kyutai/pocket-tts" target="_blank" rel="noopener noreferrer"><b>https://huggingface.co/kyutai/pocket-tts</b></a></i></p>
+                        <p>Chatterbox: <a href="https://huggingface.co/ResembleAI/chatterbox" target="_blank" rel="noopener noreferrer">https://huggingface.co/ResembleAI/chatterbox</a></p>
+
+                        <figure class="guide-figure" style="max-width: 740px;">
+                            <img src="../img/installation/hugging_face_token.png" alt="Hugging Face token creation">
+                            <figcaption>Access Token Creation. Make sure it has Read access!</figcaption>
+                        </figure>
+                    </blockquote>
+                </div>
+
+                <div class="card" id="StartServer">
+                    <ul>
+                        <li>Once ready, click <b>Start Server</b>.</li>
+                        <li>Your default web browser should open a new tab taking you to the <b>Dashboard</b>.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 620px;">
+                        <img src="../img/installation/landing_page.png" alt="CHIM dashboard landing page">
+                    </figure>
+                </div>
+
+                <div class="card" id="ProfileSetup">
+                    <h2 id="StobeProfileSetup">STOBE Profile Setup</h2>
+                    <p><b>Fill out the QUICKSTART menu:</b></p>
+                    <ul>
+                        <li><b>Paste in your OpenRouter API key</b>.</li>
+                        <li><b>Choose TTS</b>.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 760px;">
+                        <img src="../img/installation/stobe_quickstart.png" alt="STOBE quickstart menu">
+                    </figure>
+
+                    <ul>
+                        <li><b>Click Save</b>.</li>
+                    </ul>
+                </div>
+
+                <div class="card-green" id="RequiredMods">
+                    <h2 id="StobeModSetup">STOBE Mod Setup</h2>
+                    <p><b>DOWNLOAD AND INSTALL THESE REQUIRED MODS!</b></p>
+                    <ul>
+                        <li><a href="https://www.nexusmods.com/kenshi/mods/847" target="_blank" rel="noopener noreferrer"><b>RE_Kenshi</b></a></li>
+                        <li><a href="https://github.com/KenshiReclaimer/KenshiLib/releases/tag/v0.1.5" target="_blank" rel="noopener noreferrer"><b>KenshiLib</b></a></li>
+                        <li>Download the Stobe file in the <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer"><b><u>downloads page</u></b></a>.</li>
+                        <li>Install it with your mod manager of choice.</li>
+                        <li>Or manually place it within <i>C:\Program Files (x86)\Steam\steamapps\common\Kenshi\mods</i>.</li>
+                        <li><b>Now you are ready to play!</b></li>
+                    </ul>
+                </div>
+
+                <div class="card" id="LaunchRuntime">
+                    <h2 id="InGameSetup">In-game Setup</h2>
+                    <ul>
+                        <li>Ensure that <b>DwemerDistro is running</b> and <b>start RE_KENSHI (DO NOT START REGULAR KENSHI)</b>.</li>
+                        <li>Ensure STOBE is enabled in the mod manager.</li>
+                        <li>Once in game (no newgame required) follow the popup message.</li>
+                        <li>Try talking to an NPC using the chat hotkey. You should get a response.</li>
+                    </ul>
+                    <p><b>Well done, you have the mod installed!</b></p>
+                </div>
+
+                <div class="card-red" id="UpdateFlow">
+                    <h3>READ ME</h3>
+                    <p>
+                        For updating the mod you usually only need to just click UPDATE in the DwemerDistro.exe and install the latest
+                        AIAgent mod from Nexus. You do not need to reinstall the DwemerDistro unless we explicitly say so.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

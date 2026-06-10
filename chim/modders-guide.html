@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Modders Guide | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="ModdersGuide" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Modders Guide</h1>
+                    <p>
+                        This page is for modders who want to package CHIM support directly into their own mod.
+                        The main current workflow is simple: ship supported CHIM data files inside your mod, let CHIM detect them, and let the player install your mod like normal.
+                    </p>
+                </div>
+
+                <div class="card" id="CustomChimDataMods">
+                    <h2>Custom CHIM Data Mods</h2>
+                    <h3>How The Current Data Mod Flow Works</h3>
+                    <p>
+                        The current CHIM plugin looks in <code>Data/CHIM</code> when it starts up. On first load each session, it checks that folder for supported CSV files and then imports the supported CHIM data automatically.
+                    </p>
+                    <ul>
+                        <li><b><code>_bios.csv</code>:</b> NPC biography data.</li>
+                        <li><b><code>_oghma.csv</code>:</b> Oghma knowledge and lore data.</li>
+                        <li><b><code>_dynamicoghma.csv</code>:</b> Oghma data that changes as quests or events move forward.</li>
+                        <li><b><code>_descriptions.csv</code>:</b> description data for items or other game content.</li>
+                        <li><b><code>_actions.csv</code>:</b> custom action data.</li>
+                    </ul>
+                    <p>
+                        Those five file types are the current server-imported data mod formats. They are uploaded by the plugin to the CHIM server automatically, so the player does not need to rebuild them by hand in HerikaServer.
+                    </p>
+                    <h3>Voice Files</h3>
+                    <ul>
+                        <li><b><code>_voices.csv</code></b> is also supported in <code>Data/CHIM</code>, but it works a little differently.</li>
+                        <li>Voice CSV files are read locally by the plugin and cached for voice-type mapping.</li>
+                        <li>In plain terms, this is how you can tell CHIM which voice file should be used for a voice type when the normal built-in mapping is not enough.</li>
+                    </ul>
+                    <h3>How To Package A Data Mod</h3>
+                    <ul>
+                        <li>Create a <code>CHIM</code> folder inside your mod.</li>
+                        <li>Place your CHIM CSV files in that folder.</li>
+                        <li>Use the correct filename suffix so CHIM knows what each file is for.</li>
+                        <li>Ship those files as part of the mod like any other asset.</li>
+                    </ul>
+                    <p>
+                        The practical goal is straightforward: the player installs your mod, launches the game, and CHIM picks up your support data automatically.
+                    </p>
+
+                    <figure class="guide-figure" style="max-width: 620px;">
+                        <img src="../img/modders-guide/bio_test1.jpg" alt="Example CHIM folder in a mod structure">
+                    </figure>
+
+                    <figure class="guide-figure" style="max-width: 620px;">
+                        <img src="../img/modders-guide/biotest2.jpg" alt="Example CSV placement inside a CHIM folder">
+                        <figcaption>Example mod structure for placing the CHIM CSV files.</figcaption>
+                    </figure>
+                    <h3>Practical Notes</h3>
+                    <ul>
+                        <li>CHIM only scans the top level of <code>Data/CHIM</code> for these import files, so keep the CSV files directly in that folder.</li>
+                        <li>Files must be real <code>.csv</code> files.</li>
+                        <li>CHIM rejects CSV files larger than <b>10 MB</b>.</li>
+                        <li>CHIM warns when a CSV goes over <b>5 MB</b>, so splitting very large data packs is still a good idea.</li>
+                        <li>The current voice CSV parser expects at least <code>voicetype,voicefile</code>, with an optional transcript column after that.</li>
+                    </ul>
+                    <h3>How To Test It</h3>
+                    <ul>
+                        <li>Install your mod normally and launch the game with CHIM enabled.</li>
+                        <li>Let CHIM finish its startup load.</li>
+                        <li>Check whether your biography, Oghma, description, or action data appears in the matching CHIM pages.</li>
+                        <li>Check the AIAgent log if something does not import correctly.</li>
+                    </ul>
+                    <p>
+                        The most common Skyrim log locations are:
+                    </p>
+                    <p><code>C:\Users\YOURUSER\Documents\My Games\Skyrim Special Edition\SKSE</code></p>
+                    <p><code>C:\Users\YOURUSER\Documents\My Games\Skyrim.INI\SKSE</code></p>
+
+                    <figure class="guide-figure" style="max-width: 860px;">
+                        <img src="../img/modders-guide/csv_upload_log.jpg" alt="AIAgent log showing successful CSV imports">
+                        <figcaption>Example AIAgent log showing successful CHIM CSV imports.</figcaption>
+                    </figure>
+
+                    <p>
+                        If the import succeeds, your mod can be shipped with those CHIM files included and the player should not need to do manual setup for that data.
+                    </p>
+                </div>
+
+                <div class="card" id="CreatingPlugins">
+                    <h2>Creating Plugins</h2>
+                    <h3>What A CHIM Plugin Is</h3>
+                    <p>
+                        A CHIM plugin is a server-side extension that lives inside the CHIM server's <code>ext</code> folder. A plugin can add its own web page, add or change prompt behavior, expose new AI actions, run its own helper service, or read CHIM data to build its own tools.
+                    </p>
+                    <p>
+                        In practice, this means plugins are the main way to add new <b>server-side</b> features without changing the whole server. The current maintained examples are <b>CHIM-Twitch-Bot</b> and <b>CHIM-MindMap</b>. If you only need to ship new biographies, Oghma data, descriptions, or action definitions, that is usually a <code>Data/CHIM</code> data-mod job instead of a full <code>ext</code> plugin.
+                    </p>
+
+                    <h3>Where Plugins Live</h3>
+                    <p>
+                        Installed plugins live under <code>HerikaServer/ext/&lt;plugin-name&gt;</code>. The server scans the <code>ext</code> folder and loads plugin files by filename, so your plugin does not need one giant entry script for everything.
+                    </p>
+
+                    <h3>Manifest File</h3>
+                    <p>
+                        The one file you should always have is <code>manifest.json</code>. This is what the CHIM plugin manager reads to show the plugin name, description, version, and plugin page.
+                    </p>
+                    <p>
+                        The current maintained plugins use fields like:
+                    </p>
+                    <ul>
+                        <li><b><code>name</code>:</b> plugin name used by the installer and plugin manager.</li>
+                        <li><b><code>description</code>:</b> short description shown in the plugin manager.</li>
+                        <li><b><code>config_url</code>:</b> the page the user opens to configure or use the plugin.</li>
+                        <li><b><code>config_url_target</code>:</b> usually <code>_blank</code> so the page opens in a new tab.</li>
+                        <li><b><code>git_repo</code>:</b> GitHub repo used by the installer for updates.</li>
+                        <li><b><code>version</code>:</b> current plugin version.</li>
+                        <li><b><code>schema_version</code>:</b> use <code>2</code> if you want the current update flow in the plugin manager.</li>
+                    </ul>
+
+                    <h3>What Files CHIM Actually Loads</h3>
+                    <p>
+                        CHIM loads plugin hook files by name if they exist. You only create the ones your plugin actually needs.
+                    </p>
+                    <ul>
+                        <li><b><code>globals.php</code>:</b> early global setup.</li>
+                        <li><b><code>functions.php</code>:</b> add or change AI-callable functions and actions.</li>
+                        <li><b><code>preprocessing.php</code>:</b> early request preprocessing.</li>
+                        <li><b><code>prerequest.php</code>:</b> run logic before the main request is sent.</li>
+                        <li><b><code>context_pre.php</code>:</b> inject or change context before the system prompt is built.</li>
+                        <li><b><code>context.php</code>:</b> add extra context after the system prompt is built.</li>
+                        <li><b><code>prepostrequest.php</code> and <code>postrequest.php</code>:</b> react after a request runs.</li>
+                        <li><b><code>context_building.php</code>:</b> alter historical context building.</li>
+                        <li><b><code>prompts.php</code> and <code>dialogue_prompt.php</code>:</b> extend or override prompt text.</li>
+                        <li><b><code>json_response_custom.php</code>:</b> customize JSON response shaping if your plugin needs it.</li>
+                    </ul>
+                    <p>
+                        The important point is that CHIM already has named hook points. A plugin usually works by dropping the right file into the right place rather than hacking core pages.
+                    </p>
+
+                    <h3>What Plugins Can Interface With</h3>
+                    <p>
+                        CHIM plugins can hook into more than one layer of the server. The useful way to think about it is: you are not limited to just adding a menu page. A plugin can affect prompt building, request handling, available actions, and CHIM's stored data.
+                    </p>
+                    <ul>
+                        <li><b>Early request preprocessing:</b> <code>preprocessing.php</code> runs near the start of request handling, before most of the main processing path. This is where a plugin can normalize or prepare incoming data early.</li>
+                        <li><b>Pre-request logic:</b> <code>prerequest.php</code> runs before the main request processor. This is a good place to inspect or alter request state before CHIM builds the rest of the response flow.</li>
+                        <li><b>Prompt context before system prompt build:</b> <code>context_pre.php</code> runs before the system prompt is assembled. Plugins can use this to inject extra nearby context or other support information before CHIM locks the main prompt together.</li>
+                        <li><b>Prompt context after system prompt build:</b> <code>context.php</code> runs after the system prompt is built. This is useful when you want to append or adjust extra context after the main structure already exists.</li>
+                        <li><b>Historic context building:</b> <code>context_building.php</code> can alter the built conversation/history context itself. This is the layer to use if you need to reshape what old context CHIM carries forward.</li>
+                        <li><b>Prompt text and dialogue templates:</b> <code>prompts.php</code> and <code>dialogue_prompt.php</code> let a plugin extend or override prompt text rather than only adding raw context blocks.</li>
+                        <li><b>LLM actions and callable functions:</b> <code>functions.php</code> is where plugins can add or change the AI-callable action/function layer. This is the main path if your plugin wants CHIM to expose new things the AI can do.</li>
+                        <li><b>Post-request behavior:</b> <code>prepostrequest.php</code> and <code>postrequest.php</code> run after request processing. Use this layer if the plugin needs to react to the result of a request, save extra data, or trigger follow-up behavior.</li>
+                        <li><b>JSON response shaping:</b> <code>json_response_custom.php</code> can customize structured response templates when your plugin needs to alter how JSON-side output is prepared.</li>
+                        <li><b>Web UI and control pages:</b> a plugin can expose its own page through <code>config_url</code> in the manifest. That can be a settings page, dashboard, monitor, visualizer, or tool panel.</li>
+                        <li><b>Background helpers and services:</b> a plugin can ship its own runtime script or worker process if it needs to keep doing work outside the normal page request cycle.</li>
+                        <li><b>Database schema:</b> a plugin can create and update its own tables with <code>migrations</code>, instead of depending only on existing CHIM tables.</li>
+                        <li><b>Existing CHIM data:</b> plugins can read existing CHIM-side data such as memories, logs, rolemaster state, NPC data, and other stored runtime information if they are building tooling or integrations around it.</li>
+                    </ul>
+                    <p>
+                        In short, CHIM plugins can interface with both <b>runtime behavior</b> and <b>stored data</b>. Some plugins mainly change what the AI sees or can do, while others mainly add external integrations or build tools on top of CHIM's existing data.
+                    </p>
+
+                    <p>
+                        Here are a few real examples of what that looks like in practice:
+                    </p>
+
+                    <p><b>Manifest and plugin page</b></p>
+                    <pre><code>{
+  "name": "CHIM-Twitch-Bot",
+  "config_url": "/HerikaServer/ext/CHIM-Twitch-Bot/index.php",
+  "git_repo": "Dwemer-Dynamics/CHIM-Twitch-Bot",
+  "version": "1.3.0",
+  "schema_version": 2
+}</code></pre>
+                    <p>
+                        This is the basic interface between your plugin and the CHIM plugin manager. It tells CHIM what the plugin is called, where its page lives, and how the installer updates it.
+                    </p>
+
+                    <p><b>Prompt context injection</b></p>
+                    <pre><code>$currentNearby = $GLOBALS["PROMPT_NEARBY_SECTIONS"] ?? "";
+$contextBlock = "&lt;twitch_chat&gt;\n" .
+    "# TWITCH CHAT CONTEXT\n" .
+    "## viewer1: say hello to Lydia\n" .
+    "&lt;/twitch_chat&gt;";
+
+$GLOBALS["PROMPT_NEARBY_SECTIONS"] = $currentNearby . "\n" . $contextBlock;</code></pre>
+                    <p>
+                        This is the same kind of pattern used by the Twitch Bot plugin in <code>context_pre.php</code>. The plugin adds off-screen Twitch chat into the context CHIM gives the AI.
+                    </p>
+
+                    <p><b>Background service and command handoff</b></p>
+                    <pre><code>$cmd = sprintf('%s %s %s %s %s',
+    escapeshellarg($this->php_path),
+    escapeshellarg($this->manager_script),
+    escapeshellarg('rolemaster'),
+    escapeshellarg('suggestion'),
+    escapeshellarg($sanitizedFreeText)
+);</code></pre>
+                    <p>
+                        This is the runtime pattern used by CHIM-Twitch-Bot. The plugin is not just a page, it also runs its own service and forwards accepted viewer commands into CHIM's existing rolemaster pipeline.
+                    </p>
+
+                    <p><b>Reading CHIM memory data</b></p>
+                    <pre><code>$sql = 'SELECT uid, summary, embedding, companions, gamets_truncated
+FROM memory_summary
+ORDER BY gamets_truncated ASC';</code></pre>
+                    <p>
+                        This is the kind of pattern used by CHIM-MindMap. It reads CHIM data that already exists in the database and builds its own tool on top of that data instead of changing gameplay directly.
+                    </p>
+
+                    <h3>Packaging And Deployment</h3>
+                    <p>
+                        The current plugin manager installs and updates plugins from GitHub releases. If you want your plugin to follow the same flow, package it the same way the maintained plugins do.
+                    </p>
+                    <ul>
+                        <li>Create a GitHub repo for the plugin.</li>
+                        <li>Put a valid <code>manifest.json</code> in the plugin root.</li>
+                        <li>If the plugin needs database tables, add a <code>migrations</code> folder with ordered <code>.sql</code> files.</li>
+                        <li>Create a release asset named exactly <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> or <code>&lt;PACKAGE_NAME&gt;.tar</code>.</li>
+                        <li>The package should extract into one plugin folder that contains the manifest and the rest of the plugin files.</li>
+                    </ul>
+                    <p>
+                        On install, the generic installer downloads the latest release asset, extracts it into <code>HerikaServer/ext/&lt;PACKAGE_NAME&gt;</code>, and runs any plugin migrations it finds. It also tracks which migrations have already been run, so updates can add new ones safely.
+                    </p>
+                    <p>
+                        If you want the plugin to appear in the built-in repository list, it also needs an entry in the plugin repository data used by the plugin manager.
+                    </p>
+
+                    <h3>Database Migrations</h3>
+                    <p>
+                        If your plugin needs its own tables, use the built-in migration system instead of asking users to run SQL by hand.
+                    </p>
+                    <ul>
+                        <li>Create a <code>migrations</code> folder in the plugin root.</li>
+                        <li>Name files in order, like <code>001_initial_schema.sql</code>, <code>002_add_indexes.sql</code>, and so on.</li>
+                        <li>Write them to be safe to run on real installs, using patterns like <code>IF NOT EXISTS</code> where possible.</li>
+                        <li>Do not keep rewriting old migration files after release. Add new ones instead.</li>
+                    </ul>
+
+                </div>
+
+                <div class="card" id="ActionEditor">
+                    <h2>Action Editor</h2>
+                    <p>
+                        The Action Editor is the page CHIM uses to manage its action catalog. It is not just editing a loose text list. It is working with action rows that CHIM stores in its action catalog tables, with built-in rows and custom override rows merged together for the live view.
+                    </p>
+                    <h3>What The Action Editor Actually Controls</h3>
+                    <p>
+                        In plain terms, the Action Editor controls what the AI sees, where an action can appear, and part of how CHIM handles the result.
+                    </p>
+                    <ul>
+                        <li><b>Name:</b> the action name CHIM exposes in the catalog.</li>
+                        <li><b>Description:</b> the main instruction text telling the AI what the action is for.</li>
+                        <li><b>Return message:</b> the short result text CHIM gets back after the action runs.</li>
+                        <li><b>Enabled state:</b> whether the action is currently active.</li>
+                        <li><b>Scope flags:</b> who the action is available to.</li>
+                        <li><b>Parameter schema:</b> the structured arguments the action accepts.</li>
+                        <li><b>Metadata:</b> extra behavior settings such as dispatch style, follow-up behavior, and editor fields.</li>
+                    </ul>
+
+                    <h3>Scopes</h3>
+                    <p>
+                        The editor groups actions by scope using three stored flags: <code>available_to_npc</code>, <code>available_to_followers</code>, and <code>available_to_narrator</code>. If none of those are set, the editor labels the action as <b>Dynamic</b>.
+                    </p>
+                    <ul>
+                        <li><b>NPC:</b> actions available in normal NPC conversation flow.</li>
+                        <li><b>Followers:</b> actions available when CHIM is working in follower mode.</li>
+                        <li><b>Narrator:</b> actions available to narrator-side behavior.</li>
+                        <li><b>Dynamic:</b> actions with no fixed scope flag set in the catalog row.</li>
+                    </ul>
+                    <p>
+                        A single action can appear in more than one scope if more than one flag is enabled.
+                    </p>
+
+                    <h3>What Each Editor Section Does</h3>
+                    <p>
+                        The Action Editor has a few separate edit areas. They do different jobs and it helps to think of them as separate layers instead of one giant settings form.
+                    </p>
+                    <ul>
+                        <li><b>Enable or Disable:</b> turns the action on or off by writing a persistent custom override row.</li>
+                        <li><b>Text fields:</b> edits the action name, description, and return message without changing the original built-in row.</li>
+                        <li><b>Config:</b> edits metadata-backed settings that the page knows how to render as normal form fields.</li>
+                        <li><b>Parameters:</b> edits the full <code>parameters_json</code> schema for structured action arguments.</li>
+                        <li><b>Metadata preview:</b> shows the current metadata block so you can inspect how the action is wired.</li>
+                        <li><b>Script Proxy preview:</b> shows the current server-side script-proxy program if that action uses one.</li>
+                        <li><b>Reset Override:</b> deletes the custom override row and returns the action to its base definition.</li>
+                    </ul>
+
+                    <h3>What The Config Section Means</h3>
+                    <p>
+                        The config area is driven by editor field definitions in the action metadata. Every action can inherit the shared follow-up settings, and some built-in actions also add their own extra fields such as gold cost or allowed NPC lists.
+                    </p>
+                    <ul>
+                        <li><b>Follow-up Enabled:</b> allows CHIM to generate a second response after the action result comes back.</li>
+                        <li><b>Follow-up Argument Name:</b> tells CHIM which argument name to reuse when building that follow-up request.</li>
+                        <li><b>Follow-up Prompt:</b> the extra instruction CHIM prepends when it asks for the follow-up line.</li>
+                        <li><b>Allow Follow-up Actions:</b> lets the follow-up response call another action again, within CHIM's follow-up chain limits.</li>
+                    </ul>
+                    <p>
+                        Not every action has editable config. If an action does not define editor fields, the page simply shows that there is no editable config for that row.
+                    </p>
+
+                    <h3>How Custom Actions Are Shipped</h3>
+                    <p>
+                        Custom actions are normally shipped as <code>_actions.csv</code> files inside <code>Data/CHIM</code>. On startup, the CHIM plugin scans that folder, finds files ending in <code>_actions.csv</code>, and uploads them as <code>custom_action_import</code> data. The server then imports those rows into the custom action catalog.
+                    </p>
+                    <p>
+                        In practice, this means a modder can ship action definitions as part of a normal mod install. The player installs the mod, launches CHIM, and the actions appear automatically if the CSV is valid.
+                    </p>
+
+                    <h3>Important Columns In An Actions CSV</h3>
+                    <p>
+                        The current action import format supports the action text, state, scope, parameter schema, metadata, and an optional script-proxy block in one row.
+                    </p>
+                    <ul>
+                        <li><b><code>code_name</code>:</b> the stable internal action id.</li>
+                        <li><b><code>action_name</code>:</b> the visible action name.</li>
+                        <li><b><code>description</code>:</b> the instruction text telling the AI what the action does.</li>
+                        <li><b><code>return_message</code>:</b> the result text returned after the action runs.</li>
+                        <li><b><code>available_to_npc</code>, <code>available_to_followers</code>, <code>available_to_narrator</code>:</b> the scope flags.</li>
+                        <li><b><code>is_activated</code>:</b> whether the action starts enabled.</li>
+                        <li><b><code>parameters_json</code>:</b> the JSON schema for action arguments.</li>
+                        <li><b><code>metadata</code>:</b> extra action wiring such as dispatch type, source, follow-up settings, and bridge details.</li>
+                        <li><b><code>script_proxy_program</code>:</b> optional server-side runtime logic for script-proxy actions.</li>
+                    </ul>
+
+                    <h3>Two Main Ways To Build A Custom Action</h3>
+                    <p>
+                        The useful split is not "simple versus advanced". The real split is <b>who executes the action</b>.
+                    </p>
+                    <ul>
+                        <li><b>Plugin-command actions:</b> CHIM exposes the action in the catalog, but the actual execution happens through game-side code such as Papyrus or a DLL-backed bridge.</li>
+                        <li><b>Script-proxy actions:</b> the catalog row includes a server-side script-proxy program, and HerikaServer can run that action logic itself.</li>
+                    </ul>
+                    <p>
+                        If the action needs to manipulate Skyrim gameplay directly, a plugin-command action is usually the right model. If it only needs server-side logic, data updates, or helper behavior, a script-proxy action can be enough.
+                    </p>
+
+                    <h3>CHIM-NFF Example</h3>
+                    <p>
+                        CHIM-NFF is the clearest current example of how a custom gameplay action is built. The CSV in <code>CHIM-NFF/CHIM/nff_actions.csv</code> defines the actions CHIM should expose, and the Papyrus script in <code>CHIM-NFF/Source/Scripts/CHIMNFF.psc</code> is the runtime bridge that actually performs the follower-framework command.
+                    </p>
+
+                    <p><b>Example action row</b></p>
+                    <pre><code>ExtCmdCHIMNFF_FollowMe,
+    Follow_Me,
+    "Resume following #PLAYER_NAME#.",
+    "#HERIKA_NAME# follows #PLAYER_NAME# again.",
+    false,
+    true,
+    true,
+    true,
+    "{""type"":""object"",""properties"":{},""required"":[]}",
+    "{""dispatch"":""plugin_command"",""source"":""CHIM-NFF"",""integration"":""nff"",""bridge_script"":""CHIMNFF"",""bridge_entrypoint"":""DispatchExternalCommand""}",
+    12,</code></pre>
+                    <p>
+                        That row tells CHIM what the action is called, what it means, that it is a follower action, and that it should be dispatched through a plugin-command bridge instead of a server-side script proxy.
+                    </p>
+
+                    <p><b>Example Papyrus bridge pattern</b></p>
+                    <pre><code>bool Function DispatchExternalCommand(string asNpcName, string asCommand, string asParameter) Global
+    bool handled = HandlesExternalCommand(asCommand)
+    bool success = false
+
+    if handled
+        success = ExecuteExternalCommand(asNpcName, asCommand, asParameter)
+    endif
+
+    AIAgentFunctions.logMessageForActor("command@" + asCommand + "@" + asParameter + "@" + resultText, "funcret", asNpcName)
+    return success
+EndFunction</code></pre>
+                    <p>
+                        This is the key pattern. The CSV row defines the AI-facing action, the Papyrus bridge decides whether it handles that command, and then it reports the result back to CHIM through a <code>funcret</code> message.
+                    </p>
+
+                    <h3>How Follow-Up Actions Fit In</h3>
+                    <p>
+                        CHIM-NFF's <code>TeachRightHandSpell</code> row is a good example of the follow-up system. Its metadata enables a follow-up prompt so CHIM can produce one short in-character reaction after the spell-learning action succeeds.
+                    </p>
+                    <p>
+                        This is what the shared follow-up config fields in the Action Editor are for. They do not make the gameplay action itself happen. They control what CHIM should do with the result <b>after</b> the action has already run and returned.
+                    </p>
+
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

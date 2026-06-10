@@ -1,0 +1,23 @@
+.progress-container {
+    width: 100%;
+    height: 4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background: transparent;
+}
+
+.progress-bar {
+    height: 4px;
+    width: 0;
+    background: rgb(101, 206, 253);
+}
+
+.chim-progress {
+    background: #e17a21;
+}
+
+.stobe-progress {
+    background: #e6b76c;
+}

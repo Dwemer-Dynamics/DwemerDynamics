@@ -1,0 +1,56 @@
+.card,
+.card-green,
+.card-yellow,
+.card-red {
+    padding: 0 1em;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin: 0.5em 0;
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+}
+
+.card {
+    background-color: var(--site-bg-secondary);
+}
+
+.card-green,
+.card-yellow,
+.card-red {
+    text-align: left;
+}
+
+.card-green {
+    background-color: var(--site-bg-secondary);
+}
+
+.card-yellow {
+    background-color: var(--site-bg-secondary);
+}
+
+.card-red {
+    background-color: var(--site-bg-secondary);
+}
+
+.hero-card {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+    .card,
+    .card-green,
+    .card-yellow,
+    .card-red {
+        padding: 0.65em;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .card-green,
+    .card-yellow,
+    .card-red {
+        width: 100%;
+    }
+}

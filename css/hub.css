@@ -1,0 +1,205 @@
+.hubPicker {
+    display: flex;
+    flex-wrap: wrap;
+    height: 60vh;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    align-items: stretch;
+    overflow-x: hidden;
+    position: relative;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid transparent;
+    background-color: var(--site-bg-secondary);
+}
+
+.hubColumn {
+    flex-basis: 15%;
+    flex-grow: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.hubTileLink {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: transparent;
+}
+
+.hubTileLink:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.hubColumn a {
+    color: white;
+    text-decoration: none;
+}
+
+.hubColumn h2 {
+    font-size: 3.4em;
+    margin: 0.5em 0 0.2em 0;
+    line-height: 1em;
+    text-shadow: 0.05em 0.075em 0.1em rgba(0, 0, 0, 0.7);
+}
+
+.hubColumn p {
+    font-size: 1.7em;
+    margin: 0;
+    text-shadow: 0 0.1em 5pt rgb(0, 0, 0);
+}
+
+.hubLogo {
+    max-width: 170px;
+    margin-bottom: 1em;
+}
+
+.hubContainer {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+    background: var(--site-bg-primary);
+}
+
+.hubTitle {
+    width: min(1100px, calc(100% - 2em));
+    margin: 0 0 0.8em 0;
+    text-align: center;
+}
+
+.hubResources {
+    background-color: var(--site-bg-secondary);
+    z-index: 10;
+    display: block;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    width: min(1100px, calc(100% - 2em));
+}
+
+.hubResourcesInner {
+    padding: 0.4em 0 1.2em 0;
+}
+
+.hubResourcesInner h3 {
+    margin-bottom: 0.9em;
+    text-align: center;
+}
+
+.hubResourcesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9em;
+}
+
+.hubResourceButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    padding: 0.95em 1.1em;
+    border-radius: 8px;
+    background-color: var(--site-bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    font-size: 1.05em;
+    font-weight: 700;
+    text-align: center;
+    transition: background-color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.hubResourceButton:hover {
+    background-color: #242424;
+    border-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-1px);
+}
+
+#chimHub {
+    background-image: url("../img/chim_home_tile.jpg");
+    background-size: contain;
+    background-color: var(--site-bg-secondary);
+}
+
+#stobeHub {
+    background-image: url("../img/stobe_home_tile.jpg");
+    background-size: contain;
+    background-color: var(--site-bg-secondary);
+}
+
+.hubFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65em;
+}
+
+.hubFooterSocial {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+
+.hubFooterSocial a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    opacity: 0.9;
+}
+
+.hubFooterSocial a:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.hubFooterSocial img {
+    display: block;
+    max-width: 22px;
+    max-height: 22px;
+}
+
+@media (max-width: 1220px) {
+    .hubPicker {
+        flex-direction: column;
+        height: 50%;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .hubColumn {
+        flex-basis: 30%;
+        min-height: 25vh;
+    }
+
+    .hubColumn h2 {
+        font-size: 2em;
+        margin: 1em 0 0.2em 0;
+    }
+
+    .hubColumn p {
+        font-size: 1.3em;
+    }
+
+    .hubResourcesGrid {
+        grid-template-columns: 1fr;
+    }
+}

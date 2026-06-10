@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Skyrim Settings | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="InGameSettings" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Skyrim Settings</h1>
+                    <p>
+                        This page mirrors the current CHIM MCM inside Skyrim.
+                        Each section below is one real MCM page, with the current option labels grouped the same way they appear in game.
+                    </p>
+                    <p>
+                        Use this when CHIM is already installed and you want to tune how it behaves during actual play.
+                    </p>
+                </div>
+
+                <div class="card" id="Main">
+                    <h2>Skyrim Settings</h2>
+                    <h3>Main</h3>
+                    <p>
+                        This is the main control page for how you talk to CHIM, open its wheels, and toggle a few core gameplay features.
+                    </p>
+                    <p><b>Communication and wheel hotkeys</b></p>
+                    <p>
+                        These are the fast-access bindings for talking to CHIM and opening its main wheel menus.
+                    </p>
+                    <ul>
+                        <li><b>CHIM Chat:</b> Opens a text box so you can type to AI NPCs.</li>
+                        <li><b>Voice Chat:</b> Push-to-talk speech input for AI NPC conversation and book summaries.</li>
+                        <li><b>Master Wheel:</b> Quick access wheel that opens Roleplay, Settings, Mode, or Soulgaze.</li>
+                        <li><b>Roleplay Wheel:</b> Opens diary, gather, update, wait/follow, stop AI, and background-life style actions.</li>
+                        <li><b>Settings Wheel:</b> Lets you assign profiles when targeting an NPC, or switch LLM setup when not targeting one.</li>
+                        <li><b>Mode Wheel:</b> Cycles between chat modes like Standard, Whisper, Director, Spawn NPC, Cheat Mode, Auto Chat, and Inject.</li>
+                        <li><b>Soulgaze Wheel:</b> Opens the in-game image capture options for full Soulgaze, NPC photos, or raw upload.</li>
+                        <li><b>Manual AI Activate:</b> Manually turns AI control on or off for the targeted NPC, or nearby NPCs if nothing is targeted.</li>
+                        <li><b>Halt AI Actions:</b> Immediately stops CHIM AI actions for the targeted NPC or all nearby NPCs.</li>
+                    </ul>
+                    <p><b>Core toggles and runtime settings</b></p>
+                    <p>
+                        These are the main on/off gameplay switches for what CHIM is allowed to do once it is running.
+                    </p>
+                    <ul>
+                        <li><b>Enable AI Actions:</b> Allows CHIM NPCs to perform in-game actions instead of only talking.</li>
+                        <li><b>Enable Animations:</b> Lets AI NPCs use animations during interaction.</li>
+                        <li><b>Player TTS for Traditional Dialogue:</b> Uses your selected PlayerTTS voice for normal Skyrim dialogue menus, if that feature is enabled on the web side.</li>
+                        <li><b>Soulgaze HD Mode:</b> Uses the higher-end Soulgaze capture path. VR users generally want this off.</li>
+                        <li><b>Connection Timeout (seconds):</b> How long CHIM waits on the server before giving up on a request.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="AutoActivate">
+                    <h3>Auto Activate</h3>
+                    <p>
+                        This page controls when CHIM automatically picks NPCs up into the active AI system and how far speech awareness reaches around you.
+                    </p>
+                    <p><b>Activation rules</b></p>
+                    <ul>
+                        <li><b>Enable Auto Activate:</b> Turns automatic nearby NPC activation on or off.</li>
+                        <li><b>Interior Auto Activate Distance:</b> Distance for automatic activation inside interiors.</li>
+                        <li><b>Exterior Auto Activate Distance:</b> Distance for automatic activation outside.</li>
+                    </ul>
+                    <p><b>Speech awareness distances</b></p>
+                    <p>
+                        These settings are about who can realistically hear speech in the current scene, not just who becomes an AI agent.
+                    </p>
+                    <ul>
+                        <li><b>Interior Spatial Hearing Distance:</b> Indoor hearing range for conversation awareness checks.</li>
+                        <li><b>Exterior Spatial Hearing Distance:</b> Outdoor hearing range for conversation awareness checks.</li>
+                    </ul>
+                    <p><b>Who can be auto-added</b></p>
+                    <p>
+                        By default, Auto Activate is more conservative. These switches make it much broader.
+                    </p>
+                    <ul>
+                        <li><b>Add Hostile NPCs:</b> Lets Auto Activate include hostile NPCs as well.</li>
+                        <li><b>Add All races:</b> Lets Auto Activate include all races, including animals. This can be unstable.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Behavior">
+                    <h3>Behavior</h3>
+                    <p>
+                        This page tunes how AI NPCs behave over time, how they move in scenes, and how talk-heavy they stay during combat.
+                    </p>
+                    <p><b>Timers</b></p>
+                    <p>
+                        These drive recurring background behavior and automatic profile changes.
+                    </p>
+                    <ul>
+                        <li><b>Bored Event Timer (seconds):</b> How often bored-style events can potentially fire.</li>
+                        <li><b>Dynamic Profile Timer (minutes):</b> How often dynamic profiles can refresh from recent events.</li>
+                    </ul>
+                    <p><b>NPC Behavior</b></p>
+                    <p>
+                        These settings change how NPCs physically place themselves around you and whether CHIM tries to avoid breaking delicate scenes.
+                    </p>
+                    <ul>
+                        <li><b>NPCs Sandbox Near Player:</b> Makes NPCs subtly move around the player to make conversations easier to follow.</li>
+                        <li><b>NPCs Walk To Target:</b> Makes NPCs walk toward the person they are talking to.</li>
+                        <li><b>Seat Conversation Camera:</b> When seated in first person, rotates the camera toward the active speaker.</li>
+                        <li><b>NPC Scene Safety:</b> Prevents AI NPCs in traditional dialogue scenes from auto-responding and breaking those scenes.</li>
+                    </ul>
+                    <p><b>Combat Settings</b></p>
+                    <p>
+                        These decide how talkative CHIM stays once combat starts and whether it swaps to bark-style combat chatter instead.
+                    </p>
+                    <ul>
+                        <li><b>Allow combat dialogue:</b> Enables AI dialogue during combat.</li>
+                        <li><b>Clear dialogue entering combat:</b> Immediately cancels active dialogue when combat begins.</li>
+                        <li><b>Enable Combat Barks:</b> Allows AI agents in combat to shout taunts and battle cries.</li>
+                        <li><b>Combat Bark Timer (seconds):</b> How often combat barks can trigger during active combat.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Sound">
+                    <h3>Sound</h3>
+                    <p>
+                        This is the main page for voice playback, lip sync, audio positioning, microphone behavior, and the current recording device.
+                    </p>
+                    <p><b>Basic</b></p>
+                    <p>
+                        These settings control overall AI voice loudness and how voices fade or position around the player.
+                    </p>
+                    <ul>
+                        <li><b>AI Voice Volume:</b> Main volume level for AI NPC speech.</li>
+                        <li><b>AI Voice Distance Scale:</b> Adjusts how voice loudness behaves with distance.</li>
+                        <li><b>Interior Playback Dropoff (%):</b> Controls how aggressively indoor voice playback falls off with distance.</li>
+                        <li><b>Exterior Playback Dropoff (%):</b> Controls how aggressively outdoor voice playback falls off with distance.</li>
+                        <li><b>Enable 3D Audio Playback:</b> Keeps voice playback spatial instead of flattening it into simple 2D sound.</li>
+                        <li><b>Camera Based Audio:</b> Makes 3D voice direction follow the camera instead of player facing.</li>
+                    </ul>
+                    <p><b>Advanced</b></p>
+                    <p>
+                        These settings are the cleanup and fine-tuning layer for clipped silence, lip movement, pause behavior, and STT override.
+                    </p>
+                    <ul>
+                        <li><b>Skip milliseconds at begining:</b> Cuts silence from the start of generated audio clips.</li>
+                        <li><b>Skip milliseconds at end:</b> Cuts silence from the end of generated audio clips.</li>
+                        <li><b>3D Sound Invert Heading:</b> Tries the opposite heading if front/back 3D audio sounds wrong.</li>
+                        <li><b>Resolution of Lip Animations:</b> Controls how detailed lip motion updates are.</li>
+                        <li><b>Intensity of Lip Animations:</b> Controls how strongly mouths open during speech.</li>
+                        <li><b>Pause Dialogue on Game Pause:</b> Stops CHIM dialogue while the game is paused.</li>
+                        <li><b>Use WebSocket STT:</b> Uses the separate WebSocket STT path instead of the normal server-side STT path.</li>
+                    </ul>
+                    <p><b>Open Mic Settings</b></p>
+                    <p>
+                        These settings are only for open-mic speech input. They decide when recording starts, stops, and how you can silence it quickly.
+                    </p>
+                    <ul>
+                        <li><b>Enable Open Mic:</b> Starts recording automatically when your voice crosses the detection threshold.</li>
+                        <li><b>Voice Detection Sensitivity:</b> Higher values require louder speech before open mic starts listening.</li>
+                        <li><b>End of Sentence Delay (seconds):</b> How long CHIM waits after speech stops before ending the recording.</li>
+                        <li><b>Mute Open Mic:</b> Hotkey that temporarily mutes open mic.</li>
+                    </ul>
+                    <p><b>Recording Device</b></p>
+                    <p>
+                        This is just a read-only status line so you can confirm which Windows microphone CHIM is currently resolving.
+                    </p>
+                    <ul>
+                        <li><b>Current Device:</b> Shows the active recording device name CHIM is currently using.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="PrismaUi">
+                    <h3>Prisma UI</h3>
+                    <p>
+                        This page is only for Prisma UI hotkeys. It does not configure the web UI itself, just how you open the in-game panels.
+                    </p>
+                    <p><b>Hotkeys</b></p>
+                    <ul>
+                        <li><b>Master Menu:</b> Opens the Prisma launcher menu for CHIM panels.</li>
+                        <li><b>CHIM Chat:</b> Opens Prisma chat input so you can type a message and send it without leaving the game.</li>
+                        <li><b>Chatbox View:</b> Opens the live MMO-style CHIM chatbox panel.</li>
+                        <li><b>Actions Menu:</b> Opens the Prisma action panel for in-game AI interactions and commands.</li>
+                        <li><b>Status, Minihud, Terminator Views:</b> Cycles between the Prisma status displays and closes them on another press.</li>
+                        <li><b>History/Diaries:</b> Cycles between conversation history and diaries, then closes them.</li>
+                        <li><b>Browser (Beta):</b> Opens the in-game browser view for the HerikaServer web UI.</li>
+                        <li><b>Logs View (Beta):</b> Opens the Prisma logs and diagnostics view.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="AiAgents">
+                    <h3>AI Agents</h3>
+                    <p>
+                        This page is the live agent management page. It is less about permanent settings and more about what is active around you right now.
+                    </p>
+                    <p><b>Agent Management</b></p>
+                    <p>
+                        These controls do bulk add and remove work on the current live agent list.
+                    </p>
+                    <ul>
+                        <li><b>Add all current AI Agents:</b> Adds almost all nearby NPCs into the AI system right away.</li>
+                        <li><b>Remove All AI Agents:</b> Removes all currently active AI agents from the system.</li>
+                    </ul>
+                    <p><b>Active AI Agents</b></p>
+                    <p>
+                        This section is partly dynamic. It builds itself from the AI agents currently active in your game.
+                    </p>
+                    <ul>
+                        <li><b>Remove: [NPC Name]</b> Removes that specific current AI agent.</li>
+                        <li><b>No AI agents active</b> or <b>Total Active Agents: [count]</b> shows the current agent status for the page.</li>
+                    </ul>
+                    <p><b>Nearby Available NPCs</b></p>
+                    <p>
+                        This section is also dynamic. It is generated from nearby NPCs who are not currently active AI agents.
+                    </p>
+                    <ul>
+                        <li><b>Refresh Nearby NPCs List:</b> Rebuilds the nearby list.</li>
+                        <li><b>Add: [NPC Name]</b> Adds that nearby NPC into the AI system.</li>
+                        <li><b>No nearby available NPCs</b> or <b>Available NPCs: [count]</b> shows the current nearby addable status.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Tools">
+                    <h3>Tools</h3>
+                    <p>
+                        This page is for one-time or occasional sync tools that make certain CHIM features work better.
+                    </p>
+                    <ul>
+                        <li><b>Send faction and location info:</b> Sends faction and location data to the server so travel and world-awareness features work better. The in-game help says this usually only needs to be done once per playthrough.</li>
+                        <li><b>Send all voice samples to server:</b> Uploads all available voice samples so the server has the voice data it expects.</li>
+                    </ul>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

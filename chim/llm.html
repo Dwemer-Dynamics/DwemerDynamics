@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Large Language Model Services | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="LargeLanguageModels" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Large Language Model Services</h1>
+                    <p>
+                        These are the current large language model services exposed in HerikaServer for CHIM.
+                    </p>
+                </div>
+
+                <div class="card" id="OpenRouterService">
+                    <h2>Services</h2>
+                    <h3>OpenRouter</h3>
+                    <p>
+                        OpenRouter is the easiest general starting point for most CHIM users. It gives you one account that can access many different AI models, so you can try options without constantly rebuilding your setup.
+                    </p>
+                    <p><a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer"><b>OpenRouter</b></a></p>
+                </div>
+
+                <div class="card" id="OpenAIService">
+                    <h3>OpenAI</h3>
+                    <p>
+                        OpenAI connects CHIM straight to GPT models. It is a simple choice if you already use OpenAI and want a more direct setup instead of browsing lots of model options.
+                    </p>
+                    <p><a href="https://platform.openai.com/signup" target="_blank" rel="noopener noreferrer"><b>OpenAI</b></a></p>
+                </div>
+
+                <div class="card" id="GoogleService">
+                    <h3>Google</h3>
+                    <p>
+                        Google uses Gemini models for your CHIM conversations. It is another mainstream cloud option if you prefer Google's AI tools or want to compare its style against OpenAI and OpenRouter.
+                    </p>
+                    <p><a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer"><b>Google AI Studio</b></a></p>
+                </div>
+
+                <div class="card" id="GroqService">
+                    <h3>Groq</h3>
+                    <p>
+                        Groq is mainly about speed. It can make CHIM feel more responsive because replies tend to come back quickly, which some players prefer for fast back-and-forth dialogue.
+                    </p>
+                    <p><a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer"><b>Groq</b></a></p>
+                </div>
+
+                <div class="card" id="NanoGptService">
+                    <h3>Nano-GPT</h3>
+                    <p>
+                        Nano-GPT is another hosted service that gives you access to AI models without running them on your own PC. Think of it as an alternative provider if you want more choice outside the biggest platforms.
+                    </p>
+                    <p><a href="https://nano-gpt.com/" target="_blank" rel="noopener noreferrer"><b>Nano-GPT</b></a></p>
+                </div>
+
+                <div class="card" id="Player2Service">
+                    <h3>Player2</h3>
+                    <p>
+                        Player2 is for people who want CHIM to talk to a local AI app on their own machine. It is useful if you want more control over what model you use, but it is usually less beginner-friendly than cloud services.
+                    </p>
+                    <p><a href="http://127.0.0.1:4315/v1/chat/completions" target="_blank" rel="noopener noreferrer"><b>Player2 Local Endpoint</b></a></p>
+                </div>
+
+                <div class="card" id="CustomService">
+                    <h3>Custom</h3>
+                    <p>
+                        Custom is the fallback option for bringing in some other AI service that is not already listed here. Use it when you already know your provider supports OpenAI-style connections and you want to plug it into CHIM manually.
+                    </p>
+                    <p><a href="https://platform.openai.com/docs/api-reference/chat/create" target="_blank" rel="noopener noreferrer"><b>OpenAI-Compatible Chat API</b></a></p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

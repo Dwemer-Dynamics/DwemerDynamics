@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Image-to-Text Services | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="ImageToText" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Image-to-Text</h1>
+                    <p>
+                        Image-to-text is the vision side of CHIM. In normal use, this mainly means <b>Soulgaze</b>: CHIM looks at a screenshot, reads what is on screen, and turns that into useful context for your game.
+                    </p>
+                </div>
+
+                <div class="card" id="HowSoulgazeWorks">
+                    <h3>How Soulgaze Works</h3>
+                    <p>
+                        When you use Soulgaze, CHIM takes a screenshot and sends it to your chosen image-reading service. It also passes along helpful context like who is visible and where you are, so the result is more useful than a plain screenshot description.
+                    </p>
+                    <p>
+                        The Soulgaze wheel gives you four main options:
+                    </p>
+                    <ul>
+                        <li><b>Soulgaze:</b> the standard screenshot read. Use this when you want CHIM to understand the current scene.</li>
+                        <li><b>NPC Photo Zoom:</b> takes a tighter portrait-style shot of the current NPC.</li>
+                        <li><b>NPC Photo:</b> takes a normal NPC photo without the zoomed framing.</li>
+                        <li><b>Just Upload:</b> uploads the image without the full Soulgaze presentation flow.</li>
+                    </ul>
+                    <p>
+                        Finished images are saved into your Soulgaze gallery, so you can keep using the system as part of your broader roleplay setup.
+                    </p>
+                </div>
+
+                <div class="card" id="SoulgazeNotes">
+                    <h3>Soulgaze Notes</h3>
+                    <p>
+                        Soulgaze works best when the screen clearly shows what you want CHIM to notice. If you turn on Soulgaze HD Mode, CHIM uses a higher-quality capture path for cleaner image reading, but it is heavier and VR users will usually want it off.
+                    </p>
+                </div>
+
+                <div class="card-green" id="RecommendedItt">
+                    <h3>Recommended Image-to-Text Service</h3>
+                    <p>
+                        OpenRouter is the main recommended option. It is the easiest general-purpose choice if you want Soulgaze working without setting up your own local image service.
+                    </p>
+                    <p><a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer"><b>OpenRouter</b></a></p>
+                </div>
+
+                <div class="card" id="RecommendedOthers">
+                    <h3>Other Supported Image-to-Text Services</h3>
+                    <p>
+                        <b>OpenAI</b> is direct OpenAI image reading. It is a good fit if you already use OpenAI for the rest of your setup.
+                    </p>
+                    <p><a href="https://platform.openai.com/docs/overview" target="_blank" rel="noopener noreferrer"><b>OpenAI</b></a></p>
+                    <p>
+                        <b>Google OpenAI</b> uses Google's image-reading models. It is a good fit if you prefer Google's model family.
+                    </p>
+                    <p><a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank" rel="noopener noreferrer"><b>Google OpenAI</b></a></p>
+                    <p>
+                        <b>Custom</b> is for people running their own image-reading service or using a special provider that is not one of the built-in defaults.
+                    </p>
+                    <p>
+                        <b>llama.cpp</b> is a local self-hosted option for people who want image reading on their own machine.
+                    </p>
+                    <p><a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer"><b>llama.cpp</b></a></p>
+                </div>
+
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

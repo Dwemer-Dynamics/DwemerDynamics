@@ -1,0 +1,29 @@
+# DwemerDynamics
+
+Guide-first website for Dwemer Dynamics projects, currently focused on CHIM and STOBE.
+
+## Local Development
+
+Start a simple local server from the repo root:
+
+```bat
+start_server.bat
+```
+
+or:
+
+```bash
+./start_server.sh
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/
+```
+
+## Attribution
+
+This site rebuild used [ModdingLinked/ModdingLinked](https://github.com/ModdingLinked/ModdingLinked) as a structural and styling reference while adapting the site for Dwemer Dynamics content, branding, and page layout.
+
+ModdingLinked is MIT-licensed. Attribution and license notice for that upstream reference are included in [THIRD_PARTY_NOTICES.md](C:/Users/reece/Desktop/Dwemer%20Dynamics/MonoRepo/DwemerDynamics-migrated/THIRD_PARTY_NOTICES.md).

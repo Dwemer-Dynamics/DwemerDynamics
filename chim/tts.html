@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Text-to-Speech Services | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme chim-theme">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=M8nlRFiAxJA" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="TextToSpeech" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Text-to-Speech Services</h1>
+                    <p>
+                        This page documents the current text-to-speech services still actively used by HerikaServer for CHIM.
+                        The split below follows the current quickstart flow: recommended first, then the other valid services.
+                    </p>
+                </div>
+
+                <div class="card-green" id="PocketTts">
+                    <h2>Recommended</h2>
+                    <h3>PocketTTS</h3>
+                    <p>
+                        CPU-oriented local text-to-speech using the standard CHIM voice cache workflow. This is one of the main first-run recommendations.
+                    </p>
+                    <ul>
+                        <li>Best for: easiest local baseline.</li>
+                    </ul>
+                </div>
+
+                <div class="card-green" id="Chatterbox">
+                    <h3>Chatterbox</h3>
+                    <p>
+                        Local text-to-speech service using the same general voice cache and management flow as XTTS and PocketTTS, but aimed at a more
+                        expressive output path.
+                    </p>
+                    <ul>
+                        <li>Best for: recommended local expressive speech.</li>
+                    </ul>
+                </div>
+
+                <div class="card-green" id="Xtts">
+                    <h3>CHIM XTTS</h3>
+                    <p>
+                        The dedicated XTTS path in CHIM. This is the service to use when you specifically want the CHIM XTTS workflow,
+                        uploaded voice samples, and the familiar clone/cache flow.
+                    </p>
+                    <ul>
+                        <li>Best for: XTTS-specific voice cloning workflow.</li>
+                        <li>Driver id: <code>xtts-fastapi</code>.</li>
+                        <li>Supports paralinguistic tag prompts in the current server config.</li>
+                    </ul>
+                </div>
+
+                <div class="card-green" id="Inworld">
+                    <h3>Inworld</h3>
+                    <p>
+                        Hosted text-to-speech with language, model, temperature, and speed controls. It is a good option if you want a cloud voice service instead of running speech locally.
+                    </p>
+                    <ul>
+                        <li>Best for: hosted voice generation with cloning support.</li>
+                        <li>Strengths: voice cloning flow, multi-language support, model selection.</li>
+                        <li>Needs: Inworld workspace and API credentials.</li>
+                    </ul>
+                    <p><a href="https://inworld.ai/" target="_blank" rel="noopener noreferrer"><b>Inworld</b></a></p>
+                </div>
+
+                <div class="card-green" id="Cartesia">
+                    <h3>Cartesia</h3>
+                    <p>
+                        Hosted text-to-speech with current language and model options, including the newer sonic line in the server schema.
+                    </p>
+                    <ul>
+                        <li>Best for: higher-end hosted voice path with strong language support.</li>
+                        <li>Strengths: multiple models, speed control, automatic voice sync from the CHIM voice cache.</li>
+                        <li>Needs: Cartesia API key.</li>
+                    </ul>
+                    <p><a href="https://cartesia.ai/" target="_blank" rel="noopener noreferrer"><b>Cartesia</b></a></p>
+                </div>
+
+                <div class="card" id="MeloTts">
+                    <h2>Other Services</h2>
+                    <h3>MeloTTS</h3>
+                    <p>
+                        Local text-to-speech that maps strongly to Skyrim voice types. This is useful when you want a voice-type oriented local setup instead
+                        of the XTTS-style cloned voice flow.
+                    </p>
+                </div>
+
+                <div class="card" id="Mimic3">
+                    <h3>Mimic3</h3>
+                    <p>
+                        Local HTTP text-to-speech service with direct voice, rate, and volume controls. Useful if you want simple local synthesis without
+                        using the XTTS-family flow.
+                    </p>
+                </div>
+
+                <div class="card" id="PiperTts">
+                    <h3>Piper Text-to-Speech</h3>
+                    <p>
+                        Local Piper endpoint integration. Good for self-hosted offline speech if you are comfortable downloading and managing voice
+                        models manually.
+                    </p>
+                </div>
+
+                <div class="card" id="Kokoro">
+                    <h3>Kokoro</h3>
+                    <p>
+                        Local Kokoro endpoint integration. It appears as a valid current text-to-speech driver in the connector system and uses a local HTTP endpoint.
+                    </p>
+                </div>
+
+                <div class="card" id="KoboldCppTts">
+                    <h3>KoboldCPP Text-to-Speech</h3>
+                    <p>
+                        Local text-to-speech path exposed through the KoboldCPP extra text-to-speech endpoint. Use it only if your local KoboldCPP stack is already set up for speech.
+                    </p>
+                </div>
+
+                <div class="card" id="Zonos">
+                    <h3>Zonos</h3>
+                    <p>
+                        Zonos Gradio endpoint integration for users who want that specific self-hosted model family. It supports a wide language list
+                        and CHIM voice cache style voice ids in the current schema.
+                    </p>
+                </div>
+
+                <div class="card" id="XvaSynth">
+                    <h3>xVASynth</h3>
+                    <p>
+                        Legacy-friendly local Skyrim voice workflow tied to xVASynth models. Use this only if you already know you want the xVASynth route.
+                    </p>
+                </div>
+
+                <div class="card" id="Azure">
+                    <h3>Azure</h3>
+                    <p>
+                        Hosted Azure speech synthesis with mood/style support, voice selection, and prosody controls. This is still one of the more configurable
+                        cloud voice options in the CHIM stack.
+                    </p>
+                    <p><a href="https://azure.microsoft.com/en-us/products/ai-services/text-to-speech" target="_blank" rel="noopener noreferrer"><b>Azure Text-to-Speech</b></a></p>
+                </div>
+
+                <div class="card" id="ElevenLabs">
+                    <h3>ElevenLabs</h3>
+                    <p>
+                        Hosted ElevenLabs speech with model, stability, similarity, style, speed, and optional v3 audio tag controls.
+                    </p>
+                    <p><a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer"><b>ElevenLabs</b></a></p>
+                </div>
+
+                <div class="card" id="OpenAiTts">
+                    <h3>OpenAI Text-to-Speech</h3>
+                    <p>
+                        Hosted OpenAI speech synthesis using the current audio speech endpoint. Useful if you want a direct OpenAI voice path instead
+                        of a separate cloud text-to-speech provider.
+                    </p>
+                    <p><a href="https://platform.openai.com/docs/guides/text-to-speech" target="_blank" rel="noopener noreferrer"><b>OpenAI Text-to-Speech</b></a></p>
+                </div>
+
+                <div class="card" id="Deepgram">
+                    <h3>Deepgram</h3>
+                    <p>
+                        Hosted Deepgram text-to-speech. It is still a valid current CHIM service, but it is more of an alternative pick than a main quickstart choice.
+                    </p>
+                    <p><a href="https://deepgram.com/product/text-to-speech" target="_blank" rel="noopener noreferrer"><b>Deepgram Text-to-Speech</b></a></p>
+                </div>
+
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="Overview" class="section">
+                <div class="card hero-card logo-container">
+                    <div>
+                        <h1>STOBE</h1>
+                        <p>
+                            STOBE is the Kenshi-side AI framework overhaul.
+                            It focuses on agentic characters, dynamic dialogue, narrator support, and a shared DwemerDistro service stack tuned for Kenshi.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="../img/stobe-logo.png" alt="STOBE logo">
+                    </div>
+                </div>
+
+                <div class="card" id="WhatStobeIsFor">
+                    <h2>Overview</h2>
+                    <h3>What STOBE Is For</h3>
+                    <ul>
+                        <li>AI dialogue for Kenshi characters and creatures.</li>
+                        <li>TTS support so characters can actually sound present in the scene.</li>
+                        <li>Configuration that supports heavier roleplay instead of a single rigid script.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="CoreFeatures">
+                    <h3>Core Features</h3>
+                    <ul>
+                        <li><b>Agentic Characters:</b> NPCs can react to changes in the world with more autonomy.</li>
+                        <li><b>Kenshi-specific Flavor:</b> Narrator support and harsher world-roleplay hooks.</li>
+                        <li><b>Shared AI Stack:</b> Uses the same DwemerDistro backbone as CHIM, but with Kenshi-side setup and launch requirements.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="RecommendedFirstRun">
+                    <h3>Recommended First Run</h3>
+                    <ul>
+                        <li>Use OpenRouter first for the LLM path.</li>
+                        <li>Install only the DwemerDistro components your hardware can support.</li>
+                        <li>Start with RE_Kenshi and KenshiLib, then expand after base conversations work.</li>
+                    </ul>
+                </div>
+
+                <div class="card-green" id="NextStep">
+                    <h3>Next Step</h3>
+                    <p>
+                        The STOBE setup is shorter than CHIM's, but it still depends on DwemerDistro and on launching RE_KENSHI rather than regular Kenshi.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+
