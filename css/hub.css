@@ -1,3 +1,10 @@
+.hubPageLayout {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 5.7em;
+    position: relative;
+}
+
 .hubPicker {
     display: flex;
     flex-wrap: wrap;
@@ -37,6 +44,7 @@
     height: 394px;
     max-width: 100%;
     overflow: hidden;
+    border-radius: 12px 12px 0 0;
     background-color: var(--site-bg-secondary);
 }
 
@@ -68,14 +76,77 @@
     z-index: 1;
     width: 100%;
     flex: 0 0 auto;
-    min-height: 56px;
-    padding: 0.45em 0.8em 0.5em 0.8em;
+    min-height: 98px;
+    padding: 0.45em 0.8em 0.7em 0.8em;
     background: rgba(26, 26, 26, 0.88);
     text-align: center;
     pointer-events: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.55em;
+}
+
+.hubTileCaptionTitle {
+    display: block;
+}
+
+.hubTileActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55em;
+    width: 100%;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.hubTileActionButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    min-height: 38px;
+    padding: 0.45em 0.85em;
+    border-radius: 8px;
+    color: #111111;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(138, 155, 182, 0.3);
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.hubTileActionButtonChim {
+    background-color: rgb(242, 124, 17);
+    border-color: rgba(242, 124, 17, 0.95);
+}
+
+.hubTileActionButtonChim:hover {
+    background-color: rgb(221, 106, 6);
+    border-color: rgba(221, 106, 6, 0.95);
+    color: #111111;
+}
+
+.hubTileActionButtonStobe {
+    background-color: #e6b76c;
+    border-color: #e6b76c;
+}
+
+.hubTileActionButtonStobe:hover {
+    background-color: #d2a45a;
+    border-color: #d2a45a;
+    color: #111111;
 }
 
 .hubTileCaptionSkyrim {
@@ -119,12 +190,13 @@
 
 .hubContainer {
     display: flex;
-    min-height: 100vh;
+    min-height: auto;
     flex-direction: column;
     align-content: center;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 5.7em;
+    width: 100%;
+    margin: 0 auto;
     background: var(--site-bg-primary);
 }
 
@@ -154,84 +226,179 @@
     margin-bottom: 0.35em;
 }
 
-.hubResources {
-    background-color: var(--site-bg-secondary);
-    z-index: 10;
-    display: block;
-    margin-top: 2em;
-    margin-left: auto;
-    margin-right: auto;
-    width: min(1100px, calc(100% - 2em));
+.patron-shell {
+    position: absolute;
+    top: 0;
+    right: max(10px, 1vw);
+    width: min(330px, 24vw);
+    max-width: 330px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.hubResourcesInner {
-    padding: 0.4em 0 1.2em 0;
+.patron-title {
+    margin: 0 0 14px;
+    width: 100%;
+    font-size: 24px;
+    color: #ffffff;
+    line-height: 1.2;
+    font-family: "MagicCards", serif;
+    letter-spacing: 0.4px;
+    word-spacing: 6px;
+    text-align: right;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
 }
 
-.hubResourcesInner h3 {
-    margin-bottom: 0.9em;
-    text-align: center;
+.patron-title-link {
+    color: inherit;
+    text-decoration: none;
+    font-family: "MagicCards", serif;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+    display: inline-block;
 }
 
-.hubResourcesGrid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9em;
+.patron-title-link:hover,
+.patron-title-link:focus-visible {
+    color: #f0cf75;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-.hubResourceButton {
+.patron-list-scroll {
+    flex: 1 1 auto;
+    height: auto;
+    max-height: none;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.patron-list-track {
+    display: flex;
+    flex-direction: column;
+    animation: patron-list-scroll-loop 180s linear infinite;
+    will-change: transform;
+}
+
+.patron-list-cycle {
+    flex: 0 0 auto;
+}
+
+@keyframes patron-list-scroll-loop {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.patron-tier-group {
+    margin: 0;
+    padding: 10px 0 12px;
+}
+
+.patron-tier-title {
+    margin: 0 0 10px auto;
+    width: 50%;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(138, 155, 182, 0.45);
+    color: #d8e3f2;
+    font-size: 19.5px;
+    letter-spacing: 1px;
+    text-transform: none;
+    font-weight: normal;
+    font-family: "MagicCards", serif;
+    text-align: right;
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: 64px;
-    padding: 0.95em 1.1em;
-    border-radius: 8px;
-    color: #111111;
-    background-color: rgba(30, 35, 45, 0.8);
-    border: 1px solid rgba(138, 155, 182, 0.3);
-    background-image: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.08) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    text-decoration: none;
-    font-size: 1.05em;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
-        inset 0 1px rgba(255, 255, 255, 0.1);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
-.hubResourceButton:hover {
-    border-color: rgba(230, 183, 108, 0.5);
-    color: #111111;
+.patron-tier-icon {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    display: block;
+    flex: 0 0 56px;
 }
 
-.hubResourceButton:active {
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.12);
+.patron-tier-title-label {
+    line-height: 1;
+    font-family: "MagicCards", serif;
+    font-weight: normal;
+    letter-spacing: inherit;
 }
 
-.hubResourceButtonChim {
-    background-color: rgb(242, 124, 17);
-    border-color: rgba(242, 124, 17, 0.95);
+.patron-tier-gold .patron-tier-title {
+    color: #f0cf75;
+    border-bottom-color: rgba(221, 184, 86, 0.7);
 }
 
-.hubResourceButtonChim:hover {
-    background-color: rgb(221, 106, 6);
-    border-color: rgba(221, 106, 6, 0.95);
+.patron-tier-silver .patron-tier-title {
+    color: #d2d8e0;
+    border-bottom-color: rgba(170, 180, 193, 0.72);
 }
 
-.hubResourceButtonStobe {
-    background-color: #e6b76c;
-    border-color: #e6b76c;
+.patron-tier-bronze .patron-tier-title {
+    color: #d9a47c;
+    border-bottom-color: rgba(191, 130, 93, 0.72);
 }
 
-.hubResourceButtonStobe:hover {
-    background-color: #d2a45a;
-    border-color: #d2a45a;
+.patron-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.patron-list-item {
+    color: #f2f5f9;
+    font-size: 14px;
+    padding: 0;
+    line-height: 1.3;
+    word-break: break-word;
+    text-align: right;
+}
+
+.patron-empty,
+.patron-tier-empty {
+    margin: 0;
+    text-align: right;
+}
+
+.patron-empty {
+    color: #c7d0dd;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.patron-tier-empty {
+    color: #9cadc3;
+    font-size: 13px;
+    line-height: 1.4;
 }
 
 .hubFooter {
@@ -269,6 +436,10 @@
 }
 
 @media (max-width: 1220px) {
+    .hubPageLayout {
+        padding-top: 5.7em;
+    }
+
     .hubPicker {
         flex-direction: column;
         width: calc(100% - 0.25em);
@@ -307,11 +478,47 @@
     }
 
     .hubTileCaption {
-        min-height: 50px;
+        min-height: 94px;
         padding: 0.35em 0.7em 0.4em 0.7em;
     }
 
-    .hubResourcesGrid {
-        grid-template-columns: 1fr;
+    .hubTileActions {
+        flex-wrap: wrap;
+    }
+
+    .hubTileActionButton {
+        min-width: 118px;
+        min-height: 36px;
+        font-size: 0.84em;
+    }
+}
+
+@media (max-width: 1080px) {
+    .hubPageLayout {
+        display: block;
+        width: 100%;
+        padding-top: 5.7em;
+    }
+
+    .patron-shell {
+        position: absolute;
+        top: 0;
+        right: 6px;
+        width: min(210px, 42vw);
+        max-width: min(210px, 42vw);
+        padding-top: 0;
+    }
+
+    .patron-list-scroll {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        margin: 0 auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .patron-list-track {
+        animation: none;
     }
 }

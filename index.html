@@ -22,40 +22,49 @@
         </div>
     </div>
 
-    <div class="hubContainer">
-        <div class="hubPicker">
-            <div class="hubColumn" id="chimHub">
-                <div class="hubTileArtwork">
-                    <img src="./img/chim_home_tile.jpg" alt="CHIM home artwork">
+    <div class="hubPageLayout">
+        <div class="hubContainer">
+            <div class="hubPicker">
+                <div class="hubColumn" id="chimHub">
+                    <div class="hubTileArtwork">
+                        <img src="./img/chim_home_tile.jpg" alt="CHIM home artwork">
+                    </div>
+                    <a href="./chim/index.html" class="hubTileLink" aria-label="Open CHIM guide"></a>
+                    <div class="hubTileCaption">
+                        <div class="hubTileCaptionTitle hubTileCaptionSkyrim">Skyrim Special Edition / Skyrim VR</div>
+                        <div class="hubTileActions">
+                            <a class="hubTileActionButton hubTileActionButtonChim" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
+                            <a class="hubTileActionButton hubTileActionButtonChim" href="./chim/installation.html">Install Guide</a>
+                        </div>
+                    </div>
                 </div>
-                <a href="./chim/index.html" class="hubTileLink" aria-label="Open CHIM guide"></a>
-                <div class="hubTileCaption hubTileCaptionSkyrim">Skyrim Special Edition / Skyrim VR</div>
+                <div class="hubColumn" id="stobeHub">
+                    <div class="hubTileArtwork">
+                        <img src="./img/stobe_home_tile.jpg" alt="STOBE home artwork">
+                    </div>
+                    <a href="./stobe/index.html" class="hubTileLink" aria-label="Open STOBE guide"></a>
+                    <div class="hubTileCaption">
+                        <div class="hubTileCaptionTitle hubTileCaptionStobe">Kenshi</div>
+                        <div class="hubTileActions">
+                            <a class="hubTileActionButton hubTileActionButtonStobe" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
+                            <a class="hubTileActionButton hubTileActionButtonStobe" href="./stobe/installation.html">Install Guide</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="hubColumn" id="stobeHub">
-                <div class="hubTileArtwork">
-                    <img src="./img/stobe_home_tile.jpg" alt="STOBE home artwork">
-                </div>
-                <a href="./stobe/index.html" class="hubTileLink" aria-label="Open STOBE guide"></a>
-                <div class="hubTileCaption hubTileCaptionStobe">Kenshi</div>
+
+            <div class="card hubIntroCard">
+                <h1 class="hubTitle">Meaningful AI Gameplay</h1>
+                <p class="hubIntro">Dwemer Dynamics is an AI focused mod team building AI frameworks into popular games.</p>
             </div>
         </div>
 
-        <div class="card hubIntroCard">
-            <h1 class="hubTitle">Meaningful AI Gameplay</h1>
-            <p class="hubIntro">Dwemer Dynamics is an AI focused mod team building AI frameworks into popular games.</p>
-        </div>
-
-        <div class="card hubResources" id="GeneralResources">
-            <div class="hubResourcesInner">
-                <h3>Quick Links</h3>
-                <div class="hubResourcesGrid">
-                    <a class="hubResourceButton hubResourceButtonChim" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">CHIM Download</a>
-                    <a class="hubResourceButton hubResourceButtonStobe" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer">STOBE Download</a>
-                    <a class="hubResourceButton hubResourceButtonChim" href="./chim/installation.html">CHIM Installation</a>
-                    <a class="hubResourceButton hubResourceButtonStobe" href="./stobe/installation.html">STOBE Installation</a>
-                </div>
+        <aside class="patron-shell" aria-label="Current Patreon members">
+            <h2 class="patron-title"><a class="patron-title-link" href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon Members</a></h2>
+            <div class="patron-list-scroll" aria-label="Patreon members by tier">
+                <div class="patron-list-track" id="patronListTrack"></div>
             </div>
-        </div>
+        </aside>
     </div>
 
     <footer class="hubFooter">
@@ -72,5 +81,6 @@
         </div>
         <div>Dwemer Dynamics 2026</div>
     </footer>
+    <script src="js/patron-list.js" defer></script>
 </body>
 </html>
