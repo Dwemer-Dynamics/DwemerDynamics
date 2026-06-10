@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Log Files | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="LogFiles" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Log Files</h1>
+                    <p>
+                        When STOBE is failing, the fastest fix is usually finding the right log first instead of guessing.
+                        This page keeps the useful STOBE, RE_Kenshi, and DwemerDistro log locations in one place.
+                    </p>
+                </div>
+
+                <div class="card" id="StobeLog">
+                    <h2>Log Files</h2>
+                    <h3>STOBE Mod Log</h3>
+                    <p>
+                        This is the first log to open for the STOBE mod itself.
+                    </p>
+                    <p><code>Kenshi\mods\Stobe\Stobe.log</code></p>
+                    <p>
+                        Use this when STOBE is not reacting in game, the hotkeys are failing, context capture looks wrong, or the mod is not talking to the backend correctly.
+                    </p>
+                </div>
+
+                <div class="card" id="ReKenshiLog">
+                    <h3>RE_Kenshi Log</h3>
+                    <p>
+                        This is the main loader-side log for the Kenshi runtime.
+                    </p>
+                    <p><code>Kenshi\RE_Kenshi_log.txt</code></p>
+                    <p>
+                        Use this when STOBE is not loading at all, `RE_Kenshi.exe` is failing to bring the plugin up, or the DLL integration looks broken before STOBE even starts normal runtime behavior.
+                    </p>
+                </div>
+
+                <div class="card" id="ConfigFiles">
+                    <h3>STOBE Config Files</h3>
+                    <p>
+                        If the mod is loading but connecting to the wrong place or acting strangely after an update, also check the live STOBE config files:
+                    </p>
+                    <p><code>Kenshi\mods\Stobe\Stobe.ini</code></p>
+                    <p><code>Kenshi\mods\Stobe\StobeCustom.ini</code></p>
+                    <p>
+                        `Stobe.ini` is the shipped baseline, while `StobeCustom.ini` keeps the user or runtime overrides that survive updates.
+                    </p>
+                </div>
+
+                <div class="card" id="ServerLogs">
+                    <h3>STOBE Server Logs</h3>
+                    <p>
+                        The current codebase exposes the main STOBE server logs through two real entry points:
+                    </p>
+                    <ol>
+                        <li><b>HerikaServer:</b> <b>Control Panel</b> then the <b>Server Logs</b> tab.</li>
+                        <li><b>Distro Launcher:</b> <b>Debugging</b> then <b>Create Diagnostic File</b>.</li>
+                    </ol>
+                    <p>
+                        The HerikaServer side is embedding the STOBE distro debugger from the dashboard, and the launcher diagnostic export writes a summary file to:
+                    </p>
+                    <p><code>Desktop\DwemerDistro-Diagnostics\diagnostics-YYYYMMDD-HHMMSS.txt</code></p>
+                    <p>
+                        The STOBE log viewer code is currently reading from the HerikaServer log folder and surfaces these files:
+                    </p>
+                    <ol>
+                        <li><code>apache_error.log</code></li>
+                        <li><code>chim.log</code></li>
+                        <li><code>output_from_llm.log</code></li>
+                        <li><code>context_sent_to_llm.log</code></li>
+                        <li><code>output_to_plugin.log</code></li>
+                        <li><code>stt.log</code></li>
+                        <li><code>vision.log</code></li>
+                        <li><code>debugStream.log</code></li>
+                        <li><code>context_sent_to_llm_fast.log</code></li>
+                        <li><code>monitor.log</code></li>
+                        <li><code>service.log</code></li>
+                    </ol>
+                    <p>
+                        In the launcher code, there are also direct live tail commands for Apache, XTTS, Chatterbox, PocketTTS, MeloTTS, Piper, localWhisper, and Parakeet logs. So if the launcher or server log views are not enough, the debugging tools are already wired to those service-specific logs too.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

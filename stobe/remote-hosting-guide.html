@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Remote Hosting Guide | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="RemoteHostingGuide" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Remote Hosting Guide</h1>
+                    <p>
+                        This page covers the local network setup where Skyrim runs on one PC and the heavier STOBE services run on a second machine.
+                        The main thing this guide solves is getting the second machine's WSL-hosted STOBE services reachable from your gaming PC.
+                    </p>
+                </div>
+
+                <div class="card" id="BasicIdea">
+                    <h2>Remote Hosting Guide</h2>
+                    <h3>Basic Setup Idea</h3>
+                    <p>
+                        The old STOBE wiki guide was built around a two-PC LAN setup. PC A is the machine you actually play Skyrim on. PC B is the machine that runs the bigger AI stack.
+                    </p>
+                    <figure class="guide-figure" style="max-width: 880px;">
+                        <img src="../img/remote-hosting/step-01.jpg" alt="Two-PC STOBE setup diagram">
+                        <figcaption>PC A runs Skyrim. PC B runs the heavy remote STOBE services on the same local network.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="card" id="MachineRoles">
+                    <h3>What Each PC Should Run</h3>
+                    <ul>
+                        <li><b>PC A:</b> Skyrim and the lighter local STOBE side. The old guide used DwemerDistro here as only the web server side.</li>
+                        <li><b>PC B:</b> your remote model and voice stack. The old guide specifically showed KoboldCPP, DwemerDistro, and XTTS on this machine.</li>
+                    </ul>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-02.jpg" alt="PC A component installation notes">
+                        <figcaption>PC A should stay simple: Skyrim plus the local side needed to talk to the remote services.</figcaption>
+                    </figure>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-03.jpg" alt="PC B component installation notes">
+                        <figcaption>PC B handles the heavier remote services like the language model and XTTS.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="card" id="FindAddresses">
+                    <h3>Get The Two Addresses You Need</h3>
+                    <p>
+                        You need two different addresses from the remote machine:
+                    </p>
+                    <ul>
+                        <li><b>The Windows LAN IP:</b> this is the address the game PC will connect to.</li>
+                        <li><b>The WSL IP:</b> this is the internal target that Windows will forward traffic into.</li>
+                    </ul>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-04.jpg" alt="Getting the LAN IP with ipconfig">
+                        <figcaption>Use <code>ipconfig</code> on PC B and note its IPv4 LAN address.</figcaption>
+                    </figure>
+                    <figure class="guide-figure" style="max-width: 920px;">
+                        <img src="../img/remote-hosting/step-05.jpg" alt="Getting the WSL IP from DwemerDistro">
+                        <figcaption>Start DwemerDistro on PC B and note the internal WSL address it reports for the web and XTTS services.</figcaption>
+                    </figure>
+                    <p>
+                        You can also fetch the current WSL address directly with:
+                    </p>
+                    <pre><code>wsl hostname -I</code></pre>
+                    <p>
+                        If your second-PC setup suddenly stops working later, check this first. WSL IPs can change after restarts.
+                    </p>
+                </div>
+
+                <div class="card" id="PortProxySetup">
+                    <h3>Forward The WSL Services Through Windows</h3>
+                    <p>
+                        This is the key fix from the old wiki. If trying to reach <code>WSL_IP:8020</code> directly from the gaming PC keeps failing, do not keep aiming the game PC at the raw WSL address.
+                        Forward those ports through the Windows host machine instead.
+                    </p>
+                    <p>
+                        The original guide used two forwarded ports:
+                    </p>
+                    <ul>
+                        <li><b>8081:</b> the STOBE web side</li>
+                        <li><b>8020:</b> XTTS</li>
+                    </ul>
+                    <p>
+                        You can create the rules in an elevated Command Prompt:
+                    </p>
+                    <pre><code>netsh interface portproxy add v4tov4 listenport=8081 listenaddress=0.0.0.0 connectport=8081 connectaddress=&lt;WSL_IP&gt;
+netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 connectport=8020 connectaddress=&lt;WSL_IP&gt;</code></pre>
+                    <p>
+                        If you prefer a GUI, the old guide also used PortProxyGUI:
+                    </p>
+                    <p><a href="https://github.com/zmjack/PortProxyGUI/releases/tag/v1.4.2" target="_blank" rel="noopener noreferrer"><b>PortProxyGUI Download</b></a></p>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-06.jpg" alt="PortProxyGUI setup for STOBE remote hosting">
+                        <figcaption>Create rules that listen on the Windows host and forward 8081 and 8020 into the WSL address on PC B.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="card" id="FirewallRules">
+                    <h3>Open The Windows Firewall Ports</h3>
+                    <p>
+                        The old guide also opened inbound TCP rules for the forwarded ports. If Windows Firewall blocks them, the LAN setup still will not work even if the proxy is correct.
+                    </p>
+                    <ul>
+                        <li>Create an inbound rule for TCP.</li>
+                        <li>Allow the connection.</li>
+                        <li>Add local ports <code>8081,8020</code>.</li>
+                        <li>Apply it to Domain, Private, and Public if needed for your machine.</li>
+                    </ul>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-07.jpg" alt="Creating a Windows Firewall inbound rule">
+                        <figcaption>Create a new inbound rule in Windows Defender Firewall on PC B.</figcaption>
+                    </figure>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-09.jpg" alt="Adding TCP ports 8081 and 8020 to the firewall rule">
+                        <figcaption>Make the rule TCP and explicitly allow ports 8081 and 8020.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="card" id="PointPcAToPcB">
+                    <h3>Point STOBE On PC A At The Remote Machine</h3>
+                    <p>
+                        Once PC B is forwarding and accepting traffic, the gaming PC should use the <b>Windows LAN IP of PC B</b>, not the raw WSL address.
+                    </p>
+                    <ul>
+                        <li><b>For the web side:</b> open the remote STOBE pages with the PC B LAN IP on port <code>8081</code>.</li>
+                        <li><b>For XTTS:</b> use the PC B LAN IP on port <code>8020</code> inside the STOBE text-to-speech settings.</li>
+                    </ul>
+                    <figure class="guide-figure" style="max-width: 900px;">
+                        <img src="../img/remote-hosting/step-11.jpg" alt="Starting DwemerDistro on the Skyrim PC">
+                        <figcaption>Run the local STOBE side on the Skyrim machine, but leave the heavier remote services on PC B.</figcaption>
+                    </figure>
+                    <figure class="guide-figure" style="max-width: 920px;">
+                        <img src="../img/remote-hosting/step-12.jpg" alt="Configuring XTTS to use the remote machine LAN IP">
+                        <figcaption>Set the XTTS endpoint on PC A to the LAN IP of PC B, for example <code>http://192.168.1.3:8020</code>.</figcaption>
+                    </figure>
+                    <p>
+                        In short, use <code>REMOTE_MACHINE_IP:8081</code> and <code>REMOTE_MACHINE_IP:8020</code>.
+                        That is the core fix the old page was trying to teach.
+                    </p>
+                </div>
+
+                <div class="card" id="Troubleshooting">
+                    <h3>Quick Troubleshooting Notes</h3>
+                    <p>
+                        If it still does not work, go through these in order:
+                    </p>
+                    <ul>
+                        <li>Make sure the service actually works locally on PC B first.</li>
+                        <li>Confirm the PC B LAN IP with <code>ipconfig</code>.</li>
+                        <li>Confirm the current WSL IP again with <code>wsl hostname -I</code>.</li>
+                        <li>Make sure your port-proxy rules still point at the current WSL IP.</li>
+                        <li>Make sure Windows Firewall allows inbound TCP 8081 and 8020.</li>
+                        <li>On PC A, use the remote machine IP, not the WSL IP, in the endpoint fields.</li>
+                    </ul>
+                    <p>
+                        Original screenshot walkthrough on the old wiki was credited there to <i>hey_daniel</i>.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

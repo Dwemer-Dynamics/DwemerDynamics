@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Configuration | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="Configuration" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Configuration</h1>
+                    <p>
+                        This page explains the main STOBE setup pages inside StobeServer in plain language.
+                        Use it after installation when you want to tune how STOBE behaves across your playthrough.
+                    </p>
+                </div>
+
+                <div class="card" id="GlobalSettings">
+                    <h3>Global Settings</h3>
+                    <p>
+                        <b>What this page does:</b> This is the main global behavior page for StobeServer. Changes here affect the overall AI behavior for the whole save, not just one NPC.
+                    </p>
+                    <ul>
+                        <li><b>Prompting:</b> This is where StobeServer stores the main prompt head, emote mood list, general instructions, and roleplay instructions.</li>
+                        <li><b>Rechat:</b> Controls how STOBE chooses follow-up speakers, including rechat mode, strict targeting, and whether the original player speaker can be selected again.</li>
+                        <li><b>Memory:</b> Covers the global memory system and how much older context STOBE keeps bringing back into play.</li>
+                        <li><b>World Knowledge:</b> Includes broader world knowledge behavior, including whether race knowledge should be injected automatically when matching entries exist.</li>
+                        <li><b>Relationship System:</b> This is where the shared relationship layer is turned on or off for server-side interaction tracking.</li>
+                        <li><b>Player Faction:</b> Lets you define a custom player-faction name and an optional extra prompt block for how that faction should be treated.</li>
+                        <li><b>Context Selections:</b> Lets you choose which context blocks and subsections STOBE includes in system prompts.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Profiles">
+                    <h3>Profiles</h3>
+                    <p>
+                        <b>What this page does:</b> Profiles are reusable behavior presets for NPCs and factions. Instead of hand-tuning everyone one by one, you build profile setups and assign NPCs to them.
+                    </p>
+                    <ul>
+                        <li><b>Basic profile setup:</b> Each profile has a label, can be marked as a default NPC profile, and can also be marked as a player-faction profile.</li>
+                        <li><b>Main prompt text:</b> Profiles carry both a <b>Prompt Head</b> and a <b>Profile Prompt</b>, which shape the behavior style of NPCs using that profile.</li>
+                        <li><b>Connector choices:</b> Each profile can point to its own Response, Diary, Autochat, Memory, Background Life, Dynamic Profile, Relationship, and TTS connectors.</li>
+                        <li><b>Dynamic profile behavior:</b> Profiles decide whether STOBE can rewrite fields like personality, speech style, and goals over time.</li>
+                        <li><b>Diary behavior:</b> Profiles also control auto-diary behavior, including how often entries can be written and how many events are needed first.</li>
+                        <li><b>Workflow tools:</b> The page supports cloning, exporting, importing, profile testing, and profile-assignment rules for imported NPCs.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="ApiKeys">
+                    <h3>API Keys</h3>
+                    <p>
+                        <b>What this page does:</b> This is the shared API key page for StobeServer. You save provider keys here once, then the connector pages reuse them.
+                    </p>
+                    <ul>
+                        <li><b>Preset providers:</b> The current built-in presets include OpenRouter, OpenAI, Groq, Nano-GPT, Google, Cartesia, and Inworld.</li>
+                        <li><b>Used across the server:</b> These saved keys are then selected by the Large Language Model and Text-to-Speech connector pages.</li>
+                        <li><b>Custom key rows:</b> You can also add your own named API badge entries for other supported services.</li>
+                        <li><b>Practical use:</b> If a connector needs a cloud login, this page is usually where that key gets stored first.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Narrator">
+                    <h3>Narrator</h3>
+                    <p>
+                        <b>What this page does:</b> This page controls the STOBE narrator layer, including when it speaks, what profile it uses, and how it presents itself.
+                    </p>
+                    <ul>
+                        <li><b>Core toggles:</b> You can turn the narrator on or off, enable welcome narration, and enable random narration.</li>
+                        <li><b>Chance and cooldowns:</b> The page controls welcome cooldown, random narration chance, and random narration cooldown.</li>
+                        <li><b>Profile and voice:</b> You choose which profile the narrator uses, its voice ID, and which world-knowledge tags it should pull from.</li>
+                        <li><b>Prompt override:</b> There is also a narrator-specific prompt-head override if you want the narrator to follow special instructions.</li>
+                        <li><b>Dynamic profile updates:</b> The narrator can also use dynamic updates for personality, speech style, and goals if you turn that on.</li>
+                        <li><b>Narrator identity:</b> Core summary, background, personality, speech style, and goals are all editable on this page.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="ActionEditor">
+                    <h3>Action Editor</h3>
+                    <p>
+                        <b>What this page does:</b> Action Editor controls which server-side actions STOBE is allowed to use and whether they are active.
+                    </p>
+                    <ul>
+                        <li><b>Enabled state:</b> You can turn individual actions on or off without changing the shipped base rows.</li>
+                        <li><b>Search and filtering:</b> The page supports live search plus enabled and disabled filters so you can find specific actions faster.</li>
+                        <li><b>Base versus custom:</b> STOBE keeps track of which actions are still stock and which ones now have custom override rows.</li>
+                        <li><b>What you are editing:</b> The list shows the command name, visible action name, description, and current enabled state.</li>
+                        <li><b>Practical use:</b> This is mainly the page to visit when you want to stop a specific AI action from being used or re-enable one that is off.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="PromptsManager">
+                    <h3>Prompts Manager</h3>
+                    <p>
+                        <b>What this page does:</b> Prompts Manager is the page for editing STOBE's built-in prompt text one prompt at a time.
+                    </p>
+                    <ul>
+                        <li><b>Default versus custom:</b> Each prompt key keeps its shipped default text and an optional custom override.</li>
+                        <li><b>Edit and clear:</b> You can write a replacement prompt for any key, or clear it to fall straight back to the default.</li>
+                        <li><b>Description:</b> The page also shows a short description for what each prompt is for before you change it.</li>
+                        <li><b>Import and export:</b> Custom prompt changes can be exported as CSV and imported again later for backup or sharing.</li>
+                    </ul>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

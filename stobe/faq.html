@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE FAQ | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="FAQ" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE FAQ</h1>
+                    <p>
+                        This page covers the current STOBE plugin and StobeServer behavior. Old Skyrim and CHIM-specific answers have been removed.
+                    </p>
+                </div>
+
+                <div class="card" id="ConfigFiles">
+                    <h2>FAQ</h2>
+                    <h3>Where are STOBE settings saved</h3>
+                    <p>
+                        STOBE uses layered config files inside <code>Kenshi\mods\Stobe\</code>.
+                    </p>
+                    <ul>
+                        <li><code>Stobe.ini</code> is the shipped baseline file.</li>
+                        <li><code>StobeCustom.ini</code> stores user and runtime overrides.</li>
+                    </ul>
+                    <p>
+                        On first run, STOBE seeds <code>StobeCustom.ini</code> from <code>Stobe.ini</code> if it does not already exist.
+                    </p>
+                </div>
+
+                <div class="card" id="ServerAddress">
+                    <h3>What server address does STOBE use by default</h3>
+                    <p>
+                        The normal local setup is <code>127.0.0.1:8083</code>. STOBE builds its server home URL from that and opens:
+                    </p>
+                    <p><code>http://127.0.0.1:8083/StobeServer/</code></p>
+                    <p>
+                        If you want to host the server on another machine, change <code>ServerHost</code> and <code>ServerPort</code> in <code>StobeCustom.ini</code>.
+                    </p>
+                </div>
+
+                <div class="card-red" id="ServerNotResponding">
+                    <h3>The STOBE server page is not opening or the server is not responding</h3>
+                    <p>
+                        First confirm that StobeServer is actually running and reachable at the host and port STOBE is using.
+                    </p>
+                    <ul>
+                        <li>Default local target is <code>127.0.0.1:8083</code>.</li>
+                        <li>If you changed <code>ServerHost</code> or <code>ServerPort</code>, make sure the server matches those values.</li>
+                        <li>You can also use the in-game settings window to open the server page directly.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Logs">
+                    <h3>Where is the STOBE log file</h3>
+                    <p>
+                        The main mod log is written to:
+                    </p>
+                    <p><code>Kenshi\mods\Stobe\stobe.log</code></p>
+                    <p>
+                        STOBE also writes a root-level <code>stobe.log</code> and a legacy <code>Stobe_SDK.log</code>, but the mod-folder log is the main one to check.
+                    </p>
+                </div>
+
+                <div class="card" id="CsvImport">
+                    <h3>Why did my custom bios, descriptions, or world knowledge not import</h3>
+                    <p>
+                        STOBE only auto-imports supported top-level CSV files from:
+                    </p>
+                    <ul>
+                        <li><code>mods\Stobe\</code></li>
+                        <li><code>mods\&lt;YourMod&gt;\Stobe\</code></li>
+                    </ul>
+                    <p>
+                        The file must be a real <code>.csv</code>, under <b>10 MB</b>, and named like a supported type such as
+                        <code>*_bio_random.csv</code>, <code>*_bio_unique.csv</code>, <code>*_bio_token.csv</code>,
+                        <code>*_descriptions.csv</code>, or <code>*_world_knowledge.csv</code>.
+                    </p>
+                    <p>
+                        If STOBE cannot match the filename or header to a supported import type, it skips the file. Check <code>stobe.log</code> for <code>CSV_IMPORT</code> lines.
+                    </p>
+                </div>
+
+                <div class="card" id="AnimalTalks">
+                    <h3>Why are animals not talking</h3>
+                    <p>
+                        Animal talks are disabled by default. Turn on <code>AnimalTalks</code> in the STOBE settings or in <code>StobeCustom.ini</code> if you want animals to be valid chat targets.
+                    </p>
+                </div>
+
+                <div class="card" id="NoVoice">
+                    <h3>I am getting text but no spoken voice</h3>
+                    <p>
+                        Check the STOBE-side voice settings first:
+                    </p>
+                    <ul>
+                        <li>Make sure <code>TtsEnabled</code> is on.</li>
+                        <li>Make sure <code>TTSVolume</code> is not set too low.</li>
+                        <li>Make sure StobeServer has a valid text-to-speech connector configured.</li>
+                    </ul>
+                    <p>
+                        If the server is responding but audio still never plays, check <code>stobe.log</code> for <code>TTS_PLAYBACK</code> lines.
+                    </p>
+                </div>
+
+                <div class="card" id="RegularDialogue">
+                    <h3>Why is regular non-AI dialogue not being captured</h3>
+                    <p>
+                        STOBE has a separate regular dialogue capture toggle. If you want that behavior, turn on <code>Regular Dialogue</code> in the settings window or set <code>EnableRegularDialogueCapture=1</code> in <code>StobeCustom.ini</code>.
+                    </p>
+                </div>
+
+                <div class="card" id="Motd">
+                    <h3>How do I stop the MOTD window from auto-opening</h3>
+                    <p>
+                        Turn off <code>EnableMOTD</code> in <code>StobeCustom.ini</code> or use the MOTD toggle in the STOBE interface.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

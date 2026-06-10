@@ -65,80 +65,63 @@
                 <div class="card hero-card">
                     <h1>CHIM Roleplay Settings</h1>
                     <p>
-                        These systems shape what CHIM does between ordinary dialogue turns.
-                        They are the pages that control diaries, long-term memories, quest generation, background NPC life, screenshots, and relationship state.
-                    </p>
-                    <p>
-                        Use this after your install and basic configuration are already stable.
+                        These are the CHIM pages that shape the world beyond normal NPC dialogue.
+                        They control NPC records, quests, background activity, lore knowledge, screenshots, diaries, memories, and relationships.
                     </p>
                 </div>
 
                 <div class="card" id="ChimNpcsMenu">
-                    <h2>Roleplay Settings</h2>
                     <h3>CHIM NPCs Menu</h3>
                     <p>
-                        The CHIM NPCs menu in HerikaServer is the main profile-management page for AI characters. This is where you curate the persistent NPC records that CHIM uses for voice, personality, memory behavior, background life, and relationship state.
+                        <b>What this page does:</b> The CHIM NPCs menu is the main control page for individual AI characters. This is where you review and adjust how CHIM treats a specific NPC across the playthrough.
                     </p>
                     <ul>
-                        <li><b>Core profile management:</b> You can create NPCs manually, import them from JSON, assign them to profiles, and manage their saved sheet instead of relying only on whatever was generated in a live session.</li>
-                        <li><b>Search and filtering:</b> The page supports text search, profile filtering, favorites, locked profiles, dynamic profile filtering, middle-term memory filtering, auto greeting, background-life command flags, and GPS tracking flags.</li>
-                        <li><b>Per-NPC control:</b> Each NPC card surfaces race, gender, voice, RefID, Oghma tags, profile assignment, portrait selection, favorite state, and profile locking so you can quickly review whether a character is configured correctly.</li>
-                        <li><b>Roleplay feature toggles:</b> The menu is tied into systems like dynamic profiles, middle-term memory, individual memory banks, auto diaries, background life commands, and greeting behavior.</li>
-                        <li><b>Bulk maintenance tools:</b> The toolbar also exposes mass profile switching, relationship rebuilding, JSON import, and cleanup actions for unlocked profiles.</li>
+                        <li><b>Per-NPC basics:</b> Each NPC entry includes things like name, race, gender, voice, RefID, profile, and portrait so you can confirm the character sheet is correct.</li>
+                        <li><b>Profile control:</b> You can move an NPC onto a different CHIM profile, lock that profile so it stays fixed, or leave it more flexible.</li>
+                        <li><b>Roleplay features:</b> This page ties into dynamic profiles, middle-term memory, individual memory use, auto greetings, auto diaries, and background-life behavior.</li>
+                        <li><b>Search and filtering:</b> You can filter by text, profile, favorites, locked NPCs, dynamic profile state, memory state, greeting behavior, and other useful NPC flags.</li>
+                        <li><b>Import and cleanup:</b> The page also supports JSON import and export, bulk profile switching, relationship rebuilding, and cleanup for unlocked NPCs.</li>
                     </ul>
-                    <p>
-                        In practice, this is the page you use when a specific NPC needs hand-tuning or when you want tighter control over how CHIM treats characters across a whole playthrough.
-                    </p>
                 </div>
 
                 <div class="card" id="AiQuestManager">
                     <h3>AI Quest Manager</h3>
                     <p>
-                        AI Quest Manager is CHIM's quest staging and runtime panel. It is still marked as alpha in the current UI, but it already provides the main workflow for generating and playing AI-driven questlines.
+                        <b>What this page does:</b> AI Quest Manager is the page for generating, staging, starting, and stopping AI-driven questlines.
                     </p>
                     <ul>
-                        <li><b>Scenario generation:</b> You give it a suggestion or prompt, then it generates a quest title and briefing that can be staged.</li>
-                        <li><b>Quest control:</b> From the same page you can stage a storyline, start the quest, request a stop, and clear running quest state.</li>
-                        <li><b>Live tracking:</b> The panel shows running quests, staged quest state, the next objective, and the NPCs currently involved.</li>
-                        <li><b>Reference tabs:</b> The hub also exposes item types, NPC templates, NPC-owned templates, outfits, and quest-system server logs.</li>
-                        <li><b>Practical requirement:</b> The page warns you to send locations from the CHIM MCM first so the system can target valid places in Skyrim.</li>
+                        <li><b>Scenario setup:</b> You can give the system a player suggestion and extra AI instructions before it generates a quest idea.</li>
+                        <li><b>Quest flow:</b> The page supports generating a scenario, staging the storyline, starting the quest, requesting an end, and clearing stored quest state.</li>
+                        <li><b>Live tracking:</b> It shows staged storylines, running quests, current pending steps, next objectives, and the NPCs involved.</li>
+                        <li><b>Reference tabs:</b> The quest hub also links to item types, NPC templates, outfits, and quest-system server logs.</li>
+                        <li><b>Important setup note:</b> The page expects you to use <b>Send All Locations</b> in the CHIM MCM first so the quest system has valid travel locations to work with.</li>
                     </ul>
-                    <p>
-                        This page matters when you want CHIM to drive structured adventure content instead of only freeform NPC interaction.
-                    </p>
                 </div>
 
                 <div class="card" id="BackgroundLife">
                     <h3>Background Life</h3>
                     <p>
-                        Background Life is the world-simulation map page. It tracks NPC positions, lets you inspect what off-screen characters are doing, and gives you tools to push activity back into the simulation.
+                        <b>What this page does:</b> Background Life is CHIM's world-simulation map page. It is where you watch off-screen NPC activity and nudge the wider world forward.
                     </p>
                     <ul>
-                        <li><b>World map view:</b> NPCs are placed on a Skyrim map using tracked in-game coordinates so you can see where background actors currently are.</li>
-                        <li><b>Per-NPC actions:</b> The page can request a new action, request reporting, or force a coordinate refresh for an NPC.</li>
-                        <li><b>Rumor system:</b> You can create, edit, and delete rumors with hold, type, content, and lifespan fields so the background world has story prompts to react to.</li>
-                        <li><b>NPC state management:</b> The map page reads and updates metadata and extended NPC data that power background-life reporting and tracked behavior.</li>
-                        <li><b>Immersion tie-in:</b> It also surfaces letters and thought-style diary content connected to those NPCs, so it functions as both a simulation tool and a monitoring page.</li>
+                        <li><b>World map:</b> NPCs are shown on a Skyrim map using tracked coordinates so you can see where background characters currently are.</li>
+                        <li><b>NPC actions:</b> You can request a report, request a new action, or force a coordinate refresh for a specific NPC.</li>
+                        <li><b>Rumor system:</b> The page lets you create and manage rumors with hold, type, content, and lifespan so the world has loose story pressure even when you are not present.</li>
+                        <li><b>Background state:</b> It also reads the tracked NPC metadata behind those background reports and behaviors.</li>
+                        <li><b>Letters and thoughts:</b> The page can surface related letters and diary-style thoughts, so it helps you monitor both movement and off-screen story flavor.</li>
                     </ul>
-                    <p>
-                        In practice, this is one of the main pages for making the world feel alive when the player is not directly talking to someone.
-                    </p>
                 </div>
 
                 <div class="card" id="OghmaInfinium">
                     <h3>Oghma Infinium</h3>
                     <p>
-                        Oghma Infinium is CHIM's lore injection system. It gives NPCs specific world knowledge based on what they should actually know, so roleplay feels more grounded instead of every character sounding equally informed about every topic.
+                        <b>What this page does:</b> Oghma Infinium is CHIM's lore knowledge system. It helps NPCs know the right things for who they are, instead of every character sounding equally informed about every topic.
                     </p>
                     <ul>
-                        <li><b>What it changes in play:</b> A blacksmith can speak more naturally about weapons, an alchemist can know ingredient effects, and someone from a specific region can know nearby places while a stranger from another hold may not.</li>
-                        <li><b>How it triggers:</b> Oghma can be used both when you speak to an NPC and when NPCs rechat among themselves, so it is meant to shape regular play instead of only direct lore questions.</li>
-                        <li><b>Setup requirement:</b> The old guide treated Minime-T5 as the practical requirement. In the configuration wizard you enable <code>[MINIME_T5]</code> and <code>[OGHMA_INFINIUM]</code>, then save and copy those settings to all profiles.</li>
-                        <li><b>Main idea:</b> Oghma helps the AI know what it should know, and just as importantly, what it should not know.</li>
+                        <li><b>What it changes in play:</b> A blacksmith can sound more natural about weapons, an alchemist can know ingredient effects, and locals can know nearby places better than outsiders.</li>
+                        <li><b>How it shows up:</b> Oghma can affect direct conversations and NPC-to-NPC chatter, so it shapes ordinary roleplay instead of only special lore questions.</li>
+                        <li><b>Main idea:</b> Oghma helps NPCs know what they should know and, just as importantly, what they should not know.</li>
                     </ul>
-                    <p>
-                        In practice, Oghma is one of the biggest reasons CHIM NPCs feel lore-aware without becoming omniscient.
-                    </p>
                     <figure class="guide-figure" style="max-width: 441px;">
                         <img src="../img/roleplay-settings/oghma/karita-knowledge-classes.jpg" alt="Karita knowledge classes example">
                         <figcaption>Example of an NPC knowledge-class list. These tags decide what that NPC can access in Oghma.</figcaption>
@@ -146,13 +129,13 @@
                     <div id="KnowledgeClassesAndAccess">
                     <h3>Knowledge Classes And Access</h3>
                     <p>
-                        Every NPC is assigned knowledge classes based on things like race, profession, location, factions, and sometimes their specific name. Oghma compares those classes against article tags before deciding what information the NPC is allowed to receive.
+                        NPCs are given knowledge classes based on things like race, profession, location, factions, and sometimes their specific identity. Oghma checks those classes before deciding what information the NPC is allowed to use.
                     </p>
                     <ul>
-                        <li><b>Advanced article:</b> This is the expert version of a topic. It is for people who should know the deeper lore or specialist detail.</li>
-                        <li><b>Basic article:</b> This is the simpler layperson version of a topic. It is what a normal informed NPC might know.</li>
-                        <li><b>Empty basic tags:</b> If the basic tag field is empty, that basic article is treated as open common knowledge.</li>
-                        <li><b>No matching access:</b> If the NPC matches neither the advanced nor basic side, CHIM effectively tells them they do not know anything about that subject.</li>
+                        <li><b>Advanced article:</b> The deeper expert version of a topic for characters who should know specialist detail.</li>
+                        <li><b>Basic article:</b> The simpler version for ordinary informed people.</li>
+                        <li><b>Open common knowledge:</b> If the basic access tags are empty, the basic version is treated as common knowledge.</li>
+                        <li><b>No matching access:</b> If an NPC matches neither level, they should not suddenly sound informed on that subject.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 1100px;">
                         <img src="../img/roleplay-settings/oghma/akatosh-example.jpg" alt="Akatosh Oghma knowledge example">
@@ -166,12 +149,12 @@
                     <div id="OghmaExamples">
                     <h3>How It Feels In Play</h3>
                     <p>
-                        The old Oghma guide focused on a few simple examples that explain the system well:
+                        The best way to understand Oghma is by how it changes ordinary answers:
                     </p>
                     <ul>
-                        <li><b>Regional knowledge:</b> Someone from Riften might know Northwind Summit well, while people from farther away only know a little or nothing.</li>
-                        <li><b>Profession knowledge:</b> A blacksmith, fisherman, or alchemist can speak more naturally about their own subject area.</li>
-                        <li><b>Character-specific limits:</b> If an NPC does not have the right tags for a topic like the Dark Brotherhood Sanctuary, they should not suddenly sound like an expert.</li>
+                        <li><b>Regional knowledge:</b> Someone from Riften may know Northwind Summit well, while people from farther away may know little or nothing.</li>
+                        <li><b>Profession knowledge:</b> A blacksmith, fisherman, or alchemist can sound more natural on their own subject area.</li>
+                        <li><b>Character limits:</b> If an NPC does not have the right tags for a subject like the Dark Brotherhood Sanctuary, they should not magically sound like an expert.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 1200px;">
                         <img src="../img/roleplay-settings/oghma/northwind-example.jpg" alt="Northwind Summit Oghma example">
@@ -189,13 +172,13 @@
                     <div id="ManagingOghma">
                     <h3>Managing Oghma Topics</h3>
                     <p>
-                        HerikaServer includes an Oghma management page so you can build or expand your own game canon instead of only using the default Skyrim knowledge pack.
+                        HerikaServer includes an Oghma browser and editor so you can inspect topics and expand the knowledge base for your own mod list and canon.
                     </p>
                     <ul>
-                        <li><b>Browse existing topics:</b> You can search the database and inspect what is already available.</li>
-                        <li><b>Add or edit topics:</b> Each topic has a keyword name, advanced text, advanced classes, basic text, basic classes, tags, and category fields.</li>
-                        <li><b>Expand for your own canon:</b> The system is not limited to vanilla Skyrim. You can add custom topics that fit your load order and roleplay setup.</li>
-                        <li><b>Reference material:</b> The old guide also linked a public knowledge-class sheet and a Project Oghma spreadsheet for people who want to contribute more coverage.</li>
+                        <li><b>Browse topics:</b> You can search by topic or category and inspect what is already covered.</li>
+                        <li><b>Edit topics:</b> Each entry can include advanced text, basic text, access classes, tags, and category information.</li>
+                        <li><b>Support your own canon:</b> You are not limited to vanilla Skyrim. You can add custom topics that fit your load order and roleplay setup.</li>
+                        <li><b>Useful references:</b> The old guide also linked shared sheets for knowledge classes and broader Oghma topic coverage.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 760px;">
                         <img src="../img/roleplay-settings/oghma/oghma-menu.jpg" alt="Oghma browser menu">
@@ -217,20 +200,19 @@
                     <div id="TopicPickingAndDynamicOghma">
                     <h3>Topic Picking And Dynamic Oghma</h3>
                     <p>
-                        Oghma does not just look for one hard-coded trigger. The old guide described topic selection as a scoring pass that weighs the current response, the past response, the context summary, and the current location to decide what article is most relevant.
+                        Oghma does not just fire on one hard-coded keyword. It tries to choose the most relevant topic from the current conversation and surrounding context.
                     </p>
                     <figure class="guide-figure" style="max-width: 1100px;">
                         <img src="../img/roleplay-settings/oghma/topic-picking.jpg" alt="Oghma topic selection example">
                         <figcaption>Topic picking uses recent dialogue, prior context, extracted keywords, and location signals to decide which lore article to pull.</figcaption>
                     </figure>
                     <ul>
-                        <li><b>Normal Oghma:</b> Injects the best matching current lore article into the conversation.</li>
-                        <li><b>Dynamic Oghma:</b> Updates or overrides entries when a quest reaches a specific quest ID and stage ID.</li>
-                        <li><b>Partial overrides:</b> Dynamic Oghma can leave cells empty to preserve existing values, or use <code>clearall</code> to wipe a field before replacing it.</li>
-                        <li><b>Why it matters:</b> This lets world knowledge change with your playthrough, instead of staying frozen forever.</li>
+                        <li><b>Normal Oghma:</b> Pulls in the most relevant lore article for the current moment.</li>
+                        <li><b>Dynamic Oghma:</b> Lets knowledge change when quests progress, so world knowledge can evolve with your save.</li>
+                        <li><b>Why it matters:</b> This stops the lore layer from feeling frozen when your playthrough changes the world.</li>
                     </ul>
                     <p>
-                        Dynamic Oghma is the part that makes Oghma useful for evolving quest state, faction changes, and custom world progression rather than only static encyclopedia entries.
+                        Dynamic Oghma is what makes this system useful for changing quest states, faction shifts, and custom world progression instead of only static encyclopedia entries.
                     </p>
                     </div>
                 </div>
@@ -238,66 +220,54 @@
                 <div class="card" id="SoulgazeGallery">
                     <h3>Soulgaze Gallery</h3>
                     <p>
-                        Soulgaze Gallery is the image archive for CHIM screenshots and generated scene captures. It reads directly from the server gallery folder and gives you a simple asset browser.
+                        <b>What this page does:</b> Soulgaze Gallery is the image archive for CHIM screenshots and scene captures.
                     </p>
                     <ul>
-                        <li><b>Gallery storage:</b> Images and videos are loaded from `HerikaServer/data/pictures/gallery/` and shown newest first.</li>
-                        <li><b>Basic management:</b> You can upload JPG or PNG files directly, open them, download them, and delete them from the gallery UI.</li>
-                        <li><b>In-game capture flow:</b> The page explicitly expects players to use the Soulgaze hotkey in-game so those pictures appear here.</li>
-                        <li><b>Reimagine tools:</b> The lightbox includes optional reimagine and animation actions that call external image providers like OpenAI, OpenRouter, and Replicate.</li>
+                        <li><b>Gallery browser:</b> Images and videos are shown in one place, newest first, so you can quickly review captured moments.</li>
+                        <li><b>Basic management:</b> You can upload JPG or PNG files, open them, download them, and delete them from the gallery UI.</li>
+                        <li><b>In-game capture flow:</b> This page expects you to use the Soulgaze hotkey in game so those captures appear here automatically.</li>
+                        <li><b>Extra image tools:</b> The lightbox also includes optional reimagine and animation actions for players who want alternate versions of a captured scene.</li>
                     </ul>
-                    <p>
-                        This is less about gameplay rules and more about preserving visual playthrough moments and turning them into reusable scene references.
-                    </p>
                 </div>
 
                 <div class="card" id="Diaries">
                     <h3>Diaries</h3>
                     <p>
-                        The Diaries page is the main browser and editor for CHIM diary entries. It is where you inspect the personal written record CHIM creates for NPCs and related characters.
+                        <b>What this page does:</b> Diaries is the main browser and editor for CHIM diary entries. It is where you read the written inner record CHIM creates for characters.
                     </p>
                     <ul>
-                        <li><b>Browsing:</b> Diary entries can be explored by character, date, and full history views.</li>
-                        <li><b>Export:</b> The UI supports downloading current diaries, downloading all diary entries, and opening character diaries in a book-style reading view.</li>
-                        <li><b>Editing:</b> Individual diary entries can be edited directly from the page if you want to clean up or correct generated text.</li>
-                        <li><b>Cleanup:</b> There is also a dangerous full-delete action for wiping all diary entries.</li>
+                        <li><b>Browsing:</b> Entries can be explored by person, by date, or as a larger full-history view.</li>
+                        <li><b>Reading modes:</b> You can open a character's diary in a book-style reading view as well as the normal list view.</li>
+                        <li><b>Export:</b> The page supports downloading the current diary view or exporting all diary entries.</li>
+                        <li><b>Editing and cleanup:</b> Individual entries can be edited or deleted, and there is also a full wipe option for the whole diary log.</li>
                     </ul>
-                    <p>
-                        Diaries are one of the strongest immersion layers in CHIM because they preserve private emotional perspective rather than only public spoken dialogue.
-                    </p>
                 </div>
 
                 <div class="card" id="Memories">
                     <h3>Memories</h3>
                     <p>
-                        Memories are managed through the memory tab inside the Events &amp; Memories UI. This is the long-term context layer that keeps CHIM from treating every conversation as a fresh start.
+                        <b>What this page does:</b> Memories are managed through the memory tab inside Events &amp; Memories. This is the long-term continuity layer that stops CHIM from treating every conversation like a fresh start.
                     </p>
                     <ul>
-                        <li><b>Memory summaries:</b> The page shows summarized memory entries with scope, participants, period coverage, and packed memory content.</li>
-                        <li><b>System status:</b> It surfaces memory configuration, including whether embeddings are enabled and whether TXT2VEC is available.</li>
-                        <li><b>Maintenance tools:</b> You can sync memory summaries manually, edit individual summaries, delete single summaries, or wipe all summarized memories.</li>
-                        <li><b>Roleplay effect:</b> These summaries are what let CHIM keep continuity across long play sessions and changing scenes.</li>
+                        <li><b>Memory summaries:</b> The page shows saved summaries with scope, participants, time coverage, and the actual summary text CHIM is carrying forward.</li>
+                        <li><b>System status:</b> It also shows whether the memory system is enabled and whether embeddings and TXT2VEC are available.</li>
+                        <li><b>Maintenance tools:</b> You can sync summaries manually, edit a summary, delete one summary, or wipe all saved summaries.</li>
+                        <li><b>Roleplay effect:</b> These summaries are what help CHIM keep continuity across long sessions, scene changes, and stretched playthroughs.</li>
                     </ul>
-                    <p>
-                        If memory quality feels weak, repetitive, or disconnected, this is the page to inspect before changing prompt text elsewhere.
-                    </p>
                 </div>
 
                 <div class="card" id="RelationshipSystem">
                     <h3>Relationship System</h3>
                     <p>
-                        The Relationship System is what lets CHIM track how characters feel about people, groups, ideas, and even specific recurring subjects over time.
+                        <b>What this page does:</b> The Relationship System tracks how characters feel about people, groups, and important ideas over time.
                     </p>
                     <ul>
-                        <li><b>What it tracks:</b> It is about emotional and social state, like trust, dislike, admiration, resentment, fear, loyalty, or attachment.</li>
-                        <li><b>Who it can apply to:</b> Relationships are not limited to the player. NPCs can form changing opinions about other NPCs, factions, causes, and important world ideas.</li>
-                        <li><b>How it changes:</b> Conversations, arguments, praise, betrayal, repeated behavior, and larger playthrough events can all push a relationship in a better or worse direction.</li>
-                        <li><b>What that means in play:</b> The same character may answer very differently depending on who they are talking to and how their relationship has developed so far.</li>
-                        <li><b>Separate from lore knowledge:</b> This system is not about whether someone knows a fact. It is about how they feel.</li>
+                        <li><b>What it tracks:</b> Emotional and social state like trust, warmth, resentment, fear, attachment, loyalty, or hostility.</li>
+                        <li><b>Who it applies to:</b> It is not only for the player. NPCs can build opinions about other NPCs, factions, causes, and recurring topics too.</li>
+                        <li><b>How it changes:</b> Conversations, praise, betrayal, repeated behavior, conflict, and major events can all improve or damage a relationship.</li>
+                        <li><b>What it changes in play:</b> The same NPC can answer very differently depending on who they are speaking to and how that relationship has developed so far.</li>
+                        <li><b>Separate from Oghma:</b> This system is about feelings and social history, not whether someone knows a fact.</li>
                     </ul>
-                    <p>
-                        In short, this is the system that helps CHIM characters build grudges, loyalty, affection, tension, and social history instead of treating every interaction like a clean reset.
-                    </p>
                 </div>
             </span>
         </div>

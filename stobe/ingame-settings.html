@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Kenshi Settings | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="InGameSettings" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Kenshi Settings</h1>
+                    <p>
+                        STOBE does not use the old Skyrim-style settings page structure that this section used before.
+                        The current Kenshi mod has a small set of real in-game windows: the <b>AI Panel</b>, the <b>Plugin Settings</b> window, and the <b>MOTD</b> window.
+                    </p>
+                </div>
+
+                <div class="card" id="AiPanel">
+                    <h3>AI Panel</h3>
+                    <p>
+                        The first in-game STOBE menu is the left-side panel opened by the STOBE settings key. It shows your current menu key and chat key, then gives you four buttons.
+                    </p>
+                    <ul>
+                        <li><b>Menu Key / Chat Hotkey display:</b> The panel shows the current keys at the top so you can confirm your bindings in game.</li>
+                        <li><b>Stobe NPCs:</b> Opens the in-game NPC detail browser.</li>
+                        <li><b>Stobe Diaries:</b> Opens the in-game diary browser.</li>
+                        <li><b>Settings:</b> Opens the real STOBE settings window.</li>
+                        <li><b>MOTD:</b> Opens the welcome and status window.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="PluginSettings">
+                    <h3>Plugin Settings</h3>
+                    <p>
+                        This is the main STOBE settings window in Kenshi. These are the actual settings the mod exposes in code.
+                    </p>
+                    <ul>
+                        <li><b>STOBE Settings Key:</b> The key that opens and closes the STOBE menu. Current choices are <b>=</b>, <b>F7</b>, <b>F8</b>, <b>F11</b>, <b>F12</b>, <b>O</b>, <b>[</b>, and <b>]</b>.</li>
+                        <li><b>Chat Hotkey:</b> The quick chat input key. Current choices are <b>/</b>, <b>-</b>, <b>.</b>, <b>[</b>, <b>]</b>, <b>O</b>, and <b>P</b>.</li>
+                        <li><b>Default Chat Mode:</b> The normal starting mode for STOBE chat. Current choices are <b>chat</b>, <b>whisper</b>, <b>shout</b>, <b>cheat</b>, and <b>narrator</b>.</li>
+                        <li><b>Talk Radius:</b> Normal conversation distance.</li>
+                        <li><b>Shout Radius:</b> Larger distance for louder speech.</li>
+                        <li><b>TTS Volume:</b> Voice playback volume from <b>0</b> to <b>100</b>.</li>
+                        <li><b>Bored Event Range:</b> How far away STOBE can look for ambient bored-event chatter.</li>
+                        <li><b>Bored Event Timer:</b> How often bored events are allowed to happen, in in-game hours.</li>
+                        <li><b>Dynamic Profile Timer:</b> How often dynamic NPC profile updates can happen, in in-game hours.</li>
+                        <li><b>Auto Chat:</b> Lets STOBE keep conversations flowing more automatically.</li>
+                        <li><b>Bored Events:</b> Turns ambient idle conversations on or off.</li>
+                        <li><b>Regular Dialogue:</b> Toggles regular dialogue capture support.</li>
+                        <li><b>Animal Talks:</b> Enables animal conversation support.</li>
+                        <li><b>TTS:</b> Turns generated voice playback on or off.</li>
+                        <li><b>Speed Dialogue:</b> Uses the faster dialogue mode.</li>
+                        <li><b>Speaker Mode:</b> Chooses between <b>Nearest to Target</b> and <b>First Squad Member</b>.</li>
+                    </ul>
+                    <p>
+                        The settings window also shows a range hint in game: <b>~10 units is about 1 meter</b>, and whisper mode stays fixed at <b>20 units</b>.
+                    </p>
+                </div>
+
+                <div class="card" id="PluginActions">
+                    <h3>Settings Window Actions</h3>
+                    <p>
+                        The bottom row of the STOBE settings window has four action buttons.
+                    </p>
+                    <ul>
+                        <li><b>Save Settings:</b> Writes the current settings into <b>StobeCustom.ini</b>.</li>
+                        <li><b>Open Mod Folder:</b> Opens the local <b>mods\Stobe</b> folder.</li>
+                        <li><b>Open Server Folder:</b> Opens the current WSL StobeServer folder.</li>
+                        <li><b>Open server page:</b> Opens the StobeServer home page in your browser.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="MotdWindow">
+                    <h3>MOTD Window</h3>
+                    <p>
+                        The MOTD window is STOBE's welcome and quick-status page. It is also where one small runtime setting is exposed directly.
+                    </p>
+                    <ul>
+                        <li><b>Plugin version:</b> Shows the current STOBE plugin version.</li>
+                        <li><b>Key reminder:</b> Shows the current STOBE settings key and chat key again.</li>
+                        <li><b>STOBE Settings Key picker:</b> Lets you change the menu key from the MOTD window too.</li>
+                        <li><b>DwemerDistro status:</b> Shows whether the mod currently sees the distro as connected or disconnected.</li>
+                        <li><b>MOTD On:</b> Turns the startup welcome popup on or off.</li>
+                        <li><b>Open server page:</b> Opens the StobeServer browser page.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="IniBackedSettings">
+                    <h3>INI-Backed Mod Settings</h3>
+                    <p>
+                        STOBE also stores a few mod-side values in <b>Stobe.ini</b> and <b>StobeCustom.ini</b>. Some are edited through the UI, and some mainly matter for setup.
+                    </p>
+                    <ul>
+                        <li><b>ServerHost:</b> The server address STOBE talks to. Local installs normally keep this at <b>127.0.0.1</b>.</li>
+                        <li><b>ServerPort:</b> The default STOBE server port is <b>8083</b>.</li>
+                        <li><b>EnableMOTD:</b> Controls whether the MOTD popup is enabled.</li>
+                        <li><b>GeneralHotkey, ChatHotkey, ChatMode, AutoChat, AnimalTalks, UseNearestPlayerSpeaker, TalkRadius, ShoutRadius, TTSVolume, TtsEnabled, Speed Dialogue, EnableRegularDialogueCapture, BoredEventTimerHours, DynamicProfileIntervalHours, EnableBoredEventConversations:</b> These are the current saved gameplay settings behind the in-game UI.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="WhatRemoved">
+                    <h3>What Was Removed</h3>
+                    <p>
+                        The old Kenshi Settings page was still describing a large CHIM and Skyrim-style settings layout with many sections that do not exist in the STOBE Kenshi mod.
+                    </p>
+                    <p>
+                        The current STOBE source of truth is the small in-game window set above, plus the STOBE INI files that back those controls.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

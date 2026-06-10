@@ -32,7 +32,17 @@ const leftSidebarConfigs = {
         pageLinks: [
             { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home" },
             { href: "./index.html", title: "Overview", label: "Overview" },
-            { href: "./installation.html", title: "Installation", label: "Installation" }
+            { href: "./installation.html", title: "Installation", label: "Installation" },
+            { href: "./configuration.html", title: "Configuration", label: "Configuration" },
+            { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings" },
+            { href: "./ingame-settings.html", title: "Kenshi Settings", label: "Kenshi Settings" },
+            { href: "./llm.html", title: "Large Language Models", label: "Large Language Models" },
+            { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech" },
+            { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide" },
+            { href: "./faq.html", title: "FAQ", label: "FAQ" },
+            { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide" },
+            { href: "./linux-setup-guide.html", title: "Linux Setup Guide", label: "Linux Setup Guide" },
+            { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files" }
         ],
         bottomLinks: [
             { href: "https://www.nexusmods.com/kenshi/mods/1891?tab=files", title: "Download", label: "Download" },

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,6 +35,16 @@
                 <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
                 <a href="./index.html" title="Overview">Overview</a>
                 <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
             </p>
             <p class="sidebar-padder"></p>
             <hr>
@@ -53,47 +63,86 @@
                     <div>
                         <h1>STOBE</h1>
                         <p>
-                            STOBE is the Kenshi-side AI framework overhaul.
-                            It focuses on agentic characters, dynamic dialogue, narrator support, and a shared DwemerDistro service stack tuned for Kenshi.
+                            STOBE is the Kenshi-side Dwemer Dynamics framework.
+                            It focuses on AI-driven squad roleplay, narrator support, dynamic dialogue, and the same DwemerDistro service stack used across the wider project.
                         </p>
-                    </div>
-                    <div>
-                        <img src="../img/stobe-logo.png" alt="STOBE logo">
                     </div>
                 </div>
 
                 <div class="card" id="WhatStobeIsFor">
                     <h2>Overview</h2>
                     <h3>What STOBE Is For</h3>
-                    <ul>
-                        <li>AI dialogue for Kenshi characters and creatures.</li>
-                        <li>TTS support so characters can actually sound present in the scene.</li>
-                        <li>Configuration that supports heavier roleplay instead of a single rigid script.</li>
-                    </ul>
-                </div>
-
-                <div class="card" id="CoreFeatures">
-                    <h3>Core Features</h3>
-                    <ul>
-                        <li><b>Agentic Characters:</b> NPCs can react to changes in the world with more autonomy.</li>
-                        <li><b>Kenshi-specific Flavor:</b> Narrator support and harsher world-roleplay hooks.</li>
-                        <li><b>Shared AI Stack:</b> Uses the same DwemerDistro backbone as CHIM, but with Kenshi-side setup and launch requirements.</li>
-                    </ul>
-                </div>
-
-                <div class="card" id="RecommendedFirstRun">
-                    <h3>Recommended First Run</h3>
-                    <ul>
-                        <li>Use OpenRouter first for the LLM path.</li>
-                        <li>Install only the DwemerDistro components your hardware can support.</li>
-                        <li>Start with RE_Kenshi and KenshiLib, then expand after base conversations work.</li>
-                    </ul>
-                </div>
-
-                <div class="card-green" id="NextStep">
-                    <h3>Next Step</h3>
                     <p>
-                        The STOBE setup is shorter than CHIM's, but it still depends on DwemerDistro and on launching RE_KENSHI rather than regular Kenshi.
+                        STOBE is built for Kenshi players who want AI characters to feel more present in the world instead of behaving like isolated chatbot windows.
+                    </p>
+                    <ul>
+                        <li>Bring AI dialogue and voice into Kenshi scenes.</li>
+                        <li>Use DwemerDistro-backed large language models, text-to-speech, and other services with a Kenshi-focused setup flow.</li>
+                        <li>Tune behavior per character or per profile instead of using one rigid global setup.</li>
+                        <li>Push STOBE toward heavier roleplay, narrator-driven scenes, or harsher world simulation depending on your preferred style.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="AgenticCharacters">
+                    <h3>Agentic Characters</h3>
+                    <p>
+                        STOBE is meant to make Kenshi characters feel more active and less scripted. The goal is not just one special companion talking back to you, but a broader AI layer that can support squads, scenes, and ongoing interaction.
+                    </p>
+                    <p>
+                        That includes more dynamic reactions, stronger scene presence, and more room for personality instead of purely static dialogue loops.
+                    </p>
+                </div>
+
+                <div class="card" id="NarratorAndTone">
+                    <h3>Narrator And World Tone</h3>
+                    <p>
+                        STOBE is designed to support a stronger narrative layer than base Kenshi. Narrator support and roleplay-heavy prompting help scenes feel harsher, stranger, and more reactive to the world around you.
+                    </p>
+                    <p>
+                        This gives you a route into more story-like play without losing Kenshi's rougher sandbox tone.
+                    </p>
+                </div>
+
+                <div class="card" id="SharedAiStack">
+                    <h3>Shared DwemerDistro Stack</h3>
+                    <p>
+                        STOBE uses the same DwemerDistro backbone as the rest of Dwemer Dynamics. That means the same general model, voice, and service setup ideas carry over here, but the runtime and guide flow are aimed at Kenshi.
+                    </p>
+                    <p>
+                        If you already understand the DwemerDistro workflow from other Dwemer Dynamics projects, STOBE will feel familiar.
+                    </p>
+                </div>
+
+                <div class="card" id="ConfigurationDepth">
+                    <h3>Configuration Depth</h3>
+                    <p>
+                        STOBE is not locked to one service combination. You can choose different providers, tune settings, and move between simpler and heavier setups depending on your hardware and patience.
+                    </p>
+                    <p>
+                        A simple OpenRouter-first setup is the easiest way in, but the site now uses the same broader page structure as STOBE grows.
+                    </p>
+                </div>
+
+                <div class="card" id="RecommendedStart">
+                    <h3>Recommended Start</h3>
+                    <p>
+                        For most users, the right path is still:
+                    </p>
+                    <ul>
+                        <li>Install DwemerDistro.</li>
+                        <li>Use OpenRouter first.</li>
+                        <li>Set up the required Kenshi-side mods.</li>
+                        <li>Get base conversations working before you expand into deeper tuning.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="GuidePages">
+                    <h3>Guide Pages</h3>
+                    <p>
+                        The STOBE section now mirrors the broader guide layout used for STOBE-ready Dwemer Dynamics documentation.
+                    </p>
+                    <p>
+                        Installation stays as the practical first page, and the rest of the menu gives STOBE the same expandable structure for services, configuration, troubleshooting, and future deeper docs.
                     </p>
                 </div>
             </span>

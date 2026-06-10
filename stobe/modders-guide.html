@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Modders Guide | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="ModdersGuide" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Modders Guide</h1>
+                    <p>
+                        STOBE mod support is mainly a CSV auto-import workflow. You package supported CSV files with your mod,
+                        STOBE finds them on startup, and the server imports them automatically.
+                    </p>
+                </div>
+
+                <div class="card" id="AutoImport">
+                    <h2>Auto Import</h2>
+                    <p>
+                        On startup, STOBE scans these folders for top-level <code>.csv</code> files:
+                    </p>
+                    <ul>
+                        <li><code>mods\Stobe\</code></li>
+                        <li><code>mods\&lt;YourMod&gt;\Stobe\</code></li>
+                    </ul>
+                    <p>
+                        If it finds a supported CSV there, it uploads it to <code>StobeServer/csv_import.php</code>.
+                        The server then sorts the file into the right import type based on the filename and header row.
+                    </p>
+
+                    <h3>Supported CSV Types</h3>
+                    <ul>
+                        <li><b><code>*_bio_random.csv</code></b> or <b><code>*_bios.csv</code></b>: random biography traits for NPC types.</li>
+                        <li><b><code>*_bio_unique.csv</code></b>: biography entries for specific named NPCs.</li>
+                        <li><b><code>*_bio_token.csv</code></b> or <b><code>*_rename_token.csv</code></b>: rename-token words like guard titles and generic labels.</li>
+                        <li><b><code>*_descriptions.csv</code></b>: item, faction, or object descriptions.</li>
+                        <li><b><code>*_world_knowledge.csv</code></b>, <b><code>*_worldstate.csv</code></b>, or files with <b><code>oghma</code></b> in the name: world knowledge topics.</li>
+                    </ul>
+
+                    <h3>What The Files Look Like</h3>
+                    <p>
+                        STOBE includes sample files for each supported format. These are the practical shapes the importer expects:
+                    </p>
+                    <ul>
+                        <li><b>Random bios:</b> <code>stringid,name,description,race,gender,faction</code></li>
+                        <li><b>Unique bios:</b> <code>stringid,name,description</code></li>
+                        <li><b>Rename tokens:</b> <code>token</code></li>
+                        <li><b>Descriptions:</b> <code>stringid,name,description</code></li>
+                        <li><b>World knowledge:</b> <code>topic,topic_desc,topic_desc_basic,knowledge_class,knowledge_class_basic,aliases,tags</code></li>
+                    </ul>
+
+                    <h3>How To Package It</h3>
+                    <ul>
+                        <li>Create a <code>Stobe</code> folder inside your Kenshi mod folder.</li>
+                        <li>Put your CSV files directly in that folder, not in subfolders.</li>
+                        <li>Use filenames that clearly match one of the supported import types.</li>
+                        <li>Ship those CSVs as part of the mod so the player installs them normally.</li>
+                    </ul>
+                    <p>
+                        The result is simple: the player installs the mod, launches STOBE, and the data is picked up automatically.
+                    </p>
+
+                    <h3>Important Rules</h3>
+                    <ul>
+                        <li>STOBE only scans the top level of each <code>Stobe</code> folder.</li>
+                        <li>Files must be real <code>.csv</code> files.</li>
+                        <li>The startup importer rejects files over <b>10 MB</b>.</li>
+                        <li>For biography imports, valid STOBE bio types are <code>personality</code>, <code>backstory</code>, <code>speechstyle</code>, <code>occupation</code>, <code>appearance</code>, and <code>goals</code>.</li>
+                        <li>If the importer cannot match the filename or header to a supported format, it skips the file.</li>
+                    </ul>
+
+                    <h3>How To Verify It Worked</h3>
+                    <ul>
+                        <li>Install the mod and launch the game with STOBE running.</li>
+                        <li>Give STOBE time to finish its startup import pass.</li>
+                        <li>Look for <code>CSV_IMPORT</code> lines in the STOBE log.</li>
+                        <li>Open the matching STOBE server page and confirm your rows appeared there.</li>
+                    </ul>
+                    <p>
+                        In practice, this is the STOBE modding path to use for custom bios, rename tokens, descriptions, and world knowledge.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

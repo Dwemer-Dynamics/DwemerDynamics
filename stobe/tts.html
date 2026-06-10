@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Text-to-Speech Services | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="TextToSpeech" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Text-to-Speech Services</h1>
+                    <p>
+                        STOBE currently supports five text-to-speech options. The simplest way to think about them is local voices first,
+                        then hosted voice services if you want cloud speech instead.
+                    </p>
+                </div>
+
+                <div class="card" id="RecommendedLocal">
+                    <h2>Recommended Local Options</h2>
+
+                    <h3>PocketTTS</h3>
+                    <p>
+                        PocketTTS is the easiest local starting point. Use it if you want STOBE talking without setting up a more involved voice workflow.
+                    </p>
+
+                    <h3>Chatterbox</h3>
+                    <p>
+                        Chatterbox is a local voice option with a more expressive feel. Use it when you want a stronger local speech option than the most basic setup.
+                    </p>
+
+                    <h3>STOBE XTTS</h3>
+                    <p>
+                        XTTS is the option to pick when you specifically want the STOBE XTTS voice-cloning path. It fits users who want to work with cloned or more customized voices.
+                    </p>
+                </div>
+
+                <div class="card" id="HostedServices">
+                    <h2>Hosted Services</h2>
+
+                    <h3>Cartesia</h3>
+                    <p>
+                        Cartesia is a cloud text-to-speech option. Use it if you want a hosted voice service instead of running speech locally on your own machine.
+                    </p>
+                    <p><a href="https://cartesia.ai/" target="_blank" rel="noopener noreferrer"><b>Cartesia</b></a></p>
+
+                    <h3>Inworld</h3>
+                    <p>
+                        Inworld is STOBE's other hosted speech option. Use it if you want a cloud provider and prefer the Inworld voice platform.
+                    </p>
+                    <p><a href="https://inworld.ai/" target="_blank" rel="noopener noreferrer"><b>Inworld</b></a></p>
+                </div>
+
+                <div class="card" id="HowStobeUsesTts">
+                    <h2>How STOBE Uses Text-to-Speech</h2>
+                    <p>
+                        STOBE's local text-to-speech options are PocketTTS, XTTS, and Chatterbox. In the current server setup, those local providers normally point at the same local speech endpoint.
+                    </p>
+                    <p>
+                        The hosted options are Cartesia and Inworld. Those use cloud accounts instead of a local speech server, so you configure them with their service credentials inside the STOBE server tools.
+                    </p>
+                    <p>
+                        STOBE also keeps fallback male and female voice choices for cases where an NPC does not have a more specific voice mapping yet.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
+
+

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STOBE Roleplay Settings | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme stobe-theme">
+    <div class="progress-container">
+        <div class="progress-bar stobe-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">STOBE</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" title="Download" target="_blank" rel="noopener noreferrer">Download</a>
+                <a href="https://www.youtube.com/watch?v=vfhvblyOvqU" title="Video Guide" target="_blank" rel="noopener noreferrer">Video Guide</a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <span id="RoleplaySettings" class="section">
+                <div class="card hero-card">
+                    <h1>STOBE Roleplay Settings</h1>
+                    <p>
+                        This page covers the STOBE pages and systems that shape character identity, lore grounding, continuity, and diary history.
+                        The old version of this page mixed in several CHIM-only sections. This version is based on the current STOBE plugin and StobeServer pages.
+                    </p>
+                </div>
+
+                <div class="card" id="StobeNpcs">
+                    <h3>Stobe NPCs</h3>
+                    <p>
+                        <b>Stobe NPCs</b> is the main per-character roleplay page in STOBE. It is where you inspect and manage how the server understands a specific NPC.
+                    </p>
+                    <ul>
+                        <li><b>Character identity:</b> The page stores and shows the NPC's backstory, personality, speech style, occupation, appearance, goals, and relationship data.</li>
+                        <li><b>Profile assignment:</b> Each NPC can be attached to a profile, inherit the default profile, or be moved in bulk to a different profile.</li>
+                        <li><b>World Knowledge tags:</b> NPCs can carry world-knowledge tags that help control what they should naturally know.</li>
+                        <li><b>Filtering and cleanup:</b> The UI supports search plus filters like favorites, dynamic profile, middle-term memory, locked NPCs, and player-faction NPCs.</li>
+                        <li><b>Authoring tools:</b> The page includes create, import, AI profile generation, relationship rebuild, and bulk cleanup tools.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="NpcBiographies">
+                    <h3>NPC Biographies</h3>
+                    <p>
+                        <b>NPC Biographies</b> is the content page for the biography text STOBE uses to flesh out characters.
+                    </p>
+                    <ul>
+                        <li><b>Random and unique bios:</b> STOBE supports broader reusable bios as well as one-off character-specific biographies.</li>
+                        <li><b>Prompt grounding:</b> These biography entries are part of what makes NPCs sound like they have a past instead of only reacting to the current moment.</li>
+                        <li><b>Bulk editing:</b> The page supports CSV-style import and export for larger mod setups.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Descriptions">
+                    <h3>Descriptions</h3>
+                    <p>
+                        <b>Descriptions</b> manages item and equipment description text used by STOBE's prompt context.
+                    </p>
+                    <ul>
+                        <li><b>Richer world context:</b> When STOBE can describe gear and items properly, conversations about equipment, trade, and loot feel more grounded.</li>
+                        <li><b>Custom overrides:</b> You can import custom description rows and have them override the base records when the same string ID is used.</li>
+                        <li><b>Best use:</b> This matters most if you want modded equipment or custom content to have better in-world context.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="WorldKnowledge">
+                    <h3>World Knowledge</h3>
+                    <p>
+                        <b>World Knowledge</b> is STOBE's lore and knowledge grounding page. This is the STOBE-side equivalent of the older Oghma-style idea, but the real current page name is <b>World Knowledge</b>.
+                    </p>
+                    <ul>
+                        <li><b>Topic records:</b> Entries are stored by topic, with longer and simpler descriptions plus tags and knowledge-class fields.</li>
+                        <li><b>Knowledge limits:</b> This helps STOBE decide what an NPC should know, instead of every character sounding equally informed about everything.</li>
+                        <li><b>Custom canon:</b> You can add or import your own world-knowledge entries for modded factions, locations, lore, or custom story setups.</li>
+                        <li><b>NPC tie-in:</b> NPC pages include world-knowledge tags so lore access can stay character-appropriate.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="StobeDiaries">
+                    <h3>Stobe Diaries</h3>
+                    <p>
+                        STOBE has both an in-game diary browser and a full server-side diary log page. These are the main continuity pages for written character reflection.
+                    </p>
+                    <ul>
+                        <li><b>In-game browser:</b> The plugin has a <b>Stobe Diaries</b> window where you select an NPC and read their recent diary entries.</li>
+                        <li><b>Server diary log:</b> StobeServer also has a full <b>Diary Log</b> page with date filtering, person filtering, and CSV export.</li>
+                        <li><b>Manual diary writing:</b> The in-game chat UI includes a <b>Write Diary</b> action for triggering a diary request directly.</li>
+                        <li><b>What diaries are for:</b> Diaries are the roleplay layer that records how events felt from a character's point of view, rather than only logging raw game events.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Memories">
+                    <h3>Memories</h3>
+                    <p>
+                        <b>Memories</b> is the summary and continuity system that helps STOBE remember important past events across longer play.
+                    </p>
+                    <ul>
+                        <li><b>Memory summaries:</b> STOBE stores grouped memory summaries with participants, time ranges, scope, and summary text.</li>
+                        <li><b>Maintenance tools:</b> The page supports editing summaries, deleting single entries, wiping all summaries, and running a manual sync.</li>
+                        <li><b>Background processing:</b> StobeServer includes regular memory and middle-term memory maintenance so continuity can be packed in the background.</li>
+                        <li><b>Roleplay effect:</b> This is what stops longer playthroughs from feeling like every conversation starts from zero.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Relationships">
+                    <h3>Relationships</h3>
+                    <p>
+                        STOBE has a real relationship system. It is not just flavor text on the NPC page. The server tracks relationship state and can update it as conversations continue.
+                    </p>
+                    <ul>
+                        <li><b>What is tracked:</b> Relationships are stored as affinity plus a relationship type, so STOBE can model things like friendly, hostile, transactional, mentor-style, or neutral bonds.</li>
+                        <li><b>NPC context:</b> Relationship information is injected into prompt context so a character can respond differently depending on who they are talking to.</li>
+                        <li><b>Runtime updates:</b> The server can evaluate a turn, decide whether a relationship changed, and persist that new state.</li>
+                        <li><b>Where you see it:</b> The NPC detail view shows relationship summaries, and the server also has a <b>Relationship Logs</b> page for reviewing relationship activity.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="AdventureLog">
+                    <h3>Adventure Log</h3>
+                    <p>
+                        <b>Adventure Log</b> is the broader play history page in STOBE's Immersion hub.
+                    </p>
+                    <ul>
+                        <li><b>Event history:</b> It gives you a cleaner view of what happened across the playthrough instead of only showing private diary writing.</li>
+                        <li><b>Useful pairing:</b> Diaries tell you how events felt for a character, while Adventure Log gives the wider event trail around them.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="WhatRemoved">
+                    <h3>What Was Removed</h3>
+                    <p>
+                        The old STOBE roleplay page mixed in several sections that do not match the current STOBE page set.
+                    </p>
+                    <p>
+                        For STOBE, the real roleplay source of truth is the current StobeServer pages like <b>Stobe NPCs</b>, <b>World Knowledge</b>, <b>Memories</b>, <b>Diary Log</b>, and the real plugin-side <b>Stobe Diaries</b> browser.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

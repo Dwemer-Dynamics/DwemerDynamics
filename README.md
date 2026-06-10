@@ -22,6 +22,25 @@ Then open:
 http://127.0.0.1:8000/
 ```
 
+## GitHub Pages
+
+This repo is configured to deploy the site from the repository root through GitHub Actions.
+
+In the repository Pages settings, set the source to `GitHub Actions`.
+
+The deploy workflow publishes:
+
+- `index.html`
+- `chim/`
+- `stobe/`
+- `css/`
+- `font/`
+- `img/`
+- `js/`
+- `styles.css`
+- `CNAME`
+- `.nojekyll`
+
 ## Attribution
 
 This site rebuild used [ModdingLinked/ModdingLinked](https://github.com/ModdingLinked/ModdingLinked) as a structural and styling reference while adapting the site for Dwemer Dynamics content, branding, and page layout.
