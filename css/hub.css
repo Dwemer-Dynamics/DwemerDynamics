@@ -20,17 +20,24 @@
 .hubColumn {
     flex-basis: 15%;
     flex-grow: 1;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: stretch;
     text-align: center;
     overflow: hidden;
     position: relative;
-    justify-content: flex-end;
+    background-color: var(--site-bg-secondary);
+}
+
+.hubTileArtwork {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    background-size: 100% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: var(--site-bg-secondary);
 }
 
 .hubTileLink {
@@ -50,10 +57,16 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 0.8em 1em 0.9em 1em;
+    flex: 0 0 auto;
+    min-height: 92px;
+    padding: 1em 1em 1.05em 1em;
     background: rgba(26, 26, 26, 0.88);
     text-align: center;
     pointer-events: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hubTileCaptionSkyrim {
@@ -179,16 +192,12 @@
     transform: translateY(-1px);
 }
 
-#chimHub {
+#chimHub .hubTileArtwork {
     background-image: url("../img/chim_home_tile.jpg");
-    background-size: contain;
-    background-color: var(--site-bg-secondary);
 }
 
-#stobeHub {
+#stobeHub .hubTileArtwork {
     background-image: url("../img/stobe_home_tile.jpg");
-    background-size: contain;
-    background-color: var(--site-bg-secondary);
 }
 
 .hubFooter {
@@ -237,6 +246,10 @@
         min-height: 25vh;
     }
 
+    .hubTileArtwork {
+        min-height: 22vh;
+    }
+
     .hubColumn h2 {
         font-size: 2em;
         margin: 1em 0 0.2em 0;
@@ -249,6 +262,10 @@
     .hubTileCaptionSkyrim,
     .hubTileCaptionStobe {
         font-size: 1.1em;
+    }
+
+    .hubTileCaption {
+        min-height: 74px;
     }
 
     .hubResourcesGrid {
