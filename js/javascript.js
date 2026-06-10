@@ -3,53 +3,53 @@ var menuIsOpen = false;
 const leftSidebarConfigs = {
     chim: {
         pageLinks: [
-            { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home" },
-            { href: "./index.html", title: "Overview", label: "Overview" },
-            { href: "./installation.html", title: "Installation", label: "Installation" },
-            { href: "./configuration.html", title: "Configuration", label: "Configuration" },
-            { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings" },
-            { href: "./ingame-settings.html", title: "Skyrim Settings", label: "Skyrim Settings" },
-            { href: "./llm.html", title: "Large Language Models", label: "Large Language Models" },
-            { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech" },
-            { href: "./stt.html", title: "Speech-to-Text", label: "Speech-to-Text" },
-            { href: "./itt.html", title: "Image-to-Text", label: "Image-to-Text" },
-            { href: "./plugins.html", title: "Plugins", label: "Plugins" },
-            { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide" },
-            { href: "./faq.html", title: "FAQ", label: "FAQ" },
-            { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide" },
-            { href: "./linux-setup-guide.html", title: "Linux Setup Guide", label: "Linux Setup Guide" },
-            { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files" }
+            { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home", emoji: "\u2302\uFE0F" },
+            { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
+            { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
+            { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
+            { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings", emoji: "\uD83C\uDFAD" },
+            { href: "./ingame-settings.html", title: "Skyrim Settings", label: "Skyrim Settings", emoji: "\uD83C\uDFAE" },
+            { href: "./llm.html", title: "Large Language Models", label: "Large Language Models", emoji: "\uD83E\uDDE0" },
+            { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech", emoji: "\uD83D\uDD0A" },
+            { href: "./stt.html", title: "Speech-to-Text", label: "Speech-to-Text", emoji: "\uD83C\uDFA4" },
+            { href: "./itt.html", title: "Image-to-Text", label: "Image-to-Text", emoji: "\uD83D\uDCF8" },
+            { href: "./plugins.html", title: "Plugins", label: "Plugins", emoji: "\uD83E\uDDE9" },
+            { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide", emoji: "\uD83D\uDCDC" },
+            { href: "./faq.html", title: "FAQ", label: "FAQ", emoji: "\u2753" },
+            { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide", emoji: "\uD83C\uDF10" },
+            { href: "./linux-setup-guide.html", title: "Linux Setup Guide", label: "Linux Setup Guide", emoji: "\uD83D\uDC27" },
+            { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files", emoji: "\uD83D\uDCC4" }
         ],
         bottomLinks: [
-            { href: "https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files", title: "Download", label: "Download" },
-            { href: "https://www.youtube.com/watch?v=M8nlRFiAxJA", title: "Video Guide", label: "Video Guide" },
-            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord" },
-            { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube" },
-            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon" }
+            { href: "https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files", title: "Download", label: "Download", emoji: "\u2B07\uFE0F" },
+            { href: "https://www.youtube.com/watch?v=M8nlRFiAxJA", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
+            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
+            { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
         ]
     },
     stobe: {
         pageLinks: [
-            { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home" },
-            { href: "./index.html", title: "Overview", label: "Overview" },
-            { href: "./installation.html", title: "Installation", label: "Installation" },
-            { href: "./configuration.html", title: "Configuration", label: "Configuration" },
-            { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings" },
-            { href: "./ingame-settings.html", title: "Kenshi Settings", label: "Kenshi Settings" },
-            { href: "./llm.html", title: "Large Language Models", label: "Large Language Models" },
-            { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech" },
-            { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide" },
-            { href: "./faq.html", title: "FAQ", label: "FAQ" },
-            { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide" },
-            { href: "./linux-setup-guide.html", title: "Linux Setup Guide", label: "Linux Setup Guide" },
-            { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files" }
+            { href: "../index.html", title: "Dwemer Dynamics Home", label: "Dwemer Dynamics Home", emoji: "\u2302\uFE0F" },
+            { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
+            { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
+            { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
+            { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings", emoji: "\uD83C\uDFAD" },
+            { href: "./ingame-settings.html", title: "Kenshi Settings", label: "Kenshi Settings", emoji: "\uD83C\uDFAE" },
+            { href: "./llm.html", title: "Large Language Models", label: "Large Language Models", emoji: "\uD83E\uDDE0" },
+            { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech", emoji: "\uD83D\uDD0A" },
+            { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide", emoji: "\uD83D\uDCDC" },
+            { href: "./faq.html", title: "FAQ", label: "FAQ", emoji: "\u2753" },
+            { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide", emoji: "\uD83C\uDF10" },
+            { href: "./linux-setup-guide.html", title: "Linux Setup Guide", label: "Linux Setup Guide", emoji: "\uD83D\uDC27" },
+            { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files", emoji: "\uD83D\uDCC4" }
         ],
         bottomLinks: [
-            { href: "https://www.nexusmods.com/kenshi/mods/1891?tab=files", title: "Download", label: "Download" },
-            { href: "https://www.youtube.com/watch?v=vfhvblyOvqU", title: "Video Guide", label: "Video Guide" },
-            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord" },
-            { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube" },
-            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon" }
+            { href: "https://www.nexusmods.com/kenshi/mods/1891?tab=files", title: "Download", label: "Download", emoji: "\u2B07\uFE0F" },
+            { href: "https://www.youtube.com/watch?v=vfhvblyOvqU", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
+            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
+            { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
         ]
     }
 };
@@ -149,7 +149,23 @@ function buildSidebarLinkGroup(className, links, external) {
         const link = document.createElement("a");
         link.href = linkConfig.href;
         link.title = linkConfig.title;
-        link.textContent = linkConfig.label;
+
+        if (linkConfig.icon) {
+            const icon = document.createElement("img");
+            icon.className = "sidebar-link-icon";
+            icon.src = linkConfig.icon;
+            icon.alt = linkConfig.title;
+            link.appendChild(icon);
+        } else if (linkConfig.emoji) {
+            const emoji = document.createElement("span");
+            emoji.className = "sidebar-link-emoji";
+            emoji.textContent = linkConfig.emoji;
+            link.appendChild(emoji);
+        }
+
+        const label = document.createElement("span");
+        label.textContent = linkConfig.label;
+        link.appendChild(label);
 
         if (external) {
             link.target = "_blank";
