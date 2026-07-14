@@ -51,6 +51,30 @@ const leftSidebarConfigs = {
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
             { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
         ]
+    },
+    dialectic: {
+        pageLinks: [
+            { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
+            { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
+            { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
+            { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
+            { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings", emoji: "\uD83C\uDFAD" },
+            { href: "./ingame-settings.html", title: "Fallout Settings", label: "Fallout Settings", emoji: "\uD83C\uDFAE" },
+            { href: "./llm.html", title: "Large Language Models", label: "Large Language Models", emoji: "\uD83E\uDDE0" },
+            { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech", emoji: "\uD83D\uDD0A" },
+            { href: "./stt.html", title: "Speech-to-Text", label: "Speech-to-Text", emoji: "\uD83C\uDFA4" },
+            { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide", emoji: "\uD83D\uDCDC" },
+            { href: "./faq.html", title: "FAQ", label: "FAQ", emoji: "\u2753" },
+            { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide", emoji: "\uD83C\uDF10" },
+            { href: "./linux-setup-guide.html", title: "Linux Setup Guide", label: "Linux Setup Guide", emoji: "\uD83D\uDC27" },
+            { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files", emoji: "\uD83D\uDCC4" }
+        ],
+        bottomLinks: [
+            { href: "https://discord.gg/NDn9qud2ug", title: "Beta Download", label: "Beta Download", emoji: "\u2B07\uFE0F" },
+            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
+            { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
+        ]
     }
 };
 
@@ -137,6 +161,10 @@ function getLeftSidebarConfig() {
 
     if (document.body.classList.contains("stobe-theme")) {
         return leftSidebarConfigs.stobe;
+    }
+
+    if (document.body.classList.contains("dialectic-theme")) {
+        return leftSidebarConfigs.dialectic;
     }
 
     return null;
