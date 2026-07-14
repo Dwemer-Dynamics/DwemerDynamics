@@ -29,7 +29,7 @@
 }
 
 .hubColumn {
-    flex: 1 1 280px;
+    flex: 1 1 240px;
     width: min(100%, 700px);
     max-width: 100%;
     display: flex;
@@ -265,7 +265,7 @@
     flex-direction: column;
     align-items: stretch;
     min-height: 0;
-    max-height: calc(100vh - 6.7em);
+    max-height: min(560px, calc(100vh - 6.7em));
     overflow: hidden;
     z-index: 1;
 }
@@ -523,7 +523,7 @@
     }
 
     .patron-shell {
-        position: relative;
+        position: static;
         top: auto;
         width: min(100%, 980px);
         max-width: min(100%, 980px);
