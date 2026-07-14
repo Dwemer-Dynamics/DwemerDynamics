@@ -31,6 +31,7 @@ jobs:
           cp -R chim _site/
           cp -R css _site/
           cp -R data _site/
+          cp -R dialectic _site/
           cp -R font _site/
           cp -R img _site/
           cp -R js _site/

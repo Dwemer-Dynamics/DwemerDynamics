@@ -1,8 +1,12 @@
 .hubPageLayout {
     width: 100%;
     box-sizing: border-box;
-    padding-top: 5.7em;
+    padding: 5.7em 1em 0;
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 330px);
+    align-items: start;
+    gap: 1.25em;
 }
 
 .hubPicker {
@@ -25,8 +29,8 @@
 }
 
 .hubColumn {
-    flex: 0 0 700px;
-    width: 700px;
+    flex: 1 1 280px;
+    width: min(100%, 700px);
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -39,9 +43,10 @@
 }
 
 .hubTileArtwork {
-    width: 700px;
+    width: 100%;
     flex: 0 0 auto;
-    height: 394px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     max-width: 100%;
     overflow: hidden;
     border-radius: 12px 12px 0 0;
@@ -149,6 +154,17 @@
     color: #111111;
 }
 
+.hubTileActionButtonDialectic {
+    background-color: rgb(255, 182, 65);
+    border-color: rgba(255, 182, 65, 0.95);
+}
+
+.hubTileActionButtonDialectic:hover {
+    background-color: rgb(226, 153, 42);
+    border-color: rgba(226, 153, 42, 0.95);
+    color: #111111;
+}
+
 .hubTileCaptionSkyrim {
     font-family: "MagicCards", serif;
     letter-spacing: 1.2px;
@@ -160,6 +176,14 @@
 .hubTileCaptionStobe {
     font-family: var(--stobe-title-font);
     letter-spacing: 0.4px;
+    word-spacing: 5px;
+    font-size: 1.35em;
+    line-height: 1.2em;
+}
+
+.hubTileCaptionDialectic {
+    font-family: "Monofonto", Arial, sans-serif;
+    letter-spacing: 0;
     word-spacing: 5px;
     font-size: 1.35em;
     line-height: 1.2em;
@@ -227,10 +251,10 @@
 }
 
 .patron-shell {
-    position: absolute;
-    top: 0;
-    right: max(10px, 1vw);
-    width: min(330px, 24vw);
+    position: sticky;
+    top: 5.7em;
+    right: auto;
+    width: 100%;
     max-width: 330px;
     background: transparent;
     border: 0;
@@ -241,6 +265,7 @@
     flex-direction: column;
     align-items: stretch;
     min-height: 0;
+    max-height: calc(100vh - 6.7em);
     overflow: hidden;
     z-index: 1;
 }
@@ -437,12 +462,14 @@
 
 @media (max-width: 1220px) {
     .hubPageLayout {
-        padding-top: 5.7em;
+        grid-template-columns: 1fr;
+        padding: 5.7em 0.125em 0;
     }
 
     .hubPicker {
         flex-direction: column;
-        width: calc(100% - 0.25em);
+        width: 100%;
+        max-width: 980px;
         min-height: auto;
         align-items: center;
         gap: 0.9em;
@@ -450,12 +477,14 @@
 
     .hubColumn {
         flex: 0 0 auto;
-        width: min(100%, 980px);
+        width: 100%;
+        max-width: 980px;
     }
 
     .hubTileArtwork {
-        width: min(calc(100vw - 0.25em), 980px);
-        height: min(420px, 68vh);
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
         margin: 0 auto;
     }
 
@@ -473,7 +502,8 @@
     }
 
     .hubTileCaptionSkyrim,
-    .hubTileCaptionStobe {
+    .hubTileCaptionStobe,
+    .hubTileCaptionDialectic {
         font-size: 1.1em;
     }
 
@@ -491,22 +521,36 @@
         min-height: 36px;
         font-size: 0.84em;
     }
+
+    .patron-shell {
+        position: relative;
+        top: auto;
+        width: min(100%, 980px);
+        max-width: min(100%, 980px);
+        max-height: 420px;
+        margin: 0.9em auto 0;
+        padding: 0 1em;
+    }
+
+    .patron-title,
+    .patron-list-item,
+    .patron-empty,
+    .patron-tier-empty {
+        text-align: center;
+    }
+
+    .patron-tier-title {
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 @media (max-width: 1080px) {
     .hubPageLayout {
-        display: block;
         width: 100%;
         padding-top: 5.7em;
-    }
-
-    .patron-shell {
-        position: absolute;
-        top: 0;
-        right: 6px;
-        width: min(210px, 42vw);
-        max-width: min(210px, 42vw);
-        padding-top: 0;
     }
 
     .patron-list-scroll {

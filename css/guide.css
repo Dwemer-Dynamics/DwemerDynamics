@@ -6,6 +6,10 @@
     background: var(--site-bg-primary);
 }
 
+.dialectic-theme {
+    background: var(--site-bg-primary);
+}
+
 .right-sidebar p {
     margin-right: 0.7em;
 }
@@ -133,6 +137,23 @@
     color: #a8efb2;
     border-color: rgba(108, 188, 110, 0.55);
     transform: none;
+}
+
+.dialectic-theme .guide-note:not(.note-info):not(.note-tip),
+.dialectic-theme .guide-note.note-warning {
+    background: rgba(255, 182, 65, 0.08);
+    border-color: rgba(255, 182, 65, 0.28);
+    border-left-color: rgb(255, 182, 65);
+}
+
+.dialectic-theme .guide-copy-button {
+    border-color: rgba(255, 182, 65, 0.42);
+    color: #ffd48f;
+}
+
+.dialectic-theme .guide-copy-button:hover {
+    border-color: rgba(255, 182, 65, 0.78);
+    color: #ffe4b7;
 }
 
 @media only screen and (max-width: 520px) {

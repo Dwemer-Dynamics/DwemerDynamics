@@ -41,6 +41,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "Monofonto";
+    src: url("../font/MonofontoRg.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 html {
     scroll-padding-top: 5.375em;
 }
@@ -103,6 +111,9 @@ hr {
     --scrollbar-width: 0.7em;
     --hub-accent: rgb(101, 206, 253);
     --stobe-title-font: "MailartRubberstamp", "Futura Condensed Light", Arial, sans-serif;
+    --dialectic-accent: rgb(255, 182, 65);
+    --dialectic-accent-hover: rgb(226, 153, 42);
+    --dialectic-title-font: "Monofonto", Arial, sans-serif;
     --site-bg-primary: #2c2c2c;
     --site-bg-secondary: #1a1a1a;
 }
@@ -172,6 +183,23 @@ footer {
     letter-spacing: 0.5px;
     word-spacing: 8px;
     font-weight: 400;
+}
+
+.dialectic-theme #headerTitle,
+.dialectic-theme .hero-card h1,
+.dialectic-theme .magic-subtitle {
+    font-family: var(--dialectic-title-font);
+    letter-spacing: 0;
+    word-spacing: 6px;
+    font-weight: 400;
+}
+
+.dialectic-theme .content a {
+    color: var(--dialectic-accent);
+}
+
+.dialectic-theme .content a:hover {
+    color: #ffd48f;
 }
 
 .logo-container {

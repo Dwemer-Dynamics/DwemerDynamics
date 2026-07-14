@@ -1,6 +1,6 @@
 # DwemerDynamics
 
-Guide-first website for Dwemer Dynamics projects, currently focused on CHIM and STOBE.
+Guide-first website for Dwemer Dynamics projects, covering CHIM, STOBE, and Dialectic.
 
 ## Local Development
 
@@ -32,6 +32,7 @@ The deploy workflow publishes:
 
 - `index.html`
 - `chim/`
+- `dialectic/`
 - `stobe/`
 - `css/`
 - `font/`
@@ -45,4 +46,4 @@ The deploy workflow publishes:
 
 This site rebuild used [ModdingLinked/ModdingLinked](https://github.com/ModdingLinked/ModdingLinked) as a structural and styling reference while adapting the site for Dwemer Dynamics content, branding, and page layout.
 
-ModdingLinked is MIT-licensed. Attribution and license notice for that upstream reference are included in [THIRD_PARTY_NOTICES.md](C:/Users/reece/Desktop/Dwemer%20Dynamics/MonoRepo/DwemerDynamics-migrated/THIRD_PARTY_NOTICES.md).
+ModdingLinked is MIT-licensed. Attribution and license notice for that upstream reference are included in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

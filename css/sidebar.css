@@ -57,6 +57,10 @@
     background-color: #e6b76c;
 }
 
+.dialectic-theme .sidebar .active::before {
+    background-color: rgb(255, 182, 65);
+}
+
 .sidebar p {
     margin: 10px 0;
 }
