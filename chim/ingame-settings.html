@@ -84,7 +84,7 @@
                         These are the fast-access bindings for talking to CHIM and opening its main wheel menus.
                     </p>
                     <ul>
-                        <li><b>CHIM Chat:</b> Opens a text box so you can type to AI NPCs.</li>
+                        <li><b>CHIM Chat:</b> Opens the Prisma text chat so you can type to AI NPCs without leaving the game.</li>
                         <li><b>Voice Chat:</b> Push-to-talk speech input for AI NPC conversation and book summaries.</li>
                         <li><b>Master Wheel:</b> Quick access wheel that opens Roleplay, Settings, Mode, or Soulgaze.</li>
                         <li><b>Roleplay Wheel:</b> Opens diary, gather, update, wait/follow, stop AI, and background-life style actions.</li>
@@ -186,7 +186,7 @@
                         <li><b>Interior Playback Dropoff (%):</b> Controls how aggressively indoor voice playback falls off with distance.</li>
                         <li><b>Exterior Playback Dropoff (%):</b> Controls how aggressively outdoor voice playback falls off with distance.</li>
                         <li><b>Enable 3D Audio Playback:</b> Keeps voice playback spatial instead of flattening it into simple 2D sound.</li>
-                        <li><b>Camera Based Audio:</b> Makes 3D voice direction follow the camera instead of player facing.</li>
+                        <li><b>Camera Based Audio:</b> Makes 3D voice direction follow the camera instead of player facing. In VR, CHIM uses the HMD position and orientation so spatial voices follow where your head actually is.</li>
                     </ul>
                     <p><b>Advanced</b></p>
                     <p>
@@ -223,7 +223,7 @@
                 <div class="card" id="PrismaUi">
                     <h3>Prisma UI</h3>
                     <p>
-                        This page is only for Prisma UI hotkeys. It does not configure the web UI itself, just how you open the in-game panels.
+                        This page controls the hotkeys used to open CHIM's Prisma panels. The panels themselves also provide a few live controls while you play.
                     </p>
                     <p><b>Hotkeys</b></p>
                     <ul>
@@ -235,6 +235,18 @@
                         <li><b>History/Diaries:</b> Cycles between conversation history and diaries, then closes them.</li>
                         <li><b>Browser (Beta):</b> Opens the in-game browser view for the HerikaServer web UI.</li>
                         <li><b>Logs View (Beta):</b> Opens the Prisma logs and diagnostics view.</li>
+                    </ul>
+                    <p><b>Chatbox behavior</b></p>
+                    <ul>
+                        <li><b>Focus Chat:</b> When the chat field has focus, CHIM hotkeys are suppressed so typing does not trigger their bound actions.</li>
+                        <li><b>Rechat Mode:</b> The selector beside Focus Chat changes the global Tight, Conversational, Group, or Random rechat behavior without opening the web UI.</li>
+                        <li><b>Book summaries:</b> Text chat can summarize the book currently open in Skyrim when used from the appropriate reading context.</li>
+                    </ul>
+                    <p><b>Action confirmations</b></p>
+                    <ul>
+                        <li>Actions configured to require permission open a Prisma confirmation dialog before the game command runs.</li>
+                        <li>Accepting executes the queued action. Declining cancels it completely and does not request a replacement AI response.</li>
+                        <li>Confirmation policy is configured per action in the web Action Editor.</li>
                     </ul>
                 </div>
 

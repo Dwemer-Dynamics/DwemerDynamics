@@ -152,7 +152,7 @@
                         A CHIM plugin is a server-side extension that lives inside the CHIM server's <code>ext</code> folder. A plugin can add its own web page, add or change prompt behavior, expose new AI actions, run its own helper service, or read CHIM data to build its own tools.
                     </p>
                     <p>
-                        In practice, this means plugins are the main way to add new <b>server-side</b> features without changing the whole server. The current maintained examples are <b>CHIM-Twitch-Bot</b> and <b>CHIM-MindMap</b>. If you only need to ship new biographies, Oghma data, descriptions, or action definitions, that is usually a <code>Data/CHIM</code> data-mod job instead of a full <code>ext</code> plugin.
+                        In practice, this means plugins are the main way to add new <b>server-side</b> features without changing the whole server. Maintained examples include <b>CHIM-Custom</b>, <b>CHIM-Twitch-Bot</b>, and <b>CHIM-MindMap</b>. If you only need to ship new biographies, Oghma data, descriptions, or action definitions, that is usually a <code>Data/CHIM</code> data-mod job instead of a full <code>ext</code> plugin.
                     </p>
 
                     <h3>Where Plugins Live</h3>
@@ -173,6 +173,8 @@
                         <li><b><code>config_url</code>:</b> the page the user opens to configure or use the plugin.</li>
                         <li><b><code>config_url_target</code>:</b> usually <code>_blank</code> so the page opens in a new tab.</li>
                         <li><b><code>git_repo</code>:</b> GitHub repo used by the installer for updates.</li>
+                        <li><b><code>default_channel</code>:</b> channel selected when the plugin is first installed.</li>
+                        <li><b><code>channels</code>:</b> named release sources with labels, branches, package sources or URLs, and optional force-install support.</li>
                         <li><b><code>version</code>:</b> current plugin version.</li>
                         <li><b><code>schema_version</code>:</b> use <code>2</code> if you want the current update flow in the plugin manager.</li>
                     </ul>
@@ -188,6 +190,8 @@
                         <li><b><code>prerequest.php</code>:</b> run logic before the main request is sent.</li>
                         <li><b><code>context_pre.php</code>:</b> inject or change context before the system prompt is built.</li>
                         <li><b><code>context.php</code>:</b> add extra context after the system prompt is built.</li>
+                        <li><b><code>chimRegisterPromptInjection()</code>:</b> register ordered content for the <code>character_bottom</code> or <code>prompt_bottom</code> prompt slots.</li>
+                        <li><b><code>chimRegisterActorProfileEnricher()</code>:</b> append focused plugin state to an actor profile without replacing the core profile text.</li>
                         <li><b><code>prepostrequest.php</code> and <code>postrequest.php</code>:</b> react after a request runs.</li>
                         <li><b><code>context_building.php</code>:</b> alter historical context building.</li>
                         <li><b><code>prompts.php</code> and <code>dialogue_prompt.php</code>:</b> extend or override prompt text.</li>
@@ -202,6 +206,26 @@
                         CHIM plugins can hook into more than one layer of the server. The useful way to think about it is: you are not limited to just adding a menu page. A plugin can affect prompt building, request handling, available actions, and CHIM's stored data.
                     </p>
                     <ul>
+                        <li>
+                            <b>Named prompt injection slots:</b> <code>chimRegisterPromptInjection()</code> lets a plugin register static text or a callback with a stable id and priority. CHIM renders <code>character_bottom</code> after character context and <code>prompt_bottom</code> at the bottom of the assembled prompt. Lower priority values render first.
+                            <br><em>Source: <code>HerikaServer/lib/prompt_injections.php</code></em>
+                            <pre><code>chimRegisterPromptInjection(
+    'prompt_bottom',
+    'my_plugin.instructions',
+    'Use the extra state supplied by My Plugin.',
+    100
+);</code></pre>
+                        </li>
+                        <li>
+                            <b>Actor profile enrichment:</b> <code>chimRegisterActorProfileEnricher()</code> accepts a callback that can return one line or a list of lines for a named actor. Use it for concise plugin-owned state that belongs beside equipment, activity, or appearance details.
+                            <br><em>Source: <code>HerikaServer/lib/prompt_injections.php</code></em>
+                            <pre><code>chimRegisterActorProfileEnricher(
+    'my_plugin.actor_state',
+    function ($actorName, $actorType, $context) {
+        return myPluginDescribeActor($actorName);
+    }
+);</code></pre>
+                        </li>
                         <li>
                             <b>Early request preprocessing:</b> <code>preprocessing.php</code> runs near the start of request handling, before most of the main processing path. This is where a plugin can normalize or prepare incoming data early.
                             <br><em>Source: <code>HerikaServer/main.php</code></em>
@@ -301,15 +325,14 @@ $GLOBALS["CHIM_JSON_RESPONSE_EXT_LOADED"] = true;</code></pre>
 exec($cmd, $output, $returnCode);</code></pre>
                         </li>
                         <li>
-                            <b>Database schema:</b> a plugin can create and update its own tables with <code>migrations</code>, instead of depending only on existing CHIM tables.
-                            <br><em>Source: <code>HerikaServer/ext/generic_installer.php</code></em>
-                            <pre><code>$migrationsDir = $targetDir . "/migrations";
-if (!is_dir($migrationsDir)) {
-    return true;
-}
+                            <b>Database schema:</b> a plugin can create and update its own tables with ordered SQL files in <code>migrations</code>. Plugin-owned objects should use the shared <code>plugins</code> PostgreSQL schema. The installer records completed files in <code>plugins.plugin_migrations</code> so each migration runs once.
+                            <br><em>Source: <code>HerikaServer/ui/server_plugin_installer.php</code></em>
+                            <pre><code>CREATE SCHEMA IF NOT EXISTS plugins;
 
-$migrations = glob($migrationsDir . "/*.sql");
-sort($migrations);</code></pre>
+CREATE TABLE IF NOT EXISTS plugins.my_plugin_state (
+    actor_name TEXT PRIMARY KEY,
+    state_json JSONB NOT NULL
+);</code></pre>
                         </li>
                         <li>
                             <b>Existing CHIM data:</b> plugins can read existing CHIM-side data such as memories, logs, rolemaster state, NPC data, and other stored runtime information if they are building tooling or integrations around it.
@@ -444,16 +467,14 @@ foreach ($argv as $arg) {
                     </p>
                     <h3>What The Action Editor Actually Controls</h3>
                     <p>
-                        In plain terms, the Action Editor controls what the AI sees, where an action can appear, and part of how CHIM handles the result.
+                        In plain terms, the Action Editor controls what the AI sees, whether an action can run, where it can appear, and how CHIM handles the result.
                     </p>
                     <ul>
                         <li><b>Name:</b> the action name CHIM exposes in the catalog.</li>
-                        <li><b>Prompt:</b> the main instruction text telling the AI what the action is for. In the CSV and database this is still stored in the <code>description</code> column.</li>
-                        <li><b>Return message:</b> the readable result text CHIM can add to logs/context after the action reports back. This is separate from the optional follow-up response.</li>
+                        <li><b>Description:</b> the main instruction text telling the AI what the action is for. In custom action CSV files this is stored in the <code>description</code> column.</li>
+                        <li><b>Action:</b> the command or dispatch behavior associated with the catalog row.</li>
                         <li><b>Enabled state:</b> whether the action is currently active.</li>
-                        <li><b>Scope flags:</b> who the action is available to.</li>
-                        <li><b>Parameter schema:</b> the structured arguments the action accepts.</li>
-                        <li><b>Metadata:</b> extra behavior settings such as dispatch style, follow-up behavior, cooldowns, requirements, and editor fields.</li>
+                        <li><b>Advanced Options:</b> scope flags, confirmation policy, return text, follow-up behavior, parameter schema, metadata, and script-proxy details.</li>
                     </ul>
 
                     <h3>Scopes</h3>
@@ -472,15 +493,12 @@ foreach ($argv as $arg) {
 
                     <h3>What Each Editor Section Does</h3>
                     <p>
-                        The Action Editor has a few separate edit areas. They do different jobs and it helps to think of them as separate layers instead of one giant settings form.
+                        The main table keeps routine editing intentionally small. Each row shows the action name, description, action, enabled state, and compact controls. Open <b>Advanced Options</b> only when you need to change execution behavior.
                     </p>
                     <ul>
                         <li><b>Enable or Disable:</b> turns the action on or off by writing a persistent custom override row.</li>
-                        <li><b>Text fields:</b> edits the action name, prompt, and return message without changing the original built-in row.</li>
-                        <li><b>Config:</b> edits metadata-backed settings that the page knows how to render as normal form fields.</li>
-                        <li><b>Parameters:</b> edits the full <code>parameters_json</code> schema for structured action arguments.</li>
-                        <li><b>Metadata preview:</b> shows the current metadata block so you can inspect how the action is wired.</li>
-                        <li><b>Script Proxy preview:</b> shows the current server-side script-proxy program if that action uses one.</li>
+                        <li><b>Main fields:</b> edits the action name, description, and action without changing the original built-in row.</li>
+                        <li><b>Advanced Options:</b> opens the modal for confirmation, follow-up, return-message, scope, schema, metadata, and script-proxy settings.</li>
                         <li><b>Reset Override:</b> deletes the custom override row and returns the action to its base definition.</li>
                     </ul>
 
@@ -490,12 +508,13 @@ foreach ($argv as $arg) {
                     </p>
                     <ul>
                         <li><b>Follow-up Enabled:</b> allows CHIM to generate a second response after the action result comes back.</li>
+                        <li><b>Require Confirmation:</b> asks the player to accept or decline the action in Prisma before CHIM dispatches it. Declining hard-cancels the action and does not generate a replacement AI response.</li>
                         <li><b>Follow-up Argument Name:</b> tells CHIM which argument from the original action call should be reused when building that follow-up request. If this is blank, CHIM falls back to the required schema field, then common names like <code>target</code>, <code>location</code>, <code>item</code>, <code>amount</code>, or <code>speed</code>.</li>
                         <li><b>Follow-up Prompt:</b> the extra instruction CHIM prepends when it asks for the follow-up line.</li>
                         <li><b>Allow Follow-up Actions:</b> lets the follow-up response call another action again, within CHIM's follow-up chain limit. The current shared limit is one chained follow-up action.</li>
                     </ul>
                     <p>
-                        Actions can also define their own config fields through <code>metadata.editor_fields</code>. Those fields appear in the Action Editor under the shared follow-up controls. This is how actions like <code>Hire_Ferry</code> expose <b>Gold Cost</b> and <b>Allowed NPCs</b> without hardcoding those values into the prompt text.
+                        Built-in, imported, plugin, and custom actions can use the same confirmation control when their dispatch path supports action confirmation. Actions can also define their own config fields through <code>metadata.editor_fields</code>. Those fields appear in Advanced Options under the shared controls. This is how actions like <code>Hire_Ferry</code> expose <b>Gold Cost</b> and <b>Allowed NPCs</b> without hardcoding those values into the description.
                     </p>
                     <p><em>Source: <code>HerikaServer/lib/core/action_catalog.php</code></em></p>
                     <pre><code>'HireFerry' => [

@@ -65,8 +65,8 @@
                 <div class="card hero-card">
                     <h1>CHIM Text-to-Speech Services</h1>
                     <p>
-                        This page documents the current text-to-speech services still actively used by HerikaServer for CHIM.
-                        The split below follows the current quickstart flow: recommended first, then the other valid services.
+                        CHIM supports local and hosted text-to-speech services through configurable TTS connectors.
+                        The recommended services are listed first, followed by the other supported connectors.
                     </p>
                 </div>
 
@@ -74,10 +74,24 @@
                     <h2>Recommended</h2>
                     <h3>PocketTTS</h3>
                     <p>
-                        CPU-oriented local text-to-speech using the standard CHIM voice cache workflow. This is one of the main first-run recommendations.
+                        CPU-oriented local text-to-speech using the standard CHIM voice cache workflow. PocketTTS can connect to either the dedicated PocketTTS server or an <code>audio.cpp</code> OpenAI-compatible speech endpoint.
                     </p>
                     <ul>
                         <li>Best for: easiest local baseline.</li>
+                        <li>Default local endpoint: <code>http://127.0.0.1:8086</code>.</li>
+                        <li>Voice samples can be synchronized individually from TTS Studio.</li>
+                    </ul>
+                </div>
+
+                <div class="card-green" id="OmniVoice">
+                    <h3>OmniVoice</h3>
+                    <p>
+                        Local multi-language text-to-speech with language-specific voice libraries. CHIM can switch the active language, import voice samples into the selected library, and fall back to compatible voices when a requested voice is unavailable.
+                    </p>
+                    <ul>
+                        <li>Best for: a managed local voice library with language controls.</li>
+                        <li>Default local endpoint: <code>http://127.0.0.1:8021</code>.</li>
+                        <li>Driver id: <code>omnivoice</code>.</li>
                     </ul>
                 </div>
 
@@ -129,6 +143,19 @@
                         <li>Needs: Cartesia API key.</li>
                     </ul>
                     <p><a href="https://cartesia.ai/" target="_blank" rel="noopener noreferrer"><b>Cartesia</b></a></p>
+                </div>
+
+                <div class="card" id="TtsStudio">
+                    <h2>TTS Studio</h2>
+                    <p>
+                        TTS Studio manages voice samples across XTTS, Chatterbox, PocketTTS, OmniVoice, Cartesia, and Inworld. Each provider tab reports its connection state and exposes the controls supported by that service.
+                    </p>
+                    <ul>
+                        <li>Test a voice before assigning it to an NPC.</li>
+                        <li>Synchronize or regenerate one missing voice without rebuilding the entire voice cache.</li>
+                        <li>Upload and synchronize all local samples when preparing a provider.</li>
+                        <li>Select an OmniVoice language library before importing, testing, or synchronizing voices.</li>
+                    </ul>
                 </div>
 
                 <div class="card" id="MeloTts">

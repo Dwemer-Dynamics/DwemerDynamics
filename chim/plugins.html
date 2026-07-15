@@ -65,13 +65,38 @@
                 <div class="card hero-card">
                     <h1>CHIM Plugins</h1>
                     <p>
-                        Plugins let CHIM connect to extra systems outside the base install.
-                        This page only lists the two current plugins you asked to keep visible on the site: Twitch Bot and Mind Map.
+                        Server plugins extend CHIM without modifying the core server. They can add configuration pages, prompt context, AI actions, database-backed features, external integrations, and supporting services.
                     </p>
                 </div>
 
-                <div class="card" id="TwitchBot">
+                <div class="card-green" id="PluginManager">
+                    <h2>Plugin Manager</h2>
+                    <p>
+                        Install and manage supported plugins from the CHIM web interface. Plugins can publish separate channels such as Live and Dev, provide their own configuration page, and run versioned database migrations during installation.
+                    </p>
+                    <ul>
+                        <li>Installed server plugins live under <code>HerikaServer/ext</code>.</li>
+                        <li>Plugin-owned tables use the shared PostgreSQL <code>plugins</code> schema.</li>
+                        <li>Some integrations also require a matching Skyrim mod or SKSE plugin.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="ChimCustom">
                     <h2>Plugins</h2>
+                    <h3>CHIM Custom</h3>
+                    <p>
+                        CHIM Custom adds optional awareness for supported Skyrim mods. Its SKSE component detects visible survival and cleanliness state, then its server plugin adds that state to focused character context without writing it into event history.
+                    </p>
+                    <ul>
+                        <li><b>Dirt and Blood:</b> dirt, blood, cleanliness, and washing state.</li>
+                        <li><b>Bathing in Skyrim - Renewed:</b> dirtiness tier, bathing, and soapy state.</li>
+                        <li><b>SunHelm Survival:</b> hunger, thirst, exhaustion, and cold state.</li>
+                        <li><b>Starfrost:</b> hunger, exhaustion, and cold state.</li>
+                    </ul>
+                    <p><a href="https://github.com/Dwemer-Dynamics/CHIM-Custom" target="_blank" rel="noopener noreferrer"><b>CHIM Custom Source Code</b></a></p>
+                </div>
+
+                <div class="card" id="TwitchBot">
                     <h3>CHIM Twitch Bot</h3>
                     <p>
                         The Twitch Bot plugin lets your Twitch chat interact with CHIM while you play. Viewers can help drive scenes, speak through the player, or push AI characters into more chaotic roleplay moments depending on how you configure it.

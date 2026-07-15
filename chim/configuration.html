@@ -77,12 +77,12 @@
                     </p>
                     <ul>
                         <li><b>Prompt:</b> Sets the main instruction text CHIM follows and the mood list it can use when it formats emotional tags.</li>
-                        <li><b>Rechat:</b> Controls how tightly CHIM tries to answer the intended speaker, including whether rechat targeting stays strict or feels looser and more conversational.</li>
+                        <li><b>Rechat:</b> Chooses how follow-up conversation is targeted. Tight, Conversational, Group, and Random modes range from strict speaker continuity to looser multi-NPC conversation, and the active mode can also be changed from the Prisma chatbox.</li>
                         <li><b>Memory:</b> Turns long-term memory on or off, controls whether text2vec is used, and decides how often CHIM writes fresh summaries.</li>
                         <li><b>Global Connectors:</b> Chooses the shared AI brains used for player respeech, summaries, middle-term memory and Background Life, scene classification, dynamic profiles, director mode, relationship handling, and custom Oghma work.</li>
-                        <li><b>Context:</b> Filters what world information is sent into prompts, including event types, timestamps, and noisy item, location, or magic data you may want to trim out.</li>
-                        <li><b>Prompt Context Selections:</b> Lets you choose which buckets of character, appearance, and general context CHIM should carry into conversations.</li>
-                        <li><b>Misc:</b> Covers things like auto-locking profiles, auto-filling custom profiles, Background Life day cooldowns, end-conversation cooldowns, and focus chat history size.</li>
+                        <li><b>Context:</b> Filters what world information is sent into prompts, including event types, timestamps, power awareness, item detail policies, and noisy item, location, or magic data you may want to trim out.</li>
+                        <li><b>Prompt Context Selections:</b> Lets you choose which character, appearance, equipment, inventory, relationship, and general-context buckets CHIM should carry into conversations.</li>
+                        <li><b>Misc:</b> Covers auto-locking profiles, auto-filling custom profiles, Background Life Trigger Time in hours, end-conversation cooldowns, and focus chat history size.</li>
                         <li><b>Translation:</b> Handles DeepL-based text and audio translation for players who want CHIM to speak across languages.</li>
                     </ul>
                 </div>
@@ -94,10 +94,11 @@
                     </p>
                     <ul>
                         <li><b>Basic profile setup:</b> Each profile has a label and an optional slot from 1 to 4 so you can swap to it more easily in game.</li>
-                        <li><b>Behavior defaults:</b> Profiles can act as the default NPC or default narrator setup, and they also decide whether dynamic profile changes are allowed by default.</li>
+                        <li><b>Behavior defaults:</b> A profile can be the default for newly discovered NPCs or the default narrator setup, and it also decides whether dynamic profile changes are allowed.</li>
                         <li><b>Dynamic Profile fields:</b> You can choose whether CHIM is allowed to evolve personality, speech style, and goals for NPCs using that profile.</li>
                         <li><b>Diary options:</b> Profiles include diary settings like auto diary and whether wait events also count for auto-diary writing.</li>
                         <li><b>Connector choices:</b> Each profile can use its own Standard, Fast, Powerful, Experimental, Diary, and Formatter large language models, plus its own Text-to-Speech and Image-to-Text connectors.</li>
+                        <li><b>Import and assignment:</b> Imported names are cleaned before saving. During import you can make the profile the default and optionally move NPCs using the previous default or no profile onto it.</li>
                         <li><b>Workflow tools:</b> The page also supports cloning, exporting, importing, testing all profiles, and setting profile rules.</li>
                         <li><b>In play:</b> NPCs using the same profile inherit the same overall behavior style, so this is the fastest way to make groups of characters feel different.</li>
                     </ul>
@@ -137,8 +138,8 @@
                     </p>
                     <ul>
                         <li><b>Core narrator toggles:</b> You can turn the narrator on or off, keep it limited to book-style narration, hide it from normal context, and decide whether it can write diary content.</li>
-                        <li><b>Inline narration:</b> This decides what happens to *asterisked* narration, including whether The Narrator voices it, the NPC keeps it, or it is disabled.</li>
-                        <li><b>Cleanup options:</b> The page also includes asterisk cleanup controls so player or NPC voices do not read action text out loud unless you want them to.</li>
+                        <li><b>Inline narration:</b> This decides what happens to *asterisked* narration. It can be spoken by the NPC, handed to The Narrator, removed, or left visible as text while being excluded from TTS.</li>
+                        <li><b>Cleanup options:</b> Asterisk cleanup is handled separately for display and speech, so action text can remain readable without forcing a particular narration voice.</li>
                         <li><b>Welcome, random, and bored commentary:</b> You can tune welcome lines on load, random scene comments, and bored-event narrator takeovers with chance and cooldown controls.</li>
                         <li><b>Quest comments:</b> Lets The Narrator react to quest objective updates, again with its own chance and cooldown settings.</li>
                         <li><b>Profile and voice:</b> You choose the narrator profile, voice ID, and Oghma knowledge tags from here.</li>
@@ -155,7 +156,8 @@
                         <li><b>Identity:</b> You can define the player name, physical description, and character background so NPCs have a stable idea of who you are.</li>
                         <li><b>Bio visibility:</b> A simple toggle decides whether all NPCs know your background or whether that knowledge stays mainly with The Narrator.</li>
                         <li><b>Speech style:</b> You can write your own player speech style or generate one so CHIM better preserves your character voice during roleplay.</li>
-                        <li><b>Diary and Player TTS:</b> The page includes player diary participation plus a dedicated player voice path with connector, voice, language, and provider-specific overrides.</li>
+                        <li><b>Player diaries:</b> The player has independent Auto Diary and Auto Diary Wait controls, so sleeping or waiting does not have to follow the NPC profile diary policy.</li>
+                        <li><b>Player TTS:</b> The page includes a dedicated player voice path with connector, voice, language, and provider-specific overrides.</li>
                         <li><b>Live tracked data:</b> It also shows and stores current equipment, inventory, skills, and grouped Skyrim stats so the roleplay stays grounded in your actual playthrough.</li>
                     </ul>
                 </div>
@@ -166,11 +168,12 @@
                         <b>What this page does:</b> Action Editor controls which gameplay actions CHIM is allowed to use and where those actions are allowed to appear.
                     </p>
                     <ul>
-                        <li><b>Enabled state:</b> You can turn individual actions on or off without editing the shipped base action list.</li>
-                        <li><b>Scope:</b> Actions can be available to normal NPCs, followers, The Narrator, or only as background dynamic actions.</li>
-                        <li><b>Visible action text:</b> Each action row includes the action name, description, and return message CHIM uses to understand and react to that action.</li>
-                        <li><b>Parameters:</b> Actions can also carry parameter definitions, which is how more complex actions know what values they expect.</li>
-                        <li><b>Advanced fields:</b> Metadata, script proxy information, and pricing controls are there for deeper tuning, but most normal users will rarely touch them.</li>
+                        <li><b>Main editor:</b> The normal table keeps the action name, description, enabled state, and the controls most players need visible without exposing the full implementation.</li>
+                        <li><b>Enabled state:</b> Disabling an action removes the AI's permission to use it without changing the shipped base definition.</li>
+                        <li><b>Require Confirmation:</b> Supported actions can run automatically or wait for an Accept or Decline prompt in Prisma. Declining hard-cancels the action without generating another AI reply.</li>
+                        <li><b>Custom actions:</b> Imported and plugin-provided actions use the same confirmation control when their dispatch path supports game-side confirmation.</li>
+                        <li><b>Advanced Options:</b> Scope, return message, follow-up behavior, parameters, metadata, script proxy details, requirements, and action-specific settings live in a separate modal.</li>
+                        <li><b>Reset Override:</b> Removes your custom action settings and returns the row to its shipped definition.</li>
                         <li><b>Filtering:</b> The page includes live search and scope filters so you can quickly find the exact action you need.</li>
                     </ul>
                 </div>

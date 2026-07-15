@@ -78,9 +78,38 @@
                     <ul>
                         <li><b>Per-NPC basics:</b> Each NPC entry includes things like name, race, gender, voice, RefID, profile, and portrait so you can confirm the character sheet is correct.</li>
                         <li><b>Profile control:</b> You can move an NPC onto a different CHIM profile, lock that profile so it stays fixed, or leave it more flexible.</li>
+                        <li><b>Prompt Head Override:</b> A small copy control imports the currently active prompt head into the NPC override field, giving you a complete starting point before you make character-specific edits.</li>
                         <li><b>Roleplay features:</b> This page ties into dynamic profiles, middle-term memory, individual memory use, auto greetings, auto diaries, and background-life behavior.</li>
                         <li><b>Search and filtering:</b> You can filter by text, profile, favorites, locked NPCs, dynamic profile state, memory state, greeting behavior, and other useful NPC flags.</li>
                         <li><b>Import and cleanup:</b> The page also supports JSON import and export, bulk profile switching, relationship rebuilding, and cleanup for unlocked NPCs.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="WorldAwareness">
+                    <h3>Inventory And World Awareness</h3>
+                    <p>
+                        <b>What this does:</b> CHIM records richer item and equipment data so NPCs can reason about what the player and nearby characters are carrying, wearing, collecting, or physically presenting.
+                    </p>
+                    <ul>
+                        <li><b>Equipment:</b> Standard and modded equipment slots are grouped into readable worn-equipment context instead of silently dropping non-vanilla slots.</li>
+                        <li><b>Inventory:</b> Item names, descriptions, keywords, quantities, and BaseIDs can be included in prompt context according to your context-detail settings.</li>
+                        <li><b>Concrete references:</b> Held and picked-up objects include a RefID when Skyrim exposes one, while stacked inventory and container entries use their shared BaseID.</li>
+                        <li><b>VR held items:</b> With HIGGS, CHIM can tell NPCs what the player is actively holding in either hand and keep that state separate from ordinary inventory.</li>
+                        <li><b>Pickup noise control:</b> The global minimum-value setting decides which collected items are important enough to create an event for the AI.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="VanillaQuestDialogue">
+                    <h3>Vanilla Quest Dialogue</h3>
+                    <p>
+                        <b>What this does:</b> Supported vanilla quests can be started and advanced through ordinary AI conversation with the quest NPC. CHIM recognizes reviewed quest phrases and safely hands the result to Skyrim's native quest system.
+                    </p>
+                    <ul>
+                        <li><b>Natural starts:</b> Ask the relevant NPC about the subject, person, place, or work connected to a supported quest instead of selecting a traditional dialogue topic.</li>
+                        <li><b>Quest progression:</b> CHIM can perform reviewed stage, objective, item, and handoff steps while Skyrim remains the authority for the actual quest state.</li>
+                        <li><b>Safety controls:</b> The web settings can enable quest progression globally and restrict advancement to player conversations.</li>
+                        <li><b>Current scope:</b> This is a beta system for reviewed vanilla quests. It is not a general solution for modded or randomly generated radiant quests.</li>
+                        <li><b>Separate system:</b> Vanilla Quest Dialogue advances Skyrim quests. AI Quest Manager below creates CHIM-driven storylines and objectives.</li>
                     </ul>
                 </div>
 
@@ -107,8 +136,10 @@
                         <li><b>World map:</b> NPCs are shown on a Skyrim map using tracked coordinates so you can see where background characters currently are.</li>
                         <li><b>NPC actions:</b> You can request a report, request a new action, or force a coordinate refresh for a specific NPC.</li>
                         <li><b>Rumor system:</b> The page lets you create and manage rumors with hold, type, content, and lifespan so the world has loose story pressure even when you are not present.</li>
-                        <li><b>Background state:</b> It also reads the tracked NPC metadata behind those background reports and behaviors.</li>
+                        <li><b>Background history:</b> The map includes a recent history view for travel, work, trade, conversations, and other recorded off-screen actions.</li>
+                        <li><b>Background state:</b> It also reads the tracked NPC metadata behind those reports and behaviors.</li>
                         <li><b>Letters and thoughts:</b> The page can surface related letters and diary-style thoughts, so it helps you monitor both movement and off-screen story flavor.</li>
+                        <li><b>Trigger timing:</b> Background Life Trigger Time is configured in hours under Global Settings. The default is 24 hours.</li>
                     </ul>
                 </div>
 
@@ -240,6 +271,7 @@
                         <li><b>Reading modes:</b> You can open a character's diary in a book-style reading view as well as the normal list view.</li>
                         <li><b>Export:</b> The page supports downloading the current diary view or exporting all diary entries.</li>
                         <li><b>Editing and cleanup:</b> Individual entries can be edited or deleted, and there is also a full wipe option for the whole diary log.</li>
+                        <li><b>Player controls:</b> Player Roleplay has independent Auto Diary and Auto Diary Wait switches, so player diary generation can differ from NPC profile behavior.</li>
                     </ul>
                 </div>
 
