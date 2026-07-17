@@ -86,7 +86,7 @@
                     <h3>What Each PC Should Run</h3>
                     <ul>
                         <li><b>PC A:</b> Skyrim and the lighter local CHIM side. The old guide used DwemerDistro here as only the web server side.</li>
-                        <li><b>PC B:</b> your remote model and voice stack. The old guide specifically showed KoboldCPP, DwemerDistro, and XTTS on this machine.</li>
+                        <li><b>PC B:</b> your remote model and voice stack. The old guide specifically showed KoboldCPP, DwemerDistro, and XTTS on this machine; OmniVoice can be hosted there the same way.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 900px;">
                         <img src="../img/remote-hosting/step-02.jpg" alt="PC A component installation notes">
@@ -131,17 +131,19 @@
                         Forward those ports through the Windows host machine instead.
                     </p>
                     <p>
-                        The original guide used two forwarded ports:
+                        Forward the ports for the services you use:
                     </p>
                     <ul>
                         <li><b>8081:</b> the CHIM web side</li>
-                        <li><b>8020:</b> XTTS</li>
+                        <li><b>8020:</b> XTTS, Chatterbox, PocketTTS, or another service using the shared TTS port</li>
+                        <li><b>8021:</b> OmniVoice</li>
                     </ul>
                     <p>
                         You can create the rules in an elevated Command Prompt:
                     </p>
                     <pre><code>netsh interface portproxy add v4tov4 listenport=8081 listenaddress=0.0.0.0 connectport=8081 connectaddress=&lt;WSL_IP&gt;
-netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 connectport=8020 connectaddress=&lt;WSL_IP&gt;</code></pre>
+netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 connectport=8020 connectaddress=&lt;WSL_IP&gt;
+netsh interface portproxy add v4tov4 listenport=8021 listenaddress=0.0.0.0 connectport=8021 connectaddress=&lt;WSL_IP&gt;</code></pre>
                     <p>
                         If you prefer a GUI, the old guide also used PortProxyGUI:
                     </p>
@@ -150,6 +152,9 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                         <img src="../img/remote-hosting/step-06.jpg" alt="PortProxyGUI setup for CHIM remote hosting">
                         <figcaption>Create rules that listen on the Windows host and forward 8081 and 8020 into the WSL address on PC B.</figcaption>
                     </figure>
+                    <p>
+                        The screenshot predates OmniVoice. Add the same kind of rule for port <code>8021</code> when OmniVoice is installed on PC B.
+                    </p>
                 </div>
 
                 <div class="card" id="FirewallRules">
@@ -160,9 +165,12 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                     <ul>
                         <li>Create an inbound rule for TCP.</li>
                         <li>Allow the connection.</li>
-                        <li>Add local ports <code>8081,8020</code>.</li>
+                        <li>Add local ports <code>8081,8020,8021</code>, omitting any services you do not expose.</li>
                         <li>Apply it to Domain, Private, and Public if needed for your machine.</li>
                     </ul>
+                    <p>
+                        OmniVoice does not authenticate API requests. Use it only on a trusted network and restrict the port <code>8021</code> firewall rule to PC A's LAN address where practical.
+                    </p>
                     <figure class="guide-figure" style="max-width: 900px;">
                         <img src="../img/remote-hosting/step-07.jpg" alt="Creating a Windows Firewall inbound rule">
                         <figcaption>Create a new inbound rule in Windows Defender Firewall on PC B.</figcaption>
@@ -181,6 +189,7 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                     <ul>
                         <li><b>For the web side:</b> open the remote CHIM pages with the PC B LAN IP on port <code>8081</code>.</li>
                         <li><b>For XTTS:</b> use the PC B LAN IP on port <code>8020</code> inside the CHIM text-to-speech settings.</li>
+                        <li><b>For OmniVoice:</b> use the PC B LAN IP on port <code>8021</code> inside the CHIM text-to-speech settings.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 900px;">
                         <img src="../img/remote-hosting/step-11.jpg" alt="Starting DwemerDistro on the Skyrim PC">
@@ -191,8 +200,8 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                         <figcaption>Set the XTTS endpoint on PC A to the LAN IP of PC B, for example <code>http://192.168.1.3:8020</code>.</figcaption>
                     </figure>
                     <p>
-                        In short, use <code>REMOTE_MACHINE_IP:8081</code> and <code>REMOTE_MACHINE_IP:8020</code>.
-                        That is the core fix the old page was trying to teach.
+                        In short, use <code>REMOTE_MACHINE_IP:8081</code> for the web side, <code>REMOTE_MACHINE_IP:8020</code> for shared-port TTS engines,
+                        and <code>REMOTE_MACHINE_IP:8021</code> for OmniVoice.
                     </p>
                 </div>
 
@@ -206,7 +215,8 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                         <li>Confirm the PC B LAN IP with <code>ipconfig</code>.</li>
                         <li>Confirm the current WSL IP again with <code>wsl hostname -I</code>.</li>
                         <li>Make sure your port-proxy rules still point at the current WSL IP.</li>
-                        <li>Make sure Windows Firewall allows inbound TCP 8081 and 8020.</li>
+                        <li>Make sure Windows Firewall allows each required inbound TCP port, including 8021 for OmniVoice.</li>
+                        <li>From PC A, test OmniVoice with <code>curl http://REMOTE_MACHINE_IP:8021/health</code> before configuring the connector.</li>
                         <li>On PC A, use the remote machine IP, not the WSL IP, in the endpoint fields.</li>
                     </ul>
                     <p>
