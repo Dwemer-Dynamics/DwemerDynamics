@@ -75,8 +75,9 @@
                     <ul>
                         <li><b>Prompting:</b> This is where StobeServer stores the main prompt head, emote mood list, general instructions, and roleplay instructions.</li>
                         <li><b>Rechat:</b> Controls how STOBE chooses follow-up speakers, including rechat mode, strict targeting, and whether the original player speaker can be selected again.</li>
-                        <li><b>Memory:</b> Covers the global memory system and how much older context STOBE keeps bringing back into play.</li>
-                        <li><b>World Knowledge:</b> Includes broader world knowledge behavior, including whether race knowledge should be injected automatically when matching entries exist.</li>
+                        <li><b>Memory:</b> Covers the global memory system, dynamic profile timing, and how much older context STOBE keeps bringing back into play.</li>
+                        <li><b>Compact Chat History:</b> Keeps older conversation context shorter so more room remains for the current scene.</li>
+                        <li><b>World Knowledge:</b> Can automatically include matching race, location, and character knowledge when those names appear in the current context.</li>
                         <li><b>Relationship System:</b> This is where the shared relationship layer is turned on or off for server-side interaction tracking.</li>
                         <li><b>Player Faction:</b> Lets you define a custom player-faction name and an optional extra prompt block for how that faction should be treated.</li>
                         <li><b>Context Selections:</b> Lets you choose which context blocks and subsections STOBE includes in system prompts.</li>
@@ -91,10 +92,23 @@
                     <ul>
                         <li><b>Basic profile setup:</b> Each profile has a label, can be marked as a default NPC profile, and can also be marked as a player-faction profile.</li>
                         <li><b>Main prompt text:</b> Profiles carry both a <b>Prompt Head</b> and a <b>Profile Prompt</b>, which shape the behavior style of NPCs using that profile.</li>
-                        <li><b>Connector choices:</b> Each profile can point to its own Response, Diary, Autochat, Memory, Background Life, Dynamic Profile, Relationship, and TTS connectors.</li>
+                        <li><b>Response modes:</b> Each profile has Standard, Fast, Powerful, and Experimental LLM choices. You can switch the active mode from the in-game chat box.</li>
+                        <li><b>Other connectors:</b> Profiles also choose their Diary, Autochat, Memory, Background Life, Dynamic Profile, Relationship, and TTS connectors.</li>
                         <li><b>Dynamic profile behavior:</b> Profiles decide whether STOBE can rewrite fields like personality, speech style, and goals over time.</li>
                         <li><b>Diary behavior:</b> Profiles also control auto-diary behavior, including how often entries can be written and how many events are needed first.</li>
-                        <li><b>Workflow tools:</b> The page supports cloning, exporting, importing, profile testing, and profile-assignment rules for imported NPCs.</li>
+                        <li><b>Workflow tools:</b> The page supports cloning, exporting, importing, profile testing, assignment rules, and copying individual settings to other profiles.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="StobeNpcs">
+                    <h3>Stobe NPCs</h3>
+                    <p>
+                        <b>What this page does:</b> This is the main character manager. Open an NPC to edit its profile, voice, memories, relationships, and roleplay fields.
+                    </p>
+                    <ul>
+                        <li><b>Protect profiles:</b> Lock a profile to protect it from rollback. Use <b>View History</b> to review and restore an older version.</li>
+                        <li><b>Bulk controls:</b> Unlock all NPC profiles when you need to make broad changes, then use <b>Auto Lock Profiles on Edit</b> if edited profiles should lock again after saving.</li>
+                        <li><b>Filters:</b> Search and filter by favorites, locks, dynamic profiles, memory, tags, and player-faction membership.</li>
                     </ul>
                 </div>
 
@@ -117,13 +131,55 @@
                         <b>What this page does:</b> This page controls the STOBE narrator layer, including when it speaks, what profile it uses, and how it presents itself.
                     </p>
                     <ul>
-                        <li><b>Core toggles:</b> You can turn the narrator on or off, enable welcome narration, and enable random narration.</li>
+                        <li><b>Name and identity:</b> Give the narrator its own display name, profile, voice, and character description.</li>
+                        <li><b>Core toggles:</b> You can turn the narrator on or off, enable welcome narration, random narration, and narrator diaries.</li>
                         <li><b>Chance and cooldowns:</b> The page controls welcome cooldown, random narration chance, and random narration cooldown.</li>
                         <li><b>Profile and voice:</b> You choose which profile the narrator uses, its voice ID, and which world-knowledge tags it should pull from.</li>
                         <li><b>Prompt override:</b> There is also a narrator-specific prompt-head override if you want the narrator to follow special instructions.</li>
                         <li><b>Dynamic profile updates:</b> The narrator can also use dynamic updates for personality, speech style, and goals if you turn that on.</li>
-                        <li><b>Narrator identity:</b> Core summary, background, personality, speech style, and goals are all editable on this page.</li>
+                        <li><b>Inline narration:</b> Choose whether scene descriptions use the narrator voice, the NPC voice, text only, or stay disabled.</li>
                     </ul>
+                </div>
+
+                <div class="card" id="TtsStudio">
+                    <h3>TTS Studio / Voices</h3>
+                    <p>
+                        <b>What this page does:</b> Test voices, rebuild supported voice libraries, and manage voice samples without editing files by hand.
+                    </p>
+                    <p>
+                        STOBE includes race-based voices and unique voices for named NPCs. General male and female voices remain available when no specific match is found.
+                    </p>
+                </div>
+
+                <div class="card" id="RenameNames">
+                    <h3>Rename Names</h3>
+                    <p>
+                        <b>What this page does:</b> Manage the lore-friendly name pool used for generic NPCs. Add names one at a time or import a CSV, then enable or disable entries without deleting them.
+                    </p>
+                    <p>
+                        Named and unique characters are protected from this generic renaming system.
+                    </p>
+                </div>
+
+                <div class="card" id="World">
+                    <h3>World</h3>
+                    <p>
+                        <b>What this page does:</b> The World page has separate <b>World Knowledge</b> and <b>World State</b> views.
+                    </p>
+                    <ul>
+                        <li><b>World Knowledge:</b> Add lore, aliases, tags, and custom descriptions that help characters understand names mentioned in a scene.</li>
+                        <li><b>World State:</b> Review the current vanilla and mod-added world states. Enable a prompt addendum when that state should change how matching lore is explained.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Descriptions">
+                    <h3>Descriptions</h3>
+                    <p>
+                        <b>What this page does:</b> STOBE automatically saves descriptions from items and equipment it detects in game. Use this page to review them or add custom descriptions for missing and modded items.
+                    </p>
+                    <p>
+                        CSV import and export are available for larger collections, and custom rows override matching base entries.
+                    </p>
                 </div>
 
                 <div class="card" id="ActionEditor">

@@ -64,7 +64,7 @@
                         <h1>STOBE</h1>
                         <p>
                             STOBE is the Kenshi-side Dwemer Dynamics framework.
-                            It focuses on AI-driven squad roleplay, narrator support, dynamic dialogue, and the same DwemerDistro service stack used across the wider project.
+                            It adds AI dialogue, voiced characters, narrator support, memories, and world-aware roleplay to Kenshi.
                         </p>
                     </div>
                 </div>
@@ -77,29 +77,37 @@
                     </p>
                     <ul>
                         <li>Bring AI dialogue and voice into Kenshi scenes.</li>
-                        <li>Use DwemerDistro-backed large language models, text-to-speech, and other services with a Kenshi-focused setup flow.</li>
-                        <li>Tune behavior per character or per profile instead of using one rigid global setup.</li>
-                        <li>Push STOBE toward heavier roleplay, narrator-driven scenes, or harsher world simulation depending on your preferred style.</li>
+                        <li>Give characters distinct profiles, memories, diaries, relationships, and voices.</li>
+                        <li>Let conversations reflect nearby people, inventories, locations, world events, and player bases.</li>
+                        <li>Use simple in-game menus for chat, recent history, NPC details, and response modes.</li>
                     </ul>
                 </div>
 
                 <div class="card" id="AgenticCharacters">
-                    <h3>Agentic Characters</h3>
+                    <h3>Living Characters</h3>
                     <p>
-                        STOBE is meant to make Kenshi characters feel more active and less scripted. The goal is not just one special companion talking back to you, but a broader AI layer that can support squads, scenes, and ongoing interaction.
-                    </p>
-                    <p>
-                        That includes more dynamic reactions, stronger scene presence, and more room for personality instead of purely static dialogue loops.
+                        STOBE supports your whole playthrough instead of one special companion. Characters can keep their own identity, remember important events, write diaries, and change how they feel about others over time.
                     </p>
                 </div>
 
                 <div class="card" id="NarratorAndTone">
                     <h3>Narrator And World Tone</h3>
                     <p>
-                        STOBE is designed to support a stronger narrative layer than base Kenshi. Narrator support and roleplay-heavy prompting help scenes feel harsher, stranger, and more reactive to the world around you.
+                        The narrator can introduce a playthrough, describe scenes, keep its own diary, and use a custom name and voice. Inline narration can be spoken by the narrator, spoken by the NPC, or shown as text only.
                     </p>
+                </div>
+
+                <div class="card" id="WorldAwareness">
+                    <h3>World Awareness</h3>
                     <p>
-                        This gives you a route into more story-like play without losing Kenshi's rougher sandbox tone.
+                        STOBE follows more than dialogue. Characters can react to travel, injuries, death, limb loss, slavery, trade, world-state changes, and the condition of a player base while they are inside it.
+                    </p>
+                </div>
+
+                <div class="card" id="CharacterVoices">
+                    <h3>Character Voices</h3>
+                    <p>
+                        STOBE includes voices selected for Kenshi races and unique characters. Greenlanders, Scorchlanders, Shek, Hivers, Skeletons, Cannibals, and named NPCs can sound more distinct, with general voices used when no closer match is available.
                     </p>
                 </div>
 
@@ -116,10 +124,7 @@
                 <div class="card" id="ConfigurationDepth">
                     <h3>Configuration Depth</h3>
                     <p>
-                        STOBE is not locked to one service combination. You can choose different providers, tune settings, and move between simpler and heavier setups depending on your hardware and patience.
-                    </p>
-                    <p>
-                        A simple OpenRouter-first setup is the easiest way in, but the site now uses the same broader page structure as STOBE grows.
+                        STOBE is not locked to one service combination. Profiles have Standard, Fast, Powerful, and Experimental response choices, while QuickStart provides a ready-to-use default setup.
                     </p>
                 </div>
 
@@ -139,10 +144,7 @@
                 <div class="card" id="GuidePages">
                     <h3>Guide Pages</h3>
                     <p>
-                        The STOBE section now mirrors the broader guide layout used for STOBE-ready Dwemer Dynamics documentation.
-                    </p>
-                    <p>
-                        Installation stays as the practical first page, and the rest of the menu gives STOBE the same expandable structure for services, configuration, troubleshooting, and future deeper docs.
+                        Start with <a href="./installation.html">Installation</a>. Use <a href="./configuration.html">Configuration</a> for the web menus, <a href="./ingame-settings.html">Kenshi Settings</a> for the in-game windows, and <a href="./faq.html">FAQ</a> when something is not working.
                     </p>
                 </div>
             </span>

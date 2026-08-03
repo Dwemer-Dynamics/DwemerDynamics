@@ -76,6 +76,7 @@
                         <li><b>Character identity:</b> The page stores and shows the NPC's backstory, personality, speech style, occupation, appearance, goals, and relationship data.</li>
                         <li><b>Profile assignment:</b> Each NPC can be attached to a profile, inherit the default profile, or be moved in bulk to a different profile.</li>
                         <li><b>World Knowledge tags:</b> NPCs can carry world-knowledge tags that help control what they should naturally know.</li>
+                        <li><b>Profile protection:</b> Lock a profile to protect it from rollback, or use <b>View History</b> to restore an older version.</li>
                         <li><b>Filtering and cleanup:</b> The UI supports search plus filters like favorites, dynamic profile, middle-term memory, locked NPCs, and player-faction NPCs.</li>
                         <li><b>Authoring tools:</b> The page includes create, import, AI profile generation, relationship rebuild, and bulk cleanup tools.</li>
                     </ul>
@@ -99,23 +100,35 @@
                         <b>Descriptions</b> manages item and equipment description text used by STOBE's prompt context.
                     </p>
                     <ul>
-                        <li><b>Richer world context:</b> When STOBE can describe gear and items properly, conversations about equipment, trade, and loot feel more grounded.</li>
+                        <li><b>Automatic discovery:</b> When STOBE detects an item or piece of equipment with a description in game, it adds that description to the library.</li>
+                        <li><b>Richer world context:</b> This makes conversations about equipment, trade, and loot feel more grounded.</li>
                         <li><b>Custom overrides:</b> You can import custom description rows and have them override the base records when the same string ID is used.</li>
                         <li><b>Best use:</b> This matters most if you want modded equipment or custom content to have better in-world context.</li>
                     </ul>
                 </div>
 
                 <div class="card" id="WorldKnowledge">
-                    <h3>World Knowledge</h3>
+                    <h3>World Knowledge And World State</h3>
                     <p>
-                        <b>World Knowledge</b> is STOBE's lore and knowledge grounding page. This is the STOBE-side equivalent of the older Oghma-style idea, but the real current page name is <b>World Knowledge</b>.
+                        The <b>World</b> page combines STOBE's lore library with the live world-state view.
                     </p>
                     <ul>
                         <li><b>Topic records:</b> Entries are stored by topic, with longer and simpler descriptions plus tags and knowledge-class fields.</li>
+                        <li><b>Aliases:</b> Extra names help STOBE find the right article when a character, faction, or location is mentioned in a different way.</li>
                         <li><b>Knowledge limits:</b> This helps STOBE decide what an NPC should know, instead of every character sounding equally informed about everything.</li>
                         <li><b>Custom canon:</b> You can add or import your own world-knowledge entries for modded factions, locations, lore, or custom story setups.</li>
-                        <li><b>NPC tie-in:</b> NPC pages include world-knowledge tags so lore access can stay character-appropriate.</li>
+                        <li><b>World State:</b> STOBE tracks vanilla and mod-added states, then adds enabled state notes when matching world knowledge is used.</li>
                     </ul>
+                </div>
+
+                <div class="card" id="RenameNames">
+                    <h3>Rename Names</h3>
+                    <p>
+                        The Rename Names page controls the lore-friendly names STOBE can give generic NPCs. Add or import names, then disable any entries you do not want used.
+                    </p>
+                    <p>
+                        Unique and properly named characters are kept out of the generic rename pool.
+                    </p>
                 </div>
 
                 <div class="card" id="StobeDiaries">
@@ -138,9 +151,22 @@
                     </p>
                     <ul>
                         <li><b>Memory summaries:</b> STOBE stores grouped memory summaries with participants, time ranges, scope, and summary text.</li>
+                        <li><b>Important events:</b> Travel, trade, healing, slavery, deaths, limb loss, actions, and other major events can be remembered alongside dialogue and diaries.</li>
                         <li><b>Maintenance tools:</b> The page supports editing summaries, deleting single entries, wiping all summaries, and running a manual sync.</li>
                         <li><b>Background processing:</b> StobeServer includes regular memory and middle-term memory maintenance so continuity can be packed in the background.</li>
                         <li><b>Roleplay effect:</b> This is what stops longer playthroughs from feeling like every conversation starts from zero.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="PlayerBases">
+                    <h3>Player Base Awareness</h3>
+                    <p>
+                        While the selected character is inside a player-owned base, STOBE can include that base's current condition in the conversation.
+                    </p>
+                    <ul>
+                        <li><b>Power and security:</b> Characters can see current power, batteries, gates, and damaged buildings.</li>
+                        <li><b>Work and supplies:</b> Construction, production, farms, and storage are summarized so NPCs can discuss how the base is doing.</li>
+                        <li><b>Multiple bases:</b> Each discovered player base is tracked separately, and the extra context is only used while inside its perimeter.</li>
                     </ul>
                 </div>
 

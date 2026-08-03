@@ -73,9 +73,9 @@
                     <p>
                         This is the first log to open for the STOBE mod itself.
                     </p>
-                    <p><code>Kenshi\mods\Stobe\Stobe.log</code></p>
+                    <p><code>Kenshi\mods\Stobe\stobe.log</code></p>
                     <p>
-                        Use this when STOBE is not reacting in game, the hotkeys are failing, context capture looks wrong, or the mod is not talking to the backend correctly.
+                        Use this when STOBE is not reacting in game, the hotkeys are failing, context capture looks wrong, or the mod is not connecting to StobeServer.
                     </p>
                 </div>
 
@@ -86,7 +86,7 @@
                     </p>
                     <p><code>Kenshi\RE_Kenshi_log.txt</code></p>
                     <p>
-                        Use this when STOBE is not loading at all, `RE_Kenshi.exe` is failing to bring the plugin up, or the DLL integration looks broken before STOBE even starts normal runtime behavior.
+                        Use this when STOBE is not loading at all, <code>RE_Kenshi.exe</code> is failing to bring the plugin up, or the STOBE DLL never starts.
                     </p>
                 </div>
 
@@ -98,41 +98,25 @@
                     <p><code>Kenshi\mods\Stobe\Stobe.ini</code></p>
                     <p><code>Kenshi\mods\Stobe\StobeCustom.ini</code></p>
                     <p>
-                        `Stobe.ini` is the shipped baseline, while `StobeCustom.ini` keeps the user or runtime overrides that survive updates.
+                        <code>Stobe.ini</code> is the shipped baseline, while <code>StobeCustom.ini</code> keeps the user or runtime overrides that survive updates.
                     </p>
                 </div>
 
                 <div class="card" id="ServerLogs">
                     <h3>STOBE Server Logs</h3>
                     <p>
-                        The current codebase exposes the main STOBE server logs through two real entry points:
+                        Use either of these when the mod loads but the server, model, or voice service fails:
                     </p>
                     <ol>
-                        <li><b>HerikaServer:</b> <b>Control Panel</b> then the <b>Server Logs</b> tab.</li>
+                        <li><b>StobeServer:</b> Open <b>Control Panel</b>, then <b>Server Logs</b>.</li>
                         <li><b>Distro Launcher:</b> <b>Debugging</b> then <b>Create Diagnostic File</b>.</li>
                     </ol>
                     <p>
-                        The HerikaServer side is embedding the STOBE distro debugger from the dashboard, and the launcher diagnostic export writes a summary file to:
+                        The launcher saves the complete diagnostic file here:
                     </p>
                     <p><code>Desktop\DwemerDistro-Diagnostics\diagnostics-YYYYMMDD-HHMMSS.txt</code></p>
                     <p>
-                        The STOBE log viewer code is currently reading from the HerikaServer log folder and surfaces these files:
-                    </p>
-                    <ol>
-                        <li><code>apache_error.log</code></li>
-                        <li><code>chim.log</code></li>
-                        <li><code>output_from_llm.log</code></li>
-                        <li><code>context_sent_to_llm.log</code></li>
-                        <li><code>output_to_plugin.log</code></li>
-                        <li><code>stt.log</code></li>
-                        <li><code>vision.log</code></li>
-                        <li><code>debugStream.log</code></li>
-                        <li><code>context_sent_to_llm_fast.log</code></li>
-                        <li><code>monitor.log</code></li>
-                        <li><code>service.log</code></li>
-                    </ol>
-                    <p>
-                        In the launcher code, there are also direct live tail commands for Apache, XTTS, Chatterbox, PocketTTS, MeloTTS, Piper, localWhisper, and Parakeet logs. So if the launcher or server log views are not enough, the debugging tools are already wired to those service-specific logs too.
+                        Upload that diagnostic file together with <code>stobe.log</code> when asking for support. Include <code>RE_Kenshi_log.txt</code> when STOBE did not load at all.
                     </p>
                 </div>
             </span>

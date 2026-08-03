@@ -62,21 +62,22 @@
                 <div class="card hero-card">
                     <h1>STOBE Kenshi Settings</h1>
                     <p>
-                        STOBE does not use the old Skyrim-style settings page structure that this section used before.
-                        The current Kenshi mod has a small set of real in-game windows: the <b>AI Panel</b>, the <b>Plugin Settings</b> window, and the <b>MOTD</b> window.
+                        STOBE keeps its main controls inside Kenshi. The current mod includes a left-side menu, character and diary browsers, recent history, a Status HUD, Plugin Settings, and an expanded Chat Box.
                     </p>
                 </div>
 
                 <div class="card" id="AiPanel">
                     <h3>AI Panel</h3>
                     <p>
-                        The first in-game STOBE menu is the left-side panel opened by the STOBE settings key. It shows your current menu key and chat key, then gives you four buttons.
+                        The left-side STOBE menu opens with your STOBE settings key and keeps the main in-game tools together.
                     </p>
                     <ul>
                         <li><b>Menu Key / Chat Hotkey display:</b> The panel shows the current keys at the top so you can confirm your bindings in game.</li>
                         <li><b>Stobe NPCs:</b> Opens the in-game NPC detail browser.</li>
                         <li><b>Stobe Diaries:</b> Opens the in-game diary browser.</li>
+                        <li><b>Recent History:</b> Shows the latest dialogue, actions, travel, injuries, and other important events.</li>
                         <li><b>Settings:</b> Opens the real STOBE settings window.</li>
+                        <li><b>Status HUD:</b> Shows the current chat mode, response mode, AI activity, selected character, and chat target.</li>
                         <li><b>MOTD:</b> Opens the welcome and status window.</li>
                     </ul>
                 </div>
@@ -89,7 +90,7 @@
                     <ul>
                         <li><b>STOBE Settings Key:</b> The key that opens and closes the STOBE menu. Current choices are <b>=</b>, <b>F7</b>, <b>F8</b>, <b>F11</b>, <b>F12</b>, <b>O</b>, <b>[</b>, and <b>]</b>.</li>
                         <li><b>Chat Hotkey:</b> The quick chat input key. Current choices are <b>/</b>, <b>-</b>, <b>.</b>, <b>[</b>, <b>]</b>, <b>O</b>, and <b>P</b>.</li>
-                        <li><b>Default Chat Mode:</b> The normal starting mode for STOBE chat. Current choices are <b>chat</b>, <b>whisper</b>, <b>shout</b>, <b>cheat</b>, and <b>narrator</b>.</li>
+                        <li><b>Default Mode:</b> The starting mode for the Chat Box. Choose <b>chat</b>, <b>whisper</b>, <b>shout</b>, <b>cheat</b>, <b>narrator</b>, <b>inject</b>, or <b>inject &amp; chat</b>.</li>
                         <li><b>Talk Radius:</b> Normal conversation distance.</li>
                         <li><b>Shout Radius:</b> Larger distance for louder speech.</li>
                         <li><b>TTS Volume:</b> Voice playback volume from <b>0</b> to <b>100</b>.</li>
@@ -102,11 +103,29 @@
                         <li><b>Animal Talks:</b> Enables animal conversation support.</li>
                         <li><b>TTS:</b> Turns generated voice playback on or off.</li>
                         <li><b>Speed Dialogue:</b> Uses the faster dialogue mode.</li>
+                        <li><b>Item Image Sync:</b> Captures supported item images for the server pages.</li>
+                        <li><b>Status HUD:</b> Keeps the small STOBE status display visible while playing.</li>
+                        <li><b>Menu Dialogue TTS:</b> Voices supported dialogue shown in Kenshi's normal dialogue menus.</li>
                         <li><b>Speaker Mode:</b> Chooses between <b>Nearest to Target</b> and <b>First Squad Member</b>.</li>
                     </ul>
                     <p>
                         The settings window also shows a range hint in game: <b>~10 units is about 1 meter</b>, and whisper mode stays fixed at <b>20 units</b>.
                     </p>
+                </div>
+
+                <div class="card" id="ChatBox">
+                    <h3>Chat Box</h3>
+                    <p>
+                        Open the Chat Box with your chat hotkey. Choose the speaker and nearby target, enter a message, then select how STOBE should handle it.
+                    </p>
+                    <ul>
+                        <li><b>Chat modes:</b> Chat, whisper, and shout change who can hear you. Cheat can target nearby characters within 100 meters. Narrator sends the scene to your narrator.</li>
+                        <li><b>Inject:</b> Adds your text to the scene without asking for an immediate reply. <b>Inject &amp; Chat</b> adds it and continues the conversation.</li>
+                        <li><b>Conversation tools:</b> Toggle Auto Chat, continue the current conversation, rename a generic NPC, or choose a manual action.</li>
+                        <li><b>Diaries:</b> <b>Write Diary</b> writes for the selected NPC. <b>Narrator Diary</b> writes for the narrator.</li>
+                        <li><b>Response:</b> Switch between Standard, Fast, Powerful, and Experimental profile models without leaving the game.</li>
+                        <li><b>Animals:</b> When <b>Animal Talks</b> is on, nearby animals can appear as chat targets.</li>
+                    </ul>
                 </div>
 
                 <div class="card" id="PluginActions">
@@ -135,13 +154,10 @@
                     </ul>
                 </div>
 
-                <div class="card" id="WhatRemoved">
-                    <h3>What Was Removed</h3>
+                <div class="card" id="StatusHud">
+                    <h3>Status HUD</h3>
                     <p>
-                        The old Kenshi Settings page was still describing a large CHIM and Skyrim-style settings layout with many sections that do not exist in the STOBE Kenshi mod.
-                    </p>
-                    <p>
-                        The current STOBE source of truth is the small in-game window set above, plus the STOBE INI files that back those controls.
+                        The optional Status HUD is a quick check that STOBE is following the right scene. It shows the active chat and response modes, whether the AI is idle, thinking, or speaking, and the current selected and targeted characters.
                     </p>
                 </div>
             </span>

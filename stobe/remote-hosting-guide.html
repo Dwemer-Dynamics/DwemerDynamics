@@ -62,7 +62,7 @@
                 <div class="card hero-card">
                     <h1>STOBE Remote Hosting Guide</h1>
                     <p>
-                        This page covers the local network setup where Skyrim runs on one PC and the heavier STOBE services run on a second machine.
+                        This page covers the local network setup where Kenshi runs on one PC and StobeServer or voice services run on a second machine.
                         The main thing this guide solves is getting the second machine's WSL-hosted STOBE services reachable from your gaming PC.
                     </p>
                 </div>
@@ -71,23 +71,23 @@
                     <h2>Remote Hosting Guide</h2>
                     <h3>Basic Setup Idea</h3>
                     <p>
-                        The old STOBE wiki guide was built around a two-PC LAN setup. PC A is the machine you actually play Skyrim on. PC B is the machine that runs the bigger AI stack.
+                        PC A is the machine where you play Kenshi. PC B runs StobeServer, a local voice service, or both. Keep both machines on the same local network.
                     </p>
                     <figure class="guide-figure" style="max-width: 880px;">
                         <img src="../img/remote-hosting/step-01.jpg" alt="Two-PC STOBE setup diagram">
-                        <figcaption>PC A runs Skyrim. PC B runs the heavy remote STOBE services on the same local network.</figcaption>
+                        <figcaption>PC A runs Kenshi. PC B runs the remote STOBE services on the same local network.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="MachineRoles">
                     <h3>What Each PC Should Run</h3>
                     <ul>
-                        <li><b>PC A:</b> Skyrim and the lighter local STOBE side. The old guide used DwemerDistro here as only the web server side.</li>
-                        <li><b>PC B:</b> your remote model and voice stack. The old guide specifically showed KoboldCPP, DwemerDistro, and XTTS on this machine.</li>
+                        <li><b>PC A:</b> Kenshi, RE_Kenshi, KenshiLib, and the STOBE game mod.</li>
+                        <li><b>PC B:</b> DwemerDistro with StobeServer and any local AI or voice services you want to host remotely.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 900px;">
                         <img src="../img/remote-hosting/step-02.jpg" alt="PC A component installation notes">
-                        <figcaption>PC A should stay simple: Skyrim plus the local side needed to talk to the remote services.</figcaption>
+                        <figcaption>PC A runs Kenshi and connects to the services on PC B.</figcaption>
                     </figure>
                     <figure class="guide-figure" style="max-width: 900px;">
                         <img src="../img/remote-hosting/step-03.jpg" alt="PC B component installation notes">
@@ -128,36 +128,36 @@
                         Forward those ports through the Windows host machine instead.
                     </p>
                     <p>
-                        The original guide used two forwarded ports:
+                        Forward the ports you actually use:
                     </p>
                     <ul>
-                        <li><b>8081:</b> the STOBE web side</li>
-                        <li><b>8020:</b> XTTS</li>
+                        <li><b>8083:</b> StobeServer</li>
+                        <li><b>Your TTS connector port:</b> for example <b>8020</b> for XTTS, <b>8021</b> for OmniVoice, or the port shown by your selected voice service.</li>
                     </ul>
                     <p>
                         You can create the rules in an elevated Command Prompt:
                     </p>
-                    <pre><code>netsh interface portproxy add v4tov4 listenport=8081 listenaddress=0.0.0.0 connectport=8081 connectaddress=&lt;WSL_IP&gt;
-netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 connectport=8020 connectaddress=&lt;WSL_IP&gt;</code></pre>
+                    <pre><code>netsh interface portproxy add v4tov4 listenport=8083 listenaddress=0.0.0.0 connectport=8083 connectaddress=&lt;WSL_IP&gt;
+netsh interface portproxy add v4tov4 listenport=&lt;TTS_PORT&gt; listenaddress=0.0.0.0 connectport=&lt;TTS_PORT&gt; connectaddress=&lt;WSL_IP&gt;</code></pre>
                     <p>
-                        If you prefer a GUI, the old guide also used PortProxyGUI:
+                        If you prefer a visual tool, you can use PortProxyGUI:
                     </p>
                     <p><a href="https://github.com/zmjack/PortProxyGUI/releases/tag/v1.4.2" target="_blank" rel="noopener noreferrer"><b>PortProxyGUI Download</b></a></p>
                     <figure class="guide-figure" style="max-width: 900px;">
                         <img src="../img/remote-hosting/step-06.jpg" alt="PortProxyGUI setup for STOBE remote hosting">
-                        <figcaption>Create rules that listen on the Windows host and forward 8081 and 8020 into the WSL address on PC B.</figcaption>
+                        <figcaption>Create rules that forward StobeServer and your selected voice service into the WSL address on PC B.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="FirewallRules">
                     <h3>Open The Windows Firewall Ports</h3>
                     <p>
-                        The old guide also opened inbound TCP rules for the forwarded ports. If Windows Firewall blocks them, the LAN setup still will not work even if the proxy is correct.
+                        Windows Firewall must allow the same ports. The connection will not work if those ports are blocked.
                     </p>
                     <ul>
                         <li>Create an inbound rule for TCP.</li>
                         <li>Allow the connection.</li>
-                        <li>Add local ports <code>8081,8020</code>.</li>
+                        <li>Add local port <code>8083</code> and the port used by your selected local voice service.</li>
                         <li>Apply it to Domain, Private, and Public if needed for your machine.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 900px;">
@@ -165,8 +165,8 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                         <figcaption>Create a new inbound rule in Windows Defender Firewall on PC B.</figcaption>
                     </figure>
                     <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-09.jpg" alt="Adding TCP ports 8081 and 8020 to the firewall rule">
-                        <figcaption>Make the rule TCP and explicitly allow ports 8081 and 8020.</figcaption>
+                        <img src="../img/remote-hosting/step-09.jpg" alt="Adding STOBE ports to the firewall rule">
+                        <figcaption>Make the rule TCP and allow the same ports you forwarded.</figcaption>
                     </figure>
                 </div>
 
@@ -176,20 +176,19 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                         Once PC B is forwarding and accepting traffic, the gaming PC should use the <b>Windows LAN IP of PC B</b>, not the raw WSL address.
                     </p>
                     <ul>
-                        <li><b>For the web side:</b> open the remote STOBE pages with the PC B LAN IP on port <code>8081</code>.</li>
-                        <li><b>For XTTS:</b> use the PC B LAN IP on port <code>8020</code> inside the STOBE text-to-speech settings.</li>
+                        <li><b>For StobeServer:</b> set <code>ServerHost</code> in <code>StobeCustom.ini</code> to the LAN IP of PC B and keep <code>ServerPort=8083</code>.</li>
+                        <li><b>For TTS:</b> use the PC B LAN IP and matching service port inside the STOBE TTS connector.</li>
                     </ul>
                     <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-11.jpg" alt="Starting DwemerDistro on the Skyrim PC">
-                        <figcaption>Run the local STOBE side on the Skyrim machine, but leave the heavier remote services on PC B.</figcaption>
+                        <img src="../img/remote-hosting/step-11.jpg" alt="Starting DwemerDistro for remote hosting">
+                        <figcaption>Run Kenshi and the STOBE mod on PC A, while the selected services stay on PC B.</figcaption>
                     </figure>
                     <figure class="guide-figure" style="max-width: 920px;">
                         <img src="../img/remote-hosting/step-12.jpg" alt="Configuring XTTS to use the remote machine LAN IP">
                         <figcaption>Set the XTTS endpoint on PC A to the LAN IP of PC B, for example <code>http://192.168.1.3:8020</code>.</figcaption>
                     </figure>
                     <p>
-                        In short, use <code>REMOTE_MACHINE_IP:8081</code> and <code>REMOTE_MACHINE_IP:8020</code>.
-                        That is the core fix the old page was trying to teach.
+                        In short, use <code>REMOTE_MACHINE_IP:8083</code> for StobeServer and the matching port for your selected voice service.
                     </p>
                 </div>
 
@@ -203,7 +202,7 @@ netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 conne
                         <li>Confirm the PC B LAN IP with <code>ipconfig</code>.</li>
                         <li>Confirm the current WSL IP again with <code>wsl hostname -I</code>.</li>
                         <li>Make sure your port-proxy rules still point at the current WSL IP.</li>
-                        <li>Make sure Windows Firewall allows inbound TCP 8081 and 8020.</li>
+                        <li>Make sure Windows Firewall allows inbound TCP 8083 and your selected voice-service port.</li>
                         <li>On PC A, use the remote machine IP, not the WSL IP, in the endpoint fields.</li>
                     </ul>
                     <p>

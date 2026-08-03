@@ -62,7 +62,7 @@
                 <div class="card hero-card">
                     <h1>STOBE Text-to-Speech Services</h1>
                     <p>
-                        STOBE currently supports five text-to-speech options. The simplest way to think about them is local voices first,
+                        STOBE currently supports six text-to-speech options. The simplest way to think about them is local voices first,
                         then hosted voice services if you want cloud speech instead.
                     </p>
                 </div>
@@ -80,10 +80,28 @@
                         Chatterbox is a local voice option with a more expressive feel. Use it when you want a stronger local speech option than the most basic setup.
                     </p>
 
+                    <h3>OmniVoice</h3>
+                    <p>
+                        OmniVoice is a local multilingual option. Choose a prepared language profile in the connector and let StobeServer finish the voice setup in the background.
+                    </p>
+
                     <h3>STOBE XTTS</h3>
                     <p>
                         XTTS is the option to pick when you specifically want the STOBE XTTS voice-cloning path. It fits users who want to work with cloned or more customized voices.
                     </p>
+                </div>
+
+                <div class="card" id="VoiceLibrary">
+                    <h2>STOBE Voice Library</h2>
+                    <p>
+                        STOBE includes voice samples selected for Kenshi races and unique characters. The server chooses the closest match automatically when the NPC is imported.
+                    </p>
+                    <ul>
+                        <li><b>Race voices:</b> Greenlanders, Scorchlanders, Shek, Hivers, Skeletons, and Cannibals have their own voice groups.</li>
+                        <li><b>Unique voices:</b> Named Kenshi characters can use their own voice sample.</li>
+                        <li><b>Fallbacks:</b> General male and female voices are used when the race is unknown or no closer match exists.</li>
+                        <li><b>TTS Studio / Voices:</b> Use this StobeServer page to test samples and manage supported voice libraries.</li>
+                    </ul>
                 </div>
 
                 <div class="card" id="HostedServices">
@@ -105,13 +123,13 @@
                 <div class="card" id="HowStobeUsesTts">
                     <h2>How STOBE Uses Text-to-Speech</h2>
                     <p>
-                        STOBE's local text-to-speech options are PocketTTS, XTTS, and Chatterbox. In the current server setup, those local providers normally point at the same local speech endpoint.
+                        STOBE's local text-to-speech options are PocketTTS, XTTS, Chatterbox, and OmniVoice. Pick the matching service in the TTS connector page; DwemerDistro handles its local address.
                     </p>
                     <p>
                         The hosted options are Cartesia and Inworld. Those use cloud accounts instead of a local speech server, so you configure them with their service credentials inside the STOBE server tools.
                     </p>
                     <p>
-                        STOBE also keeps fallback male and female voice choices for cases where an NPC does not have a more specific voice mapping yet.
+                        Turn on <b>Menu Dialogue TTS</b> in the Kenshi Plugin Settings if you also want supported dialogue from Kenshi's normal dialogue menus spoken aloud.
                     </p>
                 </div>
             </span>

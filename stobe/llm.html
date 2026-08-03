@@ -62,7 +62,23 @@
                 <div class="card hero-card">
                     <h1>STOBE Large Language Model Services</h1>
                     <p>
-                        These are the current large language model services exposed in HerikaServer for STOBE.
+                        StobeServer can use several hosted and local AI services. OpenRouter is the simplest place to start, and profiles let you keep four response choices ready at once.
+                    </p>
+                </div>
+
+                <div class="card" id="ResponseModes">
+                    <h2>Response Modes</h2>
+                    <p>
+                        Each profile has four response slots. Switch between them from the in-game Chat Box without rebuilding the profile.
+                    </p>
+                    <ul>
+                        <li><b>Standard:</b> The normal choice for everyday dialogue. New profiles use <b>GLM 4.7</b>.</li>
+                        <li><b>Fast:</b> Prioritizes quicker replies. New profiles use <b>Gemini 2.5 Flash Lite</b>.</li>
+                        <li><b>Powerful:</b> Use when a scene needs more careful reasoning. New profiles use <b>GLM 5.2</b>.</li>
+                        <li><b>Experimental:</b> A spare slot for trying another model. New profiles use <b>DeepSeek V4 Pro</b>.</li>
+                    </ul>
+                    <p>
+                        QuickStart fills these defaults for new installs. Existing profile choices are not replaced during updates.
                     </p>
                 </div>
 
@@ -110,7 +126,7 @@
                 <div class="card" id="Player2Service">
                     <h3>Player2</h3>
                     <p>
-                        Player2 is for people who want STOBE to talk to a local AI app on their own machine. It is useful if you want more control over what model you use, but it is usually less beginner-friendly than cloud services.
+                        Player2 lets STOBE use the Player2 app running on your computer. Choose Player2 in QuickStart if that is the service you want for all response modes.
                     </p>
                     <p><a href="http://127.0.0.1:4315/v1/chat/completions" target="_blank" rel="noopener noreferrer"><b>Player2 Local Endpoint</b></a></p>
                 </div>

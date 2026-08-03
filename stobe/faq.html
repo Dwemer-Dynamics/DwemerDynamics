@@ -62,7 +62,7 @@
                 <div class="card hero-card">
                     <h1>STOBE FAQ</h1>
                     <p>
-                        This page covers the current STOBE plugin and StobeServer behavior. Old Skyrim and CHIM-specific answers have been removed.
+                        Quick answers for common STOBE setup and gameplay questions.
                     </p>
                 </div>
 
@@ -137,7 +137,21 @@
                 <div class="card" id="AnimalTalks">
                     <h3>Why are animals not talking</h3>
                     <p>
-                        Animal talks are disabled by default. Turn on <code>AnimalTalks</code> in the STOBE settings or in <code>StobeCustom.ini</code> if you want animals to be valid chat targets.
+                        Animal talks are disabled by default. Turn on <b>Animal Talks</b> in Plugin Settings, then reopen the Chat Box near the animal so it can be added to the target list.
+                    </p>
+                </div>
+
+                <div class="card" id="ResponseModes">
+                    <h3>What do Standard, Fast, Powerful, and Experimental mean</h3>
+                    <p>
+                        They are four language-model choices stored on each profile. Standard is used for normal play. The other slots let you quickly choose a faster, stronger, or test model from the in-game Chat Box.
+                    </p>
+                </div>
+
+                <div class="card" id="DynamicProfiles">
+                    <h3>Why is an NPC profile not changing over time</h3>
+                    <p>
+                        Make sure Dynamic Profile is enabled for that NPC, its profile is not locked, and the DwemerDistro server is still running. The update interval is measured in in-game hours and can be changed in Global Settings or Plugin Settings.
                     </p>
                 </div>
 
@@ -166,7 +180,7 @@
                 <div class="card" id="Motd">
                     <h3>How do I stop the MOTD window from auto-opening</h3>
                     <p>
-                        Turn off <code>EnableMOTD</code> in <code>StobeCustom.ini</code> or use the MOTD toggle in the STOBE interface.
+                        Set <code>EnableMOTD=0</code> in <code>StobeCustom.ini</code>. You can still open the MOTD manually from the left-side STOBE menu.
                     </p>
                 </div>
             </span>

@@ -89,6 +89,9 @@
                         <li><b><code>*_descriptions.csv</code></b>: item, faction, or object descriptions.</li>
                         <li><b><code>*_world_knowledge.csv</code></b>, <b><code>*_worldstate.csv</code></b>, or files with <b><code>oghma</code></b> in the name: world knowledge topics.</li>
                     </ul>
+                    <p>
+                        A filename containing <code>worldstate</code> still imports a <b>World Knowledge</b> article. It does not create or replace a live World State rule.
+                    </p>
 
                     <h3>What The Files Look Like</h3>
                     <p>
@@ -122,6 +125,7 @@
                         <li>Files must be real <code>.csv</code> files.</li>
                         <li>The startup importer rejects files over <b>10 MB</b>.</li>
                         <li>For biography imports, valid STOBE bio types are <code>personality</code>, <code>backstory</code>, <code>speechstyle</code>, <code>occupation</code>, <code>appearance</code>, and <code>goals</code>.</li>
+                        <li>Imported biography rows start enabled. Players can disable individual rows later from <b>NPC Biographies</b>.</li>
                         <li>If the importer cannot match the filename or header to a supported format, it skips the file.</li>
                     </ul>
 
