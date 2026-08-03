@@ -8,6 +8,7 @@ const leftSidebarConfigs = {
             { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
             { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
             { href: "./roleplay-settings.html", title: "Roleplay Settings", label: "Roleplay Settings", emoji: "\uD83C\uDFAD" },
+            { href: "./background-life.html", title: "Background Life", label: "Background Life", emoji: "\uD83C\uDF0D" },
             { href: "./ingame-settings.html", title: "Skyrim Settings", label: "Skyrim Settings", emoji: "\uD83C\uDFAE" },
             { href: "./llm.html", title: "Large Language Models", label: "Large Language Models", emoji: "\uD83E\uDDE0" },
             { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech", emoji: "\uD83D\uDD0A" },

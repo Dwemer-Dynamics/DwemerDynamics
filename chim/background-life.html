@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CHIM Plugins | Dwemer Dynamics</title>
+    <title>CHIM Background Life | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20260803a"></script>
     <link rel="stylesheet" href="../css/styles.css">
@@ -62,68 +62,76 @@
         </div>
 
         <div class="content">
-            <span id="Plugins" class="section">
+            <span id="BackgroundLife" class="section">
                 <div class="card hero-card">
-                    <h1>CHIM Plugins</h1>
+                    <h1>CHIM Background Life</h1>
                     <p>
-                        Server plugins extend CHIM without modifying the core server. They can add configuration pages, prompt context, AI actions, database-backed features, external integrations, and supporting services.
+                        Background Life lets selected NPCs keep living their lives while you are somewhere else. They can travel, work, rest, send letters, and create new stories over time.
                     </p>
                 </div>
 
-                <div class="card-green" id="PluginManager">
-                    <h2>Plugin Manager</h2>
+                <div class="card" id="GettingStarted">
+                    <h3>Getting Started</h3>
+                    <ol>
+                        <li>Open <b>Background Life</b> from the Roleplay section of the web interface or from the in-game CHIM menu.</li>
+                        <li>Add the NPCs you want CHIM to follow.</li>
+                        <li>Keep playing normally while CHIM updates those NPCs in the background.</li>
+                        <li>Use the map and history to see where they are and what they have been doing.</li>
+                    </ol>
                     <p>
-                        Install and manage supported plugins from the CHIM web interface. Plugins can publish separate channels such as Live and Dev, provide their own configuration page, and run versioned database migrations during installation.
-                    </p>
-                    <ul>
-                        <li>Installed server plugins live under <code>HerikaServer/ext</code>.</li>
-                        <li>Plugin-owned tables use the shared PostgreSQL <code>plugins</code> schema.</li>
-                        <li>Some integrations also require a matching Skyrim mod or SKSE plugin.</li>
-                    </ul>
-                    <p>
-                        Supported Skyrim mods can now bundle their matching server plugin. When the game starts, CHIM checks the package and installs or updates it on the connected server automatically, so players do not need to copy the server half by hand.
+                        Start with one or two NPCs while you get used to it. You can add more whenever you are ready.
                     </p>
                 </div>
 
-                <div class="card" id="ChimCustom">
-                    <h2>Plugins</h2>
-                    <h3>CHIM Custom</h3>
-                    <p>
-                        CHIM Custom adds optional awareness for supported Skyrim mods. Its SKSE component detects visible survival and cleanliness state, then its server plugin adds that state to focused character context without writing it into event history.
-                    </p>
+                <div class="card" id="ManagingNpcs">
+                    <h3>Managing NPCs</h3>
                     <ul>
-                        <li><b>Dirt and Blood:</b> dirt, blood, cleanliness, and washing state.</li>
-                        <li><b>Bathing in Skyrim - Renewed:</b> dirtiness tier, bathing, and soapy state.</li>
-                        <li><b>SunHelm Survival:</b> hunger, thirst, exhaustion, and cold state.</li>
-                        <li><b>Starfrost:</b> hunger, exhaustion, and cold state.</li>
+                        <li><b>Actions:</b> Allows the NPC to choose and perform new Background Life activities.</li>
+                        <li><b>Letters:</b> Allows the NPC to send letters as their off-screen story develops.</li>
+                        <li><b>Tracking:</b> Keeps the NPC's map position updated when CHIM receives new location information.</li>
+                        <li><b>Trigger Action:</b> Asks the selected NPC to decide what they should do next.</li>
+                        <li><b>Send Letter:</b> Asks the selected NPC to write and send a new letter.</li>
                     </ul>
-                    <p><a href="https://github.com/Dwemer-Dynamics/CHIM-Custom" target="_blank" rel="noopener noreferrer"><b>CHIM Custom Source Code</b></a></p>
+                    <p>
+                        Select an NPC on the map or in the NPC list to review their current activity, recent events, letters, and inner thoughts.
+                    </p>
                 </div>
 
-                <div class="card" id="TwitchBot">
-                    <h3>CHIM Twitch Bot</h3>
+                <div class="card" id="MapAndHistory">
+                    <h3>Map And History</h3>
                     <p>
-                        The Twitch Bot plugin lets your Twitch chat interact with CHIM while you play. Viewers can help drive scenes, speak through the player, or push AI characters into more chaotic roleplay moments depending on how you configure it.
+                        The map shows the latest known position of each tracked NPC. Zoom in to inspect busy areas, then select an NPC marker to open their Background Life details.
                     </p>
-                    <ul>
-                        <li><b>What it is for:</b> streamer-driven or viewer-driven CHIM sessions where chat actively influences the game.</li>
-                        <li><b>What it changes:</b> viewers can prompt AI NPCs, steer direction, and create social scene interactions through Twitch chat.</li>
-                        <li><b>Why it matters:</b> it turns CHIM into something your audience can play with you instead of only watching passively.</li>
-                    </ul>
-                    <p><a href="https://github.com/Dwemer-Dynamics/CHIM-Twitch-Bot" target="_blank" rel="noopener noreferrer"><b>CHIM Twitch Bot Source Code</b></a></p>
+                    <p>
+                        The History tab records travel, work, rest, conversations, and other off-screen activity. The newest events appear first, making it easy to catch up after a long journey or time away from the game.
+                    </p>
                 </div>
 
-                <div class="card" id="MindMap">
-                    <h3>CHIM Mind Map</h3>
+                <div class="card" id="Rumors">
+                    <h3>Rumors</h3>
                     <p>
-                        Mind Map is a 3D memory visualizer for CHIM. It shows how your TXT2VEC memories connect to each other, which characters appear most often, and how events cluster across a playthrough.
+                        Rumors give NPCs new local stories to react to. You can create a rumor for a specific hold, choose how long it remains active, and let it influence Background Life events over time.
                     </p>
+                </div>
+
+                <div class="card" id="CreatingNpcs">
+                    <h3>Creating Background Life NPCs</h3>
+                    <p>
+                        You can create a new character from either Background Life menu. Choose their race, role, and starting location, then leave Skyrim running and unpaused while CHIM creates them in the game.
+                    </p>
+                    <p>
+                        Created characters are added to Background Life automatically and can be found later through CHIM NPC filters.
+                    </p>
+                </div>
+
+                <div class="card" id="Tips">
+                    <h3>Tips</h3>
                     <ul>
-                        <li><b>What it is for:</b> exploring your CHIM memory graph visually instead of reading it only through logs and tables.</li>
-                        <li><b>What it needs:</b> TXT2VEC or embedding-based memory features need to be enabled and your memories need to be synced first.</li>
-                        <li><b>Why it matters:</b> it gives you a much easier way to understand what CHIM remembers and how those memories relate over time.</li>
+                        <li>Give the system time to develop stories instead of repeatedly forcing actions.</li>
+                        <li>Use letters and rumors when you want off-screen events to reach the player naturally.</li>
+                        <li>If an NPC's position is stale, use <b>Send All Locations</b> from the CHIM MCM while Skyrim is running.</li>
+                        <li>Background Life Trigger Time is configured in hours under Global Settings. The default is 24 hours.</li>
                     </ul>
-                    <p><a href="https://github.com/Dwemer-Dynamics/CHIM-MindMap" target="_blank" rel="noopener noreferrer"><b>CHIM Mind Map Source Code</b></a></p>
                 </div>
             </span>
         </div>
