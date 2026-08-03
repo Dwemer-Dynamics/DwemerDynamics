@@ -447,6 +447,16 @@ foreach ($argv as $arg) {
                         If you want the plugin to appear in the built-in repository list, it also needs an entry in the plugin repository data used by the plugin manager.
                     </p>
 
+                    <p><b>Bundling a server plugin with a Skyrim mod</b></p>
+                    <p>
+                        A Skyrim mod can also carry its matching CHIM server plugin so the player does not need a separate manual server install.
+                    </p>
+                    <ul>
+                        <li>Place the package under <code>Data/CHIM/server-plugins/&lt;plugin-name&gt;</code>.</li>
+                        <li>Use a versioned <code>.zip</code> or <code>.dwpkg</code> package containing the complete server plugin.</li>
+                        <li>When Skyrim starts, CHIM uploads and installs the package only when the connected server needs that version.</li>
+                    </ul>
+
                     <h3>Database Migrations</h3>
                     <p>
                         If your plugin needs its own tables, use the built-in migration system instead of asking users to run SQL by hand.

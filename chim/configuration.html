@@ -82,7 +82,7 @@
                         <li><b>Global Connectors:</b> Chooses the shared AI brains used for player respeech, summaries, middle-term memory and Background Life, scene classification, dynamic profiles, director mode, relationship handling, and custom Oghma work.</li>
                         <li><b>Context:</b> Filters what world information is sent into prompts, including event types, timestamps, power awareness, item detail policies, and noisy item, location, or magic data you may want to trim out.</li>
                         <li><b>Prompt Context Selections:</b> Lets you choose which character, appearance, equipment, inventory, relationship, and general-context buckets CHIM should carry into conversations.</li>
-                        <li><b>Misc:</b> Covers auto-locking profiles, auto-filling custom profiles, Background Life Trigger Time in hours, end-conversation cooldowns, and focus chat history size.</li>
+                        <li><b>Misc:</b> Covers auto-locking profiles, auto-filling custom profiles, Background Life Trigger Time in hours, end-conversation cooldowns, and Compact Chat context size.</li>
                         <li><b>Translation:</b> Handles DeepL-based text and audio translation for players who want CHIM to speak across languages.</li>
                     </ul>
                 </div>
@@ -96,10 +96,11 @@
                         <li><b>Basic profile setup:</b> Each profile has a label and an optional slot from 1 to 4 so you can swap to it more easily in game.</li>
                         <li><b>Behavior defaults:</b> A profile can be the default for newly discovered NPCs or the default narrator setup, and it also decides whether dynamic profile changes are allowed.</li>
                         <li><b>Dynamic Profile fields:</b> You can choose whether CHIM is allowed to evolve personality, speech style, and goals for NPCs using that profile.</li>
-                        <li><b>Diary options:</b> Profiles include diary settings like auto diary and whether wait events also count for auto-diary writing.</li>
+                        <li><b>Diary options:</b> Profiles control automatic diary writing, wait-event diaries, physical in-game diary books, and whether the latest entry is included in that NPC's conversation context.</li>
                         <li><b>Connector choices:</b> Each profile can use its own Standard, Fast, Powerful, Experimental, Diary, and Formatter large language models, plus its own Text-to-Speech and Image-to-Text connectors.</li>
+                        <li><b>Random LLM selection:</b> A profile can rotate between its assigned conversation models instead of always using one fixed LLM.</li>
                         <li><b>Import and assignment:</b> Imported names are cleaned before saving. During import you can make the profile the default and optionally move NPCs using the previous default or no profile onto it.</li>
-                        <li><b>Workflow tools:</b> The page also supports cloning, exporting, importing, testing all profiles, and setting profile rules.</li>
+                        <li><b>Workflow tools:</b> The page also supports cloning, exporting, importing, testing all profiles, and assigning simple profile rules by source mod, faction, race, or other character details.</li>
                         <li><b>In play:</b> NPCs using the same profile inherit the same overall behavior style, so this is the fastest way to make groups of characters feel different.</li>
                     </ul>
                 </div>
@@ -143,6 +144,7 @@
                         <li><b>Welcome, random, and bored commentary:</b> You can tune welcome lines on load, random scene comments, and bored-event narrator takeovers with chance and cooldown controls.</li>
                         <li><b>Quest comments:</b> Lets The Narrator react to quest objective updates, again with its own chance and cooldown settings.</li>
                         <li><b>Profile and voice:</b> You choose the narrator profile, voice ID, and Oghma knowledge tags from here.</li>
+                        <li><b>Diary memory:</b> The Narrator can recall relevant diary entries from NPCs, or be restricted to entries written by The Narrator.</li>
                         <li><b>Advanced narrator behavior:</b> The page also includes narrator-specific dynamic profile options, narrator action toggles, and narrator prompt overrides.</li>
                     </ul>
                 </div>
