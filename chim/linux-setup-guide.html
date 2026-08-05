@@ -66,147 +66,154 @@
                 <div class="card hero-card">
                     <h1>CHIM Linux Setup Guide</h1>
                     <p>
-                        This page is the Linux version of the old community DwemerDistro setup guide.
-                        The idea is simple: unpack the DwemerDistro archive, import the bundled image into Docker, expose the needed ports, then point CHIM at the Linux machine over your local network.
+                        The DwemerDistro Linux installer runs the CHIM server through Docker.
+                        Skyrim, Mod Organizer 2, SKSE, CHIM, and Prisma remain part of your game installation.
                     </p>
                 </div>
 
-                <div class="card" id="PrepareFiles">
-                    <h2>Linux Setup Guide</h2>
-                    <h3>Prepare The Archive</h3>
+                <div class="card" id="Requirements">
+                    <h2>Before You Begin</h2>
+                    <p><b>What this does:</b> The installer creates a persistent DwemerDistro container, updates CHIM, makes a safety backup, and checks the installation for common problems.</p>
                     <ul>
-                        <li>Unpack the DwemerDistro archive first.</li>
-                        <li>On the Linux machine, create a build folder such as <code>/home/$(whoami)/docker_build</code>.</li>
-                        <li>Copy <code>DwemerAI4Skyrim3.tar</code> into that folder.</li>
+                        <li><b>Computer:</b> An x86_64 Linux computer with at least 12 GB of free space. 16 GB of RAM is recommended.</li>
+                        <li><b>Docker:</b> Install Docker Engine and the Docker Compose v2 plugin.</li>
+                        <li><b>Commands:</b> Make sure <code>curl</code> and <code>sha256sum</code> are installed.</li>
+                        <li><b>Permissions:</b> Your Linux user must be able to run <code>docker</code> without <code>sudo</code>.</li>
                     </ul>
-                    <pre><code>mkdir -p /home/$(whoami)/docker_build</code></pre>
                     <p>
-                        The old guide used that tar file as the source for the Docker image and for the initial persisted data folders.
+                        Follow the official <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener noreferrer"><b>Docker Engine install guide</b></a>
+                        and <a href="https://docs.docker.com/compose/install/linux/" target="_blank" rel="noopener noreferrer"><b>Docker Compose guide</b></a> for your Linux distribution.
                     </p>
+                    <pre><code>docker version
+docker compose version</code></pre>
                 </div>
 
                 <div class="card" id="NvidiaNote">
-                    <h3>NVIDIA Runtime Note</h3>
+                    <h2>Optional NVIDIA Support</h2>
                     <p>
-                        If the Linux machine is going to run GPU-backed services like XTTS, install the NVIDIA container runtime first.
+                        Install the NVIDIA Container Toolkit only if this computer will run supported GPU-backed speech services.
                     </p>
                     <ul>
-                        <li><b>NVIDIA docs:</b> <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html" target="_blank" rel="noopener noreferrer"><b>Container Toolkit Install Guide</b></a></li>
-                        <li><b>Arch note from the old guide:</b> install <code>libnvidia-container</code> and <code>nvidia-container-toolkit</code> from the extra repository.</li>
-                        <li><b>Ubuntu and other distros:</b> follow the NVIDIA docs for your distro.</li>
+                        <li><b>NVIDIA setup:</b> Follow the official <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html" target="_blank" rel="noopener noreferrer"><b>Container Toolkit Install Guide</b></a>.</li>
+                        <li><b>CPU setup:</b> Skip this section if you do not need NVIDIA GPU support.</li>
                     </ul>
+                </div>
+
+                <div class="card" id="Install">
+                    <h2>Install DwemerDistro</h2>
+                    <h3>Extract The Package</h3>
                     <p>
-                        If you do not have NVIDIA GPU support available, the container can still be created and used in CPU mode.
+                        Download the current <code>DwemerDistro-Linux-*.tar.gz</code> package, open a terminal in the download folder, and extract it.
+                    </p>
+                    <pre><code>tar -xzf DwemerDistro-Linux-*.tar.gz
+cd DwemerDistro-Linux-*</code></pre>
+
+                    <h3>Choose Your Install Command</h3>
+                    <p><b>Skyrim is on this Linux computer:</b></p>
+                    <pre><code>bash install.sh</code></pre>
+
+                    <p><b>Skyrim is on another computer:</b></p>
+                    <pre><code>bash install.sh --lan</code></pre>
+
+                    <p><b>Add NVIDIA GPU support:</b></p>
+                    <pre><code>bash install.sh --nvidia
+# Or combine NVIDIA support with LAN access
+bash install.sh --lan --nvidia</code></pre>
+                    <p>
+                        The first installation verifies the package, imports DwemerDistro, starts CHIM, updates the server, creates a safety backup, and runs Distro Doctor. This can take several minutes.
                     </p>
                 </div>
 
-                <div class="card" id="ImportImage">
-                    <h3>Import The DwemerDistro Image</h3>
+                <div class="card" id="ConnectChim">
+                    <h2>Connect CHIM</h2>
                     <p>
-                        The old Linux guide imported the tar file into Docker as <code>skyrimai:latest</code>.
+                        Print the web address and exact game settings after installation:
                     </p>
-                    <pre><code>linux_user="$(whoami)"
-wsl_tar_image_path="/home/${linux_user}/docker_build/DwemerAI4Skyrim3.tar"
-
-sudo docker image import "${wsl_tar_image_path}" skyrimai:latest</code></pre>
+                    <pre><code>dwemerctl address</code></pre>
                     <p>
-                        If you already imported it earlier, Docker will already have the image and you can skip re-importing it.
+                        For a game running on the same Linux computer, the output will use settings like these:
                     </p>
-                </div>
-
-                <div class="card" id="PersistentFolders">
-                    <h3>Prepare Persistent Folders</h3>
-                    <p>
-                        The old guide persisted the main DwemerDistro folders outside the container so the database, web files, and Dwemer home directory survive container recreation.
-                    </p>
-                    <pre><code>mkdir -p /home/${linux_user}/docker_env/skyrimai_postgres
-mkdir -p /home/${linux_user}/docker_env/skyrimai_tmp
-mkdir -p /home/${linux_user}/docker_env/skyrimai_dwemerhome
-mkdir -p /home/${linux_user}/docker_env/skyrimai_www
-
-chmod 777 /home/${linux_user}/docker_env/skyrimai_tmp</code></pre>
-                    <p>
-                        The original script then unpacked the needed PostgreSQL, web, and Dwemer home paths from the tar file into those folders before starting the container.
-                    </p>
-                </div>
-
-                <div class="card" id="RunContainer">
-                    <h3>Create The Container</h3>
-                    <p>
-                        The old guide created a Docker container named <code>skyrimaiframework</code> and exposed the service ports directly to the Linux host.
-                    </p>
-                    <p>
-                        These are the important exposed ports from that guide:
-                    </p>
-                    <ul>
-                        <li><code>8081</code> for the CHIM web side</li>
-                        <li><code>8082</code> and <code>8083</code> for additional web/service endpoints</li>
-                        <li><code>59125</code>, <code>9876</code>, <code>8020</code>, and <code>8007</code> for the bundled service stack</li>
-                    </ul>
-                    <p>
-                        A simplified CPU-mode example looks like this:
-                    </p>
-                    <pre><code>sudo docker run -d \
-  --name=skyrimaiframework \
-  -p 8081:8081 \
-  -p 8082:8082 \
-  -p 8083:8083 \
-  -p 59125:59125 \
-  -p 9876:9876 \
-  -p 8020:8020 \
-  -p 8007:8007 \
-  -v /home/${linux_user}/docker_env/skyrimai_postgres:/var/lib/postgresql \
-  -v /home/${linux_user}/docker_env/skyrimai_tmp:/tmp \
-  -v /home/${linux_user}/docker_env/skyrimai_dwemerhome:/home/dwemer \
-  -v /home/${linux_user}/docker_env/skyrimai_www:/var/www/html \
-  --restart unless-stopped \
-  skyrimai:latest</code></pre>
-                    <p>
-                        If NVIDIA runtime support is installed and detected, add the runtime and GPU flags before the port mappings.
-                    </p>
-                </div>
-
-                <div class="card" id="CheckContainer">
-                    <h3>Confirm It Is Running</h3>
-                    <pre><code>sudo docker ps | grep -i skyrimaiframework</code></pre>
-                    <p>
-                        If the container shows up in the process list, move on to the in-container install steps.
-                    </p>
-                </div>
-
-                <div class="card" id="InsideContainer">
-                    <h3>Finish The Install Inside The Container</h3>
-                    <p>
-                        The old guide then entered the container, switched to the <code>dwemer</code> user, and ran the same install scripts you would normally trigger from the Windows launcher flow.
-                    </p>
-                    <pre><code>container_id=$(sudo docker ps -a | grep "skyrimaiframework" | cut -f1 -d" ")
-sudo docker exec -ti ${container_id} /bin/bash
-su dwemer</code></pre>
-                    <p>
-                        Then run these in order:
-                    </p>
-                    <ol>
-                        <li><code>/usr/local/bin/update_gws</code></li>
-                        <li><code>/home/dwemer/minime-t5/ddistro_install.sh</code> and choose the CPU option if you are not using GPU acceleration</li>
-                        <li><code>/home/dwemer/mimic3/ddistro_install.sh</code> if you want Mimic</li>
-                        <li><code>/home/dwemer/xtts-api-server/ddistro_install.sh</code> and choose default or GPU depending on your setup</li>
-                    </ol>
-                </div>
-
-                <div class="card" id="PointChimToLinux">
-                    <h3>Point CHIM To The Linux Machine</h3>
-                    <p>
-                        Once the Linux host is running, use the Linux machine's LAN IP in the plugin config on the Skyrim side.
-                        The old wiki example used a gaming PC on <code>192.168.1.51</code> and the Linux DwemerDistro machine on <code>192.168.1.101</code>.
-                    </p>
-                    <pre><code>SERVER=192.168.1.101
+                    <pre><code>SERVER=127.0.0.1
 PORT=8081
 PATH=/HerikaServer/comm.php
 POLINT=1</code></pre>
                     <p>
-                        With that kind of setup, the web interface should be available at:
+                        For a game on another computer, copy the LAN values printed by <code>dwemerctl address</code> into <code>AIAgent.ini</code>. Allow TCP port <code>8081</code> through the Linux firewall.
                     </p>
-                    <p><code>http://192.168.1.101:8081</code></p>
+                    <p><b>Web interface:</b> <code>http://127.0.0.1:8081/HerikaServer/ui/home.php</code></p>
+                </div>
+
+                <div class="card" id="DailyUse">
+                    <h2>Daily Use</h2>
+                    <p>
+                        Docker starts DwemerDistro automatically after a reboot. These commands can also be used at any time:
+                    </p>
+                    <pre><code>dwemerctl start
+dwemerctl stop
+dwemerctl restart
+dwemerctl status
+dwemerctl logs</code></pre>
+                    <p>
+                        If <code>dwemerctl</code> is not in your path, use <code>~/.local/share/dwemerdistro-linux/dwemerctl</code> instead.
+                    </p>
+                </div>
+
+                <div class="card" id="Updates">
+                    <h2>Updates And Health Checks</h2>
+                    <pre><code>dwemerctl update
+dwemerctl doctor
+dwemerctl repair</code></pre>
+                    <ul>
+                        <li><b>Update:</b> Makes a backup before updating CHIM and installed services.</li>
+                        <li><b>Doctor:</b> Checks Docker, PostgreSQL, Apache, CHIM, permissions, and installed speech services.</li>
+                        <li><b>Repair:</b> Applies the safe repairs offered by Distro Doctor.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Backups">
+                    <h2>Backups</h2>
+                    <p>Create a manual database and configuration backup:</p>
+                    <pre><code>dwemerctl backup</code></pre>
+                    <p>Restore a backup using the directory printed by that command:</p>
+                    <pre><code>dwemerctl restore ~/.local/share/dwemerdistro-linux/backups/&lt;backup-name&gt;</code></pre>
+                    <p>A second safety backup is created before the restore begins.</p>
+                </div>
+
+                <div class="card" id="ExistingInstall">
+                    <h2>Existing Manual Linux Installations</h2>
+                    <p>
+                        The installer detects the old <code>skyrimaiframework</code> container and leaves it untouched. Stop the old container first because both installations use the same ports.
+                    </p>
+                    <pre><code>docker stop skyrimaiframework</code></pre>
+                    <p>
+                        Do not delete the old container or its data until the new installation has been tested and backed up. Automatic migration from the old manual layout is not currently performed.
+                    </p>
+                </div>
+
+                <div class="card" id="Uninstall">
+                    <h2>Uninstall</h2>
+                    <p>Remove the container while keeping your database and configuration:</p>
+                    <pre><code>dwemerctl uninstall</code></pre>
+                    <p>Permanently remove the container and all persistent Linux installer data:</p>
+                    <pre><code>dwemerctl uninstall --purge-data</code></pre>
+                    <p>The purge command asks for confirmation.</p>
+                </div>
+
+                <div class="card" id="Troubleshooting">
+                    <h2>Troubleshooting</h2>
+                    <p>Start with the status and health checks:</p>
+                    <pre><code>dwemerctl status
+dwemerctl doctor</code></pre>
+                    <p>Follow the startup log if the server does not become ready:</p>
+                    <pre><code>dwemerctl logs</code></pre>
+                    <p>Open an advanced maintenance shell only when you need to inspect the container directly:</p>
+                    <pre><code>dwemerctl shell</code></pre>
+                    <p>
+                        If the web interface is unavailable, confirm that Docker is running and that another service is not already using port <code>8081</code>.
+                    </p>
+                    <p>
+                        ARM computers are not supported. The Linux installer does not install Skyrim, Mod Organizer 2, SKSE, CHIM, Prisma, or Proton.
+                    </p>
                 </div>
 
             </span>
