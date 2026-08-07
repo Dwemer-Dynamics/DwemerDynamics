@@ -11,6 +11,7 @@ const leftSidebarConfigs = {
             { href: "./background-life.html", title: "Background Life", label: "Background Life", emoji: "\uD83C\uDF0D" },
             { href: "./ingame-settings.html", title: "Skyrim Settings", label: "Skyrim Settings", emoji: "\uD83C\uDFAE" },
             { href: "./llm.html", title: "Large Language Models", label: "Large Language Models", emoji: "\uD83E\uDDE0" },
+            { href: "./local-llm-guide.html", title: "Local LLMs", label: "Local LLMs", emoji: "\uD83D\uDDA5\uFE0F" },
             { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech", emoji: "\uD83D\uDD0A" },
             { href: "./stt.html", title: "Speech-to-Text", label: "Speech-to-Text", emoji: "\uD83C\uDFA4" },
             { href: "./itt.html", title: "Image-to-Text", label: "Image-to-Text", emoji: "\uD83D\uDCF8" },
