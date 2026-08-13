@@ -250,6 +250,118 @@
     margin-bottom: 0.35em;
 }
 
+.hubModShowcase {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+    width: min(1180px, calc(100% - 2em));
+    margin: 1.25em auto 0;
+}
+
+.hubModRow {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.25fr);
+    gap: 1.4em;
+    padding: 1.1em;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--site-bg-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.13);
+}
+
+.hubModMedia {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    gap: 0.8em;
+}
+
+.hubModArtwork {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border-radius: 9px;
+    background: #111318;
+}
+
+.hubModArtwork img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hubModMedia .hubTileActions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.hubModMedia .hubTileActionButton {
+    flex: 1 1 112px;
+    min-width: 0;
+}
+
+.hubModInfo {
+    align-self: center;
+    padding: 0.25em 0.6em 0.25em 0;
+}
+
+.hubModInfo h2 {
+    margin: 0.12em 0 0.35em;
+    color: #ffffff;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    line-height: 1;
+    font-weight: 400;
+}
+
+.hubModGame {
+    margin: 0;
+    color: #cdd6e5;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.hubModSummary {
+    margin: 0 0 0.8em;
+    color: #eef2f8;
+    font-size: 1.1rem;
+    line-height: 1.55;
+}
+
+.hubModInfo ul {
+    margin: 0;
+    padding-left: 1.2em;
+    color: #d4dbe6;
+    line-height: 1.5;
+}
+
+.hubModInfo li + li {
+    margin-top: 0.38em;
+}
+
+.hubModRowChim .hubModInfo h2,
+.hubModRowChim .hubModGame {
+    font-family: "MagicCards", serif;
+    letter-spacing: 1.5px;
+    word-spacing: 8px;
+}
+
+.hubModRowStobe .hubModInfo h2,
+.hubModRowStobe .hubModGame {
+    font-family: var(--stobe-title-font);
+    letter-spacing: 0.5px;
+    word-spacing: 8px;
+}
+
+.hubModRowDialectic .hubModInfo h2,
+.hubModRowDialectic .hubModGame {
+    font-family: var(--dialectic-title-font);
+    letter-spacing: 0;
+    word-spacing: normal;
+}
+
 .patron-shell {
     position: sticky;
     top: 5.7em;
@@ -544,6 +656,31 @@
         margin-right: auto;
         justify-content: center;
         text-align: center;
+    }
+}
+
+@media (max-width: 760px) {
+    .hubModShowcase {
+        width: calc(100% - 1em);
+        gap: 0.9em;
+    }
+
+    .hubModRow {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        padding: 0.75em;
+    }
+
+    .hubModInfo {
+        padding: 0 0.25em 0.35em;
+    }
+
+    .hubModInfo h2 {
+        font-size: 2.6rem;
+    }
+
+    .hubModSummary {
+        font-size: 1rem;
     }
 }
 

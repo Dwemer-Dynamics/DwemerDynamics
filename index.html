@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sidebar.css?v=20260713a">
-    <link rel="stylesheet" href="css/hub.css?v=20260714b">
+    <link rel="stylesheet" href="css/hub.css?v=20260812a">
 </head>
 <body class="theme">
     <div style="overflow:auto">
@@ -24,51 +24,80 @@
 
     <div class="hubPageLayout">
         <div class="hubContainer">
-            <div class="hubPicker">
-                <div class="hubColumn" id="chimHub">
-                    <div class="hubTileArtwork">
-                        <img src="./img/chim_home_tile.jpg" alt="CHIM home artwork">
-                    </div>
-                    <a href="./chim/index.html" class="hubTileLink" aria-label="Open CHIM guide"></a>
-                    <div class="hubTileCaption">
-                        <div class="hubTileCaptionTitle hubTileCaptionSkyrim">Skyrim Special Edition / Skyrim VR</div>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonChim" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonChim" href="./chim/installation.html">Install Guide</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hubColumn" id="stobeHub">
-                    <div class="hubTileArtwork">
-                        <img src="./img/stobe_home_tile.jpg" alt="STOBE home artwork">
-                    </div>
-                    <a href="./stobe/index.html" class="hubTileLink" aria-label="Open STOBE guide"></a>
-                    <div class="hubTileCaption">
-                        <div class="hubTileCaptionTitle hubTileCaptionStobe">Kenshi</div>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonStobe" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonStobe" href="./stobe/installation.html">Install Guide</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hubColumn" id="dialecticHub">
-                    <div class="hubTileArtwork">
-                        <img src="./img/dialectic_home_tile.jpg" alt="Dialectic AI Framework for Fallout: New Vegas and Tale of Two Wastelands">
-                    </div>
-                    <a href="./dialectic/index.html" class="hubTileLink" aria-label="Open Dialectic guide"></a>
-                    <div class="hubTileCaption">
-                        <div class="hubTileCaptionTitle hubTileCaptionDialectic">Fallout New Vegas / TTW</div>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Beta Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="./dialectic/installation.html">Install Guide</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="card hubIntroCard">
                 <h1 class="hubTitle">Meaningful AI Gameplay</h1>
                 <p class="hubIntro">Dwemer Dynamics is an AI focused mod team building AI frameworks into popular games.</p>
+            </div>
+
+            <div class="hubModShowcase" aria-label="Dwemer Dynamics mods">
+                <article class="hubModRow hubModRowChim" id="chimHub">
+                    <div class="hubModMedia">
+                        <a class="hubModArtwork" href="./chim/index.html" aria-label="Open CHIM guide">
+                            <img src="./img/chim_home_tile.jpg" alt="CHIM home artwork">
+                        </a>
+                        <div class="hubTileActions">
+                            <a class="hubTileActionButton hubTileActionButtonChim" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
+                            <a class="hubTileActionButton hubTileActionButtonChim" href="./chim/installation.html">Install Guide</a>
+                            <a class="hubTileActionButton hubTileActionButtonChim" href="./chim/index.html">Info</a>
+                        </div>
+                    </div>
+                    <div class="hubModInfo">
+                        <p class="hubModGame hubTileCaptionSkyrim">Skyrim Special Edition / Skyrim VR</p>
+                        <h2>CHIM</h2>
+                        <p class="hubModSummary">Talk to almost anyone in Skyrim, give characters a memory of your adventures, and let them take part in quests and unscripted scenes.</p>
+                        <ul>
+                            <li>Nearly anyone in Skyrim can join a conversation, from vanilla and modded NPCs to horses.</li>
+                            <li>NPCs remember conversations and events, build relationships, and use Background Life to travel, write letters, and spread rumors.</li>
+                            <li>Use Director Mode to arrange actions and scenes, and Oghma Infinium to give NPCs world and lore knowledge.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="hubModRow hubModRowStobe" id="stobeHub">
+                    <div class="hubModMedia">
+                        <a class="hubModArtwork" href="./stobe/index.html" aria-label="Open STOBE guide">
+                            <img src="./img/stobe_home_tile.jpg" alt="STOBE home artwork">
+                        </a>
+                        <div class="hubTileActions">
+                            <a class="hubTileActionButton hubTileActionButtonStobe" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
+                            <a class="hubTileActionButton hubTileActionButtonStobe" href="./stobe/installation.html">Install Guide</a>
+                            <a class="hubTileActionButton hubTileActionButtonStobe" href="./stobe/index.html">Info</a>
+                        </div>
+                    </div>
+                    <div class="hubModInfo">
+                        <p class="hubModGame hubTileCaptionStobe">Kenshi</p>
+                        <h2>STOBE</h2>
+                        <p class="hubModSummary">Bring conversations and character voices into Kenshi, with dialogue that follows what is happening to your squad and the world around it.</p>
+                        <ul>
+                            <li>NPCs remember what happens, keep diaries, and build relationships throughout your playthrough.</li>
+                            <li>NPCs react to changes in the world and to the player's actions.</li>
+                            <li>Give every NPC in Kenshi a voiced dialogue.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="hubModRow hubModRowDialectic" id="dialecticHub">
+                    <div class="hubModMedia">
+                        <a class="hubModArtwork" href="./dialectic/index.html" aria-label="Open Dialectic guide">
+                            <img src="./img/dialectic_home_tile.jpg" alt="Dialectic AI Framework for Fallout: New Vegas and Tale of Two Wastelands">
+                        </a>
+                        <div class="hubTileActions">
+                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Beta Download</a>
+                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="./dialectic/installation.html">Install Guide</a>
+                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="./dialectic/index.html">Info</a>
+                        </div>
+                    </div>
+                    <div class="hubModInfo">
+                        <p class="hubModGame hubTileCaptionDialectic">Fallout: New Vegas / TTW</p>
+                        <h2>Dialectic</h2>
+                        <p class="hubModSummary">Talk naturally with characters across Fallout: New Vegas and Tale of Two Wastelands, with dialogue presented through Fallout's own world and interface.</p>
+                        <ul>
+                            <li>Nearly anyone in Fallout can join a conversation, including humans, non-feral ghouls, super mutants, and robots.</li>
+                            <li>NPCs remember past conversations and events, and their memories stay aligned when you load an older save.</li>
+                            <li>Any character can follow you and carry out actions such as traveling, trading, fighting, and picking up items.</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
         </div>
 
