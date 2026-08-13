@@ -1,36 +1,9 @@
 (async () => {
     const track = document.getElementById("patronListTrack");
-    const shell = document.querySelector(".patron-shell");
-    const scroll = document.querySelector(".patron-list-scroll");
-    const header = document.querySelector(".header");
-    const footer = document.querySelector(".hubFooter");
-    const pageLayout = document.querySelector(".hubPageLayout");
 
-    if (!track || !shell || !scroll || !header || !footer || !pageLayout) {
+    if (!track) {
         return;
     }
-
-    const syncPatronShellLayout = () => {
-        const headerRect = header.getBoundingClientRect();
-        const footerRect = footer.getBoundingClientRect();
-        const layoutRect = pageLayout.getBoundingClientRect();
-
-        const docTop = window.scrollY + headerRect.bottom + 10;
-        const footerTop = window.scrollY + footerRect.top - 6;
-        const layoutTop = window.scrollY + layoutRect.top;
-        const relativeTop = Math.max(0, docTop - layoutTop);
-        const availableHeight = Math.max(160, footerTop - docTop);
-
-        shell.style.top = `${relativeTop}px`;
-        shell.style.height = `${availableHeight}px`;
-    };
-
-    const schedulePatronShellLayout = () => {
-        syncPatronShellLayout();
-    };
-
-    window.addEventListener("resize", schedulePatronShellLayout, { passive: true });
-    window.addEventListener("scroll", schedulePatronShellLayout, { passive: true });
 
     const tierOrder = ["Gold", "Silver", "Bronze"];
     const tierDisplayLabels = {
@@ -173,36 +146,20 @@
             return;
         }
 
-        const duration = Math.max(100, Math.min(350, Math.round((activeCount * 5) / 1.2)));
-        track.style.animationDuration = `${duration}s`;
-
         const fragment = document.createDocumentFragment();
-        for (let cycleIndex = 0; cycleIndex < 2; cycleIndex += 1) {
-            const cycle = document.createElement("div");
-            cycle.className = "patron-list-cycle";
-            if (cycleIndex === 1) {
-                cycle.setAttribute("aria-hidden", "true");
-            }
-
-            tierOrder.forEach((tier) => {
-                cycle.appendChild(buildTierSection(tier, tierMembers[tier]));
-            });
-
-            fragment.appendChild(cycle);
-        }
+        const cycle = document.createElement("div");
+        cycle.className = "patron-list-cycle";
+        tierOrder.forEach((tier) => {
+            cycle.appendChild(buildTierSection(tier, tierMembers[tier]));
+        });
+        fragment.appendChild(cycle);
 
         track.replaceChildren(fragment);
-        syncPatronShellLayout();
     } catch (error) {
         const empty = document.createElement("p");
         empty.className = "patron-empty";
         empty.textContent = "Patreon members unavailable right now.";
         track.replaceChildren(empty);
         console.error(error);
-        syncPatronShellLayout();
     }
-
-    window.setTimeout(syncPatronShellLayout, 50);
-    window.setTimeout(syncPatronShellLayout, 250);
-    window.setTimeout(syncPatronShellLayout, 600);
 })();
