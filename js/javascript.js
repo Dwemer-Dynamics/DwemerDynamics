@@ -24,7 +24,7 @@ const leftSidebarConfigs = {
         ],
         bottomLinks: [
             { href: "https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files", title: "Download", label: "Download", emoji: "\u2B07\uFE0F" },
-            { href: "https://www.youtube.com/watch?v=WoLrvcCIRys", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
+            { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
             { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
@@ -48,7 +48,7 @@ const leftSidebarConfigs = {
         ],
         bottomLinks: [
             { href: "https://www.nexusmods.com/kenshi/mods/1891?tab=files", title: "Download", label: "Download", emoji: "\u2B07\uFE0F" },
-            { href: "https://www.youtube.com/watch?v=vfhvblyOvqU", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
+            { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
             { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
@@ -73,6 +73,7 @@ const leftSidebarConfigs = {
         ],
         bottomLinks: [
             { href: "https://discord.gg/NDn9qud2ug", title: "Beta Download", label: "Beta Download", emoji: "\u2B07\uFE0F" },
+            { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
             { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
