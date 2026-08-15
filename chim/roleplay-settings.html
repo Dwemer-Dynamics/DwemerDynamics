@@ -82,9 +82,19 @@
                         <li><b>Profile control:</b> You can move an NPC onto a different CHIM profile, lock that profile so it stays fixed, or leave it more flexible.</li>
                         <li><b>Prompt Head Override:</b> A small copy control imports the currently active prompt head into the NPC override field, giving you a complete starting point before you make character-specific edits.</li>
                         <li><b>Roleplay features:</b> This page ties into dynamic profiles, middle-term memory, individual memory use, auto greetings, auto diaries, and background-life behavior.</li>
-                        <li><b>In-game editing:</b> Open <b>CHIM NPCs</b> from the Prisma CHIM menu to browse nearby or discovered NPCs and edit the same main profile sections without leaving Skyrim.</li>
+                        <li><b>In-game editing:</b> Open the <b>Settings</b> hub from the Prisma CHIM menu and pick the <b>CHIM NPCs</b> tab to browse nearby or discovered characters and edit the same main sections without leaving Skyrim.</li>
                         <li><b>Search and filtering:</b> You can filter by text, profile, favorites, locked NPCs, dynamic profile state, memory state, greeting behavior, and other useful NPC flags.</li>
                         <li><b>Import and cleanup:</b> The page also supports JSON import and export, bulk profile switching, relationship rebuilding, and cleanup for unlocked NPCs.</li>
+                    </ul>
+                    <p>
+                        <b>The NPC editor:</b> Selecting a character opens their editor, which is split into tabs so you can work on one part of them at a time.
+                    </p>
+                    <ul>
+                        <li><b>History:</b> Each NPC has their own event history, so you can read what CHIM currently remembers about that specific character rather than the whole playthrough.</li>
+                        <li><b>Event injection:</b> Write an event and send it to that NPC, or optionally to another character as well when you want both of them to know something happened.</li>
+                        <li><b>Removing recent events:</b> Recent events can be deleted from an NPC's history when something misfired or you would rather it never happened.</li>
+                        <li><b>Background Life Goals:</b> Set the routine and purpose that character follows while you are elsewhere. See the <a href="./background-life.html"><b>Background Life guide</b></a> for how goals shape their days.</li>
+                        <li><b>Background Life inception:</b> Plant an idea in a character's mind so their off-screen choices start moving toward it, instead of waiting for them to think of it on their own.</li>
                     </ul>
                 </div>
 
@@ -98,21 +108,24 @@
                         <li><b>Inventory:</b> Item names, descriptions, keywords, quantities, and BaseIDs can be included in prompt context according to your context-detail settings.</li>
                         <li><b>Concrete references:</b> Held and picked-up objects include a RefID when Skyrim exposes one, while stacked inventory and container entries use their shared BaseID.</li>
                         <li><b>VR held items:</b> With HIGGS, CHIM can tell NPCs what the player is actively holding in either hand and keep that state separate from ordinary inventory.</li>
+                        <li><b>Handing items over:</b> When CHIM recognizes what you are holding, you can give that item to an NPC and have them react to it. This works in both flatscreen and VR.</li>
                         <li><b>Pickup noise control:</b> The global minimum-value setting decides which collected items are important enough to create an event for the AI.</li>
                     </ul>
                 </div>
 
                 <div class="card" id="VanillaQuestDialogue">
-                    <h3>Vanilla Quest Dialogue</h3>
+                    <h3>Traditional Quests</h3>
                     <p>
-                        <b>What this does:</b> Supported vanilla quests can be started and advanced through ordinary AI conversation with the quest NPC. CHIM recognizes reviewed quest phrases and safely hands the result to Skyrim's native quest system.
+                        <b>What this does:</b> Supported Skyrim quests can be started and advanced through ordinary AI conversation with the quest NPC. You talk normally, and CHIM hands the result to Skyrim's own quest system.
                     </p>
                     <ul>
-                        <li><b>Natural starts:</b> Ask the relevant NPC about the subject, person, place, or work connected to a supported quest instead of selecting a traditional dialogue topic.</li>
-                        <li><b>Quest progression:</b> CHIM can perform reviewed stage, objective, item, and handoff steps while Skyrim remains the authority for the actual quest state.</li>
-                        <li><b>Safety controls:</b> The web settings can enable quest progression globally and restrict advancement to player conversations.</li>
-                        <li><b>Current scope:</b> This is a beta system for reviewed vanilla quests. It is not a general solution for modded or randomly generated radiant quests.</li>
-                        <li><b>Separate system:</b> Vanilla Quest Dialogue advances Skyrim quests. AI Quest Manager below creates CHIM-driven storylines and objectives.</li>
+                        <li><b>What is covered:</b> Vanilla and official DLC quests only by default. Radiant quests, the randomly generated ones like fetching an item from a nearby cave, are not supported.</li>
+                        <li><b>How to start one:</b> Speak plainly to the relevant NPC and use the words the quest is about, such as the person, place, item, or job involved, instead of picking a traditional dialogue topic.</li>
+                        <li><b>Seeing what is recognized:</b> Quest definitions live under <b>Immersion &#8594; AI Quest Manager &#8594; Traditional Quests</b>, so you can check which quests are covered and what wording they expect.</li>
+                        <li><b>Adding your own:</b> Modded quests can be added there too, as long as they are defined manually. Modded quests are not picked up automatically.</li>
+                        <li><b>Turning it off:</b> Traditional quest progression can be disabled through Global Settings if you would rather handle quests the normal way.</li>
+                        <li><b>Still in beta:</b> Skyrim always stays the authority on quest state, but expect the occasional miss.</li>
+                        <li><b>Separate system:</b> Traditional Quests advance existing Skyrim quests. AI Quest Manager below creates new CHIM-driven storylines and objectives.</li>
                     </ul>
                 </div>
 
@@ -125,8 +138,9 @@
                         <li><b>Scenario setup:</b> You can give the system a player suggestion and extra AI instructions before it generates a quest idea.</li>
                         <li><b>Quest flow:</b> The page supports generating a scenario, staging the storyline, starting the quest, requesting an end, and clearing stored quest state.</li>
                         <li><b>Live tracking:</b> It shows staged storylines, running quests, current pending steps, next objectives, and the NPCs involved.</li>
+                        <li><b>New characters:</b> If a generated quest needs someone who does not exist yet, the system can create a new NPC of a supported playable race to fill that role.</li>
                         <li><b>Reference tabs:</b> The quest hub also links to item types, NPC templates, outfits, and quest-system server logs.</li>
-                        <li><b>Important setup note:</b> The page expects you to use <b>Send All Locations</b> in the CHIM MCM first so the quest system has valid travel locations to work with.</li>
+                        <li><b>Important setup note:</b> Use <b>Send faction and location info</b> on the Tools page of the CHIM MCM first so the quest system knows where characters can travel.</li>
                     </ul>
                 </div>
 
@@ -274,6 +288,7 @@
                     <ul>
                         <li><b>Browsing:</b> Entries can be explored by person, by date, or as a larger full-history view.</li>
                         <li><b>Reading modes:</b> You can open a character's diary in a book-style reading view as well as the normal list view.</li>
+                        <li><b>Play Audio:</b> Entries can be read aloud from both the web page and Prisma in game, using the voice configured for whoever wrote the diary.</li>
                         <li><b>Physical diaries:</b> A profile can create one readable diary book in an NPC's inventory and keep it updated as new entries are written.</li>
                         <li><b>Latest entry context:</b> Profiles can include an NPC's newest diary entry in future conversations.</li>
                         <li><b>Export:</b> The page supports downloading the current diary view or exporting all diary entries.</li>

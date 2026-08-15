@@ -184,6 +184,7 @@
                     </p>
                     <ul>
                         <li><b>AI Voice Volume:</b> Main volume level for AI NPC speech.</li>
+                        <li><b>Narrator / Player TTS Volume (%):</b> Shared volume level for The Narrator and your own player voice, separate from ordinary NPC speech.</li>
                         <li><b>AI Voice Distance Scale:</b> Adjusts how voice loudness behaves with distance.</li>
                         <li><b>Interior Playback Dropoff (%):</b> Controls how aggressively indoor voice playback falls off with distance.</li>
                         <li><b>Exterior Playback Dropoff (%):</b> Controls how aggressively outdoor voice playback falls off with distance.</li>
@@ -238,15 +239,50 @@
                         <li><b>Browser (Beta):</b> Opens the in-game browser view for the HerikaServer web UI.</li>
                         <li><b>Logs View (Beta):</b> Opens the Prisma logs and diagnostics view.</li>
                     </ul>
+                    <p><b>Settings</b></p>
+                    <p>
+                        The Master Menu includes a <b>Settings</b> button that opens the main CHIM configuration pages in game, so you do not have to alt-tab to the web interface for common changes.
+                    </p>
+                    <ul>
+                        <li><b>Global Settings:</b> The playthrough-wide options, including connectors, context choices, and Background Life Trigger Time.</li>
+                        <li><b>Profiles:</b> The reusable behavior presets you assign to characters.</li>
+                        <li><b>CHIM NPCs:</b> The per-character editor for the NPCs you have met.</li>
+                    </ul>
                     <p><b>CHIM Chat controls</b></p>
                     <ul>
                         <li><b>Mode:</b> Switch between Standard, Whisper, Close, Shout, Narrator, Director, Cheat Mode, Auto Chat, and event-injection choices.</li>
+                        <li><b>Close:</b> A private, close-range conversation. Only characters very close to you can hear and respond.</li>
                         <li><b>Profile and LLM:</b> View the targeted NPC's profile, assign a different one, choose a conversation model, or use the profile's Random LLM setting.</li>
                         <li><b>Rechat Mode:</b> Change Tight, Conversational, Group, or Random follow-up behavior without opening the web interface.</li>
                         <li><b>Compact Chat:</b> Uses a shorter, cleaner conversation history when building the next response.</li>
-                        <li><b>Recent Context:</b> Shows the newest dialogue and important world events below the chat panel.</li>
                         <li><b>Book summaries:</b> Text chat can summarize the book currently open in Skyrim when used from the appropriate reading context.</li>
                     </ul>
+                    <p><b>One-shot mode shortcuts</b></p>
+                    <p>
+                        You can start a typed message with one of these prefixes to send that single message in a different mode. Your saved mode does not change, so the next message goes back to whatever you had selected.
+                    </p>
+                    <ul>
+                        <li><code>~</code> Whisper</li>
+                        <li><code>~~</code> Close</li>
+                        <li><code>!!</code> Shout</li>
+                        <li><code>@</code> Narrator</li>
+                        <li><code>&gt;</code> Director</li>
+                        <li><code>#</code> Cheat Mode</li>
+                        <li><code>**</code> Auto Chat</li>
+                        <li><code>((...))</code> Event Inject</li>
+                        <li><code>(...)</code> Inject &amp; Chat</li>
+                    </ul>
+                    <p><b>Recent Context</b></p>
+                    <p>
+                        Recent Context shows the newest dialogue and important world events below the chat panel. Entries are color-coded by type, so you can tell dialogue, actions, and world events apart at a glance.
+                    </p>
+                    <ul>
+                        <li>Delete a single event when one line is wrong or you would rather CHIM forgot it.</li>
+                        <li>Clear the latest 20, 50, or 100 visible events at once when a stretch of history needs to go.</li>
+                    </ul>
+                    <p>
+                        Individual events can also be deleted from <b>Conversation History</b> in the same way.
+                    </p>
                     <p><b>Prisma UI Settings</b></p>
                     <ul>
                         <li>Scale interactive Prisma menus from 100% to 200% for larger screens or easier reading.</li>

@@ -69,18 +69,41 @@
                     <p>
                         Background Life lets selected NPCs keep living their lives while you are somewhere else. They can travel, work, rest, send letters, and create new stories over time.
                     </p>
+                    <p>
+                        <b>This is an experimental system.</b> NPCs make their own choices, so some of those choices will be strange or unexpected. Treat it as a story generator rather than a schedule you control.
+                    </p>
                 </div>
 
                 <div class="card" id="GettingStarted">
                     <h3>Getting Started</h3>
                     <ol>
+                        <li>Choose the <b>Background Life</b> LLM under <b>Global Settings</b>. Background Life uses its own model rather than your normal conversation one.</li>
+                        <li>With Skyrim running, use <b>Send faction and location info</b> on the <b>Tools</b> page of the CHIM MCM. This usually only needs doing once per playthrough, and again after you add mods that bring new locations.</li>
                         <li>Open <b>Background Life</b> from the Roleplay section of the web interface or from the in-game CHIM menu.</li>
                         <li>Add the NPCs you want CHIM to follow.</li>
+                        <li>Give each of them clear <b>Background Life Goals</b>.</li>
                         <li>Keep playing normally while CHIM updates those NPCs in the background.</li>
                         <li>Use the map and history to see where they are and what they have been doing.</li>
                     </ol>
                     <p>
+                        Goals work best when they read like a short routine: where the character usually is, what they do with their days, and what they are working toward. Vague goals produce vague behavior.
+                    </p>
+                    <p>
                         Start with one or two NPCs while you get used to it. You can add more whenever you are ready.
+                    </p>
+                </div>
+
+                <div class="card" id="WhatNpcsDo">
+                    <h3>What NPCs Do</h3>
+                    <p>
+                        Every tracked NPC is either living a full background life or sitting in a lighter version of it. The <b>Actions</b> switch is what decides which.
+                    </p>
+                    <ul>
+                        <li><b>Actions on:</b> The NPC can travel, work, rest, shop, trade, socialize with other characters, produce or use items, write down their thoughts, send letters, and make progress on their goals.</li>
+                        <li><b>Actions off:</b> The NPC stays in a lightweight mode. Thoughts and letters can still arrive, but they will not travel or do anything else in the world.</li>
+                    </ul>
+                    <p>
+                        Lightweight mode is a good middle ground for characters you want to keep hearing from without having them wander away from where you left them.
                     </p>
                 </div>
 
@@ -90,11 +113,26 @@
                         <li><b>Actions:</b> Allows the NPC to choose and perform new Background Life activities.</li>
                         <li><b>Letters:</b> Allows the NPC to send letters as their off-screen story develops.</li>
                         <li><b>Tracking:</b> Keeps the NPC's map position updated when CHIM receives new location information.</li>
+                        <li><b>Hours Cooldown:</b> How much in-game time passes before Background Life runs again.</li>
+                        <li><b>Background Life Goals:</b> The routine and purpose the NPC works from when choosing what to do.</li>
                         <li><b>Trigger Action:</b> Asks the selected NPC to decide what they should do next.</li>
                         <li><b>Send Letter:</b> Asks the selected NPC to write and send a new letter.</li>
                     </ul>
                     <p>
+                        <b>Actions</b>, <b>Letters</b>, and <b>Tracking</b> also have bulk controls, so you can switch any of them on or off for every tracked NPC at once instead of editing characters one by one.
+                    </p>
+                    <p>
                         Select an NPC on the map or in the NPC list to review their current activity, recent events, letters, and inner thoughts.
+                    </p>
+                </div>
+
+                <div class="card" id="Timing">
+                    <h3>Timing</h3>
+                    <p>
+                        <b>Hours Cooldown</b> is the same timing setting shown as <b>Background Life Trigger Time</b> under Global Settings. The default is 24 hours.
+                    </p>
+                    <p>
+                        Around 8 hours is a good recommendation if you want noticeably more active lives, with characters moving, working, and writing more often. Shorter cooldowns mean more AI requests, so raise the value again if it starts to feel too busy.
                     </p>
                 </div>
 
@@ -105,6 +143,9 @@
                     </p>
                     <p>
                         The History tab records travel, work, rest, conversations, and other off-screen activity. The newest events appear first, making it easy to catch up after a long journey or time away from the game.
+                    </p>
+                    <p>
+                        Anything that happens far from you is written to this log rather than acted out. When a tracked NPC is nearby, the same behavior can play out in front of you instead, so you may walk in on them working, resting, or talking with someone.
                     </p>
                 </div>
 
@@ -130,8 +171,8 @@
                     <ul>
                         <li>Give the system time to develop stories instead of repeatedly forcing actions.</li>
                         <li>Use letters and rumors when you want off-screen events to reach the player naturally.</li>
-                        <li>If an NPC's position is stale, use <b>Send All Locations</b> from the CHIM MCM while Skyrim is running.</li>
-                        <li>Background Life Trigger Time is configured in hours under Global Settings. The default is 24 hours.</li>
+                        <li>If an NPC's position is stale, use <b>Send faction and location info</b> from the CHIM MCM while Skyrim is running.</li>
+                        <li>If a character keeps doing something odd, rewrite their Background Life Goals before changing anything else.</li>
                     </ul>
                 </div>
             </span>
