@@ -131,7 +131,7 @@
                 <div class="card" id="CustomService">
                     <h2 id="CustomConnector">Use Your Own LLM Provider</h2>
                     <p>
-                        OpenRouter is optional. CHIM can connect directly to Gemini and other hosted or local services through a Custom connector.
+                        OpenRouter is optional. CHIM can connect to other hosted or local services through a Custom connector.
                     </p>
 
                     <h3>Before You Start</h3>
@@ -147,13 +147,14 @@
                         <li>Open <b>API Keys</b>. Save the provider's key in a preset entry, or add a named custom key.</li>
                         <li>Open <b>Large Language Models</b>, select <b>New Connector</b>, then choose <b>Custom</b>.</li>
                         <li>Enter a clear <b>Name</b>, the complete <b>URL</b>, and the provider's exact <b>Model</b> name.</li>
-                        <li>Choose the matching <b>Driver</b>. Use <b>OpenAI JSON</b> for most OpenAI-compatible services or <b>Google OpenAI JSON</b> for Gemini's OpenAI-compatible API.</li>
+                        <li>Choose the matching <b>Driver</b>. Common choices include <b>OpenAI JSON</b> for OpenAI-compatible services, <b>Google OpenAI JSON</b> for Gemini, and <b>Groq JSON</b> for Groq.</li>
                         <li>Select the API key you saved.</li>
                         <li>Leave Reasoning Model Fix, Enforce JSON, JSON Schema, Prefill JSON, and Disable Streaming unchanged unless the provider specifically requires them.</li>
                         <li>Click <b>Save</b>, then <b>Test</b>. Do not assign the connector until the test succeeds.</li>
                     </ol>
 
-                    <h3>Direct Gemini Example</h3>
+                    <h3>Example: Google Gemini</h3>
+                    <p>Gemini is one example of a provider you can add manually:</p>
                     <ul>
                         <li><b>API key:</b> Save your Google AI Studio key under the Google preset or a named custom key.</li>
                         <li><b>URL:</b> <code>https://generativelanguage.googleapis.com/v1beta/openai/chat/completions</code></li>
@@ -161,7 +162,7 @@
                         <li><b>Model:</b> Use the exact current model name shown in Google AI Studio.</li>
                     </ul>
                     <p>
-                        The built-in Google connector is the simplest direct Gemini setup. Custom gives you manual control over the endpoint and model. See <a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank" rel="noopener noreferrer"><b>Google's OpenAI compatibility guide</b></a> for its current endpoint and model guidance.
+                        The built-in Google connector is simpler for most users. Use Custom when you want manual control over the endpoint and model. See <a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank" rel="noopener noreferrer"><b>Google's OpenAI compatibility guide</b></a> for its current endpoint and model guidance.
                     </p>
 
                     <h3>Use It in CHIM</h3>
