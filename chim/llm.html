@@ -129,11 +129,53 @@
                 </div>
 
                 <div class="card" id="CustomService">
-                    <h3>Custom</h3>
+                    <h2 id="CustomConnector">Use Your Own LLM Provider</h2>
                     <p>
-                        Custom is the fallback option for bringing in some other AI service that is not already listed here. Use it when you already know your provider supports OpenAI-style connections and you want to plug it into CHIM manually.
+                        OpenRouter is optional. CHIM can connect directly to Gemini and other hosted or local services through a Custom connector.
                     </p>
-                    <p><a href="https://platform.openai.com/docs/api-reference/chat/create" target="_blank" rel="noopener noreferrer"><b>OpenAI-Compatible Chat API</b></a></p>
+
+                    <h3>Before You Start</h3>
+                    <p>Get these details from your provider:</p>
+                    <ul>
+                        <li>An API key, unless the service runs locally without one.</li>
+                        <li>The complete chat-completions URL.</li>
+                        <li>The exact model name the provider expects.</li>
+                    </ul>
+
+                    <h3>Create the Connector</h3>
+                    <ol>
+                        <li>Open <b>API Keys</b>. Save the provider's key in a preset entry, or add a named custom key.</li>
+                        <li>Open <b>Large Language Models</b>, select <b>New Connector</b>, then choose <b>Custom</b>.</li>
+                        <li>Enter a clear <b>Name</b>, the complete <b>URL</b>, and the provider's exact <b>Model</b> name.</li>
+                        <li>Choose the matching <b>Driver</b>. Use <b>OpenAI JSON</b> for most OpenAI-compatible services or <b>Google OpenAI JSON</b> for Gemini's OpenAI-compatible API.</li>
+                        <li>Select the API key you saved.</li>
+                        <li>Leave Reasoning Model Fix, Enforce JSON, JSON Schema, Prefill JSON, and Disable Streaming unchanged unless the provider specifically requires them.</li>
+                        <li>Click <b>Save</b>, then <b>Test</b>. Do not assign the connector until the test succeeds.</li>
+                    </ol>
+
+                    <h3>Direct Gemini Example</h3>
+                    <ul>
+                        <li><b>API key:</b> Save your Google AI Studio key under the Google preset or a named custom key.</li>
+                        <li><b>URL:</b> <code>https://generativelanguage.googleapis.com/v1beta/openai/chat/completions</code></li>
+                        <li><b>Driver:</b> Google OpenAI JSON</li>
+                        <li><b>Model:</b> Use the exact current model name shown in Google AI Studio.</li>
+                    </ul>
+                    <p>
+                        The built-in Google connector is the simplest direct Gemini setup. Custom gives you manual control over the endpoint and model. See <a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank" rel="noopener noreferrer"><b>Google's OpenAI compatibility guide</b></a> for its current endpoint and model guidance.
+                    </p>
+
+                    <h3>Use It in CHIM</h3>
+                    <p>
+                        Open <b>Profiles</b> and select the connector for Standard, Fast, Powerful, Experimental, Diary, or Formatter. For shared work such as summaries, memories, Background Life, Director Mode, relationships, or Oghma, assign it under <b>Global Settings</b> - <b>Global Connectors</b>.
+                    </p>
+
+                    <h3>If the Test Fails</h3>
+                    <ul>
+                        <li><b>401 or 403:</b> Check the selected API key and the provider account.</li>
+                        <li><b>404:</b> Check the full URL and model name.</li>
+                        <li><b>No usable response:</b> Make sure the selected driver matches the provider's response format.</li>
+                        <li><b>Invalid JSON:</b> Try a model that handles structured responses well. Only enable the advanced JSON options when the provider supports them.</li>
+                    </ul>
                 </div>
             </span>
         </div>
