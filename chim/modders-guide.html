@@ -446,7 +446,7 @@ foreach ($argv as $arg) {
                         On install, the generic installer downloads the latest release asset, extracts it into <code>HerikaServer/ext/&lt;PACKAGE_NAME&gt;</code>, and runs any plugin migrations it finds. It also tracks which migrations have already been run, so updates can add new ones safely.
                     </p>
                     <p>
-                        If you want the plugin to appear in the built-in repository list, it also needs an entry in the plugin repository data used by the plugin manager.
+                        If you want the plugin to appear in the built-in repository list, it also needs an entry in the plugin repository data used by the plugin manager. See <a href="#SubmittingPluginToRepository">Submitting Your Plugin To The CHIM Repository</a> below for exactly where to submit that entry.
                     </p>
 
                     <p><b>Bundling a server plugin with a Skyrim mod</b></p>
@@ -458,6 +458,58 @@ foreach ($argv as $arg) {
                         <li>Use a versioned <code>.zip</code> or <code>.dwpkg</code> package containing the complete server plugin.</li>
                         <li>When Skyrim starts, CHIM uploads and installs the package only when the connected server needs that version.</li>
                     </ul>
+
+                    <h3 id="SubmittingPluginToRepository">Submitting Your Plugin To The CHIM Repository</h3>
+                    <p>
+                        The built-in repository list is a catalog file that ships inside HerikaServer. To get your plugin listed there, you open a pull request that adds one entry to that file.
+                    </p>
+                    <ul>
+                        <li><b>Where to open the pull request:</b> <a href="https://github.com/abeiro/HerikaServer" target="_blank" rel="noopener noreferrer">https://github.com/abeiro/HerikaServer</a></li>
+                        <li><b>Branch to target:</b> <code>unstable</code></li>
+                        <li><b>File to edit:</b> <code>ui/data/plugin_repository.json</code></li>
+                    </ul>
+                    <p>
+                        Your plugin still lives in your own GitHub repo. The catalog entry only tells CHIM what to show and where to download it from.
+                    </p>
+                    <p>
+                        Add one new key under <code>plugins</code>, using the same fields the existing entries use:
+                    </p>
+                    <pre><code>"your-plugin-id": {
+    "name": "Your-Plugin-Name",
+    "description": "One short sentence shown in the plugin manager.",
+    "git_repo": "your-github-user/Your-Plugin-Name",
+    "github_url": "https://github.com/your-github-user/Your-Plugin-Name",
+    "mod_download_url": "",
+    "default_channel": "main",
+    "channels": {
+        "main": {
+            "label": "Live",
+            "branch": "main",
+            "package_source": "release",
+            "package_urls": [
+                "https://github.com/your-github-user/Your-Plugin-Name/releases/latest/download/Your-Plugin-Name.tar.gz",
+                "https://github.com/your-github-user/Your-Plugin-Name/releases/latest/download/Your-Plugin-Name.tar"
+            ]
+        }
+    }
+}</code></pre>
+                    <p>
+                        A few notes on the fields:
+                    </p>
+                    <ul>
+                        <li><code>name</code> should match the name in your root <code>manifest.json</code> and the folder CHIM installs under <code>HerikaServer/ext</code>.</li>
+                        <li><code>mod_download_url</code> is optional. Leave it as an empty string unless your plugin also has a matching Skyrim mod download.</li>
+                        <li>Keep <code>default_channel</code> set to <code>main</code>, and always ship a <code>main</code> channel with <code>package_urls</code> pointing at your release assets. Extra channels such as <code>dev</code> are optional.</li>
+                    </ul>
+                    <p><b>Submission checklist</b></p>
+                    <ol>
+                        <li>Make your plugin repo public, with a valid <code>manifest.json</code> in the repo root.</li>
+                        <li>Publish a GitHub release with the <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> or <code>&lt;PACKAGE_NAME&gt;.tar</code> asset attached.</li>
+                        <li>Install that package on a clean CHIM server and confirm the plugin loads and any migrations run.</li>
+                        <li>Add your entry to <code>ui/data/plugin_repository.json</code>.</li>
+                        <li>Open a pull request against the <code>unstable</code> branch of <code>abeiro/HerikaServer</code>.</li>
+                        <li>In the pull request description, link your repo and your release, and say what you tested.</li>
+                    </ol>
 
                     <h3>Database Migrations</h3>
                     <p>
