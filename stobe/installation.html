@@ -132,24 +132,29 @@
 
                 <div class="card" id="UpdateDistro">
                     <ul>
-                        <li>Click <b>Update Launcher</b> first.</li>
-                        <li>Wait for it to restart, then click <b>Update</b>.</li>
+                        <li>The launcher has four tabs along the top: <b>MODS</b>, <b>COMPONENTS</b>, <b>SETTINGS</b>, and <b>LOGS</b>.</li>
+                        <li>Update the launcher first. The update button sits in the <b>bottom-left corner</b> of the launcher and reads <b>Update Launcher</b> when an update is waiting, or <b>Up To Date</b> when there is nothing to install.</li>
+                        <li>If it did update, wait for the launcher to restart before carrying on.</li>
+                        <li>Open the <b>MODS</b> tab, select <b>STOBE</b>, and make sure the <b>Updates</b> checkbox next to it stays ticked. That checkbox is what includes STOBE when updates run.</li>
+                        <li>Click <b>Update Mods</b> in the top bar and wait for it to finish.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 620px;">
-                        <img src="../img/installation/distro_launcher_update.png" alt="DwemerDistro launcher update">
-                        <figcaption>Make sure the Launcher and Mod is fully updated.</figcaption>
+                    <figure class="guide-figure" style="max-width: 760px;">
+                        <img src="../img/installation/launcher_update_controls.jpg" alt="The DwemerDistro launcher on the MODS tab. Along the top of the window are the MODS, COMPONENTS, SETTINGS and LOGS tabs, and on the right of that same bar are the Update Mods, Start Server, Stop and Force Stop buttons. Below the artwork of the selected mod is an Updates checkbox, which is ticked. In the bottom-left corner of the sidebar is the launcher update button, reading Up To Date because this launcher is already current. This example has CHIM selected.">
+                        <figcaption>The MODS tab and its update controls, shown here with CHIM selected. Select STOBE instead, keep its Updates checkbox ticked, then click Update Mods in the top bar. The button in the bottom-left corner updates the launcher itself, and reads Up To Date when no launcher update is available.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="InstallComponents">
                     <ul>
-                        <li>Under <b>Install Components</b> install any you wish to use.</li>
+                        <li>Open the <b>COMPONENTS</b> tab in the top bar. It opens as a page inside the launcher window, not as a separate popup, and the list scrolls, so keep scrolling to see every component.</li>
+                        <li>Find a component you want and click the button on its card. That button reads <b>Install</b> when the component is not on your PC yet, and <b>Reinstall</b> when it is already installed.</li>
+                        <li>Let each install finish before starting the next one.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 560px;">
-                        <img src="../img/installation/new_comp_menu.png" alt="The Components Menu">
-                        <figcaption>The Components Menu</figcaption>
+                    <figure class="guide-figure" style="max-width: 760px;">
+                        <img src="../img/installation/launcher_components_page.png" alt="The DwemerDistro launcher on the COMPONENTS tab. The component list fills the middle of the window as a scrollable page with a scrollbar down its right edge, rather than opening as a separate popup window. Each entry, such as Pocket-TTS (GPU / audio.cpp), Pocket-TTS (CPU / Python) and Chatterbox, has a short description, a status label reading Installed, and its own action button. Every button here reads Reinstall because this PC already has those components installed.">
+                        <figcaption>Install the components STOBE needs from the COMPONENTS tab, which is a scrollable page inside the launcher. A component's button reads Install the first time and Reinstall afterwards, which is why every button reads Reinstall on the already-configured PC shown here.</figcaption>
                     </figure>
 
                     <blockquote class="guide-note note-tip">
@@ -172,8 +177,9 @@
 
                 <div class="card" id="StartServer">
                     <ul>
-                        <li>Once ready, click <b>Start Server</b>.</li>
+                        <li>Once ready, click <b>Start Server</b> in the top bar.</li>
                         <li>Your default web browser should open a new tab taking you to the <b>Dashboard</b>.</li>
+                        <li>If no tab opens, go back to the <b>MODS</b> tab, select <b>STOBE</b>, and click <b>STOBE Webpage</b>. If the server is stopped, the launcher asks whether to start it and opens the page once the server is ready.</li>
                     </ul>
 
                     <figure class="guide-figure" style="max-width: 620px;">
@@ -231,7 +237,7 @@
                 <div class="card-red" id="UpdateFlow">
                     <h3>READ ME</h3>
                     <p>
-                        For normal updates, restart the DwemerDistro launcher, click <b>Mod Update</b>, and install the latest STOBE file from Nexus when a new game-plugin file is included. You do not need to reinstall DwemerDistro unless the release notes say so.
+                        For normal updates, open the DwemerDistro launcher, select <b>STOBE</b> on the <b>MODS</b> tab with its <b>Updates</b> checkbox ticked, click <b>Update Mods</b> in the top bar, and install the latest STOBE file from Nexus when a new game-plugin file is included. You do not need to reinstall DwemerDistro unless the release notes say so.
                     </p>
                 </div>
             </span>
