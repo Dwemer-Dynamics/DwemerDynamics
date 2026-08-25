@@ -52,13 +52,14 @@
             <div class="card" id="UpdateDistro">
                 <h2>Install DialecticServer</h2>
                 <ul>
-                    <li>Open the DwemerDistro launcher.</li>
-                    <li>Click <b>Update Launcher</b> first and allow it to restart.</li>
-                    <li>Click <b>Update</b> and ensure <b>DialecticServer</b> is included.</li>
-                    <li>Install any local TTS or STT components you intend to use.</li>
-                    <li>Click <b>Start Server</b>, then open Dialectic from the Dwemer Dashboard.</li>
+                    <li>Open the DwemerDistro launcher. It has four tabs along the top: <b>MODS</b>, <b>COMPONENTS</b>, <b>SETTINGS</b>, and <b>LOGS</b>.</li>
+                    <li>Update the launcher first. The update button sits in the <b>bottom-left corner</b> and reads <b>Update Launcher</b> when an update is waiting, or <b>Up To Date</b> when there is nothing to install. Allow it to restart if it updates.</li>
+                    <li>Open the <b>MODS</b> tab, select <b>DIALECTIC</b>, and make sure the <b>Updates</b> checkbox next to it stays ticked so DialecticServer is included when updates run.</li>
+                    <li>Click <b>Update Mods</b> in the top bar and wait for it to finish.</li>
+                    <li>Open the <b>COMPONENTS</b> tab and install any local TTS or STT components you intend to use. Each component's button reads <b>Install</b> the first time and <b>Reinstall</b> once it is already installed.</li>
+                    <li>Click <b>Start Server</b> in the top bar, then open Dialectic from the Dwemer Dashboard. If the Dashboard does not open, return to the <b>MODS</b> tab, select <b>DIALECTIC</b>, and click <b>DIALECTIC Webpage</b>. If the server is stopped, the launcher asks whether to start it and opens the page once the server is ready.</li>
                 </ul>
-                <figure class="guide-figure" style="max-width: 620px;"><img src="../img/installation/distro_launcher_update.png" alt="DwemerDistro launcher update controls"><figcaption>Update the launcher before updating the installed server components.</figcaption></figure>
+                <figure class="guide-figure" style="max-width: 760px;"><img src="../img/installation/launcher_update_controls.jpg" alt="The DwemerDistro launcher on the MODS tab. Along the top of the window are the MODS, COMPONENTS, SETTINGS and LOGS tabs, and on the right of that same bar are the Update Mods, Start Server, Stop and Force Stop buttons. Below the artwork of the selected mod is an Updates checkbox, which is ticked. In the bottom-left corner of the sidebar is the launcher update button, reading Up To Date because this launcher is already current. This example has CHIM selected."><figcaption>The MODS tab and its update controls, shown here with CHIM selected. Select DIALECTIC instead, keep its Updates checkbox ticked, then click Update Mods in the top bar. The button in the bottom-left corner updates the launcher itself, and reads Up To Date when no launcher update is available.</figcaption></figure>
                 <blockquote class="guide-note note-tip">
                     <p><b>Recommended first setup:</b> OpenRouter for the LLM, PocketTTS or Chatterbox for voice, and Parakeet for microphone speech-to-text. OpenRouter is optional.</p>
                     <p>PocketTTS and Chatterbox require accepting their model terms on Hugging Face before installation.</p>
@@ -120,7 +121,7 @@
 
             <div class="card" id="Updates">
                 <h2>Updating</h2>
-                <p>Use the DwemerDistro launcher <b>Update</b> button for DialecticServer updates. Install the latest Dialectic beta archive over the existing Dialectic mod.</p>
+                <p>For DialecticServer updates, select <b>DIALECTIC</b> on the launcher's <b>MODS</b> tab with its <b>Updates</b> checkbox ticked, then click <b>Update Mods</b> in the top bar. Install the latest Dialectic beta archive over the existing Dialectic mod.</p>
                 <p>Do not replace Dialectic Custom during a normal update. The server and game plugin should remain on matching release versions.</p>
             </div>
         </span></div>

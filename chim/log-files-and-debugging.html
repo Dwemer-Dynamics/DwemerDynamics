@@ -68,7 +68,7 @@
                     <h1>CHIM Log Files</h1>
                     <p>
                         When CHIM is failing, the fastest fix is usually finding the right log first instead of guessing.
-                        This page keeps the useful log locations, but uses the actual current HerikaServer and DwemerDistro launcher UI labels from the codebase.
+                        This page keeps the useful log locations, and names the buttons the way HerikaServer and the DwemerDistro launcher label them.
                     </p>
                 </div>
 
@@ -100,18 +100,18 @@
                 <div class="card" id="ServerLogs">
                     <h3>CHIM Server Logs</h3>
                     <p>
-                        The current codebase exposes the main CHIM server logs through two real entry points:
+                        There are two ways into the main CHIM server logs:
                     </p>
                     <ol>
                         <li><b>HerikaServer:</b> <b>Control Panel</b> then the <b>Server Logs</b> tab.</li>
-                        <li><b>Distro Launcher:</b> <b>Debugging</b> then <b>Create Diagnostic File</b>.</li>
+                        <li><b>Distro Launcher:</b> open the <b>LOGS</b> tab, click <b>Generate Distro Debugging Logs</b> at the top of the page, and confirm when prompted.</li>
                     </ol>
                     <p>
-                        The HerikaServer side is embedding the CHIM distro debugger from the dashboard, and the launcher diagnostic export writes a summary file to:
+                        The HerikaServer side embeds the CHIM distro debugger from the dashboard. The launcher writes its diagnostic file to:
                     </p>
                     <p><code>Desktop\DwemerDistro-Diagnostics\diagnostics-YYYYMMDD-HHMMSS.txt</code></p>
                     <p>
-                        The CHIM log viewer code is currently reading from the HerikaServer log folder and surfaces these files:
+                        The CHIM log viewer reads the HerikaServer log folder and shows these files:
                     </p>
                     <ol>
                         <li><code>apache_error.log</code></li>
@@ -127,7 +127,7 @@
                         <li><code>service.log</code></li>
                     </ol>
                     <p>
-                        In the launcher code, there are also direct live tail commands for Apache, XTTS, Chatterbox, PocketTTS, MeloTTS, Piper, localWhisper, and Parakeet logs. So if the launcher or server log views are not enough, the debugging tools are already wired to those service-specific logs too.
+                        The launcher's <b>LOGS</b> tab also has a <b>LIVE LOGS</b> section below the diagnostic button. Each button there opens one service log live in a terminal window: <b>Dwemer Distro XTTS</b>, <b>Chatterbox</b>, <b>PocketTTS</b>, <b>MeloTTS</b>, <b>Piper</b>, <b>LocalWhisper</b>, <b>Parakeet</b>, and <b>Apache</b>. Use these when the diagnostic file and the server log views are not enough and you want to watch a single service while you reproduce the problem.
                     </p>
                 </div>
 
@@ -138,7 +138,7 @@
                     </p>
                     <ol>
                         <li><b>AIAgent.log</b> from the location above.</li>
-                        <li>A <b>DwemerDistro diagnostic file</b>, made with <b>Debugging</b> then <b>Create Diagnostic File</b> in the Distro Launcher.</li>
+                        <li>A <b>DwemerDistro diagnostic file</b>, made in the Distro Launcher from the <b>LOGS</b> tab with <b>Generate Distro Debugging Logs</b>, confirming when prompted.</li>
                         <li>The <b>NPC name</b> or <b>quest name</b> the problem happened with.</li>
                         <li>The <b>quest stage or action that failed</b>, and what you expected to happen instead.</li>
                         <li>For Background Life, the NPC's <b>Background Life Goals</b> and their <b>recent history</b> entries from around the time it went wrong.</li>
