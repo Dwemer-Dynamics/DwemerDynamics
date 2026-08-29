@@ -161,6 +161,10 @@
                     <p>
                         Installed plugins live under <code>HerikaServer/ext/&lt;plugin-name&gt;</code>. The server scans the <code>ext</code> folder and loads plugin files by filename, so your plugin does not need one giant entry script for everything.
                     </p>
+                    <p>
+                        The CHIM server itself is open source, so you can read the <code>ext</code> loader and the hook points listed below directly.
+                    </p>
+                    <p><a href="https://github.com/Dwemer-Dynamics/HerikaServer" target="_blank" rel="noopener noreferrer"><b>HerikaServer Source Code</b></a></p>
 
                     <h3>Manifest File</h3>
                     <p>
@@ -464,7 +468,7 @@ foreach ($argv as $arg) {
                         The built-in repository list is a catalog file that ships inside HerikaServer. To get your plugin listed there, you open a pull request that adds one entry to that file.
                     </p>
                     <ul>
-                        <li><b>Where to open the pull request:</b> <a href="https://github.com/abeiro/HerikaServer" target="_blank" rel="noopener noreferrer">https://github.com/abeiro/HerikaServer</a></li>
+                        <li><b>Where to open the pull request:</b> <a href="https://github.com/Dwemer-Dynamics/HerikaServer" target="_blank" rel="noopener noreferrer">https://github.com/Dwemer-Dynamics/HerikaServer</a></li>
                         <li><b>Branch to target:</b> <code>unstable</code></li>
                         <li><b>File to edit:</b> <code>ui/data/plugin_repository.json</code></li>
                     </ul>
@@ -507,7 +511,7 @@ foreach ($argv as $arg) {
                         <li>Publish a GitHub release with the <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> or <code>&lt;PACKAGE_NAME&gt;.tar</code> asset attached.</li>
                         <li>Install that package on a clean CHIM server and confirm the plugin loads and any migrations run.</li>
                         <li>Add your entry to <code>ui/data/plugin_repository.json</code>.</li>
-                        <li>Open a pull request against the <code>unstable</code> branch of <code>abeiro/HerikaServer</code>.</li>
+                        <li>Open a pull request against the <code>unstable</code> branch of <code>Dwemer-Dynamics/HerikaServer</code>.</li>
                         <li>In the pull request description, link your repo and your release, and say what you tested.</li>
                     </ol>
 
