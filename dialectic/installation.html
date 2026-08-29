@@ -7,7 +7,7 @@
     <meta name="description" content="Install Dialectic and DialecticServer for Fallout: New Vegas or Tale of Two Wastelands.">
     <title>Dialectic Installation | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="../img/dialectic-icon.png">
-    <script src="../js/javascript.js?v=20260714a"></script>
+    <script src="../js/javascript.js?v=20260828a"></script>
     <link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="../css/cards.css"><link rel="stylesheet" href="../css/header.css"><link rel="stylesheet" href="../css/progressBar.css"><link rel="stylesheet" href="../css/sidebar.css"><link rel="stylesheet" href="../css/guide.css">
 </head>
 <body class="theme dialectic-theme copyable-guide">
@@ -18,7 +18,7 @@
             <p class="pageLinks">
                 <a href="../index.html">Dwemer Dynamics Home</a><a href="./index.html">Overview</a><a href="./installation.html">Installation</a><a href="./configuration.html">Configuration</a><a href="./roleplay-settings.html">Roleplay Settings</a><a href="./ingame-settings.html">Fallout Settings</a><a href="./llm.html">Large Language Models</a><a href="./tts.html">Text-to-Speech</a><a href="./stt.html">Speech-to-Text</a><a href="./modders-guide.html">Modders Guide</a><a href="./faq.html">FAQ</a><a href="./remote-hosting-guide.html">Remote Hosting Guide</a><a href="./linux-setup-guide.html">Linux Setup Guide</a><a href="./log-files-and-debugging.html">Log Files</a>
             </p><p class="sidebar-padder"></p><hr>
-            <p class="sidebar-bottom"><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#11015;&#65039;</span><span>Beta Download</span></a><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/discord.png" alt="Discord"><span>Discord</span></a><a href="https://www.youtube.com/watch?v=Sf0m0FIUZuw" title="Video Guide" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#127909;</span><span>Video Guide</span></a><a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/youtube.png" alt="YouTube"><span>YouTube</span></a><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/patreon.png" alt="Patreon"><span>Patreon</span></a></p>
+            <p class="sidebar-bottom"><a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#11015;&#65039;</span><span>Download on Nexus</span></a><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/discord.png" alt="Discord"><span>Discord</span></a><a href="https://www.youtube.com/watch?v=Sf0m0FIUZuw" title="Video Guide" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#127909;</span><span>Video Guide</span></a><a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/youtube.png" alt="YouTube"><span>YouTube</span></a><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/patreon.png" alt="Patreon"><span>Patreon</span></a></p>
         </div>
 
         <div class="content"><span id="Installation" class="section">
@@ -29,11 +29,11 @@
                 </div>
                 <p class="guide-video-link"><a href="https://www.youtube.com/watch?v=Sf0m0FIUZuw" target="_blank" rel="noopener noreferrer">Open the installation video on YouTube</a></p>
                 <p>This guide installs DialecticServer through DwemerDistro and the Dialectic game mod through Mod Organizer 2.</p>
-                <p>The current Dialectic build is a beta distributed through the Dwemer Dynamics Discord.</p>
+                <p>Dialectic 1.0.0 is released on Nexus Mods. Download its archives there, then install them with Mod Organizer 2.</p>
             </div>
 
-            <blockquote class="guide-note note-warning">
-                <p><b>Beta download:</b> Join the <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Dwemer Dynamics Discord</a> and open <b>#&#127920;&#128190;dialectic-beta-announcements</b> for the current mod archive and release notes.</p>
+            <blockquote class="guide-note note-tip">
+                <p><b>Download:</b> Get the current Dialectic archives from <a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Dialectic on Nexus Mods</a>. The main archive and the separate Custom INI archive are both listed there.</p>
             </blockquote>
 
             <div class="card" id="InstallDistro">
@@ -91,19 +91,30 @@
                 <p><a href="https://www.nexusmods.com/newvegas/mods/57174" target="_blank" rel="noopener noreferrer"><b>UIO - User Interface Organizer</b></a></p>
                 <p><a href="https://aka.ms/vs/17/release/vc_redist.x86.exe" target="_blank" rel="noopener noreferrer"><b>Microsoft Visual C++ 2015-2022 Redistributable (x86)</b></a></p>
                 <p>The x86 package is required because Fallout: New Vegas is a 32-bit game, even on 64-bit Windows.</p>
+                <p><b>Optional:</b> <a href="https://www.nexusmods.com/newvegas/mods/73160" target="_blank" rel="noopener noreferrer"><b>SUP NVSE 8.55 or newer</b></a>. It is only required for PipVision and is not needed for dialogue, voices, or actions.</p>
             </div>
 
             <div class="card" id="InstallMod">
                 <h2>Install Dialectic</h2>
                 <ol>
-                    <li>Download the latest archives from <b>#&#127920;&#128190;dialectic-beta-announcements</b>.</li>
-                    <li>Install <b>Dialectic</b> with Mod Organizer 2.</li>
-                    <li>Install <b>Dialectic Custom</b> as a separate mod after Dialectic.</li>
+                    <li>Download the main Dialectic archive and the Custom INI archive from <a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Nexus Mods</a>.</li>
+                    <li>Install the <b>main Dialectic archive</b> first as its own mod in Mod Organizer 2.</li>
+                    <li>Install the <b>Custom INI archive</b> as a <b>separate</b> Mod Organizer 2 mod, placed after Dialectic so it wins the conflict.</li>
                     <li>Enable <code>Dialectic.esp</code> in the right-hand plugin list.</li>
                     <li>Keep Dialectic late enough in the left-hand mod order that its own DLL, scripts, MCM files, and interface files are not overwritten.</li>
                 </ol>
                 <p>Fallout: New Vegas is required. Tale of Two Wastelands is supported but is not a master requirement for <code>Dialectic.esp</code>.</p>
-                <p>User settings belong in <code>Data/NVSE/Plugins/dialectic_custom.ini</code>. Keeping that file in Dialectic Custom prevents normal updates from replacing personal settings.</p>
+                <p>User settings belong in <code>Data/NVSE/Plugins/dialectic_custom.ini</code>. Keeping that file in the separate Custom INI mod is what stops a later update of the main archive from replacing your personal settings.</p>
+            </div>
+
+            <div class="card" id="OptionalDownloads">
+                <h2>Optional Downloads</h2>
+                <p>The Dialectic <a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Nexus Mods page</a> can also offer extras. None of them are needed for the core installation.</p>
+                <ul>
+                    <li><b>Herika follower:</b> an optional companion you can add to a playthrough.</li>
+                    <li><b>Biography CSV samples:</b> optional example biography data for the <a href="./modders-guide.html#BiographyFormat">biography CSV format</a>.</li>
+                </ul>
+                <p>Check the page's Files section for what is currently available, then install any extra as its own Mod Organizer 2 mod.</p>
             </div>
 
             <div class="card" id="FirstLaunch">
@@ -120,8 +131,9 @@
 
             <div class="card" id="Updates">
                 <h2>Updating</h2>
-                <p>Use the DwemerDistro launcher <b>Update</b> button for DialecticServer updates. Install the latest Dialectic beta archive over the existing Dialectic mod.</p>
-                <p>Do not replace Dialectic Custom during a normal update. The server and game plugin should remain on matching release versions.</p>
+                <p>Use the DwemerDistro launcher <b>Update</b> button for DialecticServer updates.</p>
+                <p>For the game mod, download the latest main archive from <a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Nexus Mods</a> and install it over the existing Dialectic mod.</p>
+                <p>Leave the separate Custom INI mod in place during a normal update so your <code>dialectic_custom.ini</code> settings survive. Only reinstall it if the Nexus page says the Custom INI archive itself changed. The server and game plugin should remain on matching release versions.</p>
             </div>
         </span></div>
     </div>

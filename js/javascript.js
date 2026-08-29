@@ -72,7 +72,7 @@ const leftSidebarConfigs = {
             { href: "./log-files-and-debugging.html", title: "Log Files", label: "Log Files", emoji: "\uD83D\uDCC4" }
         ],
         bottomLinks: [
-            { href: "https://discord.gg/NDn9qud2ug", title: "Beta Download", label: "Beta Download", emoji: "\u2B07\uFE0F" },
+            { href: "https://www.nexusmods.com/newvegas/mods/99233", title: "Download on Nexus", label: "Download on Nexus", emoji: "\u2B07\uFE0F" },
             { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
