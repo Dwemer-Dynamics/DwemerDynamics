@@ -136,25 +136,43 @@
                 </blockquote>
 
                 <div class="card" id="UpdateDistro">
+                    <h2>Set Up CHIM in DwemerDistro</h2>
                     <ul>
-                        <li>Click <b>Update Launcher</b> first.</li>
-                        <li>Wait for it to restart, then click <b>Update</b>.</li>
+                        <li>On Quickstart Step 2, click <b>Update Distro</b>.</li>
+                        <li>Wait for the update to finish, then click <b>Next</b>.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 620px;">
-                        <img src="../img/installation/distro_launcher_update.png" alt="DwemerDistro launcher update">
-                        <figcaption>Make sure the Launcher and Mod is fully updated.</figcaption>
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-update-distro.png" alt="DwemerDistro Quickstart Update Distro step">
+                        <figcaption>Update the distro before choosing which mods to install.</figcaption>
+                    </figure>
+
+                    <ul>
+                        <li>Step 3 opens with no mods selected.</li>
+                        <li>Select <b>CHIM</b>, then click <b>Install Selected Mods</b>.</li>
+                        <li>Wait for CHIM to finish installing before continuing.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-select-none.png" alt="DwemerDistro Quickstart Choose Your Mods screen with no mods selected">
+                        <figcaption>Choose Your Mods starts with nothing selected.</figcaption>
+                    </figure>
+
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-select-chim.png" alt="DwemerDistro Quickstart with CHIM selected for installation">
+                        <figcaption>Select CHIM, then install the selected mod.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="InstallComponents">
                     <ul>
-                        <li>Under <b>Install Components</b> install any you wish to use.</li>
+                        <li>Step 4 lists the components detected by DwemerDistro.</li>
+                        <li>Review the green status checks, then click <b>Continue to Start Server</b>.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 560px;">
-                        <img src="../img/installation/new_comp_menu.png" alt="The Components Menu">
-                        <figcaption>The Components Menu</figcaption>
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-components.png" alt="DwemerDistro Quickstart Components step with installed component status checks">
+                        <figcaption>Confirm the components are ready before starting the server.</figcaption>
                     </figure>
 
                     <blockquote class="guide-note note-tip">
@@ -177,31 +195,34 @@
 
                 <div class="card" id="StartServer">
                     <ul>
-                        <li>Once ready, click <b>Start Server</b>.</li>
-                        <li>Your default web browser should open a new tab taking you to the <b>Dashboard</b>.</li>
+                        <li>After Quickstart finishes, select <b>CHIM</b> on the launcher Mods page.</li>
+                        <li>Click <b>CHIM Webpage</b> to open the server website.</li>
+                        <li>If the server is stopped, confirm the prompt to start it first.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 620px;">
-                        <img src="../img/installation/landing_page.png" alt="CHIM dashboard landing page">
+                    <figure class="guide-figure" style="max-width: 980px;">
+                        <img src="../img/installation/launcher-mods-chim.png" alt="DwemerDistro CHIM Mods page with Update CHIM and CHIM Webpage controls">
+                        <figcaption>The CHIM Mods page provides its update, webpage, Nexus, rollback, and uninstall controls.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="ProfileSetup">
-                    <h2 id="ChimProfileSetup">CHIM Profile Setup</h2>
-                    <p><b>Fill out the QUICKSTART menu:</b></p>
+                    <h2 id="ChimProfileSetup">CHIM Web Quickstart</h2>
+                    <p><b>Complete the Quickstart Menu in your browser:</b></p>
                     <ul>
-                        <li><b>Enter your Character name</b>.</li>
-                        <li><b>Paste in your OpenRouter API key</b> if you are using OpenRouter.</li>
-                        <li><b>Choose Text-to-Speech</b>.</li>
-                        <li><b>Choose Speech-to-Text</b>.</li>
+                        <li>Enter your <b>Player Name</b>.</li>
+                        <li>Paste your <b>OpenRouter API Key</b>, or use the local Player2 connector.</li>
+                        <li>Select your <b>TTS Service</b> and <b>STT Service</b>.</li>
+                        <li>Review the four LLM choices and any local-LLM optimization setting.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 700px;">
-                        <img src="../img/installation/new_quickstart_chim.png" alt="CHIM quickstart menu">
+                    <figure class="guide-figure" style="max-width: 980px;">
+                        <img src="../img/installation/chim-web-quickstart-full.png" alt="CHIM web Quickstart Menu with player, OpenRouter, TTS, STT, Player2, and LLM settings">
+                        <figcaption>CHIM Quickstart collects the main server settings needed for a first run.</figcaption>
                     </figure>
 
                     <ul>
-                        <li><b>Click Save</b>.</li>
+                        <li>Click <b>Save and Continue</b>.</li>
                     </ul>
                     <p>
                         OpenRouter is optional. To use another provider directly, save the rest of QuickStart and follow <a href="./llm.html#CustomConnector"><b>Use Your Own LLM Provider</b></a>.
@@ -229,8 +250,8 @@
                     <p><b>Now you are ready to play!</b></p>
                     <h3>Update Note</h3>
                     <p>
-                        For updating the mod you usually only need to just click UPDATE in the CHIM.exe and install the latest
-                        AIAgent mod from Nexus. You do not need to reinstall the DwemerDistro unless we explicitly say so.
+                        For normal server updates, click <b>Update CHIM</b> on the launcher Mods page. Install the latest
+                        AIAgent mod from Nexus when a new game-plugin file is included. You do not need to reinstall DwemerDistro unless the release notes say so.
                     </p>
                 </div>
 

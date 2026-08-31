@@ -131,25 +131,43 @@
                 </blockquote>
 
                 <div class="card" id="UpdateDistro">
+                    <h2>Set Up STOBE in DwemerDistro</h2>
                     <ul>
-                        <li>Click <b>Update Launcher</b> first.</li>
-                        <li>Wait for it to restart, then click <b>Update</b>.</li>
+                        <li>On Quickstart Step 2, click <b>Update Distro</b>.</li>
+                        <li>Wait for the update to finish, then click <b>Next</b>.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 620px;">
-                        <img src="../img/installation/distro_launcher_update.png" alt="DwemerDistro launcher update">
-                        <figcaption>Make sure the Launcher and Mod is fully updated.</figcaption>
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-update-distro.png" alt="DwemerDistro Quickstart Update Distro step">
+                        <figcaption>Update the distro before choosing which mods to install.</figcaption>
+                    </figure>
+
+                    <ul>
+                        <li>Step 3 opens with no mods selected.</li>
+                        <li>Select <b>STOBE</b>, then click <b>Install Selected Mods</b>.</li>
+                        <li>Wait for STOBE to finish installing before continuing.</li>
+                    </ul>
+
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-select-none.png" alt="DwemerDistro Quickstart Choose Your Mods screen with no mods selected">
+                        <figcaption>Choose Your Mods starts with nothing selected.</figcaption>
+                    </figure>
+
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-select-stobe.png" alt="DwemerDistro Quickstart with STOBE selected for installation">
+                        <figcaption>Select STOBE, then install the selected mod.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="InstallComponents">
                     <ul>
-                        <li>Under <b>Install Components</b> install any you wish to use.</li>
+                        <li>Step 4 lists the components detected by DwemerDistro.</li>
+                        <li>Review the green status checks, then click <b>Continue to Start Server</b>.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 560px;">
-                        <img src="../img/installation/new_comp_menu.png" alt="The Components Menu">
-                        <figcaption>The Components Menu</figcaption>
+                    <figure class="guide-figure" style="max-width: 700px;">
+                        <img src="../img/installation/launcher-quickstart-components.png" alt="DwemerDistro Quickstart Components step with installed component status checks">
+                        <figcaption>Confirm the components are ready before starting the server.</figcaption>
                     </figure>
 
                     <blockquote class="guide-note note-tip">
@@ -172,21 +190,24 @@
 
                 <div class="card" id="StartServer">
                     <ul>
-                        <li>Once ready, click <b>Start Server</b>.</li>
-                        <li>Your default web browser should open a new tab taking you to the <b>Dashboard</b>.</li>
+                        <li>After Quickstart finishes, select <b>STOBE</b> on the launcher Mods page.</li>
+                        <li>Click <b>STOBE Webpage</b> to open the server website.</li>
+                        <li>If the server is stopped, confirm the prompt to start it first.</li>
                     </ul>
 
-                    <figure class="guide-figure" style="max-width: 620px;">
-                        <img src="../img/installation/landing_page.png" alt="STOBE dashboard landing page">
+                    <figure class="guide-figure" style="max-width: 980px;">
+                        <img src="../img/installation/launcher-mods-stobe.png" alt="DwemerDistro STOBE Mods page with Update STOBE and STOBE Webpage controls">
+                        <figcaption>The STOBE Mods page provides its update, webpage, Nexus, rollback, and uninstall controls.</figcaption>
                     </figure>
                 </div>
 
                 <div class="card" id="ProfileSetup">
-                    <h2 id="StobeProfileSetup">STOBE Profile Setup</h2>
-                    <p><b>Fill out the QUICKSTART menu:</b></p>
+                    <h2 id="StobeProfileSetup">STOBE Web Quickstart</h2>
+                    <p><b>Complete the Quickstart Menu in your browser:</b></p>
                     <ul>
-                        <li><b>Paste in your OpenRouter API key</b> if you are using OpenRouter.</li>
-                        <li><b>Choose TTS</b>.</li>
+                        <li>Paste your <b>OpenRouter Key</b>, or enable Player2 for local LLM handling.</li>
+                        <li>Select your <b>TTS Connector</b>.</li>
+                        <li>Leave Parakeet selected for local speech-to-text, or choose another STT provider later.</li>
                     </ul>
                     <p>
                         QuickStart fills the Standard, Fast, Powerful, and Experimental response choices for the default and player-faction profiles. You can change them later from the profile editor.
@@ -195,12 +216,13 @@
                         OpenRouter is optional. To use another provider directly, save the rest of QuickStart and follow <a href="./llm.html#CustomConnector"><b>Use Your Own LLM Provider</b></a>.
                     </p>
 
-                    <figure class="guide-figure" style="max-width: 760px;">
-                        <img src="../img/installation/stobe_quickstart.png" alt="STOBE quickstart menu">
+                    <figure class="guide-figure" style="max-width: 980px;">
+                        <img src="../img/installation/stobe-web-quickstart-full.png" alt="STOBE web Quickstart Menu with Player2, OpenRouter, TTS, STT, and MiniMe settings">
+                        <figcaption>STOBE Quickstart collects the main server settings needed for a first run.</figcaption>
                     </figure>
 
                     <ul>
-                        <li><b>Click Save</b>.</li>
+                        <li>Click <b>Save and Continue</b>.</li>
                     </ul>
                 </div>
 
@@ -231,7 +253,7 @@
                 <div class="card-red" id="UpdateFlow">
                     <h3>READ ME</h3>
                     <p>
-                        For normal updates, restart the DwemerDistro launcher, click <b>Mod Update</b>, and install the latest STOBE file from Nexus when a new game-plugin file is included. You do not need to reinstall DwemerDistro unless the release notes say so.
+                        For normal server updates, restart the DwemerDistro launcher and click <b>Update STOBE</b> on the STOBE Mods page. Install the latest STOBE file from Nexus when a new game-plugin file is included. You do not need to reinstall DwemerDistro unless the release notes say so.
                     </p>
                 </div>
             </span>
