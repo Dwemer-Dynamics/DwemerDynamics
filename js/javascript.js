@@ -27,7 +27,9 @@ const leftSidebarConfigs = {
             { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
-            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" },
+            { href: "https://github.com/Dwemer-Dynamics/HerikaServer", title: "Server Code", label: "Server Code", emoji: "\uD83D\uDCBB" },
+            { href: "https://github.com/Dwemer-Dynamics/CHIM", title: "Mod Code", label: "Mod Code", emoji: "\uD83D\uDCBB" }
         ]
     },
     stobe: {
@@ -51,7 +53,9 @@ const leftSidebarConfigs = {
             { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
-            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" },
+            { href: "https://github.com/Dwemer-Dynamics/StobeServer", title: "Server Code", label: "Server Code", emoji: "\uD83D\uDCBB" },
+            { href: "https://github.com/Dwemer-Dynamics/STOBE", title: "Mod Code", label: "Mod Code", emoji: "\uD83D\uDCBB" }
         ]
     },
     dialectic: {
@@ -76,7 +80,9 @@ const leftSidebarConfigs = {
             { href: "https://www.youtube.com/watch?v=Sf0m0FIUZuw", title: "Video Guide", label: "Video Guide", emoji: "\uD83C\uDFA5" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
-            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" },
+            { href: "https://github.com/Dwemer-Dynamics/DialecticServer", title: "Server Code", label: "Server Code", emoji: "\uD83D\uDCBB" },
+            { href: "https://github.com/Dwemer-Dynamics/Dialectic", title: "Mod Code", label: "Mod Code", emoji: "\uD83D\uDCBB" }
         ]
     }
 };
