@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Roleplay Settings | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260807a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -126,7 +126,7 @@
                         <li><b>Seeing what is recognized:</b> Quest definitions live under <b>Immersion &#8594; AI Quest Manager &#8594; Traditional Quests</b>, so you can check which quests are covered and what wording they expect.</li>
                         <li><b>Adding your own:</b> Modded quests can be added there too, as long as they are defined manually. Modded quests are not picked up automatically.</li>
                         <li><b>Turning it off:</b> Traditional quest progression can be disabled through Global Settings if you would rather handle quests the normal way.</li>
-                        <li><b>Still in beta:</b> Skyrim always stays the authority on quest state, but expect the occasional miss.</li>
+                        <li><b>Quest behavior:</b> Skyrim always stays the authority on quest state, but expect the occasional miss.</li>
                         <li><b>Separate system:</b> Traditional Quests advance existing Skyrim quests. AI Quest Manager below creates new CHIM-driven storylines and objectives.</li>
                     </ul>
                 </div>
@@ -325,7 +325,26 @@
                         <li><b>Separate from Oghma:</b> This system is about feelings and social history, not whether someone knows a fact.</li>
                     </ul>
                 </div>
-            </span>
+                <div class="card" id="DirectorScenes">
+                    <h3>Director Scenes</h3>
+                    <p>Choose Director mode and describe the scene you want the nearby characters to perform.</p>
+                    <ul>
+                        <li><b>Give a direction:</b> Name the people involved and explain what you want the scene to be about. Your direction is not spoken as normal player dialogue.</li>
+                        <li><b>Watch the scene:</b> Characters speak in order and can carry out allowed actions. Enabled actions and the current scene still determine what they can do.</li>
+                        <li><b>Your turn:</b> When a character addresses you, the scene hands the conversation back to you. Start and stop notices show when Director is active.</li>
+                        <li><b>Change course:</b> Use the normal dialogue-stop controls when you want to interrupt.</li>
+                    </ul>
+                </div>
+                            <div class="card" id="Hypnosis">
+                    <h3>Hypnosis</h3>
+                    <p>Select an NPC in Prisma chat and use Hypnosis to give a one-off instruction that changes parts of their profile.</p>
+                    <ul>
+                        <li><b>What can change:</b> Personality, goals, speech style and occupation.</li>
+                        <li><b>Check the result:</b> Open the NPC profile afterward and review the changes before continuing the scene.</li>
+                        <li><b>Quest models:</b> Global Connectors includes separate Quest Creation and Quest Engine choices for creating and running AI quests.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>

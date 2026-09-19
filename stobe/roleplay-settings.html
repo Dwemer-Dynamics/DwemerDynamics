@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STOBE Roleplay Settings | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -40,6 +40,7 @@
                 <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
                 <a href="./llm.html" title="Large Language Models">Large Language Models</a>
                 <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
                 <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
                 <a href="./faq.html" title="FAQ">FAQ</a>
                 <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
@@ -185,7 +186,28 @@
                     </ul>
                 </div>
 
-            </span>
+                <div class="card" id="DirectorScenes">
+                    <h3>Director Scenes</h3>
+                    <p>Choose Director mode and describe the scene you want the nearby characters to perform.</p>
+                    <ul>
+                        <li><b>Give a direction:</b> Name the people involved and explain what you want the scene to be about. Your direction is not spoken as normal player dialogue.</li>
+                        <li><b>Watch the scene:</b> Characters speak in order and can carry out allowed actions. Enabled actions and the current scene still determine what they can do.</li>
+                        <li><b>Your turn:</b> When a character addresses you, the scene hands the conversation back to you. Start and stop notices show when Director is active.</li>
+                        <li><b>Change course:</b> Use the normal dialogue-stop controls when you want to interrupt.</li>
+                    </ul>
+                </div>
+                            <div class="card" id="HistoryAndRelationships">
+                    <h3>History And Relationships</h3>
+                    <p>Use an NPC’s History view to review the events that character received or add context for them.</p>
+                    <ul>
+                        <li><b>Diaries:</b> Use Play and Pause to listen to an entry.</li>
+                        <li><b>Scene memory:</b> Enable short-term scene memory for profiles that should carry recent scene details into conversation.</li>
+                        <li><b>Relationships:</b> Keep your own relationship notes and choose how often a profile can update its relationships.</li>
+                        <li><b>Older saves:</b> Never Clear Relationship Data can keep later relationships after a rewind. Leave it off if relationships should follow the loaded save.</li>
+                        <li><b>Combat:</b> Characters react to combat events from their local scene. A ceasefire action pauses the fight rather than permanently rewriting faction relations; movement actions use a world destination.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>

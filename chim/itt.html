@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Image-to-Text Services | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260807a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -79,13 +79,12 @@
                         When you use Soulgaze, CHIM takes a screenshot and sends it to your chosen image-reading service. It also passes along helpful context like who is visible and where you are, so the result is more useful than a plain screenshot description.
                     </p>
                     <p>
-                        The Soulgaze wheel gives you four main options:
+                        The Soulgaze hotkey has three gestures:
                     </p>
                     <ul>
-                        <li><b>Soulgaze:</b> the standard screenshot read. Use this when you want CHIM to understand the current scene.</li>
-                        <li><b>NPC Photo Zoom:</b> takes a tighter portrait-style shot of the current NPC.</li>
-                        <li><b>NPC Photo:</b> takes a normal NPC photo without the zoomed framing.</li>
-                        <li><b>Just Upload:</b> uploads the image without the full Soulgaze presentation flow.</li>
+                        <li><b>Tap:</b> Capture visual context without speech.</li>
+                        <li><b>Double-tap:</b> Aim at an activated AI NPC to update their portrait.</li>
+                        <li><b>Hold:</b> Ask the nearest activated NPC to describe the scene.</li>
                     </ul>
                     <p>
                         Finished images are saved into your Soulgaze gallery with scene information such as the location and capture time. CHIM can reuse those descriptions later so a place keeps a consistent visual identity.
@@ -129,7 +128,16 @@
                     <p><a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer"><b>llama.cpp</b></a></p>
                 </div>
 
-            </span>
+                            <div class="card" id="SceneDescriptions">
+                    <h3>Ask An NPC To Describe The Scene</h3>
+                    <p>Use the Soulgaze controls in Prisma chat or the assigned hotkey to capture the scene or a character.</p>
+                    <ul>
+                        <li><b>Scene description:</b> Ask an NPC to describe what they see. The spoken description uses their personality, speech style and voice.</li>
+                        <li><b>Portrait:</b> Frame the character you want before taking the NPC photo.</li>
+                        <li><b>Capture choices:</b> Choose the appropriate capture or upload option in the Soulgaze dropdown. Review the saved result in the gallery.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>
@@ -137,5 +145,4 @@
     <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>
-
 

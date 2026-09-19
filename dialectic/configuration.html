@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="description" content="Configure DialecticServer profiles, connectors, prompts, actions, narration, world knowledge, and Fallout NPCs.">
-<title>Dialectic Configuration | Dwemer Dynamics</title><link rel="icon" type="image/png" href="../img/dialectic-icon.png"><script src="../js/javascript.js?v=20260828a"></script>
+<title>Dialectic Configuration | Dwemer Dynamics</title><link rel="icon" type="image/png" href="../img/dialectic-icon.png"><script src="../js/javascript.js?v=20260919"></script>
 <link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="../css/cards.css"><link rel="stylesheet" href="../css/header.css"><link rel="stylesheet" href="../css/progressBar.css"><link rel="stylesheet" href="../css/sidebar.css"><link rel="stylesheet" href="../css/guide.css">
 </head><body class="theme dialectic-theme"><div class="progress-container"><div class="progress-bar dialectic-progress"></div></div><div class="container">
 <div class="header"><div class="headerMenu" onclick="toggleNav()"><button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button></div><div class="headerTitle"><a href="./index.html"><img src="../img/dialectic-icon.png" alt="Dialectic icon" id="logo"></a><a href="./index.html" id="headerTitle">Dialectic</a></div></div>
@@ -20,4 +20,33 @@
 <div class="card" id="Prompts"><h3>Prompts Manager</h3><p>Prompts Manager owns the instruction blocks used for dialogue, rechat, narration, Director Mode, memories, dynamic profiles, diaries, actions, and related systems.</p><p>Profile and NPC prompt-head overrides can specialize behavior without replacing the complete shared prompt pipeline.</p></div>
 <div class="card" id="TTSStudio"><h3>TTS Studio</h3><p>TTS Studio maps Fallout voice types and uploaded samples to supported voice-cloning connectors. Use its play and refresh controls to verify a voice before testing it in game.</p></div>
 <div class="card" id="Events"><h3>Events, Memories, And Control Panel</h3><p>Events &amp; Memories shows game events, AI responses, memories, and active quests. The Control Panel exposes the response queue, audio cache, database manager link, audits, and service health tools used during troubleshooting.</p></div>
+                <div class="card" id="PlaythroughSaves">
+                    <h3>Playthrough Saves</h3>
+                    <p>Keep a separate AI history for each character. These saves hold Dialectic conversations, memories and character state; keep saving your game normally too.</p>
+                    <ul>
+                        <li><b>Choose a playthrough:</b> Use the picker on the server home page to switch or start a new playthrough. Read the save details before choosing.</li>
+                        <li><b>Save and transfer:</b> Open Playthrough Management to manage your saves. Download a save for backup or import one when moving your AI history.</li>
+                        <li><b>Automatic switching:</b> Turn on <b>Automatically switch playthroughs</b> in the storage controls to match your loaded character. This is off by default. Reload your game save after enabling it and follow any prompt to associate an existing playthrough.</li>
+                        <li><b>Before switching:</b> The current AI progress is saved before the other playthrough is loaded.</li>
+                        <li><b>Loading an older game save:</b> AI history follows the game timeline. Automatic recovery saves use the <b>Game days behind</b> threshold. Check the recovery message and saved playthroughs if you need the later AI state.</li>
+                        <li><b>Cleanup:</b> Storage and Cleanup lets you choose which categories to clean and how old entries must be. Event cleanup is off by default. Review the category carefully before deleting anything.</li>
+                    </ul>
+                </div>
+                <div class="card" id="ProfileTimingAndContext">
+                    <h3>Profile Updates And Event Filters</h3>
+                    <p>Choose how often characters develop and which events they use in conversation.</p>
+                    <ul>
+                        <li><b>Profile timing:</b> Set the dynamic-profile interval in the web settings, in game hours. Check the selected profile and any NPC override when one character needs a different schedule. The old game-menu timer is no longer the place to set it.</li>
+                        <li><b>Event Type Filter:</b> Tick an event type to exclude it from conversation context. Add a custom event type when it is not listed. This does not delete the saved event.</li>
+                        <li><b>Voice:</b> See <a href="./tts.html#VoiceTools">Voice Tools</a> for voice effects and pronunciation changes.</li>
+                    </ul>
+                </div>
+                <div class="card" id="PipVisionCharacter">
+                    <h3>PipVision Scene Descriptions</h3>
+                    <p>When an NPC describes a PipVision capture, their personality and speech style help shape what they say.</p>
+                    <ul>
+                        <li>The configured image-to-text prompt still controls how the scene is read.</li>
+                        <li>See <a href="./ingame-settings.html#PipVision">PipVision controls</a> for capturing a scene.</li>
+                    </ul>
+                </div>
 </span></div></div><footer>Dwemer Dynamics 2026</footer></body></html>

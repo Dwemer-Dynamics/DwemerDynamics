@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM FAQ | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260807a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -77,8 +77,7 @@
                     <h2>FAQ</h2>
                     <h3>I loaded an old save and I lost a bunch of memories or events</h3>
                     <p>
-                        Due to how CHIM tracks in-game time and events to sync with the server, it has to delete events that happened in the
-                        "future" relative to the loaded save. They should still be saved in the playthrough manager.
+                        Loading an older game save brings AI history back to that point. Check the recovery notice and <a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> for the later AI state. Automatic recovery saves depend on the configured game-day threshold.
                     </p>
                 </div>
 
@@ -229,6 +228,15 @@
                     <p>
                         The most likely cause is Windows audio configuration. Use stereo, disable spatial audio, and then adjust the MCM volume sliders.
                     </p>
+                </div>
+                <div class="card" id="PlaythroughHelp">
+                    <h3>How Do I Keep Separate AI Histories?</h3>
+                    <p>Use <a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> for each character. Automatic switching is optional and starts off.</p>
+                    <ul>
+                        <li><b>After a rewind:</b> Check the recovery notice and the saved playthroughs before assuming the later AI state is lost.</li>
+                        <li><b>No response:</b> Check that the in-game interaction switch is On, then check the server connection and chosen services.</li>
+                        <li><b>Microphone:</b> Check its own recording and mute controls. Turning interaction Off is not the same as muting.</li>
+                    </ul>
                 </div>
             </span>
         </div>

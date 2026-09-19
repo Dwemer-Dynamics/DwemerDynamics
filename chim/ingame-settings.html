@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Skyrim Settings | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260807a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -79,7 +79,7 @@
 
                 <div class="card" id="Main">
                     <h2>Skyrim Settings</h2>
-                    <h3>Main</h3>
+                    <h3>Hotkeys</h3>
                     <p>
                         This is the main control page for how you talk to CHIM, open its wheels, and toggle a few core gameplay features.
                     </p>
@@ -114,7 +114,7 @@
                 <div class="card" id="AutoActivate">
                     <h3>Auto Activate</h3>
                     <p>
-                        This page controls when CHIM automatically picks NPCs up into the active AI system and how far speech awareness reaches around you.
+                        This page controls when CHIM automatically adds nearby NPCs to the active AI system. Set hearing ranges on Hearing &amp; Awareness.
                     </p>
                     <p><b>Activation rules</b></p>
                     <ul>
@@ -136,7 +136,7 @@
                     </p>
                     <ul>
                         <li><b>Add Hostile NPCs:</b> Lets Auto Activate include hostile NPCs as well.</li>
-                        <li><b>Add All races:</b> Lets Auto Activate include all races, including animals. This can be unstable.</li>
+                        <li><b>Creature activation:</b> Use the creature auto-activation option to include creature NPCs. Keep it off if you only want ordinary character conversations.</li>
                     </ul>
                 </div>
 
@@ -151,7 +151,6 @@
                     </p>
                     <ul>
                         <li><b>Bored Event Timer (seconds):</b> How often bored-style events can potentially fire.</li>
-                        <li><b>Dynamic Profile Timer (minutes):</b> How often dynamic profiles can refresh from recent events.</li>
                     </ul>
                     <p><b>NPC Behavior</b></p>
                     <p>
@@ -190,7 +189,7 @@
                         <li><b>AI Voice Distance Scale:</b> Adjusts how voice loudness behaves with distance.</li>
                         <li><b>Interior Playback Dropoff (%):</b> Controls how aggressively indoor voice playback falls off with distance.</li>
                         <li><b>Exterior Playback Dropoff (%):</b> Controls how aggressively outdoor voice playback falls off with distance.</li>
-                        <li><b>Enable 3D Audio Playback:</b> Keeps voice playback spatial instead of flattening it into simple 2D sound.</li>
+                        <li><b>Audio Mode:</b> Choose 3D Realistic, 3D Normal, 2D Flat, Mono, or Mono + Advanced Effects. 3D Normal is the default. 2D Flat keeps direction without distance fading; Mono is non-positional.</li>
                         <li><b>Camera Based Audio:</b> Makes 3D voice direction follow the camera instead of player facing. In VR, CHIM uses the HMD position and orientation so spatial voices follow where your head actually is.</li>
                     </ul>
                     <p><b>Advanced</b></p>
@@ -238,8 +237,8 @@
                         <li><b>Actions Menu:</b> Opens the Prisma action panel for in-game AI interactions and commands.</li>
                         <li><b>Status, Minihud, Terminator Views:</b> Cycles between the Prisma status displays and closes them on another press.</li>
                         <li><b>History/Diaries:</b> Cycles between conversation history and diaries, then closes them.</li>
-                        <li><b>Browser (Beta):</b> Opens the in-game browser view for the HerikaServer web UI.</li>
-                        <li><b>Logs View (Beta):</b> Opens the Prisma logs and diagnostics view.</li>
+                        <li><b>Browser:</b> Opens the in-game browser view for the HerikaServer web UI.</li>
+                        <li><b>Logs View:</b> Opens the Prisma logs and diagnostics view.</li>
                     </ul>
                     <p><b>Settings</b></p>
                     <p>
@@ -256,7 +255,6 @@
                         <li><b>Close:</b> A private, close-range conversation. Only characters very close to you can hear and respond.</li>
                         <li><b>Profile and LLM:</b> View the targeted NPC's profile, assign a different one, choose a conversation model, or use the profile's Random LLM setting.</li>
                         <li><b>Rechat Mode:</b> Change Tight, Conversational, Group, or Random follow-up behavior without opening the web interface.</li>
-                        <li><b>Compact Chat:</b> Uses a shorter, cleaner conversation history when building the next response.</li>
                         <li><b>Book summaries:</b> Text chat can summarize the book currently open in Skyrim when used from the appropriate reading context.</li>
                     </ul>
                     <p><b>One-shot mode shortcuts</b></p>
@@ -264,8 +262,8 @@
                         You can start a typed message with one of these prefixes to send that single message in a different mode. Your saved mode does not change, so the next message goes back to whatever you had selected.
                     </p>
                     <ul>
-                        <li><code>~</code> Whisper</li>
-                        <li><code>~~</code> Close</li>
+                        <li><code>%</code> Whisper</li>
+                        <li><code>%%</code> Close</li>
                         <li><code>!!</code> Shout</li>
                         <li><code>@</code> Narrator</li>
                         <li><code>&gt;</code> Director</li>
@@ -340,7 +338,37 @@
                         <li><b>Send all voice samples to server:</b> Uploads all available voice samples so the server has the voice data it expects.</li>
                     </ul>
                 </div>
-            </span>
+                <div class="card" id="InteractionSwitch">
+                    <h3>CHIM On And Off</h3>
+                    <p>Use the interaction switch in the in-game menu when you want a break from AI responses.</p>
+                    <ul>
+                        <li><b>Off:</b> Pauses AI interaction while the mod continues tracking game events.</li>
+                        <li><b>Microphone:</b> Use the microphone controls to stop recording; the interaction switch is not a microphone mute.</li>
+                        <li><b>Director:</b> See <a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> for directing a conversation.</li>
+                        <li><b>Character updates:</b> Set the schedule in the <a href="./configuration.html#ProfileTimingAndContext">web profile settings</a>.</li>
+                    </ul>
+                </div>
+                            <div class="card" id="HearingAwareness">
+                    <h3>Hearing &amp; Awareness</h3>
+                    <p>Open Hearing &amp; Awareness to choose who can hear a conversation. These settings are separate from how loud a voice sounds.</p>
+                    <ul>
+                        <li><b>Hearing Preset:</b> Choose Realistic for close conversations, Recommended for a balanced range, Extended for larger groups, or Custom for your own values.</li>
+                        <li><b>Hearing ranges:</b> Adjust indoor and outdoor distances on this page. Closed doors, speech mode and sneaking can affect who hears a line.</li>
+                        <li><b>Close and Whisper:</b> Close includes the nearby circle of listeners; Whisper stays with the target.</li>
+                    </ul>
+                </div>
+                <div class="card" id="PrismaTools">
+                    <h3>Prisma Chat And Settings</h3>
+                    <p>Open Prisma to change your conversation or character settings without leaving Skyrim.</p>
+                    <ul>
+                        <li><b>Mood:</b> Pick a mood or enter your own cue to shape typed and spoken input without speaking the cue aloud.</li>
+                        <li><b>Hypnosis:</b> Select an NPC and use Hypnosis for a one-off instruction that changes their personality, goals, speech style or occupation.</li>
+                        <li><b>Presets:</b> Save and apply Global Settings and profile presets from the Settings hub. Its CHIM MCM tab also exposes game settings.</li>
+                        <li><b>Conversation capture:</b> Use the dialogue-capture control when you want ordinary Skyrim dialogue included in recent context.</li>
+                        <li><b>Voice effects:</b> Set an NPC voice filter from their character settings and preview it before keeping it.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>

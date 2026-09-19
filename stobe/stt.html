@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>STOBE Linux Setup Guide | Dwemer Dynamics</title>
+    <title>STOBE Speech-to-Text | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
@@ -28,7 +28,7 @@
                 <a href="./index.html" aria-label="STOBE home"><img src="../img/stobe-icon.png" alt="STOBE icon" id="logo"></a>
                 <a href="./index.html" id="headerTitle">STOBE</a>
             </div>
-        </div>
+            </div>
 
         <div class="sidebar left-sidebar">
             <p class="pageLinks">
@@ -61,67 +61,33 @@
         </div>
 
         <div class="content">
-            <span id="LinuxSetupGuide" class="section">
+            <span id="SpeechToText" class="section">
                 <div class="card hero-card">
-                    <h1>STOBE Linux Setup Guide</h1>
-                    <p>
-                        Use this guide when StobeServer runs on a Linux machine while Kenshi runs on a Windows PC.
-                        This is an advanced community setup. The normal DwemerDistro installation is recommended for most players.
-                    </p>
+                    <h1>STOBE Speech-to-Text</h1>
+                    <p>Speech-to-text turns your microphone recording into words your selected character can say.</p>
                 </div>
-
-                <div class="card" id="PrepareServer">
-                    <h2>Linux Setup Guide</h2>
-                    <h3>Prepare The Linux Machine</h3>
+                            <div class="card" id="Setup">
+                    <h3>Set Up Your Microphone</h3>
+                    <p>Set up transcription on the server, then bind the recording key in Kenshi.</p>
                     <ul>
-                        <li>Install and start StobeServer using your Linux or container setup.</li>
-                        <li>Keep the Linux machine and gaming PC on the same local network.</li>
-                        <li>Allow incoming connections to StobeServer on port <code>8083</code>.</li>
+                        <li><b>Service:</b> Quickstart selects Parakeet for local transcription. Install and start that component in DwemerDistro, or choose a hosted STT provider and save its required key.</li>
+                        <li><b>Test:</b> Open the server Speech-to-Text settings and test the selected service before troubleshooting the game.</li>
+                        <li><b>Microphone:</b> Check the intended input device in Windows and allow microphone access for desktop apps.</li>
+                        <li><b>Key:</b> Open STOBE Plugin Settings and bind Push-to-Talk Key. Select a player character, hold the key to speak, then release to send.</li>
+                        <li><b>Text only:</b> Disable the push-to-talk key if you prefer the Chat Box.</li>
                     </ul>
                 </div>
-
-                <div class="card" id="FindAddress">
-                    <h3>Find The Linux Address</h3>
-                    <p>
-                        Find the local network address of the Linux machine. It will normally look like <code>192.168.1.101</code>.
-                    </p>
-                    <pre><code>hostname -I</code></pre>
-                    <p>Use the address shown for your local network connection.</p>
+                <div class="card" id="Troubleshooting">
+                    <h3>If Your Words Do Not Appear</h3>
+                    <p>Check recording, transcription and the reply separately.</p>
+                    <ul>
+                        <li>Confirm Windows can hear the microphone and that a player character is selected.</li>
+                        <li>Confirm the chosen STT service is running and passes its server test.</li>
+                        <li>If your words appear but no reply arrives, check the interaction switch and LLM settings.</li>
+                        <li>Use <a href="./log-files-and-debugging.html#GenerateLogs">Generate Logs</a> when reporting the problem.</li>
+                    </ul>
                 </div>
-
-                <div class="card" id="PointStobeToLinux">
-                    <h3>Point STOBE To The Linux Machine</h3>
-                    <p>
-                        On the gaming PC, open <code>StobeCustom.ini</code> inside the STOBE mod folder and use the Linux machine's address.
-                    </p>
-                    <pre><code>ServerHost=192.168.1.101
-ServerPort=8083</code></pre>
-                    <p>
-                        Replace the example address with the address of your Linux machine. Then open the STOBE server in a browser:
-                    </p>
-                    <p><code>http://192.168.1.101:8083/StobeServer/</code></p>
-                </div>
-
-                <div class="card" id="VoiceServices">
-                    <h3>Connect A Voice Service</h3>
-                    <p>
-                        If text-to-speech also runs on Linux, enter the same Linux address and the port shown by that voice service in STOBE's Text-to-Speech settings.
-                    </p>
-                </div>
-
-                <div class="card" id="TestConnection">
-                    <h3>Test The Connection</h3>
-                    <ol>
-                        <li>Open the StobeServer address from the gaming PC.</li>
-                        <li>Confirm the STOBE dashboard loads.</li>
-                        <li>Start Kenshi and check that STOBE connects.</li>
-                    </ol>
-                    <p>
-                        If the page does not load, check the Linux firewall and confirm port <code>8083</code> is open on your local network.
-                    </p>
-                </div>
-
-            </span>
+</span>
         </div>
 
     </div>
@@ -129,3 +95,5 @@ ServerPort=8083</code></pre>
     <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>
+
+

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STOBE FAQ | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -40,6 +40,7 @@
                 <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
                 <a href="./llm.html" title="Large Language Models">Large Language Models</a>
                 <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
                 <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
                 <a href="./faq.html" title="FAQ">FAQ</a>
                 <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
@@ -158,11 +159,7 @@
                 </div>
 
                 <div class="card" id="DynamicProfiles">
-                    <h3>Why is an NPC profile not changing over time</h3>
-                    <p>
-                        Make sure Dynamic Profile is enabled for that NPC, its profile is not locked, and the DwemerDistro server is still running. The update interval is measured in in-game hours and can be changed in Global Settings or Plugin Settings.
-                    </p>
-                </div>
+                    <h3>Why is an NPC profile not changing over time</h3><p>Check that dynamic updates are enabled for the NPC and its profile. Set the interval in game hours through the web settings, then check for a profile or NPC override. See <a href="./configuration.html#ProfileTimingAndContext">Profile Updates</a>.</p></div>
 
                 <div class="card" id="NoVoice">
                     <h3>I am getting text but no spoken voice</h3>
@@ -191,6 +188,15 @@
                     <p>
                         Set <code>EnableMOTD=0</code> in <code>StobeCustom.ini</code>. You can still open the MOTD manually from the left-side STOBE menu.
                     </p>
+                </div>
+                <div class="card" id="PlaythroughHelp">
+                    <h3>How Do I Keep Separate AI Histories?</h3>
+                    <p>Use <a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> for each campaign. Automatic switching is optional and starts off.</p>
+                    <ul>
+                        <li><b>After a rewind:</b> Check the recovery notice and the saved playthroughs before assuming the later AI state is lost.</li>
+                        <li><b>No response:</b> Check that the in-game interaction switch is On, then check the server connection and chosen services.</li>
+                        <li><b>Microphone:</b> Check its own recording and mute controls. Turning interaction Off is not the same as muting.</li>
+                    </ul>
                 </div>
             </span>
         </div>

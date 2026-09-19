@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Configuration | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260807a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -89,7 +89,7 @@
                         <li><b>Global Connectors:</b> Chooses the shared AI brains used for player respeech, summaries, middle-term memory and Background Life, scene classification, dynamic profiles, director mode, relationship handling, and custom Oghma work.</li>
                         <li><b>Context:</b> Filters what world information is sent into prompts, including event types, timestamps, power awareness, item detail policies, and noisy item, location, or magic data you may want to trim out.</li>
                         <li><b>Prompt Context Selections:</b> Lets you choose which character, appearance, equipment, inventory, relationship, and general-context buckets CHIM should carry into conversations.</li>
-                        <li><b>Misc:</b> Covers auto-locking profiles, auto-filling custom profiles, Background Life Trigger Time in hours, end-conversation cooldowns, and Compact Chat context size.</li>
+                        <li><b>Misc:</b> Covers auto-locking profiles, auto-filling custom profiles, Background Life Trigger Time in hours, end-conversation cooldowns.</li>
                         <li><b>Translation:</b> Handles DeepL-based text and audio translation for players who want CHIM to speak across languages.</li>
                     </ul>
                     <p>
@@ -131,19 +131,7 @@
                     </p>
                 </div>
 
-                <div class="card" id="PlaythroughManager">
-                    <h3>Playthrough Manager</h3>
-                    <p>
-                        <b>What this page does:</b> Playthrough Manager is CHIM's snapshot system for your AI database state. It is for saving, switching, and restoring full CHIM playthrough states.
-                    </p>
-                    <ul>
-                        <li><b>Active Database:</b> CHIM keeps one live database in use right now. That is the state your current conversations and systems are using.</li>
-                        <li><b>Stored Snapshots:</b> You can save named snapshots with notes so you can return to an earlier AI state later.</li>
-                        <li><b>Copy to Public:</b> Loading a snapshot replaces the live CHIM database with that saved state and first auto-saves your current live state for safety.</li>
-                        <li><b>Restart required:</b> After switching snapshots, CHIM needs to be restarted before the new state is fully active.</li>
-                        <li><b>Cleanup:</b> Old snapshots can be deleted, but the active one cannot be removed from the page.</li>
-                    </ul>
-                </div>
+                <div class="card" id="PlaythroughManager"><p>See <a href="#PlaythroughSaves">Playthrough Saves</a> for saving and switching your AI history.</p></div>
 
                 <div class="card" id="Narration">
                     <h3>Narration</h3>
@@ -203,6 +191,27 @@
                         <li><b>Default versus custom:</b> Each row shows the shipped default prompt and any custom replacement you have added.</li>
                         <li><b>Edit and clear:</b> You can override only the prompts you care about, or clear a custom prompt to instantly fall back to the default.</li>
                         <li><b>Import and export:</b> Custom prompt changes can be exported or imported as CSV for backup or sharing.</li>
+                    </ul>
+                </div>
+                <div class="card" id="PlaythroughSaves">
+                    <h3>Playthrough Saves</h3>
+                    <p>Keep a separate AI history for each character. These saves hold CHIM conversations, memories and character state; keep saving your game normally too.</p>
+                    <ul>
+                        <li><b>Choose a playthrough:</b> Use the picker on the server home page to switch or start a new playthrough. Read the save details before choosing.</li>
+                        <li><b>Save and transfer:</b> Open Playthrough Management to manage your saves. Download a save for backup or import one when moving your AI history.</li>
+                        <li><b>Automatic switching:</b> Turn on <b>Automatically switch playthroughs</b> in the storage controls to match your loaded character. This is off by default. Reload your game save after enabling it and follow any prompt to associate an existing playthrough.</li>
+                        <li><b>Before switching:</b> The current AI progress is saved before the other playthrough is loaded.</li>
+                        <li><b>Loading an older game save:</b> AI history follows the game timeline. Automatic recovery saves use the <b>Game days behind</b> threshold. Check the recovery message and saved playthroughs if you need the later AI state.</li>
+                        <li><b>Cleanup:</b> Storage and Cleanup lets you choose which categories to clean and how old entries must be. Event cleanup is off by default. Review the category carefully before deleting anything.</li>
+                    </ul>
+                </div>
+                <div class="card" id="ProfileTimingAndContext">
+                    <h3>Profile Updates And Event Filters</h3>
+                    <p>Choose how often characters develop and which events they use in conversation.</p>
+                    <ul>
+                        <li><b>Profile timing:</b> Set the dynamic-profile interval in the web settings, in game hours. Check the selected profile and any NPC override when one character needs a different schedule. The old game-menu timer is no longer the place to set it.</li>
+                        <li><b>Event Type Filter:</b> Tick an event type to exclude it from conversation context. Add a custom event type when it is not listed. This does not delete the saved event.</li>
+                        <li><b>Voice:</b> See <a href="./tts.html#VoiceTools">Voice Tools</a> for voice effects and pronunciation changes.</li>
                     </ul>
                 </div>
             </span>
