@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Modders Guide | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260807a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -841,6 +841,24 @@ EndFunction</code></pre>
                         This is what the shared follow-up config fields in the Action Editor are for. They do not make the gameplay action itself happen, and they are not required for CHIM to record the action result. They only control whether CHIM should ask the LLM for another in-character response <b>after</b> the action has already run and returned.
                     </p>
 
+                </div>
+                <div class="card" id="PluginNpcData">
+                    <h3>Per-NPC Plugin Data</h3>
+                    <p>Server plugins can keep their own data with an existing NPC record. Each plugin uses a separate name so it does not overwrite another plugin’s data.</p>
+                    <ul>
+                        <li><b>API:</b> Use the server’s <code>NpcMaster</code> methods <code>getPluginData</code>, <code>setPluginData</code> and <code>deletePluginData</code>. Read the <a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/dev/docs/plugin-npc-data.md">per-NPC data contract</a> before using them.</li>
+                        <li><b>Scope:</b> This is a server-side API, not a public HTTP endpoint or game command. It does not automatically add data to prompts.</li>
+                        <li><b>Saved state:</b> The data follows NPC history and playthrough saves under their normal restore rules.</li>
+                    </ul>
+                </div>
+                <div class="card" id="BiographyVoiceFilters">
+                    <h3>Biography Voice Filters</h3>
+                    <p>Biography data can supply voice-filter presets as well as written character traits.</p>
+                    <ul>
+                        <li><b>Authoring:</b> Add the optional <code>tts_filter_preset</code> column to biography CSV imports. Choose a value from the editor’s <b>Voice Filter</b> list; custom filter expressions are not accepted. The value seeds new NPCs and does not overwrite existing NPC voice choices. Append the column after <code>refid</code> (column 16). An explicitly blank value means <code>none</code>.</li>
+                        <li><b>Keep them separate:</b> A voice filter changes the sound of the selected voice; it does not replace the character’s voice ID.</li>
+                        <li><b>Preview:</b> Check the result with the <a href="./tts.html#VoiceTools">voice tools</a>.</li>
+                    </ul>
                 </div>
             </span>
         </div>

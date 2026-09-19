@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STOBE Large Language Model Services | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -40,6 +40,7 @@
                 <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
                 <a href="./llm.html" title="Large Language Models">Large Language Models</a>
                 <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
                 <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
                 <a href="./faq.html" title="FAQ">FAQ</a>
                 <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
@@ -74,7 +75,7 @@
                         Each profile has four response slots. Switch between them from the in-game Chat Box without rebuilding the profile.
                     </p>
                     <ul>
-                        <li><b>Standard:</b> The normal choice for everyday dialogue. New profiles use <b>GLM 4.7</b>.</li>
+                        <li><b>Standard:</b> The normal choice for everyday dialogue. New profiles use <b>DeepSeek V4 Flash</b>.</li>
                         <li><b>Fast:</b> Prioritizes quicker replies. New profiles use <b>Gemini 2.5 Flash Lite</b>.</li>
                         <li><b>Powerful:</b> Use when a scene needs more careful reasoning. New profiles use <b>GLM 5.2</b>.</li>
                         <li><b>Experimental:</b> A spare slot for trying another model. New profiles use <b>DeepSeek V4 Pro</b>.</li>
@@ -183,7 +184,15 @@
                         <li><b>Invalid JSON:</b> Try a model that handles structured responses well. Only enable the advanced JSON options when the provider supports them.</li>
                     </ul>
                 </div>
-            </span>
+                            <div class="card" id="LocalSetup">
+                    <h3>Guided Local Model Setup</h3>
+                    <p>Use the guided local-model setup on the server LLM page to find a local server and choose one of its available models.</p>
+                    <ul>
+                        <li>Start your local model service first, then follow the setup prompts and test the saved connector.</li>
+                        <li>Assign it to the profile you want to use. Existing profile choices stay in place until you change them.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>

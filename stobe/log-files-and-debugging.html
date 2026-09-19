@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STOBE Log Files | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -40,6 +40,7 @@
                 <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
                 <a href="./llm.html" title="Large Language Models">Large Language Models</a>
                 <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
                 <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
                 <a href="./faq.html" title="FAQ">FAQ</a>
                 <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
@@ -111,7 +112,7 @@
                     </p>
                     <ol>
                         <li><b>StobeServer:</b> Open <b>Control Panel</b>, then <b>Server Logs</b>.</li>
-                        <li><b>Distro Launcher:</b> <b>Debugging</b> then <b>Create Diagnostic File</b>.</li>
+                        <li><b>Distro Launcher:</b> <b>LOGS</b> then <b>Generate Distro Debugging Logs</b>.</li>
                     </ol>
                     <p>
                         The launcher saves the complete diagnostic file here:
@@ -121,7 +122,16 @@
                         Upload that diagnostic file together with <code>stobe.log</code> when asking for support. Include <code>RE_Kenshi_log.txt</code> when STOBE did not load at all.
                     </p>
                 </div>
-            </span>
+                            <div class="card" id="GenerateLogs">
+                    <h3>Generate Logs In Game</h3>
+                    <p>Use Generate Logs from the in-game menu to collect a support report.</p>
+                    <ul>
+                        <li><b>Include context:</b> Give the NPC name, what you were doing, and what you expected.</li>
+                        <li><b>Save or scene problems:</b> Include the recovery message or Director status shown when the problem happened.</li>
+                        <li><b>Microphone problems:</b> Say whether recording started, your words appeared, and a reply played.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>

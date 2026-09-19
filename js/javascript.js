@@ -42,6 +42,7 @@ const leftSidebarConfigs = {
             { href: "./ingame-settings.html", title: "Kenshi Settings", label: "Kenshi Settings", emoji: "\uD83C\uDFAE" },
             { href: "./llm.html", title: "Large Language Models", label: "Large Language Models", emoji: "\uD83E\uDDE0" },
             { href: "./tts.html", title: "Text-to-Speech", label: "Text-to-Speech", emoji: "\uD83D\uDD0A" },
+            { href: "./stt.html", title: "Speech-to-Text", label: "Speech-to-Text", emoji: "\uD83D\uDD0A" },
             { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide", emoji: "\uD83D\uDCDC" },
             { href: "./faq.html", title: "FAQ", label: "FAQ", emoji: "\u2753" },
             { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide", emoji: "\uD83C\uDF10" },

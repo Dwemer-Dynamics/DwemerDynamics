@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STOBE Kenshi Settings | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -40,6 +40,7 @@
                 <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
                 <a href="./llm.html" title="Large Language Models">Large Language Models</a>
                 <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
                 <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
                 <a href="./faq.html" title="FAQ">FAQ</a>
                 <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
@@ -98,7 +99,6 @@
                         <li><b>TTS Volume:</b> Voice playback volume from <b>0</b> to <b>100</b>.</li>
                         <li><b>Bored Event Range:</b> How far away STOBE can look for ambient bored-event chatter.</li>
                         <li><b>Bored Event Timer:</b> How often bored events are allowed to happen, in in-game hours.</li>
-                        <li><b>Dynamic Profile Timer:</b> How often dynamic NPC profile updates can happen, in in-game hours.</li>
                         <li><b>Auto Chat:</b> Lets STOBE keep conversations flowing more automatically.</li>
                         <li><b>Bored Events:</b> Turns ambient idle conversations on or off.</li>
                         <li><b>Regular Dialogue:</b> Toggles regular dialogue capture support.</li>
@@ -162,7 +162,28 @@
                         The optional Status HUD is a quick check that STOBE is following the right scene. It shows the active chat and response modes, whether the AI is idle, thinking, or speaking, and the current selected and targeted characters.
                     </p>
                 </div>
-            </span>
+                <div class="card" id="InteractionSwitch">
+                    <h3>STOBE On And Off</h3>
+                    <p>Use the interaction switch in the in-game menu when you want a break from AI responses.</p>
+                    <ul>
+                        <li><b>Off:</b> Pauses AI interaction while the mod continues tracking game events.</li>
+                        <li><b>Microphone:</b> Use the microphone controls to stop recording; the interaction switch is not a microphone mute.</li>
+                        <li><b>Director:</b> See <a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> for directing a conversation.</li>
+                        <li><b>Character updates:</b> Set the schedule in the <a href="./configuration.html#ProfileTimingAndContext">web profile settings</a>.</li>
+                    </ul>
+                </div>
+                            <div class="card" id="SpeechAndMoods">
+                    <h3>Microphone, Moods And Diaries</h3>
+                    <p>Speak through a selected player character or type in the Chat Box.</p>
+                    <ul>
+                        <li><b>Microphone:</b> Bind Push-to-Talk Key in Plugin Settings. Hold it to record and release it to send. Choose the disabled key option if you only want typed chat. See <a href="./stt.html">Speech-to-Text</a> for setup.</li>
+                        <li><b>Mood:</b> Choose a mood beneath the chat input to shape typed or spoken lines without reading the mood cue aloud.</li>
+                        <li><b>Diary audio:</b> Use the diary playback controls to listen to an entry in its writer’s voice.</li>
+                        <li><b>Rename:</b> Enable the optional right-click Rename action when you want it in an NPC’s context menu.</li>
+                        <li><b>Support:</b> Open Generate Logs from the STOBE menu when gathering a report.</li>
+                    </ul>
+                </div>
+</span>
         </div>
 
     </div>

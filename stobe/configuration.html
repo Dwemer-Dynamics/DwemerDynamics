@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STOBE Configuration | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260609a"></script>
+    <script src="../js/javascript.js?v=20260919"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -40,6 +40,7 @@
                 <a href="./ingame-settings.html" title="Kenshi Settings">Kenshi Settings</a>
                 <a href="./llm.html" title="Large Language Models">Large Language Models</a>
                 <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
                 <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
                 <a href="./faq.html" title="FAQ">FAQ</a>
                 <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
@@ -213,7 +214,29 @@
                         <li><b>Import and export:</b> Custom prompt changes can be exported as CSV and imported again later for backup or sharing.</li>
                     </ul>
                 </div>
-            </span>
+                <div class="card" id="PlaythroughSaves">
+                    <h3>Playthrough Saves</h3>
+                    <p>Keep a separate AI history for each campaign. These saves hold STOBE conversations, memories and character state; keep saving your game normally too.</p>
+                    <ul>
+                        <li><b>Choose a playthrough:</b> Use the picker on the server home page to switch or start a new playthrough. Read the save details before choosing.</li>
+                        <li><b>Save and transfer:</b> Open Playthrough Management to manage your saves. Download a save for backup or import one when moving your AI history.</li>
+                        <li><b>Automatic switching:</b> Turn on <b>Automatically switch playthroughs</b> in the storage controls to match your loaded campaign. This is off by default. Reload your game save after enabling it and follow any prompt to associate an existing playthrough.</li>
+                        <li><b>Before switching:</b> The current AI progress is saved before the other playthrough is loaded.</li>
+                        <li><b>Loading an older game save:</b> AI history follows the game timeline. Automatic recovery saves use the <b>Game days behind</b> threshold. Check the recovery message and saved playthroughs if you need the later AI state.</li>
+                        <li><b>Cleanup:</b> Storage and Cleanup lets you choose which categories to clean and how old entries must be. Event cleanup is off by default. Review the category carefully before deleting anything.</li>
+                    </ul>
+                </div>
+                <div class="card" id="ProfileTimingAndContext">
+                    <h3>Profile Updates And Event Filters</h3>
+                    <p>Choose how often characters develop and which events they use in conversation.</p>
+                    <ul>
+                        <li><b>Profile timing:</b> Set the dynamic-profile interval in the web settings, in game hours. Check the selected profile and any NPC override when one character needs a different schedule. The old game-menu timer is no longer the place to set it.</li>
+                        <li><b>Event Type Filter:</b> Tick an event type to exclude it from conversation context. Add a custom event type when it is not listed. This does not delete the saved event.</li>
+                        <li><b>Voice:</b> See <a href="./tts.html#VoiceTools">Voice Tools</a> for voice effects and pronunciation changes.</li>
+                    </ul>
+                </div>
+            <div class="card" id="SpeechInput"><h3>Player Speech</h3><p>Open the Speech-to-Text settings to choose how microphone audio becomes text. The player dialogue audio setting controls whether the player's words are spoken aloud.</p><p>Follow <a href="./stt.html">Speech-to-Text</a> for recording setup. Player-faction profiles remain separate from ordinary NPC profiles.</p></div>
+</span>
         </div>
 
     </div>
