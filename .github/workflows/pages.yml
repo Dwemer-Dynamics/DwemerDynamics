@@ -35,6 +35,7 @@ jobs:
           cp -R font _site/
           cp -R img _site/
           cp -R js _site/
+          cp -R lorkhan _site/
           cp -R stobe _site/
           cp index.html _site/
           cp styles.css _site/

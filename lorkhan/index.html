@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LORKHAN | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>LORKHAN</h1>
+                    <p>AI conversations, voices and character memories for The Elder Scrolls III: Morrowind, powered by a dedicated OpenMW build.</p>
+                </div>
+                <div class="card" id="Beta">
+                    <h2>LORKHAN 0.5.0 beta</h2>
+                    <p>This guide covers the 0.5.0 Windows beta. Keep your existing game installation and saves backed up. LORKHAN needs its matching OpenMW build, Lua files and LorkhanServer; it is not a plugin for the original Morrowind executable.</p>
+                    <p><a href="./installation.html">Start with the installation guide</a> for requirements, beta availability and first-run setup.</p>
+                </div>
+                <div class="card" id="Conversations">
+                    <h2>Talk to characters</h2>
+                    <p>Use text or your microphone to speak to NPCs. LORKHAN uses nearby game context to inform replies, and plays generated speech with subtitles. Profiles let you choose models, voices and roleplay settings.</p>
+                    <p>Vanilla dialogue speech can also read dialogue menu responses. Player speech is optional. See Text-to-Speech.</p>
+                </div>
+                <div class="card" id="Characters">
+                    <h2>Memories and relationships</h2>
+                    <p>NPCs can remember conversations, keep diaries and develop their profiles. Separate actor references let two guards with the same name remain distinct characters. Editable reference groups can deliberately share a character profile.</p>
+                    <p>See Roleplay Settings for memories, relationships and lore.</p>
+                </div>
+                <div class="card" id="Actions">
+                    <h2>Interaction and actions</h2>
+                    <p>Open <b>Text Chat and Interact</b> to select dialogue mode, mood or model strength, view context history, and ask a character to wait. Supported NPC actions are controlled through the server Action Editor.</p>
+                    <p>Director and Cheat modes are available, but they do not make every imagined action possible. Check the actions enabled for your setup before relying on a request.</p>
+                </div>
+                <div class="card" id="Start">
+                    <h2>Choose your setup</h2>
+                    <p>Use local or hosted AI services. Quickstart helps configure them; local services still need to be installed and running. Start with one working conversation before changing voices or adding other mods.</p>
+                    <p><a href="./configuration.html">Configure the server</a> · <a href="./ingame-settings.html">Morrowind controls</a> · <a href="./faq.html">Get help</a></p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

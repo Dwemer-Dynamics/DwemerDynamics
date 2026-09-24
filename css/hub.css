@@ -8,6 +8,16 @@
     align-items: start;
 }
 
+.hubTileActionButtonLorkhan {
+    background-color: #bc9d5a;
+}
+
+.hubTileActionButtonLorkhan:hover,
+.hubTileActionButtonLorkhan:focus-visible {
+    background-color: #dabb78;
+    color: #111111;
+}
+
 .hubPicker {
     display: flex;
     flex-wrap: wrap;

@@ -1,6 +1,84 @@
 var menuIsOpen = false;
 
 const leftSidebarConfigs = {
+    lorkhan: {
+        "pageLinks": [
+            {
+                "href": "../index.html",
+                "title": "Home",
+                "label": "Home",
+                "emoji": "↩️"
+            },
+            {
+                "href": "./index.html",
+                "title": "Overview",
+                "label": "Overview",
+                "emoji": "📖"
+            },
+            {
+                "href": "./installation.html",
+                "title": "Installation",
+                "label": "Installation",
+                "emoji": "⚙️"
+            },
+            {
+                "href": "./configuration.html",
+                "title": "Configuration",
+                "label": "Configuration",
+                "emoji": "🔧"
+            },
+            {
+                "href": "./ingame-settings.html",
+                "title": "Morrowind Settings",
+                "label": "Morrowind Settings",
+                "emoji": "🎮"
+            },
+            {
+                "href": "./faq.html",
+                "title": "FAQ",
+                "label": "FAQ",
+                "emoji": "❓"
+            },
+            {
+                "href": "./log-files-and-debugging.html",
+                "title": "Logs and Debugging",
+                "label": "Logs and Debugging",
+                "emoji": "📄"
+            }
+        ],
+        "bottomLinks": [
+            {
+                "href": "./installation.html#Download",
+                "title": "Beta downloads",
+                "label": "Beta downloads",
+                "emoji": "⬇️"
+            },
+            {
+                "href": "https://discord.gg/NDn9qud2ug",
+                "title": "Discord",
+                "label": "Discord",
+                "icon": "../img/discord.png"
+            },
+            {
+                "href": "https://www.patreon.com/DwemerDynamics",
+                "title": "Patreon",
+                "label": "Patreon",
+                "icon": "../img/patreon.png"
+            },
+            {
+                "href": "https://github.com/Dwemer-Dynamics/LORKHAN",
+                "title": "Mod Code",
+                "label": "Mod Code",
+                "emoji": "💻"
+            },
+            {
+                "href": "https://github.com/Dwemer-Dynamics/LorkhanServer",
+                "title": "Server Code",
+                "label": "Server Code",
+                "emoji": "💻"
+            }
+        ]
+    },
     chim: {
         pageLinks: [
             { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
@@ -165,6 +243,10 @@ function createLeftSidebar() {
 }
 
 function getLeftSidebarConfig() {
+    if (document.body.classList.contains("lorkhan-theme")) {
+        return leftSidebarConfigs.lorkhan;
+    }
+
     if (document.body.classList.contains("chim-theme")) {
         return leftSidebarConfigs.chim;
     }

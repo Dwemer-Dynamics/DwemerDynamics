@@ -143,6 +143,29 @@ footer {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.lorkhan-theme .content a {
+    color: #bc9d5a;
+}
+
+.lorkhan-theme .content a:hover {
+    color: #dabb78;
+}
+
+.lorkhan-theme .content pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.lorkhan-theme .headerTitle #logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.lorkhan-theme .sidebar .active::before {
+    background-color: #bc9d5a;
+}
+
 .section {
     opacity: 0;
     transition: opacity 1s ease;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Configuration | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>Configuration</h1>
+                    <p>Use LorkhanServer’s Configuration menu for shared settings, profiles, characters and services.</p>
+                </div>
+                <div class="card" id="Quickstart">
+                    <h2>Quickstart</h2>
+                    <p><b>What this does:</b> Connects LORKHAN to the services that generate dialogue, voices and microphone transcripts.</p>
+                    <ol><li>Open <b>Quickstart</b> from the server’s top menu.</li><li>Choose a language model service and supply any required API key.</li><li>Choose speech output and microphone transcription services.</li><li>Save the setup and test a short conversation.</li></ol>
+                    <p>The initial local speech choices are <b>PocketTTS</b> and <b>Parakeet</b>. Choosing them does not start a missing service. Check those services in DwemerDistro before testing.</p>
+                </div>
+                <div class="card" id="Globals">
+                    <h2>Global Settings</h2>
+                    <p>Open <b>Configuration → Global Settings</b> for shared context and behaviour settings. Review the context sections, event filters, blacklists and Oghma settings there.</p>
+                    <p>Checked event types are <b>excluded</b> from the AI context; checking more types does not add more context. Use the custom event entry only when you know the event name you want to exclude.</p>
+                </div>
+                <div class="card" id="Profiles">
+                    <h2>Profiles</h2>
+                    <p>Profiles collect shared model, voice and roleplay choices. Edit the default profile first, then use more profiles only when groups of characters need different behaviour.</p>
+                    <ul><li><b>Model slots:</b> Standard, Fast, Powerful and Experimental are assigned here and selected in game.</li><li><b>Memories and diaries:</b> Configure the profile options before expecting automatic updates.</li><li><b>Global Settings Overrides:</b> Override supported global choices for this profile when needed.</li><li><b>Save All:</b> Save changes before testing them.</li></ul>
+                    <p>See Language Models and Roleplay Settings for details.</p>
+                </div>
+                <div class="card" id="NPCs">
+                    <h2>LORKHAN NPCs</h2>
+                    <p>Select an actor to inspect its identity, biography, profile and voice. Use <b>Voice ID</b> for the voice assignment and <b>Prompt Head Override</b> for character-specific guidance.</p>
+                    <p>The base ID identifies the game record; the reference ID identifies the individual actor. Names alone are not enough to distinguish repeated guards. Only put references into a shared reference group when you want them treated as the same character.</p>
+                </div>
+                <div class="card" id="Actions">
+                    <h2>Action Editor</h2>
+                    <p>Review the available actions and their permissions before using Director or Cheat mode. An action can require confirmation, run without confirmation, or be unavailable according to its configuration.</p>
+                    <p>Keep confirmation enabled for actions you want to approve individually. An AI request cannot make an unsupported game action work.</p>
+                </div>
+                <div class="card" id="PlaythroughSaves">
+                    <h2>Playthrough Saves</h2>
+                    <p>Use the Dwemer Dashboard playthrough manager to inspect and manage server-side playthrough backups. These are separate from your OpenMW save files. Back up both before a beta upgrade or a deliberate restore.</p>
+                    <p>Playthrough handling uses game information sent by the client. If the server appears to be showing the wrong character or history after loading a save, check the active playthrough before continuing the conversation.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
