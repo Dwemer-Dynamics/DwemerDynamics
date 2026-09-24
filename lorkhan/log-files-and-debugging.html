@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Logs and Debugging | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>Logs and Debugging</h1>
+                    <p>Collect evidence from the same failed conversation before changing settings.</p>
+                </div>
+                <div class="card" id="FirstChecks">
+                    <h2>First checks</h2>
+                    <ol><li>Confirm DwemerDistro and LorkhanServer are running.</li><li>Open the server webpage through the launcher.</li><li>Check the target in Text Chat and Interact and send a short typed message.</li><li>Note the time and whether text, NPC speech or microphone transcription failed.</li></ol>
+                </div>
+                <div class="card" id="ServerLogs">
+                    <h2>Server logs</h2>
+                    <p>Open the <b>Dwemer Dashboard</b>, enter its debugger and select <b>LORKHAN</b>. Use the server log views there to inspect errors around your test time.</p>
+                    <p>The server’s AI responses and event history are useful for checking what was recorded, but a recorded response alone does not prove audio played in game.</p>
+                </div>
+                <div class="card" id="ClientLogs">
+                    <h2>Client logs</h2>
+                    <p>Use <b>Open LORKHAN Logs</b> in the launcher to find the client logs. The in-game Diagnostics menu can help identify a missing bridge or connection.</p>
+                    <p>For a bridge error, first confirm you launched <code>Play-LORKHAN.cmd</code> from the intended beta profile and did not mix files from different builds.</p>
+                </div>
+                <div class="card" id="Diagnostics">
+                    <h2>Create a support report</h2>
+                    <ol><li>Open the launcher’s <b>LOGS</b> tab.</li><li>Select <b>Generate Distro Debugging Logs</b> and confirm the prompt.</li><li>Review the diagnostic archive before sharing it. Do not include API keys, pairing keys or private configuration files.</li><li>Report the beta version, what you tried, NPC name, approximate time and whether typed chat also fails.</li></ol>
+                    <p>Share the report through <a href="https://discord.gg/NDn9qud2ug">Discord</a>. Do not reinstall or clear your history just to collect logs.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Morrowind Settings | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>Morrowind Settings</h1>
+                    <p>Open Options → Scripts → LORKHAN to configure the in-game controls.</p>
+                </div>
+                <div class="card" id="Hotkeys">
+                    <h2>Hotkeys</h2>
+                    <p>Set <b>Text Chat and Interact</b> to a comfortable key. The text field is focused when the menu opens, so you can type immediately and press Enter to send.</p>
+                    <p>Use the separate voice recording and open-microphone bindings for speech input. Check your actual bindings in the Scripts menu rather than relying on a key from another player’s setup.</p>
+                </div>
+                <div class="card" id="Target">
+                    <h2>Choose a target</h2>
+                    <p>Look at the NPC you want to address. LORKHAN prefers the eligible actor under the crosshair; without a crosshair target, it falls back to a nearby NPC.</p>
+                    <p>Check the name shown in <b>Text Chat and Interact</b> before sending. <b>Wait Here (90 seconds)</b> asks the target to stop moving temporarily.</p>
+                </div>
+                <div class="card" id="Modes">
+                    <h2>Dialogue mode and mood</h2>
+                    <p><b>Dialogue mode</b> contains the available conversation modes and typed shortcuts. Use the shortcuts shown beside each mode rather than guessing a prefix. Director and Cheat are execution modes, not language model choices.</p>
+                    <p><b>Mood</b> changes delivery guidance. <b>LLM model</b> selects Standard, Fast, Powerful or Experimental from the current profile. Auto Chat is controlled through the modes menu.</p>
+                </div>
+                <div class="card" id="Profiles">
+                    <h2>Dynamic profiles and history</h2>
+                    <p><b>Dynamic profiles</b> sends the selected update request to the server and closes the menu. Check which NPC is targeted before requesting a character update.</p>
+                    <p><b>Context history</b> shows conversation context. <b>Status HUD</b> controls the optional status display, and <b>Diagnostics</b> helps investigate connection problems.</p>
+                </div>
+                <div class="card" id="Audio">
+                    <h2>Audio and automatic dialogue</h2>
+                    <p>Review the microphone, speech playback, hearing and awareness controls in Scripts. Combat bark interval starts at <b>30 seconds</b>; profile and server settings also determine whether automatic speech is eligible.</p>
+                    <p><b>Stop AI Actions</b> is an emergency action control. Microphone capture, AI interaction and speech playback are separate controls; check each one when troubleshooting.</p>
+                    <p>For menu dialogue speech and player TTS, see Text-to-Speech.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FAQ | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>FAQ</h1>
+                    <p>Start with a short typed conversation, then add speech and other options one at a time.</p>
+                </div>
+                <div class="card" id="Engine">
+                    <h2>Can I use ordinary OpenMW or original Morrowind?</h2>
+                    <p>Use the OpenMW build included with LORKHAN and its matching Lua files. The beta depends on its native bridge. The original Morrowind executable and an unrelated stock OpenMW build are not substitutes.</p>
+                </div>
+                <div class="card" id="Mods">
+                    <h2>Which extra mods are required?</h2>
+                    <p>LORKHAN needs your Morrowind game data, its matching beta package and LorkhanServer. Skyrim tools such as SKSE and SkyUI are not required. Check other mods for compatibility with the supplied OpenMW version before adding them.</p>
+                </div>
+                <div class="card" id="Services">
+                    <h2>Does everything run locally?</h2>
+                    <p>You choose the providers. Local language models and speech services need suitable hardware and must be running. Hosted providers can require paid accounts and send the relevant dialogue or speech to that provider. Do not assume choosing a local voice also makes the language model local.</p>
+                </div>
+                <div class="card" id="NoResponse">
+                    <h2>Why is there no response?</h2>
+                    <p>Check that DwemerDistro is running, LorkhanServer opens, AI interaction is enabled and the menu shows the intended NPC. Send a short typed message to separate microphone problems from dialogue problems.</p>
+                    <p>Then check your selected model and service credentials. Use <a href="./log-files-and-debugging.html">Logs and Debugging</a> to collect the error instead of repeatedly resetting your setup.</p>
+                </div>
+                <div class="card" id="NoAudio">
+                    <h2>Text works but speech does not</h2>
+                    <p>Test the selected voice in TTS Studio. Check the speech service, endpoint and Voice ID. If the preview works, check in-game playback volume and the relevant player or dialogue speech option.</p>
+                </div>
+                <div class="card" id="Saves">
+                    <h2>Can I keep my normal saves?</h2>
+                    <p>The setup script creates a separate profile. Keep your normal installation and saves untouched, and back up the beta profile before upgrades. Server playthrough backups and game saves are different things; retain both.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

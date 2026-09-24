@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Installation | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>Installation</h1>
+                    <p>Set up the LORKHAN beta separately from your existing Morrowind and OpenMW installations.</p>
+                </div>
+                <div class="card" id="Requirements">
+                    <h2>Requirements</h2>
+                    <ul><li><b>Windows x64:</b> This guide follows the packaged Windows beta.</li><li><b>Morrowind:</b> A legally owned installation and its Data Files folder. Game data is not included.</li><li><b>Matching client:</b> The LORKHAN OpenMW build and Lua files supplied together in the beta ZIP. Stock OpenMW alone is not sufficient.</li><li><b>Server:</b> DwemerDistro with LorkhanServer installed, plus your chosen AI and speech services.</li><li><b>Runtime:</b> <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Microsoft Visual C++ 2015–2022 x64 Redistributable</a>.</li></ul>
+                    <p>Do not install Skyrim SKSE, SkyUI, MWSE or MGE XE as LORKHAN requirements. Other mods must be compatible with the supplied OpenMW build.</p>
+                </div>
+                <div class="card" id="Download">
+                    <h2>Get the beta</h2>
+                    <p>The 0.5.0 beta package is named <b>LORKHAN 0.5.0 BETA.zip</b>. Check the <a href="https://discord.gg/NDn9qud2ug">Dwemer Dynamics Discord</a> for beta availability and download instructions. The source repository is not a substitute for the compiled beta.</p>
+                    <p>Use the matching package instructions if a newer beta is announced. Do not combine an older executable with newer Lua files.</p>
+                </div>
+                <div class="card" id="Server">
+                    <h2>1. Install the server</h2>
+                    <ol><li>Install or update <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest">DwemerDistro Launcher</a>. LORKHAN needs launcher 3.3.28 or later.</li><li>Select <b>LORKHAN</b> and install its server. Use the <b>Dev</b> channel for the beta.</li><li>Start the server and open <b>LORKHAN Webpage</b>.</li><li>Complete <b>Quickstart</b> with your own AI services and credentials. Install and start any local speech services you select.</li></ol>
+                    <p>See <a href="./configuration.html#Quickstart">Quickstart</a> for the difference between models, voices and microphone transcription.</p>
+                </div>
+                <div class="card" id="Profile">
+                    <h2>2. Extract and create a profile</h2>
+                    <p>Extract the ZIP into a new versioned folder. Do not overwrite stock OpenMW or another beta. Open PowerShell in the extracted package folder and run this command, replacing both example paths:</p>
+                    <pre><code>powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\config\Setup-Profile.ps1 -GameData 'D:\Games\Morrowind\Data Files' -ProfileRoot 'D:\LorkhanProfiles\Beta-0.5.0'</code></pre>
+                    <p>The destination profile must not already exist. The script reads the local server pairing key without displaying it and creates a private client configuration. It does not copy your game data or alter stock OpenMW saves.</p>
+                    <p>The default proxy port is <b>7514</b>. The setup script accepts <code>-Distro</code> for a differently named DwemerDistro WSL instance and <code>-ProxyPort</code> for a different proxy port.</p>
+                </div>
+                <div class="card" id="FirstRun">
+                    <h2>3. Launch and test</h2>
+                    <ol><li>Leave DwemerDistro and your selected local services running.</li><li>Run <code>Play-LORKHAN.cmd</code> inside the new profile folder.</li><li>Open <b>Options → Scripts → LORKHAN</b> and check the Text Chat and Interact binding.</li><li>Look at a nearby NPC, open the interaction menu and send a short typed message.</li><li>Once text works, test NPC speech and then microphone input.</li></ol>
+                    <p>Settings, saves and audio cache stay in the separate profile. For this beta, add other mods through that profile’s <code>openmw.cfg</code>. Avoid editing a different profile with the stock launcher.</p>
+                </div>
+                <div class="card" id="Updates">
+                    <h2>Update safely</h2>
+                    <p>Back up your profile and server data first. Extract a new beta beside the old one, then follow its package instructions to update the profile launch path. Keep the executable and Lua files from the same package.</p>
+                    <p>Deleting the extracted program folder does not require deleting your profile or Morrowind data. See <a href="./log-files-and-debugging.html">Logs and Debugging</a> if the first conversation fails.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
