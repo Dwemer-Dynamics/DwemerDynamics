@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Roleplay Settings | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./roleplay-settings.html">Roleplay Settings</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./llm.html">Large Language Models</a>
+                <a href="./local-llm-guide.html">Local LLM Guide</a>
+                <a href="./tts.html">Text-to-Speech</a>
+                <a href="./stt.html">Speech-to-Text</a>
+                <a href="./modders-guide.html">Modders Guide</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./remote-hosting-guide.html">Remote Hosting</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>Roleplay Settings</h1>
+                    <p>Configure character development and context through profiles, then inspect individual NPCs when needed.</p>
+                </div>
+                <div class="card" id="Memories">
+                    <h2>Profiles and memories</h2>
+                    <p><b>Dynamic Profile</b> allows character profile updates. <b>Middle Term Memory</b> and <b>Short Term Memory</b> control the corresponding memory features for a profile.</p>
+                    <p>Enable only the behaviour you want, save the profile and test with an NPC assigned to it. Use the in-game Dynamic profiles menu for manual requests; automatic updates depend on the profile settings.</p>
+                </div>
+                <div class="card" id="Relationships">
+                    <h2>Relationships</h2>
+                    <p>Morrowind disposition is on a <b>0–100</b> scale. In-game persuasion and bribes can change it, and supported AI interactions can also affect it. Treat the live game value as the reference when checking a mismatch.</p>
+                    <p>Inspect the NPC’s relationships and recorded interactions in the server. A biography’s initial relationship descriptions are not the same as a history of conversations with your current character.</p>
+                </div>
+                <div class="card" id="Diaries">
+                    <h2>Diaries</h2>
+                    <p>Profile options include <b>Auto Diary</b>, <b>Auto Diary Wait</b>, <b>Physical Diary</b> and <b>Include Latest Diary Entry</b>. Use these to control generation after sleep or wait, readable in-game diary output, and whether the latest entry is used in response context.</p>
+                    <p>Diary generation needs a working model assignment. Check the server’s diary view before assuming an automatic trigger has produced an entry.</p>
+                </div>
+                <div class="card" id="Narrator">
+                    <h2>Narrator and player</h2>
+                    <p>Open <b>Configuration → Narration</b> to configure the narrator separately from ordinary NPCs. Review its prompt, voice and event settings before enabling frequent narration. Use <b>Configuration → Player</b> for player speech; changing an NPC profile’s voice does not configure the player voice.</p>
+                </div>
+                <div class="card" id="Oghma">
+                    <h2>Oghma Infinium</h2>
+                    <p>Oghma supplies world knowledge to character prompts. Review the knowledge articles and use <b>Oghma Result Limit</b> in Global Settings to control how many matching articles are included.</p>
+                    <p>Keep articles relevant and concise. World knowledge should describe the setting; a character’s private memories belong in that character’s history.</p>
+                </div>
+                <div class="card" id="Identity">
+                    <h2>Repeated names and reference groups</h2>
+                    <p>Two actors called Hlaalu Guard do not need to share a profile. Check reference IDs when reviewing their memories. Reference groups are for deliberate exceptions, such as several game references representing one named character.</p>
+                    <p>Do not group all guards together simply because their displayed names match.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

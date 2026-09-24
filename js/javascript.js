@@ -28,16 +28,58 @@ const leftSidebarConfigs = {
                 "emoji": "🔧"
             },
             {
+                "href": "./roleplay-settings.html",
+                "title": "Roleplay Settings",
+                "label": "Roleplay Settings",
+                "emoji": "🎭"
+            },
+            {
                 "href": "./ingame-settings.html",
                 "title": "Morrowind Settings",
                 "label": "Morrowind Settings",
                 "emoji": "🎮"
             },
             {
+                "href": "./llm.html",
+                "title": "Large Language Models",
+                "label": "Large Language Models",
+                "emoji": "🧠"
+            },
+            {
+                "href": "./local-llm-guide.html",
+                "title": "Local LLM Guide",
+                "label": "Local LLM Guide",
+                "emoji": "🖥️"
+            },
+            {
+                "href": "./tts.html",
+                "title": "Text-to-Speech",
+                "label": "Text-to-Speech",
+                "emoji": "🔊"
+            },
+            {
+                "href": "./stt.html",
+                "title": "Speech-to-Text",
+                "label": "Speech-to-Text",
+                "emoji": "🎤"
+            },
+            {
+                "href": "./modders-guide.html",
+                "title": "Modders Guide",
+                "label": "Modders Guide",
+                "emoji": "📜"
+            },
+            {
                 "href": "./faq.html",
                 "title": "FAQ",
                 "label": "FAQ",
                 "emoji": "❓"
+            },
+            {
+                "href": "./remote-hosting-guide.html",
+                "title": "Remote Hosting",
+                "label": "Remote Hosting",
+                "emoji": "🌐"
             },
             {
                 "href": "./log-files-and-debugging.html",
