@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text-to-Speech | LORKHAN | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20260924-lorkhan"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body class="theme lorkhan-theme">
+    <div class="progress-container">
+        <div class="progress-bar lorkhan-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">LORKHAN</a>
+            </div>
+            </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./roleplay-settings.html">Roleplay Settings</a>
+                <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./llm.html">Large Language Models</a>
+                <a href="./local-llm-guide.html">Local LLM Guide</a>
+                <a href="./tts.html">Text-to-Speech</a>
+                <a href="./stt.html">Speech-to-Text</a>
+                <a href="./modders-guide.html">Modders Guide</a>
+                <a href="./faq.html">FAQ</a>
+                <a href="./remote-hosting-guide.html">Remote Hosting</a>
+                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="./installation.html#Download">Beta downloads</a>
+                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
+                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
+                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
+                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section class="section" id="Guide">
+                <div class="card hero-card">
+                    <h1>Text-to-Speech</h1>
+                    <p>Choose voices for NPCs, the narrator and the player, then test speech before changing in-game playback settings.</p>
+                </div>
+                <div class="card" id="Setup">
+                    <h2>Choose a speech service</h2>
+                    <p>The initial local choice is <b>PocketTTS</b>. Other supported connectors have their own endpoint, account and voice requirements. Start the selected local service in DwemerDistro before testing.</p>
+                    <p>Assign the TTS connector in Profiles for ordinary NPC speech. Configure player and narrator speech separately. Selecting a new connector does not by itself verify that every saved voice is supported by it.</p>
+                </div>
+                <div class="card" id="Voices">
+                    <h2>Voice ID and samples</h2>
+                    <p>Open the NPC editor to inspect <b>Voice ID</b>. Biographies and race-based fallback choices can supply voice assignments, while cloning-capable services use voice samples where available.</p>
+                    <p>Keep voice samples available on the server. Do not assume every provider accepts the same identifier or supports the same cloning features. Test the selected NPC voice after changing providers.</p>
+                </div>
+                <div class="card" id="Studio">
+                    <h2>TTS Studio</h2>
+                    <p>Use TTS Studio to preview speech before testing it in game. Try a short sentence first. If the preview fails, check the connector, service, credentials and selected voice.</p>
+                    <p>Voice filters change the sound of generated speech. Preview a filter before assigning it to a character; strong effects can make speech harder to understand.</p>
+                </div>
+                <div class="card" id="Pronunciation">
+                    <h2>Pronunciations</h2>
+                    <p>Open the <b>Pronunciations</b> tab in TTS Studio to add or edit pronunciation entries and use the play/test controls. Test Morrowind names in a full sentence with your chosen voice.</p>
+                    <p>Only add replacements for words the provider gets wrong. Pronunciation varies by voice and provider, so a replacement that improves one setup can make another worse.</p>
+                </div>
+                <div class="card" id="MenuDialogue">
+                    <h2>Vanilla dialogue and player speech</h2>
+                    <p>Enable vanilla dialogue speech in the in-game Scripts settings. With the default audio pause setting, it can play while the dialogue menu pauses the game. Selecting a new option or closing the dialogue menu stops the previous speech.</p>
+                    <p>If player TTS is also enabled, the selected player dialogue option is spoken before the NPC’s response. Leave player TTS off if you only want to hear the NPC.</p>
+                </div>
+                <div class="card" id="Latency">
+                    <h2>If speech is slow</h2>
+                    <p>Compare a short Studio preview with a short in-game reply. Long replies can play in sentence-sized pieces, but speech generation still depends on provider speed and available hardware.</p>
+                    <p>If text arrives quickly but audio does not, check the speech service logs. If neither arrives, investigate the model request first.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

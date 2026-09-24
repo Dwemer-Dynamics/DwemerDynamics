@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LORKHAN | Dwemer Dynamics</title>
+    <title>Local LLM Guide | LORKHAN | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20260924-lorkhan"></script>
     <link rel="stylesheet" href="../css/styles.css">
@@ -61,33 +61,27 @@
         <main class="content">
             <section class="section" id="Guide">
                 <div class="card hero-card">
-                    <h1>LORKHAN</h1>
-                    <p>AI conversations, voices and character memories for The Elder Scrolls III: Morrowind, powered by a dedicated OpenMW build.</p>
+                    <h1>Local LLM Guide</h1>
+                    <p>Run a compatible language model service on your PC or another machine, then connect LorkhanServer to it.</p>
                 </div>
-                <div class="card" id="Beta">
-                    <h2>LORKHAN 0.5.0 beta</h2>
-                    <p>This guide covers the 0.5.0 Windows beta. Keep your existing game installation and saves backed up. LORKHAN needs its matching OpenMW build, Lua files and LorkhanServer; it is not a plugin for the original Morrowind executable.</p>
-                    <p><a href="./installation.html">Start with the installation guide</a> for requirements, beta availability and first-run setup.</p>
+                <div class="card" id="Requirements">
+                    <h2>Before you start</h2>
+                    <p>Choose a model that fits your available memory and hardware. Running the game, language model and speech services together can increase latency. A small working setup is a better starting point than several large services competing for resources.</p>
+                    <p>Use an endpoint supported by the connector you choose. An OpenAI-compatible connector needs an OpenAI-compatible chat API, not the service’s browser page.</p>
                 </div>
-                <div class="card" id="Conversations">
-                    <h2>Talk to characters</h2>
-                    <p>Use text or your microphone to speak to NPCs. LORKHAN uses nearby game context to inform replies, and plays generated speech with subtitles. Profiles let you choose models, voices and roleplay settings.</p>
-                    <p>Vanilla dialogue speech can also read dialogue menu responses. Player speech is optional. See <a href="./tts.html">Text-to-Speech</a>.</p>
+                <div class="card" id="Setup">
+                    <h2>Connect the service</h2>
+                    <ol><li>Start your local model service and load a model.</li><li>Check its documented API address and model identifier.</li><li>Create or edit the matching LLM connector in LorkhanServer.</li><li>Enter the endpoint, model and any required authentication.</li><li>Assign it to the profile’s Standard slot and save.</li><li>Send a short typed message in game.</li></ol>
                 </div>
-                <div class="card" id="Characters">
-                    <h2>Memories and relationships</h2>
-                    <p>NPCs can remember conversations, keep diaries and develop their profiles. Separate actor references let two guards with the same name remain distinct characters. Editable reference groups can deliberately share a character profile.</p>
-                    <p>See <a href="./roleplay-settings.html">Roleplay Settings</a> for memories, relationships and lore.</p>
+                <div class="card" id="Network">
+                    <h2>Use the address the server can reach</h2>
+                    <p>LorkhanServer normally runs inside DwemerDistro’s Linux environment. <code>127.0.0.1</code> is relative to the process making the request; it is not automatically another computer or a service bound only to Windows loopback.</p>
+                    <p>For a service on another machine, use its reachable address and allow only the necessary private-network access. See <a href="./remote-hosting-guide.html">Remote Hosting</a>.</p>
                 </div>
-                <div class="card" id="Actions">
-                    <h2>Interaction and actions</h2>
-                    <p>Open <b>Text Chat and Interact</b> to select dialogue mode, mood or model strength, view context history, and ask a character to wait. Supported NPC actions are controlled through the server Action Editor.</p>
-                    <p>Director and Cheat modes are available, but they do not make every imagined action possible. Check the actions enabled for your setup before relying on a request.</p>
-                </div>
-                <div class="card" id="Start">
-                    <h2>Choose your setup</h2>
-                    <p>Use local or hosted AI services. Quickstart helps configure them; local services still need to be installed and running. Start with one working conversation before changing voices or adding other mods.</p>
-                    <p><a href="./configuration.html">Configure the server</a> · <a href="./ingame-settings.html">Morrowind controls</a> · <a href="./faq.html">Get help</a></p>
+                <div class="card" id="Tuning">
+                    <h2>Improve response time</h2>
+                    <p>Start with a short reply and modest context. Check model loading, memory use and request timing. Change one setting at a time, and avoid judging the model from its first cold request alone.</p>
+                    <p>Do not expose an unauthenticated model endpoint to the public internet.</p>
                 </div>
             </section>
         </main>

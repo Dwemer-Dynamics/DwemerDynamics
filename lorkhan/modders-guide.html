@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LORKHAN | Dwemer Dynamics</title>
+    <title>Modders Guide | LORKHAN | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20260924-lorkhan"></script>
     <link rel="stylesheet" href="../css/styles.css">
@@ -61,33 +61,31 @@
         <main class="content">
             <section class="section" id="Guide">
                 <div class="card hero-card">
-                    <h1>LORKHAN</h1>
-                    <p>AI conversations, voices and character memories for The Elder Scrolls III: Morrowind, powered by a dedicated OpenMW build.</p>
+                    <h1>Modders Guide</h1>
+                    <p>Start with supported data customization. Native or Lua changes need a matching client build.</p>
                 </div>
-                <div class="card" id="Beta">
-                    <h2>LORKHAN 0.5.0 beta</h2>
-                    <p>This guide covers the 0.5.0 Windows beta. Keep your existing game installation and saves backed up. LORKHAN needs its matching OpenMW build, Lua files and LorkhanServer; it is not a plugin for the original Morrowind executable.</p>
-                    <p><a href="./installation.html">Start with the installation guide</a> for requirements, beta availability and first-run setup.</p>
+                <div class="card" id="Data">
+                    <h2>NPC biographies</h2>
+                    <p>Use the server’s NPC biography tools for reusable character information. Base IDs identify game records; live reference IDs distinguish individual actors. Keep identity fields accurate rather than using display names as unique keys.</p>
+                    <p>Use the current importer’s format and test a small import before processing a full mod. Back up existing data first. Do not assume a CSV from another game can be imported unchanged.</p>
                 </div>
-                <div class="card" id="Conversations">
-                    <h2>Talk to characters</h2>
-                    <p>Use text or your microphone to speak to NPCs. LORKHAN uses nearby game context to inform replies, and plays generated speech with subtitles. Profiles let you choose models, voices and roleplay settings.</p>
-                    <p>Vanilla dialogue speech can also read dialogue menu responses. Player speech is optional. See <a href="./tts.html">Text-to-Speech</a>.</p>
+                <div class="card" id="Voices">
+                    <h2>Voice presets</h2>
+                    <p>Biography data can include Voice ID and supported voice-filter presets. Verify the imported values in an activated NPC’s editor, then preview the voice with the intended connector.</p>
+                    <p>Only distribute audio and character assets you have permission to share. A local sample path on your development PC is not a portable voice asset.</p>
                 </div>
-                <div class="card" id="Characters">
-                    <h2>Memories and relationships</h2>
-                    <p>NPCs can remember conversations, keep diaries and develop their profiles. Separate actor references let two guards with the same name remain distinct characters. Editable reference groups can deliberately share a character profile.</p>
-                    <p>See <a href="./roleplay-settings.html">Roleplay Settings</a> for memories, relationships and lore.</p>
+                <div class="card" id="Lore">
+                    <h2>World knowledge</h2>
+                    <p>Add relevant setting information through Oghma’s knowledge tools. Keep each article focused on one topic and test retrieval in context. Avoid mixing private NPC memories into general world knowledge.</p>
                 </div>
-                <div class="card" id="Actions">
-                    <h2>Interaction and actions</h2>
-                    <p>Open <b>Text Chat and Interact</b> to select dialogue mode, mood or model strength, view context history, and ask a character to wait. Supported NPC actions are controlled through the server Action Editor.</p>
-                    <p>Director and Cheat modes are available, but they do not make every imagined action possible. Check the actions enabled for your setup before relying on a request.</p>
+                <div class="card" id="References">
+                    <h2>Reference groups</h2>
+                    <p>Use editable reference groups for multiple references that intentionally represent the same character. Do not merge unrelated actors just because their names or base records match.</p>
                 </div>
-                <div class="card" id="Start">
-                    <h2>Choose your setup</h2>
-                    <p>Use local or hosted AI services. Quickstart helps configure them; local services still need to be installed and running. Start with one working conversation before changing voices or adding other mods.</p>
-                    <p><a href="./configuration.html">Configure the server</a> · <a href="./ingame-settings.html">Morrowind controls</a> · <a href="./faq.html">Get help</a></p>
+                <div class="card" id="Source">
+                    <h2>Source and builds</h2>
+                    <p>The <a href="https://github.com/Dwemer-Dynamics/LORKHAN">LORKHAN repository</a> contains the native bridge, Lua mod and build instructions. <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">LorkhanServer</a> contains the server. Both use GPL-3.0 licensing; third-party components retain their own notices.</p>
+                    <p>Use the matching beta source package and build instructions when rebuilding a release. Keep the pinned engine, native bridge and Lua files together. Do not distribute Bethesda game data.</p>
                 </div>
             </section>
         </main>

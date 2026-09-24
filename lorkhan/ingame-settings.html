@@ -36,8 +36,15 @@
                 <a href="./index.html">Overview</a>
                 <a href="./installation.html">Installation</a>
                 <a href="./configuration.html">Configuration</a>
+                <a href="./roleplay-settings.html">Roleplay Settings</a>
                 <a href="./ingame-settings.html">Morrowind Settings</a>
+                <a href="./llm.html">Large Language Models</a>
+                <a href="./local-llm-guide.html">Local LLM Guide</a>
+                <a href="./tts.html">Text-to-Speech</a>
+                <a href="./stt.html">Speech-to-Text</a>
+                <a href="./modders-guide.html">Modders Guide</a>
                 <a href="./faq.html">FAQ</a>
+                <a href="./remote-hosting-guide.html">Remote Hosting</a>
                 <a href="./log-files-and-debugging.html">Logs and Debugging</a>
             </p>
             <p class="sidebar-padder"></p>
@@ -71,6 +78,14 @@
                     <h2>Dialogue mode and mood</h2>
                     <p><b>Dialogue mode</b> contains the available conversation modes and typed shortcuts. Use the shortcuts shown beside each mode rather than guessing a prefix. Director and Cheat are execution modes, not language model choices.</p>
                     <p><b>Mood</b> changes delivery guidance. <b>LLM model</b> selects Standard, Fast, Powerful or Experimental from the current profile. Auto Chat is controlled through the modes menu.</p>
+                    <ul>
+                        <li><b>Standard, Whisper, Close and Shout:</b> Select how the message is addressed and heard.</li>
+                        <li><b>Narrator:</b> Send the request to the narrator.</li>
+                        <li><b>Director and Cheat:</b> Use the corresponding execution mode, subject to enabled actions.</li>
+                        <li><b>Auto Chat:</b> Control automatic player chat through the mode menu.</li>
+                        <li><b>Inject Event:</b> Add an event without asking for a chat response.</li>
+                        <li><b>Inject &amp; Chat:</b> Add the event and request a response.</li>
+                    </ul>
                 </div>
                 <div class="card" id="Profiles">
                     <h2>Dynamic profiles and history</h2>
@@ -81,7 +96,7 @@
                     <h2>Audio and automatic dialogue</h2>
                     <p>Review the microphone, speech playback, hearing and awareness controls in Scripts. Combat bark interval starts at <b>30 seconds</b>; profile and server settings also determine whether automatic speech is eligible.</p>
                     <p><b>Stop AI Actions</b> is an emergency action control. Microphone capture, AI interaction and speech playback are separate controls; check each one when troubleshooting.</p>
-                    <p>For menu dialogue speech and player TTS, see Text-to-Speech.</p>
+                    <p>For menu dialogue speech and player TTS, see <a href="./tts.html">Text-to-Speech</a>.</p>
                 </div>
             </section>
         </main>

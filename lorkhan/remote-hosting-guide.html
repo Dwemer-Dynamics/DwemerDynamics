@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LORKHAN | Dwemer Dynamics</title>
+    <title>Remote Hosting | LORKHAN | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20260924-lorkhan"></script>
     <link rel="stylesheet" href="../css/styles.css">
@@ -61,33 +61,27 @@
         <main class="content">
             <section class="section" id="Guide">
                 <div class="card hero-card">
-                    <h1>LORKHAN</h1>
-                    <p>AI conversations, voices and character memories for The Elder Scrolls III: Morrowind, powered by a dedicated OpenMW build.</p>
+                    <h1>Remote Hosting</h1>
+                    <p>Separate the game-to-server connection from the server-to-provider connections.</p>
                 </div>
-                <div class="card" id="Beta">
-                    <h2>LORKHAN 0.5.0 beta</h2>
-                    <p>This guide covers the 0.5.0 Windows beta. Keep your existing game installation and saves backed up. LORKHAN needs its matching OpenMW build, Lua files and LorkhanServer; it is not a plugin for the original Morrowind executable.</p>
-                    <p><a href="./installation.html">Start with the installation guide</a> for requirements, beta availability and first-run setup.</p>
+                <div class="card" id="Connections">
+                    <h2>Which machine connects where?</h2>
+                    <ul><li><b>Game → LorkhanServer:</b> The Windows client must reach the server and use its pairing configuration.</li><li><b>LorkhanServer → AI services:</b> The server must reach the selected language model, voice and transcription endpoints.</li><li><b>Browser → Dashboard:</b> A working webpage does not by itself prove the game or provider connection works.</li></ul>
                 </div>
-                <div class="card" id="Conversations">
-                    <h2>Talk to characters</h2>
-                    <p>Use text or your microphone to speak to NPCs. LORKHAN uses nearby game context to inform replies, and plays generated speech with subtitles. Profiles let you choose models, voices and roleplay settings.</p>
-                    <p>Vanilla dialogue speech can also read dialogue menu responses. Player speech is optional. See <a href="./tts.html">Text-to-Speech</a>.</p>
+                <div class="card" id="LocalFirst">
+                    <h2>Establish a local baseline</h2>
+                    <p>Complete the <a href="./installation.html">local installation</a> first and verify typed dialogue, voice output and microphone input separately. Keep a backup of the working configuration before moving services.</p>
+                    <p>The local profile setup script reads a local DwemerDistro pairing key. Do not assume running it unchanged on a different game PC pairs that PC with your remote server.</p>
                 </div>
-                <div class="card" id="Characters">
-                    <h2>Memories and relationships</h2>
-                    <p>NPCs can remember conversations, keep diaries and develop their profiles. Separate actor references let two guards with the same name remain distinct characters. Editable reference groups can deliberately share a character profile.</p>
-                    <p>See <a href="./roleplay-settings.html">Roleplay Settings</a> for memories, relationships and lore.</p>
+                <div class="card" id="Addresses">
+                    <h2>Addresses and access</h2>
+                    <p>The packaged local setup uses proxy port <b>7514</b> by default. For remote access, use the reachable hostname or private-network address of the server host and its configured port, not a stale internal Linux address.</p>
+                    <p>Configure provider endpoints from the server’s point of view. A loopback address refers to that service’s own environment, not automatically the gaming PC.</p>
                 </div>
-                <div class="card" id="Actions">
-                    <h2>Interaction and actions</h2>
-                    <p>Open <b>Text Chat and Interact</b> to select dialogue mode, mood or model strength, view context history, and ask a character to wait. Supported NPC actions are controlled through the server Action Editor.</p>
-                    <p>Director and Cheat modes are available, but they do not make every imagined action possible. Check the actions enabled for your setup before relying on a request.</p>
-                </div>
-                <div class="card" id="Start">
-                    <h2>Choose your setup</h2>
-                    <p>Use local or hosted AI services. Quickstart helps configure them; local services still need to be installed and running. Start with one working conversation before changing voices or adding other mods.</p>
-                    <p><a href="./configuration.html">Configure the server</a> · <a href="./ingame-settings.html">Morrowind controls</a> · <a href="./faq.html">Get help</a></p>
+                <div class="card" id="Security">
+                    <h2>Keep it private</h2>
+                    <p>Use a trusted private network or VPN and restricted firewall rules. Treat the pairing key like a password. Do not publish configuration files, open unauthenticated providers to the internet or disable security checks to get a connection working.</p>
+                    <p>This guide explains the connection boundaries; it is not a verified automated remote-client installer. Check current beta support in <a href="https://discord.gg/NDn9qud2ug">Discord</a> before moving an otherwise working installation.</p>
                 </div>
             </section>
         </main>
