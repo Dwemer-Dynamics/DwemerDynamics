@@ -8,16 +8,6 @@
     align-items: start;
 }
 
-.hubTileActionButtonLorkhan {
-    background-color: #bc9d5a;
-}
-
-.hubTileActionButtonLorkhan:hover,
-.hubTileActionButtonLorkhan:focus-visible {
-    background-color: #dabb78;
-    color: #111111;
-}
-
 .hubPicker {
     display: flex;
     flex-wrap: wrap;
@@ -144,6 +134,24 @@
 .hubTileActionButtonChim {
     background-color: rgb(242, 124, 17);
     border-color: rgba(242, 124, 17, 0.95);
+}
+
+.hubTileActionButtonLorkhan {
+    background-color: #bc9d5a;
+    border-color: #bc9d5a;
+    color: #171717;
+}
+
+.hubTileActionButtonLorkhan:hover,
+.hubTileActionButtonLorkhan:focus-visible {
+    background-color: #d9c18c;
+    border-color: #d9c18c;
+    color: #171717;
+}
+
+.hubTileActionButtonLorkhan:focus-visible {
+    outline: 2px solid #d9c18c;
+    outline-offset: 3px;
 }
 
 .hubTileActionButtonChim:hover {
