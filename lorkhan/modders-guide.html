@@ -65,25 +65,32 @@
                     <p>Start with supported data customization. Native or Lua changes need a matching client build.</p>
                 </div>
                 <div class="card" id="Data">
-                    <h2>NPC biographies</h2>
-                    <p>Use the server’s NPC biography tools for reusable character information. Base IDs identify game records; live reference IDs distinguish individual actors. Keep identity fields accurate rather than using display names as unique keys.</p>
-                    <p>Use the current importer’s format and test a small import before processing a full mod. Back up existing data first. Do not assume a CSV from another game can be imported unchanged.</p>
+                    <h3>Create and Import NPC Biographies</h3>
+                    <p>Biographies provide reusable character information. Live NPC records also contain playthrough-specific state; keep those distinct when preparing a mod.</p>
+                    <ol><li>Open <b>Configuration → NPC Biographies</b>.</li><li>Choose <b>Download Example CSV</b> and use that file's headers and example as your template.</li><li>Edit a small batch in a CSV-aware editor. Preserve headers and properly quote commas, quotes and line breaks. Save as UTF-8 CSV.</li><li>Back up existing custom data, then use <b>Upload CSV</b>.</li><li>Inspect the imported records. Activate a matching NPC and check its biography and voice in LORKHAN NPCs.</li><li>Only then import the remaining batch. Use <b>Export Custom NPCs</b> to share or back up custom entries.</li></ol>
+                    <p>Base IDs identify game records; live reference IDs distinguish placed actors. Names are not unique identifiers. Do not import Skyrim biography CSVs unchanged.</p>
                 </div>
                 <div class="card" id="Voices">
-                    <h2>Voice presets</h2>
+                    <h3>Voice presets</h3>
                     <p>Biography data can include Voice ID and supported voice-filter presets. Verify the imported values in an activated NPC’s editor, then preview the voice with the intended connector.</p>
                     <p>Only distribute audio and character assets you have permission to share. A local sample path on your development PC is not a portable voice asset.</p>
                 </div>
                 <div class="card" id="Lore">
-                    <h2>World knowledge</h2>
+                    <h3>World knowledge</h3>
                     <p>Add relevant setting information through Oghma’s knowledge tools. Keep each article focused on one topic and test retrieval in context. Avoid mixing private NPC memories into general world knowledge.</p>
                 </div>
                 <div class="card" id="References">
-                    <h2>Reference groups</h2>
+                    <h3>Reference groups</h3>
                     <p>Use editable reference groups for multiple references that intentionally represent the same character. Do not merge unrelated actors just because their names or base records match.</p>
                 </div>
+                <div class="card" id="CustomActions">
+                    <h3>Actions and Game Integration</h3>
+                    <p>The Action Editor controls the actions offered to the model and their confirmation settings. Changing a description does not add a new engine capability.</p>
+                    <ol><li>Start with an implemented action and inspect its parameters and confirmation behavior.</li><li>Keep the description specific. Do not promise Skyrim-only interactions in Morrowind.</li><li>Test acceptance and refusal when confirmation is enabled.</li><li>A new action requires matching server routing and client behavior. Build and test both together.</li></ol>
+                    <p>The bridge uses typed requests. Arbitrary console commands in a prompt do not become executable actions. Follow the packaged developer documentation for protocol and build instructions.</p>
+                </div>
                 <div class="card" id="Source">
-                    <h2>Source and builds</h2>
+                    <h3>Source and builds</h3>
                     <p>The <a href="https://github.com/Dwemer-Dynamics/LORKHAN">LORKHAN repository</a> contains the native bridge, Lua mod and build instructions. <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">LorkhanServer</a> contains the server. Both use GPL-3.0 licensing; third-party components retain their own notices.</p>
                     <p>Use the matching beta source package and build instructions when rebuilding a release. Keep the pinned engine, native bridge and Lua files together. Do not distribute Bethesda game data.</p>
                 </div>

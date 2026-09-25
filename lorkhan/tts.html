@@ -65,32 +65,40 @@
                     <p>Choose voices for NPCs, the narrator and the player, then test speech before changing in-game playback settings.</p>
                 </div>
                 <div class="card" id="Setup">
-                    <h2>Choose a speech service</h2>
-                    <p>The initial local choice is <b>PocketTTS</b>. Other supported connectors have their own endpoint, account and voice requirements. Start the selected local service in DwemerDistro before testing.</p>
-                    <p>Assign the TTS connector in Profiles for ordinary NPC speech. Configure player and narrator speech separately. Selecting a new connector does not by itself verify that every saved voice is supported by it.</p>
+                    <h3>Set Up a Voice Connector</h3>
+                    <p>Start with PocketTTS, the initial local choice, or a service you already have working.</p>
+                    <ol><li>Install and start the local runtime in DwemerDistro, or configure hosted credentials in API Keys.</li><li>Open <b>Configuration → TTS</b> and create or edit a connector.</li><li>Select the service and fill in its address and voice/model options.</li><li>Save and assign it as the TTS Connector in your profile.</li><li>Preview a short line in TTS Studio, then test an NPC using that profile.</li></ol>
+                    <p>Player and Narration have their own settings. Changing an NPC profile does not automatically change their connectors.</p>
+                </div>
+                <div class="card" id="Providers">
+                    <h3>Choose a Speech Service</h3>
+                    <h4>Local speech</h4><p>The recommended list includes PocketTTS, Chatterbox, XTTS FastAPI and OmniVoice. Each requires its corresponding runtime at the configured address.</p>
+                    <h4>Hosted speech</h4><p>Inworld and Cartesia are also recommended options in the editor. Configure provider credentials and a voice available to your account. Check pricing and voice permissions before generating audio.</p>
+                    <h4>Other connectors</h4><p>The editor also exposes Piper, xVASynth, MeloTTS, Mimic3, Azure, ElevenLabs, OpenAI, Kokoro, KoboldCPP, Zonos and Deepgram. Follow the selected driver's fields; not every service supports cloning or identical voice controls.</p>
+                    <p>A provider-generated Voice ID is not interchangeable with another provider's ID. Preview using the connector that will actually speak in game.</p>
                 </div>
                 <div class="card" id="Voices">
-                    <h2>Voice ID and samples</h2>
+                    <h3>Voice ID and samples</h3>
                     <p>Open the NPC editor to inspect <b>Voice ID</b>. Biographies and race-based fallback choices can supply voice assignments, while cloning-capable services use voice samples where available.</p>
                     <p>Keep voice samples available on the server. Do not assume every provider accepts the same identifier or supports the same cloning features. Test the selected NPC voice after changing providers.</p>
                 </div>
                 <div class="card" id="Studio">
-                    <h2>TTS Studio</h2>
+                    <h3>TTS Studio</h3>
                     <p>Use TTS Studio to preview speech before testing it in game. Try a short sentence first. If the preview fails, check the connector, service, credentials and selected voice.</p>
                     <p>Voice filters change the sound of generated speech. Preview a filter before assigning it to a character; strong effects can make speech harder to understand.</p>
                 </div>
                 <div class="card" id="Pronunciation">
-                    <h2>Pronunciations</h2>
+                    <h3>Pronunciations</h3>
                     <p>Open the <b>Pronunciations</b> tab in TTS Studio to add or edit pronunciation entries and use the play/test controls. Test Morrowind names in a full sentence with your chosen voice.</p>
                     <p>Only add replacements for words the provider gets wrong. Pronunciation varies by voice and provider, so a replacement that improves one setup can make another worse.</p>
                 </div>
                 <div class="card" id="MenuDialogue">
-                    <h2>Vanilla dialogue and player speech</h2>
+                    <h3>Vanilla dialogue and player speech</h3>
                     <p>Enable vanilla dialogue speech in the in-game Scripts settings. With the default audio pause setting, it can play while the dialogue menu pauses the game. Selecting a new option or closing the dialogue menu stops the previous speech.</p>
                     <p>If player TTS is also enabled, the selected player dialogue option is spoken before the NPC’s response. Leave player TTS off if you only want to hear the NPC.</p>
                 </div>
                 <div class="card" id="Latency">
-                    <h2>If speech is slow</h2>
+                    <h3>If speech is slow</h3>
                     <p>Compare a short Studio preview with a short in-game reply. Long replies can play in sentence-sized pieces, but speech generation still depends on provider speed and available hardware.</p>
                     <p>If text arrives quickly but audio does not, check the speech service logs. If neither arrives, investigate the model request first.</p>
                 </div>

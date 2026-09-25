@@ -65,21 +65,27 @@
                     <p>Separate the game-to-server connection from the server-to-provider connections.</p>
                 </div>
                 <div class="card" id="Connections">
-                    <h2>Which machine connects where?</h2>
+                    <h3>Which machine connects where?</h3>
                     <ul><li><b>Game → LorkhanServer:</b> The Windows client must reach the server and use its pairing configuration.</li><li><b>LorkhanServer → AI services:</b> The server must reach the selected language model, voice and transcription endpoints.</li><li><b>Browser → Dashboard:</b> A working webpage does not by itself prove the game or provider connection works.</li></ul>
                 </div>
                 <div class="card" id="LocalFirst">
-                    <h2>Establish a local baseline</h2>
+                    <h3>Establish a local baseline</h3>
                     <p>Complete the <a href="./installation.html">local installation</a> first and verify typed dialogue, voice output and microphone input separately. Keep a backup of the working configuration before moving services.</p>
                     <p>The local profile setup script reads a local DwemerDistro pairing key. Do not assume running it unchanged on a different game PC pairs that PC with your remote server.</p>
                 </div>
                 <div class="card" id="Addresses">
-                    <h2>Addresses and access</h2>
-                    <p>The packaged local setup uses proxy port <b>7514</b> by default. For remote access, use the reachable hostname or private-network address of the server host and its configured port, not a stale internal Linux address.</p>
+                    <h3>Addresses and access</h3>
+                    <p>The packaged local setup uses proxy port <b>7514</b> by default. For browser access from another trusted device, use the reachable hostname or private-network address of the server host and its configured port, not a stale internal Linux address. This does not change the game bridge's loopback restriction.</p>
                     <p>Configure provider endpoints from the server’s point of view. A loopback address refers to that service’s own environment, not automatically the gaming PC.</p>
                 </div>
+                <div class="card" id="ProviderSetup">
+                    <h3>Host an AI Service on Another Computer</h3>
+                    <ol><li>Get ordinary dialogue working locally first.</li><li>Start the LLM, TTS or STT service on the second computer and test it there.</li><li>Enable listening on a trusted network interface. Restrict access through authentication and firewall rules.</li><li>Confirm LorkhanServer can reach that service address and port.</li><li>Enter the address in the relevant connector, including the full chat-completions path for an LLM.</li><li>Test one short interaction before moving another service.</li></ol>
+                    <p>For example, LM Studio at <code>192.168.1.50</code> on port <code>1234</code> would use <code>http://192.168.1.50:1234/v1/chat/completions</code>. Replace these example values with your actual service.</p>
+                    <p>This is an AI provider endpoint, not the game bridge address. The current bridge is restricted to loopback endpoints; these steps do not describe direct OpenMW-to-remote-LorkhanServer support.</p>
+                </div>
                 <div class="card" id="Security">
-                    <h2>Keep it private</h2>
+                    <h3>Keep it private</h3>
                     <p>Use a trusted private network or VPN and restricted firewall rules. Treat the pairing key like a password. Do not publish configuration files, open unauthenticated providers to the internet or disable security checks to get a connection working.</p>
                     <p>This guide explains the connection boundaries; it is not a verified automated remote-client installer. Check current beta support in <a href="https://discord.gg/NDn9qud2ug">Discord</a> before moving an otherwise working installation.</p>
                 </div>

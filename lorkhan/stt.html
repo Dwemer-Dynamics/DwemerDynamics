@@ -65,22 +65,29 @@
                     <p>Speech-to-text turns microphone audio into the text sent to the language model.</p>
                 </div>
                 <div class="card" id="Setup">
-                    <h2>Set up Parakeet</h2>
-                    <p><b>Parakeet</b> is LORKHAN’s initial local transcription choice. Install and start it through DwemerDistro, then select the matching service in Quickstart or the STT connector settings.</p>
-                    <p>Transcription and player TTS are separate. You can use a microphone without asking LORKHAN to speak your own words back.</p>
+                    <h3>Set Up Speech-to-Text</h3>
+                    <p><b>Parakeet</b> is the initial local transcription choice. Install and start it in DwemerDistro, then open <b>Configuration → STT</b>.</p>
+                    <ol><li>Connect OpenMW once if the page asks for an installation.</li><li>Select Parakeet and use the address of your running service. Keep the Distro-provided address for its managed component.</li><li>Save the connector.</li><li>Use Test to transcribe the page's fixed sample. Test also saves the current settings. This checks the service, not your microphone.</li><li>Then perform the microphone test below.</li></ol>
+                    <p>STT is shared across this installation, not assigned per NPC profile. Switching services here changes the active transcription service. Player TTS is separate and need not be enabled to use a microphone.</p>
+                </div>
+                <div class="card" id="Providers">
+                    <h3>Other Transcription Services</h3>
+                    <p>The picker groups Deepgram and Parakeet as recommended options. It also offers Whisper (OpenAI), Local Whisper, Gemini, Azure and Inworld, alongside the disabled option.</p>
+                    <ol><li>Select the service to reveal its fields.</li><li>For hosted services, configure credentials and the model, region or language fields shown. For local services, supply the reachable address.</li><li>Save and test before recording in game. Hosted tests may incur charges.</li><li>If the test fails, inspect the service error before changing microphone sensitivity.</li></ol>
+                    <p>Selecting Local Whisper does not install or start its runtime. Features differ between providers; follow the fields shown for the selected driver.</p>
                 </div>
                 <div class="card" id="Recording">
-                    <h2>Record a test</h2>
+                    <h3>Record a test</h3>
                     <ol><li>Check the recording device in the in-game LORKHAN Scripts settings.</li><li>Look at the intended NPC and confirm the target.</li><li>Hold your Voice Chat binding, say a short sentence and release it.</li><li>Check whether a transcript appears before investigating the NPC response.</li></ol>
                     <p>Check Windows microphone access and input levels if no audio is recorded.</p>
                 </div>
                 <div class="card" id="OpenMic">
-                    <h2>Open microphone</h2>
+                    <h3>Open microphone</h3>
                     <p>Use the Open Microphone binding for voice-activated recording. Use the separate mute control when you want to pause listening temporarily. Avoid speaker feedback by using headphones while testing.</p>
                     <p>Confirm recording and mute state directly. Turning AI interaction off is not the same as turning the microphone off.</p>
                 </div>
                 <div class="card" id="Troubleshooting">
-                    <h2>Find the failed stage</h2>
+                    <h3>Find the failed stage</h3>
                     <ul><li><b>No recording:</b> Check the device, binding, permissions and mute state.</li><li><b>Recording but no transcript:</b> Check Parakeet and its connector address.</li><li><b>Transcript but no reply:</b> Check the target, AI interaction and language model.</li><li><b>Reply but no voice:</b> Follow the <a href="./tts.html">TTS guide</a>.</li></ul>
                     <p>Include the approximate test time when collecting <a href="./log-files-and-debugging.html">diagnostics</a>.</p>
                 </div>

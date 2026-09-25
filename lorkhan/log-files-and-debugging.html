@@ -65,23 +65,28 @@
                     <p>Collect evidence from the same failed conversation before changing settings.</p>
                 </div>
                 <div class="card" id="FirstChecks">
-                    <h2>First checks</h2>
+                    <h3>First checks</h3>
                     <ol><li>Confirm DwemerDistro and LorkhanServer are running.</li><li>Open the server webpage through the launcher.</li><li>Check the target in Text Chat and Interact and send a short typed message.</li><li>Note the time and whether text, NPC speech or microphone transcription failed.</li></ol>
                 </div>
                 <div class="card" id="ServerLogs">
-                    <h2>Server logs</h2>
+                    <h3>Server logs</h3>
                     <p>Open the <b>Dwemer Dashboard</b>, enter its debugger and select <b>LORKHAN</b>. Use the server log views there to inspect errors around your test time.</p>
                     <p>The server’s AI responses and event history are useful for checking what was recorded, but a recorded response alone does not prove audio played in game.</p>
                 </div>
                 <div class="card" id="ClientLogs">
-                    <h2>Client logs</h2>
+                    <h3>Client logs</h3>
                     <p>Use <b>Open LORKHAN Logs</b> in the launcher to find the client logs. The in-game Diagnostics menu can help identify a missing bridge or connection.</p>
                     <p>For a bridge error, first confirm you launched <code>Play-LORKHAN.cmd</code> from the intended beta profile and did not mix files from different builds.</p>
                 </div>
                 <div class="card" id="Diagnostics">
-                    <h2>Create a support report</h2>
+                    <h3>Create a support report</h3>
                     <ol><li>Open the launcher’s <b>LOGS</b> tab.</li><li>Select <b>Generate Distro Debugging Logs</b> and confirm the prompt.</li><li>Review the diagnostic archive before sharing it. Do not include API keys, pairing keys or private configuration files.</li><li>Report the beta version, what you tried, NPC name, approximate time and whether typed chat also fails.</li></ol>
                     <p>Share the report through <a href="https://discord.gg/NDn9qud2ug">Discord</a>. Do not reinstall or clear your history just to collect logs.</p>
+                </div>
+                <div class="card" id="Reproduce">
+                    <h3>Collect a Useful Reproduction</h3>
+                    <ol><li>Note the time, NPC name/reference ID, profile, LLM slot and voice service.</li><li>Send one short typed message to exclude microphone transcription from the test.</li><li>If it works, repeat with Voice Chat. Note whether recording, transcription, generated text or playback is the first missing stage.</li><li>Collect dashboard logs around that time, together with client/server versions and whether the issue began after an update or save load.</li></ol>
+                    <p>Do not reset connectors or clear history before gathering evidence. Remove keys, tokens and private prompt text before sharing logs publicly.</p>
                 </div>
             </section>
         </main>

@@ -65,17 +65,24 @@
                     <p>Open Options → Scripts → LORKHAN to configure the in-game controls.</p>
                 </div>
                 <div class="card" id="Hotkeys">
-                    <h2>Hotkeys</h2>
-                    <p>Set <b>Text Chat and Interact</b> to a comfortable key. The text field is focused when the menu opens, so you can type immediately and press Enter to send.</p>
-                    <p>Use the separate voice recording and open-microphone bindings for speech input. Check your actual bindings in the Scripts menu rather than relying on a key from another player’s setup.</p>
+                    <h3>Hotkeys</h3>
+                    <p>Open <b>Options → Scripts → LORKHAN</b>. Click a binding, then press the desired keyboard, mouse or controller button. Escape clears it.</p>
+                    <ul><li><b>Text Chat and Interact:</b> Opens the focused text box and conversation options for the target. Type immediately and press Enter to send.</li><li><b>Voice Chat:</b> Hold to record, then release to send the transcript to the selected NPCs.</li><li><b>Open Microphone:</b> Toggles voice-activated chat.</li><li><b>Mute Open Mic:</b> Temporarily pauses or resumes open-microphone recording.</li><li><b>Activate NPCs:</b> Toggles the aimed NPC or activates nearby NPCs.</li><li><b>Stop AI Actions:</b> Stops dialogue, recording and AI actions.</li></ul>
+                    <p>Read the bindings on your own installation: imported profiles or earlier choices can differ from another player’s keys. Do not look for a Skyrim MCM or Prisma panel; these are OpenMW Scripts settings.</p>
+                </div>
+                <div class="card" id="AutoActivate">
+                    <h3>Auto Activate</h3>
+                    <p><b>Enable Auto Activate</b> automatically brings nearby eligible actors into LORKHAN. Interior and exterior activation distances control how far it searches in each environment.</p>
+                    <p><b>Include Hostile NPCs</b> and <b>Include Creatures</b> broaden eligible actor types. Activation is not the same as permission to perform every action, and it does not guarantee every nearby character will reply to every line.</p>
+                    <p>For a missing actor, test the manual Activate NPCs binding while aiming at it, then check its entry on the server. Avoid increasing every distance while diagnosing one missing target.</p>
                 </div>
                 <div class="card" id="Target">
-                    <h2>Choose a target</h2>
+                    <h3>Choose a target</h3>
                     <p>Look at the NPC you want to address. LORKHAN prefers the eligible actor under the crosshair; without a crosshair target, it falls back to a nearby NPC.</p>
                     <p>Check the name shown in <b>Text Chat and Interact</b> before sending. <b>Wait Here (90 seconds)</b> asks the target to stop moving temporarily.</p>
                 </div>
                 <div class="card" id="Modes">
-                    <h2>Dialogue mode and mood</h2>
+                    <h3>Dialogue mode and mood</h3>
                     <p><b>Dialogue mode</b> contains the available conversation modes and typed shortcuts. Use the shortcuts shown beside each mode rather than guessing a prefix. Director and Cheat are execution modes, not language model choices.</p>
                     <p><b>Mood</b> changes delivery guidance. <b>LLM model</b> selects Standard, Fast, Powerful or Experimental from the current profile. Auto Chat is controlled through the modes menu.</p>
                     <ul>
@@ -88,15 +95,31 @@
                     </ul>
                 </div>
                 <div class="card" id="Profiles">
-                    <h2>Dynamic profiles and history</h2>
+                    <h3>Dynamic profiles and history</h3>
                     <p><b>Dynamic profiles</b> sends the selected update request to the server and closes the menu. Check which NPC is targeted before requesting a character update.</p>
                     <p><b>Context history</b> shows conversation context. <b>Status HUD</b> controls the optional status display, and <b>Diagnostics</b> helps investigate connection problems.</p>
                 </div>
+                <div class="card" id="HearingAwareness">
+                    <h3>Hearing &amp; Awareness</h3>
+                    <p>Hearing distances determine the audience for a conversation. They are separate from activation distances: an active NPC does not necessarily hear every line.</p>
+                    <ul><li><b>Interior / Exterior Hearing Distance:</b> Listener ranges in game units. Indoor doors and outdoor distance fading can affect audibility.</li><li><b>Auto Hearing Radius (meters):</b> Nearby hearing without door/path checks, still bounded by hearing distance. One metre is 70 game units.</li><li><b>Speech mode:</b> Whispering and sneaking reduce the automatic allowance. Close mode does not use that allowance.</li></ul>
+                    <p>Use the available preset before choosing Custom values. Test with one nearby actor and one farther away so you can tell whether targeting or hearing is responsible.</p>
+                </div>
                 <div class="card" id="Audio">
-                    <h2>Audio and automatic dialogue</h2>
-                    <p>Review the microphone, speech playback, hearing and awareness controls in Scripts. Combat bark interval starts at <b>30 seconds</b>; profile and server settings also determine whether automatic speech is eligible.</p>
-                    <p><b>Stop AI Actions</b> is an emergency action control. Microphone capture, AI interaction and speech playback are separate controls; check each one when troubleshooting.</p>
-                    <p>For menu dialogue speech and player TTS, see <a href="./tts.html">Text-to-Speech</a>.</p>
+                    <h3>Conversation &amp; Microphone</h3>
+                    <ul><li><b>Allow Combat Dialogue:</b> Allows replies from actors in combat. Turning it off does not stop microphone recording or transcription.</li><li><b>Stop Dialogue in Combat:</b> Stops dialogue and recording when an NPC attacks you.</li><li><b>Enable Combat Barks:</b> Allows periodic combat shouts. <b>Combat Bark Timer (seconds)</b> starts at 30; server/profile settings also apply.</li><li><b>Pause autonomous dialogue:</b> Separate controls cover menus, combat and sneaking.</li><li><b>Microphone ID:</b> −1 uses the Windows default. Find device IDs in Diagnostics and restart recording to apply a change.</li><li><b>Open Mic Sensitivity:</b> Higher values require louder speech.</li><li><b>Open Mic Silence (ms):</b> Silence needed before a recording is submitted.</li></ul>
+                    <p>If a recording ends too early, review the silence setting. If room noise triggers it, check the device, input level and sensitivity. Test with headphones to avoid the NPC’s voice being recorded again.</p>
+                </div>
+                <div class="card" id="Sound">
+                    <h3>Sound</h3>
+                    <p>Start with ordinary speech volume before changing spatial audio. These controls affect playback, not whether the model generates a response.</p>
+                    <ul><li><b>Audio Mode:</b> Chooses directional/distance playback or mono. Realistic 3D and Mono + Effects use the custom distance curve; this is OpenMW playback, not Skyrim occlusion.</li><li><b>Head Voice Volume (%):</b> Controls player and narrator volume relative to the voice boost.</li><li><b>Normal Distance Scale:</b> Adjusts Normal 3D playback distance.</li><li><b>Advanced Distance Scale / Interior Dropoff / Exterior Dropoff:</b> Adjust Realistic 3D and Mono + Effects.</li><li><b>Clip Start / Clip End:</b> Trims milliseconds from generated clips. Leave at zero unless fixing a specific clip problem.</li><li><b>Read Dialogue Aloud:</b> Speaks vanilla dialogue menu responses.</li><li><b>Read Books Aloud:</b> Uses the narrator voice; closing the book stops it.</li></ul>
+                    <p>The audio pause setting affects playback while the game is paused. Keep the default unpaused playback if you want speech during dialogue menus. Player TTS is configured separately on the server.</p>
+                </div>
+                <div class="card" id="Tools">
+                    <h3>AI Agents and Display</h3>
+                    <ul><li><b>Enable AI actions:</b> Permits the game-side action path; the server still controls which actions are allowed.</li><li><b>Show Status HUD:</b> Shows the optional status overlay. It is not required for dialogue.</li><li><b>Connection Timeout:</b> Defaults to 30 seconds; accepted range is 15–300. A larger timeout does not repair a wrong address or pairing key.</li><li><b>Chat History Rows:</b> Controls the recent lines kept in the chat display.</li></ul>
+                    <p>The interaction menu also provides Context history and Diagnostics. These are better first checks than resetting every Scripts setting.</p>
                 </div>
             </section>
         </main>
