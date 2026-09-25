@@ -65,29 +65,34 @@
                     <p>Start with a short typed conversation, then add speech and other options one at a time.</p>
                 </div>
                 <div class="card" id="Engine">
-                    <h2>Can I use ordinary OpenMW or original Morrowind?</h2>
+                    <h3>Can I use ordinary OpenMW or original Morrowind?</h3>
                     <p>Use the OpenMW build included with LORKHAN and its matching Lua files. The beta depends on its native bridge. The original Morrowind executable and an unrelated stock OpenMW build are not substitutes.</p>
                 </div>
                 <div class="card" id="Mods">
-                    <h2>Which extra mods are required?</h2>
+                    <h3>Which extra mods are required?</h3>
                     <p>LORKHAN needs your Morrowind game data, its matching beta package and LorkhanServer. Skyrim tools such as SKSE and SkyUI are not required. Check other mods for compatibility with the supplied OpenMW version before adding them.</p>
                 </div>
                 <div class="card" id="Services">
-                    <h2>Does everything run locally?</h2>
+                    <h3>Does everything run locally?</h3>
                     <p>You choose the providers. Local language models and speech services need suitable hardware and must be running. Hosted providers can require paid accounts and send the relevant dialogue or speech to that provider. Do not assume choosing a local voice also makes the language model local.</p>
                 </div>
                 <div class="card" id="NoResponse">
-                    <h2>Why is there no response?</h2>
+                    <h3>Why is there no response?</h3>
                     <p>Check that DwemerDistro is running, LorkhanServer opens, AI interaction is enabled and the menu shows the intended NPC. Send a short typed message to separate microphone problems from dialogue problems.</p>
                     <p>Then check your selected model and service credentials. Use <a href="./log-files-and-debugging.html">Logs and Debugging</a> to collect the error instead of repeatedly resetting your setup.</p>
                 </div>
                 <div class="card" id="NoAudio">
-                    <h2>Text works but speech does not</h2>
+                    <h3>Text works but speech does not</h3>
                     <p>Test the selected voice in TTS Studio. Check the speech service, endpoint and Voice ID. If the preview works, check in-game playback volume and the relevant player or dialogue speech option.</p>
                 </div>
                 <div class="card" id="Saves">
-                    <h2>Can I keep my normal saves?</h2>
+                    <h3>Can I keep my normal saves?</h3>
                     <p>The setup script creates a separate profile. Keep your normal installation and saves untouched, and back up the beta profile before upgrades. Server playthrough backups and game saves are different things; retain both.</p>
+                </div>
+                <div class="card" id="Identity">
+                    <h3>Why Are There Several Guards with the Same Name?</h3>
+                    <p>Actors can share a name and base record but have different live reference IDs. Use the reference ID to identify the specific actor. Reference groups are for references intentionally representing one character, not all guards with matching names.</p>
+                    <p>See <a href="./modders-guide.html#References">Reference groups</a>.</p>
                 </div>
             </section>
         </main>

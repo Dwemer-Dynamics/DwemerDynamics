@@ -65,26 +65,35 @@
                     <p>A language model generates the text of a reply. Its voice is configured separately.</p>
                 </div>
                 <div class="card" id="Connect">
-                    <h2>Choose a provider</h2>
-                    <p>Start in Quickstart, or edit the LLM connectors in Configuration. Use your provider’s model name, endpoint and credentials. A model displayed in a saved connector still needs to be available to your account.</p>
-                    <p>Hosted services may charge per request. Review the provider’s pricing and data policy before sending game dialogue.</p>
+                    <h3>Set Up an LLM Connector</h3>
+                    <p>Open <b>Configuration → LLM</b>. A connector stores the provider address, model and credentials. A profile decides which connector an NPC uses.</p>
+                    <ol><li>Add your provider key in <b>API Keys</b>.</li><li>Create or edit an LLM connector with a recognizable name.</li><li>For a provider endpoint, choose <b>Direct OpenAI-compatible endpoint</b>. Configured runtime uses the server configuration; Deterministic mock is for testing.</li><li>Enter the full chat-completions URL and exact model identifier. Select the matching credential.</li><li>Save, assign the connector to <b>Standard LLM</b> in your profile, and save the profile.</li><li>Test a short typed conversation before adding microphone input.</li></ol>
+                    <p>Hosted services can charge for requests. Check pricing, model access and privacy terms with your provider.</p>
+                </div>
+                <div class="card" id="Providers">
+                    <h3>Provider Addresses</h3>
+                    <p>Use the provider's model identifier, not your connector's friendly name. The editor supports these endpoint formats:</p>
+                    <ul><li><b>OpenRouter:</b> <code>https://openrouter.ai/api/v1/chat/completions</code></li><li><b>OpenAI:</b> <code>https://api.openai.com/v1/chat/completions</code></li><li><b>Google:</b> <code>https://generativelanguage.googleapis.com/v1beta/openai/chat/completions</code></li><li><b>Groq:</b> <code>https://api.groq.com/openai/v1/chat/completions</code></li><li><b>NanoGPT:</b> <code>https://nano-gpt.com/api/v1/chat/completions</code></li></ul>
+                    <p>These use Direct OpenAI-compatible endpoint. CHIM's provider-specific JSON driver names are not LORKHAN menu options. For local models, follow the <a href="./local-llm-guide.html">Local LLM Guide</a>.</p>
                 </div>
                 <div class="card" id="Slots">
-                    <h2>Profile model slots</h2>
+                    <h3>Profile model slots</h3>
                     <ul><li><b>Standard:</b> The normal conversation choice.</li><li><b>Fast:</b> A separate model slot for quicker replies.</li><li><b>Powerful:</b> A separate slot for more demanding requests.</li><li><b>Experimental:</b> A slot for trying another model.</li></ul>
                     <p>Assign connectors to these slots in Profiles and save. In Text Chat and Interact, <b>LLM model</b> selects the slot by name; it does not create or download a model. Selecting Fast cannot speed up a slow model if both slots use the same connector.</p>
                 </div>
                 <div class="card" id="OtherModels">
-                    <h2>Other model jobs</h2>
-                    <p>Profiles also contain assignments and options for tasks such as diaries and fallback responses. Check these before expecting background features to work. A fallback needs a usable connector; it is not a replacement for fixing invalid credentials.</p>
+                    <h3>Background and Dedicated Models</h3>
+                    <p>The four conversation slots do not configure every AI task. In Profiles, assign a <b>Diary LLM</b> for diaries. Assign a usable <b>Fallback LLM</b> and enable LLM Fallback to retry failed dialogue through it.</p>
+                    <p>In <b>Global Settings → Global Connectors</b>, review summaries, background and memory tasks, profile tasks, scene classification, relationship management and Director. Director needs its dedicated connector; it does not simply inherit Standard.</p>
+                    <p>Enable and test background features individually after ordinary conversation works.</p>
                 </div>
                 <div class="card" id="Prompt">
-                    <h2>Prompt guidance</h2>
+                    <h3>Prompt guidance</h3>
                     <p>Use <b>Profile Prompt</b> for guidance shared by characters on that profile. Use an NPC’s <b>Prompt Head Override</b> only for character-specific instructions.</p>
                     <p>Keep guidance concise. Longer prompts, large context and long requested replies can increase latency and cost. LORKHAN uses Markdown-oriented prompting; do not paste XML response templates from another mod.</p>
                 </div>
                 <div class="card" id="Test">
-                    <h2>Test one change at a time</h2>
+                    <h3>Test one change at a time</h3>
                     <p>Send the same short request after changing one model assignment. If a reply appears in the server but arrives late as audio, test the voice service separately before blaming the language model.</p>
                     <p>For local models, follow the <a href="./local-llm-guide.html">Local LLM Guide</a>.</p>
                 </div>

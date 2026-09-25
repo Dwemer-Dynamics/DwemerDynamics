@@ -65,21 +65,24 @@
                     <p>Run a compatible language model service on your PC or another machine, then connect LorkhanServer to it.</p>
                 </div>
                 <div class="card" id="Requirements">
-                    <h2>Before you start</h2>
+                    <h3>Before you start</h3>
                     <p>Choose a model that fits your available memory and hardware. Running the game, language model and speech services together can increase latency. A small working setup is a better starting point than several large services competing for resources.</p>
                     <p>Use an endpoint supported by the connector you choose. An OpenAI-compatible connector needs an OpenAI-compatible chat API, not the service’s browser page.</p>
                 </div>
                 <div class="card" id="Setup">
-                    <h2>Connect the service</h2>
-                    <ol><li>Start your local model service and load a model.</li><li>Check its documented API address and model identifier.</li><li>Create or edit the matching LLM connector in LorkhanServer.</li><li>Enter the endpoint, model and any required authentication.</li><li>Assign it to the profile’s Standard slot and save.</li><li>Send a short typed message in game.</li></ol>
+                    <h3>Run a Local Model</h3>
+                    <h4>LM Studio</h4><ol><li>Download and load a chat model that fits your hardware.</li><li>Start its local API server and note the address, port and model identifier.</li><li>Create a LORKHAN connector using Direct OpenAI-compatible endpoint. A common endpoint is <code>http://127.0.0.1:1234/v1/chat/completions</code>; use your installation's actual address.</li><li>Save, assign it to Standard LLM in your profile, and test a short typed conversation.</li></ol>
+                    <p>See <a href="https://lmstudio.ai/docs/developer/openai-compat">LM Studio's API guide</a> for server controls and endpoints.</p>
+                    <h4>KoboldCPP</h4><ol><li>Load a compatible GGUF chat model in KoboldCPP.</li><li>Start its server and confirm text generation works in its own interface.</li><li>Use its OpenAI-compatible chat endpoint in LORKHAN. For port 5001, this is <code>http://127.0.0.1:5001/v1/chat/completions</code>.</li><li>Use the model identifier exposed by that server, then save and assign the connector.</li></ol>
+                    <p>The <a href="https://github.com/LostRuins/koboldcpp/wiki">KoboldCPP wiki</a> covers model loading and hardware settings. These ports are examples, not instructions to change a working installation.</p>
                 </div>
                 <div class="card" id="Network">
-                    <h2>Use the address the server can reach</h2>
+                    <h3>Use the address the server can reach</h3>
                     <p>LorkhanServer normally runs inside DwemerDistro’s Linux environment. <code>127.0.0.1</code> is relative to the process making the request; it is not automatically another computer or a service bound only to Windows loopback.</p>
                     <p>For a service on another machine, use its reachable address and allow only the necessary private-network access. See <a href="./remote-hosting-guide.html">Remote Hosting</a>.</p>
                 </div>
                 <div class="card" id="Tuning">
-                    <h2>Improve response time</h2>
+                    <h3>Improve response time</h3>
                     <p>Start with a short reply and modest context. Check model loading, memory use and request timing. Change one setting at a time, and avoid judging the model from its first cold request alone.</p>
                     <p>Do not expose an unauthenticated model endpoint to the public internet.</p>
                 </div>

@@ -65,34 +65,59 @@
                     <p>Set up the LORKHAN beta separately from your existing Morrowind and OpenMW installations.</p>
                 </div>
                 <div class="card" id="Requirements">
-                    <h2>Requirements</h2>
+                    <h3>Requirements</h3>
                     <ul><li><b>Windows x64:</b> This guide follows the packaged Windows beta.</li><li><b>Morrowind:</b> A legally owned installation and its Data Files folder. Game data is not included.</li><li><b>Matching client:</b> The LORKHAN OpenMW build and Lua files supplied together in the beta ZIP. Stock OpenMW alone is not sufficient.</li><li><b>Server:</b> DwemerDistro with LorkhanServer installed, plus your chosen AI and speech services.</li><li><b>Runtime:</b> <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Microsoft Visual C++ 2015–2022 x64 Redistributable</a>.</li></ul>
                     <p>Do not install Skyrim SKSE, SkyUI, MWSE or MGE XE as LORKHAN requirements. Other mods must be compatible with the supplied OpenMW build.</p>
                 </div>
                 <div class="card" id="Download">
-                    <h2>Get the beta</h2>
+                    <h3>Get the beta</h3>
                     <p>The 0.5.0 beta package is named <b>LORKHAN 0.5.0 BETA.zip</b>. Check the <a href="https://discord.gg/NDn9qud2ug">Dwemer Dynamics Discord</a> for beta availability and download instructions. The source repository is not a substitute for the compiled beta.</p>
                     <p>Use the matching package instructions if a newer beta is announced. Do not combine an older executable with newer Lua files.</p>
                 </div>
+                <div class="card" id="InstallingDistro">
+                    <h3>Installing DwemerDistro</h3>
+                    <p>DwemerDistro runs the server and local AI services. The LORKHAN game package is a separate download. Installing one does not install the other.</p>
+                    <ol><li>Check that hardware virtualization is enabled in your BIOS/UEFI. If Windows reports that virtualization is unavailable, resolve that before installing Distro.</li><li>Open <b>Turn Windows features on or off</b>. Ensure <b>Windows Subsystem for Linux</b> and <b>Virtual Machine Platform</b> are enabled, then restart if requested. Follow the installer’s requirements for your Windows edition.</li><li>Download the current DwemerDistro installer from the official distribution link. Run it and complete its setup, keeping the desktop shortcut if you want one.</li><li>Open DwemerDistro from that shortcut. If it is already installed, update it rather than installing a second copy.</li></ol>
+                    <p><a href="https://learn.microsoft.com/en-us/windows/wsl/install">Microsoft’s WSL installation guide</a> explains Windows prerequisites and restarting after setup.</p>
+                    <figure class="guide-figure"><img src="../img/installation/windows_features.jpg" alt="Shared DwemerDistro setup: Windows optional features." loading="lazy"><figcaption>Shared DwemerDistro setup: Windows optional features.</figcaption></figure>
+                    <p>The screenshot is shared with the CHIM guide; the Windows prerequisite is the same. The game mod selected later must be LORKHAN.</p>
+                </div>
                 <div class="card" id="Server">
-                    <h2>1. Install the server</h2>
-                    <ol><li>Install or update <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest">DwemerDistro Launcher</a>. LORKHAN needs launcher 3.3.28 or later.</li><li>Select <b>LORKHAN</b> and install its server. Use the <b>Dev</b> channel for the beta.</li><li>Start the server and open <b>LORKHAN Webpage</b>.</li><li>Complete <b>Quickstart</b> with your own AI services and credentials. Install and start any local speech services you select.</li></ol>
-                    <p>See <a href="./configuration.html#Quickstart">Quickstart</a> for the difference between models, voices and microphone transcription.</p>
+                    <h3>Set Up LORKHAN in DwemerDistro</h3>
+                    <ol><li>During launcher Quickstart, choose <b>Update Distro</b> and wait for completion.</li><li>On the mod selection step, select <b>LORKHAN</b> and choose <b>Install Selected Mods</b>. Do not select CHIM unless you also want the Skyrim server.</li><li>Wait for installation to finish before continuing to the component checks.</li><li>Start the server, select LORKHAN on the Mods page and click <b>LORKHAN Webpage</b>.</li></ol>
+                    <figure class="guide-figure"><img src="../img/installation/launcher-quickstart-update-distro.png" alt="Shared launcher Quickstart: update Distro before installing the mod server." loading="lazy"><figcaption>Shared launcher Quickstart: update Distro before installing the mod server.</figcaption></figure>
+                    <p>For an existing installation, use the LORKHAN card’s install/update controls instead of repeating the whole installer. LORKHAN’s beta server channel is <b>Dev</b>. Update the launcher if its Mods page has no LORKHAN card.</p>
+                    <figure class="guide-figure"><img src="../img/installation/launcher-quickstart-components.png" alt="Shared launcher Quickstart: check installed components before starting the server." loading="lazy"><figcaption>Shared launcher Quickstart: check installed components before starting the server.</figcaption></figure>
+                    <h4>Which components do I need?</h4>
+                    <ul><li><b>Language model:</b> Start with a hosted provider or a working local model. You do not need to download a large local model just to try LORKHAN.</li><li><b>PocketTTS:</b> The initial local speech choice. Install the available runtime appropriate for your hardware.</li><li><b>Parakeet:</b> The initial microphone transcription choice. It must be installed and running if selected.</li><li><b>Memory services:</b> If you enable vector-based memory, install and start its selected embedding service too. A working chat model does not provide embeddings automatically.</li></ul>
+                    <p>Follow the component installer’s account/model-access instructions. Do not share access tokens in screenshots or support logs. Start with one voice service; installing every alternative makes troubleshooting harder.</p>
+                </div>
+                <div class="card" id="WebQuickstart">
+                    <h3>LORKHAN Web Quickstart</h3>
+                    <ol><li>Open <b>Quickstart</b> from the LorkhanServer menu.</li><li>Enter your chosen provider credentials. Use your own account and check its available credit or quota.</li><li>Select the TTS and STT services you installed, or choose hosted alternatives.</li><li>Review the model choices, save the setup, and return after launching the game to check that your player has been detected.</li></ol>
+                    <p>Your player name comes from the game. Do not type a race or class into a name field to work around a missing game connection. If an installation-specific settings page asks you to connect OpenMW first, finish the client setup below, load your game, then reopen it.</p>
+                    <p>Quickstart is the starting point. Use <a href="./llm.html">LLM services</a> for another provider, <a href="./tts.html">TTS</a> for voices, and <a href="./stt.html">STT</a> for microphone setup. Do not change advanced prompt formatting to fix an invalid API key.</p>
                 </div>
                 <div class="card" id="Profile">
-                    <h2>2. Extract and create a profile</h2>
+                    <h3>2. Extract and create a profile</h3>
                     <p>Extract the ZIP into a new versioned folder. Do not overwrite stock OpenMW or another beta. Open PowerShell in the extracted package folder and run this command, replacing both example paths:</p>
                     <pre><code>powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\config\Setup-Profile.ps1 -GameData 'D:\Games\Morrowind\Data Files' -ProfileRoot 'D:\LorkhanProfiles\Beta-0.5.0'</code></pre>
                     <p>The destination profile must not already exist. The script reads the local server pairing key without displaying it and creates a private client configuration. It does not copy your game data or alter stock OpenMW saves.</p>
                     <p>The default proxy port is <b>7514</b>. The setup script accepts <code>-Distro</code> for a differently named DwemerDistro WSL instance and <code>-ProxyPort</code> for a different proxy port.</p>
                 </div>
+                <div class="card" id="ProfileFolders">
+                    <h3>What the Setup Script Creates</h3>
+                    <ul><li><code>openmw.cfg</code> selects your game data, installed masters and LORKHAN scripts.</li><li><code>lorkhan-client.conf</code> holds the private server pairing configuration. Never publish it.</li><li><code>Play-LORKHAN.cmd</code> launches the matching executable through the new profile.</li><li><code>AIData</code> holds client-generated data such as the speech cache.</li></ul>
+                    <p>Use an existing Morrowind <b>Data Files</b> folder containing <code>Morrowind.esm</code>. Tribunal and Bloodmoon are added when their masters are present. Choose a <b>new</b> profile path: even an existing empty directory is rejected to protect existing profiles.</p>
+                    <p>If setup fails, read the PowerShell error before retrying. Do not delete your normal saves. A missing executable usually means you ran the script outside the extracted runtime package; a missing master means GameData points at the wrong folder.</p>
+                </div>
                 <div class="card" id="FirstRun">
-                    <h2>3. Launch and test</h2>
+                    <h3>3. Launch and test</h3>
                     <ol><li>Leave DwemerDistro and your selected local services running.</li><li>Run <code>Play-LORKHAN.cmd</code> inside the new profile folder.</li><li>Open <b>Options → Scripts → LORKHAN</b> and check the Text Chat and Interact binding.</li><li>Look at a nearby NPC, open the interaction menu and send a short typed message.</li><li>Once text works, test NPC speech and then microphone input.</li></ol>
                     <p>Settings, saves and audio cache stay in the separate profile. For this beta, add other mods through that profile’s <code>openmw.cfg</code>. Avoid editing a different profile with the stock launcher.</p>
                 </div>
                 <div class="card" id="Updates">
-                    <h2>Update safely</h2>
+                    <h3>Update safely</h3>
                     <p>Back up your profile and server data first. Extract a new beta beside the old one, then follow its package instructions to update the profile launch path. Keep the executable and Lua files from the same package.</p>
                     <p>Deleting the extracted program folder does not require deleting your profile or Morrowind data. See <a href="./log-files-and-debugging.html">Logs and Debugging</a> if the first conversation fails.</p>
                 </div>
