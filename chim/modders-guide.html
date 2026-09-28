@@ -439,17 +439,18 @@ foreach ($argv as $arg) {
 
                     <h3>Packaging And Deployment</h3>
                     <p>
-                        The current plugin manager installs and updates plugins from GitHub releases. If you want your plugin to follow the same flow, package it the same way the maintained plugins do.
+                        The current plugin manager installs and updates plugins from configured channels. GitHub release assets are the recommended source for catalog submissions.
                     </p>
                     <ul>
                         <li>Create a GitHub repo for the plugin.</li>
                         <li>Put a valid <code>manifest.json</code> in the plugin root.</li>
                         <li>If the plugin needs database tables, add a <code>migrations</code> folder with ordered <code>.sql</code> files.</li>
-                        <li>Create a release asset named exactly <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> or <code>&lt;PACKAGE_NAME&gt;.tar</code>.</li>
-                        <li>The package should extract into one plugin folder that contains the manifest and the rest of the plugin files.</li>
+                        <li>Create a <code>.tar.gz</code> or <code>.tar</code> release asset. The default filenames are <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> and <code>&lt;PACKAGE_NAME&gt;.tar</code>; use explicit <code>package_urls</code> for other names.</li>
+                        <li>By default, put the manifest and plugin files inside one wrapper folder in the archive. The installer removes that folder with <code>archive_strip_components: 1</code>. For a flat archive, set the channel's <code>archive_strip_components</code> to <code>0</code>.</li>
+                        <li>After extraction, <code>manifest.json</code> must be directly at the installed plugin root, alongside the plugin files.</li>
                     </ul>
                     <p>
-                        On install, the generic installer downloads the latest release asset, extracts it into <code>HerikaServer/ext/&lt;PACKAGE_NAME&gt;</code>, and runs any plugin migrations it finds. It also tracks which migrations have already been run, so updates can add new ones safely.
+                        On install, the installer downloads the selected channel's package, extracts it into <code>HerikaServer/ext/&lt;PACKAGE_NAME&gt;</code>, and runs any plugin migrations it finds. It also tracks which migrations have already been run, so updates can add new ones safely.
                     </p>
                     <p>
                         If you want the plugin to appear in the built-in repository list, it also needs an entry in the plugin repository data used by the plugin manager. See <a href="#SubmittingPluginToRepository">Submitting Your Plugin To The CHIM Repository</a> below for exactly where to submit that entry.
@@ -503,15 +504,39 @@ foreach ($argv as $arg) {
                         A few notes on the fields:
                     </p>
                     <ul>
-                        <li><code>name</code> should match the name in your root <code>manifest.json</code> and the folder CHIM installs under <code>HerikaServer/ext</code>.</li>
+                        <li><code>name</code> should match the name in your plugin's <code>manifest.json</code> and the folder CHIM installs under <code>HerikaServer/ext</code>.</li>
                         <li><code>mod_download_url</code> is optional. Leave it as an empty string unless your plugin also has a matching Skyrim mod download.</li>
-                        <li>Keep <code>default_channel</code> set to <code>main</code>, and always ship a <code>main</code> channel with <code>package_urls</code> pointing at your release assets. Extra channels such as <code>dev</code> are optional.</li>
+                        <li><code>main</code> is the recommended default channel. Named channels such as <code>candidate</code> or <code>dev</code> are also supported, including as the default. Set <code>default_channel</code> to a key that exists in <code>channels</code>.</li>
+                        <li>The public manifest normally lives at the repository root on the channel's <code>branch</code>. For another location, such as <code>server/manifest.json</code>, set that channel's <code>manifest_url</code> to the public raw JSON URL. This does not change the required installed-plugin layout.</li>
+                        <li>For candidate release assets, supply explicit <code>package_urls</code>. A custom channel without them can fall back to a branch archive even with <code>package_source</code> set to <code>release</code>. Use a tag-specific asset URL for a GitHub pre-release; <code>releases/latest</code> does not select pre-releases.</li>
                     </ul>
+                    <p><b>Pre-alpha and candidate submissions</b></p>
+                    <p>
+                        Pre-alpha plugins can be submitted for catalog review with a <code>candidate</code> channel and a nested public manifest. Clearly label the maturity in the catalog description and channel label, and complete the clean-install checks below. A submission is still subject to review.
+                    </p>
+                    <p>
+                        For example, replace <code>default_channel</code> and <code>channels</code> in the entry above with these fields. This example keeps the public manifest on the <code>main</code> branch under <code>server</code>, uses a tagged release asset with one wrapper folder, and labels the install as pre-alpha:
+                    </p>
+                    <pre><code>"default_channel": "candidate",
+"channels": {
+    "candidate": {
+        "label": "Pre-alpha",
+        "branch": "main",
+        "manifest_url": "https://raw.githubusercontent.com/your-github-user/Your-Plugin-Name/main/server/manifest.json",
+        "package_source": "release",
+        "package_urls": [
+            "https://github.com/your-github-user/Your-Plugin-Name/releases/download/v0.1.0-alpha.1/Your-Plugin-Name.tar.gz"
+        ]
+    }
+}</code></pre>
+                    <p>
+                        Replace the example repository and tag with your own. Keep the public manifest's version aligned with the package it points to.
+                    </p>
                     <p><b>Submission checklist</b></p>
                     <ol>
-                        <li>Make your plugin repo public, with a valid <code>manifest.json</code> in the repo root.</li>
-                        <li>Publish a GitHub release with the <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> or <code>&lt;PACKAGE_NAME&gt;.tar</code> asset attached.</li>
-                        <li>Install that package on a clean CHIM server and confirm the plugin loads and any migrations run.</li>
+                        <li>Make your plugin repo public, with a valid public <code>manifest.json</code>. Use the repo root or supply the channel's explicit <code>manifest_url</code>.</li>
+                        <li>Publish a GitHub release with the <code>.tar.gz</code> or <code>.tar</code> asset attached, and configure the channel's package URLs.</li>
+                        <li>Install through the configured channel on a clean CHIM server. Confirm the manifest lands at the plugin root, the plugin loads, and any migrations run.</li>
                         <li>Add your entry to <code>ui/data/plugin_repository.json</code>.</li>
                         <li>Open a pull request against the <code>unstable</code> branch of <code>Dwemer-Dynamics/HerikaServer</code>.</li>
                         <li>In the pull request description, link your repo and your release, and say what you tested.</li>
