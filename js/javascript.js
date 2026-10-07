@@ -136,6 +136,7 @@ const leftSidebarConfigs = {
             { href: "./stt.html", title: "Speech-to-Text", label: "Speech-to-Text", emoji: "\uD83C\uDFA4" },
             { href: "./itt.html", title: "Image-to-Text", label: "Image-to-Text", emoji: "\uD83D\uDCF8" },
             { href: "./plugins.html", title: "Plugins", label: "Plugins", emoji: "\uD83E\uDDE9" },
+            { href: "./plugin-guide.html", title: "Plugin Guide", label: "Plugin Guide", emoji: "\uD83D\uDEE0\uFE0F" },
             { href: "./modders-guide.html", title: "Modders Guide", label: "Modders Guide", emoji: "\uD83D\uDCDC" },
             { href: "./faq.html", title: "FAQ", label: "FAQ", emoji: "\u2753" },
             { href: "./remote-hosting-guide.html", title: "Remote Hosting Guide", label: "Remote Hosting Guide", emoji: "\uD83C\uDF10" },

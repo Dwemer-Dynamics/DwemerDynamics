@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CHIM Modders Guide | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20260919"></script>
+    <script src="../js/javascript.js?v=20261006"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -36,6 +36,7 @@
                 <a href="./index.html" title="Overview">Overview</a>
                 <a href="./installation.html" title="Installation">Installation</a>
                 <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./plugin-guide.html" title="Plugin Guide">Plugin Guide</a>
                 <a href="./configuration.html" title="Configuration">Configuration</a>
                 <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
                 <a href="./background-life.html" title="Background Life">Background Life</a>
@@ -170,22 +171,8 @@
 
                     <h3>Manifest File</h3>
                     <p>
-                        The one file you should always have is <code>manifest.json</code>. This is what the CHIM plugin manager reads to show the plugin name, description, version, and plugin page.
+                        A new plugin does not need an author-written <code>manifest.json</code>. Plugin Manager takes the name, description, and version from the GitHub repository and release, and writes its own manifest when it installs the plugin. Plugins already published with a manifest keep working. See <a href="./plugin-guide.html#PackageListAndUpdate">Package, List, And Update</a> in the Plugin Guide.
                     </p>
-                    <p>
-                        The current maintained plugins use fields like:
-                    </p>
-                    <ul>
-                        <li><b><code>name</code>:</b> plugin name used by the installer and plugin manager.</li>
-                        <li><b><code>description</code>:</b> short description shown in the plugin manager.</li>
-                        <li><b><code>config_url</code>:</b> the page the user opens to configure or use the plugin.</li>
-                        <li><b><code>config_url_target</code>:</b> usually <code>_blank</code> so the page opens in a new tab.</li>
-                        <li><b><code>git_repo</code>:</b> GitHub repo used by the installer for updates.</li>
-                        <li><b><code>default_channel</code>:</b> channel selected when the plugin is first installed.</li>
-                        <li><b><code>channels</code>:</b> named release sources with labels, branches, package sources or URLs, and optional force-install support.</li>
-                        <li><b><code>version</code>:</b> current plugin version.</li>
-                        <li><b><code>schema_version</code>:</b> use <code>2</code> if you want the current update flow in the plugin manager.</li>
-                    </ul>
 
                     <h3>What Files CHIM Actually Loads</h3>
                     <p>
@@ -310,7 +297,7 @@ requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."ex
 $GLOBALS["CHIM_JSON_RESPONSE_EXT_LOADED"] = true;</code></pre>
                         </li>
                         <li>
-                            <b>Web UI and control pages:</b> a plugin can expose its own page through <code>config_url</code> in the manifest. That can be a settings page, dashboard, monitor, visualizer, or tool panel.
+                            <b>Web UI and control pages:</b> a plugin can expose its own page, such as a settings page, dashboard, monitor, visualizer, or tool panel. Put <code>index.php</code> or <code>index.html</code> at the plugin root and Plugin Manager links to it. Older plugins such as CHIM-Twitch-Bot also declare <code>config_url</code> in a legacy manifest.
                             <br><em>Source: <code>CHIM-Twitch-Bot/manifest.json</code></em>
                             <pre><code>{
     "name":"CHIM-Twitch-Bot",
@@ -439,108 +426,24 @@ foreach ($argv as $arg) {
 
                     <h3>Packaging And Deployment</h3>
                     <p>
-                        The current plugin manager installs and updates plugins from configured channels. GitHub release assets are the recommended source for catalog submissions.
+                        The <a href="./plugin-guide.html#PackageListAndUpdate">Plugin Guide</a> is the current reference for packaging. In short:
                     </p>
                     <ul>
-                        <li>Create a GitHub repo for the plugin.</li>
-                        <li>Put a valid <code>manifest.json</code> in the plugin root.</li>
+                        <li>Publish a stable GitHub release with a <code>chim-plugin.tar.gz</code> (or <code>chim-plugin.tar</code>) asset.</li>
+                        <li>Put the server files at the archive root, without a wrapper folder.</li>
                         <li>If the plugin needs database tables, add a <code>migrations</code> folder with ordered <code>.sql</code> files.</li>
-                        <li>Create a <code>.tar.gz</code> or <code>.tar</code> release asset. The default filenames are <code>&lt;PACKAGE_NAME&gt;.tar.gz</code> and <code>&lt;PACKAGE_NAME&gt;.tar</code>; use explicit <code>package_urls</code> for other names.</li>
-                        <li>By default, put the manifest and plugin files inside one wrapper folder in the archive. The installer removes that folder with <code>archive_strip_components: 1</code>. For a flat archive, set the channel's <code>archive_strip_components</code> to <code>0</code>.</li>
-                        <li>After extraction, <code>manifest.json</code> must be directly at the installed plugin root, alongside the plugin files.</li>
                     </ul>
                     <p>
-                        On install, the installer downloads the selected channel's package, extracts it into <code>HerikaServer/ext/&lt;PACKAGE_NAME&gt;</code>, and runs any plugin migrations it finds. It also tracks which migrations have already been run, so updates can add new ones safely.
+                        On install, Plugin Manager extracts the package into <code>HerikaServer/ext/&lt;repository name&gt;</code> and runs any plugin migrations it finds. It tracks which migrations have already run, so updates can add new ones safely. An update replaces the whole plugin folder.
                     </p>
                     <p>
-                        If you want the plugin to appear in the built-in repository list, it also needs an entry in the plugin repository data used by the plugin manager. See <a href="#SubmittingPluginToRepository">Submitting Your Plugin To The CHIM Repository</a> below for exactly where to submit that entry.
+                        A Skyrim mod can also carry its matching server plugin so CHIM installs it when the game starts. That uses a separate schema 4 package format; see <a href="./plugin-guide.html#SkyrimBundledPackages">Packages bundled with a Skyrim mod</a>.
                     </p>
 
-                    <p><b>Bundling a server plugin with a Skyrim mod</b></p>
+                    <h3 id="SubmittingPluginToRepository">Listing Your Plugin In Plugin Manager</h3>
                     <p>
-                        A Skyrim mod can also carry its matching CHIM server plugin so the player does not need a separate manual server install.
+                        There is no catalog file to edit and no pull request to open. Plugin Manager lists public, non-fork, non-archived GitHub repositories with the <code>chim-plugin</code> topic. Follow <a href="./plugin-guide.html#GetListed">Get listed</a> in the Plugin Guide.
                     </p>
-                    <ul>
-                        <li>Place the package under <code>Data/CHIM/server-plugins/&lt;plugin-name&gt;</code>.</li>
-                        <li>Use a versioned <code>.zip</code> or <code>.dwpkg</code> package containing the complete server plugin.</li>
-                        <li>When Skyrim starts, CHIM uploads and installs the package only when the connected server needs that version.</li>
-                    </ul>
-
-                    <h3 id="SubmittingPluginToRepository">Submitting Your Plugin To The CHIM Repository</h3>
-                    <p>
-                        The built-in repository list is a catalog file that ships inside HerikaServer. To get your plugin listed there, you open a pull request that adds one entry to that file.
-                    </p>
-                    <ul>
-                        <li><b>Where to open the pull request:</b> <a href="https://github.com/Dwemer-Dynamics/HerikaServer" target="_blank" rel="noopener noreferrer">https://github.com/Dwemer-Dynamics/HerikaServer</a></li>
-                        <li><b>Branch to target:</b> <code>unstable</code></li>
-                        <li><b>File to edit:</b> <code>ui/data/plugin_repository.json</code></li>
-                    </ul>
-                    <p>
-                        Your plugin still lives in your own GitHub repo. The catalog entry only tells CHIM what to show and where to download it from.
-                    </p>
-                    <p>
-                        Add one new key under <code>plugins</code>, using the same fields the existing entries use:
-                    </p>
-                    <pre><code>"your-plugin-id": {
-    "name": "Your-Plugin-Name",
-    "description": "One short sentence shown in the plugin manager.",
-    "git_repo": "your-github-user/Your-Plugin-Name",
-    "github_url": "https://github.com/your-github-user/Your-Plugin-Name",
-    "mod_download_url": "",
-    "default_channel": "main",
-    "channels": {
-        "main": {
-            "label": "Live",
-            "branch": "main",
-            "package_source": "release",
-            "package_urls": [
-                "https://github.com/your-github-user/Your-Plugin-Name/releases/latest/download/Your-Plugin-Name.tar.gz",
-                "https://github.com/your-github-user/Your-Plugin-Name/releases/latest/download/Your-Plugin-Name.tar"
-            ]
-        }
-    }
-}</code></pre>
-                    <p>
-                        A few notes on the fields:
-                    </p>
-                    <ul>
-                        <li><code>name</code> should match the name in your plugin's <code>manifest.json</code> and the folder CHIM installs under <code>HerikaServer/ext</code>.</li>
-                        <li><code>mod_download_url</code> is optional. Leave it as an empty string unless your plugin also has a matching Skyrim mod download.</li>
-                        <li><code>main</code> is the recommended default channel. Named channels such as <code>candidate</code> or <code>dev</code> are also supported, including as the default. Set <code>default_channel</code> to a key that exists in <code>channels</code>.</li>
-                        <li>The public manifest normally lives at the repository root on the channel's <code>branch</code>. For another location, such as <code>server/manifest.json</code>, set that channel's <code>manifest_url</code> to the public raw JSON URL. This does not change the required installed-plugin layout.</li>
-                        <li>For candidate release assets, supply explicit <code>package_urls</code>. A custom channel without them can fall back to a branch archive even with <code>package_source</code> set to <code>release</code>. Use a tag-specific asset URL for a GitHub pre-release; <code>releases/latest</code> does not select pre-releases.</li>
-                    </ul>
-                    <p><b>Pre-alpha and candidate submissions</b></p>
-                    <p>
-                        Pre-alpha plugins can be submitted for catalog review with a <code>candidate</code> channel and a nested public manifest. Clearly label the maturity in the catalog description and channel label, and complete the clean-install checks below. A submission is still subject to review.
-                    </p>
-                    <p>
-                        For example, replace <code>default_channel</code> and <code>channels</code> in the entry above with these fields. This example keeps the public manifest on the <code>main</code> branch under <code>server</code>, uses a tagged release asset with one wrapper folder, and labels the install as pre-alpha:
-                    </p>
-                    <pre><code>"default_channel": "candidate",
-"channels": {
-    "candidate": {
-        "label": "Pre-alpha",
-        "branch": "main",
-        "manifest_url": "https://raw.githubusercontent.com/your-github-user/Your-Plugin-Name/main/server/manifest.json",
-        "package_source": "release",
-        "package_urls": [
-            "https://github.com/your-github-user/Your-Plugin-Name/releases/download/v0.1.0-alpha.1/Your-Plugin-Name.tar.gz"
-        ]
-    }
-}</code></pre>
-                    <p>
-                        Replace the example repository and tag with your own. Keep the public manifest's version aligned with the package it points to.
-                    </p>
-                    <p><b>Submission checklist</b></p>
-                    <ol>
-                        <li>Make your plugin repo public, with a valid public <code>manifest.json</code>. Use the repo root or supply the channel's explicit <code>manifest_url</code>.</li>
-                        <li>Publish a GitHub release with the <code>.tar.gz</code> or <code>.tar</code> asset attached, and configure the channel's package URLs.</li>
-                        <li>Install through the configured channel on a clean CHIM server. Confirm the manifest lands at the plugin root, the plugin loads, and any migrations run.</li>
-                        <li>Add your entry to <code>ui/data/plugin_repository.json</code>.</li>
-                        <li>Open a pull request against the <code>unstable</code> branch of <code>Dwemer-Dynamics/HerikaServer</code>.</li>
-                        <li>In the pull request description, link your repo and your release, and say what you tested.</li>
-                    </ol>
 
                     <h3>Database Migrations</h3>
                     <p>
@@ -807,7 +710,7 @@ foreach ($argv as $arg) {
 $executed = herikaActionCatalogExecuteScriptProxyDbInserts($program['db_inserts'] ?? [], $context) || $executed;
 $executed = herikaActionCatalogExecuteScriptProxyNpcMetadataUpdates($program['npc_metadata_updates'] ?? [], $context) || $executed;</code></pre>
 
-                    <h3>CHIM-NFF Example</h3>
+                    <h3 id="ChimNffExample">CHIM-NFF Example</h3>
                     <p>
                         <a href="https://www.nexusmods.com/skyrimspecialedition/mods/182050" target="_blank" rel="noopener">CHIM-NFF</a> is the clearest current example of how a custom gameplay action is built. The CSV in <code>CHIM-NFF/CHIM/nff_actions.csv</code> defines the actions CHIM should expose, and the Papyrus script in <code>CHIM-NFF/Source/Scripts/CHIMNFF.psc</code> is the runtime bridge that actually performs the follower-framework command.
                     </p>
