@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/remote-hosting.css?v=20261007-remote-guide">
 </head>
-<body class="theme chim-theme">
+<body class="theme chim-theme remote-guide copyable-guide">
     <div class="progress-container">
         <div class="progress-bar chim-progress"></div>
     </div>
@@ -66,172 +67,160 @@
         </div>
 
         <div class="content">
-            <span id="RemoteHostingGuide" class="section">
+            <section id="RemoteHostingGuide" class="section">
                 <div class="card hero-card">
-                    <h1>CHIM Remote Hosting Guide</h1>
-                    <p>
-                        This page covers the local network setup where Skyrim runs on one PC and the heavier CHIM services run on a second machine.
-                        The main thing this guide solves is getting the second machine's WSL-hosted CHIM services reachable from your gaming PC.
-                    </p>
+                    <p class="remote-kicker">CHIM / two-PC setup</p>
+                    <h1>Remote Hosting Guide</h1>
+                    <p>Play Skyrim on one PC and run CHIM's server, models, and speech services on another. Keep the AI stack together and connect the game through one private-network endpoint.</p>
+                    <nav aria-label="On this page"><ul>
+                        <li><a href="#BasicIdea">See the setup</a></li>
+                        <li><a href="#MachineRoles">Prepare the host PC</a></li>
+                        <li><a href="#PortProxySetup">Connect the two PCs</a></li>
+                        <li><a href="#PointPcAToPcB">Configure Skyrim</a></li>
+                        <li><a href="#Troubleshooting">Fix a connection</a></li>
+                    </ul></nav>
                 </div>
 
                 <div class="card" id="BasicIdea">
-                    <h2>Remote Hosting Guide</h2>
-                    <h3>Basic Setup Idea</h3>
-                    <p>
-                        The old CHIM wiki guide was built around a two-PC LAN setup. PC A is the machine you actually play Skyrim on. PC B is the machine that runs the bigger AI stack.
-                    </p>
-                    <figure class="guide-figure" style="max-width: 880px;">
-                        <img src="../img/remote-hosting/step-01.jpg" alt="Two-PC CHIM setup diagram">
-                        <figcaption>PC A runs Skyrim. PC B runs the heavy remote CHIM services on the same local network.</figcaption>
+                    <h2>One Game PC. One AI Host.</h2>
+                    <p>Run the complete DwemerDistro stack on the host. HerikaServer calls the model and speech services there; your gaming PC sends requests and receives replies through CHIM.</p>
+                    <figure class="remote-diagram" aria-labelledby="LayoutCaption">
+                        <div class="remote-layout">
+                            <div class="remote-machine">
+                                <p class="remote-kicker">01 / gaming PC</p>
+                                <h3>Skyrim + CHIM</h3>
+                                <ul><li>Game and SKSE plugin</li><li>Microphone input</li><li>Subtitles and voice playback</li></ul>
+                            </div>
+                            <p class="remote-wire">Private LAN<span aria-hidden="true">⇄</span> Requests<br>and replies</p>
+                            <div class="remote-machine">
+                                <p class="remote-kicker">02 / host PC</p>
+                                <h3>DwemerDistro</h3>
+                                <div class="remote-distro">
+                                    <h4>WSL · Linux environment</h4>
+                                    <p><b>HerikaServer</b><br>Dialogue, profiles, memories, and actions</p>
+                                    <ul class="remote-services">
+                                        <li><b>Language model</b><small>LLM Studio or cloud</small></li>
+                                        <li><b>Voice generation</b><small>Text-to-speech</small></li>
+                                        <li><b>Speech recognition</b><small>Speech-to-text</small></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption id="LayoutCaption">The gaming PC reaches HerikaServer through one CHIM port. Local model and speech services stay inside the host's environment; cloud providers are reached by the host over the internet.</figcaption>
                     </figure>
+                    <p>This layout does not require a second HerikaServer on the gaming PC. It also avoids opening separate model, speech, or database ports to the network.</p>
                 </div>
 
                 <div class="card" id="MachineRoles">
-                    <h3>What Each PC Should Run</h3>
-                    <ul>
-                        <li><b>PC A:</b> Skyrim and the lighter local CHIM side. The old guide used DwemerDistro here as only the web server side.</li>
-                        <li><b>PC B:</b> your remote model and voice stack. The old guide specifically showed KoboldCPP, DwemerDistro, and XTTS on this machine; OmniVoice can be hosted there the same way.</li>
-                    </ul>
-                    <p>
-                        If you are setting up KoboldCPP or LM Studio for CHIM, configure the model first with the <a href="./local-llm-guide.html"><b>Local LLM Guide</b></a>, then return here for the second-PC network steps.
-                    </p>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-02.jpg" alt="PC A component installation notes">
-                        <figcaption>PC A should stay simple: Skyrim plus the local side needed to talk to the remote services.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-03.jpg" alt="PC B component installation notes">
-                        <figcaption>PC B handles the heavier remote services like the language model and XTTS.</figcaption>
-                    </figure>
+                    <h2>1. Get The Host Working First</h2>
+                    <ol>
+                        <li>Install and start DwemerDistro on the host PC.</li>
+                        <li>Install or update CHIM's server from the launcher's Mods page.</li>
+                        <li>Open the CHIM web interface and complete its setup.</li>
+                        <li>Test your model and voice connectors from that interface.</li>
+                        <li>Leave the launcher and DwemerDistro running while you play.</li>
+                    </ol>
+                    <p>For local models, use the launcher's <b>LLM Studio</b> component and follow the <a href="./local-llm-guide.html">Local LLM Guide</a>. Choose voice and microphone services using <a href="./tts.html">Text-to-Speech</a> and <a href="./stt.html">Speech-to-Text</a>.</p>
+                    <p>Keep connector URLs appropriate to the host. For example, bundled LLM Studio in the same distro uses <code>http://127.0.0.1:1234/v1/chat/completions</code>. Do not replace every connector URL with the gaming PC's address.</p>
+                    <p><b>Moving an existing setup?</b> Back up your existing playthrough data, profiles, configuration, and keys before moving it. A fresh host install does not contain your old AI history.</p>
+                    <p>On the host PC, confirm this page opens before continuing:</p>
+                    <pre><code>http://127.0.0.1:7513/HerikaServer/ui/</code></pre>
                 </div>
 
                 <div class="card" id="FindAddresses">
-                    <h3>Get The Two Addresses You Need</h3>
-                    <p>
-                        You need two different addresses from the remote machine:
-                    </p>
-                    <ul>
-                        <li><b>The Windows LAN IP:</b> this is the address the game PC will connect to.</li>
-                        <li><b>The WSL IP:</b> this is the internal target that Windows will forward traffic into.</li>
-                    </ul>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-04.jpg" alt="Getting the LAN IP with ipconfig">
-                        <figcaption>Use <code>ipconfig</code> on PC B and note its IPv4 LAN address.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 920px;">
-                        <img src="../img/remote-hosting/step-05.jpg" alt="Getting the WSL IP from DwemerDistro">
-                        <figcaption>Start DwemerDistro on PC B and note the internal WSL address it reports for the web and XTTS services.</figcaption>
-                    </figure>
-                    <p>
-                        You can also fetch the current WSL address directly with:
-                    </p>
-                    <pre><code>wsl hostname -I</code></pre>
-                    <p>
-                        If your second-PC setup suddenly stops working later, check this first. WSL IPs can change after restarts.
-                    </p>
+                    <h2>2. Find Both PCs' Addresses</h2>
+                    <ol>
+                        <li>Connect both PCs to the same trusted local network. Ethernet is useful for consistent audio and upload latency.</li>
+                        <li>Run <code>ipconfig</code> on the host PC and note the active Ethernet or Wi-Fi <b>IPv4 Address</b>.</li>
+                        <li>Run <code>ipconfig</code> on the gaming PC and note its IPv4 address too.</li>
+                    </ol>
+                    <p>The examples below use <b>192.168.1.50</b> for the host and <b>192.168.1.25</b> for the gaming PC. Replace both with your own values. The host's Windows address is what Skyrim will use.</p>
+                    <p>These instructions use a Private Windows network profile on a network you trust. If either LAN address changes later, update the forwarding rule, firewall scope, and INI as needed. A router DHCP reservation can keep those addresses stable.</p>
                 </div>
 
                 <div class="card" id="PortProxySetup">
-                    <h3>Forward The WSL Services Through Windows</h3>
-                    <p>
-                        This is the key fix from the old wiki. If trying to reach <code>WSL_IP:8020</code> directly from the gaming PC keeps failing, do not keep aiming the game PC at the raw WSL address.
-                        Forward those ports through the Windows host machine instead.
-                    </p>
-                    <p>
-                        Forward the ports for the services you use:
-                    </p>
-                    <ul>
-                        <li><b>8081:</b> the CHIM web side</li>
-                        <li><b>8020:</b> XTTS, Chatterbox, PocketTTS, or another service using the shared TTS port</li>
-                        <li><b>8021:</b> OmniVoice</li>
-                    </ul>
-                    <p>
-                        You can create the rules in an elevated Command Prompt:
-                    </p>
-                    <pre><code>netsh interface portproxy add v4tov4 listenport=8081 listenaddress=0.0.0.0 connectport=8081 connectaddress=&lt;WSL_IP&gt;
-netsh interface portproxy add v4tov4 listenport=8020 listenaddress=0.0.0.0 connectport=8020 connectaddress=&lt;WSL_IP&gt;
-netsh interface portproxy add v4tov4 listenport=8021 listenaddress=0.0.0.0 connectport=8021 connectaddress=&lt;WSL_IP&gt;</code></pre>
-                    <p>
-                        If you prefer a GUI, the old guide also used PortProxyGUI:
-                    </p>
-                    <p><a href="https://github.com/zmjack/PortProxyGUI/releases/tag/v1.4.2" target="_blank" rel="noopener noreferrer"><b>PortProxyGUI Download</b></a></p>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-06.jpg" alt="PortProxyGUI setup for CHIM remote hosting">
-                        <figcaption>Create rules that listen on the Windows host and forward 8081 and 8020 into the WSL address on PC B.</figcaption>
+                    <h2>3. Forward One CHIM Port</h2>
+                    <p>The launcher has a local CHIM proxy on port <b>7513</b>. It finds the current WSL address for each connection. Windows can forward the host's LAN port <b>8081</b> to that proxy.</p>
+                    <figure class="remote-diagram" aria-labelledby="RouteCaption">
+                        <div class="remote-flow">
+                            <div class="remote-hop"><p class="remote-kicker">Network entry</p><h3>Host Windows</h3><code>192.168.1.50:8081</code><p>The address used by the gaming PC.</p></div>
+                            <p class="remote-wire"><span aria-hidden="true">→</span></p>
+                            <div class="remote-hop"><p class="remote-kicker">Local relay</p><h3>Launcher proxy</h3><code>127.0.0.1:7513</code><p>Windows forwards to this fixed local address.</p></div>
+                            <p class="remote-wire"><span aria-hidden="true">→</span></p>
+                            <div class="remote-hop"><p class="remote-kicker">Inside DwemerDistro</p><h3>HerikaServer</h3><code>current WSL IP:8081</code><p>The launcher resolves this internal address.</p></div>
+                        </div>
+                        <figcaption id="RouteCaption">Requests enter at the host's Windows LAN address, pass through the launcher, and reach HerikaServer. Replies return along the same connection.</figcaption>
                     </figure>
-                    <p>
-                        The screenshot predates OmniVoice. Add the same kind of rule for port <code>8021</code> when OmniVoice is installed on PC B.
-                    </p>
+                    <p class="remote-status"><b>Verification status:</b> the launcher's local proxy and CHIM configuration paths have been checked. Forwarding a second PC through this proxy, recovery after WSL restarts, and remote Skyrim gameplay still need end-to-end validation. Test the route below before relying on it for a play session.</p>
+                    <ol>
+                        <li>On the host PC, open <b>PowerShell as Administrator</b>.</li>
+                        <li>Check your existing rules with <code>netsh interface portproxy show all</code>. If this address and port already have a rule, inspect it before changing anything.</li>
+                        <li>Set the host address below to your real IPv4 address, then add the forwarding rule.</li>
+                    </ol>
+                    <pre><code>$HostPcIp = '192.168.1.50'
+netsh interface portproxy add v4tov4 listenaddress=$HostPcIp listenport=8081 connectaddress=127.0.0.1 connectport=7513</code></pre>
+                    <p>The rule listens only on that host address. Keep the launcher open: it provides the second hop. This setup does not make CHIM's local discovery service search your LAN.</p>
+                    <details>
+                        <summary>Fallback: forward directly to the current WSL address</summary>
+                        <p>If the launcher-proxy route fails, use Windows' documented WSL forwarding route. It uses the same LAN port and firewall rule, but the internal target must be updated when WSL's address changes.</p>
+                        <ol><li>On the host, run <code>wsl -d DwemerAI4Skyrim3 hostname -I</code> and note the distro's IPv4 address.</li><li>After confirming the existing LAN rule belongs to this setup, change its target using your actual WSL address below.</li></ol>
+                        <pre><code>$HostPcIp = '192.168.1.50'
+$WslIp = '172.30.98.229'
+netsh interface portproxy set v4tov4 listenaddress=$HostPcIp listenport=8081 connectaddress=$WslIp connectport=8081</code></pre>
+                        <p>The sample WSL address is a placeholder. Refresh it after a distro restart. See <a href="https://learn.microsoft.com/en-us/windows/wsl/networking" target="_blank" rel="noopener noreferrer">Microsoft's WSL networking guide</a> for direct forwarding and optional mirrored networking. Mirrored networking changes the WSL configuration; it is not required for the route above.</p>
+                    </details>
                 </div>
 
                 <div class="card" id="FirewallRules">
-                    <h3>Open The Windows Firewall Ports</h3>
-                    <p>
-                        The old guide also opened inbound TCP rules for the forwarded ports. If Windows Firewall blocks them, the LAN setup still will not work even if the proxy is correct.
-                    </p>
-                    <ul>
-                        <li>Create an inbound rule for TCP.</li>
-                        <li>Allow the connection.</li>
-                        <li>Add local ports <code>8081,8020,8021</code>, omitting any services you do not expose.</li>
-                        <li>Apply it to Domain, Private, and Public if needed for your machine.</li>
-                    </ul>
-                    <p>
-                        OmniVoice does not authenticate API requests. Use it only on a trusted network and restrict the port <code>8021</code> firewall rule to PC A's LAN address where practical.
-                    </p>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-07.jpg" alt="Creating a Windows Firewall inbound rule">
-                        <figcaption>Create a new inbound rule in Windows Defender Firewall on PC B.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-09.jpg" alt="Adding TCP ports 8081 and 8020 to the firewall rule">
-                        <figcaption>Make the rule TCP and explicitly allow ports 8081 and 8020.</figcaption>
-                    </figure>
+                    <h2>4. Allow The Gaming PC Through The Firewall</h2>
+                    <p>In the same elevated PowerShell window on the host, set both addresses to your values. Add a TCP rule for the gaming PC on the Private profile:</p>
+                    <pre><code>$HostPcIp = '192.168.1.50'
+$GamingPcIp = '192.168.1.25'
+New-NetFirewallRule -DisplayName 'CHIM remote hosting' -Direction Inbound -Action Allow -Protocol TCP -LocalAddress $HostPcIp -LocalPort 8081 -RemoteAddress $GamingPcIp -Profile Private</code></pre>
+                    <p>If you already created this rule, edit it instead of creating duplicates. Other broad firewall rules can still allow additional devices; this rule does not narrow those existing rules.</p>
+                    <p>This guide is for a trusted private network. Do not add a router internet-forwarding rule or open model and database services to make this setup work.</p>
+                    <h3>Check From The Gaming PC</h3>
+                    <p>Open the host's CHIM interface in the gaming PC's browser:</p>
+                    <pre><code>http://192.168.1.50:8081/HerikaServer/ui/</code></pre>
+                    <p>If it does not open, stop here and check the connection before changing Skyrim. In PowerShell on the gaming PC:</p>
+                    <pre><code>Test-NetConnection 192.168.1.50 -Port 8081</code></pre>
+                    <p><code>TcpTestSucceeded: True</code> confirms that the TCP port is reachable. It does not prove that CHIM or a model is working; the web page must load too.</p>
                 </div>
 
                 <div class="card" id="PointPcAToPcB">
-                    <h3>Point CHIM On PC A At The Remote Machine</h3>
-                    <p>
-                        Once PC B is forwarding and accepting traffic, the gaming PC should use the <b>Windows LAN IP of PC B</b>, not the raw WSL address.
-                    </p>
-                    <ul>
-                        <li><b>For the web side:</b> open the remote CHIM pages with the PC B LAN IP on port <code>8081</code>.</li>
-                        <li><b>For XTTS:</b> use the PC B LAN IP on port <code>8020</code> inside the CHIM text-to-speech settings.</li>
-                        <li><b>For OmniVoice:</b> use the PC B LAN IP on port <code>8021</code> inside the CHIM text-to-speech settings.</li>
-                    </ul>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-11.jpg" alt="Starting DwemerDistro on the Skyrim PC">
-                        <figcaption>Run the local CHIM side on the Skyrim machine, but leave the heavier remote services on PC B.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 920px;">
-                        <img src="../img/remote-hosting/step-12.jpg" alt="Configuring XTTS to use the remote machine LAN IP">
-                        <figcaption>Set the XTTS endpoint on PC A to the LAN IP of PC B, for example <code>http://192.168.1.3:8020</code>.</figcaption>
-                    </figure>
-                    <p>
-                        In short, use <code>REMOTE_MACHINE_IP:8081</code> for the web side, <code>REMOTE_MACHINE_IP:8020</code> for shared-port TTS engines,
-                        and <code>REMOTE_MACHINE_IP:8021</code> for OmniVoice.
-                    </p>
+                    <h2>5. Point Skyrim At The Host</h2>
+                    <p>Install CHIM's game plugin on the gaming PC as usual. Add a separate Mod Organizer 2 override mod containing <code>SKSE/Plugins/AIAgent.ini</code>. When enabled, the game sees it at <code>Data/SKSE/Plugins/AIAgent.ini</code>.</p>
+                    <p>Use your host's Windows IPv4 address:</p>
+                    <pre><code>SERVER=192.168.1.50
+PORT=8081
+PATH=/HerikaServer/comm.php
+POLINT=1</code></pre>
+                    <ul><li><b>SERVER:</b> only the numeric IPv4 address. Do not include <code>http://</code>, a port, or a path.</li><li><b>PORT:</b> the host's LAN listening port, not the launcher's internal 7513.</li><li><b>PATH:</b> keep the complete path shown above.</li></ul>
+                    <p>The INI takes precedence over local launcher discovery. Enable the override and restart Skyrim after changing it. Keep your original configuration available if you want to switch back to a local server.</p>
+                    <h3>Test One Thing At A Time</h3>
+                    <ol><li>Load your game and confirm the host's CHIM interface sees the player.</li><li>Send a short typed message and check the reply.</li><li>Listen to a generated voice reply.</li><li>Test microphone input.</li><li>Test one action and check the actual game result.</li></ol>
+                    <p>Keep the host awake during play. A working browser page is network proof; dialogue, voice, microphone input, and game actions each need their own check.</p>
                 </div>
 
                 <div class="card" id="Troubleshooting">
-                    <h3>Quick Troubleshooting Notes</h3>
-                    <p>
-                        If it still does not work, go through these in order:
-                    </p>
-                    <ul>
-                        <li>Make sure the service actually works locally on PC B first.</li>
-                        <li>Confirm the PC B LAN IP with <code>ipconfig</code>.</li>
-                        <li>Confirm the current WSL IP again with <code>wsl hostname -I</code>.</li>
-                        <li>Make sure your port-proxy rules still point at the current WSL IP.</li>
-                        <li>Make sure Windows Firewall allows each required inbound TCP port, including 8021 for OmniVoice.</li>
-                        <li>From PC A, test OmniVoice with <code>curl http://REMOTE_MACHINE_IP:8021/health</code> before configuring the connector.</li>
-                        <li>On PC A, use the remote machine IP, not the WSL IP, in the endpoint fields.</li>
-                    </ul>
-                    <p>
-                        Original screenshot walkthrough on the old wiki was credited there to <i>hey_daniel</i>.
-                    </p>
+                    <h2>Fix A Connection</h2>
+                    <ol><li><b>The host's local 7513 page fails:</b> keep the launcher open, start DwemerDistro, and confirm CHIM's server is installed. Try the launcher again if its proxy failed to start.</li><li><b>Local works, but the gaming PC cannot connect:</b> verify both LAN addresses, the Private profile, the firewall's gaming-PC scope, and <code>netsh interface portproxy show all</code>. A VPN or guest Wi-Fi can isolate the PCs. Windows' IP Helper service is also needed for port forwarding.</li><li><b>It broke after restarting WSL:</b> the launcher route should resolve the new target, but verify it. The direct-WSL fallback needs its forwarding target updated manually.</li><li><b>The web page works, but Skyrim stays local:</b> check which mod supplies the winning <code>AIAgent.ini</code>, its four values, and restart Skyrim. Confirm the resolved address in the <a href="./log-files-and-debugging.html">CHIM log</a>.</li><li><b>Dialogue works, but speech fails:</b> test the host's STT or TTS connector separately. Do not open a new LAN port before identifying which request failed.</li></ol>
+                    <details><summary>Remove the rules created by this guide</summary>
+                        <p>On the host, inspect the forwarding rule and the firewall entry first. Remove only the rules you created for this setup; leave other service rules alone. Use the original host address if it has changed:</p>
+                        <pre><code>$HostPcIp = '192.168.1.50'
+netsh interface portproxy delete v4tov4 listenaddress=$HostPcIp listenport=8081
+Get-NetFirewallRule -DisplayName 'CHIM remote hosting' | Remove-NetFirewallRule</code></pre>
+                        <p>Disable the gaming PC's INI override when returning to a local CHIM server.</p>
+                    </details>
                 </div>
-            </span>
+
+                <div class="card" id="RemoteServicesOnly">
+                    <h2>Alternative: Move Only The AI Services</h2>
+                    <p>You can keep HerikaServer on the gaming PC and host only a model or voice service elsewhere. In that layout, each remote service needs its own reachable address, listening port, and firewall access.</p>
+                    <p>Configure those endpoints from HerikaServer's point of view. A bundled service bound only to the host's loopback address is not automatically available over the LAN. Follow the <a href="./local-llm-guide.html#Alternatives">separate model app instructions</a> or the selected service's hosting documentation.</p>
+                    <p>Use the complete-stack layout above when you want one CHIM connection and fewer individual service settings.</p>
+                </div>
+            </section>
         </div>
 
     </div>

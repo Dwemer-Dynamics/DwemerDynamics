@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page"><link rel="stylesheet" href="../css/remote-hosting.css?v=20261007-remote-guide">
 </head>
-<body class="theme stobe-theme">
+<body class="theme stobe-theme remote-guide copyable-guide">
     <div class="progress-container">
         <div class="progress-bar stobe-progress"></div>
     </div>
@@ -61,158 +61,126 @@
         </div>
 
         <div class="content">
-            <span id="RemoteHostingGuide" class="section">
-                <div class="card hero-card">
-                    <h1>STOBE Remote Hosting Guide</h1>
-                    <p>
-                        This page covers the local network setup where Kenshi runs on one PC and StobeServer or voice services run on a second machine.
-                        The main thing this guide solves is getting the second machine's WSL-hosted STOBE services reachable from your gaming PC.
-                    </p>
-                </div>
-
-                <div class="card" id="BasicIdea">
-                    <h2>Remote Hosting Guide</h2>
-                    <h3>Basic Setup Idea</h3>
-                    <p>
-                        PC A is the machine where you play Kenshi. PC B runs StobeServer, a local voice service, or both. Keep both machines on the same local network.
-                    </p>
-                    <figure class="guide-figure" style="max-width: 880px;">
-                        <img src="../img/remote-hosting/step-01.jpg" alt="Two-PC STOBE setup diagram">
-                        <figcaption>PC A runs Kenshi. PC B runs the remote STOBE services on the same local network.</figcaption>
-                    </figure>
-                </div>
-
-                <div class="card" id="MachineRoles">
-                    <h3>What Each PC Should Run</h3>
-                    <ul>
-                        <li><b>PC A:</b> Kenshi, RE_Kenshi, KenshiLib, and the STOBE game mod.</li>
-                        <li><b>PC B:</b> DwemerDistro with StobeServer and any local AI or voice services you want to host remotely.</li>
-                    </ul>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-02.jpg" alt="PC A component installation notes">
-                        <figcaption>PC A runs Kenshi and connects to the services on PC B.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-03.jpg" alt="PC B component installation notes">
-                        <figcaption>PC B handles the heavier remote services like the language model and XTTS.</figcaption>
-                    </figure>
-                </div>
-
-                <div class="card" id="FindAddresses">
-                    <h3>Get The Two Addresses You Need</h3>
-                    <p>
-                        You need two different addresses from the remote machine:
-                    </p>
-                    <ul>
-                        <li><b>The Windows LAN IP:</b> this is the address the game PC will connect to.</li>
-                        <li><b>The WSL IP:</b> this is the internal target that Windows will forward traffic into.</li>
-                    </ul>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-04.jpg" alt="Getting the LAN IP with ipconfig">
-                        <figcaption>Use <code>ipconfig</code> on PC B and note its IPv4 LAN address.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 920px;">
-                        <img src="../img/remote-hosting/step-05.jpg" alt="Getting the WSL IP from DwemerDistro">
-                        <figcaption>Start DwemerDistro on PC B and note the internal WSL address it reports for the web and XTTS services.</figcaption>
-                    </figure>
-                    <p>
-                        You can also fetch the current WSL address directly with:
-                    </p>
-                    <pre><code>wsl hostname -I</code></pre>
-                    <p>
-                        If your second-PC setup suddenly stops working later, check this first. WSL IPs can change after restarts.
-                    </p>
-                </div>
-
-                <div class="card" id="PortProxySetup">
-                    <h3>Forward The WSL Services Through Windows</h3>
-                    <p>
-                        This is the key fix from the old wiki. If trying to reach <code>WSL_IP:8020</code> directly from the gaming PC keeps failing, do not keep aiming the game PC at the raw WSL address.
-                        Forward those ports through the Windows host machine instead.
-                    </p>
-                    <p>
-                        Forward the ports you actually use:
-                    </p>
-                    <ul>
-                        <li><b>8083:</b> StobeServer</li>
-                        <li><b>Your TTS connector port:</b> for example <b>8020</b> for XTTS, <b>8021</b> for OmniVoice, or the port shown by your selected voice service.</li>
-                    </ul>
-                    <p>
-                        You can create the rules in an elevated Command Prompt:
-                    </p>
-                    <pre><code>netsh interface portproxy add v4tov4 listenport=8083 listenaddress=0.0.0.0 connectport=8083 connectaddress=&lt;WSL_IP&gt;
-netsh interface portproxy add v4tov4 listenport=&lt;TTS_PORT&gt; listenaddress=0.0.0.0 connectport=&lt;TTS_PORT&gt; connectaddress=&lt;WSL_IP&gt;</code></pre>
-                    <p>
-                        If you prefer a visual tool, you can use PortProxyGUI:
-                    </p>
-                    <p><a href="https://github.com/zmjack/PortProxyGUI/releases/tag/v1.4.2" target="_blank" rel="noopener noreferrer"><b>PortProxyGUI Download</b></a></p>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-06.jpg" alt="PortProxyGUI setup for STOBE remote hosting">
-                        <figcaption>Create rules that forward StobeServer and your selected voice service into the WSL address on PC B.</figcaption>
-                    </figure>
-                </div>
-
-                <div class="card" id="FirewallRules">
-                    <h3>Open The Windows Firewall Ports</h3>
-                    <p>
-                        Windows Firewall must allow the same ports. The connection will not work if those ports are blocked.
-                    </p>
-                    <ul>
-                        <li>Create an inbound rule for TCP.</li>
-                        <li>Allow the connection.</li>
-                        <li>Add local port <code>8083</code> and the port used by your selected local voice service.</li>
-                        <li>Apply it to Domain, Private, and Public if needed for your machine.</li>
-                    </ul>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-07.jpg" alt="Creating a Windows Firewall inbound rule">
-                        <figcaption>Create a new inbound rule in Windows Defender Firewall on PC B.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-09.jpg" alt="Adding STOBE ports to the firewall rule">
-                        <figcaption>Make the rule TCP and allow the same ports you forwarded.</figcaption>
-                    </figure>
-                </div>
-
-                <div class="card" id="PointPcAToPcB">
-                    <h3>Point STOBE On PC A At The Remote Machine</h3>
-                    <p>
-                        Once PC B is forwarding and accepting traffic, the gaming PC should use the <b>Windows LAN IP of PC B</b>, not the raw WSL address.
-                    </p>
-                    <ul>
-                        <li><b>For StobeServer:</b> set <code>ServerHost</code> in <code>StobeCustom.ini</code> to the LAN IP of PC B and keep <code>ServerPort=8083</code>.</li>
-                        <li><b>For TTS:</b> use the PC B LAN IP and matching service port inside the STOBE TTS connector.</li>
-                    </ul>
-                    <figure class="guide-figure" style="max-width: 900px;">
-                        <img src="../img/remote-hosting/step-11.jpg" alt="Starting DwemerDistro for remote hosting">
-                        <figcaption>Run Kenshi and the STOBE mod on PC A, while the selected services stay on PC B.</figcaption>
-                    </figure>
-                    <figure class="guide-figure" style="max-width: 920px;">
-                        <img src="../img/remote-hosting/step-12.jpg" alt="Configuring XTTS to use the remote machine LAN IP">
-                        <figcaption>Set the XTTS endpoint on PC A to the LAN IP of PC B, for example <code>http://192.168.1.3:8020</code>.</figcaption>
-                    </figure>
-                    <p>
-                        In short, use <code>REMOTE_MACHINE_IP:8083</code> for StobeServer and the matching port for your selected voice service.
-                    </p>
-                </div>
-
-                <div class="card" id="Troubleshooting">
-                    <h3>Quick Troubleshooting Notes</h3>
-                    <p>
-                        If it still does not work, go through these in order:
-                    </p>
-                    <ul>
-                        <li>Make sure the service actually works locally on PC B first.</li>
-                        <li>Confirm the PC B LAN IP with <code>ipconfig</code>.</li>
-                        <li>Confirm the current WSL IP again with <code>wsl hostname -I</code>.</li>
-                        <li>Make sure your port-proxy rules still point at the current WSL IP.</li>
-                        <li>Make sure Windows Firewall allows inbound TCP 8083 and your selected voice-service port.</li>
-                        <li>On PC A, use the remote machine IP, not the WSL IP, in the endpoint fields.</li>
-                    </ul>
-                    <p>
-                        Original screenshot walkthrough on the old wiki was credited there to <i>hey_daniel</i>.
-                    </p>
-                </div>
-            </span>
+            <section class="section" id="RemoteHostingGuide">
+<div class="card hero-card">
+<p class="remote-kicker">STOBE / two-PC setup</p>
+<h1>Remote Hosting Guide</h1>
+<p>Play Kenshi on one PC and run STOBE's server, models, and speech services on another. Keep the AI stack together and connect the game through one private-network endpoint.</p>
+<nav aria-label="On this page"><ul>
+<li><a href="#BasicIdea">See the setup</a></li>
+<li><a href="#MachineRoles">Prepare the host PC</a></li>
+<li><a href="#PortProxySetup">Connect the two PCs</a></li>
+<li><a href="#PointPcAToPcB">Configure Kenshi</a></li>
+<li><a href="#Troubleshooting">Fix a connection</a></li>
+</ul></nav>
+</div>
+<div class="card" id="BasicIdea">
+<h2>One Game PC. One AI Host.</h2>
+<p>Run the complete DwemerDistro stack on the host. StobeServer calls the model and speech services there; your gaming PC sends requests and receives replies through STOBE.</p>
+<figure aria-labelledby="LayoutCaption" class="remote-diagram">
+<div class="remote-layout">
+<div class="remote-machine">
+<p class="remote-kicker">01 / gaming PC</p>
+<h3>Kenshi + STOBE</h3>
+<ul><li>Kenshi, RE_Kenshi, KenshiLib, and STOBE</li><li>Microphone input</li><li>Subtitles and voice playback</li></ul>
+</div>
+<p class="remote-wire">Private LAN<span aria-hidden="true">⇄</span> Requests<br/>and replies</p>
+<div class="remote-machine">
+<p class="remote-kicker">02 / host PC</p>
+<h3>DwemerDistro</h3>
+<div class="remote-distro">
+<h4>WSL · Linux environment</h4>
+<p><b>StobeServer</b><br/>Dialogue, profiles, memories, and actions</p>
+<ul class="remote-services">
+<li><b>Language model</b><small>LLM Studio or cloud</small></li>
+<li><b>Voice generation</b><small>Text-to-speech</small></li>
+<li><b>Speech recognition</b><small>Speech-to-text</small></li>
+</ul>
+</div>
+</div>
+</div>
+<figcaption id="LayoutCaption">The gaming PC reaches StobeServer through one STOBE port. Local model and speech services stay inside the host's environment; cloud providers are reached by the host over the internet.</figcaption>
+</figure>
+<p>This layout does not require a second StobeServer on the gaming PC. It also avoids opening separate model, speech, or database ports to the network.</p>
+</div>
+<div class="card" id="MachineRoles">
+<h2>1. Get The Host Working First</h2>
+<ol>
+<li>Install and start DwemerDistro on the host PC.</li>
+<li>Install or update STOBE's server from the launcher's Mods page.</li>
+<li>Open the STOBE web interface and complete its setup.</li>
+<li>Test your model and voice connectors from that interface.</li>
+<li>Leave the launcher and DwemerDistro running while you play.</li>
+</ol>
+<p>For local models, use the launcher's <b>LLM Studio</b> component and follow the <a href="./local-llm-guide.html">Local LLM Guide</a>. Choose voice and microphone services using <a href="./tts.html">Text-to-Speech</a> and <a href="./stt.html">Speech-to-Text</a>.</p>
+<p>Keep connector URLs appropriate to the host. For example, bundled LLM Studio in the same distro uses <code>http://127.0.0.1:1234/v1/chat/completions</code>. Do not replace every connector URL with the gaming PC's address.</p>
+<p><b>Moving an existing setup?</b> Back up your existing playthrough data, profiles, configuration, and keys before moving it. A fresh host install does not contain your old AI history.</p>
+<p>On the host PC, confirm this page opens before continuing:</p>
+<pre><code>http://127.0.0.1:8083/StobeServer/ui/</code></pre>
+</div>
+<div class="card" id="FindAddresses">
+<h2>2. Find Both PCs' Addresses</h2>
+<ol>
+<li>Connect both PCs to the same trusted local network. Ethernet is useful for consistent audio and upload latency.</li>
+<li>Run <code>ipconfig</code> on the host PC and note the active Ethernet or Wi-Fi <b>IPv4 Address</b>.</li>
+<li>Run <code>ipconfig</code> on the gaming PC and note its IPv4 address too.</li>
+</ol>
+<p>The examples below use <b>192.168.1.50</b> for the host and <b>192.168.1.25</b> for the gaming PC. Replace both with your own values. The host's Windows address is what Kenshi will use.</p>
+<p>These instructions use a Private Windows network profile on a network you trust. If either LAN address changes later, update the forwarding rule, firewall scope, and INI as needed. A router DHCP reservation can keep those addresses stable.</p>
+</div>
+<div class="card" id="PortProxySetup"><h2>3. Forward One STOBE Port</h2>
+<p>Forward the host's Windows LAN port <b>8083</b> directly to StobeServer inside DwemerDistro. The launcher proxy on 7513 is specific to CHIM; do not use it for STOBE.</p>
+<figure aria-labelledby="RouteCaption" class="remote-diagram"><div class="remote-flow">
+<div class="remote-hop"><p class="remote-kicker">Network entry</p><h3>Host Windows</h3><code>192.168.1.50:8083</code><p>The address used by the gaming PC.</p></div><p class="remote-wire"><span aria-hidden="true">→</span></p>
+<div class="remote-hop"><p class="remote-kicker">Windows forwarding</p><h3>Port proxy rule</h3><code>TCP 8083</code><p>Forwards to the distro's current IPv4 address.</p></div><p class="remote-wire"><span aria-hidden="true">→</span></p>
+<div class="remote-hop"><p class="remote-kicker">Inside DwemerDistro</p><h3>StobeServer</h3><code>current WSL IP:8083</code><p>Refresh this target after WSL restarts.</p></div></div>
+<figcaption id="RouteCaption">One game-to-server connection enters through Windows and reaches StobeServer. Replies return along the same connection.</figcaption></figure>
+<p class="remote-status"><b>Verification status:</b> ports and plugin configuration were checked against current source. Two-PC forwarding, restart recovery, and remote gameplay still require end-to-end validation.</p>
+<ol><li>On the host, open <b>PowerShell as Administrator</b>.</li><li>Inspect existing rules with <code>netsh interface portproxy show all</code>. Do not overwrite a rule for another service.</li><li>Run <code>wsl -d DwemerAI4Skyrim3 hostname -I</code> and note the distro's IPv4 address.</li><li>Replace both example addresses below with your real host and WSL addresses.</li></ol>
+<pre><code>$HostPcIp = '192.168.1.50'
+$WslIp = '172.30.98.229'
+netsh interface portproxy add v4tov4 listenaddress=$HostPcIp listenport=8083 connectaddress=$WslIp connectport=8083</code></pre>
+<p>The rule listens only on the host's LAN address. WSL addresses can change after a restart. After confirming the existing rule belongs to this setup, refresh its target:</p>
+<pre><code>$HostPcIp = '192.168.1.50'
+$WslIp = '172.30.98.229'
+netsh interface portproxy set v4tov4 listenaddress=$HostPcIp listenport=8083 connectaddress=$WslIp connectport=8083</code></pre>
+<p>Use the new WSL address, not the placeholder. See <a href="https://learn.microsoft.com/en-us/windows/wsl/networking" rel="noopener noreferrer" target="_blank">Microsoft's WSL networking guide</a> for direct forwarding and optional mirrored networking. Local discovery does not automatically find a host on another PC.</p></div>
+<div class="card" id="FirewallRules">
+<h2>4. Allow The Gaming PC Through The Firewall</h2>
+<p>In the same elevated PowerShell window on the host, set both addresses to your values. Add a TCP rule for the gaming PC on the Private profile:</p>
+<pre><code>$HostPcIp = '192.168.1.50'
+$GamingPcIp = '192.168.1.25'
+New-NetFirewallRule -DisplayName 'STOBE remote hosting' -Direction Inbound -Action Allow -Protocol TCP -LocalAddress $HostPcIp -LocalPort 8083 -RemoteAddress $GamingPcIp -Profile Private</code></pre>
+<p>If you already created this rule, edit it instead of creating duplicates. Other broad firewall rules can still allow additional devices; this rule does not narrow those existing rules.</p>
+<p>This guide is for a trusted private network. Do not add a router internet-forwarding rule or open model and database services to make this setup work.</p>
+<h3>Check From The Gaming PC</h3>
+<p>Open the host's STOBE interface in the gaming PC's browser:</p>
+<pre><code>http://192.168.1.50:8083/StobeServer/ui/</code></pre>
+<p>If it does not open, stop here and check the connection before changing Kenshi. In PowerShell on the gaming PC:</p>
+<pre><code>Test-NetConnection 192.168.1.50 -Port 8083</code></pre>
+<p><code>TcpTestSucceeded: True</code> confirms that the TCP port is reachable. It does not prove that STOBE or a model is working; the web page must load too.</p>
+</div>
+<div class="card" id="PointPcAToPcB"><h2>5. Point Kenshi At The Host</h2><p>Edit <code>mods/Stobe/StobeCustom.ini</code> under your Kenshi installation. Preserve other settings and change these keys in the existing <code>[Settings]</code> section:</p><pre><code>[Settings]
+ServerHost=192.168.1.50
+ServerPort=8083</code></pre><p>Use the host's Windows IPv4 address without a URL scheme. Restart the game after editing. Keep your original values available to return to a local server.</p><h3>Test One Thing At A Time</h3><ol><li>Load your game and confirm the host's interface sees the player.</li><li>Send a short typed message and check the reply.</li><li>Listen to a generated voice reply.</li><li>Test microphone input.</li><li>Test one action and check the actual game result.</li></ol><p>Keep the host awake during play. A working browser page is network proof; dialogue, voice, microphone input, and actions each need their own check.</p></div>
+<div class="card" id="Troubleshooting">
+<h2>Fix A Connection</h2>
+<ol><li><b>The host's local page fails:</b> start DwemerDistro, confirm StobeServer is installed, and test it on the host first.</li><li><b>Local works, but the gaming PC cannot connect:</b> verify the LAN addresses, Private profile, forwarding target, and firewall's gaming-PC scope. A VPN or guest Wi-Fi can isolate the PCs. Windows' IP Helper service is needed for port forwarding.</li><li><b>It broke after restarting WSL:</b> read the new WSL IPv4 address and update only this setup's forwarding rule.</li><li><b>The web page works, but the game does not:</b> check the custom INI path and section, restart the game, and confirm the resolved address in the <a href="./log-files-and-debugging.html">plugin log</a>.</li><li><b>Dialogue works, but speech fails:</b> test the host's STT or TTS connector separately before opening additional LAN ports.</li></ol>
+<details><summary>Remove the rules created by this guide</summary>
+<p>On the host, inspect the forwarding rule and the firewall entry first. Remove only the rules you created for this setup; leave other service rules alone. Use the original host address if it has changed:</p>
+<pre><code>$HostPcIp = '192.168.1.50'
+netsh interface portproxy delete v4tov4 listenaddress=$HostPcIp listenport=8083
+Get-NetFirewallRule -DisplayName 'STOBE remote hosting' | Remove-NetFirewallRule</code></pre>
+<p>Restore ServerHost=127.0.0.1 and ServerPort=8083 in StobeCustom.ini when returning to a local server.</p>
+</details>
+</div>
+<div class="card" id="RemoteServicesOnly">
+<h2>Alternative: Move Only The AI Services</h2>
+<p>You can keep StobeServer on the gaming PC and host only a model or voice service elsewhere. In that layout, each remote service needs its own reachable address, listening port, and firewall access.</p>
+<p>Configure those endpoints from StobeServer's point of view. A bundled service bound only to the host's loopback address is not automatically available over the LAN. Follow the <a href="./local-llm-guide.html#Alternatives">separate model app instructions</a> or the selected service's hosting documentation.</p>
+<p>Use the complete-stack layout above when you want one STOBE connection and fewer individual service settings.</p>
+</div>
+</section>
         </div>
 
     </div>
