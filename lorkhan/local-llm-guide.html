@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Local LLM Guide | LORKHAN | Dwemer Dynamics</title>
+    <title>LORKHAN Local LLM Guide | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261006-copy-page"></script>
+    <script src="../js/javascript.js?v=20261007-local-llm"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
 </head>
-<body class="theme lorkhan-theme">
+<body class="theme lorkhan-theme copyable-guide">
     <div class="progress-container">
         <div class="progress-bar lorkhan-progress"></div>
     </div>
@@ -59,32 +59,147 @@
         </div>
 
         <main class="content">
-            <section class="section" id="Guide">
+            <section id="Guide" class="section">
                 <div class="card hero-card">
-                    <h1>Local LLM Guide</h1>
-                    <p>Run a compatible language model service on your PC or another machine, then connect LorkhanServer to it.</p>
+                    <h1>LORKHAN Local LLM Guide</h1>
+                    <p>Run a large language model (LLM) on your own hardware. Start with LM Studio inside DwemerDistro, test it, then connect LORKHAN. No separate Windows model app is needed for this route.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#Setup">Set up LLM Studio in DwemerDistro</a></li>
+                        <li><a href="#CreateConnector">Connect LORKHAN</a></li>
+                        <li><a href="#AssignProfile">Use it in game</a></li>
+                        <li><a href="#Alternatives">Use a separate model app</a></li>
+                        <li><a href="#Troubleshooting">Fix a problem</a></li>
+                    </ul></nav>
                 </div>
                 <div class="card" id="Requirements">
-                    <h3>Before you start</h3>
-                    <p>Choose a model that fits your available memory and hardware. Running the game, language model and speech services together can increase latency. A small working setup is a better starting point than several large services competing for resources.</p>
-                    <p>Use an endpoint supported by the connector you choose. An OpenAI-compatible connector needs an OpenAI-compatible chat API, not the service’s browser page.</p>
+                    <h2>Before You Start</h2>
+                    <ul>
+                        <li><b>Have the mod working first.</b> This guide changes the language model. It does not install the game plugin or set up speech. See <a href="./installation.html">Installation</a>.</li>
+                        <li><b>Start small.</b> Choose a chat or instruction model that fits your free memory. The game, model, and speech services share your hardware.</li>
+                        <li><b>Test one profile.</b> Keep your current connector available until local dialogue works.</li>
+                    </ul>
+                    <p>Local models avoid a hosted provider's per-request charges. Speed, dialogue quality, and reliable actions still depend on the model and your hardware.</p>
                 </div>
                 <div class="card" id="Setup">
-                    <h3>Run a Local Model</h3>
-                    <h4>LM Studio</h4><ol><li>Download and load a chat model that fits your hardware.</li><li>Start its local API server and note the address, port and model identifier.</li><li>Create a LORKHAN connector using Direct OpenAI-compatible endpoint. A common endpoint is <code>http://127.0.0.1:1234/v1/chat/completions</code>; use your installation's actual address.</li><li>Save, assign it to Standard LLM in your profile, and test a short typed conversation.</li></ol>
-                    <p>See <a href="https://lmstudio.ai/docs/developer/openai-compat">LM Studio's API guide</a> for server controls and endpoints.</p>
-                    <h4>KoboldCPP</h4><ol><li>Load a compatible GGUF chat model in KoboldCPP.</li><li>Start its server and confirm text generation works in its own interface.</li><li>Use its OpenAI-compatible chat endpoint in LORKHAN. For port 5001, this is <code>http://127.0.0.1:5001/v1/chat/completions</code>.</li><li>Use the model identifier exposed by that server, then save and assign the connector.</li></ol>
-                    <p>The <a href="https://github.com/LostRuins/koboldcpp/wiki">KoboldCPP wiki</a> covers model loading and hardware settings. These ports are examples, not instructions to change a working installation.</p>
+                    <h2>1. Set Up LLM Studio In DwemerDistro</h2>
+                    <p>The launcher calls this component <b>LLM Studio</b>. It runs LM Studio's engine inside DwemerDistro and gives you a web manager.</p>
+                    <ol>
+                        <li>Start DwemerDistro.</li>
+                        <li>Open the launcher's <b>Components</b> page.</li>
+                        <li>Find <b>LLM Studio</b> under <b>Local Language Models</b>.</li>
+                        <li>Install the component if it is not already installed.</li>
+                        <li>Select <b>Open Manager</b>.</li>
+                        <li>Select <b>Start</b> at the top of the manager if the server is stopped.</li>
+                        <li>Open <b>Models</b>, choose a model under <b>Download</b>, and select <b>Download</b>.</li>
+                        <li>Wait for the download to finish.</li>
+                        <li>Select that model under <b>Installed</b>, then select <b>Load</b>.</li>
+                    </ol>
+                    <p><b>Installed is not loaded.</b> Starting the server and downloading a model do not load it. Leave advanced load settings at their defaults for your first test. Unload the current model before switching to another.</p>
+                    <p>If LLM Studio is missing, update DwemerDistro and the launcher, then reopen Components. If the manager says <b>Locked</b>, reopen it using <b>Open Manager</b>.</p>
+                    <h3>Check The Model And Copy Its Details</h3>
+                    <ol>
+                        <li>Open the manager's <b>Test</b> tab.</li>
+                        <li>Send a short prompt, such as <code>Reply with Hello.</code>, using <b>Test</b>.</li>
+                        <li>Wait for a reply before continuing.</li>
+                        <li>Select <b>Copy ID</b> beside the loaded model and keep that value.</li>
+                        <li>Open <b>Server</b> and copy <b>Chat URL</b>.</li>
+                    </ol>
+                    <p>For a mod server in the same DwemerDistro environment, the full chat URL is:</p>
+                    <pre><code>http://127.0.0.1:1234/v1/chat/completions</code></pre>
+                    <p>Use <b>Chat URL</b>, not <b>API base</b>. The model value is the loaded model's ID, not the connector's friendly name or a guessed download filename.</p>
+                </div>
+                <div class="card" id="CreateConnector">
+                    <h2>2. Connect LORKHAN</h2>
+                    <p>A connector tells LORKHAN where to send model requests. Create one without replacing your existing connector.</p>
+                    <ol>
+                        <li>Open <b>Configuration → LLM</b> in the LORKHAN web interface.</li>
+                        <li>Select <b>New</b>.</li>
+                        <li>Open <b>Connection options</b>.</li>
+                        <li>Choose <b>Direct OpenAI-compatible endpoint</b> as the <b>Mode</b>.</li>
+                        <li>Give it a recognizable <b>Name</b>, such as Distro local model.</li>
+                        <li>Paste the manager's <b>Chat URL</b> into <b>URL</b>.</li>
+                        <li>Paste the loaded model's <b>Copy ID</b> value into <b>Model</b>.</li>
+                        <li>Select <b>No API key</b> for the bundled distro server.</li>
+                        <li>Select <b>Create</b> to save the new connector.</li>
+                        <li>Open that connector and select <b>Test</b>.</li>
+                    </ol>
+                    <p><b>Two tests, two jobs:</b> the manager test checks that the model generates text. The connector test checks that LORKHAN's server can reach it and read its response. Continue only when both work.</p>
+                    <p>The URL must end in <code>/v1/chat/completions</code>. Leave the advanced JSON and reasoning settings unchanged unless a specific test failure calls for a change. See <a href="./llm.html">Large Language Models</a> for other connector options.</p>
+                </div>
+                <div class="card" id="AssignProfile">
+                    <h2>3. Use It In Game</h2>
+                    <ol>
+                        <li>Open <b>Profiles</b> in the mod's web interface.</li>
+                        <li>Clone a working profile or open the profile you want to test.</li>
+                        <li>Select your local connector for <b>Standard LLM</b>.</li>
+                        <li>Save the profile.</li>
+                        <li>Assign that profile to a test character.</li>
+                        <li>Use <b>Standard</b> for the in-game conversation model and try a short conversation.</li>
+                    </ol>
+                    <p>Fast, Powerful, and Experimental are separate slots. They keep using their assigned connectors. Diaries, memories, and other background jobs also have their own assignments; test them separately before moving them to the local model.</p>
+                    <p>Player2 can override local choices when enabled in Quickstart. If the wrong model replies, check Player2, the character's profile or overrides, and the selected conversation slot.</p>
+                    <h3>Optional: Start It With DwemerDistro</h3>
+                    <p>After testing, open the manager's <b>Server</b> tab. Enable <b>Start with DwemerDistro</b>, choose a <b>Startup model</b>, and select <b>Save</b>. Without a startup model, starting the engine alone does not load one.</p>
+                    <p>The manager can unload an idle model. If it shows <b>No model loaded</b>, return to Models and load it before testing again. Stopping the engine leaves downloaded models in place.</p>
+                </div>
+                <div class="card" id="Alternatives">
+                    <h2>Alternative: Use A Separate Model App</h2>
+                    <p>Use this route if you already run a model app on Windows or another computer. The connector and profile steps above stay the same; change the URL and model ID to those supplied by your app.</p>
+                    <h3>Windows LM Studio</h3>
+                    <ol>
+                        <li>Install the <a href="https://lmstudio.ai/" target="_blank" rel="noopener noreferrer">LM Studio desktop app</a>.</li>
+                        <li>Download and load a chat or instruction model.</li>
+                        <li>Open <b>Developer</b> and turn on <b>Start server</b>.</li>
+                        <li>Copy the model identifier and use the app's chat-completions address.</li>
+                    </ol>
+                    <p>If the mod server cannot reach the Windows app through loopback, enable <b>Serve on Local Network</b> and use the Windows IPv4 address. See <a href="https://lmstudio.ai/docs/developer/core/server/serve-on-network" target="_blank" rel="noopener noreferrer">LM Studio's network instructions</a>.</p>
+                    <h3>KoboldCPP</h3>
+                    <ol>
+                        <li>Download <a href="https://github.com/LostRuins/koboldcpp/releases/latest" target="_blank" rel="noopener noreferrer">KoboldCPP</a>.</li>
+                        <li>Load a compatible GGUF chat model and start its server.</li>
+                        <li>Confirm it generates text in its own interface.</li>
+                        <li>Use its OpenAI-compatible chat endpoint and the model ID it reports.</li>
+                    </ol>
+                    <p>See the <a href="https://github.com/LostRuins/koboldcpp/wiki" target="_blank" rel="noopener noreferrer">KoboldCPP setup guide</a> for model loading and hardware settings.</p>
                 </div>
                 <div class="card" id="Network">
-                    <h3>Use the address the server can reach</h3>
-                    <p>LorkhanServer normally runs inside DwemerDistro’s Linux environment. <code>127.0.0.1</code> is relative to the process making the request; it is not automatically another computer or a service bound only to Windows loopback.</p>
-                    <p>For a service on another machine, use its reachable address and allow only the necessary private-network access. See <a href="./remote-hosting-guide.html">Remote Hosting</a>.</p>
+                    <h2>Which Address Do I Use?</h2>
+                    <p>The mod's <b>server</b> sends the request. Choose an address it can reach, even if your browser or game runs somewhere else.</p>
+                    <div role="region" aria-label="Model server addresses" tabindex="0" style="overflow-x: auto;"><table>
+                        <thead><tr><th>Model location</th><th>Example full chat URL</th></tr></thead>
+                        <tbody>
+                            <tr><td>LLM Studio inside the same DwemerDistro</td><td><code>http://127.0.0.1:1234/v1/chat/completions</code></td></tr>
+                            <tr><td>Separate LM Studio on Windows</td><td><code>http://&lt;WINDOWS_IP&gt;:1234/v1/chat/completions</code></td></tr>
+                            <tr><td>Separate KoboldCPP on Windows</td><td><code>http://&lt;WINDOWS_IP&gt;:5001/v1/chat/completions</code></td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>For a Windows app, run <code>ipconfig</code> on its PC and use the active Ethernet or Wi-Fi IPv4 address, for example <code>192.168.1.25</code>. Confirm the app's actual port and allow the connection on your private network.</p>
+                    <p><code>127.0.0.1</code> means the environment making the request. It works for the bundled engine and mod server in the same DwemerDistro. It does not automatically reach a Windows-only app or another PC.</p>
+                    <p>When LorkhanServer and the bundled engine share one DwemerDistro, keep the model's loopback URL. LORKHAN's game bridge remains local; moving an AI provider is a separate setup. See <a href="./remote-hosting-guide.html">Remote Hosting</a> when the model itself is on another machine. Ports shown here are defaults; use your service's actual address.</p>
                 </div>
                 <div class="card" id="Tuning">
-                    <h3>Improve response time</h3>
-                    <p>Start with a short reply and modest context. Check model loading, memory use and request timing. Change one setting at a time, and avoid judging the model from its first cold request alone.</p>
-                    <p>Do not expose an unauthenticated model endpoint to the public internet.</p>
+                    <h2>Keep The First Setup Simple</h2>
+                    <ul>
+                        <li><b>Memory:</b> a smaller quantized model leaves more room for the game and speech services. A successful download does not prove it fits in memory.</li>
+                        <li><b>Context:</b> the model must fit the prompt and the reply. Shorten conversation history or optional context if requests exceed its limit.</li>
+                        <li><b>Speed:</b> test a second request after loading. A cold first request can be slower.</li>
+                        <li><b>Actions:</b> a good short greeting does not prove the model can follow game instructions or produce reliable actions. Test those in game.</li>
+                        <li><b>Presets:</b> if your server offers a Local LLM settings preset, review what it changes before applying it. It can reduce context and optional features; it does not download a model.</li>
+                    </ul>
+                </div>
+                <div class="card" id="Troubleshooting">
+                    <h2>Fix A Problem</h2>
+                    <ol>
+                        <li><b>No reply in the manager:</b> start the engine, load a model, and wait for loading to finish. If loading fails, try a smaller model or lower memory use.</li>
+                        <li><b>Engine will not start:</b> check whether another model server already uses port 1234.</li>
+                        <li><b>Connection refused or timeout:</b> check the model's location, reachable address, port, and loading state. A Windows app may need network access enabled.</li>
+                        <li><b>404 or model not found:</b> paste the full Chat URL and the exact loaded model ID again.</li>
+                        <li><b>401 or 403:</b> a separately configured server may require authentication. Select its API key; the bundled distro endpoint needs none.</li>
+                        <li><b>Connector test works, but the game uses another model:</b> check the character's profile, Standard/Fast/Powerful/Experimental slot, NPC overrides, and Player2 setting.</li>
+                        <li><b>Invalid output or repeated actions:</b> try a model that follows instructions more reliably. Change one setting at a time and keep a working connector available.</li>
+                    </ol>
+                    <p>If it still fails, include the mod and server versions, model ID, which hosting route you used, and the exact error. Remove keys before sharing logs. See <a href="./log-files-and-debugging.html">Log Files</a>.</p>
+
                 </div>
             </section>
         </main>

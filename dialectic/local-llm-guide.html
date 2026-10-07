@@ -1,77 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CHIM Local LLM Guide | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261007-local-llm"></script>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/progressBar.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-</head>
-<body class="theme chim-theme copyable-guide">
-    <div class="progress-container">
-        <div class="progress-bar chim-progress"></div>
-    </div>
-
-    <div class="container">
-        <div class="header">
-            <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
-            </div>
-            <div class="headerTitle">
-                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">CHIM</a>
-            </div>
-            </div>
-
-        <div class="sidebar left-sidebar">
-            <p class="pageLinks">
-                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
-                <a href="./index.html" title="Overview">Overview</a>
-                <a href="./installation.html" title="Installation">Installation</a>
-                <a href="./plugins.html" title="Plugins">Plugins</a>
-                <a href="./plugin-guide.html" title="Plugin Guide">Plugin Guide</a>
-                <a href="./configuration.html" title="Configuration">Configuration</a>
-                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
-                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
-                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
-                <a href="./local-llm-guide.html" title="Local LLMs">Local LLMs</a>
-                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
-                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
-                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
-                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
-                <a href="./faq.html" title="FAQ">FAQ</a>
-                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
-                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
-                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
-            </p>
-            <p class="sidebar-padder"></p>
-            <hr>
-            <p class="sidebar-bottom">
-                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#11015;&#65039;</span><span>Download</span></a>
-                <a href="https://www.youtube.com/watch?v=Sf0m0FIUZuw" title="Video Guide" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#127909;</span><span>Video Guide</span></a>
-                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/discord.png" alt="Discord"><span>Discord</span></a>
-                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/youtube.png" alt="YouTube"><span>YouTube</span></a>
-                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/patreon.png" alt="Patreon"><span>Patreon</span></a>
-                <a href="https://github.com/Dwemer-Dynamics/HerikaServer" title="Server Code" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#128187;</span><span>Server Code</span></a>
-                <a href="https://github.com/Dwemer-Dynamics/CHIM" title="Mod Code" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#128187;</span><span>Mod Code</span></a>
-            </p>
-        </div>
-
-        <div class="content">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><meta name="description" content="Set up LM Studio inside DwemerDistro and connect a local language model to Dialectic."><title>Dialectic Local LLM Guide | Dwemer Dynamics</title><link rel="icon" type="image/png" href="../img/dialectic-icon.png"><script src="../js/javascript.js?v=20261007-local-llm"></script><link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="../css/cards.css"><link rel="stylesheet" href="../css/header.css"><link rel="stylesheet" href="../css/progressBar.css"><link rel="stylesheet" href="../css/sidebar.css"><link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page"></head>
+<body class="theme dialectic-theme copyable-guide"><div class="progress-container"><div class="progress-bar dialectic-progress"></div></div><div class="container"><div class="header"><div class="headerMenu" onclick="toggleNav()"><button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button></div><div class="headerTitle"><a href="./index.html"><img src="../img/dialectic-icon.png" alt="Dialectic icon" id="logo"></a><a href="./index.html" id="headerTitle">Dialectic</a></div></div>
+<div class="sidebar left-sidebar"><p class="pageLinks"><a href="../index.html">Dwemer Dynamics Home</a><a href="./index.html">Overview</a><a href="./installation.html">Installation</a><a href="./configuration.html">Configuration</a><a href="./roleplay-settings.html">Roleplay Settings</a><a href="./ingame-settings.html">Fallout Settings</a><a href="./llm.html">Large Language Models</a><a href="./local-llm-guide.html" title="Local LLMs">Local LLMs</a><a href="./tts.html">Text-to-Speech</a><a href="./stt.html">Speech-to-Text</a><a href="./modders-guide.html">Modders Guide</a><a href="./faq.html">FAQ</a><a href="./remote-hosting-guide.html">Remote Hosting Guide</a><a href="./linux-setup-guide.html">Linux Setup Guide</a><a href="./log-files-and-debugging.html">Log Files</a></p><p class="sidebar-padder"></p><hr><p class="sidebar-bottom"><a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#11015;&#65039;</span><span>Download</span></a><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/discord.png" alt="Discord"><span>Discord</span></a><a href="https://www.youtube.com/watch?v=Sf0m0FIUZuw" title="Video Guide" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#127909;</span><span>Video Guide</span></a><a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/youtube.png" alt="YouTube"><span>YouTube</span></a><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/patreon.png" alt="Patreon"><span>Patreon</span></a><a href="https://github.com/Dwemer-Dynamics/DialecticServer" title="Server Code" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#128187;</span><span>Server Code</span></a><a href="https://github.com/Dwemer-Dynamics/Dialectic" title="Mod Code" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#128187;</span><span>Mod Code</span></a></p></div>
+<div class="content">
             <section id="LocalLlmGuide" class="section">
                 <div class="card hero-card">
-                    <h1>CHIM Local LLM Guide</h1>
-                    <p>Run a large language model (LLM) on your own hardware. Start with LM Studio inside DwemerDistro, test it, then connect CHIM. No separate Windows model app is needed for this route.</p>
+                    <h1>Dialectic Local LLM Guide</h1>
+                    <p>Run a large language model (LLM) on your own hardware. Start with LM Studio inside DwemerDistro, test it, then connect Dialectic. No separate Windows model app is needed for this route.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#ChooseServer">Set up LLM Studio in DwemerDistro</a></li>
-                        <li><a href="#CreateConnector">Connect CHIM</a></li>
+                        <li><a href="#CreateConnector">Connect Dialectic</a></li>
                         <li><a href="#AssignProfile">Use it in game</a></li>
                         <li><a href="#Alternatives">Use a separate model app</a></li>
                         <li><a href="#Troubleshooting">Fix a problem</a></li>
@@ -115,8 +52,8 @@
                     <p>Use <b>Chat URL</b>, not <b>API base</b>. The model value is the loaded model's ID, not the connector's friendly name or a guessed download filename.</p>
                 </div>
                 <div class="card" id="CreateConnector">
-                    <h2>2. Connect CHIM</h2>
-                    <p>A connector tells CHIM where to send model requests. Create one without replacing your existing connector.</p>
+                    <h2>2. Connect Dialectic</h2>
+                    <p>A connector tells Dialectic where to send model requests. Create one without replacing your existing connector.</p>
                     <ol>
                         <li>Open <b>Configuration → LLM</b> in the mod's web interface.</li>
                         <li>Select <b>New Connector</b>.</li>
@@ -128,8 +65,8 @@
                         <li>Leave the API key unselected for the bundled distro server.</li>
                         <li>Select <b>Save</b>, then <b>Test</b>.</li>
                     </ol>
-                    <p><b>Two tests, two jobs:</b> the manager test checks that the model generates text. The connector test checks that CHIM's server can reach it and read its response. Continue only when both work.</p>
-                    <p>The URL must end in <code>/v1/chat/completions</code>. Leave the advanced JSON and reasoning settings unchanged unless a specific test failure calls for a change. See <a href="./llm.html">Large Language Models</a> for other connector options.</p>
+                    <p><b>Two tests, two jobs:</b> the manager test checks that the model generates text. The connector test checks that Dialectic's server can reach it and read its response. Continue only when both work.</p>
+                    <p>The URL must end in <code>/v1/chat/completions</code>. Leave the advanced JSON and reasoning settings unchanged unless a specific test failure calls for a change. See <a href="./llm.html">Large Language Models</a><a href="./local-llm-guide.html" title="Local LLMs">Local LLMs</a> for other connector options.</p>
                 </div>
                 <div class="card" id="AssignProfile">
                     <h2>3. Use It In Game</h2>
@@ -204,13 +141,7 @@
                         <li><b>Invalid output or repeated actions:</b> try a model that follows instructions more reliably. Change one setting at a time and keep a working connector available.</li>
                     </ol>
                     <p>If it still fails, include the mod and server versions, model ID, which hosting route you used, and the exact error. Remove keys before sharing logs. See <a href="./log-files-and-debugging.html">Log Files</a>.</p>
-                    <p>For community examples, see the <a href="https://discord.com/channels/1109612896482246826/1337437602323890177/threads/1426949268903694376" target="_blank" rel="noopener noreferrer">CHIM Local LLM Discord thread</a>.</p>
+
                 </div>
             </section>
-        </div>
-
-    </div>
-
-    <footer>Dwemer Dynamics 2026</footer>
-</body>
-</html>
+        </div></div><footer>Dwemer Dynamics 2026</footer></body></html>
