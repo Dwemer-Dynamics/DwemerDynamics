@@ -132,6 +132,7 @@
                             <li><a href="#ChooseAnApproach">Choose an approach</a></li>
                             <li><a href="#FirstServerPlugin">Your first server plugin</a></li>
                             <li><a href="#PackageListAndUpdate">Package, list, and update</a></li>
+                            <li><a href="#ChoosingDownloads">Choosing downloads</a></li>
                             <li><a href="#Actions">Actions</a></li>
                             <li><a href="#SharingYourPlugin">Sharing your plugin</a></li>
                             <li><a href="#TrustAndListings">Trust and listings</a></li>
@@ -279,6 +280,17 @@
                         <li><b>Log, do not echo.</b> Responses are streamed back to the game. Printing text from a hook can corrupt them. Write diagnostics to a log instead, and never log secrets.</li>
                         <li><b>Use the <code>plugins</code> schema</b> for your tables, with ordered, idempotent files in <code>migrations</code>. Never edit a migration after release; add a new one.</li>
                     </ul>
+                    <h3 id="OtherModsAndSaves">Plan for other mods, saves, and costs</h3>
+                    <ul>
+                        <li><b>Check what alternatives really support.</b> A replacement or stub for a dependency may implement most functions but not all. Detect each feature you call, use a safe default when it is missing, and never let an unsupported check silently stop the plugin's work. List the exact dependency versions you tested.</li>
+                        <li><b>Share state carefully.</b> If other mods also change the same value, say what your plugin writes, any limits or cooldowns it applies, and what happens when it is disabled.</li>
+                        <li><b>Make every off switch real.</b> Disabling a feature should skip its work and its prompt text, not only hide it.</li>
+                        <li><b>Restore temporary changes.</b> If a plugin overrides settings for a scene or a group of NPCs, restore them when the scene ends, on errors, after a save is loaded, and when a dependency is missing. Test with crowds and several NPCs.</li>
+                        <li><b>Explain what persists.</b> Uninstalling stops future processing but does not undo changes already made to saves or stored data. Describe what happens when players switch or load saves and upgrade, and ask them to back up first. Do not tell players to delete database tables by hand.</li>
+                        <li><b>Be clear about extra model calls.</b> State whether a feature makes additional LLM calls, which backend it uses, roughly what it costs, whether it is optional, and what happens if the call fails.</li>
+                        <li><b>Do not promise more than the game does.</b> Prompt text changes what characters say, not what happens in Skyrim. Real game effects need a documented API or game-side code in the versions you target.</li>
+                        <li><b>Make builds reproducible.</b> Build scripts should not contain your own drive paths or tool locations. Make tools configurable, keep source separate from release files, and test the released files rather than your working copy.</li>
+                    </ul>
                     <h3>Example: add one line of context</h3>
                     <p>
                         This <code>context_pre.php</code> registers a short line at the bottom of the prompt. It does nothing on servers without the prompt injection API, and nothing when there is no state to report.
@@ -318,6 +330,7 @@ find . -name '*.php' -print0 | xargs -0 -n1 php -l</code></pre>
                         <li>Test with each optional dependency missing.</li>
                         <li>Test alongside at least one other plugin.</li>
                         <li>Test a clean install and an upgrade if you have migrations.</li>
+                        <li>Test with the real game. A copied server and simulated requests catch errors, but not dialogue quality, long sessions, or save and load behavior.</li>
                     </ul>
                 </div>
 
@@ -384,6 +397,71 @@ find . -name '*.php' -print0 | xargs -0 -n1 php -l</code></pre>
                     </p>
                 </div>
 
+                <div class="card" id="ChoosingDownloads">
+                    <h2>Choosing Downloads</h2>
+                    <p>
+                        Players get confused when a release page has several files and no instructions. Offer <b>one</b> route for the server plugin, and add a game-side download only if the plugin really needs one.
+                    </p>
+                    <div class="plugin-guide-table-wrap" role="region" aria-labelledby="DownloadTableCaption" tabindex="0">
+                        <table class="plugin-guide-table">
+                            <caption id="DownloadTableCaption">Common release files and how each one is used</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">File</th>
+                                    <th scope="col">Installed by</th>
+                                    <th scope="col">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><p><code>chim-plugin.tar.gz</code></p></td>
+                                    <td><p>Plugin Manager, from the GitHub release.</p></td>
+                                    <td><p>Server files only. See <a href="#ArchiveLayout">Archive layout</a>.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><code>.dwpkg</code> package</p></td>
+                                    <td><p>CHIM, which sends it to the server when a save loads.</p></td>
+                                    <td><p>Players do not unpack it. It goes inside the mod-manager archive under <code>Data/CHIM/server-plugins/</code>. See <a href="#SkyrimBundledPackages">bundled packages</a>.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Mod-manager ZIP</p></td>
+                                    <td><p>Mod Organizer 2, Vortex, or another mod manager.</p></td>
+                                    <td><p>Holds game-side files, a bundled <code>.dwpkg</code>, or both. Its folder structure must match the route you chose.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Source code archive</p></td>
+                                    <td><p>Nobody. GitHub adds it automatically.</p></td>
+                                    <td><p>Not an installer. Tell players to ignore it.</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul>
+                        <li><b>Server plugin with no game files:</b> list it through Plugin Manager, <i>or</i> bundle the <code>.dwpkg</code> in a mod-manager ZIP. A ZIP used only to carry the package needs no ESP, Papyrus scripts, or plugin slot.</li>
+                        <li><b>Plugin with a game-side mod:</b> say clearly that players need both parts, and link each one directly.</li>
+                        <li><b>Optional extras:</b> label them optional, and say what works without them.</li>
+                        <li><b>Mod manager metadata:</b> Mod Organizer 2 may warn when an archive has no <code>meta.ini</code>. Including one with your version is helpful, but it only adds metadata. It does not make a wrongly structured archive work.</li>
+                        <li><b>Mod managers:</b> state which mod managers you actually tested.</li>
+                    </ul>
+
+                    <h3 id="InstallAndVerify">Install and verify</h3>
+                    <ol>
+                        <li>Install and enable the mod-manager ZIP, if the plugin uses one.</li>
+                        <li>Install the server plugin from Plugin Manager, if that is the chosen route.</li>
+                        <li>Start Skyrim with CHIM enabled and load a save. Bundled packages are sent to the server at this point.</li>
+                        <li>Check the version. Plugin Manager shows the installed release tag. Bundled packages appear on the server's <b>Server Plugins</b> page under <b>Automatic Game Plugin Sync</b>; use <b>Refresh Status</b>.</li>
+                        <li>Open the plugin page, if there is one, and check its settings.</li>
+                    </ol>
+
+                    <h3 id="InstallTroubleshooting">When something does not work</h3>
+                    <ul>
+                        <li><b>Not shown on the server at all:</b> the package was not installed or synchronized. Check that the mod is enabled, a save was loaded with CHIM connected, and the archive structure matches the author's instructions.</li>
+                        <li><b>Installed, but the plugin page shows an error:</b> the files arrived, but the page could not find what it needs, such as an active playthrough or save. Load a save in game, then reopen the page.</li>
+                        <li><b>Mod manager warnings:</b> read them. They are not always harmless, and not always fatal.</li>
+                        <li><b>Reporting:</b> copy the exact error text, plugin version, install route, and mod manager, and attach the relevant logs. Do not guess at a cause without them. See the <a href="#BugReportTemplate">bug report template</a>.</li>
+                    </ul>
+                </div>
+
                 <div class="card" id="Actions">
                     <h2>Actions</h2>
                     <p>
@@ -423,23 +501,33 @@ One-sentence description.
 ## Requirements
 - CHIM version:
 - HerikaServer version:
-- Dependencies (Skyrim mods, SKSE plugins, services):
+- Required dependencies (Skyrim mods, SKSE plugins, services), with tested versions:
+- Optional dependencies, and what works without them:
+- Mod managers tested:
 
 ## Download and source
-- Server plugin: install from Plugin Manager (chim-plugin topic)
-- Skyrim mod (if any): link
+- Server plugin route (pick one): Plugin Manager (chim-plugin.tar.gz)
+  or .dwpkg bundled in the mod-manager ZIP
+- Mod-manager ZIP (if any): direct link, and what is inside it
+- Files to ignore: source code archives
 - Source: link
 
 ## Install
-1. Install the Skyrim mod with your mod manager (if any).
-2. Install the plugin from Plugin Manager.
+1. Install and enable the mod-manager ZIP (if any).
+2. Install the plugin from Plugin Manager (if that is the route).
+3. Load a save with CHIM enabled, then check the plugin version.
 
 ## Settings
-- Where to find them and what each one does.
+- Where to find them, what each one does, and how to turn features off.
+
+## Extra model calls
+- Which features call an LLM, which backend, rough cost, and fallback.
 
 ## Update and uninstall
 - Updates replace the plugin folder. Note anything that is lost.
-- How to remove the plugin, its tables, and any game files.
+- How to remove the plugin and any game files.
+- What stays in saves or stored data after uninstalling.
+- How to roll back, and what to back up first.
 
 ## Known limits
 - What it does not do, and known conflicts.
@@ -447,6 +535,7 @@ One-sentence description.
 ## Testing
 - Lint: which files were checked.
 - Install: clean install / upgrade tested on CHIM and HerikaServer versions.
+- Independent testing: what someone other than the author checked.
 - In game: what was actually tested in Skyrim, and what was not.
 
 ## Bug reports
@@ -459,6 +548,7 @@ One-sentence description.
 CHIM version:
 HerikaServer version:
 Other relevant mods:
+Install route and mod manager:
 
 Steps to reproduce:
 1.
