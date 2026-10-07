@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CHIM Plugin Guide | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261006"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css">
+    <style>
+        .plugin-guide pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .plugin-guide-toc ol {
+            margin-top: 0.4em;
+        }
+
+        .plugin-guide-toc li {
+            margin: 0.2em 0;
+        }
+
+        .plugin-guide-table-wrap {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0.8em 0 1em;
+        }
+
+        .plugin-guide-table-wrap:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.6);
+            outline-offset: 2px;
+        }
+
+        .plugin-guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+
+        .plugin-guide-table caption {
+            text-align: left;
+            padding-bottom: 0.5em;
+            color: rgba(255, 255, 255, 0.74);
+        }
+
+        .plugin-guide-table th,
+        .plugin-guide-table td {
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            padding: 0.45em 0.6em;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .plugin-guide-table th {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .plugin-guide-table td p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="theme chim-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar chim-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="CHIM home"><img src="../img/chim-icon.png" alt="CHIM icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">CHIM</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html" title="Dwemer Dynamics Home">Dwemer Dynamics Home</a>
+                <a href="./index.html" title="Overview">Overview</a>
+                <a href="./installation.html" title="Installation">Installation</a>
+                <a href="./plugins.html" title="Plugins">Plugins</a>
+                <a href="./plugin-guide.html" title="Plugin Guide">Plugin Guide</a>
+                <a href="./configuration.html" title="Configuration">Configuration</a>
+                <a href="./roleplay-settings.html" title="Roleplay Settings">Roleplay Settings</a>
+                <a href="./background-life.html" title="Background Life">Background Life</a>
+                <a href="./ingame-settings.html" title="Skyrim Settings">Skyrim Settings</a>
+                <a href="./llm.html" title="Large Language Models">Large Language Models</a>
+                <a href="./local-llm-guide.html" title="Local LLMs">Local LLMs</a>
+                <a href="./tts.html" title="Text-to-Speech">Text-to-Speech</a>
+                <a href="./stt.html" title="Speech-to-Text">Speech-to-Text</a>
+                <a href="./itt.html" title="Image-to-Text">Image-to-Text</a>
+                <a href="./modders-guide.html" title="Modders Guide">Modders Guide</a>
+                <a href="./faq.html" title="FAQ">FAQ</a>
+                <a href="./remote-hosting-guide.html" title="Remote Hosting Guide">Remote Hosting Guide</a>
+                <a href="./linux-setup-guide.html" title="Linux Setup Guide">Linux Setup Guide</a>
+                <a href="./log-files-and-debugging.html" title="Log Files">Log Files</a>
+            </p>
+            <p class="sidebar-padder"></p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" title="Download" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#11015;&#65039;</span><span>Download</span></a>
+                <a href="https://www.youtube.com/watch?v=Sf0m0FIUZuw" title="Video Guide" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#127909;</span><span>Video Guide</span></a>
+                <a href="https://discord.gg/NDn9qud2ug" title="Discord" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/discord.png" alt="Discord"><span>Discord</span></a>
+                <a href="https://www.youtube.com/@DwemerDynamics" title="YouTube" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/youtube.png" alt="YouTube"><span>YouTube</span></a>
+                <a href="https://www.patreon.com/DwemerDynamics" title="Patreon" target="_blank" rel="noopener noreferrer"><img class="sidebar-link-icon" src="../img/patreon.png" alt="Patreon"><span>Patreon</span></a>
+                <a href="https://github.com/Dwemer-Dynamics/HerikaServer" title="Server Code" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#128187;</span><span>Server Code</span></a>
+                <a href="https://github.com/Dwemer-Dynamics/CHIM" title="Mod Code" target="_blank" rel="noopener noreferrer"><span class="sidebar-link-emoji">&#128187;</span><span>Mod Code</span></a>
+            </p>
+        </div>
+
+        <div class="content plugin-guide">
+            <span id="PluginGuide" class="section">
+                <div class="card hero-card">
+                    <h1>CHIM Plugin Guide</h1>
+                    <p>
+                        A practical guide for authors who want to build, package, list, and support a CHIM server plugin for Skyrim. It covers when you need a plugin at all, how to write a first one, how Plugin Manager finds and installs it, and how to describe it so players can install and report problems.
+                    </p>
+                    <nav class="plugin-guide-toc" aria-label="On this page">
+                        <p><b>On this page</b></p>
+                        <ol>
+                            <li><a href="#StartHere">Start here</a></li>
+                            <li><a href="#ChooseAnApproach">Choose an approach</a></li>
+                            <li><a href="#FirstServerPlugin">Your first server plugin</a></li>
+                            <li><a href="#PackageListAndUpdate">Package, list, and update</a></li>
+                            <li><a href="#Actions">Actions</a></li>
+                            <li><a href="#SharingYourPlugin">Sharing your plugin</a></li>
+                            <li><a href="#TrustAndListings">Trust and listings</a></li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class="card" id="StartHere">
+                    <h2>Start Here</h2>
+                    <p>
+                        A CHIM server plugin is PHP code that runs inside HerikaServer from its own folder under <code>HerikaServer/ext/&lt;name&gt;</code>. It extends CHIM without editing the core server. Typical uses are:
+                    </p>
+                    <ul>
+                        <li><b>Mod awareness:</b> tell AI characters about the state of another Skyrim mod, such as survival needs or cleanliness.</li>
+                        <li><b>Context and prompts:</b> add short, relevant lines to the prompt CHIM builds for a character.</li>
+                        <li><b>Actions:</b> give AI characters something new they can do, together with game-side code that carries it out.</li>
+                        <li><b>Dashboards and external integrations:</b> a plugin page in the CHIM web interface, a background worker, or a connection to another service such as Twitch chat.</li>
+                    </ul>
+                    <p>
+                        This guide is for CHIM with Skyrim and HerikaServer. Stobe and Dialectic have their own servers and are not covered here.
+                    </p>
+                    <p><b>Related references</b></p>
+                    <ul>
+                        <li><a href="./modders-guide.html#CreatingPlugins">Modders Guide: Creating Plugins</a> &mdash; detailed hook walkthroughs and source excerpts.</li>
+                        <li><a href="./modders-guide.html#ActionEditor">Modders Guide: Action Editor</a> &mdash; action rows, scopes, script proxy, and follow-ups.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/aiagent/docs/custom-plugins.md" target="_blank" rel="noopener noreferrer">HerikaServer custom plugin documentation</a> &mdash; the current production technical reference.</li>
+                        <li><a href="./plugins.html">CHIM Plugins</a> &mdash; what players see in Plugin Manager.</li>
+                    </ul>
+                    <p><b>Maintained example plugins</b></p>
+                    <ul>
+                        <li><a href="https://github.com/Dwemer-Dynamics/CHIM-Custom" target="_blank" rel="noopener noreferrer">CHIM-Custom</a>: optional Skyrim mod state, a native game-side component, PHP context hooks, migrations, and release scripts.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/CHIM-Twitch-Bot" target="_blank" rel="noopener noreferrer">CHIM-Twitch-Bot</a>: a plugin page, a background service, and an external integration.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/CHIM-MindMap" target="_blank" rel="noopener noreferrer">CHIM-MindMap</a>: a visual tool built on top of CHIM's stored memory data.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="ChooseAnApproach">
+                    <h2>Choose An Approach</h2>
+                    <p>
+                        Many CHIM integrations do not need a server plugin. Pick the smallest route that does the job.
+                    </p>
+                    <h3>Data files in <code>Data/CHIM</code></h3>
+                    <p>
+                        Ship CSV files inside your Skyrim mod. CHIM uploads them to the server automatically when the game starts. See <a href="./modders-guide.html#CustomChimDataMods">Custom CHIM Data Mods</a> for the format.
+                    </p>
+                    <ul>
+                        <li><code>_bios.csv</code>: NPC biographies.</li>
+                        <li><code>_oghma.csv</code>: lore and knowledge entries.</li>
+                        <li><code>_dynamicoghma.csv</code>: knowledge that changes as quests progress.</li>
+                        <li><code>_descriptions.csv</code>: descriptions for items and other content.</li>
+                        <li><code>_actions.csv</code>: action definitions.</li>
+                    </ul>
+                    <p>
+                        An <code>_actions.csv</code> row defines what the AI can call. It does not, by itself, make anything happen in the game. Gameplay still needs code that performs the action, unless the row uses a simple server-side script proxy.
+                    </p>
+                    <h3>A PHP server plugin</h3>
+                    <p>
+                        Use a server plugin when you need to change how HerikaServer behaves: adding prompt context, reacting to requests, storing your own data, serving a plugin page, or talking to another service.
+                    </p>
+                    <h3>A Papyrus or SKSE bridge</h3>
+                    <p>
+                        Use game-side code when something must change inside Skyrim, such as moving an NPC, giving an item, or reading another mod's state. A Papyrus script or SKSE plugin carries out the command and reports the result back to CHIM. Many integrations combine this with an actions CSV and, optionally, a server plugin.
+                    </p>
+                </div>
+
+                <div class="card" id="FirstServerPlugin">
+                    <h2>Your First Server Plugin</h2>
+                    <h3>Set up</h3>
+                    <ul>
+                        <li>Create a separate Git repository for your plugin. Do not develop inside a live <code>HerikaServer/ext</code> folder or inside a HerikaServer checkout.</li>
+                        <li>Test on a disposable or backed-up CHIM server, not the server you play on.</li>
+                        <li>Start with only the files you need.</li>
+                    </ul>
+                    <pre><code>MyPlugin/
+  README.md          what it does, requirements, settings, limits
+  context_pre.php    a hook file (only the hooks you use)
+  index.php          optional plugin page in the CHIM web interface
+  migrations/        optional ordered .sql files
+    001_initial.sql</code></pre>
+
+                    <h3 id="SupportedHooks">Supported hook files</h3>
+                    <p>
+                        HerikaServer loads a hook file by name from every folder under <code>ext</code>. You only create the hook files your plugin needs. These are the main request hooks:
+                    </p>
+                    <div class="plugin-guide-table-wrap" role="region" aria-labelledby="HookTableCaption" tabindex="0">
+                        <table class="plugin-guide-table">
+                            <caption id="HookTableCaption">Main request hooks, in the order <code>main.php</code> loads them</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">File</th>
+                                    <th scope="col">When it runs</th>
+                                    <th scope="col">Typical use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><p><code>globals.php</code></p></td>
+                                    <td><p>Early, after core libraries load.</p></td>
+                                    <td><p>Shared definitions, settings, and registrations.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><code>preprocessing.php</code></p></td>
+                                    <td><p>Near the start of request handling.</p></td>
+                                    <td><p>Normalize or prepare incoming data.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><code>prerequest.php</code></p></td>
+                                    <td><p>Before non-LLM event handling.</p></td>
+                                    <td><p>Inspect the request before most events are processed.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><code>context_pre.php</code></p></td>
+                                    <td><p>Before the system prompt is assembled.</p></td>
+                                    <td><p>Add context or register prompt injections.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><code>context.php</code></p></td>
+                                    <td><p>After the system prompt is built.</p></td>
+                                    <td><p>Adjust context once the main structure exists.</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><code>prepostrequest.php</code>, <code>postrequest.php</code></p></td>
+                                    <td><p>After the response, around core post-request processing.</p></td>
+                                    <td><p>Save data or queue follow-up work.</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        Other hook files exist for prompt templates, history building, and JSON responses: <code>prompts.php</code>, <code>dialogue_prompt.php</code>, <code>context_building.php</code>, and <code>json_response_custom.php</code>. See <a href="./modders-guide.html#CreatingPlugins">Creating Plugins</a> for each caller.
+                    </p>
+                    <h3>How hooks are called</h3>
+                    <ul>
+                        <li><b>Read the caller.</b> The code that loads a hook decides what data is ready and in what order. Check the matching file in the HerikaServer version you target.</li>
+                        <li><b>Variables:</b> hook files are included from inside a loader function, not the global scope. <code>$gameRequest</code> is available; read and write anything else through <code>$GLOBALS</code>.</li>
+                        <li><b>Once per request:</b> each hook file is included once per request.</li>
+                        <li><b>Not every request reaches every hook.</b> Many game events finish early, before any context hook runs. Some web pages and endpoints load only <code>globals.php</code>. Do not rely on a later hook having run.</li>
+                    </ul>
+                    <h3>Write it carefully</h3>
+                    <ul>
+                        <li><b>Prefix everything.</b> Functions, constants, globals, and tables share one server with other plugins. Use a unique prefix such as <code>myplugin_</code>, or a namespace.</li>
+                        <li><b>Handle missing optional pieces.</b> If a Skyrim mod, service, setting, or older server function is absent, return quietly instead of raising warnings.</li>
+                        <li><b>Keep prompt text short.</b> Add one or two relevant lines, only when they apply. Every line costs context for every request.</li>
+                        <li><b>Keep heavy work out of dialogue.</b> Do not call slow services or extra LLM requests while the player waits. Queue the work and process it in <code>postrequest.php</code> or a background worker.</li>
+                        <li><b>Log, do not echo.</b> Responses are streamed back to the game. Printing text from a hook can corrupt them. Write diagnostics to a log instead, and never log secrets.</li>
+                        <li><b>Use the <code>plugins</code> schema</b> for your tables, with ordered, idempotent files in <code>migrations</code>. Never edit a migration after release; add a new one.</li>
+                    </ul>
+                    <h3>Example: add one line of context</h3>
+                    <p>
+                        This <code>context_pre.php</code> registers a short line at the bottom of the prompt. It does nothing on servers without the prompt injection API, and nothing when there is no state to report.
+                    </p>
+                    <pre><code>&lt;?php
+// ext/MyPlugin/context_pre.php
+
+if (!function_exists('chimRegisterPromptInjection')) {
+    return;
+}
+
+if (!function_exists('myplugin_weather_line')) {
+    function myplugin_weather_line(string $slot, array $context): string
+    {
+        $weather = $GLOBALS['MYPLUGIN_WEATHER'] ?? '';
+        if (!is_string($weather) || $weather === '') {
+            return '';
+        }
+        return 'Current weather: ' . $weather . '.';
+    }
+}
+
+chimRegisterPromptInjection('prompt_bottom', 'myplugin.weather', 'myplugin_weather_line', 100);</code></pre>
+                    <p>
+                        <code>chimRegisterPromptInjection()</code> supports the <code>character_bottom</code> and <code>prompt_bottom</code> slots. Lower priority values render first, and empty results are skipped.
+                    </p>
+                    <h3>Validate before you test in game</h3>
+                    <p>Lint every PHP file you changed:</p>
+                    <pre><code>php -l context_pre.php
+
+# every PHP file in the plugin folder
+find . -name '*.php' -print0 | xargs -0 -n1 php -l</code></pre>
+                    <p>Then test only what you changed, on a disposable server:</p>
+                    <ul>
+                        <li>Install the plugin and confirm the server still responds normally.</li>
+                        <li>Trigger the requests your hooks handle and read the logs for PHP warnings.</li>
+                        <li>Test with each optional dependency missing.</li>
+                        <li>Test alongside at least one other plugin.</li>
+                        <li>Test a clean install and an upgrade if you have migrations.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="PackageListAndUpdate">
+                    <h2>Package, List, And Update</h2>
+                    <p>
+                        Plugin Manager finds plugins on GitHub. You do not need to submit a catalog entry, open a pull request, or write a manifest.
+                    </p>
+                    <h3 id="GetListed">Get listed</h3>
+                    <ol>
+                        <li>Make the repository <b>public</b>. It must not be a fork and must not be archived.</li>
+                        <li>Add the <code>chim-plugin</code> topic in the repository's GitHub About settings. The listing shows the repository owner, name, and description.</li>
+                        <li>Publish a <b>stable</b> GitHub release. Drafts and prereleases are ignored.</li>
+                        <li>Attach the server files as a release asset named exactly <code>chim-plugin.tar.gz</code> (or <code>chim-plugin.tar</code>).</li>
+                    </ol>
+                    <h3 id="ArchiveLayout">Archive layout</h3>
+                    <p>
+                        Put the server files at the root of the archive. Do not wrap them in a folder.
+                    </p>
+                    <pre><code>chim-plugin.tar.gz
+  context_pre.php
+  index.php          (optional plugin page)
+  lib/...
+  migrations/...     (optional)</code></pre>
+                    <p>For example, from inside a folder that holds only the files to ship (no <code>.git</code>, logs, or development files):</p>
+                    <pre><code>tar -czf ../chim-plugin.tar.gz .</code></pre>
+                    <ul>
+                        <li>Only regular files and folders with relative paths are accepted. Links, special files, and <code>..</code> paths are rejected.</li>
+                        <li>Other release assets, such as a Skyrim mod archive, are never installed.</li>
+                        <li>If <code>index.php</code> or <code>index.html</code> is at the archive root, Plugin Manager links to it as the plugin page.</li>
+                    </ul>
+                    <h3 id="VersionsAndFolders">Versions and folder names</h3>
+                    <ul>
+                        <li><b>Version:</b> the release tag is the version players see. Use letters, digits, <code>.</code>, <code>_</code>, <code>+</code>, or <code>-</code>. An update is offered whenever the latest tag differs from the installed tag, so semantic versioning is not required.</li>
+                        <li><b>Folder:</b> the plugin installs into <code>ext/&lt;repository name&gt;</code>. The repository name must be 1&ndash;64 letters, digits, <code>_</code>, <code>.</code>, or <code>-</code>, starting with a letter or digit.</li>
+                        <li><b>Collisions:</b> install and update are refused if that folder already belongs to a different repository or an unknown source. Delete the existing plugin first to replace it on purpose.</li>
+                        <li><b>Generated manifest:</b> Plugin Manager writes its own <code>ext/&lt;name&gt;/manifest.json</code> at install. A <code>manifest.json</code> inside your package is optional and cannot change the name, source, version, channels, branding, or plugin page.</li>
+                    </ul>
+                    <h3 id="Updates">Updates</h3>
+                    <p>
+                        A Plugin Manager update <b>replaces the whole plugin folder</b>. Nothing inside it is preserved. Keep user settings and data in the database, or outside the plugin folder, if they must survive updates.
+                    </p>
+                    <h3 id="RefreshAndInstallability">Refresh and installability</h3>
+                    <ul>
+                        <li>Results are cached for six hours. <b>Refresh Plugins</b> forces a new check, with a back-off after GitHub errors.</li>
+                        <li>If GitHub is unavailable or the hourly request limit is reached, the last known list stays visible and Plugin Manager shows which part is stale.</li>
+                        <li>Only the 100 most recently updated repositories with the topic are checked.</li>
+                        <li>A repository with the topic but no qualifying release is still <b>listed but not installable</b>. Plugin Manager shows the reason, such as a missing <code>chim-plugin.tar.gz</code> asset or an invalid repository name.</li>
+                    </ul>
+                    <h3 id="LegacyPlugins">Plugins with an existing manifest</h3>
+                    <p>
+                        Plugins already published with a root <code>manifest.json</code> and channels keep working. Once a release includes <code>chim-plugin.tar.gz</code>, that asset replaces the old release channel and installed copies switch over in place. Branch channels such as Dev remain available. The HerikaServer documentation describes the <a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/aiagent/docs/custom-plugins.md#legacy-manifests-and-overrides" target="_blank" rel="noopener noreferrer">legacy manifest fields</a>.
+                    </p>
+                    <h3 id="SkyrimBundledPackages">Packages bundled with a Skyrim mod</h3>
+                    <p>
+                        A Skyrim mod can carry its matching server plugin so CHIM installs it on the connected server when the game starts. This uses a different format: a schema 4 ZIP or <code>.dwpkg</code> package with an outer <code>manifest.json</code>, a <code>checksums.sha256</code> file, and the server files under <code>server/</code>. Its updater can preserve listed <code>mutable_paths</code>.
+                    </p>
+                    <p>
+                        Do not mix the two formats, and choose one install and update route for each plugin. Follow the <a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/aiagent/docs/custom-plugins.md#package-a-server-extension" target="_blank" rel="noopener noreferrer">package contract</a> and the <a href="https://github.com/Dwemer-Dynamics/CHIM-Custom/tree/main/scripts" target="_blank" rel="noopener noreferrer">CHIM-Custom packaging scripts</a>.
+                    </p>
+                    <h3 id="GameCompanion">Game-side companion files</h3>
+                    <p>
+                        If your plugin needs a Skyrim mod, ESP, Papyrus scripts, or SKSE DLL, players install that separately with their mod manager. Never put game DLLs or other game files in the server package.
+                    </p>
+                </div>
+
+                <div class="card" id="Actions">
+                    <h2>Actions</h2>
+                    <p>
+                        A working action has three parts:
+                    </p>
+                    <ol>
+                        <li><b>Define:</b> an action row tells the AI the action's name, meaning, scope, and parameters. Ship it in an <code>_actions.csv</code> file.</li>
+                        <li><b>Execute:</b> game-side code, such as a Papyrus bridge, performs the action. Simple server-only actions can use a script proxy instead.</li>
+                        <li><b>Report the actual result:</b> the bridge reports what really happened back to CHIM, commonly through a <code>funcret</code> message. Report failure as failure, so the AI does not describe something that did not happen.</li>
+                    </ol>
+                    <p>
+                        Read <a href="./modders-guide.html#ActionEditor">Action Editor</a> for the CSV columns, dispatch types, and script proxy limits. The <a href="./modders-guide.html#ChimNffExample">CHIM-NFF example</a> shows a complete action row and Papyrus bridge.
+                    </p>
+                    <h3 id="InteractExtensions">Interact extensions (unstable only)</h3>
+                    <p>
+                        Work to let plugins add their own Interact actions has been merged into the <b>unstable</b> branches of <a href="https://github.com/Dwemer-Dynamics/HerikaServer/pull/168" target="_blank" rel="noopener noreferrer">HerikaServer</a> and <a href="https://github.com/Dwemer-Dynamics/CHIM/pull/265" target="_blank" rel="noopener noreferrer">CHIM</a>. It lets a server plugin declare actions in <code>interact_actions.php</code>, and a Skyrim mod register Papyrus-handled actions.
+                    </p>
+                    <ul>
+                        <li>It is not in the production release. Do not ship a plugin that depends on it to players.</li>
+                        <li>Papyrus-handled actions need a matching pair of unstable CHIM and HerikaServer builds.</li>
+                        <li>The API may still change. Read the pull requests and their documentation before experimenting.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="SharingYourPlugin">
+                    <h2>Sharing Your Plugin</h2>
+                    <p>
+                        Use this template for your README or release page so players know what they are installing.
+                    </p>
+                    <pre><code># Plugin name
+
+One-sentence description.
+
+## What it does
+- What changes in game or in the CHIM web interface.
+
+## Requirements
+- CHIM version:
+- HerikaServer version:
+- Dependencies (Skyrim mods, SKSE plugins, services):
+
+## Download and source
+- Server plugin: install from Plugin Manager (chim-plugin topic)
+- Skyrim mod (if any): link
+- Source: link
+
+## Install
+1. Install the Skyrim mod with your mod manager (if any).
+2. Install the plugin from Plugin Manager.
+
+## Settings
+- Where to find them and what each one does.
+
+## Update and uninstall
+- Updates replace the plugin folder. Note anything that is lost.
+- How to remove the plugin, its tables, and any game files.
+
+## Known limits
+- What it does not do, and known conflicts.
+
+## Testing
+- Lint: which files were checked.
+- Install: clean install / upgrade tested on CHIM and HerikaServer versions.
+- In game: what was actually tested in Skyrim, and what was not.
+
+## Bug reports
+- Where to report, and what to include (see below).</code></pre>
+                    <p>
+                        Be specific about testing. Passing <code>php -l</code>, installing on a server, and working in game are three different claims. Only state the ones you checked.
+                    </p>
+                    <h3 id="BugReportTemplate">Bug report template</h3>
+                    <pre><code>Plugin version:
+CHIM version:
+HerikaServer version:
+Other relevant mods:
+
+Steps to reproduce:
+1.
+2.
+
+Expected result:
+Actual result:
+
+Relevant logs (remove API keys, tokens, and personal paths):</code></pre>
+                    <p>
+                        See <a href="./log-files-and-debugging.html">Log Files</a> for where CHIM and server logs are stored.
+                    </p>
+                </div>
+
+                <div class="card" id="TrustAndListings">
+                    <h2>Trust And Listings</h2>
+                    <p>
+                        The <code>chim-plugin</code> topic is a community listing, not a review or an endorsement by Dwemer Dynamics. Installing a plugin runs its PHP code and database migrations with full server privileges. Players should install plugins only from authors they trust, and authors should keep their source public and their changes clearly described.
+                    </p>
+                </div>
+            </span>
+        </div>
+
+    </div>
+
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
