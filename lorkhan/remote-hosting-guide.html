@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/remote-hosting.css?v=20261007-remote-guide">
 </head>
-<body class="theme lorkhan-theme">
+<body class="theme lorkhan-theme remote-guide copyable-guide">
     <div class="progress-container">
         <div class="progress-bar lorkhan-progress"></div>
     </div>
@@ -60,36 +61,19 @@
 
         <main class="content">
             <section class="section" id="Guide">
-                <div class="card hero-card">
-                    <h1>Remote Hosting</h1>
-                    <p>Separate the game-to-server connection from the server-to-provider connections.</p>
-                </div>
-                <div class="card" id="Connections">
-                    <h3>Which machine connects where?</h3>
-                    <ul><li><b>Game → LorkhanServer:</b> The Windows client must reach the server and use its pairing configuration.</li><li><b>LorkhanServer → AI services:</b> The server must reach the selected language model, voice and transcription endpoints.</li><li><b>Browser → Dashboard:</b> A working webpage does not by itself prove the game or provider connection works.</li></ul>
-                </div>
-                <div class="card" id="LocalFirst">
-                    <h3>Establish a local baseline</h3>
-                    <p>Complete the <a href="./installation.html">local installation</a> first and verify typed dialogue, voice output and microphone input separately. Keep a backup of the working configuration before moving services.</p>
-                    <p>The local profile setup script reads a local DwemerDistro pairing key. Do not assume running it unchanged on a different game PC pairs that PC with your remote server.</p>
-                </div>
-                <div class="card" id="Addresses">
-                    <h3>Addresses and access</h3>
-                    <p>The packaged local setup uses proxy port <b>7514</b> by default. For browser access from another trusted device, use the reachable hostname or private-network address of the server host and its configured port, not a stale internal Linux address. This does not change the game bridge's loopback restriction.</p>
-                    <p>Configure provider endpoints from the server’s point of view. A loopback address refers to that service’s own environment, not automatically the gaming PC.</p>
-                </div>
-                <div class="card" id="ProviderSetup">
-                    <h3>Host an AI Service on Another Computer</h3>
-                    <ol><li>Get ordinary dialogue working locally first.</li><li>Start the LLM, TTS or STT service on the second computer and test it there.</li><li>Enable listening on a trusted network interface. Restrict access through authentication and firewall rules.</li><li>Confirm LorkhanServer can reach that service address and port.</li><li>Enter the address in the relevant connector, including the full chat-completions path for an LLM.</li><li>Test one short interaction before moving another service.</li></ol>
-                    <p>For example, LM Studio at <code>192.168.1.50</code> on port <code>1234</code> would use <code>http://192.168.1.50:1234/v1/chat/completions</code>. Replace these example values with your actual service.</p>
-                    <p>This is an AI provider endpoint, not the game bridge address. The current bridge is restricted to loopback endpoints; these steps do not describe direct OpenMW-to-remote-LorkhanServer support.</p>
-                </div>
-                <div class="card" id="Security">
-                    <h3>Keep it private</h3>
-                    <p>Use a trusted private network or VPN and restricted firewall rules. Treat the pairing key like a password. Do not publish configuration files, open unauthenticated providers to the internet or disable security checks to get a connection working.</p>
-                    <p>This guide explains the connection boundaries; it is not a verified automated remote-client installer. Check current beta support in <a href="https://discord.gg/NDn9qud2ug">Discord</a> before moving an otherwise working installation.</p>
-                </div>
-            </section>
+<div class="card hero-card"><p class="remote-kicker">LORKHAN / remote AI services</p><h1>Remote Hosting Guide</h1><p>Keep OpenMW and LorkhanServer on the gaming PC. Move a language model or speech service to a second PC when you want to share its workload.</p><nav class="remote-toc" aria-label="On this page"><a href="#Connections">Layout</a><a href="#LocalFirst">Local setup</a><a href="#Addresses">Addresses</a><a href="#ProviderSetup">Remote services</a><a href="#Security">Access and checks</a></nav></div>
+<div class="card" id="Connections"><h2>A Local Game Bridge. A Remote AI Host.</h2><p class="remote-status"><b>Current limit:</b> LORKHAN's game bridge accepts loopback addresses only. The complete-stack CHIM, STOBE, and Dialectic remote-server layouts do not apply to OpenMW. Do not replace the game bridge address with a second PC's LAN address.</p>
+<figure class="remote-diagram" aria-labelledby="LayoutCaption"><div class="remote-layout">
+<div class="remote-machine"><p class="remote-kicker">01 / Gaming PC</p><h3>OpenMW + LORKHAN</h3><ul><li>Game, microphone, and audio playback</li><li>Local LorkhanServer in DwemerDistro</li><li>Existing loopback bridge and pairing</li></ul></div>
+<div class="remote-wire"><p>Private LAN</p><p><span aria-hidden="true">⇄</span></p><p>Provider requests<br>and replies</p></div>
+<div class="remote-machine remote-host"><p class="remote-kicker">02 / AI service PC</p><h3>Your selected service</h3><ul class="remote-services"><li>Language model<small>LM Studio or another model app</small></li><li>Voice generation<small>Text-to-speech</small></li><li>Speech recognition<small>Speech-to-text</small></li></ul><p>Move one service first. Others can stay local or use a cloud provider.</p></div></div><figcaption id="LayoutCaption">LorkhanServer stays beside the game. It sends provider requests to the remote AI service; OpenMW keeps its local game connection.</figcaption></figure></div>
+<div class="card" id="LocalFirst"><h2>1. Get The Local Setup Working</h2><p>Complete the <a href="./installation.html">local installation</a> first. Test typed dialogue, voice output, and microphone input separately. Back up your working configuration before moving a service.</p><p>The local profile setup script reads a local DwemerDistro pairing key. Running it unchanged on another PC does not pair that PC with a remote game server.</p></div>
+<div class="card" id="Addresses"><h2>2. Choose The Service Address</h2><p>On the AI service PC, run <code>ipconfig</code> and note its Windows LAN IPv4 address. On both PCs, use a trusted Private network. A router DHCP reservation can keep the service address stable.</p>
+<figure class="remote-diagram" aria-labelledby="RouteCaption"><div class="remote-flow"><div class="remote-hop"><p class="remote-kicker">Game connection</p><h3>OpenMW bridge</h3><code>Local loopback only</code><p>Keep the existing pairing.</p></div><p class="remote-wire"><span aria-hidden="true">→</span></p><div class="remote-hop"><p class="remote-kicker">Gaming PC</p><h3>LorkhanServer</h3><code>Local DwemerDistro</code><p>Configure the provider here.</p></div><p class="remote-wire"><span aria-hidden="true">→</span></p><div class="remote-hop"><p class="remote-kicker">AI service PC</p><h3>Example: LM Studio</h3><code>192.168.1.50:1234</code><p>The provider's reachable LAN endpoint.</p></div></div><figcaption id="RouteCaption">The remote address belongs in the server's provider connector, not the OpenMW game bridge.</figcaption></figure>
+<p>The packaged local setup uses launcher proxy port <b>7514</b>. Browser access to a dashboard is separate from game-bridge support. A working remote webpage does not remove the bridge's loopback restriction.</p></div>
+<div class="card" id="ProviderSetup"><h2>3. Move One AI Service</h2><ol><li>Start your chosen model, TTS, or STT service on the second PC and test it there.</li><li>Follow that service's instructions to listen on a trusted network interface. A service bound to <code>127.0.0.1</code> cannot receive requests from another PC.</li><li>Allow only its required TCP port through the Private firewall, scoped to the gaming PC. If it runs inside WSL, forward the host's LAN port to that service's current WSL address and refresh the target after WSL restarts.</li><li>Confirm LorkhanServer can reach the service from its own environment.</li><li>Enter the remote endpoint in the appropriate LorkhanServer connector.</li><li>Test a short interaction before moving another service.</li></ol>
+<p>For LM Studio at <code>192.168.1.50</code> on port <code>1234</code>, the full chat endpoint is:</p><pre><code>http://192.168.1.50:1234/v1/chat/completions</code></pre><p>Replace the example address and port. Use the <a href="./local-llm-guide.html#Alternatives">separate model app instructions</a> for a desktop model host, or your selected <a href="./tts.html">TTS</a> and <a href="./stt.html">STT</a> service's setup. Bundled DwemerDistro services are local by default; copying their loopback endpoint onto another PC does not expose them to the LAN.</p></div>
+<div class="card" id="Security"><h2>4. Check Access And Playback</h2><ul><li><b>No connection:</b> verify the service is running, its listening interface, LAN address, and scoped Private firewall rule. Guest Wi-Fi or a VPN can isolate the PCs.</li><li><b>WSL restart:</b> refresh any direct forwarding target that used the old WSL IPv4 address.</li><li><b>Port opens, but no reply:</b> test the connector from LorkhanServer. A reachable TCP port does not prove that the model, API path, or credentials work.</li><li><b>Only speech fails:</b> test TTS and STT separately and inspect the <a href="./log-files-and-debugging.html">logs</a>.</li></ul><p>Keep the service PC awake during play. Test typed dialogue, generated voice, and microphone input separately after each move.</p><p>Use a trusted private network and restrict service access. Treat the pairing key like a password. Do not forward the router's internet ports or publish credentials to make a local connection work.</p><details><summary>Return to local services</summary><p>Restore the saved local connector endpoint. Inspect and remove only the forwarding and firewall rules you created for the remote provider. Keep the game bridge and its pairing unchanged.</p></details><p class="remote-status"><b>Verification status:</b> the loopback restriction was checked against current source. These are provider-hosting steps, not a remote-client installer. Two-PC provider calls and in-game speech still require validation on your setup.</p></div></section>
         </main>
     </div>
     <footer>Dwemer Dynamics 2026</footer>
