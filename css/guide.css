@@ -154,11 +154,32 @@
     transform: translateY(-1px);
 }
 
-.guide-copy-button:disabled {
-    cursor: default;
-    color: #a8efb2;
-    border-color: rgba(108, 188, 110, 0.55);
-    transform: none;
+.guide-copy-button:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 2px;
+}
+
+.page-copy-actions {
+    display: flex;
+    margin: -0.35em 0 0.6em;
+}
+
+.page-copy-actions .page-copy-button {
+    float: none;
+    display: inline-flex;
+    margin: 0;
+}
+
+.page-copy-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 .dialectic-theme .guide-note:not(.note-info):not(.note-tip),
@@ -176,6 +197,20 @@
 .dialectic-theme .guide-copy-button:hover {
     border-color: rgba(255, 182, 65, 0.78);
     color: #ffe4b7;
+}
+
+.guide-copy-button[data-copy-state="copied"],
+.guide-copy-button[data-copy-state="copied"]:hover {
+    color: #a8efb2;
+    border-color: rgba(108, 188, 110, 0.55);
+    transform: none;
+}
+
+.guide-copy-button[data-copy-state="failed"],
+.guide-copy-button[data-copy-state="failed"]:hover {
+    color: #ffb3a8;
+    border-color: rgba(230, 96, 80, 0.6);
+    transform: none;
 }
 
 @media only screen and (max-width: 520px) {
