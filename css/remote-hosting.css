@@ -1,0 +1,202 @@
+.remote-guide {
+    --remote-brass: #c6a56a;
+    --remote-edge: rgba(198, 165, 106, 0.35);
+}
+
+.remote-guide .remote-kicker {
+    color: var(--remote-brass);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.remote-guide .remote-diagram {
+    margin: 1.3em 0;
+    padding: 1.15em;
+    border: 1px solid var(--remote-edge);
+    border-radius: 8px;
+    background: radial-gradient(ellipse at top right, rgba(198, 165, 106, 0.09), transparent 60%), #141515;
+    box-shadow: inset 0 0 0 4px rgba(198, 165, 106, 0.035);
+}
+
+.remote-guide .remote-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) 84px minmax(0, 1.15fr);
+    align-items: center;
+}
+
+.remote-guide .remote-machine,
+.remote-guide .remote-hop {
+    min-width: 0;
+    padding: 1em;
+    border: 1px solid var(--remote-edge);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.025);
+    position: relative;
+}
+
+.remote-guide .remote-machine::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 18px;
+    width: 34px;
+    height: 6px;
+    background: var(--remote-brass);
+}
+
+.remote-guide .remote-machine h3,
+.remote-guide .remote-hop h3 {
+    margin: 0.35em 0 0.7em;
+    font-size: 1.25rem;
+}
+
+.remote-guide .remote-machine ul {
+    margin-bottom: 0;
+    padding-left: 1.25em;
+}
+
+.remote-guide .remote-wire {
+    color: var(--remote-brass);
+    text-align: center;
+    font-size: 0.78rem;
+    margin: 0;
+}
+
+.remote-guide .remote-wire span {
+    display: block;
+    font-size: 1.65rem;
+    margin: 0.2em 0;
+}
+
+.remote-guide .remote-distro {
+    margin-top: 0.8em;
+    padding: 0.85em;
+    border: 1px solid rgba(242, 124, 17, 0.3);
+    border-radius: 4px;
+    background: rgba(242, 124, 17, 0.045);
+}
+
+.remote-guide .remote-distro h4 {
+    margin: 0 0 0.65em;
+    color: #e2bf83;
+}
+
+.remote-guide .remote-services {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4em;
+    margin: 0.8em 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.remote-guide .remote-services li {
+    padding: 0.55em 0.35em;
+    text-align: center;
+    border: 1px solid rgba(198, 165, 106, 0.2);
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.remote-guide .remote-services small {
+    display: block;
+    margin-top: 0.35em;
+    color: #b9b9b1;
+}
+
+.remote-guide .remote-flow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr) 32px minmax(0, 1fr);
+    align-items: center;
+}
+
+.remote-guide .remote-hop code {
+    display: block;
+    overflow-wrap: anywhere;
+    margin: 0.5em 0;
+    font-size: 0.85rem;
+}
+
+.remote-guide .remote-hop p {
+    font-size: 0.85rem;
+    color: #cecec7;
+    margin-bottom: 0;
+}
+
+.remote-guide .remote-diagram figcaption {
+    margin-top: 1em;
+    color: #cecec7;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.remote-guide .remote-status {
+    border-left: 3px solid var(--remote-brass);
+    padding: 0.7em 0.9em;
+    background: rgba(198, 165, 106, 0.07);
+    line-height: 1.5;
+}
+
+.remote-guide .content pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    padding: 0.85em;
+    border: 1px solid rgba(198, 165, 106, 0.2);
+    border-radius: 4px;
+    background: #111212;
+    line-height: 1.6;
+}
+
+.remote-guide .content pre code {
+    padding: 0;
+    background: none;
+}
+
+.remote-guide .content details {
+    margin: 1em 0;
+    padding: 0.85em;
+    border: 1px solid var(--remote-edge);
+    border-radius: 4px;
+}
+
+.remote-guide .content summary {
+    cursor: pointer;
+    color: #e2bf83;
+    line-height: 1.5;
+}
+
+.remote-guide .content summary:focus-visible {
+    outline: 2px solid var(--remote-brass);
+    outline-offset: 5px;
+}
+
+@media (max-width: 1000px) {
+    .remote-guide .remote-layout,
+    .remote-guide .remote-flow {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.6em;
+    }
+
+    .remote-guide .remote-wire span {
+        transform: rotate(90deg);
+        margin: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    .remote-guide .remote-diagram {
+        padding: 0.7em;
+    }
+
+    .remote-guide .remote-machine,
+    .remote-guide .remote-hop {
+        padding: 0.8em;
+    }
+
+    .remote-guide .remote-services {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
