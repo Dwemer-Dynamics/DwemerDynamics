@@ -98,8 +98,10 @@
                     <h2>Update A Manual Install</h2>
                     <p>In WSL:</p>
                     <pre><code>cd /var/www/html/ExampleServer
+git rev-parse HEAD
 sudo bash scripts/backup.sh
 sudo bash scripts/update.sh</code></pre>
+                    <p>Write down the commit that <code>git rev-parse HEAD</code> prints and the backup folder. Together they are the matching code and data to return to.</p>
                     <ul>
                         <li><code>update.sh</code> refuses tracked local edits, backs up the database and config, fast-forwards only, then migrates.</li>
                         <li>It stops if your branch has no upstream or has diverged; merge by hand.</li>
@@ -113,8 +115,14 @@ sudo bash scripts/update.sh</code></pre>
                     <h2>Migrations</h2>
                     <ul>
                         <li><code>scripts/migrate.php</code> (run by <code>install.sh</code> and <code>update.sh</code>) applies missing migrations in order, one transaction per file. A second run applies nothing.</li>
-                        <li>If one fails, that file is rolled back and earlier ones stay. <code>update.sh</code> exits <code>3</code> and prints the backup folder. Fix the cause and run <code>sudo -u dwemer php scripts/migrate.php</code> again, or restore that backup.</li>
-                        <li>There are no down migrations. To go back, restore a backup.</li>
+                        <li>If one fails, that file is rolled back, earlier ones stay and the code is already updated. <code>update.sh</code> exits <code>3</code> and prints the backup folder. Prefer fixing forward: fix the cause and run <code>sudo -u dwemer php scripts/migrate.php</code> again.</li>
+                        <li>There are no down migrations. To go back to before the update, return code and data together:
+                            <ol>
+                                <li>Stop the client.</li>
+                                <li>Check out the commit you recorded without resetting or cleaning, for example <code>git switch --detach &lt;commit&gt;</code>. This keeps <code>config/config.php</code>, backups and other untracked files. Commit or copy your own local edits first.</li>
+                                <li>Restore the database from the backup made with that update, as in <a href="#Restore">Restore a backup</a>, and the config from it if needed.</li>
+                            </ol>
+                            Code and database must match: newer code on the older database answers <code>503 not_migrated</code> for the missing migrations, and older code on the newer database answers <code>503 schema_too_new</code>.</li>
                         <li>A database with migrations the code does not know answers <code>503 schema_too_new</code>. Update the code; never downgrade a database by hand.</li>
                     </ul>
                     <p>To add one, create a new <code>sql/NNN_name.sql</code> and append its name to <code>SCHEMA_MIGRATIONS</code>. Never edit an applied file.</p>
@@ -127,9 +135,9 @@ sudo bash scripts/update.sh</code></pre>
 sudo -u postgres pg_restore --no-owner --role=dwemer -d example_ai_restore_check &lt; /path/to/backup/YOUR_DATABASE.dump
 sudo -u postgres psql -d example_ai_restore_check -c 'SELECT count(*) FROM ex_turns'
 sudo -u postgres dropdb example_ai_restore_check</code></pre>
-                    <p>The dashboard's <b>Verify restore</b> does a similar check into a new <code>&lt;database&gt;_verify_&lt;random&gt;</code> database; remove it yourself with <code>dropdb</code> when finished. To really restore, stop the client first, then run this. It <b>overwrites</b> that database:</p>
+                    <p>The dashboard's <b>Verify restore</b> does a similar check into a new <code>&lt;database&gt;_verify_&lt;random&gt;</code> database, so the configured database role needs <code>CREATEDB</code>; remove it yourself with <code>dropdb</code> when finished. To really restore, stop the client first, then run this. It <b>overwrites</b> that database:</p>
                     <pre><code>sudo -u postgres pg_restore --clean --if-exists -d YOUR_DATABASE &lt; /path/to/backup/YOUR_DATABASE.dump</code></pre>
-                    <p>Use this copy's configured database name (default <code>example_ai_mod</code>). Restore the config file from a full backup separately if needed.</p>
+                    <p>Use this copy's configured database name (default <code>example_ai_mod</code>). Restore the config file from a full backup separately if needed. Run <code>sudo bash scripts/install.sh</code> afterwards to repair its permissions only when the checked-out code matches that backup, because it also applies migrations.</p>
                 </div>
 
                 <div class="card" id="Branches">
@@ -141,7 +149,7 @@ sudo -u postgres dropdb example_ai_restore_check</code></pre>
                         <li>Add a new migration file and its <code>SCHEMA_MIGRATIONS</code> entry to <b>both</b> branches before either offers it. A migration only on <code>dev</code> makes <code>main</code> refuse that database with <code>schema_too_new</code>.</li>
                     </ul>
                     <div class="guide-note note-warning">
-                        <p><b>Template updates and failed switches.</b> Your copy does not follow template changes; check each merged change against both branches before offering it. If a launcher branch switch fails, the launcher may put the previous code back, but it does not undo migrations already applied to the database. Restore a backup if the old code then refuses it.</p>
+                        <p><b>Template updates and failed switches.</b> Your copy does not follow template changes; check each change you port against both branches before offering it. If a launcher branch switch fails, the launcher may put the previous code back, but it does not undo migrations already applied to the database. Restore a backup if the old code then refuses it.</p>
                     </div>
                     <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#6-back-up-and-update">SETUP.md, Back up and update</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/LAUNCHER_CUSTOM_MOD.md#branches-main-and-dev">LAUNCHER_CUSTOM_MOD.md, Branches</a>.</p>
                     <p><b>Next step:</b> <a href="./publishing.html">Publish your own mod</a>.</p>

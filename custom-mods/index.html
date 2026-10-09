@@ -81,7 +81,7 @@
                     <h2>How A Request Flows</h2>
                     <figure class="guide-figure">
                         <img src="./images/architecture.svg" width="760" height="300" alt="Diagram: the game client sends a turn.php request with its token to the server. The server reads and saves history, bios and facts in its PostgreSQL database, prompts the mock or configured LLM, and returns a reply with at most one allowlisted action to the client.">
-                        <figcaption>One turn, from player line to NPC reply.</figcaption>
+                        <figcaption>One turn, from player line to NPC reply. <a href="./images/architecture.svg">Open the request flow diagram at full size</a>.</figcaption>
                     </figure>
                     <ol>
                         <li>The client sends the player's line to <code>turn.php</code> with a fresh <code>request_id</code>, the session, the NPC and the token.</li>
