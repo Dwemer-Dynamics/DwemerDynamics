@@ -128,8 +128,8 @@
                     <div class="table-scroll" role="region" aria-label="Troubleshooting" tabindex="0"><table>
                         <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
                         <tbody>
-                            <tr><td><code>health.php</code> 404 or 403</td><td>Preview (19000): the folder must be <code>/var/www/html/ExampleServer</code> or <code>/var/www/html/custom-mods/&lt;id&gt;</code>, and <code>sudo ddistro_custom_mod setup-web</code> must have succeeded. Released (8081): where Apache serves port 8081 from, and your folder name.</td></tr>
-                            <tr><td>Nothing answers on port 19000</td><td>Run <code>sudo ddistro_custom_mod setup-web</code>. If <code>setup-web</code> is unavailable or rejected as an unknown command, your Core does not include the preview; use port 8081. See <a href="./installation.html#Ports">Ports and branches</a>.</td></tr>
+                            <tr><td><code>health.php</code> 404 or 403</td><td>The folder must be <code>/var/www/html/ExampleServer</code> or <code>/var/www/html/custom-mods/&lt;id&gt;</code>, and <code>sudo ddistro_custom_mod setup-web</code> must have succeeded.</td></tr>
+                            <tr><td>Nothing answers on port 19000</td><td>Run <code>sudo ddistro_custom_mod setup-web</code>. If <code>setup-web</code> is unavailable or rejected as an unknown command, run <b>Update Distro</b> in the DwemerDistro launcher, then run it again. See <a href="./installation.html#Ports">Ports and branches</a>.</td></tr>
                             <tr><td><code>setup-web</code> says the port is in use</td><td>Nothing was changed. Choose another <code>CUSTOM_MODS_PORT</code> from 19000 to 19999 in <code>/etc/dwemerdistro_services.conf</code>, run it again, then pair again.</td></tr>
                             <tr><td><code>500 server_not_configured</code></td><td><code>config/config.php</code> missing, unreadable, or token still the placeholder. Run the installer again.</td></tr>
                             <tr><td><code>503 database_unavailable</code></td><td>PostgreSQL running, and the database settings in the config.</td></tr>

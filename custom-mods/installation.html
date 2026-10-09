@@ -54,7 +54,7 @@
             <section id="Installation" class="section">
                 <div class="card hero-card">
                     <h1>Installation</h1>
-                    <p>Install ExampleServer inside DwemerDistro, build the ExampleMod console client on Windows, and pair them. Everything starts in mock mode, so no provider or key is needed. Allow about 15 minutes. The steps below use the tested port 19000 preview. The released port 8081 route is still available further down this page.</p>
+                    <p>Install ExampleServer inside DwemerDistro, build the ExampleMod console client on Windows, and pair them. Everything starts in mock mode, so no provider or key is needed. Allow about 15 minutes. The steps below install manually; the <a href="#LauncherRoute">launcher route</a> at the end of this page installs the server for you instead.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#Requirements">Before you start</a></li>
                         <li><a href="#Ports">Ports and branches</a></li>
@@ -62,8 +62,7 @@
                         <li><a href="#BuildClient">2. Build the client</a></li>
                         <li><a href="#Pair">3. Pair the client</a></li>
                         <li><a href="#SecondCopy">A second copy</a></li>
-                        <li><a href="#ReleasedRoute">Released route (port 8081)</a></li>
-                        <li><a href="#LauncherRoute">Launcher route (pending)</a></li>
+                        <li><a href="#LauncherRoute">Launcher route</a></li>
                     </ul></nav>
                 </div>
 
@@ -74,40 +73,39 @@
                         <li><b>Visual Studio 2022</b> with the <b>Desktop development with C++</b> workload (MSVC and CMake).</li>
                         <li>Nothing else for the first run. An LLM and voice services are optional and come later.</li>
                     </ul>
-                    <p>Both templates keep a <code>main</code> branch (the stable baseline, default) and a <code>dev</code> branch (development). Both still use port 8081. The port 19000 changes are only on a preview branch called <code>codex/configurable-custom-port</code> in each template. For your own project, clone your own repositories instead; see <a href="./publishing.html">Publishing</a>.</p>
+                    <p>Both templates keep a <code>main</code> branch (the stable baseline, default) and a <code>dev</code> branch (development). The steps below clone <code>main</code>; add <code>-b dev</code> to a clone command for the development branch. For your own project, clone your own repositories instead; see <a href="./publishing.html">Publishing</a>.</p>
                 </div>
 
                 <div class="card" id="Ports">
                     <h2>Ports And Branches</h2>
                     <div class="table-scroll" role="region" aria-label="Ports and branches" tabindex="0"><table>
-                        <thead><tr><th>Route</th><th>Needs</th><th>Server address</th></tr></thead>
+                        <thead><tr><th>Install</th><th>Folder</th><th>Server address</th></tr></thead>
                         <tbody>
-                            <tr><td>Released</td><td>Any current DwemerDistro, with the templates on <code>main</code> or <code>dev</code></td><td><code>http://127.0.0.1:8081/ExampleServer</code></td></tr>
-                            <tr><td>Preview (tested)</td><td>DwemerDistro Core built from the drafts, with the templates on <code>codex/configurable-custom-port</code></td><td><code>http://127.0.0.1:19000/ExampleServer</code></td></tr>
+                            <tr><td>Manual, steps below</td><td><code>/var/www/html/ExampleServer</code></td><td><code>http://127.0.0.1:19000/ExampleServer</code></td></tr>
+                            <tr><td><a href="#SecondCopy">A second manual copy</a></td><td><code>/var/www/html/custom-mods/&lt;id&gt;</code></td><td><code>http://127.0.0.1:19000/custom-mods/&lt;id&gt;</code></td></tr>
+                            <tr><td><a href="#LauncherRoute">Launcher</a></td><td><code>/var/www/html/custom-mods/example-server</code></td><td><code>http://127.0.0.1:19000/custom-mods/example-server</code></td></tr>
                         </tbody>
                     </table></div>
-                    <div class="guide-note note-warning">
-                        <p><b>Preview, not released.</b> The port 19000 work is in draft pull requests that have not been merged: <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Core/pull/29">Core #29</a>, then <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Core/pull/30">Core #30</a>, plus <a href="https://github.com/Dwemer-Dynamics/ExampleServer/pull/1">ExampleServer #1</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleMod/pull/1">ExampleMod #1</a>. <b>Update Distro</b> does not fetch unmerged pull requests, so a normal DwemerDistro does not have the 19000 listener yet. If you are not running a Core built from those drafts, use the <a href="#ReleasedRoute">released route</a>.</p>
-                    </div>
-                    <p>How the custom mods port works in the preview Core:</p>
+                    <p>These addresses use the standard port 19000. How the custom mods port works:</p>
                     <ul>
                         <li><b>One shared port.</b> All custom PHP mods share one Apache listener on 127.0.0.1 (this PC only). Each mod gets its own path and its own database. There are no per-mod ports.</li>
                         <li><b>Configurable.</b> The port is <code>CUSTOM_MODS_PORT</code> in <code>/etc/dwemerdistro_services.conf</code>. The default is 19000, and any number from 19000 to 19999 is allowed. Official ports such as 8081 do not change.</li>
                         <li><b>Safe setup.</b> <code>sudo ddistro_custom_mod setup-web</code> writes only its own Apache site, which serves only <code>/ExampleServer</code> and <code>/custom-mods/&lt;id&gt;</code>. After reloading Apache it waits until the port is ready. If the port is already in use, or a site file it did not write is in the way, it stops and changes nothing.</li>
-                        <li><b>Kept on update.</b> <b>Update Distro</b> keeps the port you chose.</li>
+                        <li><b>Kept on update.</b> <b>Update Distro</b> keeps your <code>CUSTOM_MODS_PORT</code>, so custom mod addresses stay the same.</li>
                         <li><b>Changing it.</b> Edit the port, run <code>setup-web</code> again, then give every client the new <code>server_url</code>. The old address stops working.</li>
                     </ul>
                 </div>
 
                 <div class="card" id="InstallServer">
+                    <span id="ReleasedRoute" aria-hidden="true"></span>
                     <h2>1. Install The Server</h2>
                     <p>Open a DwemerDistro WSL shell as the <code>dwemer</code> user from PowerShell:</p>
                     <pre><code>wsl -d DwemerAI4Skyrim3 -u dwemer</code></pre>
                     <div class="guide-note note-info">
                         <p><code>DwemerAI4Skyrim3</code> is an example distro name; yours may differ. Run <code>wsl --list --verbose</code> to see the names installed on your PC, and use yours here and in step 3.</p>
                     </div>
-                    <p>Clone the server's preview branch into Apache's web root, then run the installer:</p>
-                    <pre><code>git clone -b codex/configurable-custom-port https://github.com/Dwemer-Dynamics/ExampleServer.git /var/www/html/ExampleServer
+                    <p>Clone the server into Apache's web root, then run the installer:</p>
+                    <pre><code>git clone https://github.com/Dwemer-Dynamics/ExampleServer.git /var/www/html/ExampleServer
 cd /var/www/html/ExampleServer
 sudo bash scripts/install.sh</code></pre>
                     <p>The installer creates a private <code>config/config.php</code> with a new random token only if it is missing, creates the <code>example_ai_mod</code> database only if it is missing, sets file permissions and applies migrations. It changes nothing in Apache, PHP or any other product. Running it again keeps your config and data.</p>
@@ -115,7 +113,7 @@ sudo bash scripts/install.sh</code></pre>
                     <pre><code>sudo nano /etc/dwemerdistro_services.conf</code></pre>
                     <p>Add the line <code>CUSTOM_MODS_PORT=19000</code>, or change it if it is already there. Any number from 19000 to 19999 works; without the line, 19000 is used. Save with <b>Ctrl+O</b> and <b>Enter</b>, exit with <b>Ctrl+X</b>, then start the listener:</p>
                     <pre><code>sudo ddistro_custom_mod setup-web</code></pre>
-                    <p>It is safe to run again. If it says the port is in use, choose another port in the file and run it again. If <code>setup-web</code> is unavailable or rejected as an unknown command, your Core does not include the preview; use the <a href="#ReleasedRoute">released route</a> instead.</p>
+                    <p>It is safe to run again. If it says the port is in use, choose another port in the file and run it again. If <code>setup-web</code> is unavailable or rejected as an unknown command, run <b>Update Distro</b> in the DwemerDistro launcher, then run it again.</p>
                     <p>Check it, using your port if you changed it. Give the smoke script the address so it tests the port you chose:</p>
                     <pre><code>curl http://127.0.0.1:19000/ExampleServer/health.php
 bash scripts/smoke.sh http://127.0.0.1:19000/ExampleServer</code></pre>
@@ -129,11 +127,11 @@ bash scripts/smoke.sh http://127.0.0.1:19000/ExampleServer</code></pre>
 
                 <div class="card" id="BuildClient">
                     <h2>2. Build The Client</h2>
-                    <p>In PowerShell on Windows, clone the client's preview branch and build it:</p>
-                    <pre><code>git clone -b codex/configurable-custom-port https://github.com/Dwemer-Dynamics/ExampleMod.git
+                    <p>In PowerShell on Windows, clone the client and build it:</p>
+                    <pre><code>git clone https://github.com/Dwemer-Dynamics/ExampleMod.git
 cd ExampleMod
 powershell -ExecutionPolicy Bypass -File scripts\build.ps1</code></pre>
-                    <p>This builds x64 and x86 into <code>%LOCALAPPDATA%\DwemerDynamics\ExampleMod\build\x64\Release</code> and <code>...\x86\Release</code>, with <code>config.default.json</code> next to each <code>example_mod.exe</code>. Use the architecture your game uses; the console works with both. On this branch, <code>config.default.json</code> points to port 19000, but the pairing file from step 3 sets the address anyway.</p>
+                    <p>This builds x64 and x86 into <code>%LOCALAPPDATA%\DwemerDynamics\ExampleMod\build\x64\Release</code> and <code>...\x86\Release</code>, with <code>config.default.json</code> next to each <code>example_mod.exe</code>. Use the architecture your game uses; the console works with both. <code>config.default.json</code> points to port 19000, but the pairing file from step 3 sets the address anyway.</p>
                 </div>
 
                 <div class="card" id="Pair">
@@ -161,45 +159,21 @@ Versions: client 0.1.0, client baseline baseline-1, server 0.1.0, server baselin
                 <div class="card" id="SecondCopy">
                     <h2>A Second Copy</h2>
                     <p>Every extra manual copy needs its own folder and its own database. Never point two copies at the same database.</p>
-                    <ul>
-                        <li><b>Preview (19000):</b> the custom mods port serves only <code>/ExampleServer</code> and <code>/custom-mods/&lt;id&gt;</code>, so put the copy in <code>/var/www/html/custom-mods/&lt;id&gt;</code>. The id is 3-32 lowercase letters, digits and single hyphens, starting with a letter (<code>my-project</code>, not <code>my_project</code>). Do not use an id the launcher installs, such as <code>example-server</code>.</li>
-                        <li><b>Released (8081):</b> any new folder under <code>/var/www/html</code> works.</li>
-                    </ul>
-                    <p>Clone into the new folder, give its private config a new token and a new <code>database.name</code> before running <code>install.sh</code>, then check and pair it with its own address, for example <code>http://127.0.0.1:19000/custom-mods/my-project</code>. Full commands: <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/codex/configurable-custom-port/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md (preview), A separate copy</a> or <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md (released), A separate copy</a>.</p>
-                </div>
-
-                <div class="card" id="ReleasedRoute">
-                    <h2>Released Route (Port 8081)</h2>
-                    <p>Use this with a normal DwemerDistro and the templates' released <code>main</code> branch (add <code>-b dev</code> for the development branch). The steps match the ones above, with these changes:</p>
-                    <pre><code>git clone https://github.com/Dwemer-Dynamics/ExampleServer.git /var/www/html/ExampleServer
-cd /var/www/html/ExampleServer
-sudo bash scripts/install.sh
-curl http://127.0.0.1:8081/ExampleServer/health.php
-bash scripts/smoke.sh http://127.0.0.1:8081/ExampleServer</code></pre>
-                    <ul>
-                        <li>Skip the services file and <code>setup-web</code>.</li>
-                        <li>Open the dashboard at <code>http://127.0.0.1:8081/ExampleServer/</code>.</li>
-                        <li>Clone ExampleMod without <code>-b</code>, or with <code>-b dev</code>.</li>
-                        <li>Pair with <code>--base-url http://127.0.0.1:8081/ExampleServer</code>.</li>
-                        <li>If <code>health.php</code> returns 404, check where your Apache serves port 8081 from.</li>
-                    </ul>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md">SETUP.md (released)</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md">ExampleMod README (released)</a>.</p>
+                    <p>The custom mods port serves only <code>/ExampleServer</code> and <code>/custom-mods/&lt;id&gt;</code>, so put the copy in <code>/var/www/html/custom-mods/&lt;id&gt;</code>. The id is 3-32 lowercase letters, digits and single hyphens, starting with a letter (<code>my-project</code>, not <code>my_project</code>). Do not use an id the launcher installs, such as <code>example-server</code>.</p>
+                    <p>Clone into the new folder, give its private config a new token and a new <code>database.name</code> before running <code>install.sh</code>, then check and pair it with its own address, for example <code>http://127.0.0.1:19000/custom-mods/my-project</code>. Full commands: <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md, A separate copy with its own database</a>.</p>
                 </div>
 
                 <div class="card" id="LauncherRoute">
-                    <h2>Launcher Route (Pending)</h2>
-                    <div class="guide-note note-warning">
-                        <p><b>Not released.</b> Launcher custom-mod installation is in draft pull requests <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/53">Launcher #53</a> and <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/54">Launcher #54</a> (which adds the creation guide and custom ports), and <a href="https://github.com/Dwemer-Dynamics/Dwemer-Dashboard/pull/28">Dashboard #28</a> (which shows the configured addresses). It also needs DwemerDistro Core from draft <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Core/pull/29">Core #29</a> and <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Core/pull/30">Core #30</a>. No released launcher shows this option yet.</p>
-                    </div>
-                    <p>As drafted, <b>Mods &gt; Custom mods &gt; Add custom mod</b> takes a public HTTPS repository URL, previews the exact commit, and installs the server in its own folder and database:</p>
+                    <h2>Launcher Route</h2>
+                    <p>In the DwemerDistro launcher, <b>Mods &gt; Custom mods &gt; Add custom mod</b> takes a public HTTPS repository URL, previews the exact commit, and installs the server in its own folder and database:</p>
                     <ul>
                         <li>Folder <code>/var/www/html/custom-mods/example-server</code>, separate from a manual install.</li>
                         <li>Database <code>custom_example_server</code>, and a private config with a new token.</li>
                         <li>Dashboard <code>http://127.0.0.1:19000/custom-mods/example-server/ui/</code>, on your <code>CUSTOM_MODS_PORT</code>.</li>
                         <li>Client <code>server_url</code> <code>http://127.0.0.1:19000/custom-mods/example-server</code>.</li>
                     </ul>
-                    <p>The launcher manages the server only. To pair the client, run <code>pair_client.php</code> from that folder with <code>--base-url http://127.0.0.1:19000/custom-mods/example-server</code>. Details: <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/codex/configurable-custom-port/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md (preview)</a>.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/codex/configurable-custom-port/SETUP.md">SETUP.md (preview)</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/codex/configurable-custom-port/README.md">ExampleMod README (preview)</a>.</p>
+                    <p>The launcher manages the server only. To pair the client, run <code>pair_client.php</code> from that folder with <code>--base-url http://127.0.0.1:19000/custom-mods/example-server</code>. Details: <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md">SETUP.md</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md">ExampleMod README</a>.</p>
                     <p><b>Next step:</b> <a href="./configuration.html">Configure an LLM, keys and voice</a>, or go straight to <a href="./testing.html">Testing</a> with the mock.</p>
                 </div>
             </section>
