@@ -208,6 +208,25 @@ const leftSidebarConfigs = {
             { href: "https://github.com/Dwemer-Dynamics/DialecticServer", title: "Server Code", label: "Server Code", emoji: "\uD83D\uDCBB" },
             { href: "https://github.com/Dwemer-Dynamics/Dialectic", title: "Mod Code", label: "Mod Code", emoji: "\uD83D\uDCBB" }
         ]
+    },
+    customMods: {
+        pageLinks: [
+            { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
+            { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
+            { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
+            { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
+            { href: "./data-and-memory.html", title: "Data and Memory", label: "Data and Memory", emoji: "\uD83D\uDDC4\uFE0F" },
+            { href: "./testing.html", title: "Testing", label: "Testing", emoji: "\uD83E\uDDEA" },
+            { href: "./porting.html", title: "Porting", label: "Porting", emoji: "\uD83D\uDEE0\uFE0F" },
+            { href: "./updates.html", title: "Updates and Backups", label: "Updates and Backups", emoji: "\uD83D\uDD04" },
+            { href: "./publishing.html", title: "Publishing", label: "Publishing", emoji: "\uD83D\uDCE6" }
+        ],
+        bottomLinks: [
+            { href: "https://github.com/Dwemer-Dynamics/ExampleServer", title: "Server Template", label: "Server Template", emoji: "\uD83D\uDCBB" },
+            { href: "https://github.com/Dwemer-Dynamics/ExampleMod", title: "Client Template", label: "Client Template", emoji: "\uD83D\uDCBB" },
+            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
+        ]
     }
 };
 
@@ -302,6 +321,10 @@ function getLeftSidebarConfig() {
 
     if (document.body.classList.contains("dialectic-theme")) {
         return leftSidebarConfigs.dialectic;
+    }
+
+    if (document.body.classList.contains("custom-mods-theme")) {
+        return leftSidebarConfigs.customMods;
     }
 
     return null;

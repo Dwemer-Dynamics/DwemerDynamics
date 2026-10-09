@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Mod Guide | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="Overview" class="section">
+                <div class="card hero-card">
+                    <h1>Custom Mod Guide</h1>
+                    <p>Build the server and client of your own AI NPC mod from two public templates. <b>ExampleServer</b> is a small PHP 8.2 and PostgreSQL server that runs inside DwemerDistro. <b>ExampleMod</b> is a Windows console "fake game" that shows the game side. A player line goes in; an NPC reply and, at most, one safe action come back.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#WhatItIs">What the templates are</a></li>
+                        <li><a href="#Architecture">How a request flows</a></li>
+                        <li><a href="#Routes">Choose an install route</a></li>
+                        <li><a href="#GuideMap">Guide map</a></li>
+                        <li><a href="#FullDocs">Full template documentation</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="WhatItIs">
+                    <h2>What The Templates Are</h2>
+                    <ul>
+                        <li><b>Starting points for your own mod.</b> Copy them into your own repositories, rename them, and replace the console game with your engine.</li>
+                        <li><b>Mock-first.</b> A fresh install answers with predictable mock replies. The first run needs no LLM provider, API key or voice service.</li>
+                        <li><b>Local by design.</b> The server runs on one PC inside DwemerDistro WSL, or on a trusted local network. The dashboard has no login and the token travels over plain HTTP.</li>
+                    </ul>
+                    <div class="guide-note note-warning">
+                        <p><b>What they are not:</b> ExampleMod is not a plugin for any real game. It has no engine SDK and no game hooks, and no game is supported until someone builds and tests a port in that game. Real LLM and voice providers are optional code paths; the smoke checks cover mock mode only.</p>
+                        <p>The templates are independent of CHIM, STOBE and Dialectic. They share no Git history and receive no automatic updates from those products.</p>
+                    </div>
+                </div>
+
+                <div class="card" id="Architecture">
+                    <h2>How A Request Flows</h2>
+                    <figure class="guide-figure">
+                        <img src="./images/architecture.svg" width="760" height="300" alt="Diagram: the game client sends a turn.php request with its token to the server. The server reads and saves history, bios and facts in its PostgreSQL database, prompts the mock or configured LLM, and returns a reply with at most one allowlisted action to the client.">
+                        <figcaption>One turn, from player line to NPC reply. <a href="./images/architecture.svg">Open the request flow diagram at full size</a>.</figcaption>
+                    </figure>
+                    <ol>
+                        <li>The client sends the player's line to <code>turn.php</code> with a fresh <code>request_id</code>, the session, the NPC and the token.</li>
+                        <li>The server loads that NPC's history, bio and matching facts from its own database.</li>
+                        <li>It asks the mock (or your configured LLM) for a reply, keeps only allowlisted actions, and saves the exchange.</li>
+                        <li>The client checks the request ID and NPC, then shows the subtitle and runs the action through its own allowlist on the game thread.</li>
+                    </ol>
+                    <p>The full contract is in <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/PROTOCOL.md">PROTOCOL.md</a>, identical in both repositories.</p>
+                </div>
+
+                <div class="card" id="Routes">
+                    <h2>Choose An Install Route</h2>
+                    <div class="table-scroll" role="region" aria-label="Install routes" tabindex="0"><table>
+                        <thead><tr><th>Route</th><th>Status</th><th>Server folder</th></tr></thead>
+                        <tbody>
+                            <tr><td>Manual install in the DwemerDistro WSL shell</td><td>Available now. This guide's primary route.</td><td><code>/var/www/html/ExampleServer</code></td></tr>
+                            <tr><td>Launcher <b>Mods &gt; Custom mods</b></td><td>Pending. Not in a released launcher.</td><td><code>/var/www/html/custom-mods/example-server</code></td></tr>
+                        </tbody>
+                    </table></div>
+                    <div class="guide-note note-info">
+                        <p><b>Launcher status:</b> custom-mod installation is in draft pull requests <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/53">Launcher #53</a>, <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/54">Launcher #54</a> and <a href="https://github.com/Dwemer-Dynamics/Dwemer-Dashboard/pull/28">Dashboard #28</a>, and depends on DwemerDistro Core changes that are not yet published. Use the manual route until a released launcher includes it.</p>
+                    </div>
+                    <p>Either way, the console client is built separately on Windows.</p>
+                </div>
+
+                <div class="card" id="GuideMap">
+                    <h2>Guide Map</h2>
+                    <ol>
+                        <li><a href="./installation.html">Installation</a>: install the server, build the client and pair them.</li>
+                        <li><a href="./configuration.html">Configuration</a>: LLM, API keys, PocketTTS, Parakeet and optional NPC selection.</li>
+                        <li><a href="./data-and-memory.html">Data and Memory</a>: NPC bios, facts, profiles, memory and session checkpoints.</li>
+                        <li><a href="./testing.html">Testing</a>: the web conversation tester, events, logs, actions and cancellation.</li>
+                        <li><a href="./porting.html">Porting</a>: replace the console game with your engine, hand off to a coding agent, extend the dashboard.</li>
+                        <li><a href="./updates.html">Updates and Backups</a>: versions, migrations, backups and branch compatibility.</li>
+                        <li><a href="./publishing.html">Publishing</a>: your own repositories, licence, branding, launcher manifest and private data.</li>
+                    </ol>
+                </div>
+
+                <div class="card" id="FullDocs">
+                    <h2>Full Template Documentation</h2>
+                    <p>This guide covers the common tasks. Each topic has one canonical document in the template repositories:</p>
+                    <ul>
+                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md">START_HERE.md</a>: orientation, feature status, walkthrough and troubleshooting by request ID.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md">SETUP.md</a>: installation and operations.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md">CONNECTORS.md</a>: copyable provider settings.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a>: dashboard pages and adding your own.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md">ExampleMod README</a>: client commands, settings and smoke checks.</li>
+                    </ul>
+                    <p><b>Next step:</b> <a href="./installation.html">Install the server and client</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

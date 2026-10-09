@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Mod Configuration | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="Configuration" class="section">
+                <div class="card hero-card">
+                    <h1>Configuration</h1>
+                    <p>Everything optional starts off. Keep the mock until the client works end to end, then add one provider at a time from the dashboard or the private <code>config/config.php</code>. Changes apply on the next request; no restart is needed.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#Defaults">Shipped defaults</a></li>
+                        <li><a href="#LanguageModel">Connect an LLM</a></li>
+                        <li><a href="#ApiKeys">API keys</a></li>
+                        <li><a href="#Voice">Voice: PocketTTS and Parakeet</a></li>
+                        <li><a href="#NpcSelection">Optional NPC selection</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="Defaults">
+                    <h2>Shipped Defaults</h2>
+                    <div class="table-scroll" role="region" aria-label="Shipped defaults" tabindex="0"><table>
+                        <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>llm.mode</code></td><td><code>mock</code>: predictable replies, no network</td></tr>
+                            <tr><td><code>tts.enabled</code>, <code>stt.enabled</code></td><td><code>false</code> (PocketTTS and Parakeet preselected)</td></tr>
+                            <tr><td><code>decision.enabled</code></td><td><code>false</code>: always the baseline NPC</td></tr>
+                            <tr><td><code>allowed_actions</code></td><td><code>["follow_player"]</code> on the server and in the client</td></tr>
+                            <tr><td><code>history_limit</code></td><td><code>10</code> lines per session and NPC</td></tr>
+                            <tr><td>Client <code>voice_enabled</code></td><td><code>false</code></td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>The dashboard settings pages rewrite <code>config/config.php</code> safely but do not keep comments in the file. If a page refuses to save, run <code>sudo bash scripts/install.sh</code> again to repair ownership, then check <b>Control Panel &gt; Diagnostics</b> ("Dashboard can save settings").</p>
+                </div>
+
+                <div class="card" id="LanguageModel">
+                    <h2>Connect An LLM</h2>
+                    <ol>
+                        <li>Open <b>Configuration &gt; LLM</b> and choose a <b>Reply mode</b>.</li>
+                        <li>For <code>local</code>, set <b>Base URL</b> to the server's <code>/v1</code> address, for example <code>http://127.0.0.1:1234/v1</code>. For <code>openai</code> it is optional; <code>openrouter</code> and <code>dwemerllm</code> use fixed URLs.</li>
+                        <li>Set <b>Model</b> to the exact model name your provider lists. Every mode except <code>mock</code> needs one.</li>
+                        <li>Press <b>Save LLM settings</b> (saving never contacts the provider), then <b>Send test</b>.</li>
+                    </ol>
+                    <div class="table-scroll" role="region" aria-label="Reply modes" tabindex="0"><table>
+                        <thead><tr><th>Reply mode</th><th>Endpoint</th><th>Key</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>mock</code></td><td>none</td><td>none</td></tr>
+                            <tr><td><code>openai</code></td><td>OpenAI, or any OpenAI-compatible <code>base_url</code></td><td>usually</td></tr>
+                            <tr><td><code>openrouter</code></td><td>OpenRouter</td><td>required</td></tr>
+                            <tr><td><code>local</code></td><td>your own OpenAI-compatible server</td><td>optional</td></tr>
+                            <tr><td><code>dwemerllm</code></td><td>DwemerDistro LLM Studio at <code>127.0.0.1:1234</code>; load a model there first</td><td>never sent</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>The test shows the reply and its time, or a short reason such as <code>HTTP 401</code> (key refused) or <code>HTTP 404</code> (URL or model not found). A test may cost money; it saves no history and runs no actions. A failing provider gives the game <code>502 llm_unavailable</code>, with the reason in the Apache error log.</p>
+                    <p>To edit the file instead, in WSL, replace the <code>llm</code> block, for example:</p>
+                    <pre><code>'llm' =&gt; ['mode' =&gt; 'dwemerllm', 'model' =&gt; 'id-of-the-model-loaded-in-llm-studio',
+          'timeout_seconds' =&gt; 60, 'max_tokens' =&gt; 200],</code></pre>
+                </div>
+
+                <div class="card" id="ApiKeys">
+                    <h2>API Keys</h2>
+                    <ol>
+                        <li>Open <b>Configuration &gt; API keys</b>.</li>
+                        <li>Paste the key into its slot, for example <code>llm.api_key</code>, and press <b>Save keys</b>.</li>
+                    </ol>
+                    <p>The page only ever shows <b>Saved</b> or <b>Not set</b>. A blank field keeps the saved key; the clear box removes it. Keys live only in <code>config/config.php</code>: never in the database, the browser, logs or Git. <code>dwemerllm</code> never receives a key.</p>
+                </div>
+
+                <div class="card" id="Voice">
+                    <h2>Voice: PocketTTS And Parakeet</h2>
+                    <p>Voice is opt-in and never needed for text. The templates do not install or start voice services.</p>
+                    <ol>
+                        <li>Start PocketTTS (audio.cpp, port 8086) and/or Parakeet (port 8022) from the DwemerDistro launcher.</li>
+                        <li>Open <b>Configuration &gt; Voice</b>, enable speech and/or transcription and save. The default URLs are <code>http://127.0.0.1:8086/v1/audio/speech</code> and <code>http://127.0.0.1:8022/v1/audio/transcriptions</code>. For PocketTTS, a blank model or voice saves <code>pocket-tts</code> and <code>alba</code>.</li>
+                        <li>Press <b>Speak</b> to hear a sample. For Parakeet, choose a short WAV (at most 10 MB) under <b>Test transcription</b> and press <b>Transcribe</b>.</li>
+                        <li>In the client's <code>config.json</code>, set <code>"voice_enabled": true</code>.</li>
+                    </ol>
+                    <p>The console client saves reply WAVs in <code>%TEMP%\dwemer-ai-example\</code> and does not play them. Use <code>--listen &lt;file.wav&gt;</code> for speech input. Text always comes first: a voice failure prints <code>Voice unavailable, text only: ...</code>. faster-whisper (port 9876) is also supported; see <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md#voice">CONNECTORS.md, Voice</a>.</p>
+                    <p>Report voice as working only after you test it with your own services and recordings.</p>
+                </div>
+
+                <div class="card" id="NpcSelection">
+                    <h2>Optional NPC Selection</h2>
+                    <p><code>decision.php</code> answers one question: which of up to 8 offered NPCs should answer a line. It returns no reply or actions and falls back to the baseline NPC on any problem. Call it only when the player has <b>no</b> explicit or crosshair target.</p>
+                    <p>Enable it on <b>Configuration &gt; NPC selection</b>, or in the config:</p>
+                    <pre><code>'decision' =&gt; ['enabled' =&gt; true, 'provider' =&gt; 'mock'],</code></pre>
+                    <p>Then test from the client folder:</p>
+                    <pre><code>.\example_mod.exe --decide "Scout, is the trail safe?"</code></pre>
+                    <p>With the mock enabled it prints <code>npc_scout (provider, matched, ...)</code>; the command only prints the choice. The <code>jev</code> provider uses OpenRouter and needs a key; see <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md#npc-selection-decision-optional">CONNECTORS.md, NPC selection</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#4-use-a-real-llm-optional">SETUP.md sections 4 and 5</a>.</p>
+                    <p><b>Next step:</b> <a href="./data-and-memory.html">Give NPCs bios, facts and memory</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

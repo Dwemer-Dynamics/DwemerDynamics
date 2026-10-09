@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Mod Testing | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="Testing" class="section">
+                <div class="card hero-card">
+                    <h1>Testing</h1>
+                    <p>Test in mock mode first, from the dashboard and from the console client. Every request carries a request ID, so you can find exactly what happened in the server's logs.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#WebConversation">Web conversation tester</a></li>
+                        <li><a href="#GameEvents">Game events</a></li>
+                        <li><a href="#Logs">Find a request in Logs</a></li>
+                        <li><a href="#ClientActions">Client actions</a></li>
+                        <li><a href="#Cancellation">Cancellation and stale replies</a></li>
+                        <li><a href="#Troubleshooting">Troubleshooting</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="WebConversation">
+                    <h2>Web Conversation Tester</h2>
+                    <figure class="guide-figure">
+                        <img src="./images/public-example-conversation.jpg" width="1265" height="712" loading="lazy" alt="ExampleServer dashboard Conversation page in mock mode, showing player name, session, optional context fields, the Your message box with Send, Cancel and New session buttons, and the Game event test panel below with Event type and Mode fields.">
+                        <figcaption>The dashboard Conversation page and its Game event test, in mock mode.</figcaption>
+                    </figure>
+                    <ol>
+                        <li>Open <b>Roleplay &gt; Conversation</b>. The default session is <code>dashboard-demo</code> and the NPC is <code>npc_guide</code>.</li>
+                        <li>Type in <b>Your message</b> and press <b>Send</b>. Try <code>follow me</code>: the actions line shows <code>follow_player (target npc_guide)</code>.</li>
+                        <li>Press <b>New session</b> to start fresh: shared facts still apply, and the new turn shows 0 history lines.</li>
+                    </ol>
+                    <p>The tester writes ordinary history and displays actions without running them. No dashboard page runs game actions.</p>
+                </div>
+
+                <div class="card" id="GameEvents">
+                    <h2>Game Events</h2>
+                    <p>On the same page, <b>Game event test</b> sends <code>event.php</code>. Mode <b>Log only</b> stores an event with no model call, history or actions. <b>NPC responds</b> makes the NPC react like a normal turn. From the client folder:</p>
+                    <pre><code>.\example_mod.exe --event location_entered "The player entered the market."
+.\example_mod.exe --react item_given "The player gave a lantern. follow me"</code></pre>
+                    <p>Only four types exist: <code>location_entered</code>, <code>item_given</code>, <code>combat_started</code> and <code>combat_ended</code>. The game decides when to send events; the server never triggers anything itself.</p>
+                </div>
+
+                <div class="card" id="Logs">
+                    <h2>Find A Request In Logs</h2>
+                    <p>The client prints the ID of every request, for example <code>Trace: turn req-... (ok)</code>. Open <b>Control Panel &gt; Logs</b>, filter by <b>Request ID</b>, and open <b>Details</b>.</p>
+                    <div class="table-scroll" role="region" aria-label="Log statuses" tabindex="0"><table>
+                        <thead><tr><th>Logs shows</th><th>Meaning</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>turn</code> <code>complete</code></td><td>The server finished, not that a game ran anything. A client report appears under "Client reported (untrusted)".</td></tr>
+                            <tr><td><code>failed</code>, <code>llm_unavailable</code></td><td>The provider failed. Search the Apache error log for <code>example-ai [&lt;id&gt;]</code>.</td></tr>
+                            <tr><td><code>failed</code>, <code>duplicate_request</code></td><td>The ID was reused within a day. Use a new ID per request.</td></tr>
+                            <tr><td><code>cancelled</code> or <code>superseded</code></td><td>Expected after a cancel, NPC change, session change or checkpoint restore.</td></tr>
+                            <tr><td>No row</td><td>Inconclusive: rejected before logging, a filter hides it, or another install. Read the HTTP status the client printed.</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Voice, NPC selection, embedding and memory calls appear on <b>Control Panel &gt; Connector calls</b> instead.</p>
+                </div>
+
+                <div class="card" id="ClientActions">
+                    <h2>Client Actions</h2>
+                    <p>The model can only <i>ask</i> for an action. The server returns only names in its <code>allowed_actions</code>, and the client runs one only if it is in its own <code>allowed_actions</code> <b>and</b> has an explicit handler. Nothing maps action names to commands.</p>
+                    <ul>
+                        <li><code>--say "dance"</code>: reply only; the server lists <code>dance</code> in <code>rejected_actions</code>.</li>
+                        <li>Client <code>"allowed_actions": []</code>: <code>Rejected action not allowed by this mod: follow_player</code>.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Cancellation">
+                    <h2>Cancellation And Stale Replies</h2>
+                    <ol>
+                        <li>Set <code>mock_delay_seconds</code> to 3 on <b>Configuration &gt; LLM</b>.</li>
+                        <li>Start the interactive client with <code>.\example_mod.exe</code> and type <code>follow me</code>.</li>
+                        <li>Before it answers, type <code>/cancel</code>, <code>/npc scout</code>, <code>/unload</code> or <code>/session other-save</code>.</li>
+                    </ol>
+                    <p>The reply and its action are dropped and the server is told to cancel; Logs shows the turn as <code>cancelled</code> or <code>superseded</code>. In the dashboard tester, <b>Cancel</b> or changing the NPC does the same. Cancellation may not stop computation at the provider, and failed requests are never retried automatically.</p>
+                    <p>Server check in WSL, with a mock delay of 2 or more: <code>SMOKE_STALE=1 bash scripts/smoke.sh</code>. Set the delay back to 0 afterwards.</p>
+                </div>
+
+                <div class="card" id="Troubleshooting">
+                    <h2>Troubleshooting</h2>
+                    <div class="table-scroll" role="region" aria-label="Troubleshooting" tabindex="0"><table>
+                        <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>health.php</code> 404</td><td>Where Apache serves port 8081 from, and your folder name.</td></tr>
+                            <tr><td><code>500 server_not_configured</code></td><td><code>config/config.php</code> missing, unreadable, or token still the placeholder. Run the installer again.</td></tr>
+                            <tr><td><code>503 database_unavailable</code></td><td>PostgreSQL running, and the database settings in the config.</td></tr>
+                            <tr><td><code>503 not_migrated</code></td><td>Run <code>sudo bash scripts/install.sh</code> again.</td></tr>
+                            <tr><td>Client <code>WinHTTP error 12029</code></td><td>Server not reachable at <code>server_url</code>.</td></tr>
+                            <tr><td>Client <code>401 unauthorized</code></td><td>Token in <code>config.json</code> does not match the server. Pair again.</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Also check that Apache does not serve your Git history. <code>200</code> here means anyone who can reach the port can download it:</p>
+                    <pre><code>curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8081/ExampleServer/.git/HEAD</code></pre>
+                    <p>When sharing logs for help, include request IDs and error codes, never tokens or keys.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md#troubleshooting-by-request-id">START_HERE.md, Troubleshooting by request ID</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#troubleshooting">SETUP.md, Troubleshooting</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md#smoke-checks">ExampleMod smoke checks</a>.</p>
+                    <p><b>Next step:</b> <a href="./porting.html">Port the client to your engine</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
