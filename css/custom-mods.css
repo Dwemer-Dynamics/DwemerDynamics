@@ -1,0 +1,135 @@
+/* Custom Mod Guide: blue accent taken from the ExampleServer question-mark icon. */
+:root {
+    --custom-accent: #4da3ff;
+    --custom-accent-light: #8cc4ff;
+    --custom-edge: rgba(77, 163, 255, 0.3);
+}
+
+.custom-mods-progress {
+    background: var(--custom-accent);
+}
+
+.custom-mods-theme .content a {
+    color: var(--custom-accent-light);
+}
+
+.custom-mods-theme .content a:hover {
+    color: #c2e0ff;
+}
+
+.custom-mods-theme .content a:focus-visible,
+.custom-mods-theme .sidebar a:focus-visible {
+    outline: 2px solid var(--custom-accent-light);
+    outline-offset: 2px;
+}
+
+.custom-mods-theme .headerTitle #logo {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    object-fit: contain;
+}
+
+/* Extra room on top of the global scroll-padding so the fixed header never covers anchored titles. */
+.custom-mods-theme .content .card[id],
+#customModsHub {
+    scroll-margin-top: 1.5rem;
+}
+
+.custom-mods-theme .sidebar .active::before {
+    background-color: var(--custom-accent);
+}
+
+.custom-mods-theme .guide-copy-button {
+    border-color: rgba(77, 163, 255, 0.45);
+    color: var(--custom-accent-light);
+}
+
+.custom-mods-theme .guide-copy-button:hover {
+    border-color: rgba(77, 163, 255, 0.8);
+    color: #c2e0ff;
+}
+
+.custom-mods-theme .content pre {
+    margin: 0.8em 0;
+    padding: 0.75em 0.9em;
+    border: 1px solid var(--custom-edge);
+    border-radius: 6px;
+    background: #121418;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.custom-mods-theme .content pre code {
+    padding: 0;
+    background: none;
+    font-size: 0.95em;
+}
+
+.custom-mods-theme .table-scroll {
+    overflow-x: auto;
+    margin: 0.8em 0;
+}
+
+.custom-mods-theme .content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-mods-theme .content th,
+.custom-mods-theme .content td {
+    padding: 0.45em 0.6em;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    text-align: left;
+    vertical-align: top;
+}
+
+.custom-mods-theme .content th {
+    background: rgba(77, 163, 255, 0.1);
+}
+
+.custom-mods-theme .content li {
+    margin-top: 0.45em;
+    margin-bottom: 0.45em;
+}
+
+.custom-mods-theme .guide-figure img {
+    height: auto;
+}
+
+/* Homepage row */
+.hubModRowCustom .hubModGame {
+    color: var(--custom-accent-light);
+}
+
+.hubModArtworkCustom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(77, 163, 255, 0.18), transparent 65%), #10141b;
+}
+
+.hubModArtworkCustom img {
+    width: auto;
+    height: 56%;
+    object-fit: contain;
+}
+
+.hubTileActionButtonCustom {
+    background-color: var(--custom-accent);
+    border-color: var(--custom-accent);
+    color: #0d1117;
+}
+
+.hubTileActionButtonCustom:hover,
+.hubTileActionButtonCustom:focus-visible {
+    background-color: var(--custom-accent-light);
+    border-color: var(--custom-accent-light);
+    color: #0d1117;
+}
+
+.hubTileActionButtonCustom:focus-visible {
+    outline: 2px solid var(--custom-accent-light);
+    outline-offset: 3px;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Porting to a Real Engine | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="Porting" class="section">
+                <div class="card hero-card">
+                    <h1>Porting To A Real Engine</h1>
+                    <p>ExampleMod is a console fake game. A real mod keeps its protocol client, threading and safety checks, and replaces the console <code>GameAdapter</code> with your engine's real APIs. Nothing works in a game until you build and test the port there.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#Boundaries">Boundaries to keep</a></li>
+                        <li><a href="#Checklist">Port checklist</a></li>
+                        <li><a href="#AgentHandoff">Coding agent handoff</a></li>
+                        <li><a href="#AddAction">Add an action</a></li>
+                        <li><a href="#DashboardPages">Add a dashboard page</a></li>
+                        <li><a href="#Evidence">Evidence levels</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="Boundaries">
+                    <h2>Boundaries To Keep</h2>
+                    <div class="table-scroll" role="region" aria-label="Porting boundaries" tabindex="0"><table>
+                        <thead><tr><th>Boundary</th><th>Rule</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>GameAdapter</code> (<code>src/game_adapter.h</code>)</td><td>The only interface that touches the game. Implement it with real engine APIs; the console version is <code>src/console_game.h</code>.</td></tr>
+                            <tr><td>Threads</td><td>Only the game's main thread calls <code>GameAdapter</code>. Every server call runs on a worker thread or async HTTP; results come back through the mailbox in <code>src/main.cpp</code>. The game never waits on HTTP.</td></tr>
+                            <tr><td>Target</td><td>Before applying a reply, check its <code>request_id</code> and <code>npc_id</code>, and use <code>isSameNpc()</code> to confirm the same NPC instance is still loaded. An action's <code>args.target_id</code> must equal the NPC the request was sent to.</td></tr>
+                            <tr><td>Actions</td><td>Run a name only if it is in the client's <code>allowed_actions</code> and has an explicit handler in <code>applyResult()</code>. Never execute raw model text.</td></tr>
+                            <tr><td>Audio</td><td>Optional. <code>speak.php</code> returns a WAV and <code>listen.php</code> takes one. The console saves WAVs without playing them; a port plays them on the NPC and captures the microphone to WAV. Text always comes first.</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Never retry a failed request automatically: a retry could repeat a reply or an action.</p>
+                </div>
+
+                <div class="card" id="Checklist">
+                    <h2>Port Checklist</h2>
+                    <ul>
+                        <li>A main-thread tick or callback that alone calls <code>GameAdapter</code>.</li>
+                        <li>Worker threads or async HTTP for every server call.</li>
+                        <li>A stable NPC ID, NPC and player names, and a few context entries.</li>
+                        <li>A <code>session_id</code> per save game.</li>
+                        <li>Subtitle or message display.</li>
+                        <li><code>isSameNpc()</code> using a real engine handle or instance marker.</li>
+                        <li>One explicit handler per allowlisted action, using the engine's own behaviour (for example, follow).</li>
+                        <li>Request-ID and stale checks, no automatic retries, and both allowlists unchanged.</li>
+                        <li>A private <code>config.json</code> location for the server URL and token.</li>
+                        <li>The correct architecture (x64 or x86) for the game, built without warnings.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="AgentHandoff">
+                    <h2>Coding Agent Handoff</h2>
+                    <p><a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/AGENT_PLAYBOOK.md">AGENT_PLAYBOOK.md</a> contains a ready prompt. Run your coding agent from a folder with your copies of both repositories and your game's modding SDK, and paste that prompt. It works in five steps and stops after each:</p>
+                    <ol>
+                        <li>Inspect the game's engine, SDK, threading and APIs, citing sources.</li>
+                        <li>Run the examples unchanged and pass the smoke checks.</li>
+                        <li>Rename to your own project, keeping the licence and notices.</li>
+                        <li>Implement the game adapter with real APIs only.</li>
+                        <li>Validate the build, the mock checks, then the real game.</li>
+                    </ol>
+                    <div class="guide-note note-info">
+                        <p>The agent must not invent SDK functions. An unknown API should become a clearly marked TODO. Ask for mock checks and in-game results to be reported separately.</p>
+                    </div>
+                    <p>The playbook also has a warm-up exercise: add a third fictional NPC behind <code>GameAdapter</code>, give it a bio and fact on the server, and check retrieval in Logs, all without touching the protocol.</p>
+                </div>
+
+                <div class="card" id="AddAction">
+                    <h2>Add An Action</h2>
+                    <p>New actions follow the worked <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/WAVE_ACTION.md">wave exercise</a>. It touches, in your own copies:</p>
+                    <ul>
+                        <li>The server prompt and mock in <code>lib/llm.php</code>, and <code>allowed_actions</code> in the server config.</li>
+                        <li>One <code>GameAdapter</code> method, its implementation, and one branch in <code>applyResult()</code>.</li>
+                        <li><code>allowed_actions</code> in the client <code>config.json</code>.</li>
+                        <li>Both copies of <code>PROTOCOL.md</code>, kept identical.</li>
+                    </ul>
+                    <p>Then prove each allowlist rejects it on its own. The shipped templates keep <code>follow_player</code> as the only action.</p>
+                </div>
+
+                <div class="card" id="DashboardPages">
+                    <h2>Add A Dashboard Page</h2>
+                    <p>Copy <code>ui/examples/blank.php</code> to <code>ui/my_page.php</code>, change its includes from <code>../common.php</code> and <code>../tmpl/</code> to <code>common.php</code> and <code>tmpl/</code>, and set its title and active key:</p>
+                    <pre><code>&lt;?php
+require __DIR__ . '/common.php';
+$title = 'My page';
+$active = 'my_page';
+require __DIR__ . '/tmpl/header.php';
+?&gt;
+&lt;section class="chim-panel"&gt;
+    &lt;h2&gt;My section&lt;/h2&gt;
+    &lt;p&gt;Add your content here.&lt;/p&gt;
+&lt;/section&gt;
+&lt;?php require __DIR__ . '/tmpl/footer.php'; ?&gt;</code></pre>
+                    <p>Add <code>'my_page' =&gt; ['My page', 'my_page.php']</code> to a group in <code>ui/navigation.php</code>. Escape output with <code>e($value)</code>, check CSRF on every state-changing POST, and never print secrets. <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a> has the full rules and an agent prompt.</p>
+                </div>
+
+                <div class="card" id="Evidence">
+                    <h2>Evidence Levels</h2>
+                    <p>Report each level separately, and claim only what you actually ran:</p>
+                    <ol>
+                        <li>Server lint, migrations twice, and <code>scripts/smoke.sh</code> in mock mode.</li>
+                        <li>The console client's smoke checks.</li>
+                        <li>Real provider calls (LLM, voice, NPC selection), each tested on its own.</li>
+                        <li>In game: talk to an NPC, see the subtitle, follow, cancel a slow reply, unload the NPC while a reply is pending, and stop the server, all without a crash or hang.</li>
+                    </ol>
+                    <p>Until level 4 passes in a specific game, do not describe the mod as working in that game.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/PROTOCOL.md">PROTOCOL.md</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                    <p><b>Next step:</b> <a href="./updates.html">Plan updates and backups</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

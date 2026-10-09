@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Mod Data and Memory | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="DataAndMemory" class="section">
+                <div class="card hero-card">
+                    <h1>Data And Memory</h1>
+                    <p>The server keeps what an NPC knows in its own PostgreSQL database. Some data is shared by every session; some belongs to one session and NPC. Knowing which is which tells you what a checkpoint restore changes.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#SharedAndSession">Shared data versus session data</a></li>
+                        <li><a href="#BiosAndFacts">NPC bios and facts</a></li>
+                        <li><a href="#Retrieval">How facts are retrieved</a></li>
+                        <li><a href="#Profiles">Profiles</a></li>
+                        <li><a href="#Memory">Memory and vector search</a></li>
+                        <li><a href="#Checkpoints">Session checkpoints</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="SharedAndSession">
+                    <h2>Shared Data Versus Session Data</h2>
+                    <div class="table-scroll" role="region" aria-label="Data scope" tabindex="0"><table>
+                        <thead><tr><th>Data</th><th>Scope</th><th>Checkpoint restore</th></tr></thead>
+                        <tbody>
+                            <tr><td>NPC bios, approved facts, profiles</td><td>Shared by every session</td><td>Unchanged</td></tr>
+                            <tr><td>Conversation history</td><td>One <code>session_id</code> + <code>npc.id</code></td><td>Rolled back</td></tr>
+                            <tr><td>Memory summary and diary</td><td>One session + NPC</td><td>Rolled back</td></tr>
+                            <tr><td>Candidate facts proposed later</td><td>One session</td><td>Deleted</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Use one <code>session_id</code> per save game and a <b>stable</b> engine ID as <code>npc.id</code>: bios, facts and history all follow that ID. History keeps the newest <code>history_limit</code> lines (0-50, default 10).</p>
+                </div>
+
+                <div class="card" id="BiosAndFacts">
+                    <h2>NPC Bios And Facts</h2>
+                    <p>Nothing is added automatically. To try two fictional NPCs (Mira = <code>npc_guide</code>, Oren = <code>npc_scout</code>) and a few facts, run once in WSL from the server folder (safe to repeat; it never overwrites your edits):</p>
+                    <pre><code>php scripts/seed_example.php</code></pre>
+                    <p>Then edit them on <b>Configuration &gt; NPC bios</b>. Facts can belong to one NPC or be global, and can be searched and edited there. Try it from the client folder:</p>
+                    <pre><code>.\example_mod.exe --say "Who are you?"
+.\example_mod.exe --say "When does the market open?"</code></pre>
+                    <p>Mira answers from her bio, then from the market fact.</p>
+                </div>
+
+                <div class="card" id="Retrieval">
+                    <h2>How Facts Are Retrieved</h2>
+                    <ul>
+                        <li>The server takes up to 8 words of 4-32 letters or digits from the player's line, minus a short stopword list.</li>
+                        <li>It runs PostgreSQL full-text search (<code>simple</code> configuration) and returns at most 3 facts for that NPC or global facts, plus the stored bio.</li>
+                        <li>This is keyword matching, not semantic search: "market" matches, but a synonym such as "bazaar" does not.</li>
+                    </ul>
+                    <p>Each turn's details in <b>Control Panel &gt; Logs</b> keep a copy of what was retrieved under "Retrieved for this request". Later fact edits do not change that copy.</p>
+                </div>
+
+                <div class="card" id="Profiles">
+                    <h2>Profiles</h2>
+                    <ol>
+                        <li>Open <b>Configuration &gt; World &amp; Behavior &gt; Profiles</b>.</li>
+                        <li>Create a profile with a name and a short system prompt. Model, reply mode and TTS voice are optional; empty fields inherit the config.</li>
+                        <li>Assign NPC IDs, or tick <b>Default</b> to apply it to every NPC without its own profile.</li>
+                    </ol>
+                    <p>In mock mode, ask <code>what is your profile?</code> and the NPC answers <code>My profile is &lt;name&gt;.</code> A profile can switch only to <code>mock</code> or LLM Studio (<code>dwemerllm</code>), so a stored profile never sends your key to another provider.</p>
+                </div>
+
+                <div class="card" id="Memory">
+                    <h2>Memory And Vector Search</h2>
+                    <p>Both are off by default. Open <b>Configuration &gt; AI &amp; Voice &gt; Memory settings</b>:</p>
+                    <ul>
+                        <li><b>Enabled</b> gives each turn this session's saved summary and newest diary entries.</li>
+                        <li><b>Automatic notes</b> and <b>Automatic fact proposals</b> call the NPC's model after each reply. With a paid provider, these extra calls cost money.</li>
+                        <li>Review on <b>Roleplay &gt; Memory</b>: edit or regenerate the summary, manage diary entries, and approve or reject candidate facts. An approved candidate becomes a fact for that NPC in every session.</li>
+                    </ul>
+                    <p>Vector search over facts is optional. Choose <code>mock</code> (hashed words, not semantic) or <code>openai</code> (any OpenAI-compatible embeddings URL), enable it, save, and press <b>Reindex</b>. Turns fall back to keyword search when the embedding call fails or a fact has no current vector. Editing a fact clears its vector.</p>
+                </div>
+
+                <div class="card" id="Checkpoints">
+                    <h2>Session Checkpoints</h2>
+                    <p>A checkpoint is a named copy of one session's conversation lines and memory notes, inside this database. It is not a backup. Run these in WSL as <code>dwemer</code> from the server folder:</p>
+                    <pre><code>php scripts/checkpoint.php save    demo-save-1 before-boss
+php scripts/checkpoint.php list    demo-save-1
+php scripts/checkpoint.php restore demo-save-1 before-boss
+php scripts/checkpoint.php delete  demo-save-1 before-boss</code></pre>
+                    <p><b>Roleplay &gt; Checkpoints</b> on the dashboard does the same, and asks for confirmation before restore and delete.</p>
+                    <ul>
+                        <li>Stop or cancel the client's pending requests first. Any turn still in flight for that session is answered <code>409 stale</code> and not saved.</li>
+                        <li>The server never reads game saves. You match a checkpoint to a save by hand, using the client's <code>session_id</code>.</li>
+                        <li>Each session keeps at most 20 checkpoints of up to 2000 lines.</li>
+                    </ul>
+                    <p>For whole-database backups, see <a href="./updates.html#BackupKinds">Updates and Backups</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#bios-knowledge-and-session-checkpoints">SETUP.md, Bios, knowledge and session checkpoints</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md#memory-and-vector-search-optional">CONNECTORS.md, Memory and vector search</a>.</p>
+                    <p><b>Next step:</b> <a href="./testing.html">Test conversations, events and logs</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

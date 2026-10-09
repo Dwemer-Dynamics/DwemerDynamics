@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Publishing Your Custom Mod | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="Publishing" class="section">
+                <div class="card hero-card">
+                    <h1>Publishing</h1>
+                    <p>A copy of the templates is a different mod. Give it its own repositories, name, database and branding, follow the GPL, and keep private data out of everything you share.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#OwnRepositories">Your own repositories</a></li>
+                        <li><a href="#Licence">Licence</a></li>
+                        <li><a href="#Branding">Your own branding</a></li>
+                        <li><a href="#Manifest">Launcher manifest</a></li>
+                        <li><a href="#IconAndBanner">Icon and banner</a></li>
+                        <li><a href="#PrivateData">Private data rules</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="OwnRepositories">
+                    <h2>Your Own Repositories</h2>
+                    <ol>
+                        <li>Open <a href="https://github.com/Dwemer-Dynamics/ExampleServer">ExampleServer</a> on GitHub and choose <b>Use this template &gt; Create a new repository</b>. Then do the same, separately, for <a href="https://github.com/Dwemer-Dynamics/ExampleMod">ExampleMod</a>. You end up with two repositories you own.</li>
+                        <li>In each new repository, create the branches you will offer yourself, for example <code>main</code> and <code>dev</code>. A new repository from a template starts with only the default branch.</li>
+                        <li>Install your server copy as in <a href="./installation.html">Installation</a>, using your own folder and database name, and run the smoke checks against your route.</li>
+                        <li>To keep taking template changes, add the template as an extra Git remote and merge by hand on your own branch. Nothing updates automatically.</li>
+                    </ol>
+                </div>
+
+                <div class="card" id="Licence">
+                    <h2>Licence</h2>
+                    <p>Both templates are licensed <b>GPL-3.0-only</b>. A project based on them must follow its terms, including offering source with any binaries you share.</p>
+                    <ul>
+                        <li>Keep <code>LICENSE</code> and every existing notice listed in each repository's <code>THIRD_PARTY_NOTICES.md</code>, including <code>LICENSES/Original-MIT.txt</code>, <code>ui/HERIKA-LICENSE</code> and <code>third_party/nlohmann/LICENSE.MIT</code>.</li>
+                        <li>Add your own copyright notice to the README and <code>THIRD_PARTY_NOTICES.md</code>.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Branding">
+                    <h2>Your Own Branding</h2>
+                    <div class="table-scroll" role="region" aria-label="Branding changes" tabindex="0"><table>
+                        <thead><tr><th>Change</th><th>Edit</th></tr></thead>
+                        <tbody>
+                            <tr><td>Project and build name</td><td>ExampleMod <code>CMakeLists.txt</code> (<code>project</code> and every <code>example_mod</code> target reference), <code>scripts/build.ps1</code> and README commands</td></tr>
+                            <tr><td>Dashboard title and icon</td><td><code>ui/tmpl/navbar.php</code> and <code>ui/images/question-mark.png</code></td></tr>
+                            <tr><td>Colours</td><td>Blue accent variables in <code>ui/css/chim-theme.css</code></td></tr>
+                            <tr><td>Database</td><td>A new lowercase <code>database.name</code>, matching the manifest's <code>database_placeholder</code></td></tr>
+                            <tr><td>Model behaviour</td><td>The system prompt in <code>openai_reply()</code> in <code>lib/llm.php</code></td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>The full map is in <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                </div>
+
+                <div class="card" id="Manifest">
+                    <h2>Launcher Manifest</h2>
+                    <div class="guide-note note-warning">
+                        <p><b>Pending integration.</b> Launcher installs from this manifest are in draft pull requests (<a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/53">Launcher #53</a>, <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/54">Launcher #54</a>, <a href="https://github.com/Dwemer-Dynamics/Dwemer-Dashboard/pull/28">Dashboard #28</a>) with unpublished Core changes. Prepare your manifest now, but tell users to install manually until a launcher release supports it.</p>
+                    </div>
+                    <p><code>dwemer-mod.json</code> sits in the repository root. Change the identity fields for your mod:</p>
+                    <pre><code>{
+  "schema_version": 1,
+  "id": "my-npc-mod",
+  "name": "My NPC Mod",
+  "description": "Short description of your mod.",
+  "project_url": "https://github.com/your-account/MyNpcModServer",
+  "dashboard_path": "ui/",
+  "health_path": "health.php",
+  "requirements": { "php": "8.2", "postgresql": true },
+  "setup": {
+    "config_template": "config/config.example.php",
+    "config_path": "config/config.php",
+    "token_placeholder": "CHANGE_ME_TOKEN",
+    "database_placeholder": "my_npc_mod",
+    "migrate_script": "scripts/migrate.php"
+  },
+  "branches": { "default": "main", "allowed": ["main", "dev"] },
+  "assets": { "icon": "ui/images/icon.png", "banner": "ui/images/banner.png" }
+}</code></pre>
+                    <ul>
+                        <li><code>id</code>: 3-32 characters of <code>a-z</code>, <code>0-9</code> and single hyphens, starting with a letter. It cannot change after install; the folder and database (<code>custom_&lt;id&gt;</code>) derive from it.</li>
+                        <li><code>project_url</code>: your own public HTTPS repository. The launcher accepts only public HTTPS URLs.</li>
+                        <li><code>database_placeholder</code>: change it together with the database name in <code>config/config.example.php</code>.</li>
+                        <li><code>branches</code>: only the manifest on the default branch decides which branches are offered, and every listed branch must exist. Without it, only the default branch is offered.</li>
+                    </ul>
+                    <p>Every copy must also keep <code>config/config.php</code> untracked (a repository that tracks it is rejected), keep <code>'CHANGE_ME_TOKEN'</code> and the database name each exactly once as quoted strings in the template, keep <code>scripts/migrate.php</code> safe to repeat, and add no symbolic links or submodules.</p>
+                </div>
+
+                <div class="card" id="IconAndBanner">
+                    <h2>Icon And Banner</h2>
+                    <ul>
+                        <li>Commit the image files and the <code>assets</code> entry together. Paths are relative to the repository root and must point to tracked <code>.png</code>, <code>.jpg</code> or <code>.jpeg</code> files; links, <code>..</code>, hidden folders and web addresses are rejected.</li>
+                        <li>Use a square icon (shown at 26 x 26) and a wide banner of about 2:1. Keep each file under 4 MB.</li>
+                        <li>Pictures come from the installed version, so users see new ones only after an update.</li>
+                        <li>Both are optional. Replace the template's question-mark icon with your own.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="PrivateData">
+                    <h2>Private Data Rules</h2>
+                    <p>Never commit, package or publish:</p>
+                    <ul>
+                        <li><code>config/config.php</code>, <code>config/config.php.lock</code> and <code>config/.config-*.php</code> (token, database password, API keys).</li>
+                        <li>The client <code>config.json</code> and the paired <code>example-client.json</code>.</li>
+                        <li>Backup folders, <code>*.dump</code> files and logs.</li>
+                    </ul>
+                    <p>Publish the server as its Git repository, or a <code>git archive</code> of a commit, which contains committed files only. Ship the client executable with <code>config.default.json</code>, never with a <code>config.json</code> that holds a token. Keep public docs generic: no personal names, local paths, private endpoints or credential values.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md#packaging-licensing-and-private-data">START_HERE.md, Packaging, licensing and private data</a>.</p>
+                    <p><b>Back to:</b> <a href="./index.html">Custom Mod Guide overview</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

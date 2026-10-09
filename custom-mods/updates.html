@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Mod Updates and Backups | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Installation</a>
+                <a href="./configuration.html">Configuration</a>
+                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./porting.html">Porting</a>
+                <a href="./updates.html">Updates and Backups</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="Updates" class="section">
+                <div class="card hero-card">
+                    <h1>Updates And Backups</h1>
+                    <p>Back up before every update, keep your settings in the private config, and keep your code changes in your own repository. Migrations only move forward.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#Versions">Versions</a></li>
+                        <li><a href="#BackupKinds">Backups versus checkpoints</a></li>
+                        <li><a href="#Update">Update a manual install</a></li>
+                        <li><a href="#Migrations">Migrations</a></li>
+                        <li><a href="#Restore">Restore a backup</a></li>
+                        <li><a href="#Branches">Branch and schema compatibility</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="Versions">
+                    <h2>Versions</h2>
+                    <p><code>health.php</code> and <b>Control Panel &gt; Diagnostics</b> report several separate versions. Never treat one as another:</p>
+                    <div class="table-scroll" role="region" aria-label="Versions" tabindex="0"><table>
+                        <thead><tr><th>Name</th><th>Current</th><th>Set in</th></tr></thead>
+                        <tbody>
+                            <tr><td>Server release</td><td><code>0.1.0</code></td><td><code>lib/version.php</code> (<code>SERVER_VERSION</code>)</td></tr>
+                            <tr><td>Client release</td><td><code>0.1.0</code></td><td>ExampleMod <code>CMakeLists.txt</code> (<code>project(... VERSION)</code>)</td></tr>
+                            <tr><td>Protocol</td><td><code>1</code></td><td>Both <code>PROTOCOL.md</code> files and both sides' code</td></tr>
+                            <tr><td>Baseline</td><td><code>baseline-1</code></td><td>A template feature-set label, not a release</td></tr>
+                            <tr><td>Schema</td><td><code>007_connector_calls</code></td><td><code>sql/</code> files and <code>SCHEMA_MIGRATIONS</code> in <code>lib/app.php</code></td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Bump the protocol only for a change a version-1 peer would misread, and then in both repositories together.</p>
+                </div>
+
+                <div class="card" id="BackupKinds">
+                    <h2>Backups Versus Checkpoints</h2>
+                    <div class="table-scroll" role="region" aria-label="Backup kinds" tabindex="0"><table>
+                        <thead><tr><th>Kind</th><th>Contains</th><th>Where</th></tr></thead>
+                        <tbody>
+                            <tr><td>Full backup: <code>sudo bash scripts/backup.sh</code></td><td>The whole database <b>and</b> <code>config/config.php</code></td><td><code>/home/dwemer/example-ai-server-backups/&lt;time&gt;/</code>, outside the web root</td></tr>
+                            <tr><td>Dashboard backup: <b>Control Panel &gt; Backups</b></td><td>The database only, no config</td><td><code>backup_dir</code> from the config, or a temporary folder that may be emptied on restart</td></tr>
+                            <tr><td>Session checkpoint: <b>Roleplay &gt; Checkpoints</b></td><td>One session's conversation lines and memory notes</td><td>Inside the same database</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>A checkpoint is not a backup: it is lost with the database. Backup folders contain your token and keys; keep them private and out of Git. Checkpoints are covered in <a href="./data-and-memory.html#Checkpoints">Data and Memory</a>.</p>
+                </div>
+
+                <div class="card" id="Update">
+                    <h2>Update A Manual Install</h2>
+                    <p>In WSL:</p>
+                    <pre><code>cd /var/www/html/ExampleServer
+sudo bash scripts/backup.sh
+sudo bash scripts/update.sh</code></pre>
+                    <ul>
+                        <li><code>update.sh</code> refuses tracked local edits, backs up the database and config, fast-forwards only, then migrates.</li>
+                        <li>It stops if your branch has no upstream or has diverged; merge by hand.</li>
+                        <li>It stops if the update would start tracking a file you have privately, such as <code>config/config.php</code>.</li>
+                        <li>It never resets, cleans or deletes anything, and never restores anything itself.</li>
+                    </ul>
+                    <p>A manual install follows the branch it was cloned from. The launcher's Update and Switch commands are part of the <a href="./installation.html#LauncherRoute">pending launcher route</a>.</p>
+                </div>
+
+                <div class="card" id="Migrations">
+                    <h2>Migrations</h2>
+                    <ul>
+                        <li><code>scripts/migrate.php</code> (run by <code>install.sh</code> and <code>update.sh</code>) applies missing migrations in order, one transaction per file. A second run applies nothing.</li>
+                        <li>If one fails, that file is rolled back and earlier ones stay. <code>update.sh</code> exits <code>3</code> and prints the backup folder. Fix the cause and run <code>sudo -u dwemer php scripts/migrate.php</code> again, or restore that backup.</li>
+                        <li>There are no down migrations. To go back, restore a backup.</li>
+                        <li>A database with migrations the code does not know answers <code>503 schema_too_new</code>. Update the code; never downgrade a database by hand.</li>
+                    </ul>
+                    <p>To add one, create a new <code>sql/NNN_name.sql</code> and append its name to <code>SCHEMA_MIGRATIONS</code>. Never edit an applied file.</p>
+                </div>
+
+                <div class="card" id="Restore">
+                    <h2>Restore A Backup</h2>
+                    <p>To inspect a backup without touching the live database, restore it into a disposable one and compare:</p>
+                    <pre><code>sudo -u postgres createdb --owner=dwemer --template=template0 example_ai_restore_check
+sudo -u postgres pg_restore --no-owner --role=dwemer -d example_ai_restore_check &lt; /path/to/backup/YOUR_DATABASE.dump
+sudo -u postgres psql -d example_ai_restore_check -c 'SELECT count(*) FROM ex_turns'
+sudo -u postgres dropdb example_ai_restore_check</code></pre>
+                    <p>The dashboard's <b>Verify restore</b> does a similar check into a new <code>&lt;database&gt;_verify_&lt;random&gt;</code> database; remove it yourself with <code>dropdb</code> when finished. To really restore, stop the client first, then run this. It <b>overwrites</b> that database:</p>
+                    <pre><code>sudo -u postgres pg_restore --clean --if-exists -d YOUR_DATABASE &lt; /path/to/backup/YOUR_DATABASE.dump</code></pre>
+                    <p>Use this copy's configured database name (default <code>example_ai_mod</code>). Restore the config file from a full backup separately if needed.</p>
+                </div>
+
+                <div class="card" id="Branches">
+                    <h2>Branch And Schema Compatibility</h2>
+                    <p>If you offer <code>main</code> and <code>dev</code>, users can move between them in both directions, so both branches must work with the same database:</p>
+                    <ul>
+                        <li>Keep the same manifest <code>id</code> and <code>config_path</code> on every offered branch.</li>
+                        <li>Make migrations additive and safe to run twice (<code>CREATE TABLE IF NOT EXISTS</code>, <code>ADD COLUMN IF NOT EXISTS</code>). Never drop or rename what another offered branch still reads.</li>
+                        <li>Add a new migration file and its <code>SCHEMA_MIGRATIONS</code> entry to <b>both</b> branches before either offers it. A migration only on <code>dev</code> makes <code>main</code> refuse that database with <code>schema_too_new</code>.</li>
+                    </ul>
+                    <div class="guide-note note-warning">
+                        <p><b>Template updates and failed switches.</b> Your copy does not follow template changes; check each merged change against both branches before offering it. If a launcher branch switch fails, the launcher may put the previous code back, but it does not undo migrations already applied to the database. Restore a backup if the old code then refuses it.</p>
+                    </div>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#6-back-up-and-update">SETUP.md, Back up and update</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/LAUNCHER_CUSTOM_MOD.md#branches-main-and-dev">LAUNCHER_CUSTOM_MOD.md, Branches</a>.</p>
+                    <p><b>Next step:</b> <a href="./publishing.html">Publish your own mod</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
