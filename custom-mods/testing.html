@@ -120,7 +120,7 @@
                         <li>Before it answers, type <code>/cancel</code>, <code>/npc scout</code>, <code>/unload</code> or <code>/session other-save</code>.</li>
                     </ol>
                     <p>The reply and its action are dropped and the server is told to cancel; Logs shows the turn as <code>cancelled</code> or <code>superseded</code>. In the dashboard tester, <b>Cancel</b> or changing the NPC does the same. Cancellation may not stop computation at the provider, and failed requests are never retried automatically.</p>
-                    <p>Server check in WSL, with a mock delay of 2 or more: <code>SMOKE_STALE=1 bash scripts/smoke.sh</code>. Set the delay back to 0 afterwards.</p>
+                    <p>Server check in WSL, with a mock delay of 2 or more: <code>SMOKE_STALE=1 bash scripts/smoke.sh http://127.0.0.1:19000/ExampleServer</code>, using your own server address. Set the delay back to 0 afterwards.</p>
                 </div>
 
                 <div class="card" id="Troubleshooting">
@@ -128,16 +128,19 @@
                     <div class="table-scroll" role="region" aria-label="Troubleshooting" tabindex="0"><table>
                         <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
                         <tbody>
-                            <tr><td><code>health.php</code> 404</td><td>Where Apache serves port 8081 from, and your folder name.</td></tr>
+                            <tr><td><code>health.php</code> 404 or 403</td><td>Preview (19000): the folder must be <code>/var/www/html/ExampleServer</code> or <code>/var/www/html/custom-mods/&lt;id&gt;</code>, and <code>sudo ddistro_custom_mod setup-web</code> must have succeeded. Released (8081): where Apache serves port 8081 from, and your folder name.</td></tr>
+                            <tr><td>Nothing answers on port 19000</td><td>Run <code>sudo ddistro_custom_mod setup-web</code>. If <code>setup-web</code> is unavailable or rejected as an unknown command, your Core does not include the preview; use port 8081. See <a href="./installation.html#Ports">Ports and branches</a>.</td></tr>
+                            <tr><td><code>setup-web</code> says the port is in use</td><td>Nothing was changed. Choose another <code>CUSTOM_MODS_PORT</code> from 19000 to 19999 in <code>/etc/dwemerdistro_services.conf</code>, run it again, then pair again.</td></tr>
                             <tr><td><code>500 server_not_configured</code></td><td><code>config/config.php</code> missing, unreadable, or token still the placeholder. Run the installer again.</td></tr>
                             <tr><td><code>503 database_unavailable</code></td><td>PostgreSQL running, and the database settings in the config.</td></tr>
                             <tr><td><code>503 not_migrated</code></td><td>Run <code>sudo bash scripts/install.sh</code> again.</td></tr>
-                            <tr><td>Client <code>WinHTTP error 12029</code></td><td>Server not reachable at <code>server_url</code>.</td></tr>
+                            <tr><td>Client <code>WinHTTP error 12029</code></td><td>Server not reachable at <code>server_url</code>. After a port change, pair again or edit <code>server_url</code>.</td></tr>
                             <tr><td>Client <code>401 unauthorized</code></td><td>Token in <code>config.json</code> does not match the server. Pair again.</td></tr>
                         </tbody>
                     </table></div>
-                    <p>Also check that Apache does not serve your Git history. <code>200</code> here means anyone who can reach the port can download it:</p>
-                    <pre><code>curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8081/ExampleServer/.git/HEAD</code></pre>
+                    <p>Also check that Apache does not serve your Git history. <code>200</code> here means anyone who can reach the port can download it. Check port 8081 too, because it also serves <code>/var/www/html</code>:</p>
+                    <pre><code>curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:19000/ExampleServer/.git/HEAD
+curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8081/ExampleServer/.git/HEAD</code></pre>
                     <p>When sharing logs for help, include request IDs and error codes, never tokens or keys.</p>
                     <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md#troubleshooting-by-request-id">START_HERE.md, Troubleshooting by request ID</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#troubleshooting">SETUP.md, Troubleshooting</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md#smoke-checks">ExampleMod smoke checks</a>.</p>
                     <p><b>Next step:</b> <a href="./porting.html">Port the client to your engine</a>.</p>

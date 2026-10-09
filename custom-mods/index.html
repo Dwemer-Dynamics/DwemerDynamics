@@ -95,22 +95,26 @@
                 <div class="card" id="Routes">
                     <h2>Choose An Install Route</h2>
                     <div class="table-scroll" role="region" aria-label="Install routes" tabindex="0"><table>
-                        <thead><tr><th>Route</th><th>Status</th><th>Server folder</th></tr></thead>
+                        <thead><tr><th>Route</th><th>Status</th><th>Server address</th></tr></thead>
                         <tbody>
-                            <tr><td>Manual install in the DwemerDistro WSL shell</td><td>Available now. This guide's primary route.</td><td><code>/var/www/html/ExampleServer</code></td></tr>
-                            <tr><td>Launcher <b>Mods &gt; Custom mods</b></td><td>Pending. Not in a released launcher.</td><td><code>/var/www/html/custom-mods/example-server</code></td></tr>
+                            <tr><td>Manual install, released templates (<code>main</code> or <code>dev</code>)</td><td>Available now.</td><td><code>http://127.0.0.1:8081/ExampleServer</code></td></tr>
+                            <tr><td>Manual install, port 19000 preview</td><td>Tested preview. Needs a Core built from draft pull requests.</td><td><code>http://127.0.0.1:19000/ExampleServer</code></td></tr>
+                            <tr><td>Launcher <b>Mods &gt; Custom mods</b></td><td>Pending. Not in a released launcher.</td><td><code>http://127.0.0.1:19000/custom-mods/example-server/ui/</code></td></tr>
                         </tbody>
                     </table></div>
-                    <div class="guide-note note-info">
-                        <p><b>Launcher status:</b> custom-mod installation is in draft pull requests <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/53">Launcher #53</a>, <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/54">Launcher #54</a> and <a href="https://github.com/Dwemer-Dynamics/Dwemer-Dashboard/pull/28">Dashboard #28</a>, and depends on DwemerDistro Core changes that are not yet published. Use the manual route until a released launcher includes it.</p>
+                    <div class="guide-note note-warning">
+                        <p><b>Port 19000 preview:</b> DwemerDistro gives all custom PHP mods one shared port on this PC, <code>CUSTOM_MODS_PORT</code> (default 19000, allowed 19000-19999). Each mod has its own path and database, and official ports such as 8081 do not change. This is not released. It needs a Core built from draft <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Core/pull/29">Core #29</a> then <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Core/pull/30">Core #30</a>, which <b>Update Distro</b> does not fetch, and the templates' <code>codex/configurable-custom-port</code> branch (<a href="https://github.com/Dwemer-Dynamics/ExampleServer/pull/1">ExampleServer #1</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleMod/pull/1">ExampleMod #1</a>). See <a href="./installation.html#Ports">Ports and branches</a>.</p>
                     </div>
-                    <p>Either way, the console client is built separately on Windows.</p>
+                    <div class="guide-note note-info">
+                        <p><b>Launcher status:</b> custom-mod installation is in draft pull requests <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/53">Launcher #53</a>, <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/pull/54">Launcher #54</a> and <a href="https://github.com/Dwemer-Dynamics/Dwemer-Dashboard/pull/28">Dashboard #28</a>, and depends on the same draft Core changes. Use a manual route until a released launcher includes it.</p>
+                    </div>
+                    <p>Every route builds the console client separately on Windows.</p>
                 </div>
 
                 <div class="card" id="GuideMap">
                     <h2>Guide Map</h2>
                     <ol>
-                        <li><a href="./installation.html">Installation</a>: install the server, build the client and pair them.</li>
+                        <li><a href="./installation.html">Installation</a>: ports, installing the server, building the client and pairing them.</li>
                         <li><a href="./configuration.html">Configuration</a>: LLM, API keys, PocketTTS, Parakeet and optional NPC selection.</li>
                         <li><a href="./data-and-memory.html">Data and Memory</a>: NPC bios, facts, profiles, memory and session checkpoints.</li>
                         <li><a href="./testing.html">Testing</a>: the web conversation tester, events, logs, actions and cancellation.</li>
@@ -130,6 +134,7 @@
                         <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a>: dashboard pages and adding your own.</li>
                         <li><a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md">ExampleMod README</a>: client commands, settings and smoke checks.</li>
                     </ul>
+                    <p>These links show the released <code>main</code> branch (port 8081). The port 19000 preview instructions are on each template's preview branch: <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/codex/configurable-custom-port/SETUP.md">SETUP.md (preview)</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/codex/configurable-custom-port/README.md">ExampleMod README (preview)</a>.</p>
                     <p><b>Next step:</b> <a href="./installation.html">Install the server and client</a>.</p>
                 </div>
             </section>

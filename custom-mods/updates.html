@@ -108,7 +108,10 @@ sudo bash scripts/update.sh</code></pre>
                         <li>It stops if the update would start tracking a file you have privately, such as <code>config/config.php</code>.</li>
                         <li>It never resets, cleans or deletes anything, and never restores anything itself.</li>
                     </ul>
-                    <p>A manual install follows the branch it was cloned from. The launcher's Update and Switch commands are part of the <a href="./installation.html#LauncherRoute">pending launcher route</a>.</p>
+                    <p>A manual install follows the branch it was cloned from, so a preview clone stays on <code>codex/configurable-custom-port</code> and a released clone stays on <code>main</code> or <code>dev</code>. The launcher's Update and Switch commands are part of the <a href="./installation.html#LauncherRoute">pending launcher route</a>.</p>
+                    <div class="guide-note note-info">
+                        <p><b>DwemerDistro updates and the custom mods port.</b> On a Core built from the port 19000 drafts, <b>Update Distro</b> keeps your <code>CUSTOM_MODS_PORT</code> and other service ports. It does not fetch unmerged pull requests, so it will not add the preview to a normal DwemerDistro. If you change the port, run <code>sudo ddistro_custom_mod setup-web</code> and pair every client again. See <a href="./installation.html#Ports">Ports and branches</a>.</p>
+                    </div>
                 </div>
 
                 <div class="card" id="Migrations">
