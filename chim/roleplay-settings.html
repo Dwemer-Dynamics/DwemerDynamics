@@ -112,6 +112,7 @@
                         <li><b>Concrete references:</b> Held and picked-up objects include a RefID when Skyrim exposes one, while stacked inventory and container entries use their shared BaseID.</li>
                         <li><b>VR held items:</b> With HIGGS, CHIM can tell NPCs what the player is actively holding in either hand and keep that state separate from ordinary inventory.</li>
                         <li><b>Handing items over:</b> When CHIM recognizes what you are holding, you can give that item to an NPC and have them react to it. This works in both flatscreen and VR.</li>
+                        <li><b>Acting on the world:</b> Use the <a href="./ingame-settings.html#ChimInteract">CHIM Interact</a> power to describe what you do to a person or object you aim at, optionally with an item or magic.</li>
                         <li><b>Pickup noise control:</b> The global minimum-value setting decides which collected items are important enough to create an event for the AI.</li>
                     </ul>
                 </div>
@@ -343,6 +344,23 @@
                         <li><b>What can change:</b> Personality, goals, speech style and occupation.</li>
                         <li><b>Check the result:</b> Open the NPC profile afterward and review the changes before continuing the scene.</li>
                         <li><b>Quest models:</b> Global Connectors includes separate Quest Creation and Quest Engine choices for creating and running AI quests.</li>
+                    </ul>
+                </div>
+                <div class="card" id="SmartWait">
+                    <h3>Smart Wait</h3>
+                    <p>Use Smart Wait to describe what happens while time passes, then let the Narrator tell the scene.</p>
+                    <ol>
+                        <li>Open CHIM Chat and choose <b>Smart Wait</b> from the Mode list. It has no typed shortcut symbol and is not on the Mode Wheel.</li>
+                        <li>Describe what happens while you wait, such as the camp settling down for the night, and send it. You do not need to target an NPC.</li>
+                        <li>Skyrim's Wait menu opens. Choose how long to wait as usual.</li>
+                    </ol>
+                    <ul>
+                        <li><b>Before you start:</b> The <b>Summaries</b> connector must be set up and available under Global Connectors, and the Narrator must have loaded with CHIM.</li>
+                        <li><b>Narration:</b> The scene is prepared in the background and the Narrator describes it once it is ready, which can be after the wait has finished.</li>
+                        <li><b>Normal waiting rules:</b> If Skyrim would not let you wait, such as with enemies nearby, the Wait menu does not open.</li>
+                        <li><b>One scene at a time:</b> Wait for the current scene before starting another.</li>
+                        <li><b>Loading a save:</b> Loading an earlier save discards a scene that has not been told yet.</li>
+                        <li><b>Afterwards:</b> Chat returns to Standard mode after each Smart Wait message.</li>
                     </ul>
                 </div>
 </span>
