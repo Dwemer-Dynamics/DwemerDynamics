@@ -153,6 +153,10 @@
                     <ul>
                         <li><b>Bored Event Timer (seconds):</b> How often bored-style events can potentially fire.</li>
                     </ul>
+                    <p><b>General Behavior</b></p>
+                    <ul>
+                        <li><b>BFA Facial Animations:</b> Optional and off by default. When on, CHIM dialogue faces are animated by Better Facial Animations. When off, CHIM uses its own lip sync and expressions. This needs a compatible version of Better Facial Animations installed. If CHIM does not detect it, the MCM shows <b>Not detected</b> and the Prisma settings menu hides the option.</li>
+                    </ul>
                     <p><b>NPC Behavior</b></p>
                     <p>
                         These settings change how NPCs physically place themselves around you and whether CHIM tries to avoid breaking delicate scenes.
@@ -252,7 +256,8 @@
                     </ul>
                     <p><b>CHIM Chat controls</b></p>
                     <ul>
-                        <li><b>Mode:</b> Switch between Standard, Whisper, Close, Shout, Narrator, Director, Cheat Mode, Auto Chat, and event-injection choices.</li>
+                        <li><b>Mode:</b> Switch between Standard, Whisper, Close, Shout, Narrator, Director, Cheat Mode, Hypnosis, Smart Wait, Auto Chat, and event-injection choices.</li>
+                        <li><b>Smart Wait:</b> Describe what happens while you wait, then choose how long to wait in Skyrim's Wait menu. The Narrator tells the scene once it is ready. See <a href="./roleplay-settings.html#SmartWait">Smart Wait</a> for requirements and limits.</li>
                         <li><b>Close:</b> A private, close-range conversation. Only characters very close to you can hear and respond.</li>
                         <li><b>Profile and LLM:</b> View the targeted NPC's profile, assign a different one, choose a conversation model, or use the profile's Random LLM setting.</li>
                         <li><b>Rechat Mode:</b> Change Tight, Conversational, Group, or Random follow-up behavior without opening the web interface.</li>
@@ -337,6 +342,24 @@
                     <ul>
                         <li><b>Send faction and location info:</b> Sends faction and location data to the server so travel and world-awareness features work better. The in-game help says this usually only needs to be done once per playthrough.</li>
                         <li><b>Send all voice samples to server:</b> Uploads all available voice samples so the server has the voice data it expects.</li>
+                    </ul>
+                </div>
+                <div class="card" id="ChimInteract">
+                    <h3>CHIM Interact</h3>
+                    <p>
+                        <b>What this does:</b> CHIM Interact lets you describe something you do to a person or object in the world, such as handing over an item, casting a spell on someone, or opening a container. CHIM works out which supported actions fit, runs them in game, and the Narrator describes what actually happened.
+                    </p>
+                    <ol>
+                        <li><b>Find the power:</b> The <b>CHIM Interact</b> lesser power is added under Powers once CHIM connects after a new game or save load. It can be used repeatedly. Its panel needs Prisma UI.</li>
+                        <li><b>Aim and cast:</b> Aim at a loaded actor or object and cast the power. The CHIM Interact panel opens for that target.</li>
+                        <li><b>Add an item or magic (optional):</b> <b>Item</b> starts as <b>No item</b>; use its <b>Choose&hellip;</b> button to pick an inventory item, and an amount for stacks. <b>Magic</b> starts as <b>No magic</b>; its own <b>Choose&hellip;</b> button picks a known spell, power or shout.</li>
+                        <li><b>Describe and submit:</b> Type what you want to do under <b>What do you want to do?</b>, then press <b>Enter</b> or select <b>Interact</b>. <b>Shift+Enter</b> adds a new line. <b>Esc</b> closes an open picker first, then the panel.</li>
+                    </ol>
+                    <ul>
+                        <li><b>Results:</b> Only supported actions can run, and Skyrim still decides the outcome. Targets can resist, be immune or be protected, so the Narrator reports what really happened, including failures.</li>
+                        <li><b>Selected items:</b> A selected item can be used as a prop in the scene. It is only given away, dropped or used up when that is the action that actually runs.</li>
+                        <li><b>No extra confirmation:</b> Submitting the panel authorizes the action. This is separate from the <b>Require Confirmation</b> setting for ordinary AI actions.</li>
+                        <li><b>NPC reactions:</b> When the target is a living NPC active in CHIM, they can respond after the Narrator finishes.</li>
                     </ul>
                 </div>
                 <div class="card" id="InteractionSwitch">

@@ -475,15 +475,20 @@ find . -name '*.php' -print0 | xargs -0 -n1 php -l</code></pre>
                     <p>
                         Read <a href="./modders-guide.html#ActionEditor">Action Editor</a> for the CSV columns, dispatch types, and script proxy limits. The <a href="./modders-guide.html#ChimNffExample">CHIM-NFF example</a> shows a complete action row and Papyrus bridge.
                     </p>
-                    <h3 id="InteractExtensions">Interact extensions (unstable only)</h3>
+                    <h3 id="InteractExtensions">Interact actions</h3>
                     <p>
-                        Work to let plugins add their own Interact actions has been merged into the <b>unstable</b> branches of <a href="https://github.com/Dwemer-Dynamics/HerikaServer/pull/168" target="_blank" rel="noopener noreferrer">HerikaServer</a> and <a href="https://github.com/Dwemer-Dynamics/CHIM/pull/265" target="_blank" rel="noopener noreferrer">CHIM</a>. It lets a server plugin declare actions in <code>interact_actions.php</code>, and a Skyrim mod register Papyrus-handled actions.
+                        Plugins can add their own actions to <a href="./ingame-settings.html#ChimInteract">CHIM Interact</a>. They then go through the same planning, result reporting, and narration as CHIM's built-in actions. There are two kinds:
                     </p>
                     <ul>
-                        <li>It is not in the production release. Do not ship a plugin that depends on it to players.</li>
-                        <li>Papyrus-handled actions need a matching pair of unstable CHIM and HerikaServer builds.</li>
-                        <li>The API may still change. Read the pull requests and their documentation before experimenting.</li>
+                        <li><b>Server actions:</b> combine CHIM's existing Interact effects. Declare them in <code>interact_actions.php</code> directly inside your plugin folder (<code>ext/&lt;name&gt;/</code>). The file only returns data and needs no game script.</li>
+                        <li><b>Game actions:</b> run a new mechanic from your Skyrim mod's Papyrus handler. Register them with <code>RegisterAction</code> in CHIM's <code>CHIMInteractExtensions</code> script, receive the <code>OnCHIMInteractAction</code> event, and report the result with <code>CompleteAction</code>.</li>
+                        <li><b>Register on every load:</b> registrations last only for the current game load. Subscribe to the <code>CHIM_InteractActionsReady</code> mod event and register again whenever it arrives.</li>
+                        <li><b>Report the actual result:</b> report <code>succeeded</code> only for a change your handler actually observed. Otherwise report <code>failed</code>, <code>skipped</code>, or <code>unknown</code>. CHIM labels plugin-reported results in the Event Log and narration.</li>
+                        <li><b>Paired requirements:</b> a game action needs both a CHIM mod and a HerikaServer that support Interact plugin actions. State the versions you tested in your <a href="#SharingYourPlugin">README</a>.</li>
                     </ul>
+                    <p>
+                        The developer guides cover descriptor fields, limits, return codes, and complete examples: <a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/dev/docs/agent-guide.md#interact-plugin-actions" target="_blank" rel="noopener noreferrer">HerikaServer Interact plugin actions</a> and <a href="https://github.com/Dwemer-Dynamics/CHIM/blob/dev/AIAgent/docs/CHIM/agent-guide.md#plugin-actions" target="_blank" rel="noopener noreferrer">CHIM plugin actions</a>.
+                    </p>
                 </div>
 
                 <div class="card" id="SharingYourPlugin">
