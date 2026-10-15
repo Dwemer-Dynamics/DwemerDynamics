@@ -92,7 +92,10 @@
                         Those five file types are the current server-imported data mod formats. They are uploaded by the plugin to the CHIM server automatically, so the player does not need to rebuild them by hand in HerikaServer.
                     </p>
                     <p>
-                        The current CHIM download includes sample CSV files you can use as a starting point. Get them from the <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">CHIM Nexus files page</a>.
+                        These names are filename <b>suffixes</b>, not exact filenames. For example, an action file is named something like <code>my_mod_actions.csv</code> and placed in <code>Data/CHIM</code>; any file ending in <code>_actions.csv</code> there is imported as action data.
+                    </p>
+                    <p>
+                        Look for data-mod samples on the <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">CHIM Nexus files page</a>. For actions, use the <a href="#ActionCsvExample">complete action CSV example</a> below; you do not need to find a separate sample download.
                     </p>
                     <h3>Voice Files</h3>
                     <ul>
@@ -157,7 +160,7 @@
                         A CHIM plugin is a server-side extension that lives inside the CHIM server's <code>ext</code> folder. A plugin can add its own web page, add or change prompt behavior, expose new AI actions, run its own helper service, or read CHIM data to build its own tools.
                     </p>
                     <p>
-                        In practice, this means plugins are the main way to add new <b>server-side</b> features without changing the whole server. Maintained examples include <b>CHIM-Custom</b>, <b>CHIM-Twitch-Bot</b>, and <b>CHIM-MindMap</b>. If you only need to ship new biographies, Oghma data, descriptions, or action definitions, that is usually a <code>Data/CHIM</code> data-mod job instead of a full <code>ext</code> plugin.
+                        In practice, this means plugins are the main way to add new <b>server-side</b> features without changing the whole server. Maintained examples include <b>CHIM-Custom</b>, <b>CHIM-Twitch-Bot</b>, and <b>CHIM-MindMap</b>. CHIM-Custom covers survival and cleanliness integrations; it is not a repository of sample actions. If you only need to ship new biographies, Oghma data, descriptions, or action definitions, that is usually a <code>Data/CHIM</code> data-mod job instead of a full <code>ext</code> plugin.
                     </p>
 
                     <h3>Where Plugins Live</h3>
@@ -571,7 +574,7 @@ foreach ($argv as $arg) {
 
                     <h3>How Custom Actions Are Shipped</h3>
                     <p>
-                        Custom actions are normally shipped as <code>_actions.csv</code> files inside <code>Data/CHIM</code>. On startup, the CHIM plugin scans that folder, finds files ending in <code>_actions.csv</code>, and uploads them as <code>custom_action_import</code> data. The server then imports those rows into the custom action catalog.
+                        Custom actions are normally shipped as CSV files whose names end in <code>_actions.csv</code>, such as <code>my_mod_actions.csv</code>, inside <code>Data/CHIM</code>. On startup, the CHIM plugin scans that folder, finds files ending in <code>_actions.csv</code>, and uploads them as <code>custom_action_import</code> data. The server then imports those rows into the custom action catalog.
                     </p>
                     <p>
                         In practice, this means a modder can ship action definitions as part of a normal mod install. The player installs the mod, launches CHIM, and the actions appear automatically if the CSV is valid.
@@ -593,6 +596,22 @@ foreach ($argv as $arg) {
                         <li><b><code>metadata</code>:</b> extra action wiring such as dispatch type, source, follow-up settings, and bridge details.</li>
                         <li><b><code>import_version</code>:</b> optional numeric version for imported action rows. A row only overwrites an existing imported custom row when its version is higher.</li>
                         <li><b><code>script_proxy_program</code>:</b> optional server-side runtime logic for script-proxy actions.</li>
+                    </ul>
+
+                    <h3 id="ActionCsvExample">Complete Action CSV Example</h3>
+                    <p>
+                        This is a complete <code>my_mod_actions.csv</code>: one header line and one action row. It defines a server-side script-proxy action that saves a phrase, supplied as an action argument, into a namespaced NPC metadata key through <code>npc_metadata_updates</code>.
+                    </p>
+                    <pre style="white-space: pre-wrap; overflow-wrap: anywhere;"><code>code_name,action_name,description,return_message,available_to_npc,available_to_followers,available_to_narrator,is_activated,game_function,parameters_json,metadata,import_version,script_proxy_program
+MyModPhraseKeeper_RememberPhrase,MyMod_Remember_Phrase,"Use only when #PLAYER_NAME# explicitly asks you to remember a short phrase. Put that phrase in the phrase argument.","#HERIKA_NAME# commits a phrase to memory.",true,true,false,true,true,"{""type"":""object"",""properties"":{""phrase"":{""type"":""string"",""description"":""The short phrase to remember""}},""required"":[""phrase""]}","{""dispatch"":""script_proxy"",""source"":""MyMod""}",1,"{""npc_metadata_updates"":{""mymod_phrase_keeper"":{""phrase"":""{{parameters.phrase}}"",""saved_gamets"":""{{game_ts}}""}}}"</code></pre>
+                    <ul>
+                        <li><b>One physical line each:</b> copy both lines into <code>Data/CHIM/my_mod_actions.csv</code>. The display wraps long lines to fit the page, but the saved header and row must each stay on a single line. Do not insert line breaks or pretty-print the JSON inside the CSV.</li>
+                        <li><b>Doubled quotes:</b> JSON columns are wrapped in double quotes, so every double quote inside the JSON is written twice (<code>""</code>).</li>
+                        <li><b>Unique names:</b> give <code>code_name</code>, <code>action_name</code> and the metadata key (<code>mymod_phrase_keeper</code> here) a prefix for your mod so they cannot collide with built-in or other mods' rows.</li>
+                        <li><b>Arguments:</b> <code>{{parameters.phrase}}</code> reads the <code>phrase</code> field from the action arguments. The AI writes that argument when it chooses to call the action. It is not an automatic, exact capture of what the player said.</li>
+                        <li><b>Metadata visibility:</b> the saved value is stored with the NPC on the server. It is not automatically added to the AI's prompt; something else, such as a server plugin, must read it and inject it if you want the AI to see it.</li>
+                        <li><b>Updating:</b> once a row has been imported, a changed row is only applied when its <code>import_version</code> is higher than the imported one. Raise it (for example from <code>1</code> to <code>2</code>) each time you ship a change.</li>
+                        <li><b>Finding it:</b> after the CHIM plugin has started a session and uploaded the file, open the Action Editor and look for <code>MyMod_Remember_Phrase</code>.</li>
                     </ul>
 
                     <h3>Two Main Ways To Build A Custom Action</h3>
@@ -621,6 +640,9 @@ foreach ($argv as $arg) {
                     <h3>Existing Script Proxy Actions</h3>
                     <p>
                         Current built-in script-proxy actions include <code>Drink</code>, <code>Make_A_Toast</code>, <code>Start_Ritual_Ceremony</code>, and <code>End_Ritual_Ceremony</code>. They show the main patterns Script Proxy supports: choose a case from context, send command-builder messages, write bookkeeping rows, and update NPC metadata.
+                    </p>
+                    <p>
+                        These built-in rows come from <code>HerikaServer/data/core_action_seed.sql</code>, not from a CSV file. The snippets below are partial <code>script_proxy_program</code> fragments, not CSV rows; see the <a href="#ActionCsvExample">complete action CSV example</a> for a full importable file.
                     </p>
 
                     <p><b>Drink: choose behavior from actor state</b></p>
@@ -768,6 +790,20 @@ EndFunction</code></pre>
                     <p>
                         This is what the shared follow-up config fields in the Action Editor are for. They do not make the gameplay action itself happen, and they are not required for CHIM to record the action result. They only control whether CHIM should ask the LLM for another in-character response <b>after</b> the action has already run and returned.
                     </p>
+
+                    <h3>Multi-Stage Conversations</h3>
+                    <p>
+                        <code>Start_Ritual_Ceremony</code> starts ritual effects and records ritual state. It does not wait for player replies, capture later words, or advance a multi-stage conversation. A follow-up prompt requests another AI response after an action; it does not wait for the player's next turn.
+                    </p>
+                    <p>
+                        Action descriptions, follower availability flags and follow-up prompts only influence what the AI may choose. On their own they do not give you a deterministic trigger or a conversation state machine. For a reliable multi-stage exchange, use a dedicated server plugin that:
+                    </p>
+                    <ul>
+                        <li>checks that the speaking NPC is the intended one, whether they are a follower, and what the incoming player phrase is before advancing;</li>
+                        <li>saves the current stage and any values collected later with the namespaced <a href="#PluginNpcData">per-NPC plugin data API</a>;</li>
+                        <li>injects focused context for the current stage on each turn;</li>
+                        <li>handles completion and cancellation by clearing or finalizing that saved state.</li>
+                    </ul>
 
                 </div>
                 <div class="card" id="PluginNpcData">
