@@ -8,7 +8,7 @@ Guide-first website for Dwemer Dynamics projects, covering CHIM, STOBE, and Dial
 
 ## Other Projects
 
-`other-projects/` is a static hub for modding tools and experiments outside the AI game mods, linked from the homepage header. Its entries reuse the homepage card styles from `css/hub.css`, with page-specific styles in `css/other-projects.css`.
+`other-projects/` is a small guide for modding tools and experiments outside the AI game mods, linked from the homepage. `index.html` is the overview and each project has its own page, such as `kosmokrator.html`. The pages share the `otherProjects` sidebar in `js/javascript.js`, selected by the `other-projects-theme` body class. Their styles live in `css/other-projects.css`, scoped to that class because the homepage also loads the file for its Other Projects panel. Each project's own README is the reference for setup; keep these pages short and link to it.
 
 ## Local Development
 

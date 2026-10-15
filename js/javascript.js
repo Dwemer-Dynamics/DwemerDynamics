@@ -227,6 +227,18 @@ const leftSidebarConfigs = {
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
         ]
+    },
+    otherProjects: {
+        pageLinks: [
+            { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
+            { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
+            { href: "./kosmokrator.html", title: "Kosmokrator", label: "Kosmokrator", emoji: "\uD83D\uDDFA\uFE0F" }
+        ],
+        bottomLinks: [
+            { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
+            { href: "https://www.youtube.com/@DwemerDynamics", title: "YouTube", label: "YouTube", icon: "../img/youtube.png" },
+            { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
+        ]
     }
 };
 
@@ -258,6 +270,12 @@ function toggleNav() {
     }
     sidebar.classList.toggle("expanded");
     menuIsOpen = sidebar.classList.contains("expanded");
+
+    // Only menu buttons that declare aria-expanded opt in to state syncing.
+    const navButton = document.getElementById("navButton");
+    if (navButton && navButton.hasAttribute("aria-expanded")) {
+        navButton.setAttribute("aria-expanded", String(menuIsOpen));
+    }
 }
 
 function updateProgressBarAndFadeIn() {
@@ -325,6 +343,10 @@ function getLeftSidebarConfig() {
 
     if (document.body.classList.contains("custom-mods-theme")) {
         return leftSidebarConfigs.customMods;
+    }
+
+    if (document.body.classList.contains("other-projects-theme")) {
+        return leftSidebarConfigs.otherProjects;
     }
 
     return null;

@@ -51,3 +51,124 @@
     outline: 2px solid #a6e2fe;
     outline-offset: 3px;
 }
+
+/* Other Projects guide pages: shared guide layout with the site accent. */
+.other-projects-progress {
+    background: var(--hub-accent);
+}
+
+.other-projects-theme .content a:hover {
+    color: #a6e2fe;
+}
+
+.other-projects-theme .content a:focus-visible,
+.other-projects-theme .sidebar a:focus-visible,
+.other-projects-theme #navButton:focus-visible {
+    outline: 2px solid #a6e2fe;
+    outline-offset: 2px;
+}
+
+.other-projects-theme .headerTitle #logo {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    margin-right: 0.75em;
+    object-fit: contain;
+}
+
+.other-projects-theme .headerTitle {
+    min-width: 0;
+}
+
+.other-projects-theme #headerTitle {
+    white-space: nowrap;
+}
+
+/* Extra room on top of the global scroll-padding so the fixed header never covers anchored titles. */
+.other-projects-theme .content .card[id] {
+    scroll-margin-top: 1.5rem;
+}
+
+.other-projects-theme .sidebar .active::before {
+    background-color: var(--hub-accent);
+}
+
+.other-projects-theme .guide-copy-button {
+    border-color: rgba(101, 206, 253, 0.45);
+    color: var(--hub-accent);
+}
+
+.other-projects-theme .guide-copy-button:hover {
+    border-color: rgba(101, 206, 253, 0.8);
+    color: #a6e2fe;
+}
+
+.other-projects-theme .content li {
+    margin-top: 0.45em;
+    margin-bottom: 0.45em;
+}
+
+.other-projects-theme .project-tag {
+    margin-top: -0.2em;
+    color: #cdd6e5;
+    letter-spacing: 0.5px;
+}
+
+.other-projects-theme .project-heading-link {
+    color: inherit;
+}
+
+.other-projects-theme .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    margin: 1em 0;
+}
+
+.other-projects-theme .content .project-action-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5em;
+    padding: 0.45em 1em;
+    border: 1px solid var(--hub-accent);
+    border-radius: 6px;
+    background-color: var(--hub-accent);
+    color: #0d1117;
+    font-weight: 700;
+}
+
+.other-projects-theme .content .project-action-button:hover,
+.other-projects-theme .content .project-action-button:focus-visible {
+    background-color: #a6e2fe;
+    border-color: #a6e2fe;
+    color: #0d1117;
+}
+
+.other-projects-theme .content .project-action-secondary {
+    background-color: transparent;
+    color: var(--hub-accent);
+}
+
+.other-projects-theme .content .project-action-secondary:hover,
+.other-projects-theme .content .project-action-secondary:focus-visible {
+    background-color: rgba(101, 206, 253, 0.12);
+    color: #a6e2fe;
+}
+
+@media only screen and (max-width: 900px) {
+    /* Keep the closed off-canvas menu out of the tab order; visibility flips after the slide-out. */
+    .other-projects-theme .left-sidebar:not(.expanded) {
+        visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .other-projects-theme #headerTitle {
+        font-size: 1.6em;
+    }
+
+    .other-projects-theme .project-action-button {
+        flex: 1 1 100%;
+        justify-content: center;
+    }
+}

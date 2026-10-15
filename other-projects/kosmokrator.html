@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Kosmokrator is an agent-assisted modding tool for Dominions 6. Build nations and maps with Codex or Claude Code, then review, edit, validate and export them locally.">
+    <title>Kosmokrator | Dwemer Dynamics</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261014-other-projects"></script>
+    <link rel="stylesheet" href="../css/styles.css?v=20260713a">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css?v=20260713a">
+    <link rel="stylesheet" href="../css/sidebar.css?v=20260713a">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/other-projects.css?v=20261014-guide">
+</head>
+<body class="theme other-projects-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar other-projects-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Other Projects home"><img src="../img/dd_logo.png" alt="Dwemer Dynamics logo" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Other Projects</a>
+            </div>
+        </div>
+
+        <nav class="sidebar left-sidebar" id="leftSidebar" aria-label="Other Projects">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./kosmokrator.html">Kosmokrator</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </nav>
+
+        <main class="content">
+            <section id="Overview" class="section">
+                <div class="card hero-card">
+                    <h1>Kosmokrator</h1>
+                    <p class="project-tag">Dominions 6 / Modding tool</p>
+                    <p>Kosmokrator is an agent-assisted modding tool for Dominions 6. Describe a nation or map, and Kosmokrator prepares instructions and project files for your coding agent. The agent creates the content; Kosmokrator's local browser interface lets you review it, make supported edits, check it and export it.</p>
+                    <p class="project-actions">
+                        <a class="project-action-button" href="https://github.com/Dwemer-Dynamics/Kosmokrator/releases/latest" target="_blank" rel="noopener noreferrer">Download latest release</a>
+                        <a class="project-action-button project-action-secondary" href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">Read the README</a>
+                    </p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#Features">Features</a></li>
+                        <li><a href="#GetStarted">Requirements and getting started</a></li>
+                        <li><a href="#Limits">Checks and limits</a></li>
+                        <li><a href="#Downloads">Downloads and source</a></li>
+                    </ul></nav>
+                </div>
+
+                <blockquote class="guide-note note-info">
+                    <p><b>An external agent is required.</b> Kosmokrator does not include an AI model. AI assistance comes from an agent you run yourself, such as Codex or Claude Code, and that agent's usual subscription or API charges apply. You also need Dominions 6 to play and test what you export.</p>
+                </blockquote>
+
+                <div class="card" id="Features">
+                    <h2>Features</h2>
+                    <ul>
+                        <li><b>Author mods with your agent.</b> Start a nation or a map from a short brief in the browser, then hand the generated instructions to Codex or Claude Code. A project can hold several nations and maps.</li>
+                        <li><b>Work with existing mods.</b> Import a mod into a new project, inspect its contents and make supported edits.</li>
+                        <li><b>Browse and edit.</b> View units, sprites and unit sheets, edit values and traits, and see inheritance, cross-mod conflicts and balance references.</li>
+                        <li><b>Maps are supported.</b> The agent creates the map files, including provinces, connections, scenarios and image layers. The browser reviews maps; it is not a paint editor.</li>
+                        <li><b>Validate and export.</b> Check a project's files against supported rules, then export a mod or map bundle. Edits use revisions, previews and backups. Exports go to a new destination, and regular exports do not install themselves.</li>
+                    </ul>
+                    <p>Comparisons against the base game need separate reference data that you supply. The README explains how to add it.</p>
+                </div>
+
+                <div class="card" id="GetStarted">
+                    <h2>Requirements And Getting Started</h2>
+                    <p><b>You need:</b></p>
+                    <ul>
+                        <li>Python 3.11 or newer.</li>
+                        <li>Access to an external coding agent such as Codex or Claude Code.</li>
+                        <li>Dominions 6, to play and test exported mods.</li>
+                    </ul>
+                    <p><b>In short:</b> download and extract the release source ZIP, start Kosmokrator's local browser interface from that folder, and open your agent on the same folder. Start a nation or map in the browser, give the generated instructions to your agent, then reload to review, validate and export the result.</p>
+                    <p>The <a href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">Kosmokrator README</a> has the exact launch command, ports and folders, troubleshooting and optional setup. The quick start uses PowerShell on Windows; the README notes that its non-Windows instructions have not been verified on a real non-Windows system.</p>
+                </div>
+
+                <div class="card" id="Limits">
+                    <h2>Checks And Limits</h2>
+                    <div class="guide-note note-warning">
+                        <p><b>Validation is static.</b> It checks files and supported rules. It does not prove that a mod loads in the game engine, plays correctly or is balanced. Unknown commands and unresolved mechanics stay marked as unverified.</p>
+                    </div>
+                    <ul>
+                        <li>Test every export in Dominions 6 yourself before you share it.</li>
+                        <li>Review what your agent creates. Kosmokrator makes no guarantee about the quality, correctness or balance of generated content.</li>
+                        <li>Publishing is manual.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Downloads">
+                    <h2>Downloads And Source</h2>
+                    <ul>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator/releases/latest" target="_blank" rel="noopener noreferrer">Latest release</a>: the current release files and checksums.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">README</a>: setup, features and limits. This is the reference if anything here differs.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator" target="_blank" rel="noopener noreferrer">Source on GitHub</a>: original source code is licensed GPL-3.0-only. See the repository for resource and artwork terms.</li>
+                    </ul>
+                    <p>Kosmokrator is an independent tool. Dominions 6 belongs to Illwinter Game Design, and game files are not bundled.</p>
+                    <p><a href="./index.html">Back to Other Projects</a></p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>

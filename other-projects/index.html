@@ -4,75 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Modding tools and experiments from Dwemer Dynamics, including Kosmokrator for Dominions 6.">
     <title>Other Projects | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <script src="../js/javascript.js?v=20261014-other-projects"></script>
     <link rel="stylesheet" href="../css/styles.css?v=20260713a">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/hub.css?v=20261014-other-projects">
-    <link rel="stylesheet" href="../css/other-projects.css?v=20261014">
+    <link rel="stylesheet" href="../css/progressBar.css?v=20260713a">
+    <link rel="stylesheet" href="../css/sidebar.css?v=20260713a">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/other-projects.css?v=20261014-guide">
 </head>
-<body class="theme">
-    <div style="overflow:auto">
-        <div class="header hubHeader">
-            <div class="headerTitle">
-                <img src="../img/dd_logo.png" alt="Dwemer Dynamics logo" id="logo">
-                <a href="../index.html" id="headerTitle">Dwemer Dynamics</a>
-            </div>
-            <nav class="hubHeaderNav" aria-label="Site">
-                <a href="../index.html">Home</a>
-                <a href="./index.html" aria-current="page">Other Projects</a>
-            </nav>
-        </div>
+<body class="theme other-projects-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar other-projects-progress"></div>
     </div>
 
-    <main class="hubPageLayout">
-        <div class="hubContainer">
-            <div class="card hubIntroCard">
-                <h1 class="hubTitle">Other Projects</h1>
-                <p class="hubIntro">Modding tools and experiments from Dwemer Dynamics.</p>
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
             </div>
-
-            <div class="hubModShowcase">
-                <article class="hubModRow hubModRowKosmokrator" id="kosmokrator">
-                    <div class="hubModMedia">
-                        <div class="otherProjectPanel" aria-hidden="true">
-                            <span class="otherProjectPanelTitle">Kosmokrator</span>
-                            <span class="otherProjectPanelGame">Dominions 6</span>
-                        </div>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonKosmokrator" href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">Get Started</a>
-                            <a class="hubTileActionButton hubTileActionButtonKosmokrator" href="https://github.com/Dwemer-Dynamics/Kosmokrator/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
-                        </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame">Dominions 6 / Modding tool</p>
-                        <h2>Kosmokrator</h2>
-                        <p class="hubModSummary">An agent-assisted modding tool for Dominions 6.</p>
-                        <ul>
-                            <li>Create and edit mod projects with Codex or Claude Code.</li>
-                            <li>Browse units, traits, assets and source definitions.</li>
-                            <li>Validate and export your mods.</li>
-                        </ul>
-                    </div>
-                </article>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="Other Projects home"><img src="../img/dd_logo.png" alt="Dwemer Dynamics logo" id="logo"></a>
+                <a href="./index.html" id="headerTitle">Other Projects</a>
             </div>
         </div>
-    </main>
 
-    <footer class="hubFooter">
-        <div class="hubFooterSocial" aria-label="Dwemer Dynamics social links">
-            <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord">
-                <img src="../img/discord.png" alt="Discord">
-            </a>
-            <a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
-                <img src="../img/youtube.png" alt="YouTube">
-            </a>
-            <a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer" aria-label="Patreon" title="Patreon">
-                <img src="../img/patreon.png" alt="Patreon">
-            </a>
-        </div>
-        <div>Dwemer Dynamics 2026</div>
-    </footer>
+        <nav class="sidebar left-sidebar" id="leftSidebar" aria-label="Other Projects">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./kosmokrator.html">Kosmokrator</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a>
+            </p>
+        </nav>
+
+        <main class="content">
+            <section id="Overview" class="section">
+                <div class="card hero-card">
+                    <h1>Other Projects</h1>
+                    <p>Modding tools and experiments from Dwemer Dynamics that sit outside the AI game mods. Each project has its own page here and its own public repository.</p>
+                </div>
+
+                <div class="card" id="AboutTheseProjects">
+                    <h2>About These Projects</h2>
+                    <ul>
+                        <li><b>Tools and experiments.</b> These are smaller, standalone projects, separate from DwemerDistro and the AI game mods.</li>
+                        <li><b>Repository first.</b> Each project's README is the reference for setup and current features. The pages here summarize what a project does and link to it.</li>
+                        <li><b>Use at your own risk.</b> Projects may be early previews. Read the requirements and limits on each page before you start.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Kosmokrator">
+                    <h2><a class="project-heading-link" href="./kosmokrator.html">Kosmokrator</a></h2>
+                    <p class="project-tag">Dominions 6 / Modding tool</p>
+                    <p>An agent-assisted modding tool for Dominions 6. You describe a nation or map, an external coding agent such as Codex or Claude Code creates the content, and Kosmokrator's local browser interface lets you review, edit, validate and export it.</p>
+                    <ul>
+                        <li>Create nation and map mods, or import an existing mod into a new project.</li>
+                        <li>Browse units, traits, sprites and project files.</li>
+                        <li>Validate supported rules and export a mod or map bundle.</li>
+                    </ul>
+                    <p class="project-actions">
+                        <a class="project-action-button" href="./kosmokrator.html">Read the Kosmokrator page</a>
+                        <a class="project-action-button project-action-secondary" href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">README on GitHub</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>
