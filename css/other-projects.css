@@ -1,0 +1,48 @@
+/* Other Projects: text title panels in place of artwork, using the site accent. */
+.otherProjectPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    aspect-ratio: 16 / 9;
+    padding: 1em;
+    border: 1px solid rgba(101, 206, 253, 0.25);
+    border-radius: 9px;
+    background: radial-gradient(circle at center, rgba(101, 206, 253, 0.14), transparent 65%), #111318;
+    text-align: center;
+}
+
+.otherProjectPanelTitle {
+    max-width: 100%;
+    color: #ffffff;
+    font-family: "MagicCards", serif;
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: 1.5px;
+    overflow-wrap: anywhere;
+}
+
+.otherProjectPanelGame {
+    color: #cdd6e5;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.hubTileActionButtonKosmokrator {
+    background-color: var(--hub-accent);
+    border-color: var(--hub-accent);
+    color: #0d1117;
+}
+
+.hubTileActionButtonKosmokrator:hover,
+.hubTileActionButtonKosmokrator:focus-visible {
+    background-color: #a6e2fe;
+    border-color: #a6e2fe;
+    color: #0d1117;
+}
+
+.hubTileActionButtonKosmokrator:focus-visible {
+    outline: 2px solid #a6e2fe;
+    outline-offset: 3px;
+}

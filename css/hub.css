@@ -800,3 +800,52 @@
         gap: 0.4em;
     }
 }
+
+.hubHeaderNav {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-left: auto;
+}
+
+.hubHeaderNav a {
+    padding: 0.35em 0.65em;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 1.15em;
+    white-space: nowrap;
+}
+
+.hubHeaderNav a[aria-current="page"] {
+    color: var(--hub-accent);
+    box-shadow: inset 0 -2px 0 var(--hub-accent);
+}
+
+.hubHeader a:focus-visible {
+    outline: 2px solid var(--hub-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+@media (max-width: 560px) {
+    .hubHeader {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.1em;
+    }
+
+    .hubHeader #headerTitle {
+        font-size: 1.6em;
+        line-height: 1.15;
+    }
+
+    .hubHeaderNav {
+        margin-left: -0.65em;
+    }
+
+    .hubHeaderNav a {
+        padding: 0.3em 0.65em;
+        font-size: 1em;
+    }
+}
