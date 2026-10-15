@@ -20,6 +20,7 @@
     font-size: clamp(1.8rem, 7vw, 2.8rem);
     line-height: 1.1;
     letter-spacing: 1.5px;
+    word-spacing: 8px;
     overflow-wrap: anywhere;
 }
 
@@ -29,20 +30,24 @@
     letter-spacing: 0.5px;
 }
 
-.hubTileActionButtonKosmokrator {
+.hubTileActionButtonKosmokrator,
+.hubTileActionButtonOtherProjects {
     background-color: var(--hub-accent);
     border-color: var(--hub-accent);
     color: #0d1117;
 }
 
 .hubTileActionButtonKosmokrator:hover,
-.hubTileActionButtonKosmokrator:focus-visible {
+.hubTileActionButtonKosmokrator:focus-visible,
+.hubTileActionButtonOtherProjects:hover,
+.hubTileActionButtonOtherProjects:focus-visible {
     background-color: #a6e2fe;
     border-color: #a6e2fe;
     color: #0d1117;
 }
 
-.hubTileActionButtonKosmokrator:focus-visible {
+.hubTileActionButtonKosmokrator:focus-visible,
+.hubTileActionButtonOtherProjects:focus-visible {
     outline: 2px solid #a6e2fe;
     outline-offset: 3px;
 }
