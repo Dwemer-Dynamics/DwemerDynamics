@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Kosmokrator is an agent-assisted modding tool for Dominions 6. Build nations and maps with Codex or Claude Code, then review, edit, validate and export them locally.">
+    <meta name="description" content="Make Dominions 6 nations and maps with Codex or Claude Code, then review and export them in your browser.">
     <title>Kosmokrator | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20261014-other-projects"></script>
@@ -51,7 +51,7 @@
                 <div class="card hero-card">
                     <h1>Kosmokrator</h1>
                     <p class="project-tag">Dominions 6 / Modding tool</p>
-                    <p>Kosmokrator is an agent-assisted modding tool for Dominions 6. Describe a nation or map, and Kosmokrator prepares instructions and project files for your coding agent. The agent creates the content; Kosmokrator's local browser interface lets you review it, make supported edits, check it and export it.</p>
+                    <p>Kosmokrator helps you make nations and maps for Dominions 6. Describe what you want, and Codex or Claude Code builds it. Kosmokrator runs on your computer and opens in your browser, where you can review your mod and export it.</p>
                     <p class="project-actions">
                         <a class="project-action-button" href="https://github.com/Dwemer-Dynamics/Kosmokrator/releases/latest" target="_blank" rel="noopener noreferrer">Download latest release</a>
                         <a class="project-action-button project-action-secondary" href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">Read the README</a>
@@ -65,68 +65,75 @@
                 </div>
 
                 <blockquote class="guide-note note-info">
-                    <p><b>An external agent is required.</b> Kosmokrator does not include an AI model. AI assistance comes from an agent you run yourself, such as Codex or Claude Code, and that agent's usual subscription or API charges apply. You also need Dominions 6 to play and test what you export.</p>
+                    <p><b>You'll need Codex or Claude Code.</b> Kosmokrator contains no AI model. You run your agent separately, using your own account, and its normal subscription or API costs apply.</p>
                 </blockquote>
 
                 <div class="card" id="Features">
                     <h2>Features</h2>
                     <ul>
-                        <li><b>Author mods with your agent.</b> Start a nation or a map from a short brief in the browser, then hand the generated instructions to Codex or Claude Code. A project can hold several nations and maps.</li>
-                        <li><b>Work with existing mods.</b> Import a mod into a new project, inspect its contents and make supported edits.</li>
-                        <li><b>Browse and edit.</b> View units, sprites and unit sheets, edit values and traits, and see inheritance, cross-mod conflicts and balance references.</li>
-                        <li><b>Maps are supported.</b> The agent creates the map files, including provinces, connections, scenarios and image layers. The browser reviews maps; it is not a paint editor.</li>
-                        <li><b>Validate and export.</b> Check a project's files against supported rules, then export a mod or map bundle. Edits use revisions, previews and backups. Exports go to a new destination, and regular exports do not install themselves.</li>
+                        <li><b>Make nations and maps.</b> Fill in a short brief and paste the instructions into your agent. It builds maps too, which you review in the browser rather than paint by hand. One project can hold several nations and maps.</li>
+                        <li><b>Import an existing mod.</b> Bring a mod into a new project, then browse its units and edit their stats and traits.</li>
+                        <li><b>Browse and edit units.</b> View each unit's sprite, stats and description, edit stats and traits, and compare units with the base game for balance. For copied units, see which stats you've changed.</li>
+                        <li><b>Check and export.</b> Health lists problems in one place, and a compatibility check looks for clashes with other mods. Export a nation as a mod, or a map as a map bundle.</li>
+                        <li><b>Track and undo changes.</b> Changes keeps checkpoints of your project, so you can see what's different and restore an earlier version. Exports are saved as new files and aren't installed automatically.</li>
                     </ul>
-                    <p>Comparisons against the base game need separate reference data that you supply. The README explains how to add it.</p>
+                    <p>Balance comparisons need base-game reference data, which you add separately; the README explains how. Checks cover your files, not how the mod plays, so test it in Dominions 6.</p>
                 </div>
 
                 <div class="card" id="Screenshots">
                     <h2>Screenshots</h2>
-                    <p>These screenshots show Kosmokrator's local browser with Dunarraidh, a Pictish-inspired showcase nation made for this page. They show the review tools at work; they do not show the nation running in Dominions 6. Select an image to open it at full size.</p>
+                    <p>These screenshots show Dunarraidh, an example Pictish-inspired nation. Select an image to see it full size.</p>
                     <div class="kosmokrator-gallery">
                         <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-overview.png"><img src="../img/kosmokrator/dunarraidh-overview.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Kosmokrator project overview for Dunarraidh, the Painted Kingdoms, showing the latest export, counts of 10 recruitable troops and 6 commanders, and the project's definitions."></a>
-                            <figcaption><b>Project overview.</b> Readiness, the latest export and the selected nation's roster at a glance.</figcaption>
+                            <a href="../img/kosmokrator/dunarraidh-overview.png"><img src="../img/kosmokrator/dunarraidh-overview.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Overview of Dunarraidh, the Painted Kingdoms, showing its latest export, 10 recruitable troops and 6 recruitable commanders."></a>
+                            <figcaption><b>Project overview.</b> Troops, commanders and the latest export at a glance.</figcaption>
                         </figure>
                         <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-units.png"><img src="../img/kosmokrator/dunarraidh-units.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Units view listing the Dunarraidh roster with a sprite for each unit, beside the Grove Druid's unit sheet with stats, quarterstaff, Nature, Earth and Holy paths, an enlarged sprite and its description."></a>
-                            <figcaption><b>Units and sprites.</b> The roster with each unit's artwork, and a unit sheet with stats, equipment, magic paths and description.</figcaption>
+                            <a href="../img/kosmokrator/dunarraidh-units.png"><img src="../img/kosmokrator/dunarraidh-units.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Units tab listing Dunarraidh's units beside the Grove Druid's sheet: stats, quarterstaff, Nature, Earth and Holy magic, sprite and description."></a>
+                            <figcaption><b>Browse units.</b> Sprite, stats, weapons, magic and description.</figcaption>
                         </figure>
                         <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-unit-editor.png"><img src="../img/kosmokrator/dunarraidh-unit-editor.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Unit editor for the Antler-Sworn, with base stats labelled as authored or inherited from the donor unit, source line references, and leadership and magic path fields."></a>
-                            <figcaption><b>Unit editor.</b> Values set in the mod are marked apart from values inherited from the donor unit, and every edit is reviewed before saving.</figcaption>
+                            <a href="../img/kosmokrator/dunarraidh-unit-editor.png"><img src="../img/kosmokrator/dunarraidh-unit-editor.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Stat editor for the Antler-Sworn, with each stat tagged authored or inherited from the copied unit, and leadership and magic path fields below."></a>
+                            <figcaption><b>Edit stats.</b> See which stats still come from the copied unit.</figcaption>
                         </figure>
                         <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-health.png"><img src="../img/kosmokrator/dunarraidh-health.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Health view showing no blockers, warnings or unverified findings, with the checked scope, recruitment classes, a list of what was not checked such as installed mods and game loading, and limitations."></a>
-                            <figcaption><b>Health.</b> One prioritised list of findings, with what was checked and what was not.</figcaption>
+                            <a href="../img/kosmokrator/dunarraidh-health.png"><img src="../img/kosmokrator/dunarraidh-health.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Health tab reporting no blockers, warnings or unverified findings, with lists of what was and wasn't checked, and its limitations."></a>
+                            <figcaption><b>Health.</b> Anything that needs fixing, in one place.</figcaption>
                         </figure>
                         <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-changes.png"><img src="../img/kosmokrator/dunarraidh-changes.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Changes view comparing current files with an agent review checkpoint: the Painted Levy's gold cost changed from 10 to 9, shown as a definition change and as a raw source diff."></a>
-                            <figcaption><b>Changes.</b> Local checkpoints compared with the current files, as a definition-level change and a raw source diff.</figcaption>
+                            <a href="../img/kosmokrator/dunarraidh-changes.png"><img src="../img/kosmokrator/dunarraidh-changes.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Changes tab comparing a checkpoint with the current files: the Painted Levy's gold cost went from 10 to 9, shown as a summary and a line-by-line diff."></a>
+                            <figcaption><b>Changes.</b> Compare with an earlier checkpoint, or restore it.</figcaption>
                         </figure>
                     </div>
                 </div>
 
                 <div class="card" id="GetStarted">
-                    <h2>Requirements And Getting Started</h2>
+                    <h2>Requirements and getting started</h2>
                     <p><b>You need:</b></p>
                     <ul>
                         <li>Python 3.11 or newer.</li>
-                        <li>Access to an external coding agent such as Codex or Claude Code.</li>
-                        <li>Dominions 6, to play and test exported mods.</li>
+                        <li>An account for Codex or Claude Code.</li>
+                        <li>Dominions 6, to play and test your mod.</li>
                     </ul>
-                    <p><b>In short:</b> download and extract the release source ZIP, start Kosmokrator's local browser interface from that folder, and open your agent on the same folder. Start a nation or map in the browser, give the generated instructions to your agent, then reload to review, validate and export the result.</p>
-                    <p>The <a href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">Kosmokrator README</a> has the exact launch command, ports and folders, troubleshooting and optional setup. The quick start uses PowerShell on Windows; the README notes that its non-Windows instructions have not been verified on a real non-Windows system.</p>
+                    <p><b>Getting started:</b></p>
+                    <ol>
+                        <li>Download the latest release and extract the source ZIP.</li>
+                        <li>Start Kosmokrator from that folder. It opens in your browser.</li>
+                        <li>Open Codex or Claude Code in the same folder.</li>
+                        <li>Choose <b>Start a nation</b> or <b>Start a map</b>, fill in the brief and paste the instructions into your agent.</li>
+                        <li>When your agent is done, press <b>Reload</b> to see the result.</li>
+                    </ol>
+                    <p>The <a href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">Kosmokrator README</a> is the full setup guide, with the exact launch command, troubleshooting and optional extras. These steps are for Windows and PowerShell. The README also covers other systems, but those instructions haven't been tested yet.</p>
                 </div>
 
                 <div class="card" id="Downloads">
-                    <h2>Downloads And Source</h2>
+                    <h2>Downloads and source</h2>
                     <ul>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator/releases/latest" target="_blank" rel="noopener noreferrer">Latest release</a>: the current release files and checksums.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">README</a>: setup, features and limits. This is the reference if anything here differs.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator" target="_blank" rel="noopener noreferrer">Source on GitHub</a>: original source code is licensed GPL-3.0-only. See the repository for resource and artwork terms.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator/releases/latest" target="_blank" rel="noopener noreferrer">Latest release</a>: download files and checksums.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator#readme" target="_blank" rel="noopener noreferrer">README</a>: the setup guide, plus features and limits.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kosmokrator" target="_blank" rel="noopener noreferrer">Source on GitHub</a>: the source code, licensed GPL-3.0-only. Artwork and resource terms are in the repository.</li>
                     </ul>
-                    <p>Kosmokrator is an independent tool. Dominions 6 belongs to Illwinter Game Design, and game files are not bundled.</p>
+                    <p>Kosmokrator is an independent tool. Dominions 6 belongs to Illwinter Game Design, and no game files are included.</p>
                     <p><a href="./index.html">Back to Other Projects</a></p>
                 </div>
             </section>
