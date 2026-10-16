@@ -179,17 +179,17 @@
 
                     <h3>What Files CHIM Actually Loads</h3>
                     <p>
-                        CHIM loads plugin hook files by name if they exist. You only create the ones your plugin actually needs.
+                        CHIM loads plugin hook files by name if they exist. You only create the ones your plugin actually needs. The two <code>chimRegister...()</code> entries below are functions, not files: call them from one of your hook files.
                     </p>
                     <ul>
                         <li><b><code>globals.php</code>:</b> early global setup.</li>
                         <li><b>AI actions:</b> add or change AI-callable actions through the Action Editor/action catalog. Current action loading is data-driven rather than a separate plugin hook file.</li>
                         <li><b><code>preprocessing.php</code>:</b> early request preprocessing.</li>
-                        <li><b><code>prerequest.php</code>:</b> run logic before the main request is sent.</li>
+                        <li><b><code>prerequest.php</code>:</b> runs after CHIM has parsed the request and loaded the NPC profile, before CHIM's event processor handles it.</li>
                         <li><b><code>context_pre.php</code>:</b> inject or change context before the system prompt is built.</li>
                         <li><b><code>context.php</code>:</b> add extra context after the system prompt is built.</li>
-                        <li><b><code>chimRegisterPromptInjection()</code>:</b> register ordered content for the <code>character_bottom</code> or <code>prompt_bottom</code> prompt slots.</li>
-                        <li><b><code>chimRegisterActorProfileEnricher()</code>:</b> append focused plugin state to an actor profile without replacing the core profile text.</li>
+                        <li><b><code>chimRegisterPromptInjection()</code> (function):</b> register ordered content for the <code>character_bottom</code> or <code>prompt_bottom</code> prompt slots. Calling it from <code>context_pre.php</code> is early enough for the current prompt.</li>
+                        <li><b><code>chimRegisterActorProfileEnricher()</code> (function):</b> append focused plugin state to an actor profile without replacing the core profile text.</li>
                         <li><b><code>prepostrequest.php</code> and <code>postrequest.php</code>:</b> react after a request runs.</li>
                         <li><b><code>context_building.php</code>:</b> alter historical context building.</li>
                         <li><b><code>prompts.php</code> and <code>dialogue_prompt.php</code>:</b> extend or override prompt text.</li>
@@ -197,6 +197,22 @@
                     </ul>
                     <p>
                         The important point is that CHIM already has named hook points. A plugin usually works by dropping the right file into the right place rather than hacking core pages.
+                    </p>
+
+                    <h3 id="RequestLifecycle">Request Lifecycle And State</h3>
+                    <p>
+                        Each event the game sends to CHIM, such as player input, an NPC speech acknowledgement or a location update, is a separate request. CHIM runs <code>main.php</code> from the start for every request, and PHP state from earlier requests is gone.
+                    </p>
+                    <ul>
+                        <li><b>Within one request:</b> values in <code>$GLOBALS</code> are shared by every hook file and function that runs during that request. Calling a function does not clear them; they last until the request ends.</li>
+                        <li><b>Across requests:</b> nothing in <code>$GLOBALS</code> carries over to the next request. Save anything you need later, such as a conversation stage, with the <a href="#PluginNpcData">per-NPC plugin data API</a>.</li>
+                        <li><b>Hook file scope:</b> CHIM includes each hook file from inside a loader function, so a plain variable set in <code>prerequest.php</code> is not visible in <code>context_pre.php</code>. Use a prefixed <code>$GLOBALS</code> key to pass a value between hooks in the same request. Each hook file runs at most once per request.</li>
+                        <li><b>Hooks are conditional:</b> <code>main.php</code> has early exits. Reaching <code>prerequest.php</code> does not mean <code>context_pre.php</code> or <code>postrequest.php</code> will run for that request.</li>
+                        <li><b>Speech acknowledgements:</b> <code>_speech</code> is the game client's acknowledgement of an NPC line. It is not independent confirmation that the line was audibly played, and it is not player input. It reaches <code>prerequest.php</code>, is handled by CHIM's event processor, and exits before <code>context_pre.php</code>.</li>
+                        <li><b>Player input timing:</b> <code>preprocessing.php</code> sees player input before optional Player re-speech; <code>prerequest.php</code> sees it afterwards, so the text may have been rewritten.</li>
+                    </ul>
+                    <p>
+                        For hook order, request fields and speech payloads, read the <a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/dev/docs/plugin-runtime.md" target="_blank" rel="noopener noreferrer">plugin runtime reference</a>.
                     </p>
 
                     <h3>What Plugins Can Interface With</h3>
@@ -231,7 +247,7 @@
 requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"preprocessing.php");</code></pre>
                         </li>
                         <li>
-                            <b>Pre-request logic:</b> <code>prerequest.php</code> runs before the main request processor. This is a good place to inspect or alter request state before CHIM builds the rest of the response flow.
+                            <b>Pre-request logic:</b> <code>prerequest.php</code> runs after CHIM has parsed the request and loaded the NPC profile, and before <code>processor/comm.php</code> handles it. Many events, including <code>_speech</code>, finish in <code>comm.php</code> and never reach the later hooks.
                             <br><em>Source: <code>HerikaServer/main.php</code></em>
                             <pre><code>requireFilesRecursively(__DIR__.DIRECTORY_SEPARATOR."ext".DIRECTORY_SEPARATOR,"prerequest.php");
 
@@ -323,14 +339,8 @@ $GLOBALS["CHIM_JSON_RESPONSE_EXT_LOADED"] = true;</code></pre>
 exec($cmd, $output, $returnCode);</code></pre>
                         </li>
                         <li>
-                            <b>Database schema:</b> a plugin can create and update its own tables with ordered SQL files in <code>migrations</code>. Plugin-owned objects should use the shared <code>plugins</code> PostgreSQL schema. The installer records completed files in <code>plugins.plugin_migrations</code> so each migration runs once.
+                            <b>Database schema:</b> for state that belongs to one NPC, such as a conversation stage, use the existing <a href="#PluginNpcData">per-NPC plugin data API</a> first. It needs no SQL or migration. A plugin that genuinely owns other data can create and update its own tables with ordered SQL files in <code>migrations</code>; see <a href="#PluginDatabaseMigrations">Database Migrations</a>. Plugin-owned objects should use the shared <code>plugins</code> PostgreSQL schema. The installer records completed files in <code>plugins.plugin_migrations</code> so each migration runs once. Plugin tables are not saved or restored with playthroughs automatically.
                             <br><em>Source: <code>HerikaServer/ui/server_plugin_installer.php</code></em>
-                            <pre><code>CREATE SCHEMA IF NOT EXISTS plugins;
-
-CREATE TABLE IF NOT EXISTS plugins.my_plugin_state (
-    actor_name TEXT PRIMARY KEY,
-    state_json JSONB NOT NULL
-);</code></pre>
                         </li>
                         <li>
                             <b>Existing CHIM data:</b> plugins can read existing CHIM-side data such as memories, logs, rolemaster state, NPC data, and other stored runtime information if they are building tooling or integrations around it.
@@ -448,7 +458,7 @@ foreach ($argv as $arg) {
                         There is no catalog file to edit and no pull request to open. Plugin Manager lists public, non-fork, non-archived GitHub repositories with the <code>chim-plugin</code> topic. Follow <a href="./plugin-guide.html#GetListed">Get listed</a> in the Plugin Guide.
                     </p>
 
-                    <h3>Database Migrations</h3>
+                    <h3 id="PluginDatabaseMigrations">Database Migrations</h3>
                     <p>
                         If your plugin needs its own tables, use the built-in migration system instead of asking users to run SQL by hand.
                     </p>
@@ -609,7 +619,10 @@ MyModPhraseKeeper_RememberPhrase,MyMod_Remember_Phrase,"Use only when #PLAYER_NA
                         <li><b>Doubled quotes:</b> JSON columns are wrapped in double quotes, so every double quote inside the JSON is written twice (<code>""</code>).</li>
                         <li><b>Unique names:</b> give <code>code_name</code>, <code>action_name</code> and the metadata key (<code>mymod_phrase_keeper</code> here) a prefix for your mod so they cannot collide with built-in or other mods' rows.</li>
                         <li><b>Arguments:</b> <code>{{parameters.phrase}}</code> reads the <code>phrase</code> field from the action arguments. The AI writes that argument when it chooses to call the action. It is not an automatic, exact capture of what the player said.</li>
+                        <li><b>No game files needed for this example:</b> this action runs entirely on the server. It needs no ESP, Papyrus script or quest, so there is nothing to look for in the Creation Kit or xEdit. Script Proxy actions that send game commands still rely on the CHIM game plugin to carry them out.</li>
                         <li><b>Metadata visibility:</b> the saved value is stored with the NPC on the server. It is not automatically added to the AI's prompt; something else, such as a server plugin, must read it and inject it if you want the AI to see it.</li>
+                        <li><b>Not plugin data:</b> <code>npc_metadata_updates</code> writes a top-level key in the NPC's <code>metadata</code> field. The <a href="#PluginNpcData">per-NPC plugin data API</a> uses a separate <code>plugin_extended_data</code> field, so <code>getPluginData</code> does not read this value. The two are not interchangeable.</li>
+                        <li><b>No waiting:</b> the action saves the phrase once, when the AI calls it. It does not wait for the player's next line. Follow-up settings belong in the <code>metadata</code> column under <code>followup</code>, not in <code>script_proxy_program</code>; see <a href="#FollowUpActions">How Follow-Up Actions Fit In</a>.</li>
                         <li><b>Updating:</b> once a row has been imported, a changed row is only applied when its <code>import_version</code> is higher than the imported one. Raise it (for example from <code>1</code> to <code>2</code>) each time you ship a change.</li>
                         <li><b>Finding it:</b> after the CHIM plugin has started a session and uploaded the file, open the Action Editor and look for <code>MyMod_Remember_Phrase</code>.</li>
                     </ul>
@@ -634,7 +647,7 @@ MyModPhraseKeeper_RememberPhrase,MyMod_Remember_Phrase,"Use only when #PLAYER_NA
                         <li><b>What it can do:</b> send supported command-builder messages, insert known server database rows, and update supported NPC metadata using values from the action context.</li>
                         <li><b>What it is good for:</b> simple repeatable action sequences, lightweight server bookkeeping, and actions where the server already has enough context to do the work.</li>
                         <li><b>What it is limited by:</b> it is not a general scripting language, it should not replace complex Papyrus/game-side logic, and it can only use the command, database, and metadata operations the action catalog runner supports.</li>
-                        <li><b>How results work:</b> if the row has a return message, CHIM can log a readable action result after the script-proxy program runs. Follow-up behavior is still controlled separately by the action metadata.</li>
+                        <li><b>How results work:</b> if the row has a return message, CHIM can log a readable action result after the script-proxy program runs. Follow-up behavior is controlled separately by <code>followup</code> in the action metadata. A script-proxy program has no step that waits for the player or runs a conversation.</li>
                     </ul>
 
                     <h3>Existing Script Proxy Actions</h3>
@@ -738,28 +751,29 @@ $executed = herikaActionCatalogExecuteScriptProxyNpcMetadataUpdates($program['np
                     </p>
 
                     <p><b>Example action row</b></p>
-                    <pre><code>ExtCmdCHIMNFF_FollowMe,
-    Follow_Me,
-    "Resume following #PLAYER_NAME#.",
-    "#HERIKA_NAME# follows #PLAYER_NAME# again.",
-    false,
-    true,
-    true,
-    true,
-    "{""type"":""object"",""properties"":{},""required"":[]}",
-    "{""dispatch"":""plugin_command"",""source"":""CHIM-NFF"",""integration"":""nff"",""bridge_script"":""CHIMNFF"",""bridge_entrypoint"":""DispatchExternalCommand""}",
-    12,</code></pre>
                     <p>
-                        That row tells CHIM what the action is called, what it means, that it is a follower action, and that it should be dispatched through a plugin-command bridge instead of a server-side script proxy.
+                        This is the header and the <code>Follow_Me</code> row from a CHIM-NFF source copy of <code>nff_actions.csv</code>, two lines out of a larger file. These excerpts illustrate the pattern; the files in a particular CHIM-NFF release may differ. It only works together with the CHIM-NFF Papyrus bridge and Nether's Follower Framework, so do not copy it as a starter file; use the <a href="#ActionCsvExample">complete action CSV example</a> for that. CHIM-NFF's header has no <code>available_to_narrator</code> column; the importer matches columns by header name, so the four booleans here are <code>available_to_npc</code>, <code>available_to_followers</code>, <code>is_activated</code> and <code>game_function</code>.
+                    </p>
+                    <p><em>Source: <code>CHIM-NFF/CHIM/nff_actions.csv</code></em></p>
+                    <pre style="white-space: pre-wrap; overflow-wrap: anywhere;"><code>code_name,action_name,description,return_message,available_to_npc,available_to_followers,is_activated,game_function,parameters_json,metadata,import_version,script_proxy_program
+ExtCmdCHIMNFF_FollowMe,Follow_Me,"Resume following #PLAYER_NAME#.","#HERIKA_NAME# follows #PLAYER_NAME# again.",false,true,true,true,"{""type"":""object"",""properties"":{},""required"":[]}","{""dispatch"":""plugin_command"",""builtin"":false,""status"":""active"",""source"":""CHIM-NFF"",""integration"":""nff"",""protocol"":""extcmd_static_dispatch"",""bridge_script"":""CHIMNFF"",""bridge_entrypoint"":""DispatchExternalCommand"",""debug_notification"":true,""suppress_placeholder_infoaction"":true}",12,</code></pre>
+                    <p>
+                        That row tells CHIM what the action is called, what it means, that it is a follower action, and that it should be dispatched through a plugin-command bridge instead of a server-side script proxy. The trailing comma leaves <code>script_proxy_program</code> empty.
                     </p>
 
                     <p><b>Example Papyrus bridge pattern</b></p>
+                    <p><em>Source: <code>CHIM-NFF/Source/Scripts/CHIMNFF.psc</code></em></p>
                     <pre><code>bool Function DispatchExternalCommand(string asNpcName, string asCommand, string asParameter) Global
     bool handled = HandlesExternalCommand(asCommand)
     bool success = false
+    string resultText = ""
 
     if handled
         success = ExecuteExternalCommand(asNpcName, asCommand, asParameter)
+        resultText = BuildExternalCommandResult(asNpcName, asCommand, asParameter, success)
+    else
+        Debug.Trace("[CHIM-NFF] DispatchExternalCommand received unsupported command: " + asCommand)
+        resultText = "error: NPC could not complete " + asCommand + "."
     endif
 
     AIAgentFunctions.logMessageForActor("command@" + asCommand + "@" + asParameter + "@" + resultText, "funcret", asNpcName)
@@ -783,10 +797,16 @@ EndFunction</code></pre>
                         The common pattern is: the action row describes what the AI can call, the parameter schema describes what data the AI must provide, the dispatch metadata decides who executes it, and the return/follow-up settings decide how the result is fed back into CHIM.
                     </p>
 
-                    <h3>How Follow-Up Actions Fit In</h3>
+                    <h3 id="FollowUpActions">How Follow-Up Actions Fit In</h3>
                     <p>
-                        CHIM-NFF's <code>TeachRightHandSpell</code> row is a good example of the follow-up system. Its metadata enables a follow-up prompt so CHIM can produce one short in-character reaction after the spell-learning action succeeds.
+                        CHIM-NFF's <code>TeachRightHandSpell</code> row is a good example of the follow-up system. Its metadata enables a follow-up prompt so CHIM can produce one short in-character reaction after the spell-learning action succeeds. The settings sit in a <code>followup</code> object inside the <code>metadata</code> column, shown here unescaped and with its other metadata keys left out:
                     </p>
+                    <p><em>Source: <code>CHIM-NFF/CHIM/nff_actions.csv</code></em></p>
+                    <pre><code>"followup": {
+  "enabled": true,
+  "arg_name": "target",
+  "prompt": "Reply with one short in-character line reacting to learning #PLAYER_NAME#'s right-hand spell. Do not ask follow-up questions."
+}</code></pre>
                     <p>
                         This is what the shared follow-up config fields in the Action Editor are for. They do not make the gameplay action itself happen, and they are not required for CHIM to record the action result. They only control whether CHIM should ask the LLM for another in-character response <b>after</b> the action has already run and returned.
                     </p>
@@ -799,10 +819,135 @@ EndFunction</code></pre>
                         Action descriptions, follower availability flags and follow-up prompts only influence what the AI may choose. On their own they do not give you a deterministic trigger or a conversation state machine. For a reliable multi-stage exchange, use a dedicated server plugin that:
                     </p>
                     <ul>
-                        <li>checks that the speaking NPC is the intended one, whether they are a follower, and what the incoming player phrase is before advancing;</li>
+                        <li>checks the event type, the NPC the request is for, whether they are a follower, and what the incoming player phrase is before advancing;</li>
                         <li>saves the current stage and any values collected later with the namespaced <a href="#PluginNpcData">per-NPC plugin data API</a>;</li>
                         <li>injects focused context for the current stage on each turn;</li>
                         <li>handles completion and cancellation by clearing or finalizing that saved state.</li>
+                    </ul>
+
+                    <h3 id="ConversationWalkthrough">Walkthrough: A Two-Step Conversation</h3>
+                    <p>
+                        This teaching sketch is not a complete plugin and has not been tested in a live CHIM server or in game. An NPC teaches the player an oath: the player starts it, the NPC asks them to swear, and the player completes or cancels it. Each NPC keeps its own saved stage, so it survives between requests. The sketch accepts any NPC that has a database record; it does not check that the NPC is the one your mod intends or that they are a follower. Add those eligibility checks for your own mod.
+                    </p>
+                    <ul>
+                        <li><b>Start:</b> no saved stage, and the player's whole line is <i>teach me the oath</i>. Save stage <code>awaiting_vow</code>.</li>
+                        <li><b>Each later turn:</b> while the stage is <code>awaiting_vow</code>, tell the NPC to wait for the vow.</li>
+                        <li><b>Cancel:</b> the player's whole line is <i>forget the oath</i>. Delete the saved stage and tell the NPC to drop the subject. This is checked first.</li>
+                        <li><b>Complete:</b> the player's whole line is <i>I swear</i>. Delete the saved stage and tell the NPC, for this turn only, to acknowledge it.</li>
+                    </ul>
+                    <p>
+                        Matching is deliberately simple. The sketch ignores case, surrounding spaces and trailing <code>.</code>, <code>!</code> or <code>?</code> marks, then compares the whole line with those three phrases. <i>I swear nothing</i> or <i>do not teach me the oath</i> do nothing. Neither does a line with extra words, a routing annotation or text rewritten into something else; it is not a natural-language parser.
+                    </p>
+                    <p>
+                        Put the shared helpers in their own file, here <code>mymod_oath_state.php</code>. <code>$npcId</code> must be the positive database ID of an NPC that already exists in the current playthrough.
+                    </p>
+                    <pre><code>&lt;?php
+// mymod_oath_state.php: loaded by the hook files with require_once.
+if (!function_exists('mymodOathCurrentNpcId')) {
+    // ID of the NPC this request is for, or 0 (the Narrator, or no record).
+    function mymodOathCurrentNpcId(): int
+    {
+        $name = (string) ($GLOBALS['HERIKA_NAME'] ?? '');
+        $npc = $name === '' ? null : (new NpcMaster())-&gt;getByName($name);
+        return is_array($npc) ? (int) ($npc['id'] ?? 0) : 0;
+    }
+
+    function mymodOathGetStage(int $npcId): string
+    {
+        $data = (new NpcMaster())-&gt;getPluginData($npcId, 'mymod_oath');
+        return is_string($data['stage'] ?? null) ? $data['stage'] : '';
+    }
+
+    // Read, change and write back: setPluginData replaces the whole namespace.
+    function mymodOathSetStage(int $npcId, string $stage): bool
+    {
+        $npcMaster = new NpcMaster();
+        $data = $npcMaster-&gt;getPluginData($npcId, 'mymod_oath') ?? [];
+        $data['stage'] = $stage;
+        return $npcMaster-&gt;setPluginData($npcId, 'mymod_oath', $data);
+    }
+
+    function mymodOathClear(int $npcId): bool
+    {
+        return (new NpcMaster())-&gt;deletePluginData($npcId, 'mymod_oath');
+    }
+}</code></pre>
+                    <p>
+                        <code>prerequest.php</code> advances the stage. It only looks at <code>inputtext</code> requests and ignores every other event type. NPC <code>_speech</code> acknowledgements return straight away, so an NPC's own line never counts as the player's answer. Player input does not always arrive as <code>inputtext</code>, so a real plugin must decide which input routes it supports and normalize them itself.
+                    </p>
+                    <pre><code>&lt;?php
+require_once __DIR__ . '/mymod_oath_state.php';
+
+$mymodRequest = $GLOBALS['gameRequest'] ?? null;
+if (!is_array($mymodRequest) || ($mymodRequest[0] ?? '') !== 'inputtext'
+    || !is_string($mymodRequest[3] ?? null)) {
+    return;
+}
+// The payload is "PlayerName: text". Drop the name, then ignore case,
+// surrounding spaces and final sentence punctuation.
+$mymodText = (string) preg_replace('/^[^:]+:\s*/', '', $mymodRequest[3]);
+$mymodText = strtolower(trim(rtrim(trim($mymodText), '.!?')));
+
+try {
+    $mymodNpcId = mymodOathCurrentNpcId();
+    if ($mymodNpcId &lt;= 0) {
+        return;
+    }
+    $mymodStage = mymodOathGetStage($mymodNpcId);
+    $mymodNote = '';
+    // Whole-line matches only; cancellation is checked first.
+    if ($mymodStage !== '' &amp;&amp; $mymodText === 'forget the oath') {
+        $mymodSaved = mymodOathClear($mymodNpcId);
+        $mymodNote = 'cancelled';
+    } elseif ($mymodStage === '' &amp;&amp; $mymodText === 'teach me the oath') {
+        $mymodSaved = mymodOathSetStage($mymodNpcId, 'awaiting_vow');
+    } elseif ($mymodStage === 'awaiting_vow' &amp;&amp; $mymodText === 'i swear') {
+        $mymodSaved = mymodOathClear($mymodNpcId);
+        $mymodNote = 'completed';
+    } else {
+        return;
+    }
+    if (!$mymodSaved) {
+        Logger::warn('[MyModOath] Could not save the oath stage.');
+        return;
+    }
+    // Lasts for this request only; context_pre.php reads it if it runs.
+    $GLOBALS['MYMOD_OATH_TURN_NOTE'] = $mymodNote;
+} catch (Throwable $e) {
+    Logger::warn('[MyModOath] ' . $e-&gt;getMessage());
+}</code></pre>
+                    <p>
+                        <code>context_pre.php</code> gives the NPC guidance for the current stage. It reads the saved stage again instead of relying on <code>prerequest.php</code>, so it also works on turns where the player said nothing new, such as when the same NPC speaks again on their own.
+                    </p>
+                    <pre><code>&lt;?php
+require_once __DIR__ . '/mymod_oath_state.php';
+require_once $GLOBALS['ENGINE_PATH'] . 'lib/prompt_injections.php';
+
+$mymodNote = $GLOBALS['MYMOD_OATH_TURN_NOTE'] ?? '';
+$mymodGuidance = '';
+if ($mymodNote === 'completed') {
+    $mymodGuidance = 'The player has just sworn the oath. Acknowledge it briefly. The oath lesson is over.';
+} elseif ($mymodNote === 'cancelled') {
+    $mymodGuidance = 'The player has abandoned the oath. Drop the subject.';
+} else {
+    try {
+        $mymodNpcId = mymodOathCurrentNpcId();
+        if ($mymodNpcId &gt; 0 &amp;&amp; mymodOathGetStage($mymodNpcId) === 'awaiting_vow') {
+            $mymodGuidance = 'You are teaching the player an oath. Ask them to swear it by saying "I swear", '
+                . 'or to say "forget the oath" to stop. Do not act as if they have sworn yet.';
+        }
+    } catch (Throwable $e) {
+        Logger::warn('[MyModOath] ' . $e-&gt;getMessage());
+    }
+}
+if ($mymodGuidance !== '') {
+    chimRegisterPromptInjection('character_bottom', 'mymod_oath.stage', $mymodGuidance, 100);
+}</code></pre>
+                    <ul>
+                        <li><b>Neither hook is guaranteed:</b> either file may not run for a given request. If <code>context_pre.php</code> does not run after a completion, that turn's acknowledgement is skipped, but the saved stage is still correct.</li>
+                        <li><b>Progress is not proof of a reply:</b> the stage changes when the player's input arrives. That does not mean the NPC generated or spoke a reply.</li>
+                        <li><b>Wording varies:</b> speech-to-text and Player re-speech can change what the player said, and a changed line will not match. Other request types, including other player input types such as <code>inputtext_s</code> and <code>ginputtext</code>, are ignored here; decide separately which routes your plugin should handle and how to normalize them.</li>
+                        <li><b>Concurrent writes:</b> if two requests for the same NPC change the stage at once, the last committed write wins.</li>
                     </ul>
 
                 </div>
@@ -811,8 +956,14 @@ EndFunction</code></pre>
                     <p>Server plugins can keep their own data with an existing NPC record. Each plugin uses a separate name so it does not overwrite another plugin’s data.</p>
                     <ul>
                         <li><b>API:</b> Use the server’s <code>NpcMaster</code> methods <code>getPluginData</code>, <code>setPluginData</code> and <code>deletePluginData</code>. Read the <a href="https://github.com/Dwemer-Dynamics/HerikaServer/blob/dev/docs/plugin-npc-data.md">per-NPC data contract</a> before using them.</li>
+                        <li><b>Use it before custom SQL:</b> For state that belongs to one NPC, this API needs no table or migration of your own.</li>
+                        <li><b>NPC ID:</b> Pass the positive database ID of an NPC that already exists in the current playthrough. Names are not keys; look the ID up first, for example from the row <code>getByName</code> returns.</li>
+                        <li><b>Plugin ID:</b> Use one lowercase ID for your plugin, matching <code>[a-z][a-z0-9_-]{0,63}</code>. Invalid IDs or data throw an exception.</li>
+                        <li><b>Whole-namespace writes:</b> <code>setPluginData</code> replaces your plugin’s whole namespace; it does not merge nested values. To change one value, read the namespace, change it, write it all back, and check that the call returned <code>true</code>.</li>
+                        <li><b>Return values:</b> <code>getPluginData</code> returns <code>null</code> when the NPC or namespace is absent. <code>setPluginData</code> and <code>deletePluginData</code> return <code>false</code> when the NPC is missing or the write fails.</li>
+                        <li><b>Concurrent writes:</b> Other plugins’ namespaces are preserved, but two writes to the same namespace are not merged: the last committed write wins. Reading, changing and writing back does not protect against another request writing in between.</li>
                         <li><b>Scope:</b> This is a server-side API, not a public HTTP endpoint or game command. It does not automatically add data to prompts.</li>
-                        <li><b>Saved state:</b> The data follows NPC history and playthrough saves under their normal restore rules.</li>
+                        <li><b>Saved state:</b> The data follows NPC history and playthrough saves under their normal restore rules. Restoring an older snapshot can bring back older plugin data, and snapshots made before this field existed start with none.</li>
                     </ul>
                 </div>
                 <div class="card" id="BiographyVoiceFilters">
