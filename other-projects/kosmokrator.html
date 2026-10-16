@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="../css/progressBar.css?v=20260713a">
     <link rel="stylesheet" href="../css/sidebar.css?v=20260713a">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/other-projects.css?v=20261016-gallery">
+    <link rel="stylesheet" href="../css/other-projects.css?v=20261016-gallery2">
+    <script src="../js/kosmokrator-gallery.js?v=20261016-gallery2" defer></script>
+    <noscript><style>#Overview.section { opacity: 1; }</style></noscript>
 </head>
 <body class="theme other-projects-theme copyable-guide">
     <div class="progress-container">
@@ -82,28 +84,22 @@
 
                 <div class="card" id="Screenshots">
                     <h2>Screenshots</h2>
-                    <p>These screenshots show Dunarraidh, an example Pictish-inspired nation. Select an image to see it full size.</p>
+                    <p>These screenshots show Dunarraidh, an example Pictish-inspired nation. Choose a screenshot below, then select the large image to see it full size.</p>
                     <div class="kosmokrator-gallery">
-                        <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-overview.png"><img src="../img/kosmokrator/dunarraidh-overview.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Overview of Dunarraidh, the Painted Kingdoms, showing its latest export, 10 recruitable troops and 6 recruitable commanders."></a>
-                            <figcaption><b>Project overview.</b> Troops, commanders and the latest export at a glance.</figcaption>
+                        <figure class="guide-figure kosmokrator-gallery-preview">
+                            <a href="../img/kosmokrator/dunarraidh-overview.png"><img src="../img/kosmokrator/dunarraidh-overview.png" width="1440" height="1000" decoding="async" alt="Overview of Dunarraidh, the Painted Kingdoms, showing its latest export, 10 recruitable troops and 6 recruitable commanders."></a>
+                            <figcaption aria-live="polite"><b>Project overview.</b> Troops, commanders and the latest export at a glance.</figcaption>
                         </figure>
-                        <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-units.png"><img src="../img/kosmokrator/dunarraidh-units.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Units tab listing Dunarraidh's units beside the Grove Druid's sheet: stats, quarterstaff, Nature, Earth and Holy magic, sprite and description."></a>
-                            <figcaption><b>Browse units.</b> Sprite, stats, weapons, magic and description.</figcaption>
-                        </figure>
-                        <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-unit-editor.png"><img src="../img/kosmokrator/dunarraidh-unit-editor.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Stat editor for the Antler-Sworn, with each stat tagged authored or inherited from the copied unit, and leadership and magic path fields below."></a>
-                            <figcaption><b>Edit stats.</b> See which stats still come from the copied unit.</figcaption>
-                        </figure>
-                        <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-health.png"><img src="../img/kosmokrator/dunarraidh-health.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Health tab reporting no blockers, warnings or unverified findings, with lists of what was and wasn't checked, and its limitations."></a>
-                            <figcaption><b>Health.</b> Anything that needs fixing, in one place.</figcaption>
-                        </figure>
-                        <figure class="guide-figure">
-                            <a href="../img/kosmokrator/dunarraidh-changes.png"><img src="../img/kosmokrator/dunarraidh-changes.png" width="1440" height="1000" loading="lazy" decoding="async" alt="Changes tab comparing a checkpoint with the current files: the Painted Levy's gold cost went from 10 to 9, shown as a summary and a line-by-line diff."></a>
-                            <figcaption><b>Changes.</b> Compare with an earlier checkpoint, or restore it.</figcaption>
-                        </figure>
+                        <ul class="kosmokrator-gallery-thumbs" aria-label="Screenshots">
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-overview.png" data-title="Project overview." data-caption="Troops, commanders and the latest export at a glance." data-alt="Overview of Dunarraidh, the Painted Kingdoms, showing its latest export, 10 recruitable troops and 6 recruitable commanders."><img src="../img/kosmokrator/dunarraidh-overview.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Overview</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-nation.png" data-title="Nation." data-caption="Flag, description, summary and what each fort can recruit." data-alt="Nation tab for Dunarraidh showing its flag, era and colours, description, summary of its troops and magic, and lists of fort troops and commanders."><img src="../img/kosmokrator/dunarraidh-nation.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Nation</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-units.png" data-title="Browse units." data-caption="Sprite, stats, weapons, magic and description." data-alt="Units tab listing Dunarraidh's units beside the Grove Druid's sheet: stats, quarterstaff, Nature, Earth and Holy magic, sprite and description."><img src="../img/kosmokrator/dunarraidh-units.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Units</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-unit-editor.png" data-title="Edit stats." data-caption="See which stats still come from the copied unit." data-alt="Stat editor for the Antler-Sworn, with each stat tagged authored or inherited from the copied unit, and leadership and magic path fields below."><img src="../img/kosmokrator/dunarraidh-unit-editor.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Edit stats</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-balance.png" data-title="Balance." data-caption="Compare your roster and magic with base-game nations from the same era." data-alt="Balance tab comparing Dunarraidh with Early Age Marverni, Tir na n'Og and Ulm: recruitable troop counts, highest fixed magic per path and the top of a cost and protection chart. The tab notes it gives no power score."><img src="../img/kosmokrator/dunarraidh-balance.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Balance</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-health.png" data-title="Health." data-caption="Anything that needs fixing, in one place." data-alt="Health tab reporting no blockers, warnings or unverified findings, with lists of what was and wasn't checked, and its limitations."><img src="../img/kosmokrator/dunarraidh-health.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Health</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-export.png" data-title="Export." data-caption="Package the mod as a ZIP and see earlier exports." data-alt="Export tab showing validation with no errors, warnings or unverified items, the saved file and its hash, and earlier ZIP exports, above the Steam Workshop steps."><img src="../img/kosmokrator/dunarraidh-export.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Export</span></a></li>
+                            <li><a class="kosmokrator-gallery-thumb" href="../img/kosmokrator/dunarraidh-changes.png" data-title="Changes." data-caption="Compare with an earlier checkpoint, or restore it." data-alt="Changes tab comparing a checkpoint with the current files: the Painted Levy's gold cost went from 10 to 9, shown as a summary and a line-by-line diff."><img src="../img/kosmokrator/dunarraidh-changes.png" width="1440" height="1000" loading="lazy" decoding="async" alt=""><span>Changes</span></a></li>
+                        </ul>
                     </div>
                 </div>
 
