@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Custom Mod Guide | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <title>Kagrenac Guide | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -26,8 +26,8 @@
                 <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
+                <a href="./index.html" id="headerTitle">Kagrenac</a>
             </div>
         </div>
 
@@ -45,16 +45,16 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
             </p>
         </div>
 
         <main class="content">
             <section id="Overview" class="section">
                 <div class="card hero-card">
-                    <h1>Custom Mod Guide</h1>
-                    <p>Build the server and client of your own AI NPC mod from two public templates. <b>ExampleServer</b> is a small PHP 8.2 and PostgreSQL server that runs inside DwemerDistro. <b>ExampleMod</b> is a Windows console "fake game" that shows the game side. A player line goes in; an NPC reply and, at most, one safe action come back.</p>
+                    <h1>Kagrenac</h1>
+                    <p>Kagrenac is a starter kit for building AI NPC mods. It is two public templates you copy and make your own: <b>KagrenacServer</b> is a small PHP 8.2 and PostgreSQL server that runs inside DwemerDistro, and <b>KagrenacClient</b> is a Windows console "fake game" that shows the game side. A player line goes in; an NPC reply and, at most, one safe action come back.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#WhatItIs">What the templates are</a></li>
                         <li><a href="#Architecture">How a request flows</a></li>
@@ -72,8 +72,7 @@
                         <li><b>Local by design.</b> The server runs on one PC inside DwemerDistro WSL, or on a trusted local network. The dashboard has no login and the token travels over plain HTTP.</li>
                     </ul>
                     <div class="guide-note note-warning">
-                        <p><b>What they are not:</b> ExampleMod is not a plugin for any real game. It has no engine SDK and no game hooks, and no game is supported until someone builds and tests a port in that game. Real LLM and voice providers are optional code paths; the smoke checks cover mock mode only.</p>
-                        <p>The templates are independent of CHIM, STOBE and Dialectic. They share no Git history and receive no automatic updates from those products.</p>
+                        <p><b>What they are not:</b> KagrenacClient is not a plugin for any real game. It has no engine SDK and no game hooks, and no game is supported until someone builds and tests a port in that game. Real LLM and voice providers are optional code paths; the smoke checks cover mock mode only.</p>
                     </div>
                 </div>
 
@@ -89,7 +88,7 @@
                         <li>It asks the mock (or your configured LLM) for a reply, keeps only allowlisted actions, and saves the exchange.</li>
                         <li>The client checks the request ID and NPC, then shows the subtitle and runs the action through its own allowlist on the game thread.</li>
                     </ol>
-                    <p>The full contract is in <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/PROTOCOL.md">PROTOCOL.md</a>, identical in both repositories.</p>
+                    <p>The full contract is in <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/PROTOCOL.md">PROTOCOL.md</a>, identical in both repositories.</p>
                 </div>
 
                 <div class="card" id="Routes">
@@ -97,14 +96,14 @@
                     <div class="table-scroll" role="region" aria-label="Install routes" tabindex="0"><table>
                         <thead><tr><th>Route</th><th>Server address</th></tr></thead>
                         <tbody>
-                            <tr><td><a href="./installation.html#InstallServer">Manual install</a> (<code>main</code> or <code>dev</code>)</td><td><code>http://127.0.0.1:19000/ExampleServer</code></td></tr>
+                            <tr><td><a href="./installation.html#InstallServer">Manual install</a> (<code>main</code> or <code>dev</code>)</td><td><code>http://127.0.0.1:19000/custom-mods/KagrenacServer</code></td></tr>
                             <tr><td><a href="./installation.html#LauncherRoute">Launcher <b>Mods &gt; Custom mods</b></a></td><td><code>http://127.0.0.1:19000/custom-mods/example-server</code></td></tr>
                         </tbody>
                     </table></div>
                     <div class="guide-note note-info">
                         <p><b>Custom mods port:</b> DwemerDistro gives all custom PHP mods one shared port on this PC, <code>CUSTOM_MODS_PORT</code> (default 19000, allowed 19000-19999). Each mod has its own path and database, and official ports such as 8081 do not change. See <a href="./installation.html#Ports">Ports and branches</a>.</p>
                     </div>
-                    <p>Every route builds the console client separately on Windows.</p>
+                    <p>The two routes are separate installs with separate databases: you clone the manual one into <code>custom-mods/KagrenacServer</code> yourself, while the launcher creates and manages <code>custom-mods/example-server</code> from the template's manifest id. Every route builds the console client separately on Windows.</p>
                 </div>
 
                 <div class="card" id="GuideMap">
@@ -114,7 +113,7 @@
                         <li><a href="./configuration.html">Configuration</a>: LLM, API keys, PocketTTS, Parakeet and optional NPC selection.</li>
                         <li><a href="./data-and-memory.html">Data and Memory</a>: NPC bios, facts, profiles, memory and session checkpoints.</li>
                         <li><a href="./testing.html">Testing</a>: the web conversation tester, events, logs, actions and cancellation.</li>
-                        <li><a href="./porting.html">Porting</a>: replace the console game with your engine, hand off to a coding agent, extend the dashboard.</li>
+                        <li><a href="./porting.html">Porting</a>: replace the console game with your engine in stages with a coding agent, and extend the dashboard.</li>
                         <li><a href="./updates.html">Updates and Backups</a>: versions, migrations, backups and branch compatibility.</li>
                         <li><a href="./publishing.html">Publishing</a>: your own repositories, licence, branding, launcher manifest and private data.</li>
                     </ol>
@@ -124,11 +123,12 @@
                     <h2>Full Template Documentation</h2>
                     <p>This guide covers the common tasks. Each topic has one canonical document in the template repositories:</p>
                     <ul>
-                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md">START_HERE.md</a>: orientation, feature status, walkthrough and troubleshooting by request ID.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md">SETUP.md</a>: installation and operations.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md">CONNECTORS.md</a>: copyable provider settings.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a>: dashboard pages and adding your own.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md">ExampleMod README</a>: client commands, settings and smoke checks.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md">START_HERE.md</a>: orientation, feature status, walkthrough and troubleshooting by request ID.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md">SETUP.md</a>: installation and operations.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md">CONNECTORS.md</a>: copyable provider settings.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a>: dashboard pages and adding your own.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/README.md">KagrenacClient README</a>: client commands, settings and smoke checks.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/AGENT_PLAYBOOK.md">AGENT_PLAYBOOK.md</a>, <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/ENGINE_PACK.md">ENGINE_PACK.md</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md">PORT_RECIPES.md</a>: the staged coding agent prompt, the engine evidence record and one recipe per port stage.</li>
                     </ul>
                     <p>These links show each template's default <code>main</code> branch. The <code>dev</code> branch is for development.</p>
                     <p><b>Next step:</b> <a href="./installation.html">Install the server and client</a>.</p>

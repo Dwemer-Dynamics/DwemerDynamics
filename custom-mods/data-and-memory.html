@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Custom Mod Data and Memory | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <title>Kagrenac Data and Memory | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -26,8 +26,8 @@
                 <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
+                <a href="./index.html" id="headerTitle">Kagrenac</a>
             </div>
         </div>
 
@@ -45,8 +45,8 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
             </p>
         </div>
 
@@ -84,8 +84,8 @@
                     <p>Nothing is added automatically. To try two fictional NPCs (Mira = <code>npc_guide</code>, Oren = <code>npc_scout</code>) and a few facts, run once in WSL from the server folder (safe to repeat; it never overwrites your edits):</p>
                     <pre><code>php scripts/seed_example.php</code></pre>
                     <p>Then edit them on <b>Configuration &gt; NPC bios</b>. Facts can belong to one NPC or be global, and can be searched and edited there. Try it from the client folder:</p>
-                    <pre><code>.\example_mod.exe --say "Who are you?"
-.\example_mod.exe --say "When does the market open?"</code></pre>
+                    <pre><code>.\KagrenacClient.exe --say "Who are you?"
+.\KagrenacClient.exe --say "When does the market open?"</code></pre>
                     <p>Mira answers from her bio, then from the market fact.</p>
                 </div>
 
@@ -134,7 +134,7 @@ php scripts/checkpoint.php delete  demo-save-1 before-boss</code></pre>
                         <li>Each session keeps at most 20 checkpoints of up to 2000 lines.</li>
                     </ul>
                     <p>For whole-database backups, see <a href="./updates.html#BackupKinds">Updates and Backups</a>.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#bios-knowledge-and-session-checkpoints">SETUP.md, Bios, knowledge and session checkpoints</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md#memory-and-vector-search-optional">CONNECTORS.md, Memory and vector search</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md#bios-knowledge-and-session-checkpoints">SETUP.md, Bios, knowledge and session checkpoints</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md#memory-and-vector-search-optional">CONNECTORS.md, Memory and vector search</a>.</p>
                     <p><b>Next step:</b> <a href="./testing.html">Test conversations, events and logs</a>.</p>
                 </div>
             </section>

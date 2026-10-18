@@ -1,4 +1,4 @@
-/* Custom Mod Guide: blue accent taken from the ExampleServer question-mark icon. */
+/* Kagrenac guide (custom-mods/): blue accent shared by the guide pages and homepage row. */
 :root {
     --custom-accent: #4da3ff;
     --custom-accent-light: #8cc4ff;
@@ -113,6 +113,7 @@
 .hubModArtworkCustom img {
     width: auto;
     height: 56%;
+    max-height: 121px; /* the icon's intrinsic height; avoids upscaling the small artwork */
     object-fit: contain;
 }
 

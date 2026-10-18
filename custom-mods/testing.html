@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Custom Mod Testing | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <title>Kagrenac Testing | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -26,8 +26,8 @@
                 <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
+                <a href="./index.html" id="headerTitle">Kagrenac</a>
             </div>
         </div>
 
@@ -45,8 +45,8 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
             </p>
         </div>
 
@@ -68,8 +68,8 @@
                 <div class="card" id="WebConversation">
                     <h2>Web Conversation Tester</h2>
                     <figure class="guide-figure">
-                        <img src="./images/public-example-conversation.jpg" width="1265" height="712" loading="lazy" alt="ExampleServer dashboard Conversation page in mock mode, showing player name, session, optional context fields, the Your message box with Send, Cancel and New session buttons, and the Game event test panel below with Event type and Mode fields.">
-                        <figcaption>The dashboard Conversation page and its Game event test, in mock mode.</figcaption>
+                        <img src="./images/public-example-conversation.jpg" width="1280" height="1523" loading="lazy" alt="KagrenacServer dashboard Conversation page in mock mode. The form uses NPC ID npc_guide, NPC name Guide, player Traveler and session dashboard-demo, with the message Hello, can you help me find the market? Below are the Game event test panel and the Conversation log, where the mock Guide replies: Guide heard you say: Hello, can you help me find the market? Actions: none.">
+                        <figcaption>The dashboard Conversation page in mock mode: a test turn in the <code>dashboard-demo</code> session, where the mock Guide echoes the message with no action. No game or provider is involved.</figcaption>
                     </figure>
                     <ol>
                         <li>Open <b>Roleplay &gt; Conversation</b>. The default session is <code>dashboard-demo</code> and the NPC is <code>npc_guide</code>.</li>
@@ -82,8 +82,8 @@
                 <div class="card" id="GameEvents">
                     <h2>Game Events</h2>
                     <p>On the same page, <b>Game event test</b> sends <code>event.php</code>. Mode <b>Log only</b> stores an event with no model call, history or actions. <b>NPC responds</b> makes the NPC react like a normal turn. From the client folder:</p>
-                    <pre><code>.\example_mod.exe --event location_entered "The player entered the market."
-.\example_mod.exe --react item_given "The player gave a lantern. follow me"</code></pre>
+                    <pre><code>.\KagrenacClient.exe --event location_entered "The player entered the market."
+.\KagrenacClient.exe --react item_given "The player gave a lantern. follow me"</code></pre>
                     <p>Only four types exist: <code>location_entered</code>, <code>item_given</code>, <code>combat_started</code> and <code>combat_ended</code>. The game decides when to send events; the server never triggers anything itself.</p>
                 </div>
 
@@ -116,11 +116,11 @@
                     <h2>Cancellation And Stale Replies</h2>
                     <ol>
                         <li>Set <code>mock_delay_seconds</code> to 3 on <b>Configuration &gt; LLM</b>.</li>
-                        <li>Start the interactive client with <code>.\example_mod.exe</code> and type <code>follow me</code>.</li>
+                        <li>Start the interactive client with <code>.\KagrenacClient.exe</code> and type <code>follow me</code>.</li>
                         <li>Before it answers, type <code>/cancel</code>, <code>/npc scout</code>, <code>/unload</code> or <code>/session other-save</code>.</li>
                     </ol>
                     <p>The reply and its action are dropped and the server is told to cancel; Logs shows the turn as <code>cancelled</code> or <code>superseded</code>. In the dashboard tester, <b>Cancel</b> or changing the NPC does the same. Cancellation may not stop computation at the provider, and failed requests are never retried automatically.</p>
-                    <p>Server check in WSL, with a mock delay of 2 or more: <code>SMOKE_STALE=1 bash scripts/smoke.sh http://127.0.0.1:19000/ExampleServer</code>, using your own server address. Set the delay back to 0 afterwards.</p>
+                    <p>Server check in WSL, with a mock delay of 2 or more: <code>SMOKE_STALE=1 bash scripts/smoke.sh http://127.0.0.1:19000/custom-mods/KagrenacServer</code>, using your own server address. Set the delay back to 0 afterwards.</p>
                 </div>
 
                 <div class="card" id="Troubleshooting">
@@ -128,7 +128,7 @@
                     <div class="table-scroll" role="region" aria-label="Troubleshooting" tabindex="0"><table>
                         <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
                         <tbody>
-                            <tr><td><code>health.php</code> 404 or 403</td><td>The folder must be <code>/var/www/html/ExampleServer</code> or <code>/var/www/html/custom-mods/&lt;id&gt;</code>, and <code>sudo ddistro_custom_mod setup-web</code> must have succeeded.</td></tr>
+                            <tr><td><code>health.php</code> 404 or 403</td><td>The folder must be inside <code>/var/www/html/custom-mods/</code>, such as <code>/var/www/html/custom-mods/KagrenacServer</code> for a manual install, and <code>sudo ddistro_custom_mod setup-web</code> must have succeeded.</td></tr>
                             <tr><td>Nothing answers on port 19000</td><td>Run <code>sudo ddistro_custom_mod setup-web</code>. If <code>setup-web</code> is unavailable or rejected as an unknown command, run <b>Update Distro</b> in the DwemerDistro launcher, then run it again. See <a href="./installation.html#Ports">Ports and branches</a>.</td></tr>
                             <tr><td><code>setup-web</code> says the port is in use</td><td>Nothing was changed. Choose another <code>CUSTOM_MODS_PORT</code> from 19000 to 19999 in <code>/etc/dwemerdistro_services.conf</code>, run it again, then pair again.</td></tr>
                             <tr><td><code>500 server_not_configured</code></td><td><code>config/config.php</code> missing, unreadable, or token still the placeholder. Run the installer again.</td></tr>
@@ -139,10 +139,10 @@
                         </tbody>
                     </table></div>
                     <p>Also check that Apache does not serve your Git history. <code>200</code> here means anyone who can reach the port can download it. Check port 8081 too, because it also serves <code>/var/www/html</code>:</p>
-                    <pre><code>curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:19000/ExampleServer/.git/HEAD
-curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8081/ExampleServer/.git/HEAD</code></pre>
+                    <pre><code>curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:19000/custom-mods/KagrenacServer/.git/HEAD
+curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8081/custom-mods/KagrenacServer/.git/HEAD</code></pre>
                     <p>When sharing logs for help, include request IDs and error codes, never tokens or keys.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md#troubleshooting-by-request-id">START_HERE.md, Troubleshooting by request ID</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#troubleshooting">SETUP.md, Troubleshooting</a> and the <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/README.md#smoke-checks">ExampleMod smoke checks</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md#troubleshooting-by-request-id">START_HERE.md, Troubleshooting by request ID</a>, <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md#troubleshooting">SETUP.md, Troubleshooting</a> and the <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/README.md#smoke-checks">KagrenacClient smoke checks</a>.</p>
                     <p><b>Next step:</b> <a href="./porting.html">Port the client to your engine</a>.</p>
                 </div>
             </section>

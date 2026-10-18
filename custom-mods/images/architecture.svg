@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-labelledby="archTitle archDesc" font-family="Arial, Helvetica, sans-serif">
-    <title id="archTitle">Custom mod architecture</title>
+    <title id="archTitle">Kagrenac architecture</title>
     <desc id="archDesc">The game client sends a player line to the server with turn.php. The server reads and saves history, bios and facts in its PostgreSQL database, asks the mock or a configured LLM, and returns a reply with at most one allowlisted action. The client applies the reply on the game thread.</desc>
     <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -17,14 +17,14 @@
 
     <g fill="#ffffff" text-anchor="middle">
         <text x="120" y="115" font-size="19" font-weight="bold">Game client</text>
-        <text x="120" y="142" font-size="14" fill="#cdd6e5">ExampleMod or your port</text>
+        <text x="120" y="142" font-size="14" fill="#cdd6e5">KagrenacClient or a port</text>
         <text x="120" y="164" font-size="14" fill="#cdd6e5">GameAdapter runs on</text>
         <text x="120" y="184" font-size="14" fill="#cdd6e5">the game thread</text>
 
         <text x="385" y="115" font-size="19" font-weight="bold">Server</text>
-        <text x="385" y="142" font-size="14" fill="#cdd6e5">ExampleServer, PHP 8.2</text>
+        <text x="385" y="142" font-size="14" fill="#cdd6e5">KagrenacServer, PHP 8.2</text>
         <text x="385" y="164" font-size="14" fill="#cdd6e5">in DwemerDistro WSL</text>
-        <text x="385" y="184" font-size="14" fill="#cdd6e5">Apache, port 8081</text>
+        <text x="385" y="184" font-size="14" fill="#cdd6e5">Apache, port 19000</text>
 
         <text x="660" y="62" font-size="17" font-weight="bold">Database</text>
         <text x="660" y="88" font-size="13" fill="#cdd6e5">PostgreSQL: history,</text>

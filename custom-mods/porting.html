@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Porting to a Real Engine | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <title>Kagrenac Porting | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -26,8 +26,8 @@
                 <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
+                <a href="./index.html" id="headerTitle">Kagrenac</a>
             </div>
         </div>
 
@@ -45,8 +45,8 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
             </p>
         </div>
 
@@ -54,7 +54,7 @@
             <section id="Porting" class="section">
                 <div class="card hero-card">
                     <h1>Porting To A Real Engine</h1>
-                    <p>ExampleMod is a console fake game. A real mod keeps its protocol client, threading and safety checks, and replaces the console <code>GameAdapter</code> with your engine's real APIs. Nothing works in a game until you build and test the port there.</p>
+                    <p>KagrenacClient is a console fake game. A real mod keeps its protocol client, threading and safety checks, and replaces the console <code>GameAdapter</code> with your engine's real APIs. Nothing works in a game until you build and test the port there.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#Boundaries">Boundaries to keep</a></li>
                         <li><a href="#Checklist">Port checklist</a></li>
@@ -93,28 +93,34 @@
                         <li>Request-ID and stale checks, no automatic retries, and both allowlists unchanged.</li>
                         <li>A private <code>config.json</code> location for the server URL and token.</li>
                         <li>The correct architecture (x64 or x86) for the game, built without warnings.</li>
+                        <li>Plugin load, unload and quit handled outside <code>GameAdapter</code>, with no worker calling back after unload (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#plugin-lifecycle-and-shutdown">lifecycle recipe</a>).</li>
+                        <li>Pending replies dropped and cancelled on NPC change, NPC unload, save load or new game (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#sessions-saves-and-branches">sessions recipe</a>).</li>
+                        <li>If the game sends events, keep them bounded (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#game-events">events recipe</a>).</li>
+                        <li>A client log of request ID, endpoint, status and outcome, never the token or audio (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#diagnostics">diagnostics recipe</a>).</li>
+                        <li>A plugin package, separate from the console demo, tested in a clean game install (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#packaging">packaging recipe</a>).</li>
                     </ul>
+                    <p>The canonical list is <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>.</p>
                 </div>
 
                 <div class="card" id="AgentHandoff">
                     <h2>Coding Agent Handoff</h2>
-                    <p><a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/AGENT_PLAYBOOK.md">AGENT_PLAYBOOK.md</a> contains a ready prompt. Run your coding agent from a folder with your copies of both repositories and your game's modding SDK, and paste that prompt. It works in five steps and stops after each:</p>
-                    <ol>
-                        <li>Inspect the game's engine, SDK, threading and APIs, citing sources.</li>
-                        <li>Run the examples unchanged and pass the smoke checks.</li>
-                        <li>Rename to your own project, keeping the licence and notices.</li>
-                        <li>Implement the game adapter with real APIs only.</li>
-                        <li>Validate the build, the mock checks, then the real game.</li>
-                    </ol>
+                    <p>The full-mod workflow lives in three client documents. Use them as they are rather than writing a second workflow:</p>
+                    <ul>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/AGENT_PLAYBOOK.md">AGENT_PLAYBOOK.md</a>: the prompt to paste into your coding agent.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/ENGINE_PACK.md">ENGINE_PACK.md</a>: a blank record of your engine's SDK facts, what is implemented and what is verified in the engine.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md">PORT_RECIPES.md</a>: one bounded recipe per stage, each with what you can check now against the mock and what only the engine can show.</li>
+                    </ul>
+                    <p>Run the agent from a folder that holds your copies of both repositories, as siblings named <code>KagrenacServer</code> and <code>KagrenacClient</code>, plus your engine's modding SDK. Fill in the prompt's <b>Authorized now</b> block first: project name, engine, stages in scope, and whether real provider calls, voice, extra actions or commits are allowed. The agent then works through every authorized stage without pausing, and stops only for missing authority, a material decision (protocol, schema, endpoint or dependency) or a blocker it cannot resolve.</p>
+                    <p>The stages run in order: scope and recon of the SDK, a mock baseline with the console client unchanged, project identity, plugin lifecycle, typed dialogue, actions, game events if the engine has hooks, saves and sessions, optional voice, diagnostics and packaging, and a final acceptance report.</p>
                     <div class="guide-note note-info">
-                        <p>The agent must not invent SDK functions. An unknown API should become a clearly marked TODO. Ask for mock checks and in-game results to be reported separately.</p>
+                        <p><b>Mock first, engine unverified.</b> The baseline runs against the mock server and the console fake game; passing it says nothing about your engine. The agent must cite the SDK for every engine fact, write "Unknown" and a marked TODO instead of inventing an API, and mark engine-side work <i>Implemented, untested</i> until it has run in the game. Voice is optional and skipped unless you authorize it.</p>
                     </div>
-                    <p>The playbook also has a warm-up exercise: add a third fictional NPC behind <code>GameAdapter</code>, give it a bio and fact on the server, and check retrieval in Logs, all without touching the protocol.</p>
+                    <p>Before the typed dialogue stage, the playbook's warm-up exercise is worth doing: add a third fictional NPC behind <code>GameAdapter</code>, give it a bio and fact on the server, and check retrieval in Logs, all without touching the protocol.</p>
                 </div>
 
                 <div class="card" id="AddAction">
                     <h2>Add An Action</h2>
-                    <p>New actions follow the worked <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/WAVE_ACTION.md">wave exercise</a>. It touches, in your own copies:</p>
+                    <p>New actions follow the worked <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/WAVE_ACTION.md">wave exercise</a>. It touches, in your own copies:</p>
                     <ul>
                         <li>The server prompt and mock in <code>lib/llm.php</code>, and <code>allowed_actions</code> in the server config.</li>
                         <li>One <code>GameAdapter</code> method, its implementation, and one branch in <code>applyResult()</code>.</li>
@@ -138,12 +144,12 @@ require __DIR__ . '/tmpl/header.php';
     &lt;p&gt;Add your content here.&lt;/p&gt;
 &lt;/section&gt;
 &lt;?php require __DIR__ . '/tmpl/footer.php'; ?&gt;</code></pre>
-                    <p>Add <code>'my_page' =&gt; ['My page', 'my_page.php']</code> to a group in <code>ui/navigation.php</code>. Escape output with <code>e($value)</code>, check CSRF on every state-changing POST, and never print secrets. <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a> has the full rules and an agent prompt.</p>
+                    <p>Add <code>'my_page' =&gt; ['My page', 'my_page.php']</code> to a group in <code>ui/navigation.php</code>. Escape output with <code>e($value)</code>, check CSRF on every state-changing POST, and never print secrets. <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a> has the full rules and an agent prompt.</p>
                 </div>
 
                 <div class="card" id="Evidence">
                     <h2>Evidence Levels</h2>
-                    <p>Report each level separately, and claim only what you actually ran:</p>
+                    <p>Report each level separately, record the results in your copy of <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/ENGINE_PACK.md">ENGINE_PACK.md</a>, and claim only what you actually ran:</p>
                     <ol>
                         <li>Server lint, migrations twice, and <code>scripts/smoke.sh</code> in mock mode.</li>
                         <li>The console client's smoke checks.</li>
@@ -151,7 +157,7 @@ require __DIR__ . '/tmpl/header.php';
                         <li>In game: talk to an NPC, see the subtitle, follow, cancel a slow reply, unload the NPC while a reply is pending, and stop the server, all without a crash or hang.</li>
                     </ol>
                     <p>Until level 4 passes in a specific game, do not describe the mod as working in that game.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>, <a href="https://github.com/Dwemer-Dynamics/ExampleMod/blob/main/PROTOCOL.md">PROTOCOL.md</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>, <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PROTOCOL.md">PROTOCOL.md</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
                     <p><b>Next step:</b> <a href="./updates.html">Plan updates and backups</a>.</p>
                 </div>
             </section>

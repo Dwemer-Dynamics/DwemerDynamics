@@ -2,9 +2,9 @@
 
 Guide-first website for Dwemer Dynamics projects, covering CHIM, STOBE, and Dialectic.
 
-## Custom Mod Guide
+## Kagrenac Guide
 
-`custom-mods/` is the author guide for building a mod from the public ExampleServer and ExampleMod templates. Its pages share `css/custom-mods.css` and the `customMods` sidebar in `js/javascript.js`, selected by the `custom-mods-theme` body class. The template repositories hold the canonical reference docs; keep these pages task-focused and link to them.
+`custom-mods/` is the author guide for Kagrenac, a starter kit for building AI NPC mods from the public [KagrenacServer](https://github.com/Dwemer-Dynamics/KagrenacServer) and [KagrenacClient](https://github.com/Dwemer-Dynamics/KagrenacClient) templates. The folder name stays `custom-mods/` so existing links keep working. Its pages share `css/custom-mods.css` and the `customMods` sidebar in `js/javascript.js`, selected by the `custom-mods-theme` body class. The template repositories hold the canonical reference docs, including the client's staged porting kit (`AGENT_PLAYBOOK.md`, `ENGINE_PACK.md`, `PORT_RECIPES.md`); keep these pages task-focused and link to them.
 
 ## Other Projects
 
