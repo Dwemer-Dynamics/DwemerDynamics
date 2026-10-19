@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kagrenac Publishing | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
+    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -45,8 +45,7 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Source Code</a>
             </p>
         </div>
 
@@ -54,9 +53,9 @@
             <section id="Publishing" class="section">
                 <div class="card hero-card">
                     <h1>Publishing</h1>
-                    <p>A copy of the templates is a different mod. Give it its own repositories, name, database and branding, follow the GPL, and keep private data out of everything you share.</p>
+                    <p>A copy of Kagrenac is a different mod. Give it its own repository, name, database and branding, follow the GPL, and keep private data out of everything you share.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
-                        <li><a href="#OwnRepositories">Your own repositories</a></li>
+                        <li><a href="#OwnRepositories">Your own repository</a></li>
                         <li><a href="#Licence">Licence</a></li>
                         <li><a href="#Branding">Your own branding</a></li>
                         <li><a href="#Manifest">Launcher manifest</a></li>
@@ -66,26 +65,26 @@
                 </div>
 
                 <div class="card" id="OwnRepositories">
-                    <h2>Your Own Repositories</h2>
+                    <h2>Your Own Repository</h2>
                     <ol>
-                        <li>Open <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">KagrenacServer</a> on GitHub and choose <b>Use this template &gt; Create a new repository</b>. Then do the same, separately, for <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">KagrenacClient</a>. You end up with two repositories you own.</li>
-                        <li>Make sure each repository has the branches you will offer, for example <code>main</code> and <code>dev</code>. <b>Include all branches</b> is optional: leave it off to start with only the default branch and create the others yourself, or tick it to copy the template's branches.</li>
+                        <li>Open <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Kagrenac</a> on GitHub and choose <b>Use this template &gt; Create a new repository</b>. You end up with one repository you own, with the server at the root and the client in <code>client/</code>.</li>
+                        <li>Make sure the repository has the branches you will offer, for example <code>main</code> and <code>dev</code>. <b>Include all branches</b> is optional: leave it off to start with only the default branch and create the others yourself, or tick it to copy the Kagrenac branches.</li>
                         <li>Before the first install, change <code>database.name</code> in your server's <code>config/config.example.php</code> to a unique name of your own, for example <code>my_npc_mod</code>, and set the manifest's <code>database_placeholder</code> to the same value. Never point it at <code>example_ai_mod</code> or another product's database.</li>
-                        <li>Clone your server into its own folder, install it as in <a href="./installation.html">Installation</a>, and run the smoke checks against it. Use <code>/var/www/html/custom-mods/&lt;folder&gt;</code> with a folder name that differs from your manifest <code>id</code>, for example <code>my-npc-mod-dev</code> at <code>http://127.0.0.1:19000/custom-mods/my-npc-mod-dev/health.php</code>. Give <code>smoke.sh</code> and <code>pair_client.php --base-url</code> that address.</li>
+                        <li>Clone your repository twice, as in <a href="./installation.html#Requirements">Before you start</a>: a server copy in WSL and a development copy on Windows. Install the server copy into its own folder as in <a href="./installation.html">Installation</a>, and run the smoke checks against it. Use <code>/var/www/html/custom-mods/&lt;folder&gt;</code> with a folder name that differs from your manifest <code>id</code>, for example <code>my-npc-mod-dev</code> at <code>http://127.0.0.1:19000/custom-mods/my-npc-mod-dev/health.php</code>. Give <code>smoke.sh</code> and <code>pair_client.php --base-url</code> that address.</li>
                     </ol>
-                    <p>Editing the template does not change a <code>config/config.php</code> that already exists. For a copy you already installed, edit only <code>database.name</code> in its existing private <code>config/config.php</code> to a new unique database, keeping its token, keys and other settings, and do not copy <code>config.example.php</code> over it. Then rerun <code>install.sh</code> to create and migrate that new database. Existing data is not transferred automatically. For a fresh checkout, follow <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md, A separate copy with its own database</a>.</p>
+                    <p>Editing <code>config/config.example.php</code> does not change a <code>config/config.php</code> that already exists. For a copy you already installed, edit only <code>database.name</code> in its existing private <code>config/config.php</code> to a new unique database, keeping its token, keys and other settings, and do not copy <code>config.example.php</code> over it. Then rerun <code>install.sh</code> to create and migrate that new database. Existing data is not transferred automatically. For a fresh checkout, follow <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md, A separate copy with its own database</a>.</p>
                     <div class="guide-note note-info">
-                        <p><b>Port defaults.</b> <b>Use this template</b> copies the template's <code>main</code> branch, with its port 19000 defaults. If you set a different <code>CUSTOM_MODS_PORT</code>, use that port instead. Either way, pass the address explicitly when you smoke test and pair. See <a href="./installation.html#Ports">Ports and branches</a>.</p>
-                        <p><b>Template updates.</b> A repository made with <b>Use this template</b> has its own independent history, so template changes will not merge in normally. Nothing updates automatically. Compare later template changes with your copy, port the ones you need by hand, and test both your server and client. Do not force a merge of unrelated histories. If you want shared history instead, clone the template and push it to a new empty repository of your own.</p>
+                        <p><b>Port defaults.</b> <b>Use this template</b> copies the Kagrenac <code>main</code> branch, with its port 19000 defaults. If you set a different <code>CUSTOM_MODS_PORT</code>, use that port instead. Either way, pass the address explicitly when you smoke test and pair. See <a href="./installation.html#Ports">Ports and branches</a>.</p>
+                        <p><b>Kagrenac updates.</b> A repository made with <b>Use this template</b> has its own independent history, so upstream Kagrenac changes will not merge in normally. Nothing updates automatically. Compare later Kagrenac changes with your copy, port the ones you need by hand, and test both your server and client. Do not force a merge of unrelated histories. If you want shared history instead, clone Kagrenac and push it to a new empty repository of your own.</p>
                     </div>
                 </div>
 
                 <div class="card" id="Licence">
                     <h2>Licence</h2>
-                    <p>Both templates are licensed <b>GPL-3.0-only</b>. A project based on them must follow its terms, including offering source with any binaries you share.</p>
+                    <p>Kagrenac is licensed <b>GPL-3.0-only</b>. A project based on it must follow its terms, including offering source with any binaries you share.</p>
                     <ul>
-                        <li>Keep <code>LICENSE</code> and every existing notice listed in each repository's <code>THIRD_PARTY_NOTICES.md</code>, including <code>LICENSES/Original-MIT.txt</code>, <code>ui/HERIKA-LICENSE</code> and <code>third_party/nlohmann/LICENSE.MIT</code>.</li>
-                        <li>Add your own copyright notice to the README and <code>THIRD_PARTY_NOTICES.md</code>.</li>
+                        <li>Keep both <code>LICENSE</code> files and every existing notice listed in <code>THIRD_PARTY_NOTICES.md</code> at the root and in <code>client/</code>, including <code>LICENSES/Original-MIT.txt</code>, <code>ui/HERIKA-LICENSE</code> and <code>client/third_party/nlohmann/LICENSE.MIT</code>.</li>
+                        <li>Add your own copyright notice to the README and both <code>THIRD_PARTY_NOTICES.md</code> files.</li>
                     </ul>
                 </div>
 
@@ -94,14 +93,14 @@
                     <div class="table-scroll" role="region" aria-label="Branding changes" tabindex="0"><table>
                         <thead><tr><th>Change</th><th>Edit</th></tr></thead>
                         <tbody>
-                            <tr><td>Project and build name</td><td>KagrenacClient <code>CMakeLists.txt</code> (<code>project</code> and the executable target name), <code>scripts/build.ps1</code> and README commands</td></tr>
+                            <tr><td>Project and build name</td><td><code>client/CMakeLists.txt</code> (<code>project</code> and the executable target name), <code>client/scripts/build.ps1</code> and the README commands</td></tr>
                             <tr><td>Dashboard title and icon</td><td><code>ui/tmpl/navbar.php</code>, <code>ui/tmpl/header.php</code> (favicon) and <code>ui/images/kagrenac.png</code></td></tr>
                             <tr><td>Colours</td><td>Blue accent variables in <code>ui/css/chim-theme.css</code></td></tr>
                             <tr><td>Database</td><td>A new lowercase <code>database.name</code> in <code>config/config.example.php</code>, matching the manifest's <code>database_placeholder</code></td></tr>
                             <tr><td>Model behaviour</td><td>The system prompt in <code>openai_reply()</code> in <code>lib/llm.php</code></td></tr>
                         </tbody>
                     </table></div>
-                    <p>The full map is in <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                    <p>The full map is in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
                 </div>
 
                 <div class="card" id="Manifest">
@@ -112,7 +111,7 @@
   "id": "my-npc-mod",
   "name": "My NPC Mod",
   "description": "Short description of your mod.",
-  "project_url": "https://github.com/your-account/MyNpcModServer",
+  "project_url": "https://github.com/your-account/MyNpcMod",
   "dashboard_path": "ui/",
   "health_path": "health.php",
   "requirements": { "php": "8.2", "postgresql": true },
@@ -133,7 +132,7 @@
                         <li><code>database_placeholder</code>: change it together with the database name in <code>config/config.example.php</code>.</li>
                         <li><code>branches</code>: only the manifest on the default branch decides which branches are offered, and every listed branch must exist. Without it, only the default branch is offered.</li>
                     </ul>
-                    <p>Every copy must also keep <code>config/config.php</code> untracked (a repository that tracks it is rejected), keep <code>'CHANGE_ME_TOKEN'</code> and the database name each exactly once as quoted strings in the template, keep <code>scripts/migrate.php</code> safe to repeat, and add no symbolic links or submodules.</p>
+                    <p>Every copy must also keep <code>config/config.php</code> untracked (a repository that tracks it is rejected), keep <code>'CHANGE_ME_TOKEN'</code> and the database name each exactly once as quoted strings in <code>config/config.example.php</code>, keep <code>scripts/migrate.php</code> safe to repeat, and add no symbolic links or submodules.</p>
                 </div>
 
                 <div class="card" id="IconAndBanner">
@@ -142,7 +141,7 @@
                         <li>Commit the image files and the <code>assets</code> entry together. Paths are relative to the repository root and must point to tracked <code>.png</code>, <code>.jpg</code> or <code>.jpeg</code> files; links, <code>..</code>, hidden folders and web addresses are rejected.</li>
                         <li>Use a square icon (shown at 26 x 26) and a wide banner of about 2:1. Keep each file under 4 MB.</li>
                         <li>Pictures come from the installed version, so users see new ones only after an update.</li>
-                        <li>Both are optional. Replace the template's Kagrenac icon with your own.</li>
+                        <li>Both are optional. Replace the Kagrenac icon with your own.</li>
                     </ul>
                 </div>
 
@@ -154,8 +153,8 @@
                         <li>The client <code>config.json</code> and the paired <code>example-client.json</code>.</li>
                         <li>Backup folders, <code>*.dump</code> files and logs.</li>
                     </ul>
-                    <p>Publish the server as its Git repository, or a <code>git archive</code> of a commit, which contains committed files only. Ship the client executable with <code>config.default.json</code>, never with a <code>config.json</code> that holds a token. Keep public docs generic: no personal names, local paths, private endpoints or credential values.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>, <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md#packaging-licensing-and-private-data">START_HERE.md, Packaging, licensing and private data</a>.</p>
+                    <p>Publish your mod as its Git repository, or a <code>git archive</code> of a commit, which contains committed files only. Ship the client executable with <code>config.default.json</code>, never with a <code>config.json</code> that holds a token. Keep public docs generic: no personal names, local paths, private endpoints or credential values.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/START_HERE.md#packaging-licensing-and-private-data">START_HERE.md, Packaging, licensing and private data</a>.</p>
                     <p><b>Back to:</b> <a href="./index.html">Kagrenac guide overview</a>.</p>
                 </div>
             </section>

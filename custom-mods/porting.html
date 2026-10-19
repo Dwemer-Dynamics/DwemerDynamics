@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kagrenac Porting | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
+    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -45,8 +45,7 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Source Code</a>
             </p>
         </div>
 
@@ -54,7 +53,7 @@
             <section id="Porting" class="section">
                 <div class="card hero-card">
                     <h1>Porting To A Real Engine</h1>
-                    <p>KagrenacClient is a console fake game. A real mod keeps its protocol client, threading and safety checks, and replaces the console <code>GameAdapter</code> with your engine's real APIs. Nothing works in a game until you build and test the port there.</p>
+                    <p>KagrenacClient, in the repository's <code>client/</code> folder, is a console client that simulates the game side. A real mod keeps its protocol client, threading and safety checks, and replaces the console <code>GameAdapter</code> with your engine's real APIs. Nothing works in a game until you build and test the port there.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#Boundaries">Boundaries to keep</a></li>
                         <li><a href="#Checklist">Port checklist</a></li>
@@ -70,8 +69,8 @@
                     <div class="table-scroll" role="region" aria-label="Porting boundaries" tabindex="0"><table>
                         <thead><tr><th>Boundary</th><th>Rule</th></tr></thead>
                         <tbody>
-                            <tr><td><code>GameAdapter</code> (<code>src/game_adapter.h</code>)</td><td>The only interface that touches the game. Implement it with real engine APIs; the console version is <code>src/console_game.h</code>.</td></tr>
-                            <tr><td>Threads</td><td>Only the game's main thread calls <code>GameAdapter</code>. Every server call runs on a worker thread or async HTTP; results come back through the mailbox in <code>src/main.cpp</code>. The game never waits on HTTP.</td></tr>
+                            <tr><td><code>GameAdapter</code> (<code>client/src/game_adapter.h</code>)</td><td>The only interface that touches the game. Implement it with real engine APIs; the console version is <code>client/src/console_game.h</code>.</td></tr>
+                            <tr><td>Threads</td><td>Only the game's main thread calls <code>GameAdapter</code>. Every server call runs on a worker thread or async HTTP; results come back through the mailbox in <code>client/src/main.cpp</code>. The game never waits on HTTP.</td></tr>
                             <tr><td>Target</td><td>Before applying a reply, check its <code>request_id</code> and <code>npc_id</code>, and use <code>isSameNpc()</code> to confirm the same NPC instance is still loaded. An action's <code>args.target_id</code> must equal the NPC the request was sent to.</td></tr>
                             <tr><td>Actions</td><td>Run a name only if it is in the client's <code>allowed_actions</code> and has an explicit handler in <code>applyResult()</code>. Never execute raw model text.</td></tr>
                             <tr><td>Audio</td><td>Optional. <code>speak.php</code> returns a WAV and <code>listen.php</code> takes one. The console saves WAVs without playing them; a port plays them on the NPC and captures the microphone to WAV. Text always comes first.</td></tr>
@@ -93,24 +92,24 @@
                         <li>Request-ID and stale checks, no automatic retries, and both allowlists unchanged.</li>
                         <li>A private <code>config.json</code> location for the server URL and token.</li>
                         <li>The correct architecture (x64 or x86) for the game, built without warnings.</li>
-                        <li>Plugin load, unload and quit handled outside <code>GameAdapter</code>, with no worker calling back after unload (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#plugin-lifecycle-and-shutdown">lifecycle recipe</a>).</li>
-                        <li>Pending replies dropped and cancelled on NPC change, NPC unload, save load or new game (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#sessions-saves-and-branches">sessions recipe</a>).</li>
-                        <li>If the game sends events, keep them bounded (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#game-events">events recipe</a>).</li>
-                        <li>A client log of request ID, endpoint, status and outcome, never the token or audio (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#diagnostics">diagnostics recipe</a>).</li>
-                        <li>A plugin package, separate from the console demo, tested in a clean game install (<a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md#packaging">packaging recipe</a>).</li>
+                        <li>Plugin load, unload and quit handled outside <code>GameAdapter</code>, with no worker calling back after unload (<a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md#plugin-lifecycle-and-shutdown">lifecycle recipe</a>).</li>
+                        <li>Pending replies dropped and cancelled on NPC change, NPC unload, save load or new game (<a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md#sessions-saves-and-branches">sessions recipe</a>).</li>
+                        <li>If the game sends events, keep them bounded (<a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md#game-events">events recipe</a>).</li>
+                        <li>A client log of request ID, endpoint, status and outcome, never the token or audio (<a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md#diagnostics">diagnostics recipe</a>).</li>
+                        <li>A plugin package, separate from the console demo, tested in a clean game install (<a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md#packaging">packaging recipe</a>).</li>
                     </ul>
-                    <p>The canonical list is <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>.</p>
+                    <p>The canonical list is <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>.</p>
                 </div>
 
                 <div class="card" id="AgentHandoff">
                     <h2>Coding Agent Handoff</h2>
-                    <p>The full-mod workflow lives in three client documents. Use them as they are rather than writing a second workflow:</p>
+                    <p>The full-mod workflow lives in three authoring documents in the repository's <code>docs/</code> folder. Use them as they are rather than writing a second workflow:</p>
                     <ul>
-                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/AGENT_PLAYBOOK.md">AGENT_PLAYBOOK.md</a>: the prompt to paste into your coding agent.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/ENGINE_PACK.md">ENGINE_PACK.md</a>: a blank record of your engine's SDK facts, what is implemented and what is verified in the engine.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PORT_RECIPES.md">PORT_RECIPES.md</a>: one bounded recipe per stage, each with what you can check now against the mock and what only the engine can show.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/agent-playbook.md">AGENT_PLAYBOOK.md</a>: the prompt to paste into your coding agent.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/engine-packs/ENGINE_PACK.md">ENGINE_PACK.md</a>: a blank record of your engine's SDK facts, what is implemented and what is verified in the engine.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md">PORT_RECIPES.md</a>: one bounded recipe per stage, each with what you can check now against the mock and what only the engine can show.</li>
                     </ul>
-                    <p>Run the agent from a folder that holds your copies of both repositories, as siblings named <code>KagrenacServer</code> and <code>KagrenacClient</code>, plus your engine's modding SDK. Fill in the prompt's <b>Authorized now</b> block first: project name, engine, stages in scope, and whether real provider calls, voice, extra actions or commits are allowed. The agent then works through every authorized stage without pausing, and stops only for missing authority, a material decision (protocol, schema, endpoint or dependency) or a blocker it cannot resolve.</p>
+                    <p>Run the agent in your Windows development copy of the repository, with the server at the root and the client in <code>client/</code>, and give it your engine's modding SDK. Never run it in the server copy under <code>/var/www/html</code>. Fill in the prompt's <b>Authorized now</b> block first: project name, engine, stages in scope, and whether real provider calls, voice, extra actions or commits are allowed. The agent then works through every authorized stage without pausing, and stops only for missing authority, a material decision (protocol, schema, endpoint or dependency) or a blocker it cannot resolve.</p>
                     <p>The stages run in order: scope and recon of the SDK, a mock baseline with the console client unchanged, project identity, plugin lifecycle, typed dialogue, actions, game events if the engine has hooks, saves and sessions, optional voice, diagnostics and packaging, and a final acceptance report.</p>
                     <div class="guide-note note-info">
                         <p><b>Mock first, engine unverified.</b> The baseline runs against the mock server and the console fake game; passing it says nothing about your engine. The agent must cite the SDK for every engine fact, write "Unknown" and a marked TODO instead of inventing an API, and mark engine-side work <i>Implemented, untested</i> until it has run in the game. Voice is optional and skipped unless you authorize it.</p>
@@ -120,14 +119,14 @@
 
                 <div class="card" id="AddAction">
                     <h2>Add An Action</h2>
-                    <p>New actions follow the worked <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/WAVE_ACTION.md">wave exercise</a>. It touches, in your own copies:</p>
+                    <p>New actions follow the worked <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/WAVE_ACTION.md">wave exercise</a>. It touches, in your own copies:</p>
                     <ul>
                         <li>The server prompt and mock in <code>lib/llm.php</code>, and <code>allowed_actions</code> in the server config.</li>
                         <li>One <code>GameAdapter</code> method, its implementation, and one branch in <code>applyResult()</code>.</li>
                         <li><code>allowed_actions</code> in the client <code>config.json</code>.</li>
-                        <li>Both copies of <code>PROTOCOL.md</code>, kept identical.</li>
+                        <li><code>PROTOCOL.md</code> at the repository root.</li>
                     </ul>
-                    <p>Then prove each allowlist rejects it on its own. The shipped templates keep <code>follow_player</code> as the only action.</p>
+                    <p>Then prove each allowlist rejects it on its own. Kagrenac ships with <code>follow_player</code> as the only action.</p>
                 </div>
 
                 <div class="card" id="DashboardPages">
@@ -144,12 +143,12 @@ require __DIR__ . '/tmpl/header.php';
     &lt;p&gt;Add your content here.&lt;/p&gt;
 &lt;/section&gt;
 &lt;?php require __DIR__ . '/tmpl/footer.php'; ?&gt;</code></pre>
-                    <p>Add <code>'my_page' =&gt; ['My page', 'my_page.php']</code> to a group in <code>ui/navigation.php</code>. Escape output with <code>e($value)</code>, check CSRF on every state-changing POST, and never print secrets. <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/UI_GUIDE.md">UI_GUIDE.md</a> has the full rules and an agent prompt.</p>
+                    <p>Add <code>'my_page' =&gt; ['My page', 'my_page.php']</code> to a group in <code>ui/navigation.php</code>. Escape output with <code>e($value)</code>, check CSRF on every state-changing POST, and never print secrets. <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/UI_GUIDE.md">UI_GUIDE.md</a> has the full rules and an agent prompt.</p>
                 </div>
 
                 <div class="card" id="Evidence">
                     <h2>Evidence Levels</h2>
-                    <p>Report each level separately, record the results in your copy of <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/ENGINE_PACK.md">ENGINE_PACK.md</a>, and claim only what you actually ran:</p>
+                    <p>Report each level separately, record the results in your copy of <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/engine-packs/ENGINE_PACK.md">ENGINE_PACK.md</a>, and claim only what you actually ran:</p>
                     <ol>
                         <li>Server lint, migrations twice, and <code>scripts/smoke.sh</code> in mock mode.</li>
                         <li>The console client's smoke checks.</li>
@@ -157,7 +156,7 @@ require __DIR__ . '/tmpl/header.php';
                         <li>In game: talk to an NPC, see the subtitle, follow, cancel a slow reply, unload the NPC while a reply is pending, and stop the server, all without a crash or hang.</li>
                     </ol>
                     <p>Until level 4 passes in a specific game, do not describe the mod as working in that game.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>, <a href="https://github.com/Dwemer-Dynamics/KagrenacClient/blob/main/PROTOCOL.md">PROTOCOL.md</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/START_HERE.md#porting-to-a-real-engine">START_HERE.md, Porting to a real engine</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/PROTOCOL.md">PROTOCOL.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
                     <p><b>Next step:</b> <a href="./updates.html">Plan updates and backups</a>.</p>
                 </div>
             </section>

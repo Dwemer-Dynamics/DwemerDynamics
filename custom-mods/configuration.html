@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kagrenac Configuration | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
+    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -45,8 +45,7 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Source Code</a>
             </p>
         </div>
 
@@ -115,14 +114,14 @@
 
                 <div class="card" id="Voice">
                     <h2>Voice: PocketTTS And Parakeet</h2>
-                    <p>Voice is opt-in and never needed for text. The templates do not install or start voice services.</p>
+                    <p>Voice is opt-in and never needed for text. Kagrenac does not install or start voice services.</p>
                     <ol>
                         <li>Start PocketTTS (audio.cpp, port 8086) and/or Parakeet (port 8022) from the DwemerDistro launcher.</li>
                         <li>Open <b>Configuration &gt; Voice</b>, enable speech and/or transcription and save. The default URLs are <code>http://127.0.0.1:8086/v1/audio/speech</code> and <code>http://127.0.0.1:8022/v1/audio/transcriptions</code>. For PocketTTS, a blank model or voice saves <code>pocket-tts</code> and <code>alba</code>.</li>
                         <li>Press <b>Speak</b> to hear a sample. For Parakeet, choose a short WAV (at most 10 MB) under <b>Test transcription</b> and press <b>Transcribe</b>.</li>
                         <li>In the client's <code>config.json</code>, set <code>"voice_enabled": true</code>.</li>
                     </ol>
-                    <p>The console client saves reply WAVs in <code>%TEMP%\dwemer-ai-example\</code> and does not play them. Use <code>--listen &lt;file.wav&gt;</code> for speech input. Text always comes first: a voice failure prints <code>Voice unavailable, text only: ...</code>. faster-whisper (port 9876) is also supported; see <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md#voice">CONNECTORS.md, Voice</a>.</p>
+                    <p>The console client saves reply WAVs in <code>%TEMP%\dwemer-ai-example\</code> and does not play them. Use <code>--listen &lt;file.wav&gt;</code> for speech input. Text always comes first: a voice failure prints <code>Voice unavailable, text only: ...</code>. faster-whisper (port 9876) is also supported; see <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md#voice">CONNECTORS.md, Voice</a>.</p>
                     <p>Report voice as working only after you test it with your own services and recordings.</p>
                 </div>
 
@@ -133,8 +132,8 @@
                     <pre><code>'decision' =&gt; ['enabled' =&gt; true, 'provider' =&gt; 'mock'],</code></pre>
                     <p>Then test from the client folder:</p>
                     <pre><code>.\KagrenacClient.exe --decide "Scout, is the trail safe?"</code></pre>
-                    <p>With the mock enabled it prints <code>npc_scout (provider, matched, ...)</code>; the command only prints the choice. The <code>jev</code> provider uses OpenRouter and needs a key; see <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md#npc-selection-decision-optional">CONNECTORS.md, NPC selection</a>.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md#4-use-a-real-llm-optional">SETUP.md sections 4 and 5</a>.</p>
+                    <p>With the mock enabled it prints <code>npc_scout (provider, matched, ...)</code>; the command only prints the choice. The <code>jev</code> provider uses OpenRouter and needs a key; see <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md#npc-selection-decision-optional">CONNECTORS.md, NPC selection</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#4-use-a-real-llm-optional">SETUP.md sections 4 and 5</a>.</p>
                     <p><b>Next step:</b> <a href="./data-and-memory.html">Give NPCs bios, facts and memory</a>.</p>
                 </div>
             </section>
