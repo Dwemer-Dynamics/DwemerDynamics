@@ -222,8 +222,8 @@ const leftSidebarConfigs = {
             { href: "./publishing.html", title: "Publishing", label: "Publishing", emoji: "\uD83D\uDCE6" }
         ],
         bottomLinks: [
-            { href: "https://github.com/Dwemer-Dynamics/ExampleServer", title: "Server Template", label: "Server Template", emoji: "\uD83D\uDCBB" },
-            { href: "https://github.com/Dwemer-Dynamics/ExampleMod", title: "Client Template", label: "Client Template", emoji: "\uD83D\uDCBB" },
+            { href: "https://github.com/Dwemer-Dynamics/KagrenacServer", title: "Server Template", label: "Server Template", emoji: "\uD83D\uDCBB" },
+            { href: "https://github.com/Dwemer-Dynamics/KagrenacClient", title: "Client Template", label: "Client Template", emoji: "\uD83D\uDCBB" },
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
             { href: "https://www.patreon.com/DwemerDynamics", title: "Patreon", label: "Patreon", icon: "../img/patreon.png" }
         ]

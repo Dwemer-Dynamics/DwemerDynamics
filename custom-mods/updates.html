@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Custom Mod Updates and Backups | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <title>Kagrenac Updates and Backups | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -26,8 +26,8 @@
                 <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
+                <a href="./index.html" id="headerTitle">Kagrenac</a>
             </div>
         </div>
 
@@ -45,8 +45,8 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
             </p>
         </div>
 
@@ -72,7 +72,7 @@
                         <thead><tr><th>Name</th><th>Current</th><th>Set in</th></tr></thead>
                         <tbody>
                             <tr><td>Server release</td><td><code>0.1.0</code></td><td><code>lib/version.php</code> (<code>SERVER_VERSION</code>)</td></tr>
-                            <tr><td>Client release</td><td><code>0.1.0</code></td><td>ExampleMod <code>CMakeLists.txt</code> (<code>project(... VERSION)</code>)</td></tr>
+                            <tr><td>Client release</td><td><code>0.1.0</code></td><td>KagrenacClient <code>CMakeLists.txt</code> (<code>project(... VERSION)</code>)</td></tr>
                             <tr><td>Protocol</td><td><code>1</code></td><td>Both <code>PROTOCOL.md</code> files and both sides' code</td></tr>
                             <tr><td>Baseline</td><td><code>baseline-1</code></td><td>A template feature-set label, not a release</td></tr>
                             <tr><td>Schema</td><td><code>007_connector_calls</code></td><td><code>sql/</code> files and <code>SCHEMA_MIGRATIONS</code> in <code>lib/app.php</code></td></tr>
@@ -97,7 +97,7 @@
                 <div class="card" id="Update">
                     <h2>Update A Manual Install</h2>
                     <p>In WSL:</p>
-                    <pre><code>cd /var/www/html/ExampleServer
+                    <pre><code>cd /var/www/html/custom-mods/KagrenacServer
 git rev-parse HEAD
 sudo bash scripts/backup.sh
 sudo bash scripts/update.sh</code></pre>
@@ -154,7 +154,7 @@ sudo -u postgres dropdb example_ai_restore_check</code></pre>
                     <div class="guide-note note-warning">
                         <p><b>Template updates and failed switches.</b> Your copy does not follow template changes; check each change you port against both branches before offering it. If a launcher branch switch fails, the launcher may put the previous code back, but it does not undo migrations already applied to the database. Restore a backup if the old code then refuses it.</p>
                     </div>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#6-back-up-and-update">SETUP.md, Back up and update</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/LAUNCHER_CUSTOM_MOD.md#branches-main-and-dev">LAUNCHER_CUSTOM_MOD.md, Branches</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md#6-back-up-and-update">SETUP.md, Back up and update</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/LAUNCHER_CUSTOM_MOD.md#branches-main-and-dev">LAUNCHER_CUSTOM_MOD.md, Branches</a>.</p>
                     <p><b>Next step:</b> <a href="./publishing.html">Publish your own mod</a>.</p>
                 </div>
             </section>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Custom Mod Configuration | Dwemer Dynamics</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261008-custom-mods"></script>
+    <title>Kagrenac Configuration | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261018-kagrenac"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -26,8 +26,8 @@
                 <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Custom Mod Guide home"><img src="./images/question-mark.png" alt="Custom Mod Guide icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Custom Mod Guide</a>
+                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
+                <a href="./index.html" id="headerTitle">Kagrenac</a>
             </div>
         </div>
 
@@ -45,8 +45,8 @@
             </p>
             <hr>
             <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/ExampleServer">Server Template</a>
-                <a href="https://github.com/Dwemer-Dynamics/ExampleMod">Client Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacServer">Server Template</a>
+                <a href="https://github.com/Dwemer-Dynamics/KagrenacClient">Client Template</a>
             </p>
         </div>
 
@@ -122,7 +122,7 @@
                         <li>Press <b>Speak</b> to hear a sample. For Parakeet, choose a short WAV (at most 10 MB) under <b>Test transcription</b> and press <b>Transcribe</b>.</li>
                         <li>In the client's <code>config.json</code>, set <code>"voice_enabled": true</code>.</li>
                     </ol>
-                    <p>The console client saves reply WAVs in <code>%TEMP%\dwemer-ai-example\</code> and does not play them. Use <code>--listen &lt;file.wav&gt;</code> for speech input. Text always comes first: a voice failure prints <code>Voice unavailable, text only: ...</code>. faster-whisper (port 9876) is also supported; see <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md#voice">CONNECTORS.md, Voice</a>.</p>
+                    <p>The console client saves reply WAVs in <code>%TEMP%\dwemer-ai-example\</code> and does not play them. Use <code>--listen &lt;file.wav&gt;</code> for speech input. Text always comes first: a voice failure prints <code>Voice unavailable, text only: ...</code>. faster-whisper (port 9876) is also supported; see <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md#voice">CONNECTORS.md, Voice</a>.</p>
                     <p>Report voice as working only after you test it with your own services and recordings.</p>
                 </div>
 
@@ -132,9 +132,9 @@
                     <p>Enable it on <b>Configuration &gt; NPC selection</b>, or in the config:</p>
                     <pre><code>'decision' =&gt; ['enabled' =&gt; true, 'provider' =&gt; 'mock'],</code></pre>
                     <p>Then test from the client folder:</p>
-                    <pre><code>.\example_mod.exe --decide "Scout, is the trail safe?"</code></pre>
-                    <p>With the mock enabled it prints <code>npc_scout (provider, matched, ...)</code>; the command only prints the choice. The <code>jev</code> provider uses OpenRouter and needs a key; see <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md#npc-selection-decision-optional">CONNECTORS.md, NPC selection</a>.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/ExampleServer/blob/main/SETUP.md#4-use-a-real-llm-optional">SETUP.md sections 4 and 5</a>.</p>
+                    <pre><code>.\KagrenacClient.exe --decide "Scout, is the trail safe?"</code></pre>
+                    <p>With the mock enabled it prints <code>npc_scout (provider, matched, ...)</code>; the command only prints the choice. The <code>jev</code> provider uses OpenRouter and needs a key; see <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md#npc-selection-decision-optional">CONNECTORS.md, NPC selection</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/KagrenacServer/blob/main/SETUP.md#4-use-a-real-llm-optional">SETUP.md sections 4 and 5</a>.</p>
                     <p><b>Next step:</b> <a href="./data-and-memory.html">Give NPCs bios, facts and memory</a>.</p>
                 </div>
             </section>
