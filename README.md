@@ -2,9 +2,9 @@
 
 Guide-first website for Dwemer Dynamics projects, covering CHIM, STOBE, and Dialectic.
 
-## Kagrenac Guide
+## KAGRENAC AI Mod Maker Guide
 
-`custom-mods/` is the author guide for Kagrenac, a starter kit for building AI NPC mods from the public [KagrenacServer](https://github.com/Dwemer-Dynamics/KagrenacServer) and [KagrenacClient](https://github.com/Dwemer-Dynamics/KagrenacClient) templates. The folder name stays `custom-mods/` so existing links keep working. Its pages share `css/custom-mods.css` and the `customMods` sidebar in `js/javascript.js`, selected by the `custom-mods-theme` body class. The template repositories hold the canonical reference docs, including the client's staged porting kit (`AGENT_PLAYBOOK.md`, `ENGINE_PACK.md`, `PORT_RECIPES.md`); keep these pages task-focused and link to them.
+`custom-mods/` is the author guide for KAGRENAC AI Mod Maker, a toolkit for authoring AI NPC mods from the public [Kagrenac](https://github.com/Dwemer-Dynamics/Kagrenac) repository: the KagrenacServer component at the repository root and the KagrenacClient console client in `client/`. The folder name stays `custom-mods/` so existing links keep working. Its pages share `css/custom-mods.css` and the `customMods` sidebar in `js/javascript.js`, selected by the `custom-mods-theme` body class. The repository holds the canonical reference docs, including `docs/getting-started.md` and the staged porting kit (`docs/agent-playbook.md`, `docs/engine-packs/ENGINE_PACK.md`, `docs/feature-recipes/PORT_RECIPES.md`); keep these pages task-focused and link to them.
 
 ## Other Projects
 
