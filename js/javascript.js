@@ -231,7 +231,8 @@ const leftSidebarConfigs = {
         pageLinks: [
             { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
             { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
-            { href: "./kosmokrator.html", title: "Kosmokrator", label: "Kosmokrator", emoji: "\uD83D\uDDFA\uFE0F" }
+            { href: "./kosmokrator.html", title: "Kosmokrator", label: "Kosmokrator", emoji: "\uD83D\uDDFA\uFE0F" },
+            { href: "./kenogenesis.html", title: "KENOGENESIS", label: "KENOGENESIS", emoji: "\u2694\uFE0F" }
         ],
         bottomLinks: [
             { href: "https://discord.gg/NDn9qud2ug", title: "Discord", label: "Discord", icon: "../img/discord.png" },
