@@ -213,12 +213,13 @@ const leftSidebarConfigs = {
         pageLinks: [
             { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
             { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
-            { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
-            { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
-            { href: "./data-and-memory.html", title: "Data and Memory", label: "Data and Memory", emoji: "\uD83D\uDDC4\uFE0F" },
+            { href: "./installation.html", title: "Get started", label: "Get started", emoji: "\u2699\uFE0F" },
+            { href: "./gameplay.html", title: "Gameplay design", label: "Gameplay design", emoji: "\uD83C\uDFAE" },
+            { href: "./porting.html", title: "Game integration", label: "Game integration", emoji: "\uD83D\uDEE0\uFE0F" },
+            { href: "./configuration.html", title: "Providers & voice", label: "Providers & voice", emoji: "\uD83D\uDD27" },
+            { href: "./data-and-memory.html", title: "Characters & memory", label: "Characters & memory", emoji: "\uD83D\uDDC4\uFE0F" },
             { href: "./testing.html", title: "Testing", label: "Testing", emoji: "\uD83E\uDDEA" },
-            { href: "./porting.html", title: "Porting", label: "Porting", emoji: "\uD83D\uDEE0\uFE0F" },
-            { href: "./updates.html", title: "Updates and Backups", label: "Updates and Backups", emoji: "\uD83D\uDD04" },
+            { href: "./updates.html", title: "Updates & recovery", label: "Updates & recovery", emoji: "\uD83D\uDD04" },
             { href: "./publishing.html", title: "Publishing", label: "Publishing", emoji: "\uD83D\uDCE6" }
         ],
         bottomLinks: [

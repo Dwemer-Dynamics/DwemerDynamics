@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kagrenac Testing | Dwemer Dynamics</title>
+    <title>KAGRENAC Testing | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-guide"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -23,24 +23,25 @@
     <div class="container">
         <div class="header">
             <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
-                <a href="./index.html" id="headerTitle">Kagrenac</a>
+                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
+                <a href="./index.html" id="headerTitle">KAGRENAC</a>
             </div>
         </div>
 
-        <div class="sidebar left-sidebar">
+        <div class="sidebar left-sidebar" id="leftSidebar">
             <p class="pageLinks">
                 <a href="../index.html">Home</a>
                 <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./installation.html">Get started</a>
+                <a href="./gameplay.html">Gameplay design</a>
+                <a href="./porting.html">Game integration</a>
+                <a href="./configuration.html">Providers &amp; voice</a>
+                <a href="./data-and-memory.html">Characters &amp; memory</a>
                 <a href="./testing.html">Testing</a>
-                <a href="./porting.html">Porting</a>
-                <a href="./updates.html">Updates and Backups</a>
+                <a href="./updates.html">Updates &amp; recovery</a>
                 <a href="./publishing.html">Publishing</a>
             </p>
             <hr>
@@ -53,73 +54,66 @@
             <section id="Testing" class="section">
                 <div class="card hero-card">
                     <h1>Testing</h1>
-                    <p>Test in mock mode first, from the dashboard and from the console client. Every request carries a request ID, so you can find exactly what happened in the server's logs.</p>
+                    <p>A mod is tested in four separate ways, and each says something different. Your agent reports them separately, and only you can confirm what happens in game.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
-                        <li><a href="#WebConversation">Web conversation tester</a></li>
-                        <li><a href="#GameEvents">Game events</a></li>
-                        <li><a href="#Logs">Find a request in Logs</a></li>
-                        <li><a href="#ClientActions">Client actions</a></li>
+                        <li><a href="#Evidence">Four kinds of evidence</a></li>
+                        <li><a href="#InGame">In-game checks</a></li>
                         <li><a href="#Cancellation">Cancellation and stale replies</a></li>
+                        <li><a href="#Logs">Find a request in Logs</a></li>
+                        <li><a href="#WebConversation">Optional dashboard checks</a></li>
                         <li><a href="#Troubleshooting">Troubleshooting</a></li>
                     </ul></nav>
                 </div>
 
-                <div class="card" id="WebConversation">
-                    <h2>Web Conversation Tester</h2>
-                    <figure class="guide-figure">
-                        <img src="./images/public-example-conversation.jpg" width="1280" height="1523" loading="lazy" alt="KagrenacServer dashboard Conversation page in mock mode. The form uses NPC ID npc_guide, NPC name Guide, player Traveler and session dashboard-demo, with the message Hello, can you help me find the market? Below are the Game event test panel and the Conversation log, where the mock Guide replies: Guide heard you say: Hello, can you help me find the market? Actions: none.">
-                        <figcaption>The dashboard Conversation page in mock mode: a test turn in the <code>dashboard-demo</code> session, where the mock Guide echoes the message with no action. No game or provider is involved.</figcaption>
-                    </figure>
-                    <ol>
-                        <li>Open <b>Roleplay &gt; Conversation</b>. The default session is <code>dashboard-demo</code> and the NPC is <code>npc_guide</code>.</li>
-                        <li>Type in <b>Your message</b> and press <b>Send</b>. Try <code>follow me</code>: the actions line shows <code>follow_player (target npc_guide)</code>.</li>
-                        <li>Press <b>New session</b> to start fresh: shared facts still apply, and the new turn shows 0 history lines.</li>
-                    </ol>
-                    <p>The tester writes ordinary history and displays actions without running them. No dashboard page runs game actions.</p>
-                </div>
-
-                <div class="card" id="GameEvents">
-                    <h2>Game Events</h2>
-                    <p>On the same page, <b>Game event test</b> sends <code>event.php</code>. Mode <b>Log only</b> stores an event with no model call, history or actions. <b>NPC responds</b> makes the NPC react like a normal turn. From the client folder:</p>
-                    <pre><code>.\KagrenacClient.exe --event location_entered "The player entered the market."
-.\KagrenacClient.exe --react item_given "The player gave a lantern. follow me"</code></pre>
-                    <p>Only four types exist: <code>location_entered</code>, <code>item_given</code>, <code>combat_started</code> and <code>combat_ended</code>. The game decides when to send events; the server never triggers anything itself.</p>
-                </div>
-
-                <div class="card" id="Logs">
-                    <h2>Find A Request In Logs</h2>
-                    <p>The client prints the ID of every request, for example <code>Trace: turn req-... (ok)</code>. Open <b>Control Panel &gt; Logs</b>, filter by <b>Request ID</b>, and open <b>Details</b>.</p>
-                    <div class="table-scroll" role="region" aria-label="Log statuses" tabindex="0"><table>
-                        <thead><tr><th>Logs shows</th><th>Meaning</th></tr></thead>
+                <div class="card" id="Evidence">
+                    <h2>Four Kinds Of Evidence</h2>
+                    <div class="table-scroll" role="region" aria-label="Kinds of evidence" tabindex="0"><table>
+                        <thead><tr><th>Kind</th><th>Shows</th><th>Does not show</th></tr></thead>
                         <tbody>
-                            <tr><td><code>turn</code> <code>complete</code></td><td>The server finished, not that a game ran anything. A client report appears under "Client reported (untrusted)".</td></tr>
-                            <tr><td><code>failed</code>, <code>llm_unavailable</code></td><td>The provider failed. Search the Apache error log for <code>example-ai [&lt;id&gt;]</code>.</td></tr>
-                            <tr><td><code>failed</code>, <code>duplicate_request</code></td><td>The ID was reused within a day. Use a new ID per request.</td></tr>
-                            <tr><td><code>cancelled</code> or <code>superseded</code></td><td>Expected after a cancel, NPC change, session change or checkpoint restore.</td></tr>
-                            <tr><td>No row</td><td>Inconclusive: rejected before logging, a filter hides it, or another install. Read the HTTP status the client printed.</td></tr>
+                            <tr><td>Server and fixtures</td><td>The server is deployed and healthy, and automated checks pass</td><td>Anything about the game or a real provider</td></tr>
+                            <tr><td>Game-side build</td><td>The actual game mod builds and is installed for your game version</td><td>That it loads or works in game</td></tr>
+                            <tr><td>Provider</td><td>Your chosen dialogue model or voice service answers a real call</td><td>That the player sees or hears it</td></tr>
+                            <tr><td>In game</td><td>You played it: the loop, heard voice and each action's visible result</td><td>Other games or other loaders</td></tr>
                         </tbody>
                     </table></div>
-                    <p>Voice, NPC selection, embedding and memory calls appear on <b>Control Panel &gt; Connector calls</b> instead.</p>
+                    <p>A generated sound file is not heard voice, and an action the game accepted is not an action you saw happen. Each action gets its own in-game check.</p>
                 </div>
 
-                <div class="card" id="ClientActions">
-                    <h2>Client Actions</h2>
-                    <p>The model can only <i>ask</i> for an action. The server returns only names in its <code>allowed_actions</code>, and the client runs one only if it is in its own <code>allowed_actions</code> <b>and</b> has an explicit handler. Nothing maps action names to commands.</p>
+                <div class="card" id="InGame">
+                    <h2>In-Game Checks</h2>
+                    <p>Start the game the normal way, using its offline loader profile if it needs one (see <a href="./porting.html#Checklist">Game integration</a>), and check:</p>
                     <ul>
-                        <li><code>--say "dance"</code>: reply only; the server lists <code>dance</code> in <code>rejected_actions</code>.</li>
-                        <li>Client <code>"allowed_actions": []</code>: <code>Rejected action not allowed by this mod: follow_player</code>.</li>
+                        <li><b>Loading.</b> The mod loads and connects by itself, with no extra command.</li>
+                        <li><b>Chat.</b> You type your own line to the character the chat box shows, get a reply, and your controls work normally afterwards.</li>
+                        <li id="GameEvents"><b>Automatic remarks.</b> If you asked for them, the real game event triggers one and it stops cleanly.</li>
+                        <li><b>Voice.</b> If you asked for voice, you hear it. If you asked for speech input, push-to-talk fills the draft and Enter sends it.</li>
+                        <li id="ClientActions"><b>Each action.</b> You ask, and see the result in game.</li>
+                        <li><b>No server.</b> With only this mod's server route unreachable (your agent can set this up), and DwemerDistro and other mods left running, the game stays playable and tells you, and the next request works once it is back.</li>
                     </ul>
                 </div>
 
                 <div class="card" id="Cancellation">
                     <h2>Cancellation And Stale Replies</h2>
-                    <ol>
-                        <li>Set <code>mock_delay_seconds</code> to 3 on <b>Configuration &gt; LLM</b>.</li>
-                        <li>Start the interactive client with <code>.\KagrenacClient.exe</code> and type <code>follow me</code>.</li>
-                        <li>Before it answers, type <code>/cancel</code>, <code>/npc scout</code>, <code>/unload</code> or <code>/session other-save</code>.</li>
-                    </ol>
-                    <p>The reply and its action are dropped and the server is told to cancel; Logs shows the turn as <code>cancelled</code> or <code>superseded</code>. In the dashboard tester, <b>Cancel</b> or changing the NPC does the same. Cancellation may not stop computation at the provider, and failed requests are never retried automatically.</p>
-                    <p>Server check in WSL, with a mock delay of 2 or more: <code>SMOKE_STALE=1 bash scripts/smoke.sh http://127.0.0.1:19000/custom-mods/KagrenacServer</code>, using your own server address. Set the delay back to 0 afterwards.</p>
+                    <p>A reply that arrives too late must not play. While a reply is still coming, try leaving the character, loading a save, starting another conversation and quitting. The late reply should be dropped quietly, with no crash or hang. Failed requests are never retried automatically.</p>
+                </div>
+
+                <div class="card" id="Logs">
+                    <h2>Find A Request In Logs</h2>
+                    <p>Every request has an ID. On your mod's dashboard, open <b>Control Panel &gt; Logs</b>, filter by <b>Request ID</b> and open <b>Details</b>. Voice, NPC selection and memory calls are on <b>Control Panel &gt; Connector calls</b>.</p>
+                    <ul>
+                        <li><code>complete</code> means the server finished, not that the game showed or did anything.</li>
+                        <li><code>cancelled</code> or <code>superseded</code> is expected after a cancel, a character change or a session change.</li>
+                    </ul>
+                    <p>When asking for help, share request IDs and error codes, never tokens or keys.</p>
+                </div>
+
+                <div class="card" id="WebConversation">
+                    <h2>Optional Dashboard Checks</h2>
+                    <figure class="guide-figure">
+                        <img src="./images/public-example-conversation.jpg" width="1280" height="1523" loading="lazy" alt="KagrenacServer dashboard Conversation page in mock mode. The form uses NPC ID npc_guide, NPC name Guide, player Traveler and session dashboard-demo, with the message Hello, can you help me find the market? Below are the Game event test panel and the Conversation log, where the mock Guide replies: Guide heard you say: Hello, can you help me find the market? Actions: none.">
+                        <figcaption>The dashboard Conversation page with test replies. No game or provider is involved.</figcaption>
+                    </figure>
+                    <p><b>Roleplay &gt; Conversation</b> lets you send a test line and see the reply, and <b>Game event test</b> sends a test game event. It is useful for checking bios, facts and providers, but it shows actions without running them and is not an in-game test.</p>
                 </div>
 
                 <div class="card" id="Troubleshooting">
@@ -127,22 +121,15 @@
                     <div class="table-scroll" role="region" aria-label="Troubleshooting" tabindex="0"><table>
                         <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
                         <tbody>
-                            <tr><td><code>health.php</code> 404 or 403</td><td>The folder must be inside <code>/var/www/html/custom-mods/</code>, such as <code>/var/www/html/custom-mods/KagrenacServer</code> for a manual install, and <code>sudo ddistro_custom_mod setup-web</code> must have succeeded.</td></tr>
-                            <tr><td>Nothing answers on port 19000</td><td>Run <code>sudo ddistro_custom_mod setup-web</code>. If <code>setup-web</code> is unavailable or rejected as an unknown command, run <b>Update Distro</b> in the DwemerDistro launcher, then run it again. See <a href="./installation.html#Ports">Ports and branches</a>.</td></tr>
-                            <tr><td><code>setup-web</code> says the port is in use</td><td>Nothing was changed. Choose another <code>CUSTOM_MODS_PORT</code> from 19000 to 19999 in <code>/etc/dwemerdistro_services.conf</code>, run it again, then pair again.</td></tr>
-                            <tr><td><code>500 server_not_configured</code></td><td><code>config/config.php</code> missing, unreadable, or token still the placeholder. Run the installer again.</td></tr>
-                            <tr><td><code>503 database_unavailable</code></td><td>PostgreSQL running, and the database settings in the config.</td></tr>
-                            <tr><td><code>503 not_migrated</code></td><td>Run <code>sudo bash scripts/install.sh</code> again.</td></tr>
-                            <tr><td>Client <code>WinHTTP error 12029</code></td><td>Server not reachable at <code>server_url</code>. After a port change, pair again or edit <code>server_url</code>.</td></tr>
-                            <tr><td>Client <code>401 unauthorized</code></td><td>Token in <code>config.json</code> does not match the server. Pair again.</td></tr>
+                            <tr><td>The game says the server is unavailable</td><td>Start DwemerDistro, then try again in game.</td></tr>
+                            <tr><td><code>401 unauthorized</code></td><td>The game mod's connection file does not match this server. Ask your agent to pair again.</td></tr>
+                            <tr><td><code>502 llm_unavailable</code></td><td>The provider failed. Check the key and model with <b>Send test</b>.</td></tr>
+                            <tr><td><code>503 not_migrated</code> or <code>schema_too_new</code></td><td>The code and database do not match. See <a href="./updates.html#Migrations">Updates &amp; recovery</a>.</td></tr>
+                            <tr><td>The dashboard cannot save settings</td><td>Ask your agent to deploy again; it repairs ownership.</td></tr>
                         </tbody>
                     </table></div>
-                    <p>Also check that Apache does not serve your Git history. <code>200</code> here means anyone who can reach the port can download it. Check port 8081 too, because it also serves <code>/var/www/html</code>:</p>
-                    <pre><code>curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:19000/custom-mods/KagrenacServer/.git/HEAD
-curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:8081/custom-mods/KagrenacServer/.git/HEAD</code></pre>
-                    <p>When sharing logs for help, include request IDs and error codes, never tokens or keys.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/START_HERE.md#troubleshooting-by-request-id">START_HERE.md, Troubleshooting by request ID</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#troubleshooting">SETUP.md, Troubleshooting</a> and the <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/client/README.md#smoke-checks">KagrenacClient smoke checks</a>.</p>
-                    <p><b>Next step:</b> <a href="./porting.html">Port the client to your engine</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/START_HERE.md#troubleshooting-by-request-id">START_HERE.md, Troubleshooting by request ID</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#troubleshooting">SETUP.md, Troubleshooting</a>.</p>
+                    <p><b>Next step:</b> <a href="./updates.html">Updates and recovery</a>.</p>
                 </div>
             </section>
         </main>

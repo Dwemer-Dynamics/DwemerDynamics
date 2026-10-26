@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kagrenac Installation | Dwemer Dynamics</title>
+    <title>KAGRENAC Get Started | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-guide"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -23,24 +23,25 @@
     <div class="container">
         <div class="header">
             <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
-                <a href="./index.html" id="headerTitle">Kagrenac</a>
+                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
+                <a href="./index.html" id="headerTitle">KAGRENAC</a>
             </div>
         </div>
 
-        <div class="sidebar left-sidebar">
+        <div class="sidebar left-sidebar" id="leftSidebar">
             <p class="pageLinks">
                 <a href="../index.html">Home</a>
                 <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./installation.html">Get started</a>
+                <a href="./gameplay.html">Gameplay design</a>
+                <a href="./porting.html">Game integration</a>
+                <a href="./configuration.html">Providers &amp; voice</a>
+                <a href="./data-and-memory.html">Characters &amp; memory</a>
                 <a href="./testing.html">Testing</a>
-                <a href="./porting.html">Porting</a>
-                <a href="./updates.html">Updates and Backups</a>
+                <a href="./updates.html">Updates &amp; recovery</a>
                 <a href="./publishing.html">Publishing</a>
             </p>
             <hr>
@@ -52,141 +53,96 @@
         <main class="content">
             <section id="Installation" class="section">
                 <div class="card hero-card">
-                    <h1>Installation</h1>
-                    <p>Install the KagrenacServer component inside DwemerDistro, build the KagrenacClient console client from a separate copy on Windows, and pair them. Everything starts in mock mode, so no provider or key is needed. Allow about 15 minutes. The steps below install manually; the <a href="#LauncherRoute">launcher route</a> at the end of this page installs the server for you instead.</p>
+                    <h1>Get Started</h1>
+                    <p>There is no form to fill in and no setup commands to type. Get the template, open your coding agent in it and paste one prompt. The agent asks only for what is missing and runs the setup itself.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
-                        <li><a href="#Requirements">Before you start</a></li>
-                        <li><a href="#Ports">Ports and branches</a></li>
-                        <li><a href="#InstallServer">1. Install the server</a></li>
-                        <li><a href="#BuildClient">2. Build the client</a></li>
-                        <li><a href="#Pair">3. Pair the client</a></li>
-                        <li><a href="#SecondCopy">A second copy</a></li>
-                        <li><a href="#LauncherRoute">Launcher route</a></li>
+                        <li><a href="#Requirements">What you need</a></li>
+                        <li><a href="#GetTemplate">1. Get the template</a></li>
+                        <li><a href="#FirstPrompt">2. Give your agent the first prompt</a></li>
+                        <li><a href="#WhoDoesWhat">Who does what</a></li>
+                        <li><a href="#InstallServer">What your agent sets up</a></li>
+                        <li><a href="#Ports">Where things live</a></li>
+                        <li><a href="#LauncherRoute">Legacy template installs</a></li>
                     </ul></nav>
                 </div>
 
                 <div class="card" id="Requirements">
-                    <h2>Before You Start</h2>
+                    <h2>What You Need</h2>
                     <ul>
-                        <li><b>DwemerDistro</b> installed and started. It provides WSL, Apache, PostgreSQL and PHP 8.2.</li>
-                        <li><b>Visual Studio 2022</b> with the <b>Desktop development with C++</b> workload (MSVC and CMake).</li>
-                        <li>Nothing else for the first run. An LLM and voice services are optional and come later.</li>
+                        <li><b>Windows, Git and a coding agent</b> of your choice.</li>
+                        <li><b>DwemerDistro</b>, which runs your mod's server.</li>
+                        <li><b>Your game's mod tools</b>, or a mod loader that supports your exact game version. Your agent works out which.</li>
+                        <li><b>Visual Studio C++ tools</b> only if your mod is a C++ plugin. Script-based mods use their own tools.</li>
+                        <li><b>An AI provider</b> for real conversations: an account and key such as OpenRouter, or a local model. See <a href="./configuration.html">Providers &amp; voice</a>.</li>
                     </ul>
-                    <p>Everything comes from one repository, <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Kagrenac</a>: the server at the root and the client in <code>client/</code>. You clone it twice, and the two copies have different jobs:</p>
-                    <ul>
-                        <li><b>Server copy, in WSL.</b> The installed server under <code>/var/www/html/custom-mods/</code>. Apache serves it; you install, update and pair from it.</li>
-                        <li><b>Development copy, on Windows.</b> An ordinary folder where you edit, build and run the client. Never build the client or keep its <code>config.json</code> in the server copy.</li>
-                    </ul>
-                    <p>The repository keeps a <code>main</code> branch (the stable baseline, default) and a <code>dev</code> branch (development). The steps below clone <code>main</code>; add <code>-b dev</code> to a clone command for the development branch. For your own project, clone your own repository instead; see <a href="./publishing.html">Publishing</a>. The repository's <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/getting-started.md">getting-started guide</a> is the canonical walkthrough, including any helper scripts.</p>
+                    <div class="guide-note note-info">
+                        <p><b>Run Update Distro first.</b> Press <b>Update Distro</b> in the DwemerDistro launcher before your agent deploys anything, including on a fresh install. Your agent then checks that DwemerDistro has the setup tools it needs; the version label alone does not tell you. If something is missing, setup stops without changing anything.</p>
+                    </div>
                 </div>
 
-                <div class="card" id="Ports">
-                    <h2>Ports And Branches</h2>
-                    <div class="table-scroll" role="region" aria-label="Ports and branches" tabindex="0"><table>
-                        <thead><tr><th>Install</th><th>Folder</th><th>Server address</th></tr></thead>
-                        <tbody>
-                            <tr><td>Manual, steps below</td><td><code>/var/www/html/custom-mods/KagrenacServer</code></td><td><code>http://127.0.0.1:19000/custom-mods/KagrenacServer</code></td></tr>
-                            <tr><td><a href="#SecondCopy">A second manual copy</a></td><td><code>/var/www/html/custom-mods/&lt;id&gt;</code></td><td><code>http://127.0.0.1:19000/custom-mods/&lt;id&gt;</code></td></tr>
-                            <tr><td><a href="#LauncherRoute">Launcher</a></td><td><code>/var/www/html/custom-mods/example-server</code></td><td><code>http://127.0.0.1:19000/custom-mods/example-server</code></td></tr>
-                        </tbody>
-                    </table></div>
-                    <p>The manual install and the launcher install are two separate routes: the manual folder <code>custom-mods/KagrenacServer</code> is one you clone yourself, while <code>custom-mods/example-server</code> is created and managed by the launcher from the template's manifest id <code>example-server</code>. They can sit side by side, each with its own database. These addresses use the standard port 19000. How the custom mods port works:</p>
+                <div class="card" id="GetTemplate">
+                    <h2>1. Get The Template</h2>
+                    <p>Clone the <a href="https://github.com/Dwemer-Dynamics/Kagrenac">KAGRENAC repository</a> to a folder on Windows, or press GitHub's <b>Use this template</b> and clone your copy. Then open your coding agent in that folder. Your agent creates a separate copy for your mod and works there from then on.</p>
+                </div>
+
+                <div class="card" id="FirstPrompt">
+                    <h2>2. Give Your Agent The First Prompt</h2>
+                    <p>Paste this exactly as it is. It is the same prompt as in the repository's <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/README.md#first-prompt-for-your-coding-agent">README</a>:</p>
+                    <pre><code>Read AGENTS.md, PROJECT.md and docs/getting-started.md. Help me build an AI mod.
+Reuse what I already told you; ask only for the missing game, starting feature and mod name.
+Plan a meaningful gameplay loop and qualify the game's integration before writing port code.
+Prepare the server and providers alongside that research. Use in-game text chat by default;
+add voice if requested and speech input only if requested. Run the setup, implement, test,
+review the actual changes, and fix findings. Keep keys out of chat and preserve existing work.</code></pre>
+                    <p>If you already said which game, feature or name you want, the agent reuses it. Next time, open the agent in your mod's folder and ask it to continue; it resumes from <code>PROJECT.md</code>.</p>
+                </div>
+
+                <div class="card" id="WhoDoesWhat">
+                    <h2>Who Does What</h2>
                     <ul>
-                        <li><b>One shared port.</b> All custom PHP mods share one Apache listener on 127.0.0.1 (this PC only). Each mod gets its own path and its own database. There are no per-mod ports.</li>
-                        <li><b>Configurable.</b> The port is <code>CUSTOM_MODS_PORT</code> in <code>/etc/dwemerdistro_services.conf</code>. The default is 19000, and any number from 19000 to 19999 is allowed. Official ports such as 8081 do not change.</li>
-                        <li><b>Safe setup.</b> <code>sudo ddistro_custom_mod setup-web</code> writes only its own Apache site, which serves only folders under <code>/custom-mods/</code> (plus the legacy <code>/ExampleServer</code> path). Any other folder in <code>/var/www/html</code> is rejected on this port. After reloading Apache it waits until the port is ready. If the port is already in use, or a site file it did not write is in the way, it stops and changes nothing.</li>
-                        <li><b>Kept on update.</b> <b>Update Distro</b> keeps your <code>CUSTOM_MODS_PORT</code>, so custom mod addresses stay the same.</li>
-                        <li><b>Changing it.</b> Edit the port, run <code>setup-web</code> again, then give every client the new <code>server_url</code>. The old address stops working.</li>
+                        <li><b>You</b> choose the game, the feature and the name; enter API keys on your mod's dashboard; approve anything that costs money or needs your account; and play the result to say whether it works.</li>
+                        <li><b>Your agent</b> plans the gameplay, researches the game, sets up and deploys the server, builds and tests the mod, reviews its own changes and records progress in <code>PROJECT.md</code>.</li>
                     </ul>
+                    <div class="guide-note note-info">
+                        <p><b>Two different AIs.</b> Your <b>coding agent</b> builds the mod. The <b>dialogue model</b> you set up on the mod's dashboard writes the characters' replies; an optional, separately configured text-to-speech service supplies their voice. Neither is your coding agent, and your agent never needs your provider keys in chat.</p>
+                    </div>
                 </div>
 
                 <div class="card" id="InstallServer">
                     <span id="ReleasedRoute" aria-hidden="true"></span>
-                    <h2>1. Install The Server</h2>
-                    <p>Open a DwemerDistro WSL shell as the <code>dwemer</code> user from PowerShell:</p>
-                    <pre><code>wsl -d DwemerAI4Skyrim3 -u dwemer</code></pre>
-                    <div class="guide-note note-info">
-                        <p><code>DwemerAI4Skyrim3</code> is an example distro name; yours may differ. Run <code>wsl --list --verbose</code> to see the names installed on your PC, and use yours here and in step 3.</p>
-                    </div>
-                    <div class="guide-note note-warning">
-                        <p><b>Protect the web port before you clone.</b> Because the repository also contains the client source, authoring docs and engine port records (<code>client/</code>, <code>docs/</code> and <code>ports/</code>), the combined server needs a companion DwemerDistro Core update that keeps those folders off the web port. Install the server only after that protection is published: run <b>Update Distro</b> in the DwemerDistro launcher, then apply and check the protection below before you clone anything. The <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/getting-started.md">getting-started guide</a> states the current requirement.</p>
-                    </div>
-                    <p>After <b>Update Distro</b>, apply the protection and check it:</p>
-                    <pre><code>sudo ddistro_custom_mod setup-web
-grep -qF '(client|ports|docs)' /etc/apache2/sites-available/dwemerdistro-custom-mods.conf &amp;&amp; echo protected</code></pre>
-                    <p>Continue only if it printed <code>protected</code>. If it printed nothing, your DwemerDistro Core does not have the protection yet; do not clone or install until an update brings it. If <code>setup-web</code> is unavailable or rejected as an unknown command, run <b>Update Distro</b> in the DwemerDistro launcher, then run both commands again. The protection covers <code>/custom-mods/KagrenacServer</code>; a renamed folder needs its own Apache rules.</p>
-                    <p>Then create the folder for <code>dwemer</code>, clone the repository into it, and run the installer:</p>
-                    <pre><code>sudo install -d -o dwemer -g dwemer /var/www/html/custom-mods/KagrenacServer
-git clone https://github.com/Dwemer-Dynamics/Kagrenac.git /var/www/html/custom-mods/KagrenacServer
-cd /var/www/html/custom-mods/KagrenacServer
-sudo bash scripts/install.sh</code></pre>
-                    <p>The installer creates a private <code>config/config.php</code> with a new random token only if it is missing, creates the <code>example_ai_mod</code> database only if it is missing, sets file permissions and applies migrations. It changes nothing in Apache, PHP or any other product. Running it again keeps your config and data.</p>
-                    <p>The <code>setup-web</code> you ran above already serves this folder on the custom mods port, 19000 unless you set another. To use a different port, open the services file:</p>
-                    <pre><code>sudo nano /etc/dwemerdistro_services.conf</code></pre>
-                    <p>Add the line <code>CUSTOM_MODS_PORT=19000</code>, or change it if it is already there. Any number from 19000 to 19999 works; without the line, 19000 is used. Save with <b>Ctrl+O</b> and <b>Enter</b>, exit with <b>Ctrl+X</b>, then run <code>setup-web</code> again to apply the new port:</p>
-                    <pre><code>sudo ddistro_custom_mod setup-web</code></pre>
-                    <p>It is safe to run again. If it says the port is in use, choose another port in the file and run it again.</p>
-                    <p>Check it, using your port if you changed it. Give the smoke script the address so it tests the port you chose:</p>
-                    <pre><code>curl http://127.0.0.1:19000/custom-mods/KagrenacServer/health.php
-bash scripts/smoke.sh http://127.0.0.1:19000/custom-mods/KagrenacServer</code></pre>
-                    <p>Health answers with <code>"ok":true</code>, <code>"schema":"007_connector_calls"</code> and <code>"server_version":"0.1.0"</code>. The smoke script ends with <code>All checks passed.</code></p>
-                    <p>Open the dashboard at <code>http://127.0.0.1:19000/custom-mods/KagrenacServer/</code>. <b>Control Panel &gt; Diagnostics</b> should say Ready.</p>
-                    <div class="guide-note note-warning">
-                        <p><b>Keep it local.</b> The dashboard has no login and no rate limiting; anyone who can open it can change settings and API keys. The custom mods port listens on this PC only, and the official port 8081 also serves <code>/var/www/html</code>. Do not expose either beyond your PC or a trusted local network. Kagrenac does not provide a secure online deployment.</p>
-                    </div>
-                    <p>If <code>health.php</code> returns 404 or 403, check that the folder is inside <code>/var/www/html/custom-mods/</code> (for this install, <code>/var/www/html/custom-mods/KagrenacServer</code>), and that <code>setup-web</code> succeeded.</p>
+                    <h2>What Your Agent Sets Up</h2>
+                    <p>These are one-time setup steps the agent runs from your mod's folder. They are not something players repeat each session.</p>
+                    <div class="table-scroll" role="region" aria-label="Setup steps" tabindex="0"><table>
+                        <thead><tr><th>Step</th><th>What it does</th></tr></thead>
+                        <tbody>
+                            <tr><td>Create</td><td>Copies the template into a new, independent repository for your mod, with its own id and name.</td></tr>
+                            <tr><td>Deploy</td><td>Installs your mod's committed code as its own server in DwemerDistro, keeping existing settings and data.</td></tr>
+                            <tr><td>Configure</td><td>Chooses the dialogue provider, voice and allowed actions for that server.</td></tr>
+                            <tr id="Pair"><td>Pair</td><td>Writes the game mod's private connection file, without showing its token.</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p id="BuildClient">The game side is built by its own route once the game has been checked; see <a href="./porting.html">Game integration</a>. The exact commands are in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/getting-started.md#scriptsprojectps1">docs/getting-started.md</a>.</p>
                 </div>
 
-                <div class="card" id="BuildClient">
-                    <h2>2. Build The Client</h2>
-                    <p>In PowerShell on Windows, clone your development copy into an ordinary folder, not into the WSL server copy, and build the client:</p>
-                    <pre><code>git clone https://github.com/Dwemer-Dynamics/Kagrenac.git
-cd Kagrenac
-powershell -ExecutionPolicy Bypass -File client\scripts\build.ps1</code></pre>
-                    <p>This builds x64 and x86 into <code>%LOCALAPPDATA%\DwemerDynamics\KagrenacClient\build\x64\Release</code> and <code>...\x86\Release</code>, with <code>config.default.json</code> next to each <code>KagrenacClient.exe</code>. Use the architecture your game uses; the console works with both. <code>config.default.json</code> points to port 19000, but the pairing file from step 3 sets the address anyway.</p>
-                </div>
-
-                <div class="card" id="Pair">
-                    <h2>3. Pair The Client</h2>
-                    <p>In the WSL shell, write a private client config outside the web root. Pass the address with your port:</p>
-                    <pre><code>cd /var/www/html/custom-mods/KagrenacServer
-sudo -u dwemer php scripts/pair_client.php --out /home/dwemer/example-client.json --base-url http://127.0.0.1:19000/custom-mods/KagrenacServer</code></pre>
-                    <p>The file is created with mode 0600 and the token is not printed. An existing file is never replaced. If you change <code>CUSTOM_MODS_PORT</code> later, pair again to a new <code>--out</code> file, or edit <code>server_url</code> in <code>config.json</code>.</p>
-                    <p>Copy it next to <code>KagrenacClient.exe</code> as <code>config.json</code>. The copy command writes to the current folder, so change to the build folder first. In PowerShell, using your distro name:</p>
-                    <pre><code>cd "$env:LOCALAPPDATA\DwemerDynamics\KagrenacClient\build\x64\Release"
-Copy-Item \\wsl.localhost\DwemerAI4Skyrim3\home\dwemer\example-client.json .\config.json</code></pre>
-                    <p>Treat both copies like a password, and delete the WSL copy if you no longer need it. <code>config.json</code> is git-ignored.</p>
-                    <p>From the same folder, check the connection and send a first line:</p>
-                    <pre><code>.\KagrenacClient.exe --health
-.\KagrenacClient.exe --say "Follow me"</code></pre>
-                    <p>Expected output:</p>
-                    <pre><code>Server is ready.
-Versions: client 0.1.0, client baseline baseline-1, server 0.1.0, server baseline baseline-1, schema 007_connector_calls, protocol 1.
-[Guide] Of course. Lead the way.
-* npc_guide is now following you (simulated).
-* Result reported to server: follow_player handled (client-reported, console simulation).</code></pre>
-                    <p>"Following you (simulated)" is console output, not a game engine. <code>WinHTTP error 12029</code> means the server is not reachable at <code>server_url</code>; <code>401 unauthorized</code> means the token does not match.</p>
-                </div>
-
-                <div class="card" id="SecondCopy">
-                    <h2>A Second Copy</h2>
-                    <p>Every extra manual copy needs its own folder and its own database. Never point two copies at the same database.</p>
-                    <p>The custom mods port serves only folders under <code>/custom-mods/</code>, so put the copy in its own <code>/var/www/html/custom-mods/&lt;folder&gt;</code>, not in the <code>KagrenacServer</code> folder from step 1. Pairing accepts folder names made of letters, digits, dots, underscores and hyphens; a simple lowercase hyphenated name such as <code>my-project</code> is recommended. A manual folder name is not a launcher manifest <code>id</code>, which has a stricter rule (<a href="./publishing.html#Manifest">Manifest</a>). Do not use a folder the launcher installs, such as <code>example-server</code>.</p>
-                    <p>Clone into the new folder, give its private config a new token and a new <code>database.name</code> before running <code>install.sh</code>, then check and pair it with its own address, for example <code>http://127.0.0.1:19000/custom-mods/my-project</code>. Full commands: <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md, A separate copy with its own database</a>.</p>
+                <div class="card" id="Ports">
+                    <h2>Where Things Live</h2>
+                    <div class="table-scroll" role="region" aria-label="Locations" tabindex="0"><table>
+                        <thead><tr><th>What</th><th>Where</th></tr></thead>
+                        <tbody>
+                            <tr><td>Source</td><td>Your mod's repository, checked out on Windows. The agent works here.</td></tr>
+                            <tr><td>Builds</td><td>Outside the source, by default under <code>%LOCALAPPDATA%\DwemerDynamics\Kagrenac\projects\&lt;id&gt;</code>. You can choose another folder.</td></tr>
+                            <tr><td>Game side</td><td>The game's mod folder or loader profile, with the private connection file.</td></tr>
+                            <tr><td>Server</td><td>New mods: <code>/var/www/html/&lt;Name&gt;Server</code> in DwemerDistro, for example <code>http://127.0.0.1:19000/MyModServer</code>, with its own database. An existing install keeps the path DwemerDistro has on record for it.</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>All custom mods share one port on this PC, <code>CUSTOM_MODS_PORT</code> (default 19000, allowed 19000-19999). <b>Update Distro</b> keeps your port, so addresses stay the same.</p>
+                    <p id="SecondCopy">Every mod has its own server folder and database. Never point two mods at the same database. Older installs under <code>/custom-mods/&lt;id&gt;</code> keep working.</p>
                 </div>
 
                 <div class="card" id="LauncherRoute">
-                    <h2>Launcher Route</h2>
-                    <p>In the DwemerDistro launcher, <b>Mods &gt; Custom mods &gt; Add custom mod</b> takes a public HTTPS repository URL, previews the exact commit, and installs the server in its own folder and database. The same DwemerDistro update requirement as a <a href="#InstallServer">manual install</a> applies:</p>
-                    <ul>
-                        <li>Folder <code>/var/www/html/custom-mods/example-server</code>, separate from a manual install.</li>
-                        <li>Database <code>custom_example_server</code>, and a private config with a new token.</li>
-                        <li>Dashboard <code>http://127.0.0.1:19000/custom-mods/example-server/ui/</code>, on your <code>CUSTOM_MODS_PORT</code>.</li>
-                        <li>Client <code>server_url</code> <code>http://127.0.0.1:19000/custom-mods/example-server</code>.</li>
-                    </ul>
-                    <p>The launcher manages the server only. Build the client from your Windows development copy as in <a href="#BuildClient">step 2</a>. To pair it, run <code>pair_client.php</code> from the launcher's folder with <code>--base-url http://127.0.0.1:19000/custom-mods/example-server</code>. Details: <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/getting-started.md">docs/getting-started.md</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md">SETUP.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/client/README.md">client/README.md</a>.</p>
-                    <p><b>Next step:</b> <a href="./configuration.html">Configure an LLM, keys and voice</a>, or go straight to <a href="./testing.html">Testing</a> with the mock.</p>
+                    <h2>Legacy Template Installs</h2>
+                    <p>Earlier guides installed the template server on its own, as <code>/custom-mods/example-server</code> through the launcher or <code>/custom-mods/KagrenacServer</code> by hand. Those installs keep working and keep their data. They contain no game mod. For the manual route, maintenance and removal, see <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md">SETUP.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>.</p>
+                    <p><b>Next step:</b> <a href="./gameplay.html">Design the gameplay</a>.</p>
                 </div>
             </section>
         </main>

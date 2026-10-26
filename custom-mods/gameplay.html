@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KAGRENAC Gameplay Design | Dwemer Dynamics</title>
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <script src="../js/javascript.js?v=20261026-kagrenac-guide"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/progressBar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+</head>
+<body class="theme custom-mods-theme copyable-guide">
+    <div class="progress-container">
+        <div class="progress-bar custom-mods-progress"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="headerMenu" onclick="toggleNav()">
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
+            </div>
+            <div class="headerTitle">
+                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
+                <a href="./index.html" id="headerTitle">KAGRENAC</a>
+            </div>
+        </div>
+
+        <div class="sidebar left-sidebar" id="leftSidebar">
+            <p class="pageLinks">
+                <a href="../index.html">Home</a>
+                <a href="./index.html">Overview</a>
+                <a href="./installation.html">Get started</a>
+                <a href="./gameplay.html">Gameplay design</a>
+                <a href="./porting.html">Game integration</a>
+                <a href="./configuration.html">Providers &amp; voice</a>
+                <a href="./data-and-memory.html">Characters &amp; memory</a>
+                <a href="./testing.html">Testing</a>
+                <a href="./updates.html">Updates &amp; recovery</a>
+                <a href="./publishing.html">Publishing</a>
+            </p>
+            <hr>
+            <p class="sidebar-bottom">
+                <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Source Code</a>
+            </p>
+        </div>
+
+        <main class="content">
+            <section id="GameplayDesign" class="section">
+                <div class="card hero-card">
+                    <h1>Gameplay Design</h1>
+                    <p>An AI mod is worth playing when something in the game changes because of it, not just because a chat box answers. Before writing game code, your agent turns your idea into a short gameplay plan in <code>PROJECT.md</code>. It fills that plan from your conversation; you never fill in a research form.</p>
+                    <nav aria-label="On this page"><p><b>On this page</b></p><ul>
+                        <li><a href="#PlayerFantasy">Start with the player</a></li>
+                        <li><a href="#Modes">Interaction modes</a></li>
+                        <li><a href="#Triggers">Triggers and who is there</a></li>
+                        <li><a href="#WhoDecides">Who decides</a></li>
+                        <li><a href="#PlayerFirst">The player comes first</a></li>
+                        <li><a href="#Planned">Planned, not yet available</a></li>
+                    </ul></nav>
+                </div>
+
+                <div class="card" id="PlayerFantasy">
+                    <h2>Start With The Player</h2>
+                    <ul>
+                        <li><b>The fantasy.</b> One sentence about what the player gets to feel, such as "my companion has my back".</li>
+                        <li><b>The loop.</b> What the player does, sees and hears in two or three minutes. If nothing visible or audible changes, it is not a loop yet.</li>
+                        <li><b>The outcome.</b> A subtitle, a voice line, a movement or a changed state the player can notice.</li>
+                    </ul>
+                    <p>A simple mod where the player talks to one NPC needs only a few words for each.</p>
+                </div>
+
+                <div class="card" id="Modes">
+                    <h2>Interaction Modes</h2>
+                    <div class="table-scroll" role="region" aria-label="Interaction modes" tabindex="0"><table>
+                        <thead><tr><th>Mode</th><th>How it starts</th></tr></thead>
+                        <tbody>
+                            <tr><td>Manual</td><td>The player types to a character in game.</td></tr>
+                            <tr><td>Ambient, one speaker</td><td>Something happens in the game, such as entering a place, and one nearby NPC remarks on it.</td></tr>
+                            <tr><td>Companion</td><td>The player talks to a companion, who also reacts to events and can carry out actions the game supports.</td></tr>
+                            <tr><td>Operator</td><td>The player asks an advisor for a report or gives an order. Obvious orders go straight to the game, with no AI call.</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>A mix is fine. Every mode keeps a real in-game chat box: the player sees who they are talking to, types freely and presses Enter. A hotkey that sends a canned line is not chat.</p>
+                </div>
+
+                <div class="card" id="Triggers">
+                    <h2>Triggers And Who Is There</h2>
+                    <ul>
+                        <li><b>Real triggers.</b> Automatic lines start from something the game actually reports, not a timer that talks every few seconds.</li>
+                        <li><b>Real observations.</b> Characters are told only what the game can read now. Anything it cannot read is marked unavailable, never guessed. See <a href="./porting.html#Observations">Game awareness</a>.</li>
+                        <li><b>Participants and listeners.</b> Note who is present and who could hear. Today one NPC answers at a time; conversations between NPCs are <a href="#Planned">planned</a>.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="WhoDecides">
+                    <h2>Who Decides</h2>
+                    <div class="table-scroll" role="region" aria-label="Who decides" tabindex="0"><table>
+                        <thead><tr><th>Need</th><th>Use</th></tr></thead>
+                        <tbody>
+                            <tr><td>Fixed rules, emergencies, combat</td><td>The game's own AI or a simple rule</td></tr>
+                            <tr><td>An obvious command, such as a button or fixed phrase</td><td>The game's handler directly</td></tr>
+                            <tr><td>Words the player will read or hear</td><td>The dialogue model</td></tr>
+                            <tr><td>Which nearby NPC answers the player</td><td>Optional NPC selection with JEV</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Skip the AI when the outcome is already fixed, one option is always right, or nobody will see or hear the result.</p>
+                </div>
+
+                <div class="card" id="PlayerFirst">
+                    <h2>The Player Comes First</h2>
+                    <ul>
+                        <li><b>Player input wins.</b> When the player speaks, any automatic line in progress gives way. No new automatic line starts while the chat box is open.</li>
+                        <li><b>Clean stops.</b> An automatic exchange has a fixed number of lines, then ends. Generated lines never trigger more automatic lines.</li>
+                        <li><b>No limits on the player.</b> Lines the player asks for have no artificial quotas or cooldowns. Pacing applies only to automatic remarks.</li>
+                        <li><b>Nothing lost.</b> If a line fails, it goes back into the chat box to send again. Nothing is retried automatically.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="Planned">
+                    <h2>Planned, Not Yet Available</h2>
+                    <p>Conversations between NPCs, with listeners and overheard knowledge, and broader JEV decisions, such as choosing an action, are planned. Today JEV only picks which offered NPC answers the player. If your idea needs one of these, your agent records it as a missing piece and builds what works now.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/GAMEPLAY_DESIGN.md">docs/GAMEPLAY_DESIGN.md</a>.</p>
+                    <p><b>Next step:</b> <a href="./porting.html">Plan the game integration</a>.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Dwemer Dynamics 2026</footer>
+</body>
+</html>
