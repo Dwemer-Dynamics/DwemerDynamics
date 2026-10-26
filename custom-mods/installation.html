@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KAGRENAC Get Started | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261026-kagrenac-guide"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-fixes"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261026-kagrenac-fixes">
 </head>
 <body class="theme custom-mods-theme copyable-guide">
     <div class="progress-container">
@@ -57,6 +57,7 @@
                     <p>There is no form to fill in and no setup commands to type. Get the template, open your coding agent in it and paste one prompt. The agent asks only for what is missing and runs the setup itself.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#Requirements">What you need</a></li>
+                        <li><a href="#InstallDistro">Install DwemerDistro</a></li>
                         <li><a href="#GetTemplate">1. Get the template</a></li>
                         <li><a href="#FirstPrompt">2. Give your agent the first prompt</a></li>
                         <li><a href="#WhoDoesWhat">Who does what</a></li>
@@ -70,7 +71,7 @@
                     <h2>What You Need</h2>
                     <ul>
                         <li><b>Windows, Git and a coding agent</b> of your choice.</li>
-                        <li><b>DwemerDistro</b>, which runs your mod's server.</li>
+                        <li><b>DwemerDistro</b>, which runs your mod's server. See <a href="#InstallDistro">Install DwemerDistro</a> if it is not on this PC yet.</li>
                         <li><b>Your game's mod tools</b>, or a mod loader that supports your exact game version. Your agent works out which.</li>
                         <li><b>Visual Studio C++ tools</b> only if your mod is a C++ plugin. Script-based mods use their own tools.</li>
                         <li><b>An AI provider</b> for real conversations: an account and key such as OpenRouter, or a local model. See <a href="./configuration.html">Providers &amp; voice</a>.</li>
@@ -78,6 +79,17 @@
                     <div class="guide-note note-info">
                         <p><b>Run Update Distro first.</b> Press <b>Update Distro</b> in the DwemerDistro launcher before your agent deploys anything, including on a fresh install. Your agent then checks that DwemerDistro has the setup tools it needs; the version label alone does not tell you. If something is missing, setup stops without changing anything.</p>
                     </div>
+                </div>
+
+                <div class="card" id="InstallDistro">
+                    <h2>Install DwemerDistro</h2>
+                    <p>DwemerDistro is a small Linux environment that runs on Windows through WSL (Windows Subsystem for Linux). It provides the web server, PHP and database your mod's server runs on. Skip this only if DwemerDistro itself is already installed and starts from its launcher; otherwise run the full installer below.</p>
+                    <ol>
+                        <li>Download <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest/download/DwemerDistroInstaller.exe"><code>DwemerDistroInstaller.exe</code></a> from the <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest">latest DwemerDistro release</a>. It is one file containing DwemerDistro and its launcher. The ZIP on that page is only the launcher, so it cannot do a first install.</li>
+                        <li>Run the installer. It asks for administrator permission. Keep WSL setup and import turned on, and let it finish.</li>
+                        <li>Open the DwemerDistro launcher, start DwemerDistro and press <b>Update Distro</b>.</li>
+                    </ol>
+                    <p>Keep DwemerDistro running while your agent sets up and tests your mod.</p>
                 </div>
 
                 <div class="card" id="GetTemplate">
@@ -88,7 +100,7 @@
                 <div class="card" id="FirstPrompt">
                     <h2>2. Give Your Agent The First Prompt</h2>
                     <p>Paste this exactly as it is. It is the same prompt as in the repository's <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/README.md#first-prompt-for-your-coding-agent">README</a>:</p>
-                    <pre><code>Read AGENTS.md, PROJECT.md and docs/getting-started.md. Help me build an AI mod.
+                    <pre class="copyable-prompt"><code>Read AGENTS.md, PROJECT.md and docs/getting-started.md. Help me build an AI mod.
 Reuse what I already told you; ask only for the missing game, starting feature and mod name.
 Plan a meaningful gameplay loop and qualify the game's integration before writing port code.
 Prepare the server and providers alongside that research. Use in-game text chat by default;

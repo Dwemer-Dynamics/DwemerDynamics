@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KAGRENAC AI Mod Maker Guide | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261026-kagrenac-guide"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-fixes"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261026-kagrenac-fixes">
 </head>
 <body class="theme custom-mods-theme copyable-guide">
     <div class="progress-container">
@@ -58,6 +58,7 @@
                     <p><b>Build a mod:</b> <a href="./installation.html">Get started</a>. <b>Playing someone else's mod?</b> <a href="#InstallPublished">Install a published mod</a>.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
                         <li><a href="#WhatItIs">What you can make</a></li>
+                        <li><a href="#Included">Included and built for you</a></li>
                         <li><a href="#Journey">How a mod gets built</a></li>
                         <li><a href="#Architecture">How it fits together</a></li>
                         <li><a href="#Routes">Build or play</a></li>
@@ -78,6 +79,25 @@
                     </ul>
                 </div>
 
+                <div class="card" id="Included">
+                    <h2>Included And Built For You</h2>
+                    <p><b>Ready to use in the template:</b></p>
+                    <ul>
+                        <li><b>Your mod's server and dashboard.</b> They handle conversations, game events, character bios and facts, history, checkpoints and optional memory.</li>
+                        <li><b>Provider connections.</b> Dialogue models, PocketTTS and other voice services, and optional speech input.</li>
+                        <li><b>A shared Windows client.</b> A C++ library that sends the player's lines, receives replies and passes action requests to the game, with a console example that stands in for a game.</li>
+                        <li><b>A documented protocol</b> that any game-side code can use to talk to the server.</li>
+                    </ul>
+                    <p><b>Built by your agent for your game:</b></p>
+                    <ul>
+                        <li><b>The in-game chat and reply display</b>, using what the game's mod tools allow.</li>
+                        <li><b>Observations</b>: the events and details the game reports to the server.</li>
+                        <li><b>Voice playback</b>, and microphone input if you ask for it.</li>
+                        <li><b>Action handlers</b>: the game code that carries out each allowed action and checks the result.</li>
+                    </ul>
+                    <p>Choosing a game starts this research and building; it is not a ready-made integration for that game. Your agent checks what the game can do first. See <a href="./porting.html">Game integration</a>.</p>
+                </div>
+
                 <div class="card" id="Journey">
                     <h2>How A Mod Gets Built</h2>
                     <ol>
@@ -93,11 +113,11 @@
 
                 <div class="card" id="Architecture">
                     <h2>How It Fits Together</h2>
-                    <figure class="guide-figure">
+                    <figure class="guide-figure architecture-figure">
                         <img src="./images/architecture.svg" width="760" height="300" alt="Diagram: the game mod sends the player's line and what the game observed to the mod's own named server in DwemerDistro. The server asks the dialogue model you configured and, optionally, a voice service, then returns the reply text, optional voice and any action requests. The game runs only actions it has its own handler for and checks the result itself.">
                         <figcaption>One conversation turn. <a href="./images/architecture.svg">Open the diagram at full size</a>.</figcaption>
                     </figure>
-                    <ol>
+                    <ol class="architecture-flow">
                         <li><b>Your game mod</b> sends the player's line and what the game can actually see right now.</li>
                         <li><b>Your mod's server</b> adds the character's bio, facts and recent conversation, then asks your providers for a reply.</li>
                         <li><b>The game</b> shows the reply, plays any voice, and runs a requested action only if it has its own handler for it.</li>

@@ -98,6 +98,70 @@
     height: auto;
 }
 
+.custom-mods-theme .prompt-copy-actions {
+    margin: 0.8em 0 0;
+}
+
+.custom-mods-theme .prompt-copy-actions .guide-copy-button {
+    float: none;
+    display: inline-flex;
+    margin: 0;
+}
+
+/* Closed off-canvas menu: hidden at once (no delayed visibility transition, including on the inherited
+   links) so its links leave the Tab order and accessibility tree as soon as it closes. */
+@media only screen and (max-width: 900px) {
+    /* header.css hides the menu button from 900px up; keep it at exactly 900px, where the sidebar is already off-canvas. */
+    .custom-mods-theme .headerMenu {
+        display: flex;
+    }
+
+    .custom-mods-theme .left-sidebar:not(.expanded) {
+        visibility: hidden;
+        transition: transform 333ms cubic-bezier(0, 0, 0, 1);
+    }
+
+    .custom-mods-theme .left-sidebar:not(.expanded) * {
+        transition: none;
+    }
+}
+
+/* Phones: the diagram's labels become too small, so the numbered steps below it become a stacked flow. */
+@media only screen and (max-width: 700px) {
+    .custom-mods-theme .architecture-figure img {
+        display: none;
+    }
+
+    .custom-mods-theme .architecture-flow {
+        margin-left: 0;
+        padding-left: 0;
+        list-style-position: inside;
+    }
+
+    .custom-mods-theme .content .architecture-flow li {
+        position: relative;
+        margin: 0 0 1.6em;
+        padding: 0.65em 0.85em;
+        border: 1px solid var(--custom-edge);
+        border-radius: 6px;
+        background: #121418;
+    }
+
+    .custom-mods-theme .content .architecture-flow li:last-child {
+        margin-bottom: 0;
+    }
+
+    .custom-mods-theme .architecture-flow li:not(:last-child)::after {
+        content: "\2193" / "";
+        position: absolute;
+        left: 50%;
+        bottom: -1.45em;
+        transform: translateX(-50%);
+        color: var(--custom-accent-light);
+        line-height: 1;
+    }
+}
+
 /* Homepage row */
 .hubModRowCustom .hubModGame {
     color: var(--custom-accent-light);
