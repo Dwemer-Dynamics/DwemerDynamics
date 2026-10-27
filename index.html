@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sidebar.css?v=20260713a">
-    <link rel="stylesheet" href="css/hub.css?v=20261014-mobile-grid">
+    <link rel="stylesheet" href="css/hub.css?v=20261026-home-buttons">
     <link rel="stylesheet" href="css/custom-mods.css?v=20261018-kagrenac">
     <link rel="stylesheet" href="css/other-projects.css?v=20261014-home">
 </head>
@@ -28,144 +28,90 @@
     </div>
 
     <div class="hubPageLayout">
-        <div class="hubContainer">
-            <div class="card hubIntroCard">
-                <h1 class="hubTitle">Meaningful AI Gameplay</h1>
-                <p class="hubIntro">Dwemer Dynamics is an AI focused mod team building AI frameworks into popular games.</p>
-            </div>
+        <main class="hubContainer hubHome">
+            <section class="hubHomeBanner" id="customModsHub" aria-labelledby="hubHomeBannerTitle">
+                <img class="hubHomeBannerIcon" src="./custom-mods/images/kagrenac.png" alt="" width="512" height="512">
+                <h1 class="hubHomeBannerTitle" id="hubHomeBannerTitle">KAGRENAC AI Mod Maker</h1>
+                <p class="hubHomeBannerLede">Build your own AI game mod with a coding agent, from your first idea to a version you can try in game.</p>
+                <div class="hubHomeBannerActions">
+                    <a class="hubHomeDownload" href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest/download/DwemerDistroInstaller.exe">Download DwemerDistro</a>
+                    <a class="hubHomeBuild" href="./custom-mods/index.html">Build a Mod</a>
+                </div>
+                <p class="hubHomeBannerNote">Windows installer for the DwemerDistro server and launcher. Game plugins download separately with each mod below. <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest" target="_blank" rel="noopener noreferrer">Release notes</a></p>
+            </section>
 
-            <div class="hubModShowcase" aria-label="Dwemer Dynamics mods">
-                <article class="hubModRow hubModRowChim" id="chimHub">
-                    <div class="hubModMedia">
-                        <a class="hubModArtwork" href="./chim/index.html" aria-label="Open CHIM guide">
-                            <img src="./img/chim_home_tile.jpg" alt="CHIM home artwork">
+            <section class="hubHomeMods" aria-labelledby="hubHomeModsTitle">
+                <h2 class="hubHomeHeading" id="hubHomeModsTitle">Official mods</h2>
+                <div class="hubHomeGrid">
+                    <article class="hubHomeCard hubHomeCardChim" id="chimHub">
+                        <a class="hubHomeCardArt" href="./chim/index.html" tabindex="-1" aria-hidden="true">
+                            <img src="./img/chim_home_tile.jpg" alt="" width="1920" height="1080">
                         </a>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonChim" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonChim" href="./chim/installation.html">Install Guide</a>
-                            <a class="hubTileActionButton hubTileActionButtonChim" href="./chim/index.html">Info</a>
+                        <div class="hubHomeCardBody">
+                            <p class="hubHomeCardGame">Skyrim Special Edition / Skyrim VR</p>
+                            <h3 class="hubHomeCardTitle"><a href="./chim/index.html">CHIM</a></h3>
+                            <p class="hubHomeCardSummary">Talk to almost anyone in Skyrim, with characters who remember your adventures and join in quests and unscripted scenes.</p>
+                            <div class="hubHomeCardActions">
+                                <a class="hubHomeCardDownload" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
+                                <a class="hubHomeCardGuide" href="./chim/installation.html">Guide</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame hubTileCaptionSkyrim">Skyrim Special Edition / Skyrim VR</p>
-                        <h2>CHIM</h2>
-                        <p class="hubModSummary">Talk to almost anyone in Skyrim, give characters a memory of your adventures, and let them take part in quests and unscripted scenes.</p>
-                        <ul>
-                            <li>Nearly anyone in Skyrim can join a conversation, from vanilla and modded NPCs to horses.</li>
-                            <li>NPCs remember conversations and events, build relationships, and use Background Life to travel, write letters, and spread rumors.</li>
-                            <li>Use Director Mode to arrange actions and scenes, and Oghma Infinium to give NPCs world and lore knowledge.</li>
-                        </ul>
-                    </div>
-                </article>
+                    </article>
 
-                <article class="hubModRow hubModRowLorkhan" id="lorkhanHub">
-                    <div class="hubModMedia">
-                        <a class="hubModArtwork" href="./lorkhan/index.html" aria-label="Open LORKHAN guide">
-                            <img src="./img/lorkhan_home_tile.jpg" alt="LORKHAN AI Framework for Morrowind" loading="lazy" width="1920" height="1080">
+                    <article class="hubHomeCard hubHomeCardLorkhan" id="lorkhanHub">
+                        <a class="hubHomeCardArt" href="./lorkhan/index.html" tabindex="-1" aria-hidden="true">
+                            <img src="./img/lorkhan_home_tile.jpg" alt="" width="1920" height="1080">
                         </a>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonLorkhan" href="./lorkhan/installation.html#Download">Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonLorkhan" href="./lorkhan/installation.html">Install Guide</a>
-                            <a class="hubTileActionButton hubTileActionButtonLorkhan" href="./lorkhan/index.html">Info</a>
+                        <div class="hubHomeCardBody">
+                            <p class="hubHomeCardGame">Morrowind / OpenMW</p>
+                            <h3 class="hubHomeCardTitle"><a href="./lorkhan/index.html">LORKHAN</a> <span class="hubHomeBeta">Beta</span></h3>
+                            <p class="hubHomeCardSummary">Talk with Morrowind characters through text or voice, with memories and roleplay shaped by your adventures.</p>
+                            <div class="hubHomeCardActions">
+                                <a class="hubHomeCardDownload" href="./lorkhan/installation.html#Download">Download</a>
+                                <a class="hubHomeCardGuide" href="./lorkhan/installation.html">Guide</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame">Morrowind / OpenMW</p>
-                        <h2>LORKHAN <small>(Beta)</small></h2>
-                        <p class="hubModSummary">Talk with Morrowind characters through text or voice, with memories and roleplay shaped by your adventures.</p>
-                        <ul>
-                            <li>Choose character voices and profiles, including speech for vanilla dialogue menus.</li>
-                            <li>Build character memories, relationships and diaries throughout your playthrough.</li>
-                            <li>Use the dedicated LORKHAN OpenMW build with LorkhanServer, managed through DwemerDistro.</li>
-                        </ul>
-                    </div>
-                </article>
+                    </article>
 
-                <article class="hubModRow hubModRowStobe" id="stobeHub">
-                    <div class="hubModMedia">
-                        <a class="hubModArtwork" href="./stobe/index.html" aria-label="Open STOBE guide">
-                            <img src="./img/stobe_home_tile.jpg" alt="STOBE home artwork">
+                    <article class="hubHomeCard hubHomeCardStobe" id="stobeHub">
+                        <a class="hubHomeCardArt" href="./stobe/index.html" tabindex="-1" aria-hidden="true">
+                            <img src="./img/stobe_home_tile.jpg" alt="" width="1920" height="1080" loading="lazy">
                         </a>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonStobe" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonStobe" href="./stobe/installation.html">Install Guide</a>
-                            <a class="hubTileActionButton hubTileActionButtonStobe" href="./stobe/index.html">Info</a>
+                        <div class="hubHomeCardBody">
+                            <p class="hubHomeCardGame">Kenshi</p>
+                            <h3 class="hubHomeCardTitle"><a href="./stobe/index.html">STOBE</a></h3>
+                            <p class="hubHomeCardSummary">Bring conversations and character voices to Kenshi, with dialogue that follows what happens to your squad and the world around it.</p>
+                            <div class="hubHomeCardActions">
+                                <a class="hubHomeCardDownload" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer">Download</a>
+                                <a class="hubHomeCardGuide" href="./stobe/installation.html">Guide</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame hubTileCaptionStobe">Kenshi</p>
-                        <h2>STOBE</h2>
-                        <p class="hubModSummary">Bring conversations and character voices into Kenshi, with dialogue that follows what is happening to your squad and the world around it.</p>
-                        <ul>
-                            <li>NPCs remember what happens, keep diaries, and build relationships throughout your playthrough.</li>
-                            <li>NPCs react to changes in the world and to the player's actions.</li>
-                            <li>Give every NPC in Kenshi a voiced dialogue.</li>
-                        </ul>
-                    </div>
-                </article>
+                    </article>
 
-                <article class="hubModRow hubModRowDialectic" id="dialecticHub">
-                    <div class="hubModMedia">
-                        <a class="hubModArtwork" href="./dialectic/index.html" aria-label="Open Dialectic guide">
-                            <img src="./img/dialectic_home_tile.jpg" alt="Dialectic AI Framework for Fallout: New Vegas and Tale of Two Wastelands">
+                    <article class="hubHomeCard hubHomeCardDialectic" id="dialecticHub">
+                        <a class="hubHomeCardArt" href="./dialectic/index.html" tabindex="-1" aria-hidden="true">
+                            <img src="./img/dialectic_home_tile.jpg" alt="" width="1400" height="788" loading="lazy">
                         </a>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Download</a>
-                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="./dialectic/installation.html">Install Guide</a>
-                            <a class="hubTileActionButton hubTileActionButtonDialectic" href="./dialectic/index.html">Info</a>
+                        <div class="hubHomeCardBody">
+                            <p class="hubHomeCardGame">Fallout: New Vegas / TTW</p>
+                            <h3 class="hubHomeCardTitle"><a href="./dialectic/index.html">Dialectic</a></h3>
+                            <p class="hubHomeCardSummary">Talk naturally with characters across Fallout: New Vegas and Tale of Two Wastelands, through Fallout's own interface.</p>
+                            <div class="hubHomeCardActions">
+                                <a class="hubHomeCardDownload" href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Download</a>
+                                <a class="hubHomeCardGuide" href="./dialectic/installation.html">Guide</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame hubTileCaptionDialectic">Fallout: New Vegas / TTW</p>
-                        <h2>Dialectic</h2>
-                        <p class="hubModSummary">Talk naturally with characters across Fallout: New Vegas and Tale of Two Wastelands, with dialogue presented through Fallout's own world and interface.</p>
-                        <ul>
-                            <li>Nearly anyone in Fallout can join a conversation, including humans, non-feral ghouls, super mutants, and robots.</li>
-                            <li>NPCs remember past conversations and events, and their memories stay aligned when you load an older save.</li>
-                            <li>Any character can follow you and carry out actions such as traveling, trading, fighting, and picking up items.</li>
-                        </ul>
-                    </div>
-                </article>
+                    </article>
+                </div>
+            </section>
 
-                <article class="hubModRow hubModRowCustom" id="customModsHub">
-                    <div class="hubModMedia">
-                        <a class="hubModArtwork hubModArtworkCustom" href="./custom-mods/index.html" aria-label="Open the KAGRENAC AI Mod Maker guide">
-                            <img src="./custom-mods/images/kagrenac.png" alt="KAGRENAC icon: an ink sketch of a robed figure with outstretched arms in a round parchment medallion" loading="lazy" width="512" height="512">
-                        </a>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonCustom" href="./custom-mods/index.html">Build a Mod</a>
-                            <a class="hubTileActionButton hubTileActionButtonCustom" href="https://github.com/Dwemer-Dynamics/Kagrenac" target="_blank" rel="noopener noreferrer">Source Code</a>
-                        </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame">For mod authors / DwemerDistro</p>
-                        <h2>KAGRENAC AI Mod Maker</h2>
-                        <p class="hubModSummary">Build your own AI mod with your coding agent. Choose a game and the experience you want; KAGRENAC helps your agent plan the gameplay, check what the game can do, set up your mod's server in DwemerDistro and build a first version for you to try in game.</p>
-                        <ul>
-                            <li>Your agent runs the setup and keeps progress in the mod's PROJECT.md.</li>
-                            <li>Players type to characters in the game itself, with optional voice.</li>
-                            <li>Publish your mod so players can install its server from the DwemerDistro launcher.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="hubModRow hubModRowOtherProjects" id="otherProjectsHub">
-                    <div class="hubModMedia">
-                        <a class="otherProjectPanel" href="./other-projects/index.html" aria-label="Browse Other Projects">
-                            <span class="otherProjectPanelTitle">Other Projects</span>
-                            <span class="otherProjectPanelGame">Dwemer Dynamics</span>
-                        </a>
-                        <div class="hubTileActions">
-                            <a class="hubTileActionButton hubTileActionButtonOtherProjects" href="./other-projects/index.html">Browse Projects</a>
-                        </div>
-                    </div>
-                    <div class="hubModInfo">
-                        <p class="hubModGame">Tools / Experiments</p>
-                        <h2><a href="./other-projects/index.html" style="color: inherit;">Other Projects</a></h2>
-                        <p class="hubModSummary">Modding tools and experiments from Dwemer Dynamics.</p>
-                    </div>
-                </article>
-            </div>
+            <section class="hubHomeMore" id="otherProjectsHub" aria-labelledby="hubHomeMoreTitle">
+                <div>
+                    <h2 class="hubHomeMoreTitle" id="hubHomeMoreTitle">Other Projects</h2>
+                    <p>Modding tools and experiments from Dwemer Dynamics.</p>
+                </div>
+                <a class="hubHomeMoreLink" href="./other-projects/index.html">Browse Projects</a>
+            </section>
 
             <aside class="patron-shell patron-card" aria-label="Current Patreon members">
                 <h2 class="patron-title"><a class="patron-title-link" href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon Members</a></h2>
@@ -173,8 +119,7 @@
                     <div class="patron-list-track" id="patronListTrack"></div>
                 </div>
             </aside>
-        </div>
-
+        </main>
     </div>
 
     <footer class="hubFooter">
