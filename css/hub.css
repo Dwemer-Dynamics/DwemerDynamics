@@ -927,7 +927,7 @@
     grid-area: actions;
     display: flex;
     align-items: center;
-    gap: 0.25rem 0.5rem;
+    gap: 0.5rem 0.625rem;
 }
 
 .hubHomeDownload,
@@ -950,35 +950,44 @@
     white-space: nowrap;
 }
 
-.hubHomeBuild,
 .hubHomeCardGuide,
 .hubHomeMoreLink {
     padding-inline: 0.5rem;
 }
 
-.hubHomeBuild:hover,
 .hubHomeCardGuide:hover,
 .hubHomeMoreLink:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
+/* Banner actions: filled primary (Build a Mod) then outlined secondary (Download), same box size. */
+.hubHomeBuild,
 .hubHomeDownload {
+    padding-inline: 1.125rem;
+    border: 2px solid var(--custom-accent, #4da3ff);
+}
+
+.hubHomeBuild {
     background: var(--custom-accent, #4da3ff);
     color: #0d1117;
 }
 
-.hubHomeDownload:hover {
+.hubHomeBuild:hover {
+    border-color: var(--custom-accent-light, #8cc4ff);
     background: var(--custom-accent-light, #8cc4ff);
     color: #0d1117;
 }
 
-.hubHomeBuild {
-    color: #d6b56d;
+.hubHomeDownload {
+    background: transparent;
+    color: var(--custom-accent-light, #8cc4ff);
 }
 
-.hubHomeBuild:hover {
-    color: #f0cf75;
+.hubHomeDownload:hover {
+    border-color: var(--custom-accent-light, #8cc4ff);
+    background: rgba(77, 163, 255, 0.14);
+    color: #ffffff;
 }
 
 .hubHomeHeading {
@@ -1185,13 +1194,7 @@
     }
 
     .hubHomeBannerActions {
-        column-gap: 1rem;
         margin-top: 0;
-    }
-
-    /* Keep a wrapped Build a Mod flush with the Download button's left edge. */
-    .hubHomeBuild {
-        padding-left: 0;
     }
 
     .hubHomeHeading {
