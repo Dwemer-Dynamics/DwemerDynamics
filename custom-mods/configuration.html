@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kagrenac Configuration | Dwemer Dynamics</title>
+    <title>KAGRENAC Providers &amp; Voice | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-fixes"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261026-kagrenac-fixes">
 </head>
 <body class="theme custom-mods-theme copyable-guide">
     <div class="progress-container">
@@ -23,24 +23,25 @@
     <div class="container">
         <div class="header">
             <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
-                <a href="./index.html" id="headerTitle">Kagrenac</a>
+                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
+                <a href="./index.html" id="headerTitle">KAGRENAC</a>
             </div>
         </div>
 
-        <div class="sidebar left-sidebar">
+        <div class="sidebar left-sidebar" id="leftSidebar">
             <p class="pageLinks">
                 <a href="../index.html">Home</a>
                 <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./installation.html">Get started</a>
+                <a href="./gameplay.html">Gameplay design</a>
+                <a href="./porting.html">Game integration</a>
+                <a href="./configuration.html">Providers &amp; voice</a>
+                <a href="./data-and-memory.html">Characters &amp; memory</a>
                 <a href="./testing.html">Testing</a>
-                <a href="./porting.html">Porting</a>
-                <a href="./updates.html">Updates and Backups</a>
+                <a href="./updates.html">Updates &amp; recovery</a>
                 <a href="./publishing.html">Publishing</a>
             </p>
             <hr>
@@ -52,89 +53,71 @@
         <main class="content">
             <section id="Configuration" class="section">
                 <div class="card hero-card">
-                    <h1>Configuration</h1>
-                    <p>Everything optional starts off. Keep the mock until the client works end to end, then add one provider at a time from the dashboard or the private <code>config/config.php</code>. Changes apply on the next request; no restart is needed.</p>
+                    <h1>Providers And Voice</h1>
+                    <p>Your mod's characters need an AI provider to talk, and optionally voice services. You set these up on your mod's own dashboard. This is separate from the coding agent that builds the mod.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
-                        <li><a href="#Defaults">Shipped defaults</a></li>
-                        <li><a href="#LanguageModel">Connect an LLM</a></li>
+                        <li><a href="#Defaults">Recommended setup</a></li>
                         <li><a href="#ApiKeys">API keys</a></li>
-                        <li><a href="#Voice">Voice: PocketTTS and Parakeet</a></li>
+                        <li><a href="#LanguageModel">Dialogue model</a></li>
+                        <li><a href="#Voice">Voice and speech input</a></li>
                         <li><a href="#NpcSelection">Optional NPC selection</a></li>
                     </ul></nav>
                 </div>
 
                 <div class="card" id="Defaults">
-                    <h2>Shipped Defaults</h2>
-                    <div class="table-scroll" role="region" aria-label="Shipped defaults" tabindex="0"><table>
-                        <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+                    <h2>Recommended Setup</h2>
+                    <div class="table-scroll" role="region" aria-label="Recommended providers" tabindex="0"><table>
+                        <thead><tr><th>Part</th><th>Recommended</th><th>When</th></tr></thead>
                         <tbody>
-                            <tr><td><code>llm.mode</code></td><td><code>mock</code>: predictable replies, no network</td></tr>
-                            <tr><td><code>tts.enabled</code>, <code>stt.enabled</code></td><td><code>false</code> (PocketTTS and Parakeet preselected)</td></tr>
-                            <tr><td><code>decision.enabled</code></td><td><code>false</code>: always the baseline NPC</td></tr>
-                            <tr><td><code>allowed_actions</code></td><td><code>["follow_player"]</code> on the server and in the client</td></tr>
-                            <tr><td><code>history_limit</code></td><td><code>10</code> lines per session and NPC</td></tr>
-                            <tr><td>Client <code>voice_enabled</code></td><td><code>false</code></td></tr>
+                            <tr><td>Dialogue</td><td>OpenRouter, <code>google/gemma-4-31b-it</code></td><td>Always, or another provider you choose</td></tr>
+                            <tr><td>Voice replies</td><td>PocketTTS</td><td>Only if you want voice</td></tr>
+                            <tr><td>Speech input</td><td>Parakeet, push-to-talk</td><td>Only if you ask for it</td></tr>
+                            <tr><td>NPC selection</td><td>JEV, <code>typesafe/jev-1.13</code></td><td>Optional: picks which NPC answers</td></tr>
                         </tbody>
                     </table></div>
-                    <p>The dashboard settings pages rewrite <code>config/config.php</code> safely but do not keep comments in the file. If a page refuses to save, run <code>sudo bash scripts/install.sh</code> again to repair ownership, then check <b>Control Panel &gt; Diagnostics</b> ("Dashboard can save settings").</p>
-                </div>
-
-                <div class="card" id="LanguageModel">
-                    <h2>Connect An LLM</h2>
-                    <ol>
-                        <li>Open <b>Configuration &gt; LLM</b> and choose a <b>Reply mode</b>.</li>
-                        <li>For <code>local</code>, set <b>Base URL</b> to the server's <code>/v1</code> address, for example <code>http://127.0.0.1:1234/v1</code>. For <code>openai</code> it is optional; <code>openrouter</code> and <code>dwemerllm</code> use fixed URLs.</li>
-                        <li>Set <b>Model</b> to the exact model name your provider lists. Every mode except <code>mock</code> needs one.</li>
-                        <li>Press <b>Save LLM settings</b> (saving never contacts the provider), then <b>Send test</b>.</li>
-                    </ol>
-                    <div class="table-scroll" role="region" aria-label="Reply modes" tabindex="0"><table>
-                        <thead><tr><th>Reply mode</th><th>Endpoint</th><th>Key</th></tr></thead>
-                        <tbody>
-                            <tr><td><code>mock</code></td><td>none</td><td>none</td></tr>
-                            <tr><td><code>openai</code></td><td>OpenAI, or any OpenAI-compatible <code>base_url</code></td><td>usually</td></tr>
-                            <tr><td><code>openrouter</code></td><td>OpenRouter</td><td>required</td></tr>
-                            <tr><td><code>local</code></td><td>your own OpenAI-compatible server</td><td>optional</td></tr>
-                            <tr><td><code>dwemerllm</code></td><td>DwemerDistro LLM Studio at <code>127.0.0.1:1234</code>; load a model there first</td><td>never sent</td></tr>
-                        </tbody>
-                    </table></div>
-                    <p>The test shows the reply and its time, or a short reason such as <code>HTTP 401</code> (key refused) or <code>HTTP 404</code> (URL or model not found). A test may cost money; it saves no history and runs no actions. A failing provider gives the game <code>502 llm_unavailable</code>, with the reason in the Apache error log.</p>
-                    <p>To edit the file instead, in WSL, replace the <code>llm</code> block, for example:</p>
-                    <pre><code>'llm' =&gt; ['mode' =&gt; 'dwemerllm', 'model' =&gt; 'id-of-the-model-loaded-in-llm-studio',
-          'timeout_seconds' =&gt; 60, 'max_tokens' =&gt; 200],</code></pre>
+                    <p>A fresh template server starts in <code>mock</code> mode, with predictable replies and no network calls, and with voice and NPC selection off. Your agent switches to the provider you chose once your key is saved.</p>
                 </div>
 
                 <div class="card" id="ApiKeys">
                     <h2>API Keys</h2>
                     <ol>
-                        <li>Open <b>Configuration &gt; API keys</b>.</li>
-                        <li>Paste the key into its slot, for example <code>llm.api_key</code>, and press <b>Save keys</b>.</li>
+                        <li>Open your mod's dashboard and go to <b>Configuration &gt; API keys</b>.</li>
+                        <li>Paste the key into its slot and press <b>Save keys</b>.</li>
                     </ol>
-                    <p>The page only ever shows <b>Saved</b> or <b>Not set</b>. A blank field keeps the saved key; the clear box removes it. Keys live only in <code>config/config.php</code>: never in the database, the browser, logs or Git. <code>dwemerllm</code> never receives a key.</p>
+                    <p>The page shows only <b>Saved</b> or <b>Not set</b>. Keys stay in the mod's private config, never in the database, logs or Git. Each mod has its own keys: do not expect keys from the DwemerDistro launcher or another mod to carry over, and never paste a key into your agent's chat.</p>
+                </div>
+
+                <div class="card" id="LanguageModel">
+                    <h2>Dialogue Model</h2>
+                    <p>On <b>Configuration &gt; LLM</b>, choose a <b>Reply mode</b> and model, then press <b>Save LLM settings</b>. Saving never contacts the provider.</p>
+                    <div class="table-scroll" role="region" aria-label="Reply modes" tabindex="0"><table>
+                        <thead><tr><th>Reply mode</th><th>Provider</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>openrouter</code></td><td>OpenRouter; needs a key</td></tr>
+                            <tr><td><code>openai</code></td><td>OpenAI or any compatible service</td></tr>
+                            <tr><td><code>local</code></td><td>Your own compatible server</td></tr>
+                            <tr><td><code>dwemerllm</code></td><td>DwemerDistro LLM Studio; load a model there first</td></tr>
+                            <tr><td><code>mock</code></td><td>Built-in test replies, no provider</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p><b>Send test</b> uses the selected Reply mode. <code>mock</code> stays on the server; other modes make one real provider call and show the reply or a short reason, such as <code>HTTP 401</code> for a refused key. Real calls can cost money, so your agent runs them only when you allow it.</p>
                 </div>
 
                 <div class="card" id="Voice">
-                    <h2>Voice: PocketTTS And Parakeet</h2>
-                    <p>Voice is opt-in and never needed for text. Kagrenac does not install or start voice services.</p>
-                    <ol>
-                        <li>Start PocketTTS (audio.cpp, port 8086) and/or Parakeet (port 8022) from the DwemerDistro launcher.</li>
-                        <li>Open <b>Configuration &gt; Voice</b>, enable speech and/or transcription and save. The default URLs are <code>http://127.0.0.1:8086/v1/audio/speech</code> and <code>http://127.0.0.1:8022/v1/audio/transcriptions</code>. For PocketTTS, a blank model or voice saves <code>pocket-tts</code> and <code>alba</code>.</li>
-                        <li>Press <b>Speak</b> to hear a sample. For Parakeet, choose a short WAV (at most 10 MB) under <b>Test transcription</b> and press <b>Transcribe</b>.</li>
-                        <li>In the client's <code>config.json</code>, set <code>"voice_enabled": true</code>.</li>
-                    </ol>
-                    <p>The console client saves reply WAVs in <code>%TEMP%\dwemer-ai-example\</code> and does not play them. Use <code>--listen &lt;file.wav&gt;</code> for speech input. Text always comes first: a voice failure prints <code>Voice unavailable, text only: ...</code>. faster-whisper (port 9876) is also supported; see <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md#voice">CONNECTORS.md, Voice</a>.</p>
-                    <p>Report voice as working only after you test it with your own services and recordings.</p>
+                    <h2>Voice And Speech Input</h2>
+                    <ul>
+                        <li><b>Voice replies.</b> Install and start PocketTTS from the DwemerDistro launcher, enable it on <b>Configuration &gt; Voice</b>, and press <b>Speak</b> to hear a sample.</li>
+                        <li><b>Speech input.</b> With Parakeet, the player holds a key to talk. The words land in the chat box as an editable draft, and nothing is sent until the player presses Enter.</li>
+                        <li><b>Text first.</b> The reply text always appears. If voice fails, the player still gets the text.</li>
+                    </ul>
+                    <p>Voice counts as working only once someone has heard it, on <b>Speak</b> or in game.</p>
                 </div>
 
                 <div class="card" id="NpcSelection">
                     <h2>Optional NPC Selection</h2>
-                    <p><code>decision.php</code> answers one question: which of up to 8 offered NPCs should answer a line. It returns no reply or actions and falls back to the baseline NPC on any problem. Call it only when the player has <b>no</b> explicit or crosshair target.</p>
-                    <p>Enable it on <b>Configuration &gt; NPC selection</b>, or in the config:</p>
-                    <pre><code>'decision' =&gt; ['enabled' =&gt; true, 'provider' =&gt; 'mock'],</code></pre>
-                    <p>Then test from the client folder:</p>
-                    <pre><code>.\KagrenacClient.exe --decide "Scout, is the trail safe?"</code></pre>
-                    <p>With the mock enabled it prints <code>npc_scout (provider, matched, ...)</code>; the command only prints the choice. The <code>jev</code> provider uses OpenRouter and needs a key; see <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md#npc-selection-decision-optional">CONNECTORS.md, NPC selection</a>.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#4-use-a-real-llm-optional">SETUP.md sections 4 and 5</a>.</p>
-                    <p><b>Next step:</b> <a href="./data-and-memory.html">Give NPCs bios, facts and memory</a>.</p>
+                    <p>When the player speaks without picking anyone, the game can offer up to 8 nearby NPCs and JEV picks which one answers. That is all it does today: it writes no reply and runs no actions, and any problem falls back to the default NPC. Turn it on at <b>Configuration &gt; NPC selection</b>. Other JEV decisions are <a href="./gameplay.html#Planned">planned</a>.</p>
+                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md">CONNECTORS.md</a>.</p>
+                    <p><b>Next step:</b> <a href="./data-and-memory.html">Give characters bios, facts and memory</a>.</p>
                 </div>
             </section>
         </main>

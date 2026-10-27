@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KAGRENAC AI Mod Maker Guide | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-fixes"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261026-kagrenac-fixes">
 </head>
 <body class="theme custom-mods-theme copyable-guide">
     <div class="progress-container">
@@ -23,24 +23,25 @@
     <div class="container">
         <div class="header">
             <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
-                <a href="./index.html" id="headerTitle">Kagrenac</a>
+                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
+                <a href="./index.html" id="headerTitle">KAGRENAC</a>
             </div>
         </div>
 
-        <div class="sidebar left-sidebar">
+        <div class="sidebar left-sidebar" id="leftSidebar">
             <p class="pageLinks">
                 <a href="../index.html">Home</a>
                 <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./installation.html">Get started</a>
+                <a href="./gameplay.html">Gameplay design</a>
+                <a href="./porting.html">Game integration</a>
+                <a href="./configuration.html">Providers &amp; voice</a>
+                <a href="./data-and-memory.html">Characters &amp; memory</a>
                 <a href="./testing.html">Testing</a>
-                <a href="./porting.html">Porting</a>
-                <a href="./updates.html">Updates and Backups</a>
+                <a href="./updates.html">Updates &amp; recovery</a>
                 <a href="./publishing.html">Publishing</a>
             </p>
             <hr>
@@ -53,85 +54,125 @@
             <section id="Overview" class="section">
                 <div class="card hero-card">
                     <h1>KAGRENAC AI Mod Maker</h1>
-                    <p>KAGRENAC AI Mod Maker is a toolkit for authoring your own AI NPC mod. One public repository, <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Kagrenac</a>, holds both parts: <b>KagrenacServer</b> at the repository root, a small PHP 8.2 and PostgreSQL server that runs inside DwemerDistro, and <b>KagrenacClient</b> in <code>client/</code>, a Windows console client that simulates the game side while you build your port. A player line goes in; an NPC reply and, at most, one safe action come back.</p>
+                    <p>KAGRENAC helps you build your own AI mod with the coding agent you already use. Tell it the game, the feature you want and a name for your mod. It plans the gameplay, checks what that game can really do, sets up your mod's own server in DwemerDistro and builds a first version for you to try in game.</p>
+                    <p><b>Build a mod:</b> <a href="./installation.html">Get started</a>. <b>Playing someone else's mod?</b> <a href="#InstallPublished">Install a published mod</a>.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
-                        <li><a href="#WhatItIs">What Kagrenac is</a></li>
-                        <li><a href="#Architecture">How a request flows</a></li>
-                        <li><a href="#Routes">Choose an install route</a></li>
+                        <li><a href="#WhatItIs">What you can make</a></li>
+                        <li><a href="#Included">Included and built for you</a></li>
+                        <li><a href="#Journey">How a mod gets built</a></li>
+                        <li><a href="#Architecture">How it fits together</a></li>
+                        <li><a href="#Routes">Build or play</a></li>
+                        <li><a href="#InstallPublished">Install a published mod</a></li>
                         <li><a href="#GuideMap">Guide map</a></li>
                         <li><a href="#FullDocs">Full documentation</a></li>
                     </ul></nav>
                 </div>
 
                 <div class="card" id="WhatItIs">
-                    <h2>What Kagrenac Is</h2>
+                    <h2>What You Can Make</h2>
                     <ul>
-                        <li><b>A starting point for your own mod.</b> Make your own copy of the repository, rename it, and replace the console client's simulated game with your engine.</li>
-                        <li><b>Ready-made server features.</b> NPC bios and facts, profiles, memory, session checkpoints, logs, and optional LLM and voice connectors.</li>
-                        <li><b>Mock-first.</b> A fresh install answers with predictable mock replies. The first run needs no LLM provider, API key or voice service.</li>
-                        <li><b>Local by design.</b> The server runs on one PC inside DwemerDistro WSL, or on a trusted local network. The dashboard has no login and the token travels over plain HTTP.</li>
+                        <li><b>Characters you can talk to.</b> Type to an NPC, companion or advisor in the game's own chat box, and read or hear the reply.</li>
+                        <li><b>Characters who notice things.</b> An NPC can remark on what the game reports, such as arriving somewhere or a fight ending.</li>
+                        <li><b>Companions who act.</b> A reply can ask for something the game already knows how to do, such as following you. The game decides whether it happens.</li>
+                        <li><b>Optional voice.</b> Spoken replies with PocketTTS, and push-to-talk dictation if you want it.</li>
+                        <li><b>A mod that is yours.</b> Each mod gets its own name, server, database and releases. KAGRENAC is the template you build from, not a mod players install.</li>
                     </ul>
-                    <div class="guide-note note-warning">
-                        <p><b>What it is not:</b> Kagrenac is not a playable game client or a plugin for any real game. KagrenacClient has no engine SDK, no game hooks, no microphone capture and no audio playback; its "follow" action is console output only. No game is supported until someone builds and tests a port in that game. Real LLM and voice providers are optional code paths; the smoke checks cover mock mode only.</p>
-                    </div>
+                </div>
+
+                <div class="card" id="Included">
+                    <h2>Included And Built For You</h2>
+                    <p><b>Ready to use in the template:</b></p>
+                    <ul>
+                        <li><b>Your mod's server and dashboard.</b> They handle conversations, game events, character bios and facts, history, checkpoints and optional memory.</li>
+                        <li><b>Provider connections.</b> Dialogue models, PocketTTS and other voice services, and optional speech input.</li>
+                        <li><b>A shared Windows client.</b> A C++ library that sends the player's lines, receives replies and passes action requests to the game, with a console example that stands in for a game.</li>
+                        <li><b>A documented protocol</b> that any game-side code can use to talk to the server.</li>
+                    </ul>
+                    <p><b>Built by your agent for your game:</b></p>
+                    <ul>
+                        <li><b>The in-game chat and reply display</b>, using what the game's mod tools allow.</li>
+                        <li><b>Observations</b>: the events and details the game reports to the server.</li>
+                        <li><b>Voice playback</b>, and microphone input if you ask for it.</li>
+                        <li><b>Action handlers</b>: the game code that carries out each allowed action and checks the result.</li>
+                    </ul>
+                    <p>Choosing a game starts this research and building; it is not a ready-made integration for that game. Your agent checks what the game can do first. See <a href="./porting.html">Game integration</a>.</p>
+                </div>
+
+                <div class="card" id="Journey">
+                    <h2>How A Mod Gets Built</h2>
+                    <ol>
+                        <li><b>Brief.</b> You tell your agent the game, the starting feature and the mod's name.</li>
+                        <li><b>Gameplay design.</b> The agent turns your idea into a short loop the player can see and hear. See <a href="./gameplay.html">Gameplay design</a>.</li>
+                        <li><b>Game integration.</b> It checks your installed game and its mod tools before writing game code. See <a href="./porting.html">Game integration</a>.</li>
+                        <li><b>Server and providers.</b> Meanwhile, it sets up your mod's server and the AI services you choose. See <a href="./configuration.html">Providers &amp; voice</a>.</li>
+                        <li><b>First prototype.</b> One working slice in game: you type to a character and it answers. You play it and report back. See <a href="./testing.html">Testing</a>.</li>
+                        <li><b>Expand and share.</b> Add one feature at a time, then <a href="./publishing.html">publish</a>.</li>
+                    </ol>
+                    <p>The agent keeps the plan and progress in the mod's <code>PROJECT.md</code>, so it can pick up where it left off.</p>
                 </div>
 
                 <div class="card" id="Architecture">
-                    <h2>How A Request Flows</h2>
-                    <figure class="guide-figure">
-                        <img src="./images/architecture.svg" width="760" height="300" alt="Diagram: the game client sends a turn.php request with its token to the server. The server reads and saves history, bios and facts in its PostgreSQL database, prompts the mock or configured LLM, and returns a reply with at most one allowlisted action to the client.">
-                        <figcaption>One turn, from player line to NPC reply. <a href="./images/architecture.svg">Open the request flow diagram at full size</a>.</figcaption>
+                    <h2>How It Fits Together</h2>
+                    <figure class="guide-figure architecture-figure">
+                        <img src="./images/architecture.svg" width="760" height="300" alt="Diagram: the game mod sends the player's line and what the game observed to the mod's own named server in DwemerDistro. The server asks the dialogue model you configured and, optionally, a voice service, then returns the reply text, optional voice and any action requests. The game runs only actions it has its own handler for and checks the result itself.">
+                        <figcaption>One conversation turn. <a href="./images/architecture.svg">Open the diagram at full size</a>.</figcaption>
                     </figure>
-                    <ol>
-                        <li>The client sends the player's line to <code>turn.php</code> with a fresh <code>request_id</code>, the session, the NPC and the token.</li>
-                        <li>The server loads that NPC's history, bio and matching facts from its own database.</li>
-                        <li>It asks the mock (or your configured LLM) for a reply, keeps only allowlisted actions, and saves the exchange.</li>
-                        <li>The client checks the request ID and NPC, then shows the subtitle and runs the action through its own allowlist on the game thread.</li>
+                    <ol class="architecture-flow">
+                        <li><b>Your game mod</b> sends the player's line and what the game can actually see right now.</li>
+                        <li><b>Your mod's server</b> adds the character's bio, facts and recent conversation, then asks your providers for a reply.</li>
+                        <li><b>The game</b> shows the reply, plays any voice, and runs a requested action only if it has its own handler for it.</li>
                     </ol>
-                    <p>The full contract is in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/PROTOCOL.md">PROTOCOL.md</a> at the repository root.</p>
+                    <div class="guide-note note-warning">
+                        <p><b>Keep it local.</b> Run the server on one PC or a trusted home network. The dashboard has no login, the game connects over plain HTTP, and there is no rate limiting.</p>
+                    </div>
                 </div>
 
                 <div class="card" id="Routes">
-                    <h2>Choose An Install Route</h2>
-                    <div class="table-scroll" role="region" aria-label="Install routes" tabindex="0"><table>
-                        <thead><tr><th>Route</th><th>Server address</th></tr></thead>
-                        <tbody>
-                            <tr><td><a href="./installation.html#InstallServer">Manual install</a> (<code>main</code> or <code>dev</code>)</td><td><code>http://127.0.0.1:19000/custom-mods/KagrenacServer</code></td></tr>
-                            <tr><td><a href="./installation.html#LauncherRoute">Launcher <b>Mods &gt; Custom mods</b></a></td><td><code>http://127.0.0.1:19000/custom-mods/example-server</code></td></tr>
-                        </tbody>
-                    </table></div>
-                    <div class="guide-note note-info">
-                        <p><b>Custom mods port:</b> DwemerDistro gives all custom PHP mods one shared port on this PC, <code>CUSTOM_MODS_PORT</code> (default 19000, allowed 19000-19999). Each mod has its own path and database, and official ports such as 8081 do not change. See <a href="./installation.html#Ports">Ports and branches</a>.</p>
-                    </div>
-                    <p>The two routes are separate installs with separate databases: you clone the manual one into <code>custom-mods/KagrenacServer</code> yourself, while the launcher creates and manages <code>custom-mods/example-server</code> from the repository's manifest id. Every route builds the console client separately, from a development copy on Windows; see <a href="./installation.html#Requirements">Before you start</a>.</p>
+                    <h2>Build Or Play</h2>
+                    <ul>
+                        <li><b>Build a mod.</b> Start from the KAGRENAC template with your coding agent: <a href="./installation.html">Get started</a>. In the DwemerDistro launcher, <b>Mods &gt; Custom mods &gt; Build a Mod!</b> opens the KAGRENAC repository.</li>
+                        <li><b>Play a mod.</b> Install a published KAGRENAC-based mod from the launcher, as below.</li>
+                    </ul>
+                </div>
+
+                <div class="card" id="InstallPublished">
+                    <h2>Install A Published Mod</h2>
+                    <ol>
+                        <li>Run <b>Update Distro</b> in the DwemerDistro launcher.</li>
+                        <li>Open <b>Mods &gt; Custom mods &gt; Browse mods</b>, search by mod or game name, and choose the mod's card.</li>
+                        <li>Press <b>Install server</b>. This installs the mod's server in your DwemerDistro.</li>
+                        <li>Press <b>Download mod release</b>. This opens the game mod's download.</li>
+                        <li>Add the download to your game the way the mod's author describes, including any loader or load-order step.</li>
+                    </ol>
+                    <p>The launcher installs the server only. It does not add, enable or set up the game mod for you. Enter any API keys on that mod's own dashboard. Being listed in Browse mods is not a review or an endorsement.</p>
                 </div>
 
                 <div class="card" id="GuideMap">
                     <h2>Guide Map</h2>
                     <ol>
-                        <li><a href="./installation.html">Installation</a>: ports, installing the server, building the client and pairing them.</li>
-                        <li><a href="./configuration.html">Configuration</a>: LLM, API keys, PocketTTS, Parakeet and optional NPC selection.</li>
-                        <li><a href="./data-and-memory.html">Data and Memory</a>: NPC bios, facts, profiles, memory and session checkpoints.</li>
-                        <li><a href="./testing.html">Testing</a>: the web conversation tester, events, logs, actions and cancellation.</li>
-                        <li><a href="./porting.html">Porting</a>: replace the console game with your engine in stages with a coding agent, and extend the dashboard.</li>
-                        <li><a href="./updates.html">Updates and Backups</a>: versions, migrations, backups and branch compatibility.</li>
-                        <li><a href="./publishing.html">Publishing</a>: your own repository, licence, branding, launcher manifest and private data.</li>
+                        <li><a href="./installation.html">Get started</a>: get the template, give your agent the first prompt, and see who does what.</li>
+                        <li><a href="./gameplay.html">Gameplay design</a>: turn an idea into a loop players will notice.</li>
+                        <li><a href="./porting.html">Game integration</a>: check the game first, then build one connected in-game slice.</li>
+                        <li><a href="./configuration.html">Providers &amp; voice</a>: dialogue model, API keys, voice and speech input.</li>
+                        <li><a href="./data-and-memory.html">Characters &amp; memory</a>: bios, facts, profiles, memory and checkpoints.</li>
+                        <li><a href="./testing.html">Testing</a>: the four kinds of evidence and the in-game checks.</li>
+                        <li><a href="./updates.html">Updates &amp; recovery</a>: redeploys, release updates, template changes and backups.</li>
+                        <li><a href="./publishing.html">Publishing</a>: package, review and publish your mod for players.</li>
                     </ol>
+                    <p>Pages 3 to 5 overlap in time: your agent prepares the server and providers while it researches the game.</p>
                 </div>
 
                 <div class="card" id="FullDocs">
                     <h2>Full Documentation</h2>
-                    <p>This guide covers the common tasks. Each topic has one canonical document in the <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Kagrenac repository</a>:</p>
+                    <p>This guide explains the ideas. The <a href="https://github.com/Dwemer-Dynamics/Kagrenac">KAGRENAC repository</a> holds the exact commands and rules your agent follows:</p>
                     <ul>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/README.md">README.md</a>: what is in the repository and where to start.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/getting-started.md">docs/getting-started.md</a>: the canonical walkthrough for cloning, installing the server and building the client.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/PROTOCOL.md">PROTOCOL.md</a>: the contract between server and client.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md">SETUP.md</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md">CONNECTORS.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/UI_GUIDE.md">UI_GUIDE.md</a>: server operations, copyable provider settings, and dashboard pages.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/client/README.md">client/README.md</a>: KagrenacClient commands, settings and smoke checks.</li>
-                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/agent-playbook.md">docs/agent-playbook.md</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/engine-packs/ENGINE_PACK.md">docs/engine-packs/ENGINE_PACK.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/feature-recipes/PORT_RECIPES.md">docs/feature-recipes/PORT_RECIPES.md</a>: the staged coding agent prompt, the engine evidence record and one recipe per port stage.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/README.md">README.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/getting-started.md">docs/getting-started.md</a>: the first prompt and guided setup.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/GAMEPLAY_DESIGN.md">docs/GAMEPLAY_DESIGN.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/ENGINE_PLANNING.md">docs/ENGINE_PLANNING.md</a>: design and game integration.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/CONNECTORS.md">CONNECTORS.md</a>: provider and voice settings.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/PUBLISHING.md">docs/PUBLISHING.md</a>: packaging and publishing.</li>
+                        <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md">SETUP.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/PROTOCOL.md">PROTOCOL.md</a>: manual installs, maintenance, recovery and the server contract.</li>
                     </ul>
-                    <p>These links show the repository's default <code>main</code> branch. The <code>dev</code> branch is for development.</p>
-                    <p><b>Next step:</b> <a href="./installation.html">Install the server and client</a>.</p>
+                    <p><b>Next step:</b> <a href="./installation.html">Get started</a>.</p>
                 </div>
             </section>
         </main>

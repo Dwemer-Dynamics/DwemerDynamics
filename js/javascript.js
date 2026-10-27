@@ -213,12 +213,13 @@ const leftSidebarConfigs = {
         pageLinks: [
             { href: "../index.html", title: "Home", label: "Home", emoji: "\u21A9\uFE0F" },
             { href: "./index.html", title: "Overview", label: "Overview", emoji: "\uD83D\uDCD6" },
-            { href: "./installation.html", title: "Installation", label: "Installation", emoji: "\u2699\uFE0F" },
-            { href: "./configuration.html", title: "Configuration", label: "Configuration", emoji: "\uD83D\uDD27" },
-            { href: "./data-and-memory.html", title: "Data and Memory", label: "Data and Memory", emoji: "\uD83D\uDDC4\uFE0F" },
+            { href: "./installation.html", title: "Get started", label: "Get started", emoji: "\u2699\uFE0F" },
+            { href: "./gameplay.html", title: "Gameplay design", label: "Gameplay design", emoji: "\uD83C\uDFAE" },
+            { href: "./porting.html", title: "Game integration", label: "Game integration", emoji: "\uD83D\uDEE0\uFE0F" },
+            { href: "./configuration.html", title: "Providers & voice", label: "Providers & voice", emoji: "\uD83D\uDD27" },
+            { href: "./data-and-memory.html", title: "Characters & memory", label: "Characters & memory", emoji: "\uD83D\uDDC4\uFE0F" },
             { href: "./testing.html", title: "Testing", label: "Testing", emoji: "\uD83E\uDDEA" },
-            { href: "./porting.html", title: "Porting", label: "Porting", emoji: "\uD83D\uDEE0\uFE0F" },
-            { href: "./updates.html", title: "Updates and Backups", label: "Updates and Backups", emoji: "\uD83D\uDD04" },
+            { href: "./updates.html", title: "Updates & recovery", label: "Updates & recovery", emoji: "\uD83D\uDD04" },
             { href: "./publishing.html", title: "Publishing", label: "Publishing", emoji: "\uD83D\uDCE6" }
         ],
         bottomLinks: [
@@ -254,6 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
     createRightSidebar();
     markActivePage();
     createPageCopyButton();
+    createPromptCopyButtons();
 });
 window.onscroll = updateProgressBarAndFadeIn;
 
@@ -464,14 +466,62 @@ function createPageCopyButton() {
         return;
     }
 
+    const actions = createCopyControl({
+        buttonClass: "page-copy-button",
+        label: PAGE_COPY_LABEL,
+        accessibleLabel: PAGE_COPY_ACCESSIBLE_LABEL,
+        getText: function () {
+            return buildPageMarkdown(content);
+        },
+        copiedMessage: "Page copied as Markdown.",
+        failedMessage: "Could not copy the page as Markdown.",
+        blockedMessage: "Could not copy the page as Markdown. Your browser blocked clipboard access."
+    });
+
+    const heading = content.querySelector("h1");
+    const hero = content.querySelector(".hero-card");
+    if (heading) {
+        heading.insertAdjacentElement("afterend", actions);
+    } else if (hero) {
+        hero.insertBefore(actions, hero.firstChild);
+    } else {
+        content.insertBefore(actions, content.firstChild);
+    }
+}
+
+// Adds a "Copy prompt" control above each pre.copyable-prompt; it copies only that block's text.
+function createPromptCopyButtons() {
+    if (!document.body.classList.contains("copyable-guide")) {
+        return;
+    }
+
+    document.querySelectorAll(".content pre.copyable-prompt").forEach(function (pre) {
+        const actions = createCopyControl({
+            extraClass: "prompt-copy-actions",
+            buttonClass: "prompt-copy-button",
+            label: "Copy prompt",
+            accessibleLabel: "Copy prompt",
+            getText: function () {
+                return pre.textContent;
+            },
+            copiedMessage: "Prompt copied.",
+            failedMessage: "Could not copy the prompt. Select the prompt text and copy it instead.",
+            blockedMessage: "Could not copy the prompt. Your browser blocked clipboard access. Select the prompt text and copy it instead."
+        });
+        pre.insertAdjacentElement("beforebegin", actions);
+    });
+}
+
+// Builds a copy button with visible and announced feedback. The .page-copy-actions wrapper keeps it out of Copy page output.
+function createCopyControl(options) {
     const actions = document.createElement("div");
-    actions.className = "page-copy-actions";
+    actions.className = options.extraClass ? "page-copy-actions " + options.extraClass : "page-copy-actions";
 
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "guide-copy-button page-copy-button";
-    button.textContent = PAGE_COPY_LABEL;
-    button.setAttribute("aria-label", PAGE_COPY_ACCESSIBLE_LABEL);
+    button.className = "guide-copy-button " + options.buttonClass;
+    button.textContent = options.label;
+    button.setAttribute("aria-label", options.accessibleLabel);
 
     const status = document.createElement("span");
     status.className = "page-copy-status";
@@ -489,7 +539,7 @@ function createPageCopyButton() {
         status.textContent = message;
 
         resetTimer = window.setTimeout(function () {
-            button.textContent = PAGE_COPY_LABEL;
+            button.textContent = options.label;
             delete button.dataset.copyState;
             status.textContent = "";
         }, PAGE_COPY_RESET_DELAY);
@@ -501,33 +551,25 @@ function createPageCopyButton() {
         }
 
         copying = true;
-        let markdown;
+        let text;
         try {
-            markdown = buildPageMarkdown(content);
+            text = options.getText();
         } catch (error) {
             copying = false;
-            showCopyResult("failed", "Copy failed", "Could not copy the page as Markdown.");
+            showCopyResult("failed", "Copy failed", options.failedMessage);
             return;
         }
 
-        copyTextToClipboard(markdown).then(function () {
-            showCopyResult("copied", "Copied", "Page copied as Markdown.");
+        copyTextToClipboard(text).then(function () {
+            showCopyResult("copied", "Copied", options.copiedMessage);
         }).catch(function () {
-            showCopyResult("failed", "Copy failed", "Could not copy the page as Markdown. Your browser blocked clipboard access.");
+            showCopyResult("failed", "Copy failed", options.blockedMessage);
         }).then(function () {
             copying = false;
         });
     });
 
-    const heading = content.querySelector("h1");
-    const hero = content.querySelector(".hero-card");
-    if (heading) {
-        heading.insertAdjacentElement("afterend", actions);
-    } else if (hero) {
-        hero.insertBefore(actions, hero.firstChild);
-    } else {
-        content.insertBefore(actions, content.firstChild);
-    }
+    return actions;
 }
 
 function copyTextToClipboard(text) {
@@ -985,5 +1027,18 @@ document.addEventListener("click", function (event) {
         if (target.id !== "navButton" && leftSidebar && !leftSidebar.contains(target)) {
             toggleNav();
         }
+    }
+});
+
+// KAGRENAC guide: Escape closes the open mobile menu and returns focus to its button.
+document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape" || !menuIsOpen || !document.body.classList.contains("custom-mods-theme")) {
+        return;
+    }
+
+    toggleNav();
+    const navButton = document.getElementById("navButton");
+    if (navButton) {
+        navButton.focus();
     }
 });

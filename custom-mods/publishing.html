@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kagrenac Publishing | Dwemer Dynamics</title>
+    <title>KAGRENAC Publishing | Dwemer Dynamics</title>
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
-    <script src="../js/javascript.js?v=20261019-kagrenac-repo"></script>
+    <script src="../js/javascript.js?v=20261026-kagrenac-fixes"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/progressBar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/custom-mods.css?v=20261008">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261026-kagrenac-fixes">
 </head>
 <body class="theme custom-mods-theme copyable-guide">
     <div class="progress-container">
@@ -23,24 +23,25 @@
     <div class="container">
         <div class="header">
             <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
+                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
             </div>
             <div class="headerTitle">
-                <a href="./index.html" aria-label="Kagrenac guide home"><img src="./images/kagrenac.png" alt="Kagrenac icon" id="logo" width="128" height="121"></a>
-                <a href="./index.html" id="headerTitle">Kagrenac</a>
+                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
+                <a href="./index.html" id="headerTitle">KAGRENAC</a>
             </div>
         </div>
 
-        <div class="sidebar left-sidebar">
+        <div class="sidebar left-sidebar" id="leftSidebar">
             <p class="pageLinks">
                 <a href="../index.html">Home</a>
                 <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./data-and-memory.html">Data and Memory</a>
+                <a href="./installation.html">Get started</a>
+                <a href="./gameplay.html">Gameplay design</a>
+                <a href="./porting.html">Game integration</a>
+                <a href="./configuration.html">Providers &amp; voice</a>
+                <a href="./data-and-memory.html">Characters &amp; memory</a>
                 <a href="./testing.html">Testing</a>
-                <a href="./porting.html">Porting</a>
-                <a href="./updates.html">Updates and Backups</a>
+                <a href="./updates.html">Updates &amp; recovery</a>
                 <a href="./publishing.html">Publishing</a>
             </p>
             <hr>
@@ -53,109 +54,83 @@
             <section id="Publishing" class="section">
                 <div class="card hero-card">
                     <h1>Publishing</h1>
-                    <p>A copy of Kagrenac is a different mod. Give it its own repository, name, database and branding, follow the GPL, and keep private data out of everything you share.</p>
+                    <p>When your mod works in game, tell your agent <b>Prepare this mod for publishing</b>. It fills in the manifest, builds the release packages and shows you exactly what would ship. Nothing is published until you say so.</p>
                     <nav aria-label="On this page"><p><b>On this page</b></p><ul>
-                        <li><a href="#OwnRepositories">Your own repository</a></li>
+                        <li><a href="#OwnRepositories">Your mod's own identity</a></li>
+                        <li><a href="#Manifest">One manifest</a></li>
+                        <li><a href="#Packages">Server and game packages</a></li>
+                        <li><a href="#Release">Package, review, publish</a></li>
+                        <li><a href="#PlayerHandoff">What players do</a></li>
+                        <li><a href="#IconAndBanner">Icon and banner</a></li>
+                        <li><a href="#PrivateData">Private data</a></li>
                         <li><a href="#Licence">Licence</a></li>
                         <li><a href="#Branding">Your own branding</a></li>
-                        <li><a href="#Manifest">Launcher manifest</a></li>
-                        <li><a href="#IconAndBanner">Icon and banner</a></li>
-                        <li><a href="#PrivateData">Private data rules</a></li>
                     </ul></nav>
                 </div>
 
                 <div class="card" id="OwnRepositories">
-                    <h2>Your Own Repository</h2>
-                    <ol>
-                        <li>Open <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Kagrenac</a> on GitHub and choose <b>Use this template &gt; Create a new repository</b>. You end up with one repository you own, with the server at the root and the client in <code>client/</code>.</li>
-                        <li>Make sure the repository has the branches you will offer, for example <code>main</code> and <code>dev</code>. <b>Include all branches</b> is optional: leave it off to start with only the default branch and create the others yourself, or tick it to copy the Kagrenac branches.</li>
-                        <li>Before the first install, change <code>database.name</code> in your server's <code>config/config.example.php</code> to a unique name of your own, for example <code>my_npc_mod</code>, and set the manifest's <code>database_placeholder</code> to the same value. Never point it at <code>example_ai_mod</code> or another product's database.</li>
-                        <li>Clone your repository twice, as in <a href="./installation.html#Requirements">Before you start</a>: a server copy in WSL and a development copy on Windows. Install the server copy into its own folder as in <a href="./installation.html">Installation</a>, and run the smoke checks against it. Use <code>/var/www/html/custom-mods/&lt;folder&gt;</code> with a folder name that differs from your manifest <code>id</code>, for example <code>my-npc-mod-dev</code> at <code>http://127.0.0.1:19000/custom-mods/my-npc-mod-dev/health.php</code>. Give <code>smoke.sh</code> and <code>pair_client.php --base-url</code> that address.</li>
-                    </ol>
-                    <p>Editing <code>config/config.example.php</code> does not change a <code>config/config.php</code> that already exists. For a copy you already installed, edit only <code>database.name</code> in its existing private <code>config/config.php</code> to a new unique database, keeping its token, keys and other settings, and do not copy <code>config.example.php</code> over it. Then rerun <code>install.sh</code> to create and migrate that new database. Existing data is not transferred automatically. For a fresh checkout, follow <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/SETUP.md#a-separate-copy-with-its-own-database">SETUP.md, A separate copy with its own database</a>.</p>
-                    <div class="guide-note note-info">
-                        <p><b>Port defaults.</b> <b>Use this template</b> copies the Kagrenac <code>main</code> branch, with its port 19000 defaults. If you set a different <code>CUSTOM_MODS_PORT</code>, use that port instead. Either way, pass the address explicitly when you smoke test and pair. See <a href="./installation.html#Ports">Ports and branches</a>.</p>
-                        <p><b>Kagrenac updates.</b> A repository made with <b>Use this template</b> has its own independent history, so upstream Kagrenac changes will not merge in normally. Nothing updates automatically. Compare later Kagrenac changes with your copy, port the ones you need by hand, and test both your server and client. Do not force a merge of unrelated histories. If you want shared history instead, clone Kagrenac and push it to a new empty repository of your own.</p>
-                    </div>
-                </div>
-
-                <div class="card" id="Licence">
-                    <h2>Licence</h2>
-                    <p>Kagrenac is licensed <b>GPL-3.0-only</b>. A project based on it must follow its terms, including offering source with any binaries you share.</p>
-                    <ul>
-                        <li>Keep both <code>LICENSE</code> files and every existing notice listed in <code>THIRD_PARTY_NOTICES.md</code> at the root and in <code>client/</code>, including <code>LICENSES/Original-MIT.txt</code>, <code>ui/HERIKA-LICENSE</code> and <code>client/third_party/nlohmann/LICENSE.MIT</code>.</li>
-                        <li>Add your own copyright notice to the README and both <code>THIRD_PARTY_NOTICES.md</code> files.</li>
-                    </ul>
-                </div>
-
-                <div class="card" id="Branding">
-                    <h2>Your Own Branding</h2>
-                    <div class="table-scroll" role="region" aria-label="Branding changes" tabindex="0"><table>
-                        <thead><tr><th>Change</th><th>Edit</th></tr></thead>
-                        <tbody>
-                            <tr><td>Project and build name</td><td><code>client/CMakeLists.txt</code> (<code>project</code> and the executable target name), <code>client/scripts/build.ps1</code> and the README commands</td></tr>
-                            <tr><td>Dashboard title and icon</td><td><code>ui/tmpl/navbar.php</code>, <code>ui/tmpl/header.php</code> (favicon) and <code>ui/images/kagrenac.png</code></td></tr>
-                            <tr><td>Colours</td><td>Blue accent variables in <code>ui/css/chim-theme.css</code></td></tr>
-                            <tr><td>Database</td><td>A new lowercase <code>database.name</code> in <code>config/config.example.php</code>, matching the manifest's <code>database_placeholder</code></td></tr>
-                            <tr><td>Model behaviour</td><td>The system prompt in <code>openai_reply()</code> in <code>lib/llm.php</code></td></tr>
-                        </tbody>
-                    </table></div>
-                    <p>The full map is in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                    <h2>Your Mod's Own Identity</h2>
+                    <p>Your mod is not KAGRENAC. It has its own public GitHub repository, id, name, named server and database, set when your agent created it. Server and game mod live in that one repository and are released as separate packages.</p>
                 </div>
 
                 <div class="card" id="Manifest">
-                    <h2>Launcher Manifest</h2>
-                    <p><code>dwemer-mod.json</code> sits in the repository root. Change the identity fields for your mod:</p>
-                    <pre><code>{
-  "schema_version": 1,
-  "id": "my-npc-mod",
-  "name": "My NPC Mod",
-  "description": "Short description of your mod.",
-  "project_url": "https://github.com/your-account/MyNpcMod",
-  "dashboard_path": "ui/",
-  "health_path": "health.php",
-  "requirements": { "php": "8.2", "postgresql": true },
-  "setup": {
-    "config_template": "config/config.example.php",
-    "config_path": "config/config.php",
-    "token_placeholder": "CHANGE_ME_TOKEN",
-    "database_placeholder": "my_npc_mod",
-    "migrate_script": "scripts/migrate.php"
-  },
-  "branches": { "default": "main", "allowed": ["main", "dev"] },
-  "assets": { "icon": "ui/images/icon.png", "banner": "ui/images/banner.png" }
-}</code></pre>
-                    <p>The <code>assets</code> paths are examples: create and commit those files first, or leave <code>assets</code> out until they are ready. See <a href="#IconAndBanner">Icon and banner</a>.</p>
+                    <h2>One Manifest</h2>
+                    <p><code>dwemer-mod.json</code> in the repository root describes the whole mod. Releases use version 2, which adds the game and what goes into each package. The launcher's mod card shows:</p>
                     <ul>
-                        <li><code>id</code> (launcher rule, stricter than manual folder names): 3-32 characters of <code>a-z</code>, <code>0-9</code> and single hyphens, starting with a letter. It cannot change after install; the launcher derives the folder <code>custom-mods/&lt;id&gt;</code> and the database <code>custom_&lt;id&gt;</code> (hyphens become underscores, so <code>my-npc-mod</code> uses <code>custom_my_npc_mod</code>) from it. Its dashboard is <code>http://127.0.0.1:19000/custom-mods/my-npc-mod/ui/</code> on the configured <code>CUSTOM_MODS_PORT</code>.</li>
-                        <li><code>project_url</code>: your own public HTTPS repository. The launcher accepts only public HTTPS URLs.</li>
-                        <li><code>database_placeholder</code>: change it together with the database name in <code>config/config.example.php</code>.</li>
-                        <li><code>branches</code>: only the manifest on the default branch decides which branches are offered, and every listed branch must exist. Without it, only the default branch is offered.</li>
+                        <li><b>Title</b> from <code>name</code>, with the game from <code>game.name</code> below it.</li>
+                        <li><b>"By ..."</b> from <code>author</code>, or the repository owner if it is missing.</li>
+                        <li><b>Icon and banner</b> from <code>assets</code>.</li>
                     </ul>
-                    <p>Every copy must also keep <code>config/config.php</code> untracked (a repository that tracks it is rejected), keep <code>'CHANGE_ME_TOKEN'</code> and the database name each exactly once as quoted strings in <code>config/config.example.php</code>, keep <code>scripts/migrate.php</code> safe to repeat, and add no symbolic links or submodules.</p>
+                    <p>Older version 1 manifests still install as branch installs, through their own route. Do not mix version 2 fields into them. The full format is in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/PUBLISHING.md#one-authored-manifest">docs/PUBLISHING.md</a>.</p>
+                </div>
+
+                <div class="card" id="Packages">
+                    <h2>Server And Game Packages</h2>
+                    <ul>
+                        <li><b>Server package</b> comes from committed source, never from uncommitted changes.</li>
+                        <li><b>Game package</b> comes from the game-side build, which stays outside the source folder.</li>
+                        <li><b>Include and exclude lists</b> choose the files for each package. Exclusions win.</li>
+                    </ul>
+                    <p>Leaving a file out of a package does not make it private: anything in a public repository stays public.</p>
+                </div>
+
+                <div class="card" id="Release">
+                    <h2>Package, Review, Publish</h2>
+                    <ol>
+                        <li><b>Package.</b> The agent builds both ZIPs and a release record with the source commit and file hashes.</li>
+                        <li><b>Review.</b> Check both ZIPs' file lists for anything private, and test the packaged server and game mod.</li>
+                        <li><b>Publish.</b> Only with your explicit go-ahead, the agent publishes a GitHub release and adds the <code>kagrenac-mod</code> topic, which lists the mod in the launcher's <b>Browse mods</b>.</li>
+                    </ol>
+                    <p>Being listed is not a review or an endorsement. Never republish a version with different files. The commands are in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/docs/PUBLISHING.md#build-and-review">docs/PUBLISHING.md</a>.</p>
+                </div>
+
+                <div class="card" id="PlayerHandoff">
+                    <h2>What Players Do</h2>
+                    <p>Players install your server from the launcher, then download your game mod; see <a href="./index.html#InstallPublished">Install a published mod</a>. The launcher does not add or enable the game mod, so your release page must say how to install it, including any loader, load order or in-game enable step, and which API keys to enter on the dashboard.</p>
                 </div>
 
                 <div class="card" id="IconAndBanner">
                     <h2>Icon And Banner</h2>
                     <ul>
-                        <li>Commit the image files and the <code>assets</code> entry together. Paths are relative to the repository root and must point to tracked <code>.png</code>, <code>.jpg</code> or <code>.jpeg</code> files; links, <code>..</code>, hidden folders and web addresses are rejected.</li>
-                        <li>Use a square icon (shown at 26 x 26) and a wide banner of about 2:1. Keep each file under 4 MB.</li>
-                        <li>Pictures come from the installed version, so users see new ones only after an update.</li>
-                        <li>Both are optional. Replace the Kagrenac icon with your own.</li>
+                        <li>Use a square icon and a wide banner of about 2:1, each a committed PNG or JPEG under 4 MB.</li>
+                        <li>Replace the KAGRENAC icon with your own.</li>
                     </ul>
                 </div>
 
                 <div class="card" id="PrivateData">
-                    <h2>Private Data Rules</h2>
-                    <p>Never commit, package or publish:</p>
-                    <ul>
-                        <li><code>config/config.php</code>, <code>config/config.php.lock</code> and <code>config/.config-*.php</code> (token, database password, API keys).</li>
-                        <li>The client <code>config.json</code> and the paired <code>example-client.json</code>.</li>
-                        <li>Backup folders, <code>*.dump</code> files and logs.</li>
-                    </ul>
-                    <p>Publish your mod as its Git repository, or a <code>git archive</code> of a commit, which contains committed files only. Ship the client executable with <code>config.default.json</code>, never with a <code>config.json</code> that holds a token. Keep public docs generic: no personal names, local paths, private endpoints or credential values.</p>
-                    <p><b>Full reference:</b> <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/LAUNCHER_CUSTOM_MOD.md">LAUNCHER_CUSTOM_MOD.md</a>, <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a> and <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/START_HERE.md#packaging-licensing-and-private-data">START_HERE.md, Packaging, licensing and private data</a>.</p>
-                    <p><b>Back to:</b> <a href="./index.html">Kagrenac guide overview</a>.</p>
+                    <h2>Private Data</h2>
+                    <p>Never commit, package or publish the server's private config, the game mod's connection file, backups, database dumps or logs. They hold your token and keys. Keep public docs free of personal names, local paths and private addresses.</p>
+                </div>
+
+                <div class="card" id="Licence">
+                    <h2>Licence</h2>
+                    <p>KAGRENAC is licensed <b>GPL-3.0-only</b>. A mod built from it must follow those terms, including offering source with any binaries you share. Keep the existing licence files and notices, and add your own copyright.</p>
+                </div>
+
+                <div class="card" id="Branding">
+                    <h2>Your Own Branding</h2>
+                    <p>Give your mod its own name, icon, banner and dashboard look. The full list of what to change is in <a href="https://github.com/Dwemer-Dynamics/Kagrenac/blob/main/MAKE_IT_YOURS.md">MAKE_IT_YOURS.md</a>.</p>
+                    <p><b>Back to:</b> <a href="./index.html">KAGRENAC guide overview</a>.</p>
                 </div>
             </section>
         </main>
