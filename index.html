@@ -5,126 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dwemer Dynamics</title>
+    <meta name="description" content="AI mods for Skyrim, Morrowind, Kenshi and Fallout: New Vegas, and KAGRENAC for building your own.">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="css/styles.css?v=20260713a">
-    <link rel="stylesheet" href="css/cards.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/sidebar.css?v=20260713a">
-    <link rel="stylesheet" href="css/hub.css?v=20261026-home-build-button">
-    <link rel="stylesheet" href="css/custom-mods.css?v=20261018-kagrenac">
-    <link rel="stylesheet" href="css/other-projects.css?v=20261014-home">
+    <link rel="stylesheet" href="css/home-guidewall.css?v=20261109-flat-bg">
 </head>
-<body class="theme">
-    <div style="overflow:auto">
-        <div class="header hubHeader">
-            <div class="headerTitle">
-                <img src="./img/dd_logo.png" alt="Dwemer Dynamics logo" id="logo">
-                <a href="./index.html" id="headerTitle">Dwemer Dynamics</a>
-            </div>
-            <nav class="hubHeaderNav" aria-label="Site">
-                <a href="./other-projects/index.html">Other Projects</a>
-            </nav>
+<body class="dd-home">
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="wrap top">
+        <a class="brand" href="./index.html"><img src="./img/dd_logo.png" alt="" width="30" height="30">Dwemer Dynamics</a>
+        <nav aria-label="Site">
+            <details class="menu" id="projectsMenu">
+                <summary>Projects</summary>
+                <ul>
+                    <li><a href="./custom-mods/index.html">KAGRENAC</a></li>
+                    <li><a href="./chim/index.html">CHIM</a></li>
+                    <li><a href="./lorkhan/index.html">LORKHAN</a></li>
+                    <li><a href="./stobe/index.html">STOBE</a></li>
+                    <li><a href="./dialectic/index.html">DIALECTIC</a></li>
+                    <li><a href="./dwemerdistro/index.html">DwemerDistro</a></li>
+                    <li><a href="./other-projects/index.html">Other Projects</a></li>
+                </ul>
+            </details>
+        </nav>
+    </header>
+
+    <main id="main" class="wrap">
+        <div class="stage">
+            <h1 class="headline">Meaningful AI Gameplay</h1>
+            <p class="intro">We make AI mods that let you talk to the people in Skyrim, Morrowind, Kenshi and Fallout: New Vegas.</p>
+            <p class="get"><a class="dl" href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest/download/DwemerDistroInstaller.exe">Download DwemerDistro</a><a class="about" href="./dwemerdistro/index.html">About DwemerDistro</a></p>
+
+            <ul class="wall">
+                <li class="g-kagrenac" id="customModsHub">
+                    <article class="tile" aria-labelledby="h-kagrenac">
+                        <div class="art"><img src="./img/kagrenac_home_tile.jpg" alt="" width="1920" height="1080"></div>
+                        <div class="cap">
+                            <p class="game">Any game</p>
+                            <h2 id="h-kagrenac"><a href="./custom-mods/index.html">KAGRENAC</a></h2>
+                            <p class="d">Build AI mods for your games with a coding agent.</p>
+                            <ul class="links" aria-label="KAGRENAC guides">
+                                <li><a class="inst" href="./custom-mods/installation.html">Build a Mod</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+                <li class="g-chim" id="chimHub">
+                    <article class="tile" aria-labelledby="h-chim">
+                        <div class="art"><img src="./img/chim_home_tile.jpg" alt="" width="1920" height="1080"></div>
+                        <div class="cap">
+                            <p class="game">Skyrim Special Edition and Skyrim VR</p>
+                            <h2 id="h-chim"><a href="./chim/index.html">CHIM</a></h2>
+                            <p class="d">Talk to Skyrim's people out loud or by typing. They notice where they are and what just happened, remember what you've been through together, and can act on what you say.</p>
+                            <ul class="links" aria-label="CHIM guides">
+                                <li><a class="inst" href="./chim/installation.html">Install</a></li>
+                                <li><a href="./chim/index.html">Overview</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+                <li class="g-lorkhan" id="lorkhanHub">
+                    <article class="tile narrow" aria-labelledby="h-lorkhan">
+                        <div class="art"><img src="./img/lorkhan_home_tile.jpg" alt="" width="1920" height="1080"></div>
+                        <div class="cap">
+                            <p class="game">Morrowind on OpenMW · Beta</p>
+                            <h2 id="h-lorkhan"><a href="./lorkhan/index.html">LORKHAN</a></h2>
+                            <p class="d">Voiced NPCs on Vvardenfell who remember you and keep diaries. Uses its own OpenMW build.</p>
+                            <ul class="links" aria-label="LORKHAN guides">
+                                <li><a class="inst" href="./lorkhan/installation.html">Install</a></li>
+                                <li><a href="./lorkhan/index.html">Overview</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+                <li class="g-stobe" id="stobeHub">
+                    <article class="tile narrow" aria-labelledby="h-stobe">
+                        <div class="art"><img src="./img/stobe_home_tile.jpg" alt="" width="1920" height="1080" loading="lazy"></div>
+                        <div class="cap">
+                            <p class="game">Kenshi</p>
+                            <h2 id="h-stobe"><a href="./stobe/index.html">STOBE</a></h2>
+                            <p class="d">The whole squad talks, not just one companion. Shek, Hivers and Skeletons get their own voices, and a narrator covers the run.</p>
+                            <ul class="links" aria-label="STOBE guides">
+                                <li><a class="inst" href="./stobe/installation.html">Install</a></li>
+                                <li><a href="./stobe/index.html">Overview</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+                <li class="g-dialectic" id="dialecticHub">
+                    <article class="tile" aria-labelledby="h-dialectic">
+                        <div class="art"><img src="./img/dialectic_home_tile.jpg" alt="" width="1400" height="788" loading="lazy"></div>
+                        <div class="cap">
+                            <p class="game">Fallout: New Vegas, with or without Tale of Two Wastelands</p>
+                            <h2 id="h-dialectic"><a href="./dialectic/index.html">DIALECTIC</a></h2>
+                            <p class="d">Voiced, lip-synced characters with memory, shaped by their faction, inventory and SPECIAL. With TTW they follow you from the Mojave to the Capital Wasteland.</p>
+                            <ul class="links" aria-label="DIALECTIC guides">
+                                <li><a class="inst" href="./dialectic/installation.html">Install</a></li>
+                                <li><a href="./dialectic/index.html">Overview</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+            </ul>
         </div>
-    </div>
 
-    <div class="hubPageLayout">
-        <main class="hubContainer hubHome">
-            <h1 class="hubTitle hubHomeMotto">Meaningful AI Gameplay</h1>
+        <aside class="patron-shell patron-card" aria-label="Current Patreon members">
+            <h2 class="patron-title"><a class="patron-title-link" href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon Members</a></h2>
+            <div class="patron-list-scroll" role="region" aria-label="Patreon members by tier" tabindex="0">
+                <div class="patron-list-track" id="patronListTrack"></div>
+            </div>
+        </aside>
+    </main>
 
-            <section class="hubHomeBanner" id="customModsHub" aria-labelledby="hubHomeBannerTitle">
-                <img class="hubHomeBannerIcon" src="./custom-mods/images/kagrenac.png" alt="" width="512" height="512">
-                <h2 class="hubHomeBannerTitle" id="hubHomeBannerTitle">KAGRENAC AI Mod Maker</h2>
-                <p class="hubHomeBannerLede">Build your own AI mods.</p>
-                <div class="hubHomeBannerActions">
-                    <a class="hubHomeBuild" href="./custom-mods/index.html">Build a Mod</a>
-                    <a class="hubHomeDownload" href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest/download/DwemerDistroInstaller.exe">Download DwemerDistro</a>
-                </div>
-            </section>
-
-            <section class="hubHomeMods" aria-labelledby="hubHomeModsTitle">
-                <h2 class="hubHomeHeading" id="hubHomeModsTitle">Official mods</h2>
-                <div class="hubHomeGrid">
-                    <article class="hubHomeCard hubHomeCardChim" id="chimHub">
-                        <a class="hubHomeCardArt" href="./chim/index.html" tabindex="-1" aria-hidden="true">
-                            <img src="./img/chim_home_tile.jpg" alt="" width="1920" height="1080">
-                        </a>
-                        <div class="hubHomeCardBody">
-                            <p class="hubHomeCardGame">Skyrim Special Edition / Skyrim VR</p>
-                            <h3 class="hubHomeCardTitle"><a href="./chim/index.html">CHIM</a></h3>
-                            <p class="hubHomeCardSummary">Talk to almost anyone in Skyrim, with characters who remember your adventures and join in quests and unscripted scenes.</p>
-                            <div class="hubHomeCardActions">
-                                <a class="hubHomeCardDownload" href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer" aria-label="Download CHIM (opens in new tab)">Download</a>
-                                <a class="hubHomeCardGuide" href="./chim/installation.html" aria-label="Guide for CHIM installation">Guide</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="hubHomeCard hubHomeCardLorkhan" id="lorkhanHub">
-                        <a class="hubHomeCardArt" href="./lorkhan/index.html" tabindex="-1" aria-hidden="true">
-                            <img src="./img/lorkhan_home_tile.jpg" alt="" width="1920" height="1080">
-                        </a>
-                        <div class="hubHomeCardBody">
-                            <p class="hubHomeCardGame">Morrowind / OpenMW</p>
-                            <h3 class="hubHomeCardTitle"><a href="./lorkhan/index.html">LORKHAN</a> <span class="hubHomeBeta">Beta</span></h3>
-                            <p class="hubHomeCardSummary">Talk with Morrowind characters through text or voice, with memories and roleplay shaped by your adventures.</p>
-                            <div class="hubHomeCardActions">
-                                <a class="hubHomeCardDownload" href="./lorkhan/installation.html#Download" aria-label="Download LORKHAN">Download</a>
-                                <a class="hubHomeCardGuide" href="./lorkhan/installation.html" aria-label="Guide for LORKHAN installation">Guide</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="hubHomeCard hubHomeCardStobe" id="stobeHub">
-                        <a class="hubHomeCardArt" href="./stobe/index.html" tabindex="-1" aria-hidden="true">
-                            <img src="./img/stobe_home_tile.jpg" alt="" width="1920" height="1080" loading="lazy">
-                        </a>
-                        <div class="hubHomeCardBody">
-                            <p class="hubHomeCardGame">Kenshi</p>
-                            <h3 class="hubHomeCardTitle"><a href="./stobe/index.html">STOBE</a></h3>
-                            <p class="hubHomeCardSummary">Bring conversations and character voices to Kenshi, with dialogue that follows what happens to your squad and the world around it.</p>
-                            <div class="hubHomeCardActions">
-                                <a class="hubHomeCardDownload" href="https://www.nexusmods.com/kenshi/mods/1891?tab=files" target="_blank" rel="noopener noreferrer" aria-label="Download STOBE (opens in new tab)">Download</a>
-                                <a class="hubHomeCardGuide" href="./stobe/installation.html" aria-label="Guide for STOBE installation">Guide</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="hubHomeCard hubHomeCardDialectic" id="dialecticHub">
-                        <a class="hubHomeCardArt" href="./dialectic/index.html" tabindex="-1" aria-hidden="true">
-                            <img src="./img/dialectic_home_tile.jpg" alt="" width="1400" height="788" loading="lazy">
-                        </a>
-                        <div class="hubHomeCardBody">
-                            <p class="hubHomeCardGame">Fallout: New Vegas / TTW</p>
-                            <h3 class="hubHomeCardTitle"><a href="./dialectic/index.html">Dialectic</a></h3>
-                            <p class="hubHomeCardSummary">Talk naturally with characters across Fallout: New Vegas and Tale of Two Wastelands, through Fallout's own interface.</p>
-                            <div class="hubHomeCardActions">
-                                <a class="hubHomeCardDownload" href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer" aria-label="Download Dialectic (opens in new tab)">Download</a>
-                                <a class="hubHomeCardGuide" href="./dialectic/installation.html" aria-label="Guide for Dialectic installation">Guide</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="hubHomeMore" id="otherProjectsHub" aria-labelledby="hubHomeMoreTitle">
-                <div>
-                    <h2 class="hubHomeMoreTitle" id="hubHomeMoreTitle">Other Projects</h2>
-                    <p>Modding tools and experiments from Dwemer Dynamics.</p>
-                </div>
-                <a class="hubHomeMoreLink" href="./other-projects/index.html">Browse Projects</a>
-            </section>
-
-            <aside class="patron-shell patron-card" aria-label="Current Patreon members">
-                <h2 class="patron-title"><a class="patron-title-link" href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon Members</a></h2>
-                <div class="patron-list-scroll" role="region" aria-label="Patreon members by tier" tabindex="0">
-                    <div class="patron-list-track" id="patronListTrack"></div>
-                </div>
-            </aside>
-        </main>
-    </div>
-
-    <footer class="hubFooter">
-        <nav class="hubFooterSocial" aria-label="Dwemer Dynamics social links">
+    <footer class="wrap site-footer">
+        <nav class="footer-social" aria-label="Dwemer Dynamics social links">
             <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord">
                 <img src="./img/discord.png" alt="Discord">
             </a>
@@ -135,8 +129,28 @@
                 <img src="./img/patreon.png" alt="Patreon">
             </a>
         </nav>
-        <div>Dwemer Dynamics 2026</div>
+        <p class="footer-meta">
+            <a href="./other-projects/index.html">Other Projects</a>
+            <span>Dwemer Dynamics 2026</span>
+        </p>
     </footer>
     <script src="js/patron-list.js?v=20260812a" defer></script>
+    <script>
+        // Projects menu: close on Escape, outside click, or when focus leaves it
+        (function () {
+            var menu = document.getElementById('projectsMenu');
+            if (!menu) return;
+            var summary = menu.querySelector('summary');
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menu.open) { menu.open = false; summary.focus(); }
+            });
+            document.addEventListener('click', function (e) {
+                if (menu.open && !menu.contains(e.target)) menu.open = false;
+            });
+            menu.addEventListener('focusout', function (e) {
+                if (e.relatedTarget && !menu.contains(e.relatedTarget)) menu.open = false;
+            });
+        })();
+    </script>
 </body>
 </html>
