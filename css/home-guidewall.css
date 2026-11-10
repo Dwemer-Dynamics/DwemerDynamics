@@ -68,8 +68,9 @@
 .dd-home .wall > li { display: flex; }
 .dd-home .tile { position: relative; flex: 1; display: flex; flex-direction: column; padding: .4rem; background: var(--s1); border: 1px solid var(--line); border-radius: 8px; transition: border-color .15s, background-color .15s, box-shadow .2s, transform .2s; }
 .dd-home .tile:hover, .dd-home .tile:focus-within { border-color: color-mix(in srgb, var(--orange) 50%, var(--line)); background: color-mix(in srgb, var(--s2) 60%, var(--s1)); }
-.dd-home .art { aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: var(--s2); flex: none; position: relative; }
-.dd-home .art img { width: 100%; height: 100%; object-fit: contain; transition: filter .15s; }
+/* Art keeps each image's own ratio (width/height attributes reserve it), so nothing is cropped or banded */
+.dd-home .art { border-radius: 4px; overflow: hidden; background: var(--s2); flex: none; position: relative; }
+.dd-home .art img { width: 100%; height: auto; transition: filter .15s; }
 .dd-home .tile:hover .art img { filter: brightness(1.08); }
 /* Lift only where a fine pointer hovers; touch taps and keyboard focus keep the flat border cue */
 @media (hover: hover) and (pointer: fine) {
@@ -104,19 +105,16 @@
 .dd-home .links .inst:hover { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
 .dd-home .links .inst:active { background: #9a4600; box-shadow: none; }
 
-/* Brick mosaic: 7 + 5 columns, then 5 + 7. Both tiles in a row share the wide tile's 16:9 art
-   height (7 of 12 columns, less the tile's padding and border) so their captions start level;
-   the narrow tile shows its full art contained inside that frame, never cropped. */
+/* Two equal columns: CHIM + LORKHAN, then STOBE + DIALECTIC. Each card subgrids five shared
+   rows (art, game, title, description, buttons) so a pair's captions line up however they wrap. */
 @media (min-width: 52rem) {
-    .dd-home .wall { grid-template-columns: repeat(12, minmax(0, 1fr)); container-type: inline-size; }
-    .dd-home .wall > li:not(.g-kagrenac) .art { aspect-ratio: auto; height: calc(((100cqw - 8.25rem) * 7 / 12 + 4.5rem - .8rem - 2px) * 9 / 16); }
-    .dd-home .g-chim { grid-column: 1 / 8; }
-    .dd-home .g-lorkhan { grid-column: 8 / 13; }
-    .dd-home .g-stobe { grid-column: 1 / 6; }
-    .dd-home .g-dialectic { grid-column: 6 / 13; }
-    /* KAGRENAC opens the brick: art at the same 7-column width as the wide tiles, caption beside it.
-       The art keeps its full 16:9 frame so none of the baked-in text is cropped. */
-    .dd-home .g-kagrenac { grid-column: 1 / 13; }
+    .dd-home .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0; }
+    .dd-home .wall > li + li { margin-top: .75rem; }
+    .dd-home .wall > li:not(.g-kagrenac) { grid-row: span 5; display: grid; grid-template-rows: subgrid; }
+    .dd-home .wall > li:not(.g-kagrenac) .tile { grid-row: span 5; display: grid; grid-template-rows: subgrid; align-items: start; }
+    .dd-home .wall > li:not(.g-kagrenac) .cap { grid-row: span 4; display: grid; grid-template-rows: subgrid; align-content: start; }
+    /* KAGRENAC spans both columns: art at 7/12 of the row, caption beside it */
+    .dd-home .g-kagrenac { grid-column: 1 / -1; }
     .dd-home .g-kagrenac .tile { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; column-gap: .75rem; }
     .dd-home .g-kagrenac .cap { padding: .6rem .6rem .6rem .25rem; }
 }
