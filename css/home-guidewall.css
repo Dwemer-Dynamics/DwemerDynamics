@@ -53,7 +53,7 @@
 .dd-home .headline { margin: 1.5rem 0 0; font-family: "MagicCards", serif; font-size: clamp(1.875rem, 1.3rem + 2vw, 2.75rem); line-height: 1.2; font-weight: 400; letter-spacing: .03em; word-spacing: .25em; overflow-wrap: break-word; }
 .dd-home .intro { margin: .5rem 0 1rem; color: var(--muted); max-width: 44rem; }
 /* Top-level download: the one installer every mod needs, sized above the card buttons */
-.dd-home .get { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 0 0 1.5rem; }
+.dd-home .get { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem; margin: 0 0 1.5rem; }
 .dd-home .dl { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .6rem 1.5rem; border: 1px solid var(--orange); border-radius: var(--r); background: var(--orange); color: var(--bg); font-size: 1.0625rem; font-weight: 750; text-decoration: none; box-shadow: 0 6px 20px -8px rgba(242, 124, 17, .7); transition: background-color .15s, border-color .15s, box-shadow .15s; }
 .dd-home .dl:hover { background: #ff9233; border-color: #ffb066; box-shadow: 0 0 0 1px rgba(255, 176, 102, .35), 0 8px 24px -6px rgba(242, 124, 17, .75); }
 .dd-home .dl:focus-visible { outline-offset: 3px; border-radius: var(--r); box-shadow: 0 0 0 5px rgba(242, 124, 17, .22); }
@@ -64,7 +64,19 @@
 .dd-home .about:focus-visible { outline-offset: 3px; border-radius: var(--r); }
 /* Ploofy.ai: the Dwemer Dashboard panel (dark frame, cyan glow) kept as a deliberate brand
    exception; the whole panel is the link and sits at the end of the action row under a small label. */
-.dd-home .ploofy-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: .3rem; margin-left: auto; }
+/* Community links and Ploofy share one right-hand group, bottom-aligned with the panel under its label */
+.dd-home .ext-links { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: flex-end; gap: .75rem; margin-left: auto; }
+.dd-home .social-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+/* Social buttons reuse the Ploofy panel frame so the whole group reads as one set */
+/* Each service tints its frame/glow to match its icon via --brand (RGB triplet); Ploofy keeps cyan */
+.dd-home .social { --brand: 0, 229, 255; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: 4px 14px 4px 10px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(var(--brand), .35), 0 0 24px rgba(var(--brand), .14), 0 8px 20px rgba(0, 0, 0, .4); color: #fff; font-weight: 700; line-height: 1; white-space: nowrap; text-decoration: none; transition: box-shadow .15s; }
+.dd-home .social-discord { --brand: 88, 101, 242; }
+.dd-home .social-youtube { --brand: 255, 0, 0; }
+.dd-home .social-patreon { --brand: 249, 104, 84; }
+.dd-home .social:hover, .dd-home .social:focus-visible { box-shadow: 0 0 0 2px rgba(var(--brand), .8), 0 0 32px rgba(var(--brand), .3), 0 8px 20px rgba(0, 0, 0, .4); }
+.dd-home .social:focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 3px; border-radius: 12px; }
+.dd-home .social img { flex: none; width: 28px; height: 28px; object-fit: contain; }
+.dd-home .ploofy-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: .3rem; }
 .dd-home .ploofy-tag { color: #fff; font-size: .75rem; font-weight: 700; line-height: 1; letter-spacing: .04em; }
 .dd-home .ploofy { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 4px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); text-decoration: none; transition: box-shadow .15s; }
 .dd-home .ploofy:hover, .dd-home .ploofy:focus-visible { box-shadow: 0 0 0 1px rgba(0, 229, 255, .5), 0 0 32px rgba(0, 229, 255, .22), 0 8px 20px rgba(0, 0, 0, .4); }
@@ -302,7 +314,11 @@
     .dd-home .wrap { padding-inline: .75rem; }
     /* The download spans the column; card buttons fill their row, each label kept on one line */
     .dd-home .dl, .dd-home .about, .dd-home .ploofy-wrap, .dd-home .ploofy { display: flex; width: 100%; }
-    .dd-home .ploofy-wrap { margin-left: 0; }
+    .dd-home .ext-links, .dd-home .social-row { width: 100%; }
+    .dd-home .ext-links { margin-left: 0; }
+    /* Tighter social frames keep all three on one row down to ~390px; narrower screens wrap */
+    .dd-home .social { flex: 1 1 auto; gap: .375rem; padding-inline: 8px 10px; }
+    .dd-home .social img { width: 24px; height: 24px; }
     .dd-home .links li { flex: 1 1 0; display: flex; }
     .dd-home .links a { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
 }
