@@ -88,8 +88,8 @@ html:has(> body.guide-outline) { scroll-behavior: smooth; }
 .guide-outline .lo-outline a:hover { color: var(--lo-text); }
 .guide-outline .lo-outline a[aria-current="true"] { color: var(--lo-accent); border-left-color: var(--lo-accent); }
 
-.guide-outline .lo-nav .lo-ext { margin-top: auto; padding-top: 1rem; display: flex; flex-wrap: wrap; gap: .1rem .9rem; padding-left: .5rem; }
-.guide-outline .lo-nav .lo-ext a { font-size: .75rem; color: var(--lo-muted); text-decoration: none; line-height: 1.9; }
+.guide-outline .lo-nav .lo-ext { margin-top: auto; padding-top: 1rem; display: flex; flex-direction: column; padding-left: .5rem; }
+.guide-outline .lo-nav .lo-ext a { display: block; font-size: .75rem; color: var(--lo-muted); text-decoration: none; line-height: 1.9; }
 .guide-outline .lo-nav .lo-ext a:hover { color: var(--lo-text); text-decoration: underline; }
 
 /* Wide, comfortable article */

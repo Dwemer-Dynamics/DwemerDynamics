@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DwemerDistro | Dwemer Dynamics</title>
-    <meta name="description" content="What DwemerDistro does, how to install it, and how to set up, update, run and troubleshoot it for Dwemer Dynamics AI mods.">
+    <meta name="description" content="How to get, install, set up, run, update and get help with DwemerDistro, the server home for Dwemer Dynamics AI mods.">
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <script src="../js/javascript.js?v=20261007-local-llm"></script>
     <link rel="stylesheet" href="../css/styles.css">
@@ -41,17 +41,17 @@
                         <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="DwemerDistro sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
                     </div>
                     <ol class="lo-outline" id="lo-outline" aria-label="On this page">
-                        <li><a href="#Download">Download the installer</a></li>
+                        <li><a href="#Download">Download</a></li>
                         <li><a href="#Install">Install</a></li>
-                        <li><a href="#FirstLaunch">First launch: Quickstart</a></li>
+                        <li><a href="#FirstLaunch">Quickstart</a></li>
                         <li><a href="#ChooseGame">Set up your game</a></li>
-                        <li><a href="#WhatItDoes">How DwemerDistro works</a></li>
+                        <li><a href="#WhatItDoes">What it is</a></li>
                         <li><a href="#Mods">The Mods page</a></li>
-                        <li><a href="#Components">Components and AI services</a></li>
-                        <li><a href="#Updates">Updates</a></li>
+                        <li><a href="#Components">Voices and AI</a></li>
                         <li><a href="#Running">Starting and stopping</a></li>
+                        <li><a href="#Updates">Updates</a></li>
                         <li><a href="#Help">Getting help</a></li>
-                        <li><a href="#DownloadDetails">Other downloads and checksums</a></li>
+                        <li><a href="#DownloadDetails">Other downloads</a></li>
                     </ol>
                 </li>
             </ul>
@@ -76,59 +76,59 @@
             <article class="lo-article content" id="Guide">
                 <header class="lo-intro">
                     <h1>DwemerDistro</h1>
-                    <p class="lo-standfirst">The shared home for Dwemer Dynamics AI mod servers. Install it once, then use the launcher to set up, update and run the servers for your games.</p>
+                    <p class="lo-standfirst">The home for the Dwemer Dynamics AI mod servers. Install it once, then use the launcher to set up, run and update the mods you play.</p>
                 </header>
 
                 <section class="lo-section dd-get" id="Download">
-                    <h2>Download the installer</h2>
-                    <p class="dd-get-action"><a class="dd-download" href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest/download/DwemerDistroInstaller.exe">Download the installer <span class="dd-file">DwemerDistroInstaller.exe</span></a></p>
-                    <p class="dd-get-note">From the latest GitHub release. This one file installs both DwemerDistro and the launcher.</p>
+                    <h2>Download</h2>
+                    <p class="dd-get-action"><a class="dd-download" href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher">Get DwemerDistro on GitHub</a></p>
+                    <p class="dd-get-note">On GitHub, open the latest release under <b>Releases</b> and download <code>DwemerDistroInstaller.exe</code>. That one file installs DwemerDistro and the launcher.</p>
                     <h3>You need</h3>
                     <ul class="dd-reqs">
-                        <li>64-bit Windows with WSL2 support, with current updates</li>
-                        <li>Hardware virtualization (Intel VT-x or AMD-V/SVM) switched on</li>
-                        <li>Administrator rights on the PC</li>
-                        <li>A local drive to install to; network drives are refused</li>
+                        <li>64-bit Windows with WSL2 support and current updates</li>
+                        <li>Hardware virtualization (Intel VT-x or AMD-V/SVM) turned on</li>
+                        <li>Administrator rights</li>
+                        <li>A local drive to install to (not a network drive)</li>
                     </ul>
-                    <p>An NVIDIA graphics card is not required. Quickstart sets up an <b>NVIDIA</b> or an <b>AMD / CPU</b> configuration to match your PC.</p>
+                    <p>You do not need an NVIDIA graphics card. Quickstart picks a setup that suits your PC.</p>
                 </section>
 
                 <section class="lo-section" id="Install">
                     <h2>Install</h2>
                     <ol>
                         <li>Run <code>DwemerDistroInstaller.exe</code> and allow the administrator prompt.</li>
-                        <li>Keep the default install folder, <code>C:\DwemerDistro</code>, unless you have a reason to move it.</li>
-                        <li>On the <b>DwemerDistro WSL Setup</b> page, leave <b>Prepare WSL automatically (recommended)</b> and <b>Install WSL DwemerDistro</b> ticked. They are ticked by default, so you do not need to enable Windows features or install Ubuntu yourself.</li>
-                        <li>Wait while it sets up WSL and imports DwemerDistro. A console window opens during the import; leave it running.</li>
-                        <li>On the last page, keep <b>Create a Desktop shortcut for all users</b> ticked if you want a shortcut, then click <b>Finish</b>.</li>
+                        <li>Keep the default folder, <code>C:\DwemerDistro</code>, unless you need another one.</li>
+                        <li>Leave the WSL setup options ticked. The installer sets up WSL for you, so you do not need to install Ubuntu or turn on Windows features yourself.</li>
+                        <li>Wait while it installs. A console window opens for a while; leave it running.</li>
+                        <li>Click <b>Finish</b>.</li>
                     </ol>
                     <h3>If the installer stops</h3>
                     <ul>
-                        <li><b>Windows must restart:</b> the installer prepared WSL but Windows needs a restart before it can import DwemerDistro. Restart, then run the installer again.</li>
-                        <li><b>Virtualization unavailable or disabled:</b> turn on Intel VT-x or AMD-V/SVM in your BIOS/UEFI settings, then run the installer again. <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener noreferrer">Microsoft's WSL install guide</a> covers the Windows side.</li>
-                        <li><b>Unsupported Windows version:</b> install current Windows updates, then run it again.</li>
-                        <li><b>Setup finished with errors:</b> the launcher was installed but the WSL import did not finish, so no Desktop shortcut was made. The details are in <code>Logs\install.log</code> inside the install folder you chose, which is <code>C:\DwemerDistro\Logs\install.log</code> by default. Bring that file to Discord if running the installer again does not fix it.</li>
+                        <li><b>Windows must restart:</b> restart, then run the installer again.</li>
+                        <li><b>Virtualization is off:</b> turn on Intel VT-x or AMD-V/SVM in your BIOS/UEFI, then run the installer again. See <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener noreferrer">Microsoft's WSL guide</a> for help.</li>
+                        <li><b>Unsupported Windows version:</b> install Windows updates, then try again.</li>
+                        <li><b>Setup finished with errors:</b> run the installer again. If that does not fix it, bring <code>C:\DwemerDistro\Logs\install.log</code> (or <code>Logs\install.log</code> in the folder you chose) to Discord.</li>
                     </ul>
                 </section>
 
                 <section class="lo-section" id="FirstLaunch">
-                    <h2>First launch: Quickstart</h2>
-                    <p>Open <b>DwemerDistro</b> from the desktop shortcut or the Start menu. If a newer launcher is available it updates itself first. Then the <b>DwemerDistro Quickstart</b> window walks you through setup. In launcher 3.4.1 the steps are:</p>
+                    <h2>Quickstart</h2>
+                    <p>Open <b>DwemerDistro</b> from the desktop shortcut or the Start menu. If a newer launcher is out, it updates itself first. Then <b>Quickstart</b> walks you through setup:</p>
                     <ol>
-                        <li><b>Quick Setup:</b> the launcher checks your hardware and picks a recommended setup, either <b>NVIDIA</b> or <b>AMD / CPU</b>. Click <b>Start Quick Setup</b>.</li>
-                        <li><b>Update Distro:</b> click <b>Update Distro</b> to pull the latest distro scripts, wait for it to finish, then click <b>Next</b>.</li>
-                        <li><b>Local AI (Optional):</b> choose a model to run on your PC with LLM Studio, or click <b>Skip</b> if you will use a hosted AI service. You can add one later.</li>
-                        <li><b>Choose Your Mods:</b> nothing is ticked to start with. Tick the mods you play, then click <b>Install Selected Mods</b>. Picking none is fine; you can install them from the Mods page later.</li>
-                        <li><b>Connect Hugging Face:</b> the voice installers download models from Hugging Face. This step is skipped only when the launcher verifies a saved token that already has access to every listed model. Otherwise use <b>Open Token Page</b> to create a read token, accept access for each listed model on Hugging Face, then click <b>Save and Verify</b> and wait for it to confirm before <b>Continue to Install</b>.</li>
-                        <li><b>Components:</b> click <b>Install</b> to install the voice and speech services for the recommended setup, then <b>Continue to Start Server</b>.</li>
-                        <li><b>Setup Complete:</b> click <b>Start Server</b>.</li>
+                        <li>Accept the recommended setup the launcher picked for your PC.</li>
+                        <li>Update the distro.</li>
+                        <li>Choose a local AI model, or skip this if you will use an online AI service.</li>
+                        <li>Tick the mods you play. You can add or remove mods later.</li>
+                        <li>Connect Hugging Face if asked. The voice installers download models from there. Create a read token, accept access to each model listed, then save and verify the token.</li>
+                        <li>Install the recommended voice and speech components.</li>
+                        <li>Click <b>Start Server</b>.</li>
                     </ol>
-                    <p>Large downloads can take a while. Leave the window open until each step reports that it finished. To run setup again later, open <b>Settings</b> and click <b>Open</b> next to <b>First-Time Setup</b>.</p>
+                    <p>Big downloads can take a while. Wait for each step to finish. To run Quickstart again, open <b>Settings</b> and click <b>Open</b> next to <b>First-Time Setup</b>.</p>
                 </section>
 
                 <section class="lo-section" id="ChooseGame">
                     <h2>Set up your game</h2>
-                    <p>DwemerDistro only runs the server side. Each mod still needs its game plugin and its own first-time settings, so follow the guide for your game next:</p>
+                    <p>DwemerDistro runs the server side only. Each mod also needs its game plugin and its own setup. Follow the guide for your game next:</p>
                     <ul class="dd-games">
                         <li><a href="../chim/installation.html"><b>CHIM</b></a> for Skyrim Special Edition and Skyrim VR</li>
                         <li><a href="../lorkhan/installation.html"><b>LORKHAN</b></a> (beta) for Morrowind on OpenMW</li>
@@ -139,95 +139,87 @@
                 </section>
 
                 <section class="lo-section" id="WhatItDoes">
-                    <h2>How DwemerDistro works</h2>
-                    <p>Each game mod has two halves: a plugin you install in the game with your mod manager, and a server that does the AI work. DwemerDistro is where those servers live, together with their database and the local voice and AI services.</p>
-                    <p>It runs on <b>Windows Subsystem for Linux (WSL)</b>, the part of Windows that runs Linux programs. DwemerDistro is its own small Linux system inside WSL, registered as <code>DwemerAI4Skyrim3</code>. It is separate from Ubuntu or any other WSL system you may already have, and installing those does not give you DwemerDistro.</p>
-                    <p>The <b>DwemerDistro launcher</b> is the Windows app you actually use. From it you install, update and repair each mod's server, install shared components, start and stop everything, open each mod's webpage and collect logs. A fresh DwemerDistro has no game servers installed until you pick them.</p>
+                    <h2>What it is</h2>
+                    <p>Each mod has two parts: a plugin in your game, and a server that does the AI work. DwemerDistro holds those servers, their database and the local voice and AI services.</p>
+                    <p>It runs in <b>Windows Subsystem for Linux (WSL)</b> as its own system, named <code>DwemerAI4Skyrim3</code>. It is separate from Ubuntu or any other WSL system you have. The <b>DwemerDistro launcher</b> is the Windows app you use to control it.</p>
                 </section>
 
                 <section class="lo-section" id="Mods">
                     <h2>The Mods page</h2>
-                    <p>Each mod has its own entry on the launcher's <b>Mods</b> page. Select one to see its status line and the buttons that fit that state:</p>
+                    <p>Select a mod on the launcher's <b>Mods</b> page to see its status and the buttons that fit:</p>
                     <ul>
-                        <li><b>Not installed:</b> offers <b>Install Server</b>.</li>
-                        <li><b>Installed:</b> the status line shows the installed version as branch, date and version number, with <b>Update Available</b> added when the selected branch has a newer one. It offers the mod's webpage button and its update button, for example <b>CHIM Webpage</b> and <b>Update CHIM</b>.</li>
-                        <li><b>Needs repair:</b> offers <b>Repair Installation</b>, which restores that server's files and database without deleting your data.</li>
+                        <li><b>Not installed:</b> <b>Install Server</b>.</li>
+                        <li><b>Installed:</b> the mod's <b>Open</b> button, such as <b>Open CHIM</b>, its update button and, where offered, <b>Download Mod</b>.</li>
+                        <li><b>Needs repair:</b> <b>Repair Installation</b>. This restores the server's files and database without deleting your data.</li>
                     </ul>
                     <figure class="guide-figure">
-                        <img src="../img/dwemerdistro/launcher-3.4.1-mods.jpg" width="1280" height="820" loading="lazy" alt="DwemerDistro launcher version 3.4.1, Mods page, with CHIM selected. The right panel reads HerikaServer, Needs repair, and offers Repair Installation, Skyrim Logs, Skyrim VR Logs and Uninstall CHIM. The top bar shows Update Distro, Start Server and Force Stop. The bottom left shows Up To Date and Launcher Version 3.4.1.">
-                        <figcaption>Launcher 3.4.1 Mods page from an existing install where CHIM reports <b>Needs repair</b>, so it offers <b>Repair Installation</b>. A new or working install shows different buttons. <a href="../img/dwemerdistro/launcher-3.4.1-mods.jpg" target="_blank" rel="noopener">Open full-size screenshot</a></figcaption>
+                        <img src="../img/dwemerdistro/launcher-3.4.1-mods.jpg" width="1280" height="820" loading="lazy" alt="Older DwemerDistro launcher, version 3.4.1, Mods page, with CHIM selected. The right panel reads HerikaServer, Needs repair, and offers Repair Installation, Skyrim Logs, Skyrim VR Logs and Uninstall CHIM.">
+                        <figcaption>Older launcher (3.4.1). Your launcher may look different. Here CHIM needs repair, so it offers <b>Repair Installation</b>. <a href="../img/dwemerdistro/launcher-3.4.1-mods.jpg" target="_blank" rel="noopener">Open full-size screenshot</a></figcaption>
                     </figure>
-                    <p>Do not use the red <b>Uninstall</b> button to fix a problem. For CHIM, STOBE and DIALECTIC it permanently deletes that server's database, profiles, memories and voices, which is why it asks you to type a confirmation first.</p>
+                    <p><b>Do not use Uninstall to fix a problem.</b> For CHIM, STOBE and DIALECTIC it permanently deletes that server's database, profiles, memories and voices. It asks you to type a confirmation first. Use <b>Repair Installation</b> or <a href="#Help">Getting help</a> instead.</p>
                 </section>
 
                 <section class="lo-section" id="Components">
-                    <h2>Components and AI services</h2>
-                    <p>The <b>Components</b> page installs the shared services that every mod can use. Quickstart already installed the recommended set:</p>
+                    <h2>Voices and AI</h2>
+                    <p>The <b>Components</b> page holds the shared voice, speech and helper services all mods use. Quickstart already installed the recommended set for your PC. Get that working before you add more.</p>
+                    <p>The language model writes what characters say. You can use:</p>
                     <ul>
-                        <li><b>NVIDIA:</b> CUDA, Pocket-TTS (GPU / audio.cpp), Minime and TXT2VEC, and Parakeet STT.</li>
-                        <li><b>AMD / CPU:</b> Pocket-TTS (CPU / Python), Minime and TXT2VEC, and Parakeet STT, without CUDA. CUDA is NVIDIA only, so the AMD path runs these services in CPU mode.</li>
+                        <li><b>An online service</b>, such as OpenRouter. You set it up in each mod's webpage.</li>
+                        <li><b>A local model</b> with <b>LLM Studio</b>, which you can add in Quickstart or from the Components page. Local models share graphics memory with the game, so pick one that fits while you play.</li>
                     </ul>
-                    <p>Pocket-TTS gives NPCs a voice, Parakeet STT turns your microphone into text, and Minime and TXT2VEC handle helper tasks and memory search. The Components page lists other voices and speech services too. Start with the recommended set and add others once that works.</p>
-                    <h3>Hosted or local language model</h3>
-                    <p>The language model writes what the characters say. You can use either:</p>
-                    <ul>
-                        <li><b>A hosted service</b>, such as OpenRouter. You enter its API key in the mod's own web Quickstart, not in the launcher. The launcher's <b>API Keys</b> page is not used by CHIM, STOBE or DIALECTIC.</li>
-                        <li><b>A local model</b> with <b>LLM Studio</b>, which runs inside DwemerDistro. Open it from the <b>LLM Studio</b> entry on the Mods page. Local models share your graphics memory with the game, so a model that fits on its own may not fit while you play.</li>
-                    </ul>
-                    <p>For details see the <a href="../chim/llm.html">language model guide</a>, the <a href="../chim/local-llm-guide.html">Local LLM guide</a>, <a href="../chim/tts.html">Text-to-Speech</a> and <a href="../chim/stt.html">Speech-to-Text</a>. They are written for CHIM, but the launcher steps are the same for every mod.</p>
-                </section>
-
-                <section class="lo-section" id="Updates">
-                    <h2>Updates</h2>
-                    <p>There are three separate update buttons, and each one updates something different.</p>
-                    <ul>
-                        <li><b>Update Distro</b> (top bar) updates DwemerDistro and the shared services. It does not change your installed mods. When a check finds an update, the button reads <b>Distro Update Available</b>. It is also the first thing to try if the distro is acting up.</li>
-                        <li><b>Update CHIM</b>, <b>Update STOBE</b> and the like (Mods page) update DwemerDistro and shared components first, then that one mod on its selected branch. They never install a mod you do not have, and never touch other mods.</li>
-                        <li><b>The launcher itself</b> updates from the bottom of the left-hand column, above <b>Launcher Version</b>. The button reads <b>Up To Date</b> when you have the latest, or <b>Update Launcher</b> when a new one is out. After a launcher update, the next start syncs DwemerDistro and the shared services once, without changing your mods.</li>
-                    </ul>
-                    <p>When a mod releases a new game plugin, install that from the mod's download page as well, so the plugin and server stay on matching versions.</p>
-                    <p>If you edit server files by hand, leave <b>Force Updates</b> in Settings switched off. When it is on, updates permanently discard your edits to files those servers track.</p>
+                    <p>More detail: <a href="../chim/llm.html">language models</a>, <a href="../chim/local-llm-guide.html">local LLMs</a>, <a href="../chim/tts.html">Text-to-Speech</a> and <a href="../chim/stt.html">Speech-to-Text</a>. These are written for CHIM, but the launcher steps are the same for every mod.</p>
                 </section>
 
                 <section class="lo-section" id="Running">
                     <h2>Starting and stopping</h2>
                     <ul>
-                        <li><b>Start Server</b> (top bar) starts the whole DwemerDistro stack. Once it is running, the same button reads <b>Stop Server</b>. Keep it running while you play; the game plugin talks to it.</li>
-                        <li>A mod's <b>Webpage</b> button opens its server page in your browser. If the server is stopped, the launcher offers to start it first.</li>
-                        <li><b>Stop Server</b> shuts everything down cleanly. Stop it when you are done playing if you want the memory back.</li>
-                        <li><b>Force Stop</b> ends the distro immediately without a clean shutdown. Only use it when Stop Server does not respond.</li>
+                        <li><b>Start Server</b> (top bar) starts DwemerDistro. Keep it running while you play.</li>
+                        <li>A mod's <b>Open</b> button, such as <b>Open CHIM</b>, opens its server page. If the server is stopped, the launcher can start it first.</li>
+                        <li>Once the server is running, the top-bar <b>Start Server</b> button changes to <b>Stop Server</b>. Use it to shut down cleanly when you are done.</li>
+                        <li><b>Force Stop</b> ends it at once. Use it only when <b>Stop Server</b> does not work.</li>
                     </ul>
+                </section>
+
+                <section class="lo-section" id="Updates">
+                    <h2>Updates</h2>
+                    <ul>
+                        <li><b>Update Distro</b> (top bar) updates DwemerDistro and shared services. It does not change your mods. It reads <b>Distro Update Available</b> when an update is found. It is also the first thing to try if something breaks.</li>
+                        <li><b>A mod's update button</b> (Mods page) updates the distro first, then that one mod.</li>
+                        <li><b>The launcher</b> updates from the bottom of the left column. It reads <b>Update Launcher</b> when a new version is out.</li>
+                    </ul>
+                    <p>When a mod releases a new game plugin, install that too, so the plugin and server match.</p>
+                    <p>If you edit server files by hand, leave <b>Force Updates</b> in Settings off. When it is on, updates delete your edits.</p>
                 </section>
 
                 <section class="lo-section" id="Help">
                     <h2>Getting help</h2>
-                    <h3>Collect a debugging file</h3>
-                    <ol>
-                        <li>Open the <b>Logs</b> page and click <b>Generate Distro Debugging Logs</b>, then confirm.</li>
-                        <li>The launcher writes <code>Desktop\DwemerDistro-Diagnostics\diagnostics-YYYYMMDD-HHMMSS.txt</code> and opens that folder.</li>
-                        <li>Post the file in the support channel on <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a> with what you were doing and what went wrong.</li>
-                    </ol>
-                    <p>The file includes recent launcher output, service logs, the requests and replies sent to your language model, and game plugin logs when available. Read it before posting anywhere public, and never post API keys or tokens.</p>
-                    <h3>Fixes to try first</h3>
+                    <h3>Try these first</h3>
                     <ul>
-                        <li><b>Distro Doctor</b> (Settings) checks and repairs common problems with permissions, Apache, Background Life, ports, disk space and recent logs.</li>
-                        <li><b>Fix WSL DNS (GitHub)</b> (Settings) helps when updates or installs fail because WSL cannot reach GitHub.</li>
-                        <li>If the launcher says the DwemerDistro distro is missing (<code>WSL_E_DISTRO_NOT_FOUND</code>), run <code>DwemerDistroInstaller.exe</code> again. Update Distro cannot create a missing distro.</li>
-                        <li>For problems inside a game, see that mod's log guide, for example <a href="../chim/log-files-and-debugging.html">CHIM log files and debugging</a>.</li>
+                        <li>Click <b>Update Distro</b>.</li>
+                        <li>Run <b>Distro Doctor</b> in Settings. It checks and fixes common problems.</li>
+                        <li>If downloads or updates cannot reach GitHub, run <b>Fix WSL DNS (GitHub)</b> in Settings.</li>
+                        <li>If the launcher says the distro is missing (<code>WSL_E_DISTRO_NOT_FOUND</code>), run <code>DwemerDistroInstaller.exe</code> again. Update Distro cannot fix this.</li>
+                        <li>For problems in a game, see that mod's log guide, for example <a href="../chim/log-files-and-debugging.html">CHIM log files and debugging</a>.</li>
                     </ul>
+                    <h3>Ask on Discord</h3>
+                    <ol>
+                        <li>Open the <b>Logs</b> page and click <b>Generate Distro Debugging Logs</b>.</li>
+                        <li>The launcher saves a file in <code>DwemerDistro-Diagnostics</code> on your Desktop and opens that folder.</li>
+                        <li>Post the file in the support channel on <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a>, with what you did and what went wrong.</li>
+                    </ol>
+                    <p>The file can include your chats with the AI. Check it before you post it in public. Never post API keys or tokens.</p>
                     <h3>Other setups</h3>
                     <p>To run the servers on a second PC, see the <a href="../chim/remote-hosting-guide.html">Remote Hosting Guide</a>. For Linux, see the <a href="../chim/linux-setup-guide.html">Linux Setup Guide</a>.</p>
                 </section>
 
                 <section class="lo-section" id="DownloadDetails">
-                    <h2>Other downloads and checksums</h2>
+                    <h2>Other downloads</h2>
                     <ul>
                         <li>DwemerDistro is also on the <a href="https://www.nexusmods.com/skyrimspecialedition/mods/126330?tab=files" target="_blank" rel="noopener noreferrer">CHIM Nexus files page</a>.</li>
-                        <li>The release also has a <code>DwemerDistro-win-x64.zip</code>. That ZIP is <b>only the launcher</b>, for replacing the launcher on a PC that already has DwemerDistro. On a new PC it ends in a <code>WSL_E_DISTRO_NOT_FOUND</code> error because there is no distro for it to control.</li>
+                        <li>The <code>DwemerDistro-win-x64.zip</code> in each release is <b>only the launcher</b>. It does not install DwemerDistro. Use the installer on a new PC.</li>
+                        <li>To check the installer, run <code>Get-FileHash .\DwemerDistroInstaller.exe</code> in PowerShell and compare it with the release's <code>SHA256SUMS</code> file.</li>
                     </ul>
-                    <p>To check the installer, compare it with the matching line in the release's <code>SHA256SUMS</code> file. In PowerShell, in your Downloads folder, run:</p>
-                    <pre><code>Get-FileHash .\DwemerDistroInstaller.exe</code></pre>
-                    <p>Only download the installer from the GitHub release or the official Nexus page. If Windows security warns you about it, check where you downloaded it from and compare the checksum before you run it.</p>
+                    <p>Only download DwemerDistro from GitHub or the official Nexus page.</p>
                 </section>
             </article>
             <nav class="lo-pager" aria-label="Guide pages">

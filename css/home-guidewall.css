@@ -50,7 +50,7 @@
 .dd-home .menu li:last-child a { color: var(--muted); font-weight: 400; }
 .dd-home .menu li:last-child a:hover { color: var(--ivory); }
 
-.dd-home .headline { margin: 1.5rem 0 0; font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem); line-height: 1.1; font-weight: 750; letter-spacing: -.01em; }
+.dd-home .headline { margin: 1.5rem 0 0; font-family: "MagicCards", serif; font-size: clamp(1.875rem, 1.3rem + 2vw, 2.75rem); line-height: 1.2; font-weight: 400; letter-spacing: .03em; word-spacing: .25em; overflow-wrap: break-word; }
 .dd-home .intro { margin: .5rem 0 1rem; color: var(--muted); max-width: 44rem; }
 /* Top-level download: the one installer every mod needs, sized above the card buttons */
 .dd-home .get { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 0 0 1.5rem; }
