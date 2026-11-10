@@ -91,7 +91,6 @@
 .dd-home .tile h2 a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 8px; }
 .dd-home .tile h2 a:focus-visible { outline: none; }
 .dd-home .tile h2 a:focus-visible::after { outline: 2px solid var(--orange); outline-offset: 2px; }
-.dd-home .d { margin: 0; font-size: .9375rem; max-width: 38rem; color: #fff; }
 
 /* Guide links as compact flat buttons: the primary action in orange, the rest dark gray */
 .dd-home .links { position: relative; z-index: 2; list-style: none; margin: .75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; font-size: .875rem; }
@@ -105,14 +104,14 @@
 .dd-home .links .inst:hover { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
 .dd-home .links .inst:active { background: #9a4600; box-shadow: none; }
 
-/* Two equal columns: CHIM + LORKHAN, then STOBE + DIALECTIC. Each card subgrids five shared
-   rows (art, game, title, description, buttons) so a pair's captions line up however they wrap. */
+/* Two equal columns: CHIM + LORKHAN, then STOBE + DIALECTIC. Each card subgrids four shared
+   rows (art, game, title, buttons) so a pair's captions line up however they wrap. */
 @media (min-width: 52rem) {
     .dd-home .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0; }
     .dd-home .wall > li + li { margin-top: .75rem; }
-    .dd-home .wall > li:not(.g-kagrenac) { grid-row: span 5; display: grid; grid-template-rows: subgrid; }
-    .dd-home .wall > li:not(.g-kagrenac) .tile { grid-row: span 5; display: grid; grid-template-rows: subgrid; align-items: start; }
-    .dd-home .wall > li:not(.g-kagrenac) .cap { grid-row: span 4; display: grid; grid-template-rows: subgrid; align-content: start; }
+    .dd-home .wall > li:not(.g-kagrenac) { grid-row: span 4; display: grid; grid-template-rows: subgrid; }
+    .dd-home .wall > li:not(.g-kagrenac) .tile { grid-row: span 4; display: grid; grid-template-rows: subgrid; align-items: start; }
+    .dd-home .wall > li:not(.g-kagrenac) .cap { grid-row: span 3; display: grid; grid-template-rows: subgrid; align-content: start; }
     /* KAGRENAC spans both columns: art at 7/12 of the row, caption beside it */
     .dd-home .g-kagrenac { grid-column: 1 / -1; }
     .dd-home .g-kagrenac .tile { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; column-gap: .75rem; }
@@ -292,10 +291,10 @@
 
 @media (max-width: 30rem) {
     .dd-home .wrap { padding-inline: .75rem; }
-    /* The download spans the column; card buttons split their row evenly */
+    /* The download spans the column; card buttons fill their row, each label kept on one line */
     .dd-home .dl, .dd-home .about { display: flex; width: 100%; }
     .dd-home .links li { flex: 1 1 0; display: flex; }
-    .dd-home .links a { flex: 1; justify-content: center; text-align: center; }
+    .dd-home .links a { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
     .dd-home *, .dd-home *::before, .dd-home *::after { transition: none !important; }
