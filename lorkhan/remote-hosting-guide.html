@@ -9,57 +9,77 @@
     <script src="../js/javascript.js?v=20261007-local-llm"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/progressBar.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
     <link rel="stylesheet" href="../css/remote-hosting.css?v=20261007-remote-guide">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261104-outline">
 </head>
-<body class="theme lorkhan-theme remote-guide copyable-guide">
-    <div class="progress-container">
-        <div class="progress-bar lorkhan-progress"></div>
-    </div>
+<body class="guide-outline lorkhan-theme remote-guide copyable-guide">
+    <script src="../js/guide-outline.js?v=20261104-outline"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
 
-    <div class="container">
-        <div class="header">
-            <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
-            </div>
-            <div class="headerTitle">
-                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">LORKHAN</a>
-            </div>
-            </div>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">&#9776;</button>
+        <a class="lo-brand" href="./index.html"><img src="../img/lorkhan-icon.png" alt=""><b>LORKHAN</b></a>
+        <a class="lo-install" href="./installation.html">Install</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
 
-        <div class="sidebar left-sidebar">
-            <p class="pageLinks">
-                <a href="../index.html">Home</a>
-                <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./roleplay-settings.html">Roleplay Settings</a>
-                <a href="./ingame-settings.html">Morrowind Settings</a>
-                <a href="./llm.html">Large Language Models</a>
-                <a href="./local-llm-guide.html">Local LLM Guide</a>
-                <a href="./tts.html">Text-to-Speech</a>
-                <a href="./stt.html">Speech-to-Text</a>
-                <a href="./modders-guide.html">Modders Guide</a>
-                <a href="./faq.html">FAQ</a>
-                <a href="./remote-hosting-guide.html">Remote Hosting</a>
-                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
-            </p>
-            <p class="sidebar-padder"></p>
-            <hr>
-            <p class="sidebar-bottom">
-                <a href="./installation.html#Download">Beta downloads</a>
-                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
-                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
-                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
-                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
-            </p>
-        </div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="LORKHAN guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><img src="../img/lorkhan-icon.png" alt=""><b>LORKHAN</b></a>
+                <a class="lo-install" href="./installation.html">Install</a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">&times;</button>
+            </div>
+            <ul>
+                <li><a class="lo-item" href="../index.html">Home</a></li>
+                <li><a class="lo-item" href="./index.html">Overview</a></li>
+                <li><a class="lo-item" href="./installation.html">Installation</a></li>
+                <li><a class="lo-item" href="./configuration.html">Configuration</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-play">Play</p>
+            <ul aria-labelledby="lo-g-play">
+                <li><a class="lo-item" href="./roleplay-settings.html">Roleplay Settings</a></li>
+                <li><a class="lo-item" href="./ingame-settings.html">Morrowind Settings</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-ai">AI services</p>
+            <ul aria-labelledby="lo-g-ai">
+                <li><a class="lo-item" href="./llm.html">Large Language Models</a></li>
+                <li><a class="lo-item" href="./local-llm-guide.html">Local LLM Guide</a></li>
+                <li><a class="lo-item" href="./tts.html">Text-to-Speech</a></li>
+                <li><a class="lo-item" href="./stt.html">Speech-to-Text</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-help">Help</p>
+            <ul aria-labelledby="lo-g-help">
+                <li><a class="lo-item" href="./modders-guide.html">Modders Guide</a></li>
+                <li><a class="lo-item" href="./faq.html">FAQ</a></li>
+                <li>
+                    <div class="lo-current">
+                        <a class="lo-item" href="./remote-hosting-guide.html" aria-current="page">Remote Hosting</a>
+                        <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Remote Hosting sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+                    </div>
+                    <ol class="lo-outline" id="lo-outline" aria-label="On this page">
+                        <li><a href="#Connections">A Local Game Bridge. A Remote AI Host.</a></li>
+                        <li><a href="#LocalFirst">1. Get The Local Setup Working</a></li>
+                        <li><a href="#Addresses">2. Choose The Service Address</a></li>
+                        <li><a href="#ProviderSetup">3. Move One AI Service</a></li>
+                        <li><a href="#Security">4. Check Access And Playback</a></li>
+                    </ol>
+                </li>
+                <li><a class="lo-item" href="./log-files-and-debugging.html">Logs and Debugging</a></li>
+            </ul>
+            <ul class="lo-ext" aria-label="Links">
+                <li><a href="./installation.html#Download">Beta downloads</a></li>
+                <li><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                <li><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a></li>
+                <li><a href="https://github.com/Dwemer-Dynamics/LORKHAN" target="_blank" rel="noopener noreferrer">Mod Code</a></li>
+                <li><a href="https://github.com/Dwemer-Dynamics/LorkhanServer" target="_blank" rel="noopener noreferrer">Server Code</a></li>
+            </ul>
+        </nav>
 
-        <main class="content">
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <div class="lo-article content">
             <section class="section" id="Guide">
 <div class="card hero-card"><p class="remote-kicker">LORKHAN / remote AI services</p><h1>Remote Hosting Guide</h1><p>Keep OpenMW and LorkhanServer on the gaming PC. Move a language model or speech service to a second PC when you want to share its workload.</p><nav class="remote-toc" aria-label="On this page"><a href="#Connections">Layout</a><a href="#LocalFirst">Local setup</a><a href="#Addresses">Addresses</a><a href="#ProviderSetup">Remote services</a><a href="#Security">Access and checks</a></nav></div>
 <div class="card" id="Connections"><h2>A Local Game Bridge. A Remote AI Host.</h2><p class="remote-status"><b>Current limit:</b> LORKHAN's game bridge accepts loopback addresses only. The complete-stack CHIM, STOBE, and Dialectic remote-server layouts do not apply to OpenMW. Do not replace the game bridge address with a second PC's LAN address.</p>
@@ -74,8 +94,13 @@
 <div class="card" id="ProviderSetup"><h2>3. Move One AI Service</h2><ol><li>Start your chosen model, TTS, or STT service on the second PC and test it there.</li><li>Follow that service's instructions to listen on a trusted network interface. A service bound to <code>127.0.0.1</code> cannot receive requests from another PC.</li><li>Allow only its required TCP port through the Private firewall, scoped to the gaming PC. If it runs inside WSL, forward the host's LAN port to that service's current WSL address and refresh the target after WSL restarts.</li><li>Confirm LorkhanServer can reach the service from its own environment.</li><li>Enter the remote endpoint in the appropriate LorkhanServer connector.</li><li>Test a short interaction before moving another service.</li></ol>
 <p>For LM Studio at <code>192.168.1.50</code> on port <code>1234</code>, the full chat endpoint is:</p><pre><code>http://192.168.1.50:1234/v1/chat/completions</code></pre><p>Replace the example address and port. Use the <a href="./local-llm-guide.html#Alternatives">separate model app instructions</a> for a desktop model host, or your selected <a href="./tts.html">TTS</a> and <a href="./stt.html">STT</a> service's setup. Bundled DwemerDistro services are local by default; copying their loopback endpoint onto another PC does not expose them to the LAN.</p></div>
 <div class="card" id="Security"><h2>4. Check Access And Playback</h2><ul><li><b>No connection:</b> verify the service is running, its listening interface, LAN address, and scoped Private firewall rule. Guest Wi-Fi or a VPN can isolate the PCs.</li><li><b>WSL restart:</b> refresh any direct forwarding target that used the old WSL IPv4 address.</li><li><b>Port opens, but no reply:</b> test the connector from LorkhanServer. A reachable TCP port does not prove that the model, API path, or credentials work.</li><li><b>Only speech fails:</b> test TTS and STT separately and inspect the <a href="./log-files-and-debugging.html">logs</a>.</li></ul><p>Keep the service PC awake during play. Test typed dialogue, generated voice, and microphone input separately after each move.</p><p>Use a trusted private network and restrict service access. Treat the pairing key like a password. Do not forward the router's internet ports or publish credentials to make a local connection work.</p><details><summary>Return to local services</summary><p>Restore the saved local connector endpoint. Inspect and remove only the forwarding and firewall rules you created for the remote provider. Keep the game bridge and its pairing unchanged.</p></details><p class="remote-status"><b>Verification status:</b> the loopback restriction was checked against current source. These are provider-hosting steps, not a remote-client installer. Two-PC provider calls and in-game speech still require validation on your setup.</p></div></section>
+        </div>
+            <nav class="lo-pager" aria-label="Guide pages">
+                <a class="lo-prev" href="./faq.html" rel="prev">&larr; FAQ</a>
+                <a class="lo-next" href="./log-files-and-debugging.html" rel="next">Next: Logs and Debugging &rarr;</a>
+            </nav>
+            <footer class="lo-footer">Dwemer Dynamics 2026</footer>
         </main>
     </div>
-    <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>

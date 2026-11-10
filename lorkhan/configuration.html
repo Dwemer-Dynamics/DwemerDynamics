@@ -6,135 +6,159 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Configuration | LORKHAN | Dwemer Dynamics</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-    <script src="../js/javascript.js?v=20261007-local-llm"></script>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/progressBar.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261104-outline">
 </head>
-<body class="theme lorkhan-theme">
-    <div class="progress-container">
-        <div class="progress-bar lorkhan-progress"></div>
-    </div>
+<body class="guide-outline lorkhan-theme">
+    <script src="../js/guide-outline.js?v=20261104-outline"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
 
-    <div class="container">
-        <div class="header">
-            <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
-            </div>
-            <div class="headerTitle">
-                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">LORKHAN</a>
-            </div>
-            </div>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">&#9776;</button>
+        <a class="lo-brand" href="./index.html"><img src="../img/lorkhan-icon.png" alt=""><b>LORKHAN</b></a>
+        <a class="lo-install" href="./installation.html">Install</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
 
-        <div class="sidebar left-sidebar">
-            <p class="pageLinks">
-                <a href="../index.html">Home</a>
-                <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./roleplay-settings.html">Roleplay Settings</a>
-                <a href="./ingame-settings.html">Morrowind Settings</a>
-                <a href="./llm.html">Large Language Models</a>
-                <a href="./local-llm-guide.html">Local LLM Guide</a>
-                <a href="./tts.html">Text-to-Speech</a>
-                <a href="./stt.html">Speech-to-Text</a>
-                <a href="./modders-guide.html">Modders Guide</a>
-                <a href="./faq.html">FAQ</a>
-                <a href="./remote-hosting-guide.html">Remote Hosting</a>
-                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
-            </p>
-            <p class="sidebar-padder"></p>
-            <hr>
-            <p class="sidebar-bottom">
-                <a href="./installation.html#Download">Beta downloads</a>
-                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
-                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
-                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
-                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
-            </p>
-        </div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="LORKHAN guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><img src="../img/lorkhan-icon.png" alt=""><b>LORKHAN</b></a>
+                <a class="lo-install" href="./installation.html">Install</a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">&times;</button>
+            </div>
+            <ul>
+                <li><a class="lo-item" href="../index.html">Home</a></li>
+                <li><a class="lo-item" href="./index.html">Overview</a></li>
+                <li><a class="lo-item" href="./installation.html">Installation</a></li>
+                <li>
+                    <div class="lo-current">
+                        <a class="lo-item" href="./configuration.html" aria-current="page">Configuration</a>
+                        <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Configuration sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+                    </div>
+                    <ol class="lo-outline" id="lo-outline" aria-label="On this page">
+                        <li><a href="#Quickstart">Quickstart</a></li>
+                        <li><a href="#Globals">General Settings</a></li>
+                        <li><a href="#Profiles">Profiles</a></li>
+                        <li><a href="#APIKeys">API Keys</a></li>
+                        <li><a href="#NPCs">LORKHAN NPCs</a></li>
+                        <li><a href="#Narration">Narration</a></li>
+                        <li><a href="#PlayerRoleplay">Player Roleplay</a></li>
+                        <li><a href="#Actions">Action Editor</a></li>
+                        <li><a href="#PromptsManager">Prompts Manager</a></li>
+                        <li><a href="#PlaythroughSaves">Playthrough Saves</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <p class="lo-group" id="lo-g-play">Play</p>
+            <ul aria-labelledby="lo-g-play">
+                <li><a class="lo-item" href="./roleplay-settings.html">Roleplay Settings</a></li>
+                <li><a class="lo-item" href="./ingame-settings.html">Morrowind Settings</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-ai">AI services</p>
+            <ul aria-labelledby="lo-g-ai">
+                <li><a class="lo-item" href="./llm.html">Large Language Models</a></li>
+                <li><a class="lo-item" href="./local-llm-guide.html">Local LLM Guide</a></li>
+                <li><a class="lo-item" href="./tts.html">Text-to-Speech</a></li>
+                <li><a class="lo-item" href="./stt.html">Speech-to-Text</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-help">Help</p>
+            <ul aria-labelledby="lo-g-help">
+                <li><a class="lo-item" href="./modders-guide.html">Modders Guide</a></li>
+                <li><a class="lo-item" href="./faq.html">FAQ</a></li>
+                <li><a class="lo-item" href="./remote-hosting-guide.html">Remote Hosting</a></li>
+                <li><a class="lo-item" href="./log-files-and-debugging.html">Logs and Debugging</a></li>
+            </ul>
+            <ul class="lo-ext" aria-label="Links">
+                <li><a href="./installation.html#Download">Beta downloads</a></li>
+                <li><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                <li><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a></li>
+                <li><a href="https://github.com/Dwemer-Dynamics/LORKHAN" target="_blank" rel="noopener noreferrer">Mod Code</a></li>
+                <li><a href="https://github.com/Dwemer-Dynamics/LorkhanServer" target="_blank" rel="noopener noreferrer">Server Code</a></li>
+            </ul>
+        </nav>
 
-        <main class="content">
-            <section class="section" id="Guide">
-                <div class="card hero-card">
-                    <h1>Configuration</h1>
-                    <p>Use LorkhanServer’s Configuration menu for shared settings, profiles, characters and services.</p>
-                </div>
-                <div class="card" id="Quickstart">
-                    <h3>Quickstart</h3>
-                    <p><b>What this does:</b> Connects LORKHAN to the services that generate dialogue, voices and microphone transcripts.</p>
-                    <ol><li>Open <b>Quickstart</b> from the server’s top menu.</li><li>Choose a language model service and supply any required API key.</li><li>Choose speech output and microphone transcription services.</li><li>Save the setup and test a short conversation.</li></ol>
-                    <p>The initial local speech choices are <b>PocketTTS</b> and <b>Parakeet</b>. Choosing them does not start a missing service. Check those services in DwemerDistro before testing.</p>
-                </div>
-                <div class="card" id="Globals">
-                    <h3>General Settings</h3>
-                    <p><b>What this does:</b> Sets shared behaviour and the information LORKHAN includes in conversations. Open <b>Configuration → Global Settings</b>; use <b>Save All</b> after editing.</p>
-                    <ul><li><b>Prompt &amp; Rechat:</b> Controls how continuing dialogue chooses its next speaker. Tight uses the listener, Conversational favours the current partner, Group rotates nearby NPCs and Random selects a mode for the chain. Strict Rechat Targeting asks the next speaker to address the previous speaker directly.</li><li><b>Memory:</b> Controls shared memory behaviour and embedding use. Changing a retrieval setting does not generate a new diary or dynamic profile.</li><li><b>Global Connectors:</b> Assigns models for summaries, background and memory tasks, scene classification, profile tasks, Director and relationship evaluation. These are distinct from a profile’s four conversation slots.</li><li><b>Oghma:</b> Controls lore inclusion, topic/result limits and forced race/location context. The extractor fallback has its own connector and timeout.</li><li><b>Context:</b> Controls observations such as magic events, transformations, item pickup value and prompt timestamps.</li><li><b>Context Selections:</b> Chooses optional information included in the prompt. Core identity, response rules and the current turn remain necessary.</li><li><b>Misc:</b> Includes behaviour such as the cooldown after a successful End Conversation action.</li></ul>
-                    <h4>Filter noisy events without deleting your history</h4>
-                    <p>Checked entries in <b>Event Type Filter</b> are excluded from AI context. Uncheck an entry to include it. Add a custom event type by its actual recorded name, then save. This filters prompt context; it is not an instruction to delete the stored event log.</p>
-                    <p>Magic, location and item blacklists use one entry per line and case-insensitive exact matches, not regular expressions. For example, an exact cell name excludes that location; a partial fragment is not a wildcard.</p>
-                </div>
-                <div class="card" id="Profiles">
-                    <h3>Profiles</h3>
-                    <p><b>What this does:</b> Groups shared model, voice and roleplay choices so you do not have to configure every NPC individually.</p>
-                    <ol><li>Open <b>Configuration → Profiles</b> and select the default profile, or create a new one.</li><li>Give it a meaningful name. An optional slot from 1–4 makes it available through the profile-slot system.</li><li>Assign the conversation models and TTS connector. Start with working services before changing roleplay options.</li><li>Choose memory, diary and dynamic-profile behaviour, then click <b>Save All</b>.</li><li>Open an NPC and confirm that it uses the intended profile before testing.</li></ol>
-                    <ul><li><b>Default NPC:</b> Chooses the profile used for newly discovered NPCs. Check existing NPC assignments separately.</li><li><b>Profile Prompt:</b> Shared roleplay guidance, such as preferred reply length or conversational tone.</li><li><b>Dynamic Profile:</b> Sets automatic update behaviour for newly discovered NPCs. The displayed option explicitly leaves existing NPC choices unchanged.</li><li><b>Middle Term Memory / Short Term Memory:</b> Includes the corresponding memory tiers in dialogue context.</li><li><b>Diary:</b> Auto Diary, Auto Diary Wait, Physical Diary and Include Latest Diary Entry control different parts of diary generation and use.</li><li><b>LLM Randomizer:</b> Rotates between the profile’s response models. Leave off when comparing one model’s performance.</li><li><b>LLM Fallback:</b> Enables retry through the assigned Fallback LLM. Assign a working fallback before relying on it.</li></ul>
-                    <h4>Connector selection</h4>
-                    <p><b>Standard</b> is normal dialogue; <b>Fast</b>, <b>Powerful</b> and <b>Experimental</b> are alternate slots selected in game. <b>Diary LLM</b> and <b>Fallback LLM</b> have separate jobs. TTS Connector selects the NPC speech service. Editing a shared connector affects other profiles using it.</p>
-                    <h4>Response, Rechat and context</h4>
-                    <p>Review response length/language, Rechat depth and chance, and whether Rechat may generate actions. Bored Event Chance controls eligible idle conversations. Context History Event Count limits regular history; diary and dynamic-profile event counts control their own inputs. These are limits, not guarantees that every event will be included.</p>
-                    <p>Use <b>Global Settings Overrides</b> only when this profile should differ from the server defaults. Use <b>Copy to all</b> carefully: it changes the corresponding setting across profiles, not only the selected NPC.</p>
-                    <p>See <a href="./roleplay-settings.html">Roleplay Settings</a> for practical memory and diary workflows.</p>
-                </div>
-                <div class="card" id="APIKeys">
-                    <h3>API Keys</h3>
-                    <ol><li>Open <b>Configuration → API Keys</b>.</li><li>Save the key under the appropriate provider, or use a supported custom key entry.</li><li>Return to the LLM, TTS or STT editor and select the matching key reference.</li><li>Test that connector before assigning it to a profile.</li></ol>
-                    <p>A saved key is not proof that billing, model access or region permissions are valid. A 401/403 error usually calls for checking the selected credential and account, not rewriting the NPC prompt.</p>
-                    <p>Never put keys into Profile Prompt, NPC biographies or published screenshots. Local services may use <b>No API key</b> only when that service genuinely does not require authentication.</p>
-                </div>
-                <div class="card" id="NPCs">
-                    <h3>LORKHAN NPCs</h3>
-                    <p>Select an actor to inspect its identity, biography, profile and voice. Use <b>Voice ID</b> for the voice assignment and <b>Prompt Head Override</b> for character-specific guidance.</p>
-                    <p>The base ID identifies the game record; the reference ID identifies the individual actor. Names alone are not enough to distinguish repeated guards. Only put references into a shared reference group when you want them treated as the same character.</p>
-                </div>
-                <div class="card" id="Narration">
-                    <h3>Narration</h3>
-                    <p>Open <b>Configuration → Narration</b> to edit the narrator’s voice and guidance. The narrator is not an ordinary nearby actor; choosing a voice for your default NPC profile does not automatically configure it.</p>
-                    <ol><li>Choose a working voice service and Voice ID.</li><li>Write the narrator’s guidance in its prompt fields.</li><li>Review enabled narration events, chances and cooldowns.</li><li>Save, then use Narrator mode for a short deliberate test before enabling frequent automatic events.</li></ol>
-                    <p>If book reading is enabled in the Scripts menu, it uses the narrator voice. Check that voice before troubleshooting a silent book.</p>
-                </div>
-                <div class="card" id="PlayerRoleplay">
-                    <h3>Player Roleplay</h3>
-                    <p>Open <b>Configuration → Player</b> for player-specific roleplay and speech. Your character name is supplied by the game. Keep biographical guidance separate from the live identity.</p>
-                    <p>Player TTS speaks your submitted dialogue. It is independent of microphone transcription: turning player TTS off does not prevent voice chat. In vanilla dialogue menus, enabled player speech plays the selected option before the NPC response.</p>
-                    <p>Test a short typed line after changing the player voice. If microphone input also repeats the line, investigate the speech/subtitle path rather than disabling STT.</p>
-                </div>
-                <div class="card" id="Actions">
-                    <h3>Action Editor</h3>
-                    <p><b>What this does:</b> Controls the supported actions AI characters may request and which require your confirmation.</p>
-                    <ol><li>Open <b>Configuration → Action Editor</b> and select an existing action.</li><li>Read its description and required parameters.</li><li>Choose whether it is available and whether a Yes/No confirmation is required.</li><li>Save, then test that action with a suitable nearby target.</li></ol>
-                    <p>In game, <b>Enable AI actions</b> must also permit execution. Director and Cheat modes do not bypass unsupported actions. Accepting a confirmation means you approved the request; check the actual game result before treating it as completed.</p>
-                    <p>Do not invent a function name in the editor and expect OpenMW to implement it. See <a href="./modders-guide.html#CustomActions">custom actions</a> for the client/server boundary.</p>
-                </div>
-                <div class="card" id="PromptsManager">
-                    <h3>Prompts Manager</h3>
-                    <p>Use <b>Configuration → Prompts Manager</b> for reusable prompt documents. Use a profile’s Profile Prompt for shared character guidance and an NPC’s Prompt Head Override only for an individual exception.</p>
-                    <p>Keep a copy of a working prompt before experimenting. Change one instruction at a time, save, then inspect a fresh response. LORKHAN’s normal prompting is Markdown-based; importing CHIM XML response instructions can conflict with the expected output.</p>
-                    <p>Prompts influence the model. They cannot grant new game capabilities or fix a disconnected speech service.</p>
-                </div>
-                <div class="card" id="PlaythroughSaves">
-                    <h3>Playthrough Saves</h3>
-                    <p><b>What this does:</b> Keeps server-side AI history associated with the intended playthrough. It is separate from the OpenMW save file.</p>
-                    <ol><li>Open <b>DwemerDistro Home</b> from the server menu, then the dashboard’s playthrough manager for LORKHAN.</li><li>Check the selected playthrough and available saved snapshots before switching or restoring.</li><li>Back up the corresponding game profile as well as the server data before a manual restore or beta upgrade.</li><li>After loading a game save, check that the server shows the expected character and recent history.</li></ol>
-                    <p>When testing an older save, do not assume later AI history belongs in that earlier point in the game. Inspect the playthrough state and backup options before continuing or clearing anything. Server backups do not contain a replacement for your Morrowind save.</p>
-                </div>
-            </section>
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <article class="lo-article" id="Guide">
+                    <header class="lo-intro">
+                        <h1>Configuration</h1>
+                        <p class="lo-standfirst">Use LorkhanServer’s Configuration menu for shared settings, profiles, characters and services.</p>
+                    </header>
+                    <section class="lo-section" id="Quickstart">
+                        <h3>Quickstart</h3>
+                        <p><b>What this does:</b> Connects LORKHAN to the services that generate dialogue, voices and microphone transcripts.</p>
+                        <ol><li>Open <b>Quickstart</b> from the server’s top menu.</li><li>Choose a language model service and supply any required API key.</li><li>Choose speech output and microphone transcription services.</li><li>Save the setup and test a short conversation.</li></ol>
+                        <p>The initial local speech choices are <b>PocketTTS</b> and <b>Parakeet</b>. Choosing them does not start a missing service. Check those services in DwemerDistro before testing.</p>
+                    </section>
+                    <section class="lo-section" id="Globals">
+                        <h3>General Settings</h3>
+                        <p><b>What this does:</b> Sets shared behaviour and the information LORKHAN includes in conversations. Open <b>Configuration → Global Settings</b>; use <b>Save All</b> after editing.</p>
+                        <ul><li><b>Prompt &amp; Rechat:</b> Controls how continuing dialogue chooses its next speaker. Tight uses the listener, Conversational favours the current partner, Group rotates nearby NPCs and Random selects a mode for the chain. Strict Rechat Targeting asks the next speaker to address the previous speaker directly.</li><li><b>Memory:</b> Controls shared memory behaviour and embedding use. Changing a retrieval setting does not generate a new diary or dynamic profile.</li><li><b>Global Connectors:</b> Assigns models for summaries, background and memory tasks, scene classification, profile tasks, Director and relationship evaluation. These are distinct from a profile’s four conversation slots.</li><li><b>Oghma:</b> Controls lore inclusion, topic/result limits and forced race/location context. The extractor fallback has its own connector and timeout.</li><li><b>Context:</b> Controls observations such as magic events, transformations, item pickup value and prompt timestamps.</li><li><b>Context Selections:</b> Chooses optional information included in the prompt. Core identity, response rules and the current turn remain necessary.</li><li><b>Misc:</b> Includes behaviour such as the cooldown after a successful End Conversation action.</li></ul>
+                        <h4>Filter noisy events without deleting your history</h4>
+                        <p>Checked entries in <b>Event Type Filter</b> are excluded from AI context. Uncheck an entry to include it. Add a custom event type by its actual recorded name, then save. This filters prompt context; it is not an instruction to delete the stored event log.</p>
+                        <p>Magic, location and item blacklists use one entry per line and case-insensitive exact matches, not regular expressions. For example, an exact cell name excludes that location; a partial fragment is not a wildcard.</p>
+                    </section>
+                    <section class="lo-section" id="Profiles">
+                        <h3>Profiles</h3>
+                        <p><b>What this does:</b> Groups shared model, voice and roleplay choices so you do not have to configure every NPC individually.</p>
+                        <ol><li>Open <b>Configuration → Profiles</b> and select the default profile, or create a new one.</li><li>Give it a meaningful name. An optional slot from 1–4 makes it available through the profile-slot system.</li><li>Assign the conversation models and TTS connector. Start with working services before changing roleplay options.</li><li>Choose memory, diary and dynamic-profile behaviour, then click <b>Save All</b>.</li><li>Open an NPC and confirm that it uses the intended profile before testing.</li></ol>
+                        <ul><li><b>Default NPC:</b> Chooses the profile used for newly discovered NPCs. Check existing NPC assignments separately.</li><li><b>Profile Prompt:</b> Shared roleplay guidance, such as preferred reply length or conversational tone.</li><li><b>Dynamic Profile:</b> Sets automatic update behaviour for newly discovered NPCs. The displayed option explicitly leaves existing NPC choices unchanged.</li><li><b>Middle Term Memory / Short Term Memory:</b> Includes the corresponding memory tiers in dialogue context.</li><li><b>Diary:</b> Auto Diary, Auto Diary Wait, Physical Diary and Include Latest Diary Entry control different parts of diary generation and use.</li><li><b>LLM Randomizer:</b> Rotates between the profile’s response models. Leave off when comparing one model’s performance.</li><li><b>LLM Fallback:</b> Enables retry through the assigned Fallback LLM. Assign a working fallback before relying on it.</li></ul>
+                        <h4>Connector selection</h4>
+                        <p><b>Standard</b> is normal dialogue; <b>Fast</b>, <b>Powerful</b> and <b>Experimental</b> are alternate slots selected in game. <b>Diary LLM</b> and <b>Fallback LLM</b> have separate jobs. TTS Connector selects the NPC speech service. Editing a shared connector affects other profiles using it.</p>
+                        <h4>Response, Rechat and context</h4>
+                        <p>Review response length/language, Rechat depth and chance, and whether Rechat may generate actions. Bored Event Chance controls eligible idle conversations. Context History Event Count limits regular history; diary and dynamic-profile event counts control their own inputs. These are limits, not guarantees that every event will be included.</p>
+                        <p>Use <b>Global Settings Overrides</b> only when this profile should differ from the server defaults. Use <b>Copy to all</b> carefully: it changes the corresponding setting across profiles, not only the selected NPC.</p>
+                        <p>See <a href="./roleplay-settings.html">Roleplay Settings</a> for practical memory and diary workflows.</p>
+                    </section>
+                    <section class="lo-section" id="APIKeys">
+                        <h3>API Keys</h3>
+                        <ol><li>Open <b>Configuration → API Keys</b>.</li><li>Save the key under the appropriate provider, or use a supported custom key entry.</li><li>Return to the LLM, TTS or STT editor and select the matching key reference.</li><li>Test that connector before assigning it to a profile.</li></ol>
+                        <p>A saved key is not proof that billing, model access or region permissions are valid. A 401/403 error usually calls for checking the selected credential and account, not rewriting the NPC prompt.</p>
+                        <p>Never put keys into Profile Prompt, NPC biographies or published screenshots. Local services may use <b>No API key</b> only when that service genuinely does not require authentication.</p>
+                    </section>
+                    <section class="lo-section" id="NPCs">
+                        <h3>LORKHAN NPCs</h3>
+                        <p>Select an actor to inspect its identity, biography, profile and voice. Use <b>Voice ID</b> for the voice assignment and <b>Prompt Head Override</b> for character-specific guidance.</p>
+                        <p>The base ID identifies the game record; the reference ID identifies the individual actor. Names alone are not enough to distinguish repeated guards. Only put references into a shared reference group when you want them treated as the same character.</p>
+                    </section>
+                    <section class="lo-section" id="Narration">
+                        <h3>Narration</h3>
+                        <p>Open <b>Configuration → Narration</b> to edit the narrator’s voice and guidance. The narrator is not an ordinary nearby actor; choosing a voice for your default NPC profile does not automatically configure it.</p>
+                        <ol><li>Choose a working voice service and Voice ID.</li><li>Write the narrator’s guidance in its prompt fields.</li><li>Review enabled narration events, chances and cooldowns.</li><li>Save, then use Narrator mode for a short deliberate test before enabling frequent automatic events.</li></ol>
+                        <p>If book reading is enabled in the Scripts menu, it uses the narrator voice. Check that voice before troubleshooting a silent book.</p>
+                    </section>
+                    <section class="lo-section" id="PlayerRoleplay">
+                        <h3>Player Roleplay</h3>
+                        <p>Open <b>Configuration → Player</b> for player-specific roleplay and speech. Your character name is supplied by the game. Keep biographical guidance separate from the live identity.</p>
+                        <p>Player TTS speaks your submitted dialogue. It is independent of microphone transcription: turning player TTS off does not prevent voice chat. In vanilla dialogue menus, enabled player speech plays the selected option before the NPC response.</p>
+                        <p>Test a short typed line after changing the player voice. If microphone input also repeats the line, investigate the speech/subtitle path rather than disabling STT.</p>
+                    </section>
+                    <section class="lo-section" id="Actions">
+                        <h3>Action Editor</h3>
+                        <p><b>What this does:</b> Controls the supported actions AI characters may request and which require your confirmation.</p>
+                        <ol><li>Open <b>Configuration → Action Editor</b> and select an existing action.</li><li>Read its description and required parameters.</li><li>Choose whether it is available and whether a Yes/No confirmation is required.</li><li>Save, then test that action with a suitable nearby target.</li></ol>
+                        <p>In game, <b>Enable AI actions</b> must also permit execution. Director and Cheat modes do not bypass unsupported actions. Accepting a confirmation means you approved the request; check the actual game result before treating it as completed.</p>
+                        <p>Do not invent a function name in the editor and expect OpenMW to implement it. See <a href="./modders-guide.html#CustomActions">custom actions</a> for the client/server boundary.</p>
+                    </section>
+                    <section class="lo-section" id="PromptsManager">
+                        <h3>Prompts Manager</h3>
+                        <p>Use <b>Configuration → Prompts Manager</b> for reusable prompt documents. Use a profile’s Profile Prompt for shared character guidance and an NPC’s Prompt Head Override only for an individual exception.</p>
+                        <p>Keep a copy of a working prompt before experimenting. Change one instruction at a time, save, then inspect a fresh response. LORKHAN’s normal prompting is Markdown-based; importing CHIM XML response instructions can conflict with the expected output.</p>
+                        <p>Prompts influence the model. They cannot grant new game capabilities or fix a disconnected speech service.</p>
+                    </section>
+                    <section class="lo-section" id="PlaythroughSaves">
+                        <h3>Playthrough Saves</h3>
+                        <p><b>What this does:</b> Keeps server-side AI history associated with the intended playthrough. It is separate from the OpenMW save file.</p>
+                        <ol><li>Open <b>DwemerDistro Home</b> from the server menu, then the dashboard’s playthrough manager for LORKHAN.</li><li>Check the selected playthrough and available saved snapshots before switching or restoring.</li><li>Back up the corresponding game profile as well as the server data before a manual restore or beta upgrade.</li><li>After loading a game save, check that the server shows the expected character and recent history.</li></ol>
+                        <p>When testing an older save, do not assume later AI history belongs in that earlier point in the game. Inspect the playthrough state and backup options before continuing or clearing anything. Server backups do not contain a replacement for your Morrowind save.</p>
+                    </section>
+                <nav class="lo-pager" aria-label="Guide pages">
+                    <a class="lo-prev" href="./installation.html" rel="prev">← Previous: Installation</a>
+                    <a class="lo-next" href="./roleplay-settings.html" rel="next">Next: Roleplay Settings →</a>
+                </nav>
+                <footer class="lo-footer">Dwemer Dynamics 2026</footer>
+            </article>
         </main>
     </div>
-    <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>

@@ -152,7 +152,8 @@
             }
         }
 
-        // Scrollspy: mark the section nearest the top of the viewport in the outline.
+        // Scrollspy: mark the last section whose top has reached the anchor landing line (scroll-margin or top bar, plus a little slack),
+        // so a short section reached from the outline stays marked; at the bottom of the page the last section is marked.
         if (outline) {
             var links = Array.prototype.slice.call(outline.querySelectorAll('a[href^="#"]'));
             var sections = links.map(function (link) {
@@ -165,10 +166,12 @@
             var scheduled = false;
             var update = function () {
                 scheduled = false;
-                var line = window.innerHeight * 0.3;
+                var bar = document.querySelector(".lo-topbar");
+                var barBottom = bar ? Math.max(0, bar.getBoundingClientRect().bottom) : 0;
                 var current = sections[0];
                 sections.forEach(function (section) {
-                    if (section.getBoundingClientRect().top <= line) {
+                    var margin = parseFloat(window.getComputedStyle(section).scrollMarginTop) || 0;
+                    if (section.getBoundingClientRect().top <= Math.max(margin, barBottom) + 24) {
                         current = section;
                     }
                 });

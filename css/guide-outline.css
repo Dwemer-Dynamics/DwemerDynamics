@@ -95,7 +95,9 @@ html:has(> body.guide-outline) { scroll-behavior: smooth; }
 /* Wide, comfortable article */
 .guide-outline .lo-main { min-width: 0; padding: 4.5rem 4rem 4rem; }
 .guide-outline .lo-article { max-width: 46rem; margin: 0 auto; }
-.guide-outline .lo-article [id] { scroll-margin-top: var(--lo-anchor); }
+/* The legacy card selector outranks custom-mods.css's 1.5rem card margin, which would leave KAGRENAC anchors under the mobile top bar. */
+.guide-outline .lo-article [id],
+.guide-outline .lo-article.content .card[id] { scroll-margin-top: var(--lo-anchor); }
 .guide-outline .lo-intro h1 { font: 400 clamp(2.5rem, 5vw, 3.25rem)/1.05 var(--lo-title); letter-spacing: 2px; margin: 0 0 1rem; }
 .guide-outline .lo-standfirst { font: 400 1.3rem/1.55 var(--lo-sans); color: #d9d4c9; margin: 0 0 2.75rem; max-width: 40rem; }
 .guide-outline .lo-section { padding-top: 2.25rem; }
@@ -130,7 +132,8 @@ html:has(> body.guide-outline) { scroll-behavior: smooth; }
 .guide-outline .lo-pager a:hover { color: var(--lo-accent); }
 .guide-outline .lo-pager .lo-next { margin-left: auto; text-align: right; }
 
-.guide-outline .lo-footer { margin-top: 2.5rem; font-size: .8125rem; color: var(--lo-muted); }
+/* Reset the legacy styles.css footer bar so every product's guide footer matches. */
+.guide-outline .lo-footer { margin-top: 2.5rem; padding: 0; outline: 0; background: none; text-align: start; font-size: .8125rem; color: var(--lo-muted); }
 
 /* Legacy article content: original card markup inside .lo-article.content.
    Content rules use :where() so the existing component styles (guide notes, copy buttons, remote-hosting diagram,
@@ -202,6 +205,18 @@ html:has(> body.guide-outline) { scroll-padding-top: 0; }
 
 @media (max-width: 480px) {
     .guide-outline .lo-topbar .lo-brand img { display: none; }
+}
+
+/* Print the article alone at full width; navigation and reading chrome stay on screen. */
+@media print {
+    .guide-outline .lo-progress,
+    .guide-outline .lo-skip,
+    .guide-outline .lo-topbar,
+    .guide-outline .lo-scrim,
+    .guide-outline .lo-nav,
+    .guide-outline .lo-pager { display: none !important; }
+    .guide-outline .lo-shell { display: block; }
+    .guide-outline .lo-main { padding: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
