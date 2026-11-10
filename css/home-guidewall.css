@@ -63,8 +63,10 @@
 .dd-home .about:hover { background: #2f2924; border-color: var(--orange); }
 .dd-home .about:focus-visible { outline-offset: 3px; border-radius: var(--r); }
 /* Ploofy.ai: the Dwemer Dashboard panel (dark frame, cyan glow) kept as a deliberate brand
-   exception; the whole panel is the link and sits at the end of the action row. */
-.dd-home .ploofy { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; margin-left: auto; padding: 4px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); text-decoration: none; transition: box-shadow .15s; }
+   exception; the whole panel is the link and sits at the end of the action row under a small label. */
+.dd-home .ploofy-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: .3rem; margin-left: auto; }
+.dd-home .ploofy-tag { color: #fff; font-size: .75rem; font-weight: 700; line-height: 1; letter-spacing: .04em; }
+.dd-home .ploofy { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 4px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); text-decoration: none; transition: box-shadow .15s; }
 .dd-home .ploofy:hover, .dd-home .ploofy:focus-visible { box-shadow: 0 0 0 1px rgba(0, 229, 255, .5), 0 0 32px rgba(0, 229, 255, .22), 0 8px 20px rgba(0, 0, 0, .4); }
 .dd-home .ploofy:focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; border-radius: 12px; }
 /* Native 338x104 ratio; the logo's near-black ground merges with the panel */
@@ -299,8 +301,8 @@
 @media (max-width: 30rem) {
     .dd-home .wrap { padding-inline: .75rem; }
     /* The download spans the column; card buttons fill their row, each label kept on one line */
-    .dd-home .dl, .dd-home .about, .dd-home .ploofy { display: flex; width: 100%; }
-    .dd-home .ploofy { margin-left: 0; }
+    .dd-home .dl, .dd-home .about, .dd-home .ploofy-wrap, .dd-home .ploofy { display: flex; width: 100%; }
+    .dd-home .ploofy-wrap { margin-left: 0; }
     .dd-home .links li { flex: 1 1 0; display: flex; }
     .dd-home .links a { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
 }
