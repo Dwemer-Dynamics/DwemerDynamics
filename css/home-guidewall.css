@@ -68,9 +68,13 @@
 .dd-home .ext-links { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: flex-end; gap: .75rem; margin-left: auto; }
 .dd-home .social-row { display: flex; flex-wrap: wrap; gap: .5rem; }
 /* Social buttons reuse the Ploofy panel frame so the whole group reads as one set */
-.dd-home .social { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: 4px 14px 4px 10px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); color: #fff; font-weight: 700; line-height: 1; white-space: nowrap; text-decoration: none; transition: box-shadow .15s; }
-.dd-home .social:hover, .dd-home .social:focus-visible { box-shadow: 0 0 0 1px rgba(0, 229, 255, .5), 0 0 32px rgba(0, 229, 255, .22), 0 8px 20px rgba(0, 0, 0, .4); }
-.dd-home .social:focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; border-radius: 12px; }
+/* Each service tints its frame/glow to match its icon via --brand (RGB triplet); Ploofy keeps cyan */
+.dd-home .social { --brand: 0, 229, 255; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: 4px 14px 4px 10px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(var(--brand), .35), 0 0 24px rgba(var(--brand), .14), 0 8px 20px rgba(0, 0, 0, .4); color: #fff; font-weight: 700; line-height: 1; white-space: nowrap; text-decoration: none; transition: box-shadow .15s; }
+.dd-home .social-discord { --brand: 88, 101, 242; }
+.dd-home .social-youtube { --brand: 255, 0, 0; }
+.dd-home .social-patreon { --brand: 249, 104, 84; }
+.dd-home .social:hover, .dd-home .social:focus-visible { box-shadow: 0 0 0 2px rgba(var(--brand), .8), 0 0 32px rgba(var(--brand), .3), 0 8px 20px rgba(0, 0, 0, .4); }
+.dd-home .social:focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 3px; border-radius: 12px; }
 .dd-home .social img { flex: none; width: 28px; height: 28px; object-fit: contain; }
 .dd-home .ploofy-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: .3rem; }
 .dd-home .ploofy-tag { color: #fff; font-size: .75rem; font-weight: 700; line-height: 1; letter-spacing: .04em; }
