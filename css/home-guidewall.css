@@ -69,7 +69,7 @@
 .dd-home .tile { position: relative; flex: 1; display: flex; flex-direction: column; padding: .4rem; background: var(--s1); border: 1px solid var(--line); border-radius: 8px; transition: border-color .15s, background-color .15s, box-shadow .2s, transform .2s; }
 .dd-home .tile:hover, .dd-home .tile:focus-within { border-color: color-mix(in srgb, var(--orange) 50%, var(--line)); background: color-mix(in srgb, var(--s2) 60%, var(--s1)); }
 .dd-home .art { aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: var(--s2); flex: none; position: relative; }
-.dd-home .art img { width: 100%; height: 100%; object-fit: cover; transition: filter .15s; }
+.dd-home .art img { width: 100%; height: 100%; object-fit: contain; transition: filter .15s; }
 .dd-home .tile:hover .art img { filter: brightness(1.08); }
 /* Lift only where a fine pointer hovers; touch taps and keyboard focus keep the flat border cue */
 @media (hover: hover) and (pointer: fine) {
@@ -77,33 +77,39 @@
 }
 
 .dd-home .cap { padding: .8rem .6rem .5rem; }
-.dd-home .game { margin: 0; font-size: .875rem; color: var(--muted); }
-.dd-home .tile h2 { margin: .1rem 0 .35rem; font-size: 1.5rem; line-height: 1.15; font-weight: 750; color: var(--gold); }
+.dd-home .game { margin: 0; font-size: .875rem; color: #fff; }
+/* Titles use each mod's established face (css/styles.css, css/hub.css): MagicCards for the
+   Elder Scrolls mods and KAGRENAC, MailartRubberstamp for STOBE, Monofonto for DIALECTIC */
+.dd-home .tile h2 { margin: .1rem 0 .35rem; font-family: "MagicCards", serif; font-size: 1.5rem; line-height: 1.15; font-weight: 400; letter-spacing: 1.2px; word-spacing: 6px; color: #fff; }
+.dd-home .g-stobe h2 { font-family: "MailartRubberstamp", "Futura Condensed Light", Arial, sans-serif; letter-spacing: .4px; word-spacing: 5px; }
+.dd-home .g-dialectic h2 { font-family: "Monofonto", Arial, sans-serif; letter-spacing: 0; word-spacing: 5px; }
 .dd-home .tile h2 a { text-decoration: none; }
-.dd-home .g-kagrenac h2 { font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); letter-spacing: .02em; }
-.dd-home .tile h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.dd-home .g-kagrenac h2 { font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); }
 /* Whole-card link: the heading anchor stretches over the tile, so the card goes to the
    project overview without nesting anchors or a click handler. The guide buttons sit above it. */
 .dd-home .tile h2 a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 8px; }
-.dd-home .tile h2 a:focus-visible { outline: none; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.dd-home .tile h2 a:focus-visible { outline: none; }
 .dd-home .tile h2 a:focus-visible::after { outline: 2px solid var(--orange); outline-offset: 2px; }
-.dd-home .d { margin: 0; font-size: .9375rem; max-width: 38rem; }
+.dd-home .d { margin: 0; font-size: .9375rem; max-width: 38rem; color: #fff; }
 
 /* Guide links as compact flat buttons: the primary action in orange, the rest dark gray */
 .dd-home .links { position: relative; z-index: 2; list-style: none; margin: .75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; font-size: .875rem; }
-.dd-home .links a { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .8rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--s2); color: var(--ivory); font-weight: 600; text-decoration: none; transition: background-color .15s, border-color .15s, box-shadow .15s, color .15s; }
+.dd-home .links a { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .8rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--s2); color: #fff; font-weight: 600; text-decoration: none; transition: background-color .15s, border-color .15s, box-shadow .15s, color .15s; }
 /* Buttons answer on their own: an orange edge and warm glow, distinct from the card's border cue */
 .dd-home .links a:hover { background: #2f2924; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .25), 0 4px 14px -4px rgba(242, 124, 17, .5); }
 .dd-home .links a:focus-visible { outline-offset: 2px; border-radius: var(--r); border-color: var(--orange); box-shadow: 0 0 0 4px rgba(242, 124, 17, .22); }
 .dd-home .links a:active { background: #262220; box-shadow: none; }
-.dd-home .links .inst { background: var(--orange); border-color: var(--orange); color: var(--bg); font-weight: 700; }
-.dd-home .links .inst:hover { background: #ff9233; border-color: #ffb066; box-shadow: 0 0 0 1px rgba(255, 176, 102, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
-.dd-home .links .inst:active { background: #e06f0a; box-shadow: none; }
+.dd-home .links .inst { background: #b35200; border-color: #b35200; color: #fff; font-weight: 700; }
+/* Darker orange keeps white text above 4.5:1 in every state (5.1 rest, 4.8 hover, 6.5 active) */
+.dd-home .links .inst:hover { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
+.dd-home .links .inst:active { background: #9a4600; box-shadow: none; }
 
-/* Brick mosaic: 7 + 5 columns, then 5 + 7. Every tile keeps its art at the full 16:9 frame
-   so the baked-in titles are never cropped; the narrow tile's caption takes the extra height. */
+/* Brick mosaic: 7 + 5 columns, then 5 + 7. Both tiles in a row share the wide tile's 16:9 art
+   height (7 of 12 columns, less the tile's padding and border) so their captions start level;
+   the narrow tile shows its full art contained inside that frame, never cropped. */
 @media (min-width: 52rem) {
-    .dd-home .wall { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .dd-home .wall { grid-template-columns: repeat(12, minmax(0, 1fr)); container-type: inline-size; }
+    .dd-home .wall > li:not(.g-kagrenac) .art { aspect-ratio: auto; height: calc(((100cqw - 8.25rem) * 7 / 12 + 4.5rem - .8rem - 2px) * 9 / 16); }
     .dd-home .g-chim { grid-column: 1 / 8; }
     .dd-home .g-lorkhan { grid-column: 8 / 13; }
     .dd-home .g-stobe { grid-column: 1 / 6; }
@@ -120,6 +126,20 @@
 @font-face {
     font-family: "MagicCards";
     src: url("../font/MagicCardsNormal.ttf") format("truetype");
+}
+@font-face {
+    font-family: "MailartRubberstamp";
+    src: url("../font/MailartRubberstamp-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Monofonto";
+    src: url("../font/MonofontoRg.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 .dd-home .patron-card {
     position: static;
