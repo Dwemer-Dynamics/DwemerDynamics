@@ -52,55 +52,9 @@
     outline-offset: 3px;
 }
 
-/* Other Projects guide pages: shared guide layout with the site accent. */
-.other-projects-progress {
-    background: var(--hub-accent);
-}
-
-.other-projects-theme .content a:hover {
-    color: #a6e2fe;
-}
-
-.other-projects-theme .content a:focus-visible,
-.other-projects-theme .sidebar a:focus-visible,
-.other-projects-theme #navButton:focus-visible {
-    outline: 2px solid #a6e2fe;
-    outline-offset: 2px;
-}
-
-.other-projects-theme .headerTitle #logo {
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    margin-right: 0.75em;
-    object-fit: contain;
-}
-
-.other-projects-theme .headerTitle {
-    min-width: 0;
-}
-
-.other-projects-theme #headerTitle {
-    white-space: nowrap;
-}
-
-/* Extra room on top of the global scroll-padding so the fixed header never covers anchored titles. */
-.other-projects-theme .content .card[id] {
-    scroll-margin-top: 1.5rem;
-}
-
-.other-projects-theme .sidebar .active::before {
-    background-color: var(--hub-accent);
-}
-
-.other-projects-theme .guide-copy-button {
-    border-color: rgba(101, 206, 253, 0.45);
-    color: var(--hub-accent);
-}
-
-.other-projects-theme .guide-copy-button:hover {
-    border-color: rgba(101, 206, 253, 0.8);
-    color: #a6e2fe;
+/* Other Projects guide pages: Outline guide layout (guide-outline.css) with its default warm accent. */
+.other-projects-theme .lo-brand b {
+    word-spacing: 6px;
 }
 
 .other-projects-theme .content li {
@@ -114,8 +68,13 @@
     letter-spacing: 0.5px;
 }
 
-.other-projects-theme .project-heading-link {
+.other-projects-theme .content .project-heading-link {
     color: inherit;
+    text-decoration: none;
+}
+
+.other-projects-theme .content .project-heading-link:hover {
+    color: var(--lo-accent);
 }
 
 .other-projects-theme .project-actions {
@@ -130,29 +89,30 @@
     align-items: center;
     min-height: 2.5em;
     padding: 0.45em 1em;
-    border: 1px solid var(--hub-accent);
+    border: 1px solid var(--lo-accent);
     border-radius: 6px;
-    background-color: var(--hub-accent);
+    background-color: var(--lo-accent);
     color: #0d1117;
     font-weight: 700;
+    text-decoration: none;
 }
 
 .other-projects-theme .content .project-action-button:hover,
 .other-projects-theme .content .project-action-button:focus-visible {
-    background-color: #a6e2fe;
-    border-color: #a6e2fe;
+    background-color: var(--lo-text);
+    border-color: var(--lo-text);
     color: #0d1117;
 }
 
 .other-projects-theme .content .project-action-secondary {
     background-color: transparent;
-    color: var(--hub-accent);
+    color: var(--lo-accent);
 }
 
 .other-projects-theme .content .project-action-secondary:hover,
 .other-projects-theme .content .project-action-secondary:focus-visible {
-    background-color: rgba(101, 206, 253, 0.12);
-    color: #a6e2fe;
+    background-color: rgba(221, 181, 116, 0.12);
+    color: var(--lo-text);
 }
 
 /* Kosmokrator page: one large screenshot with labelled thumbnails to switch between them. */
@@ -175,7 +135,7 @@
 }
 
 .other-projects-theme .kosmokrator-gallery-preview a:hover img {
-    border-color: rgba(101, 206, 253, 0.6);
+    border-color: rgba(221, 181, 116, 0.6);
 }
 
 .other-projects-theme .kosmokrator-gallery-thumbs {
@@ -216,34 +176,23 @@
 }
 
 .other-projects-theme .content .kosmokrator-gallery-thumb:hover {
-    border-color: rgba(101, 206, 253, 0.6);
+    border-color: rgba(221, 181, 116, 0.6);
     color: #ffffff;
 }
 
 .other-projects-theme .content .kosmokrator-gallery-thumb:focus-visible {
-    outline: 2px solid #a6e2fe;
+    outline: 2px solid var(--lo-accent);
     outline-offset: 2px;
 }
 
 .other-projects-theme .content .kosmokrator-gallery-thumb[aria-pressed="true"] {
-    border-color: var(--hub-accent);
-    background: rgba(101, 206, 253, 0.12);
+    border-color: var(--lo-accent);
+    background: rgba(221, 181, 116, 0.12);
     color: #ffffff;
     font-weight: 700;
 }
 
-@media only screen and (max-width: 900px) {
-    /* Keep the closed off-canvas menu out of the tab order; visibility flips after the slide-out. */
-    .other-projects-theme .left-sidebar:not(.expanded) {
-        visibility: hidden;
-    }
-}
-
 @media only screen and (max-width: 420px) {
-    .other-projects-theme #headerTitle {
-        font-size: 1.6em;
-    }
-
     .other-projects-theme .project-action-button {
         flex: 1 1 100%;
         justify-content: center;

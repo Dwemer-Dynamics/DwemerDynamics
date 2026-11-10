@@ -1,0 +1,238 @@
+/* Reading Room: Outline guide layout (CHIM, STOBE, DIALECTIC, LORKHAN, KAGRENAC guides).
+   Every rule is scoped to body.guide-outline. One left navigation holds the product's guide links and an expandable
+   outline of the current page; the article is a single wide column. Older guide pages keep their original article
+   markup (cards, notes, tables, prompts) and the content styles from styles.css, cards.css, guide.css and their
+   product stylesheet; the "Legacy article content" section below adapts that markup to this layout. */
+
+@font-face {
+    font-family: "MagicCards";
+    src: url("../font/MagicCardsNormal.ttf") format("truetype");
+    font-display: swap;
+}
+
+.guide-outline {
+    --lo-bg: #171717;
+    --lo-raise: #232323;
+    --lo-line: #2b2b2b;
+    --lo-line2: #404040;
+    --lo-text: #f5f1e8;
+    --lo-muted: #aaa69e;
+    --lo-accent: #ddb574;
+    --lo-cta: #f27c11;
+    --lo-bar: #ddb574;
+    --lo-title: "MagicCards", var(--lo-serif);
+    --lo-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --lo-sans: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    --lo-mono: Consolas, "Cascadia Mono", ui-monospace, monospace;
+    --lo-nav: 16rem;
+    --lo-anchor: 2rem;
+    margin: 0;
+    background: var(--lo-bg);
+    color: var(--lo-text);
+    font: 400 17px/1.7 var(--lo-sans);
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Product accents: links and focus (accent), primary action (cta), reading progress (bar) and title font. */
+.guide-outline.chim-theme { --lo-accent: #f0a45c; --lo-cta: #e17a21; --lo-bar: #e17a21; }
+.guide-outline.stobe-theme { --lo-accent: #e6b76c; --lo-cta: #e6b76c; --lo-bar: #e6b76c; --lo-title: "MailartRubberstamp", "Futura Condensed Light", Arial, sans-serif; }
+.guide-outline.dialectic-theme { --lo-accent: #ffb641; --lo-cta: #ffb641; --lo-bar: #ffb641; --lo-title: "Monofonto", Arial, sans-serif; }
+.guide-outline.custom-mods-theme { --lo-accent: #e2cc96; --lo-cta: #b8955a; --lo-bar: #b8955a; }
+.guide-outline.stobe-theme .lo-brand b { letter-spacing: .5px; }
+.guide-outline.dialectic-theme .lo-brand b { letter-spacing: 0; }
+
+html:has(> body.guide-outline) { scroll-behavior: smooth; }
+
+.guide-outline *,
+.guide-outline *::before,
+.guide-outline *::after { box-sizing: border-box; }
+
+.guide-outline a { color: var(--lo-accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+.guide-outline a:hover { color: var(--lo-text); }
+.guide-outline :focus-visible { outline: 2px solid var(--lo-accent); outline-offset: 2px; border-radius: 2px; }
+.guide-outline .lo-main:focus { outline: none; }
+
+.guide-outline .lo-skip { position: absolute; left: -999px; top: .75rem; z-index: 20; padding: .5rem .8rem; background: var(--lo-accent); color: var(--lo-bg); font-weight: 700; text-decoration: none; }
+.guide-outline .lo-skip:focus { left: .75rem; color: var(--lo-bg); }
+
+.guide-outline .lo-shell { display: grid; grid-template-columns: var(--lo-nav) minmax(0, 1fr); min-height: 100vh; }
+
+/* Unified navigation: guides + current page outline */
+.guide-outline .lo-nav { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: #1b1b1b; border-right: 1px solid var(--lo-line); padding: 1.25rem .75rem 1rem; display: flex; flex-direction: column; font-size: .875rem; line-height: 1.35; }
+.guide-outline .lo-nav-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: 0 .5rem 1rem; }
+.guide-outline .lo-brand { display: flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--lo-text); }
+.guide-outline .lo-brand img { width: 26px; height: 26px; object-fit: contain; }
+.guide-outline .lo-brand b { font: 400 1.25rem/1 var(--lo-title); letter-spacing: 1.5px; }
+.guide-outline .lo-install { padding: .35rem .7rem; background: var(--lo-cta); color: var(--lo-bg); border-radius: 3px; font-size: .8125rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.guide-outline .lo-install:hover { background: var(--lo-accent); color: var(--lo-bg); }
+.guide-outline .lo-nav ul,
+.guide-outline .lo-nav ol { list-style: none; margin: 0; padding: 0; }
+.guide-outline .lo-nav li { margin: 0; }
+.guide-outline .lo-nav a.lo-item { display: block; padding: .38rem .5rem; border-radius: 3px; color: var(--lo-muted); text-decoration: none; }
+.guide-outline .lo-nav a.lo-item:hover { color: var(--lo-text); background: var(--lo-raise); }
+/* Sidebar icons from guide-outline.js: a fixed column beside each guide link, reserved under lo-js so labels do not shift
+   when the icons arrive; wrapped labels keep a hanging indent. Without JavaScript the links stay plain text. */
+.guide-outline.lo-js .lo-nav a.lo-item { position: relative; padding-left: 2.1rem; }
+.guide-outline .lo-nav .lo-ico { position: absolute; left: .5rem; top: .38rem; width: 1.2rem; text-align: center; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; font-weight: 400; opacity: .8; user-select: none; }
+.guide-outline .lo-nav a.lo-item:hover .lo-ico,
+.guide-outline .lo-nav a.lo-item[aria-current="page"] .lo-ico { opacity: 1; }
+.guide-outline .lo-group { margin: 1rem .5rem .3rem; font-size: .75rem; font-weight: 600; color: #8c887f; }
+.guide-outline .lo-nav-close { display: none; }
+
+/* Current page row with outline toggle */
+.guide-outline .lo-current { display: flex; align-items: stretch; border-radius: 3px; background: var(--lo-raise); }
+.guide-outline .lo-current a.lo-item { flex: 1; color: var(--lo-text); font-weight: 600; }
+.guide-outline .lo-current a.lo-item:hover { background: transparent; color: var(--lo-accent); }
+.guide-outline .lo-current button { display: none; flex: none; width: 2.25rem; background: none; border: 0; border-left: 1px solid var(--lo-line2); border-radius: 0 3px 3px 0; color: var(--lo-muted); cursor: pointer; }
+.guide-outline.lo-js .lo-current button { display: block; }
+.guide-outline .lo-current button:hover { color: var(--lo-text); background: var(--lo-line2); }
+.guide-outline .lo-current button svg { width: 12px; height: 12px; transition: transform 150ms ease; }
+.guide-outline .lo-current button[aria-expanded="false"] svg { transform: rotate(-90deg); }
+.guide-outline .lo-outline { margin: .3rem 0 .4rem .9rem; border-left: 1px solid var(--lo-line2); }
+.guide-outline .lo-outline[hidden] { display: none; }
+.guide-outline .lo-outline a { display: block; padding: .27rem .6rem; margin-left: -1px; border-left: 2px solid transparent; font-size: .8125rem; color: var(--lo-muted); text-decoration: none; }
+.guide-outline .lo-outline a:hover { color: var(--lo-text); }
+.guide-outline .lo-outline a[aria-current="true"] { color: var(--lo-accent); border-left-color: var(--lo-accent); }
+
+.guide-outline .lo-nav .lo-ext { margin-top: auto; padding-top: 1rem; display: flex; flex-direction: column; padding-left: .5rem; }
+.guide-outline .lo-nav .lo-ext a { display: block; font-size: .75rem; color: var(--lo-muted); text-decoration: none; line-height: 1.9; }
+.guide-outline .lo-nav .lo-ext a:hover { color: var(--lo-text); text-decoration: underline; }
+
+/* Wide, comfortable article */
+.guide-outline .lo-main { min-width: 0; padding: 4.5rem 4rem 4rem; }
+.guide-outline .lo-article { max-width: 46rem; margin: 0 auto; }
+/* The legacy card selector outranks custom-mods.css's 1.5rem card margin, which would leave KAGRENAC anchors under the mobile top bar. */
+.guide-outline .lo-article [id],
+.guide-outline .lo-article.content .card[id] { scroll-margin-top: var(--lo-anchor); }
+.guide-outline .lo-intro h1 { font: 400 clamp(2.5rem, 5vw, 3.25rem)/1.05 var(--lo-title); letter-spacing: 2px; margin: 0 0 1rem; }
+.guide-outline .lo-standfirst { font: 400 1.3rem/1.55 var(--lo-sans); color: #d9d4c9; margin: 0 0 2.75rem; max-width: 40rem; }
+.guide-outline .lo-section { padding-top: 2.25rem; }
+.guide-outline .lo-section + .lo-section { margin-top: 2.25rem; border-top: 1px solid var(--lo-line); }
+.guide-outline .lo-section h3 { font: 600 1.375rem/1.3 var(--lo-sans); margin: 0 0 .75rem; }
+.guide-outline .lo-section h4 { font: 600 1.0625rem/1.35 var(--lo-sans); margin: 1.75rem 0 .5rem; color: var(--lo-text); }
+.guide-outline .lo-section p,
+.guide-outline .lo-section ul,
+.guide-outline .lo-section ol { margin: 0 0 1rem; color: #e6e1d6; }
+.guide-outline .lo-section ul,
+.guide-outline .lo-section ol { padding-left: 1.4rem; }
+.guide-outline .lo-section li { margin: 0 0 .4rem; padding-left: .2rem; }
+.guide-outline .lo-section li::marker { color: var(--lo-muted); }
+.guide-outline .lo-section > :last-child { margin-bottom: 0; }
+.guide-outline .lo-section b { color: var(--lo-text); font-weight: 600; }
+
+.guide-outline .lo-section code { font: .875em/1.5 var(--lo-mono); padding: .1em .35em; background: var(--lo-raise); border: 1px solid var(--lo-line2); border-radius: 3px; color: var(--lo-text); overflow-wrap: anywhere; }
+.guide-outline .lo-section pre { margin: 0 0 1rem; padding: 1rem 1.1rem; background: #111; border: 1px solid var(--lo-line2); border-radius: 4px; overflow-x: auto; }
+.guide-outline .lo-section pre code { display: block; padding: 0; background: none; border: 0; font-size: .875rem; line-height: 1.6; white-space: pre; overflow-wrap: normal; }
+
+.guide-outline :where(.guide-figure) { margin: 1.5rem 0; }
+.guide-outline :where(.guide-figure) img { display: block; max-width: 100%; height: auto; border: 1px solid var(--lo-line2); border-radius: 4px; }
+.guide-outline :where(.guide-figure) figcaption { margin-top: .5rem; font-size: .8125rem; color: var(--lo-muted); }
+
+.guide-outline .lo-note { padding: 1.25rem 1.5rem; background: var(--lo-raise); border-left: 3px solid var(--lo-cta); border-radius: 0 4px 4px 0; }
+.guide-outline .lo-note h3 { font-size: 1.125rem; }
+.guide-outline .lo-note p { font-size: 1rem; }
+.guide-outline .lo-note + .lo-section { border-top: 0; margin-top: .5rem; }
+
+.guide-outline .lo-pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--lo-line2); }
+.guide-outline .lo-pager a { font-size: 1.0625rem; font-weight: 600; color: var(--lo-text); text-decoration: none; }
+.guide-outline .lo-pager a:hover { color: var(--lo-accent); }
+.guide-outline .lo-pager .lo-next { margin-left: auto; text-align: right; }
+
+/* Reset the legacy styles.css footer bar so every product's guide footer matches. */
+.guide-outline .lo-footer { margin-top: 2.5rem; padding: 0; outline: 0; background: none; text-align: start; font-size: .8125rem; color: var(--lo-muted); }
+
+/* Legacy article content: original card markup inside .lo-article.content.
+   Content rules use :where() so the existing component styles (guide notes, copy buttons, remote-hosting diagram,
+   KAGRENAC tables, prompts and architecture flow) still win where they are more specific. */
+html:has(> body.guide-outline) { scroll-padding-top: 0; }
+.guide-outline :where(*) { transition: none; }
+.guide-outline .lo-article.content { display: block; width: auto; min-width: 0; margin: 0 auto; padding: 0; overflow: visible; }
+.guide-outline .content .section { display: block; opacity: 1; }
+.guide-outline .content :is(.card, .card-green, .card-yellow, .card-red) { width: auto; margin: 0; padding: 2.25rem 0 0; background: none; border: 0; border-radius: 0; outline: 0; box-shadow: none; }
+.guide-outline .content :is(.card, .card-green, .card-yellow, .card-red) + :is(.card, .card-green, .card-yellow, .card-red) { margin-top: 2.25rem; border-top: 1px solid var(--lo-line); }
+.guide-outline .content .hero-card { padding-top: 0; }
+.guide-outline .content .hero-card h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.1; margin: 0 0 1rem; color: var(--lo-text); }
+.guide-outline .content .hero-card > p { font-size: 1.15rem; line-height: 1.6; color: #d9d4c9; }
+.guide-outline .content .hero-card + :is(.card, .card-green, .card-yellow, .card-red) { margin-top: 1rem; }
+.guide-outline :where(.content) :where(h2, h3, h4) { cursor: auto; color: var(--lo-text); }
+.guide-outline :where(.content) h2 { font: 600 1.5rem/1.3 var(--lo-sans); margin: 0 0 .75rem; }
+.guide-outline :where(.content) h3 { font: 600 1.25rem/1.35 var(--lo-sans); margin: 1.75rem 0 .5rem; }
+.guide-outline :where(.content) :where(h2, h3, h4):first-child { margin-top: 0; }
+.guide-outline :where(.content) h4 { font: 600 1.0625rem/1.35 var(--lo-sans); margin: 1.5rem 0 .5rem; }
+.guide-outline :where(.content) :where(p, ul, ol) { margin: 0 0 1rem; }
+.guide-outline :where(.content) :where(ul, ol) { margin-left: 0; padding-left: 1.4rem; }
+.guide-outline :where(.content) li { margin: 0 0 .4rem; }
+.guide-outline :where(.content) li > :where(ul, ol) { margin: .4rem 0 0; }
+.guide-outline :where(.content) li::marker { color: var(--lo-muted); }
+.guide-outline .content a { color: var(--lo-accent); text-decoration: underline; }
+.guide-outline .content a:hover { color: var(--lo-text); }
+.guide-outline .content :is(.guide-copy-button, .page-copy-button) { text-decoration: none; }
+.guide-outline :where(.content) code { font-family: var(--lo-mono); font-size: .875em; overflow-wrap: anywhere; }
+.guide-outline :where(.content) pre { max-width: 100%; margin: 0 0 1rem; padding: 1rem 1.1rem; background: #111; border: 1px solid var(--lo-line2); border-radius: 4px; overflow-x: auto; line-height: 1.6; }
+.guide-outline :where(.content) pre code { padding: 0; background: none; overflow-wrap: normal; }
+.guide-outline :where(.content) :where(img, video, iframe) { max-width: 100%; }
+.guide-outline :where(.content) img { height: auto; }
+.guide-outline :where(.content) table:not(.table-scroll table, .plugin-guide-table-wrap table) { display: block; max-width: 100%; overflow-x: auto; }
+.guide-outline :where(.content) :where(th, td) { padding: .45em .6em; border: 1px solid var(--lo-line2); text-align: left; vertical-align: top; }
+.guide-outline :where(.content) table { border-collapse: collapse; }
+.guide-outline :where(.content) hr { margin: 1.5rem 0; border: 0; border-top: 1px solid var(--lo-line); }
+
+.guide-outline .lo-topbar,
+.guide-outline .lo-scrim { display: none; }
+
+@media (max-width: 1100px) {
+    .guide-outline .lo-main { padding: 3.5rem 2.5rem 3.5rem; }
+}
+
+@media (max-width: 820px) {
+    .guide-outline .lo-shell { display: block; }
+    .guide-outline .lo-main { padding: 2.5rem 1.25rem 3rem; }
+    .guide-outline .lo-standfirst { font-size: 1.15rem; }
+    .guide-outline .lo-note { padding: 1rem 1.1rem; }
+    .guide-outline .lo-nav a.lo-item { padding: .55rem .5rem; }
+    .guide-outline .lo-nav .lo-ico { top: .55rem; }
+    .guide-outline .lo-outline a { padding: .45rem .6rem; font-size: .875rem; }
+    .guide-outline .lo-current button { width: 2.75rem; }
+
+    /* Without JavaScript the navigation stays in normal flow above the article. */
+    .guide-outline .lo-nav { position: static; height: auto; overflow: visible; border-right: 0; border-bottom: 1px solid var(--lo-line); font-size: .9375rem; }
+
+    /* With JavaScript it becomes an off-canvas drawer opened from the top bar. */
+    .guide-outline.lo-js { --lo-anchor: 4.5rem; }
+    .guide-outline.lo-js .lo-topbar { display: flex; position: sticky; top: 0; z-index: 8; align-items: center; gap: .75rem; height: 3.5rem; padding: 0 .75rem; background: var(--lo-bg); border-bottom: 1px solid var(--lo-line); }
+    .guide-outline .lo-topbar button,
+    .guide-outline.lo-js .lo-nav-close { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; padding: 0; background: none; border: 1px solid var(--lo-line2); border-radius: 4px; color: var(--lo-text); font-size: 1.25rem; line-height: 1; cursor: pointer; }
+    .guide-outline .lo-topbar .lo-install { margin-left: auto; padding: .5rem .85rem; font-size: .875rem; }
+    .guide-outline.lo-js .lo-nav { position: fixed; z-index: 12; top: 0; left: 0; width: 18rem; max-width: 88vw; height: 100vh; height: 100dvh; overflow-y: auto; border-bottom: 0; border-right: 1px solid var(--lo-line); transform: translateX(-100%); visibility: hidden; transition: transform 220ms ease, visibility 0s 220ms; box-shadow: 0 0 24px rgba(0, 0, 0, .5); }
+    .guide-outline.lo-js .lo-nav.lo-open { transform: none; visibility: visible; transition: transform 220ms ease; }
+    .guide-outline.lo-js .lo-nav .lo-nav-head .lo-install { display: none; }
+    .guide-outline.lo-js .lo-scrim.lo-open { display: block; position: fixed; inset: 0; z-index: 11; background: rgba(0, 0, 0, .55); }
+    .guide-outline.lo-drawer-open { overflow: hidden; }
+}
+
+@media (max-width: 480px) {
+    .guide-outline .lo-topbar .lo-brand img { display: none; }
+}
+
+/* Print the article alone at full width; navigation and reading chrome stay on screen. */
+@media print {
+    .guide-outline .lo-progress,
+    .guide-outline .lo-skip,
+    .guide-outline .lo-topbar,
+    .guide-outline .lo-scrim,
+    .guide-outline .lo-nav,
+    .guide-outline .lo-pager { display: none !important; }
+    .guide-outline .lo-shell { display: block; }
+    .guide-outline .lo-main { padding: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:has(> body.guide-outline) { scroll-behavior: auto; }
+    .guide-outline *,
+    .guide-outline *::before,
+    .guide-outline *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+body.guide-outline .lo-progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: var(--lo-bar); z-index: 1000; pointer-events: none; }
+.guide-outline .lo-article a { overflow-wrap: anywhere; }
+.guide-outline .lo-article { overflow-wrap: anywhere; }

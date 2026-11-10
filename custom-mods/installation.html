@@ -9,48 +9,71 @@
     <script src="../js/javascript.js?v=20261026-kagrenac-fixes"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/progressBar.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/custom-mods.css?v=20261026-kagrenac-fixes">
+    <link rel="stylesheet" href="../css/custom-mods.css?v=20261109-kagrenac-brass">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
 </head>
-<body class="theme custom-mods-theme copyable-guide">
-    <div class="progress-container">
-        <div class="progress-bar custom-mods-progress"></div>
-    </div>
+<body class="guide-outline custom-mods-theme copyable-guide">
+    <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
 
-    <div class="container">
-        <div class="header">
-            <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">&#9776;</button>
+        <a class="lo-brand" href="./index.html"><img src="./images/kagrenac.png" alt=""><b>KAGRENAC</b></a>
+        <a class="lo-install" href="./installation.html">Get started</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
+
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="KAGRENAC guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><img src="./images/kagrenac.png" alt=""><b>KAGRENAC</b></a>
+                <a class="lo-install" href="./installation.html">Get started</a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">&times;</button>
             </div>
-            <div class="headerTitle">
-                <a href="./index.html" aria-label="KAGRENAC guide home"><img src="./images/kagrenac.png" alt="KAGRENAC icon" id="logo" width="512" height="512"></a>
-                <a href="./index.html" id="headerTitle">KAGRENAC</a>
-            </div>
-        </div>
+            <ul>
+                <li><a class="lo-item" href="../index.html">Home</a></li>
+                <li><a class="lo-item" href="./index.html">Overview</a></li>
+                <li>
+                    <div class="lo-current">
+                        <a class="lo-item" href="./installation.html" aria-current="page">Get started</a>
+                        <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Get started sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+                    </div>
+                    <ol class="lo-outline" id="lo-outline" aria-label="On this page">
+                        <li><a href="#Requirements">What You Need</a></li>
+                        <li><a href="#InstallDistro">Install DwemerDistro</a></li>
+                        <li><a href="#GetTemplate">1. Get The Template</a></li>
+                        <li><a href="#FirstPrompt">2. Give Your Agent The First Prompt</a></li>
+                        <li><a href="#WhoDoesWhat">Who Does What</a></li>
+                        <li><a href="#InstallServer">What Your Agent Sets Up</a></li>
+                        <li><a href="#Ports">Where Things Live</a></li>
+                        <li><a href="#LauncherRoute">Legacy Template Installs</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <p class="lo-group" id="lo-g-build">Build</p>
+            <ul aria-labelledby="lo-g-build">
+                <li><a class="lo-item" href="./gameplay.html">Gameplay design</a></li>
+                <li><a class="lo-item" href="./porting.html">Game integration</a></li>
+                <li><a class="lo-item" href="./configuration.html">Providers &amp; voice</a></li>
+                <li><a class="lo-item" href="./data-and-memory.html">Characters &amp; memory</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-ship">Ship</p>
+            <ul aria-labelledby="lo-g-ship">
+                <li><a class="lo-item" href="./testing.html">Testing</a></li>
+                <li><a class="lo-item" href="./updates.html">Updates &amp; recovery</a></li>
+                <li><a class="lo-item" href="./publishing.html">Publishing</a></li>
+            </ul>
+            <ul class="lo-ext" aria-label="Links">
+                <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac" target="_blank" rel="noopener noreferrer">Source Code</a></li>
+                <li><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                <li><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a></li>
+            </ul>
+        </nav>
 
-        <div class="sidebar left-sidebar" id="leftSidebar">
-            <p class="pageLinks">
-                <a href="../index.html">Home</a>
-                <a href="./index.html">Overview</a>
-                <a href="./installation.html">Get started</a>
-                <a href="./gameplay.html">Gameplay design</a>
-                <a href="./porting.html">Game integration</a>
-                <a href="./configuration.html">Providers &amp; voice</a>
-                <a href="./data-and-memory.html">Characters &amp; memory</a>
-                <a href="./testing.html">Testing</a>
-                <a href="./updates.html">Updates &amp; recovery</a>
-                <a href="./publishing.html">Publishing</a>
-            </p>
-            <hr>
-            <p class="sidebar-bottom">
-                <a href="https://github.com/Dwemer-Dynamics/Kagrenac">Source Code</a>
-            </p>
-        </div>
-
-        <main class="content">
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <div class="lo-article content">
             <section id="Installation" class="section">
                 <div class="card hero-card">
                     <h1>Get Started</h1>
@@ -85,7 +108,7 @@
                     <h2>Install DwemerDistro</h2>
                     <p>DwemerDistro is a small Linux environment that runs on Windows through WSL (Windows Subsystem for Linux). It provides the web server, PHP and database your mod's server runs on. Skip this only if DwemerDistro itself is already installed and starts from its launcher; otherwise run the full installer below.</p>
                     <ol>
-                        <li>Download <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest/download/DwemerDistroInstaller.exe"><code>DwemerDistroInstaller.exe</code></a> from the <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest">latest DwemerDistro release</a>. It is one file containing DwemerDistro and its launcher. The ZIP on that page is only the launcher, so it cannot do a first install.</li>
+                        <li>Download <code>DwemerDistroInstaller.exe</code> from the <a href="https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases/latest">latest DwemerDistro release</a>. It is one file containing DwemerDistro and its launcher. The ZIP on that page is only the launcher, so it cannot do a first install.</li>
                         <li>Run the installer. It asks for administrator permission. Keep WSL setup and import turned on, and let it finish.</li>
                         <li>Open the DwemerDistro launcher, start DwemerDistro and press <b>Update Distro</b>.</li>
                     </ol>
@@ -157,8 +180,13 @@ review the actual changes, and fix findings. Keep keys out of chat and preserve 
                     <p><b>Next step:</b> <a href="./gameplay.html">Design the gameplay</a>.</p>
                 </div>
             </section>
+        </div>
+            <nav class="lo-pager" aria-label="Guide pages">
+                <a class="lo-prev" href="./index.html" rel="prev">&larr; Overview</a>
+                <a class="lo-next" href="./gameplay.html" rel="next">Next: Gameplay design &rarr;</a>
+            </nav>
+            <footer class="lo-footer">Dwemer Dynamics 2026</footer>
         </main>
     </div>
-    <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>

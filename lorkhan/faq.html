@@ -9,56 +9,78 @@
     <script src="../js/javascript.js?v=20261007-local-llm"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/progressBar.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
 </head>
-<body class="theme lorkhan-theme">
-    <div class="progress-container">
-        <div class="progress-bar lorkhan-progress"></div>
-    </div>
+<body class="guide-outline lorkhan-theme">
+    <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
 
-    <div class="container">
-        <div class="header">
-            <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation">&#9776;</button>
-            </div>
-            <div class="headerTitle">
-                <a href="./index.html" aria-label="LORKHAN home"><img src="../img/lorkhan-icon.png" alt="LORKHAN icon" id="logo"></a>
-                <a href="./index.html" id="headerTitle">LORKHAN</a>
-            </div>
-            </div>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">&#9776;</button>
+        <a class="lo-brand" href="./index.html"><img src="../img/lorkhan-icon.png" alt=""><b>LORKHAN</b></a>
+        <a class="lo-install" href="./installation.html">Install</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
 
-        <div class="sidebar left-sidebar">
-            <p class="pageLinks">
-                <a href="../index.html">Home</a>
-                <a href="./index.html">Overview</a>
-                <a href="./installation.html">Installation</a>
-                <a href="./configuration.html">Configuration</a>
-                <a href="./roleplay-settings.html">Roleplay Settings</a>
-                <a href="./ingame-settings.html">Morrowind Settings</a>
-                <a href="./llm.html">Large Language Models</a>
-                <a href="./local-llm-guide.html">Local LLM Guide</a>
-                <a href="./tts.html">Text-to-Speech</a>
-                <a href="./stt.html">Speech-to-Text</a>
-                <a href="./modders-guide.html">Modders Guide</a>
-                <a href="./faq.html">FAQ</a>
-                <a href="./remote-hosting-guide.html">Remote Hosting</a>
-                <a href="./log-files-and-debugging.html">Logs and Debugging</a>
-            </p>
-            <p class="sidebar-padder"></p>
-            <hr>
-            <p class="sidebar-bottom">
-                <a href="./installation.html#Download">Beta downloads</a>
-                <a href="https://discord.gg/NDn9qud2ug">Discord</a>
-                <a href="https://www.patreon.com/DwemerDynamics">Patreon</a>
-                <a href="https://github.com/Dwemer-Dynamics/LORKHAN">Mod Code</a>
-                <a href="https://github.com/Dwemer-Dynamics/LorkhanServer">Server Code</a>
-            </p>
-        </div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="LORKHAN guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><img src="../img/lorkhan-icon.png" alt=""><b>LORKHAN</b></a>
+                <a class="lo-install" href="./installation.html">Install</a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">&times;</button>
+            </div>
+            <ul>
+                <li><a class="lo-item" href="../index.html">Home</a></li>
+                <li><a class="lo-item" href="./index.html">Overview</a></li>
+                <li><a class="lo-item" href="./installation.html">Installation</a></li>
+                <li><a class="lo-item" href="./configuration.html">Configuration</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-play">Play</p>
+            <ul aria-labelledby="lo-g-play">
+                <li><a class="lo-item" href="./roleplay-settings.html">Roleplay Settings</a></li>
+                <li><a class="lo-item" href="./ingame-settings.html">Morrowind Settings</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-ai">AI services</p>
+            <ul aria-labelledby="lo-g-ai">
+                <li><a class="lo-item" href="./llm.html">Large Language Models</a></li>
+                <li><a class="lo-item" href="./local-llm-guide.html">Local LLM Guide</a></li>
+                <li><a class="lo-item" href="./tts.html">Text-to-Speech</a></li>
+                <li><a class="lo-item" href="./stt.html">Speech-to-Text</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-help">Help</p>
+            <ul aria-labelledby="lo-g-help">
+                <li><a class="lo-item" href="./modders-guide.html">Modders Guide</a></li>
+                <li>
+                    <div class="lo-current">
+                        <a class="lo-item" href="./faq.html" aria-current="page">FAQ</a>
+                        <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="FAQ sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+                    </div>
+                    <ol class="lo-outline" id="lo-outline" aria-label="On this page">
+                        <li><a href="#Engine">Can I use ordinary OpenMW or original Morrowind?</a></li>
+                        <li><a href="#Mods">Which extra mods are required?</a></li>
+                        <li><a href="#Services">Does everything run locally?</a></li>
+                        <li><a href="#NoResponse">Why is there no response?</a></li>
+                        <li><a href="#NoAudio">Text works but speech does not</a></li>
+                        <li><a href="#Saves">Can I keep my normal saves?</a></li>
+                        <li><a href="#Identity">Why Are There Several Guards with the Same Name?</a></li>
+                    </ol>
+                </li>
+                <li><a class="lo-item" href="./remote-hosting-guide.html">Remote Hosting</a></li>
+                <li><a class="lo-item" href="./log-files-and-debugging.html">Logs and Debugging</a></li>
+            </ul>
+            <ul class="lo-ext" aria-label="Links">
+                <li><a href="./installation.html#Download">Beta downloads</a></li>
+                <li><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                <li><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a></li>
+                <li><a href="https://github.com/Dwemer-Dynamics/LORKHAN" target="_blank" rel="noopener noreferrer">Mod Code</a></li>
+                <li><a href="https://github.com/Dwemer-Dynamics/LorkhanServer" target="_blank" rel="noopener noreferrer">Server Code</a></li>
+            </ul>
+        </nav>
 
-        <main class="content">
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <div class="lo-article content">
             <section class="section" id="Guide">
                 <div class="card hero-card">
                     <h1>FAQ</h1>
@@ -95,8 +117,13 @@
                     <p>See <a href="./modders-guide.html#References">Reference groups</a>.</p>
                 </div>
             </section>
+        </div>
+            <nav class="lo-pager" aria-label="Guide pages">
+                <a class="lo-prev" href="./modders-guide.html" rel="prev">&larr; Modders Guide</a>
+                <a class="lo-next" href="./remote-hosting-guide.html" rel="next">Next: Remote Hosting &rarr;</a>
+            </nav>
+            <footer class="lo-footer">Dwemer Dynamics 2026</footer>
         </main>
     </div>
-    <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>

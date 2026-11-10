@@ -1,0 +1,310 @@
+/* Homepage guidewall. Loaded only by index.html and scoped to body.dd-home so the
+   guide and project pages keep their own styling. */
+.dd-home {
+    --bg: #171717;
+    --s1: #232323;
+    --s2: #2b2b2b;
+    --line: #404040;
+    --ivory: #f5f1e8;
+    --muted: #aaa69e;
+    --orange: #f27c11;
+    --gold: #ddb574;
+    --r: 6px;
+    --sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--ivory);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+}
+.dd-home *, .dd-home *::before, .dd-home *::after { box-sizing: border-box; }
+.dd-home img { display: block; max-width: 100%; }
+.dd-home a { color: inherit; }
+.dd-home :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; border-radius: 3px; }
+
+.dd-home .skip { position: absolute; left: -999px; top: 0; background: var(--orange); color: var(--bg); padding: .5rem .9rem; border-radius: var(--r); z-index: 20; font-weight: 700; }
+.dd-home .skip:focus { left: .75rem; top: .75rem; }
+
+.dd-home .wrap { max-width: 76rem; margin: 0 auto; padding-inline: 1.25rem; }
+
+/* Header: name on the left, Projects dropdown on the right */
+.dd-home .top { display: flex; align-items: center; justify-content: space-between; gap: .5rem 2rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+.dd-home .brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: "MagicCards", serif; font-weight: 400; font-size: clamp(.9375rem, .5rem + 2.25vw, 1.1875rem); line-height: 1.2; letter-spacing: .04em; word-spacing: .3em; white-space: nowrap; margin: 0; min-width: 0; }
+.dd-home .brand img { width: 30px; height: 30px; object-fit: contain; }
+
+/* Native details/summary menu; the panel hangs from the right edge so it stays on screen */
+.dd-home .menu { position: relative; flex: none; }
+.dd-home .menu summary { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.25rem; padding: .3rem .8rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--s2); color: var(--ivory); font-size: .9375rem; font-weight: 600; cursor: pointer; list-style: none; user-select: none; transition: background-color .15s, border-color .15s; }
+.dd-home .menu summary::-webkit-details-marker { display: none; }
+.dd-home .menu summary::after { content: ""; width: .45rem; height: .45rem; margin-top: -.2rem; border-right: 2px solid var(--orange); border-bottom: 2px solid var(--orange); transform: rotate(45deg); transition: transform .15s; }
+.dd-home .menu summary:hover { background: #363636; border-color: #555; }
+.dd-home .menu summary:focus-visible { border-radius: var(--r); }
+.dd-home .menu[open] summary { border-color: var(--orange); }
+.dd-home .menu[open] summary::after { margin-top: .2rem; transform: rotate(-135deg); }
+.dd-home .menu ul { position: absolute; right: 0; top: calc(100% + .4rem); z-index: 30; width: max-content; min-width: 12rem; max-width: calc(100vw - 1.5rem); list-style: none; margin: 0; padding: .3rem; background: var(--s1); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 10px 28px rgba(0, 0, 0, .5); font-size: .9375rem; }
+.dd-home .menu li a { display: block; padding: .5rem .75rem; border-radius: 4px; text-decoration: none; color: var(--ivory); font-weight: 600; }
+.dd-home .menu li a:hover { background: var(--s2); color: var(--orange); }
+.dd-home .menu li a:focus-visible { outline-offset: -2px; border-radius: 4px; }
+.dd-home .menu li:last-child { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--line); }
+.dd-home .menu li:last-child a { color: var(--muted); font-weight: 400; }
+.dd-home .menu li:last-child a:hover { color: var(--ivory); }
+
+.dd-home .headline { margin: 1.5rem 0 0; font-family: "MagicCards", serif; font-size: clamp(1.875rem, 1.3rem + 2vw, 2.75rem); line-height: 1.2; font-weight: 400; letter-spacing: .03em; word-spacing: .25em; overflow-wrap: break-word; }
+.dd-home .intro { margin: .5rem 0 1rem; color: var(--muted); max-width: 44rem; }
+/* Top-level download: the one installer every mod needs, sized above the card buttons */
+.dd-home .get { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 0 0 1.5rem; }
+.dd-home .dl { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .6rem 1.5rem; border: 1px solid var(--orange); border-radius: var(--r); background: var(--orange); color: var(--bg); font-size: 1.0625rem; font-weight: 750; text-decoration: none; box-shadow: 0 6px 20px -8px rgba(242, 124, 17, .7); transition: background-color .15s, border-color .15s, box-shadow .15s; }
+.dd-home .dl:hover { background: #ff9233; border-color: #ffb066; box-shadow: 0 0 0 1px rgba(255, 176, 102, .35), 0 8px 24px -6px rgba(242, 124, 17, .75); }
+.dd-home .dl:focus-visible { outline-offset: 3px; border-radius: var(--r); box-shadow: 0 0 0 5px rgba(242, 124, 17, .22); }
+.dd-home .dl:active { background: #e06f0a; box-shadow: none; }
+/* Secondary link beside the download: explains what the installer is */
+.dd-home .about { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .6rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--s2); color: var(--ivory); font-weight: 600; text-decoration: none; transition: background-color .15s, border-color .15s; }
+.dd-home .about:hover { background: #2f2924; border-color: var(--orange); }
+.dd-home .about:focus-visible { outline-offset: 3px; border-radius: var(--r); }
+/* Ploofy.ai: the Dwemer Dashboard panel (dark frame, cyan glow) kept as a deliberate brand
+   exception; the whole panel is the link and sits at the end of the action row. */
+.dd-home .ploofy { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; margin-left: auto; padding: 4px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); text-decoration: none; transition: box-shadow .15s; }
+.dd-home .ploofy:hover, .dd-home .ploofy:focus-visible { box-shadow: 0 0 0 1px rgba(0, 229, 255, .5), 0 0 32px rgba(0, 229, 255, .22), 0 8px 20px rgba(0, 0, 0, .4); }
+.dd-home .ploofy:focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; border-radius: 12px; }
+/* Native 338x104 ratio; the logo's near-black ground merges with the panel */
+.dd-home .ploofy img { flex: none; width: auto; height: 40px; mix-blend-mode: lighten; }
+
+/* Wall: one frame per mod, art inset inside it, caption straight on the frame */
+.dd-home .wall { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: .75rem; }
+.dd-home .wall > li { display: flex; }
+.dd-home .tile { position: relative; flex: 1; display: flex; flex-direction: column; padding: .4rem; background: var(--s1); border: 1px solid var(--line); border-radius: 8px; transition: border-color .15s, background-color .15s, box-shadow .2s, transform .2s; }
+.dd-home .tile:hover, .dd-home .tile:focus-within { border-color: color-mix(in srgb, var(--orange) 50%, var(--line)); background: color-mix(in srgb, var(--s2) 60%, var(--s1)); }
+/* Art keeps each image's own ratio (width/height attributes reserve it), so nothing is cropped or banded */
+.dd-home .art { border-radius: 4px; overflow: hidden; background: var(--s2); flex: none; position: relative; }
+.dd-home .art img { width: 100%; height: auto; transition: filter .15s; }
+.dd-home .tile:hover .art img { filter: brightness(1.08); }
+/* Lift only where a fine pointer hovers; touch taps and keyboard focus keep the flat border cue */
+@media (hover: hover) and (pointer: fine) {
+    .dd-home .tile:hover { transform: translateY(-2px); box-shadow: 0 10px 26px -12px rgba(242, 124, 17, .35), 0 6px 18px rgba(0, 0, 0, .35); }
+}
+
+.dd-home .cap { padding: .8rem .6rem .5rem; }
+.dd-home .game { margin: 0; font-size: .875rem; color: #fff; }
+/* Titles use each mod's established face (css/styles.css, css/hub.css): MagicCards for the
+   Elder Scrolls mods and KAGRENAC, MailartRubberstamp for STOBE, Monofonto for DIALECTIC */
+.dd-home .tile h2 { margin: .1rem 0 .35rem; font-family: "MagicCards", serif; font-size: 1.5rem; line-height: 1.15; font-weight: 400; letter-spacing: 1.2px; word-spacing: 6px; color: #fff; }
+.dd-home .g-stobe h2 { font-family: "MailartRubberstamp", "Futura Condensed Light", Arial, sans-serif; letter-spacing: .4px; word-spacing: 5px; }
+.dd-home .g-dialectic h2 { font-family: "Monofonto", Arial, sans-serif; letter-spacing: 0; word-spacing: 5px; }
+.dd-home .tile h2 a { text-decoration: none; }
+.dd-home .g-kagrenac h2 { font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); }
+/* Whole-card link: the heading anchor stretches over the tile, so the card goes to the
+   project overview without nesting anchors or a click handler. The guide buttons sit above it. */
+.dd-home .tile h2 a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 8px; }
+.dd-home .tile h2 a:focus-visible { outline: none; }
+.dd-home .tile h2 a:focus-visible::after { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+/* Guide links as compact flat buttons: the primary action in orange, the rest dark gray */
+.dd-home .links { position: relative; z-index: 2; list-style: none; margin: .75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; font-size: .875rem; }
+.dd-home .links a { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .8rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--s2); color: #fff; font-weight: 600; text-decoration: none; transition: background-color .15s, border-color .15s, box-shadow .15s, color .15s; }
+/* Buttons answer on their own: an orange edge and warm glow, distinct from the card's border cue */
+.dd-home .links a:hover { background: #2f2924; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .25), 0 4px 14px -4px rgba(242, 124, 17, .5); }
+.dd-home .links a:focus-visible { outline-offset: 2px; border-radius: var(--r); border-color: var(--orange); box-shadow: 0 0 0 4px rgba(242, 124, 17, .22); }
+.dd-home .links a:active { background: #262220; box-shadow: none; }
+.dd-home .links .inst { background: #b35200; border-color: #b35200; color: #fff; font-weight: 700; }
+/* Darker orange keeps white text above 4.5:1 in every state (5.1 rest, 4.8 hover, 6.5 active) */
+.dd-home .links .inst:hover { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
+.dd-home .links .inst:active { background: #9a4600; box-shadow: none; }
+
+/* Two equal columns: CHIM + LORKHAN, then STOBE + DIALECTIC. Each card subgrids four shared
+   rows (art, game, title, buttons) so a pair's captions line up however they wrap. */
+@media (min-width: 52rem) {
+    .dd-home .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0; }
+    .dd-home .wall > li + li { margin-top: .75rem; }
+    .dd-home .wall > li:not(.g-kagrenac) { grid-row: span 4; display: grid; grid-template-rows: subgrid; }
+    .dd-home .wall > li:not(.g-kagrenac) .tile { grid-row: span 4; display: grid; grid-template-rows: subgrid; align-items: start; }
+    .dd-home .wall > li:not(.g-kagrenac) .cap { grid-row: span 3; display: grid; grid-template-rows: subgrid; align-content: start; }
+    /* KAGRENAC spans both columns: art at 7/12 of the row, caption beside it */
+    .dd-home .g-kagrenac { grid-column: 1 / -1; }
+    .dd-home .g-kagrenac .tile { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; column-gap: .75rem; }
+    .dd-home .g-kagrenac .cap { padding: .6rem .6rem .6rem .25rem; }
+}
+
+/* Patreon members: restored from the previous homepage (css/hub.css .patron-shell.patron-card
+   plus the inherited .theme/body/h2/h3 context), scoped to the homepage. */
+@font-face {
+    font-family: "MagicCards";
+    src: url("../font/MagicCardsNormal.ttf") format("truetype");
+}
+@font-face {
+    font-family: "MailartRubberstamp";
+    src: url("../font/MailartRubberstamp-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Monofonto";
+    src: url("../font/MonofontoRg.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+.dd-home .patron-card {
+    position: static;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: min(1100px, calc(100% - 2em));
+    min-height: 0;
+    margin: 1.1em auto 0;
+    padding: 0.8em 1em 1em;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    background: #1a1a1a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.13);
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.45em;
+}
+.dd-home .patron-title {
+    margin: 0 0 0.65em;
+    width: 100%;
+    font-family: "MagicCards", serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.4px;
+    word-spacing: 6px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    cursor: pointer;
+}
+.dd-home .patron-title-link {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+}
+.dd-home .patron-title-link:hover,
+.dd-home .patron-title-link:focus-visible {
+    color: #f0cf75;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.dd-home .patron-title-link:focus-visible,
+.dd-home .patron-list-scroll:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+.dd-home .patron-list-scroll {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    max-height: 190px;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.63) transparent;
+}
+.dd-home .patron-list-scroll::-webkit-scrollbar { width: 12px; }
+.dd-home .patron-list-scroll::-webkit-scrollbar-track { background: transparent; }
+.dd-home .patron-list-scroll::-webkit-scrollbar-thumb { background-color: rgba(143, 143, 143, 0.63); border-radius: 20px; }
+.dd-home .patron-list-scroll::-webkit-scrollbar-thumb:hover { background-color: rgba(240, 240, 240, 0.63); }
+.dd-home .patron-list-track { display: block; }
+.dd-home .patron-list-cycle {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1em;
+}
+.dd-home .patron-tier-group {
+    margin: 0;
+    padding: 0 0.75em 0.5em;
+}
+.dd-home .patron-tier-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin: 0 0 0.65em;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(138, 155, 182, 0.45);
+    color: #d8e3f2;
+    font-family: "MagicCards", serif;
+    font-size: 19.5px;
+    font-weight: normal;
+    line-height: 1.25em;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.dd-home .patron-tier-icon {
+    display: block;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+.dd-home .patron-tier-title-label {
+    line-height: 1;
+    font-family: "MagicCards", serif;
+    font-weight: normal;
+    letter-spacing: inherit;
+}
+.dd-home .patron-tier-gold .patron-tier-title { color: #f0cf75; border-bottom-color: rgba(221, 184, 86, 0.7); }
+.dd-home .patron-tier-silver .patron-tier-title { color: #d2d8e0; border-bottom-color: rgba(170, 180, 193, 0.72); }
+.dd-home .patron-tier-bronze .patron-tier-title { color: #d9a47c; border-bottom-color: rgba(191, 130, 93, 0.72); }
+.dd-home .patron-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.dd-home .patron-list-item {
+    padding: 0;
+    color: #f2f5f9;
+    font-size: 14px;
+    line-height: 1.3;
+    word-break: break-word;
+    text-align: center;
+}
+.dd-home .patron-empty,
+.dd-home .patron-tier-empty { margin: 0; text-align: center; }
+.dd-home .patron-empty { color: #c7d0dd; font-size: 14px; line-height: 1.5; }
+.dd-home .patron-tier-empty { color: #9cadc3; font-size: 13px; line-height: 1.4; }
+@media (max-width: 700px) {
+    .dd-home .patron-card { width: calc(100% - 1em); padding: 0.75em; }
+    .dd-home .patron-list-scroll { max-height: 250px; }
+    .dd-home .patron-list-cycle { grid-template-columns: 1fr; gap: 0.4em; }
+}
+
+/* Footer: social links, Other Projects and the copyright line */
+.dd-home .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; margin-top: 2.5rem; padding-block: 1rem; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
+.dd-home .site-footer a { color: var(--muted); text-underline-offset: 3px; }
+.dd-home .site-footer a:hover { color: var(--ivory); }
+.dd-home .footer-social { display: flex; align-items: center; gap: .5rem; }
+.dd-home .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: var(--r); opacity: .8; transition: opacity .15s; }
+.dd-home .footer-social a:hover { opacity: 1; }
+.dd-home .footer-social img { width: 26px; height: 26px; object-fit: contain; }
+.dd-home .footer-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.25rem; margin: 0; }
+
+@media (max-width: 30rem) {
+    .dd-home .wrap { padding-inline: .75rem; }
+    /* The download spans the column; card buttons fill their row, each label kept on one line */
+    .dd-home .dl, .dd-home .about, .dd-home .ploofy { display: flex; width: 100%; }
+    .dd-home .ploofy { margin-left: 0; }
+    .dd-home .links li { flex: 1 1 0; display: flex; }
+    .dd-home .links a { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .dd-home *, .dd-home *::before, .dd-home *::after { transition: none !important; }
+    .dd-home .tile:hover { transform: none; }
+}

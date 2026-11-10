@@ -10,46 +10,55 @@
     <script src="../js/javascript.js?v=20261019-kenogenesis-case"></script>
     <link rel="stylesheet" href="../css/styles.css?v=20260713a">
     <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/progressBar.css?v=20260713a">
-    <link rel="stylesheet" href="../css/sidebar.css?v=20260713a">
     <link rel="stylesheet" href="../css/guide.css?v=20261006-copy-page">
-    <link rel="stylesheet" href="../css/other-projects.css?v=20261016-gallery2">
+    <link rel="stylesheet" href="../css/other-projects.css?v=20261109-outline">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
     <script src="../js/kosmokrator-gallery.js?v=20261016-gallery2" defer></script>
     <noscript><style>#Overview.section { opacity: 1; }</style></noscript>
 </head>
-<body class="theme other-projects-theme copyable-guide">
-    <div class="progress-container">
-        <div class="progress-bar other-projects-progress"></div>
-    </div>
+<body class="guide-outline other-projects-theme copyable-guide">
+    <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
 
-    <div class="container">
-        <div class="header">
-            <div class="headerMenu" onclick="toggleNav()">
-                <button id="navButton" type="button" aria-label="Toggle navigation" aria-controls="leftSidebar" aria-expanded="false">&#9776;</button>
-            </div>
-            <div class="headerTitle">
-                <a href="./index.html" aria-label="Other Projects home"><img src="../img/dd_logo.png" alt="Dwemer Dynamics logo" id="logo"></a>
-                <a href="./index.html" id="headerTitle">Other Projects</a>
-            </div>
-        </div>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">&#9776;</button>
+        <a class="lo-brand" href="./index.html"><img src="../img/dd_logo.png" alt=""><b>Other Projects</b></a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
 
-        <nav class="sidebar left-sidebar" id="leftSidebar" aria-label="Other Projects">
-            <p class="pageLinks">
-                <a href="../index.html">Home</a>
-                <a href="./index.html">Overview</a>
-                <a href="./kosmokrator.html">Kosmokrator</a>
-                <a href="./kenogenesis.html">Kenogenesis</a>
-            </p>
-            <hr>
-            <p class="sidebar-bottom">
-                <a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a>
-                <a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer">YouTube</a>
-                <a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a>
-            </p>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="Other Projects">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><img src="../img/dd_logo.png" alt=""><b>Other Projects</b></a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">&times;</button>
+            </div>
+            <ul>
+                <li><a class="lo-item" href="../index.html">Home</a></li>
+                <li><a class="lo-item" href="./index.html">Overview</a></li>
+                <li><a class="lo-item" href="./kosmokrator.html">Kosmokrator</a></li>
+                <li>
+                    <div class="lo-current">
+                        <a class="lo-item" href="./kenogenesis.html" aria-current="page">Kenogenesis</a>
+                        <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Kenogenesis sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+                    </div>
+                    <ol class="lo-outline" id="lo-outline" aria-label="On this page">
+                        <li><a href="#Features">Features</a></li>
+                        <li><a href="#Screenshots">Screenshots</a></li>
+                        <li><a href="#GetStarted">Requirements and getting started</a></li>
+                        <li><a href="#Downloads">Downloads and source</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <ul class="lo-ext" aria-label="Links">
+                <li><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                <li><a href="https://www.youtube.com/@DwemerDynamics" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                <li><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a></li>
+            </ul>
         </nav>
 
-        <main class="content">
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <div class="lo-article content">
             <section id="Overview" class="section">
                 <div class="card hero-card">
                     <h1>Kenogenesis</h1>
@@ -138,8 +147,12 @@
                     <p><a href="./index.html">Back to Other Projects</a></p>
                 </div>
             </section>
+            </div>
+            <nav class="lo-pager" aria-label="Other Projects pages">
+                <a class="lo-prev" href="./kosmokrator.html" rel="prev">&larr; Kosmokrator</a>
+            </nav>
+            <footer class="lo-footer">Dwemer Dynamics 2026</footer>
         </main>
     </div>
-    <footer>Dwemer Dynamics 2026</footer>
 </body>
 </html>

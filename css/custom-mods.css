@@ -1,8 +1,17 @@
-/* Kagrenac guide (custom-mods/): blue accent shared by the guide pages and homepage row. */
+/* Kagrenac guide (custom-mods/): blue accent kept for the legacy homepage row rules below. */
 :root {
     --custom-accent: #4da3ff;
     --custom-accent-light: #8cc4ff;
     --custom-edge: rgba(77, 163, 255, 0.3);
+}
+
+/* Guide pages take brass, parchment and ink from the Kagrenac icon instead. */
+.custom-mods-theme {
+    --custom-accent: #b8955a;
+    --custom-accent-light: #e2cc96;
+    --custom-accent-hover: #f3e6c4;
+    --custom-edge: rgba(184, 149, 90, 0.34);
+    --custom-tint: rgba(184, 149, 90, 0.12);
 }
 
 .custom-mods-progress {
@@ -14,7 +23,7 @@
 }
 
 .custom-mods-theme .content a:hover {
-    color: #c2e0ff;
+    color: var(--custom-accent-hover);
 }
 
 .custom-mods-theme .content a:focus-visible,
@@ -40,14 +49,15 @@
     background-color: var(--custom-accent);
 }
 
-.custom-mods-theme .guide-copy-button {
-    border-color: rgba(77, 163, 255, 0.45);
+/* Skip buttons showing a copied/failed state so guide.css's green/red feedback still applies. */
+.custom-mods-theme .guide-copy-button:not([data-copy-state]) {
+    border-color: rgba(184, 149, 90, 0.5);
     color: var(--custom-accent-light);
 }
 
-.custom-mods-theme .guide-copy-button:hover {
-    border-color: rgba(77, 163, 255, 0.8);
-    color: #c2e0ff;
+.custom-mods-theme .guide-copy-button:not([data-copy-state]):hover {
+    border-color: rgba(226, 204, 150, 0.85);
+    color: var(--custom-accent-hover);
 }
 
 .custom-mods-theme .content pre {
@@ -86,7 +96,13 @@
 }
 
 .custom-mods-theme .content th {
-    background: rgba(77, 163, 255, 0.1);
+    background: var(--custom-tint);
+}
+
+.custom-mods-theme .guide-note.note-info {
+    background: rgba(226, 204, 150, 0.06);
+    border-color: rgba(226, 204, 150, 0.24);
+    border-left-color: var(--custom-accent-light);
 }
 
 .custom-mods-theme .content li {

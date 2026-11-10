@@ -1,0 +1,40 @@
+/* Homepage margin art. Loaded only by index.html; js/home-margins.js builds the layer.
+   The sixteen Dwemer book pages and parchments from The Elder Scrolls III: Morrowind (see
+   THIRD_PARTY_NOTICES.md) sit faintly in brass in the side gutters only, outside the 76rem
+   content column: one column per gutter, running the full page height behind everything and
+   scrolling with the page. Nothing sits in the header, the hero or behind a card. Where the
+   gutters are too narrow (under 88rem) none show. On a fine pointer a lit copy under a soft
+   mask brings nearby drawings forward; touch and reduced motion keep the static art. Unless
+   motion is reduced, each base drawing breathes very faintly (about .8x to 1.1x its strength)
+   on its own slow cycle, timed by js/home-margins.js; the lit copy does not pulse. */
+body.dd-home { position: relative; }
+.mb-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.mb { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; display: none; }
+.mb-col { position: absolute; top: 40px; bottom: 24px; display: flex; flex-direction: column; justify-content: space-evenly; --m: clamp(16px, (50% - 38rem) * .08, 56px); width: calc(50% - 38rem - 2 * var(--m)); }
+.mb-l { left: var(--m); }
+.mb-r { right: var(--m); }
+.mb-col svg { flex: none; display: block; width: min(var(--s), 100%); height: auto; overflow: hidden; --a: .09; }
+.mb-col .mb-parch { --a: .085; }
+.mb-col .mb-txt { --a: .035; }
+.mb-pen { opacity: var(--a); }
+.mb-lit .mb-pen { opacity: calc(var(--a) * 2.6); }
+@media (min-width: 88rem) {
+    .mb { display: block; }
+}
+@keyframes mb-pulse { 0%, 100% { opacity: .727; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+    .mb:not(.mb-lit) .mb-pen { opacity: calc(var(--a) * 1.1); }
+    .mb:not(.mb-lit) .mb-col svg { animation: mb-pulse var(--d, 18s) ease-in-out var(--o, 0s) infinite; }
+}
+.mb-lit {
+    display: none; opacity: 0; transition: opacity .3s ease-out;
+    -webkit-mask-image: radial-gradient(circle 190px at var(--mb-x, -999px) var(--mb-y, -999px), #000 0, rgba(0, 0, 0, .55) 45%, transparent 100%);
+    mask-image: radial-gradient(circle 190px at var(--mb-x, -999px) var(--mb-y, -999px), #000 0, rgba(0, 0, 0, .55) 45%, transparent 100%);
+}
+@media (min-width: 88rem) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .mb-lit { display: block; }
+    .mb-lit.mb-on { opacity: .85; }
+}
+@media (forced-colors: active), print {
+    .mb, .mb-lit { display: none; }
+}
