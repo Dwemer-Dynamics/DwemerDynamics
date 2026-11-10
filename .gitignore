@@ -20,4 +20,7 @@ ENV/
 
 # OS specific
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Generated site
+_site/

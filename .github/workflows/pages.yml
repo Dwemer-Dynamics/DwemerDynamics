@@ -25,26 +25,8 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Prepare static site
-        run: |
-          mkdir -p _site
-          cp -R chim _site/
-          cp -R css _site/
-          cp -R custom-mods _site/
-          cp -R data _site/
-          cp -R dialectic _site/
-          cp -R dwemerdistro _site/
-          cp -R font _site/
-          cp -R img _site/
-          cp -R js _site/
-          cp -R lorkhan _site/
-          cp -R other-projects _site/
-          cp -R stobe _site/
-          cp index.html _site/
-          cp styles.css _site/
-          cp CNAME _site/
-          cp .nojekyll _site/
-          cp THIRD_PARTY_NOTICES.md _site/
+      - name: Build static site
+        run: python3 build_site.py
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

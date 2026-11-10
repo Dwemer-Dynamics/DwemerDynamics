@@ -10,9 +10,21 @@ Guide-first website for Dwemer Dynamics projects, covering CHIM, STOBE, and Dial
 
 `other-projects/` is a small guide for modding tools and experiments outside the AI game mods, linked from the homepage. `index.html` is the overview and each project has its own page, such as `kosmokrator.html`. The pages share the `otherProjects` sidebar in `js/javascript.js`, selected by the `other-projects-theme` body class. Their styles live in `css/other-projects.css`, scoped to that class because the homepage also loads the file for its Other Projects panel. Each project's own README is the reference for setup; keep these pages short and link to it.
 
+## Clean URLs and Build
+
+Pages are authored as plain HTML in place (`chim/installation.html`). `build_site.py` (Python 3, standard library only) builds the deployable site into `_site/`:
+
+- each page is written to a clean directory URL: `/`, `/chim/`, `/chim/installation/`
+- internal `href`/`src` values are rewritten to root-relative clean paths, and each page gets a clean canonical link
+- every old `.html` address keeps a small page that forwards to the clean URL, keeping the query and hash (a client-side redirect, not an HTTP 301)
+- explicit `index.html` visits are tidied to the directory URL in the address bar
+- the build fails if an internal link or asset does not resolve
+
+Authored links can stay relative (`./faq.html`, `../css/guide.css`); root-relative and already-clean links also work. The builder only replaces an output folder that is empty or carries its `.dwemer-site-build` marker. Navigation scripts receive content-based cache versions.
+
 ## Local Development
 
-Start a simple local server from the repo root:
+Build and serve `_site/` from the repo root:
 
 ```bat
 start_server.bat
@@ -32,25 +44,7 @@ http://127.0.0.1:8000/
 
 ## GitHub Pages
 
-This repo is configured to deploy the site from the repository root through GitHub Actions.
-
-In the repository Pages settings, set the source to `GitHub Actions`.
-
-The deploy workflow publishes:
-
-- `index.html`
-- `chim/`
-- `custom-mods/`
-- `dialectic/`
-- `other-projects/`
-- `stobe/`
-- `css/`
-- `font/`
-- `img/`
-- `js/`
-- `styles.css`
-- `CNAME`
-- `.nojekyll`
+The deploy workflow runs `python3 build_site.py` and publishes `_site/`. In the repository Pages settings, set the source to `GitHub Actions`. The published folders and files are listed in `ENTRIES` in `build_site.py`.
 
 ## Attribution
 

@@ -51,6 +51,9 @@
     };
     var HOME_ICON = "🏠";
     var FALLBACK_ICON = "📑";
+    // The site root, from this script's own URL (js/guide-outline.js), so links are matched the same way
+    // whether they are authored (./faq.html, ../index.html) or built clean URLs (/chim/faq/, /).
+    var SITE_ROOT = document.currentScript ? new URL("..", document.currentScript.src).href : "";
 
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
@@ -244,19 +247,21 @@
     // Each guide link gets one decorative icon in a fixed column (the CSS reserves it under lo-js, so labels do not shift).
     // Label text, href and aria-current are untouched; the icon is aria-hidden so link names stay the same.
     function addNavIcons() {
+        var product = (sitePath(window.location.href) || [])[0];
         document.querySelectorAll(".lo-nav a.lo-item").forEach(function (link) {
             if (link.querySelector(".lo-ico")) {
                 return;
             }
-            var parts = (link.getAttribute("href") || "").split(/[?#]/)[0].split("/");
-            var file = parts[parts.length - 1] || "index.html";
+            var parts = sitePath(link.href);
             var icon;
-            if (parts[0] === ".." && parts.length === 2 && file === "index.html") {
+            if (!parts) {
+                icon = FALLBACK_ICON;
+            } else if (!parts.length) {
                 icon = HOME_ICON;
-            } else if (parts[0] === ".." && parts.length > 2) {
-                icon = PRODUCT_ICONS[parts[1]];
+            } else if (parts[0] !== product) {
+                icon = PRODUCT_ICONS[parts[0]];
             } else {
-                icon = PAGE_ICONS[file];
+                icon = PAGE_ICONS[(parts[1] || "index") + ".html"];
             }
             var span = document.createElement("span");
             span.className = "lo-ico";
@@ -264,5 +269,15 @@
             span.textContent = icon || FALLBACK_ICON;
             link.insertBefore(span, link.firstChild);
         });
+    }
+
+    // Path segments of a URL below the site root, without index.html or .html: "/" -> [], "/chim/index.html" -> ["chim"],
+    // "/chim/faq.html" and "/chim/faq/" -> ["chim", "faq"]. Null for URLs outside the site.
+    function sitePath(url) {
+        if (!SITE_ROOT || url.indexOf(SITE_ROOT) !== 0) {
+            return null;
+        }
+        return url.slice(SITE_ROOT.length).split(/[?#]/)[0].replace(/(^|\/)index\.html$/, "").replace(/\.html$/, "")
+            .split("/").filter(Boolean);
     }
 })();
