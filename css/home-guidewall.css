@@ -100,16 +100,14 @@
 .dd-home .links .inst:hover { background: #ff9233; border-color: #ffb066; box-shadow: 0 0 0 1px rgba(255, 176, 102, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
 .dd-home .links .inst:active { background: #e06f0a; box-shadow: none; }
 
-/* Brick mosaic: 7 + 5 columns, then 5 + 7. The wide tile sets the row height and the narrow
-   tile's art grows to match, centred on the key art so the baked-in titles stay in frame. */
+/* Brick mosaic: 7 + 5 columns, then 5 + 7. Every tile keeps its art at the full 16:9 frame
+   so the baked-in titles are never cropped; the narrow tile's caption takes the extra height. */
 @media (min-width: 52rem) {
     .dd-home .wall { grid-template-columns: repeat(12, minmax(0, 1fr)); }
     .dd-home .g-chim { grid-column: 1 / 8; }
     .dd-home .g-lorkhan { grid-column: 8 / 13; }
     .dd-home .g-stobe { grid-column: 1 / 6; }
     .dd-home .g-dialectic { grid-column: 6 / 13; }
-    .dd-home .narrow .art { aspect-ratio: auto; flex: 1; min-height: 12rem; }
-    .dd-home .narrow .art img { position: absolute; inset: 0; }
     /* KAGRENAC opens the brick: art at the same 7-column width as the wide tiles, caption beside it.
        The art keeps its full 16:9 frame so none of the baked-in text is cropped. */
     .dd-home .g-kagrenac { grid-column: 1 / 13; }
