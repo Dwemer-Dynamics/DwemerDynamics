@@ -243,6 +243,22 @@ const leftSidebarConfigs = {
     }
 };
 
+// Sidebar config paths are written from a product folder (./faq.html, ../index.html, ../img/discord.png).
+// They are resolved from that folder, and become clean URLs (/chim/faq/) when the page was opened at one.
+const SIDEBAR_SITE_ROOT = document.currentScript ? new URL("..", document.currentScript.src).href : "";
+
+function resolveSidebarUrl(value) {
+    if (!SIDEBAR_SITE_ROOT || /^[a-z][a-z0-9+.-]*:/i.test(value) || window.location.href.indexOf(SIDEBAR_SITE_ROOT) !== 0) {
+        return value;
+    }
+    const product = window.location.href.slice(SIDEBAR_SITE_ROOT.length).split(/[?#]/)[0].split("/")[0];
+    const url = new URL(value, SIDEBAR_SITE_ROOT + product + "/");
+    if (!/\.html$/.test(window.location.pathname) && /\.html$/.test(url.pathname)) {
+        url.pathname = url.pathname.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "/");
+    }
+    return url.href;
+}
+
 const progressBars = document.getElementsByClassName("progress-bar");
 const sections = document.getElementsByClassName("section");
 const sidebars = document.getElementsByClassName("sidebar");
@@ -360,13 +376,13 @@ function buildSidebarLinkGroup(className, links, external) {
 
     links.forEach(function (linkConfig) {
         const link = document.createElement("a");
-        link.href = linkConfig.href;
+        link.href = resolveSidebarUrl(linkConfig.href);
         link.title = linkConfig.title;
 
         if (linkConfig.icon) {
             const icon = document.createElement("img");
             icon.className = "sidebar-link-icon";
-            icon.src = linkConfig.icon;
+            icon.src = resolveSidebarUrl(linkConfig.icon);
             icon.alt = linkConfig.title;
             link.appendChild(icon);
         } else if (linkConfig.emoji) {
@@ -433,10 +449,13 @@ function markActivePage() {
     }
 
     const sidebarLinks = leftSidebar.querySelectorAll("a");
-    const currentPage = "./" + window.location.pathname.split("/").pop();
+    const pageKey = function (url) {
+        return url.split(/[?#]/)[0].replace(/index\.html$/, "");
+    };
+    const currentPage = pageKey(window.location.href);
 
     sidebarLinks.forEach(function (link) {
-        if (link.getAttribute("href") === currentPage) {
+        if (!link.hash && pageKey(link.href) === currentPage) {
             link.classList.add("active");
         }
     });
