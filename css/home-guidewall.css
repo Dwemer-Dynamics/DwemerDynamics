@@ -30,7 +30,7 @@
 
 /* Header: name on the left, Projects dropdown on the right */
 .dd-home .top { display: flex; align-items: center; justify-content: space-between; gap: .5rem 2rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
-.dd-home .brand { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; font-weight: 700; font-size: 1.0625rem; margin: 0; min-width: 0; }
+.dd-home .brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: "MagicCards", serif; font-weight: 400; font-size: clamp(.9375rem, .5rem + 2.25vw, 1.1875rem); line-height: 1.2; letter-spacing: .04em; word-spacing: .3em; white-space: nowrap; margin: 0; min-width: 0; }
 .dd-home .brand img { width: 30px; height: 30px; object-fit: contain; }
 
 /* Native details/summary menu; the panel hangs from the right edge so it stays on screen */
