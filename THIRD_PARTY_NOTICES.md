@@ -35,3 +35,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## The Elder Scrolls III: Morrowind book art
+
+The faint brass artwork in the homepage margins is original art from The Elder Scrolls III: Morrowind, by Bethesda Softworks, not artwork made for this site. The sixteen images in `img/morrowind/` are the illustrated and script pages of three Dwemer books (Divine Metaphysics, The Egg of Time and Secrets of Dwemer Animunculi) and six Dwemer parchment textures. They were converted from the game's `Morrowind.bsa` textures to PNG with no other change. The homepage tints, fades and feathers them when it displays them.
+
+This material is not covered by the project's GPL licence; see [LICENSING.md](https://github.com/Dwemer-Dynamics/DwemerDynamics/blob/a1f1166c3fdf9a091a8c53ffc911a7b5d9b9a438/LICENSING.md).
