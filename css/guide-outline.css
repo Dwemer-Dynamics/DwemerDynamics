@@ -37,7 +37,7 @@
 .guide-outline.chim-theme { --lo-accent: #65cefd; --lo-cta: #e17a21; --lo-bar: #e17a21; }
 .guide-outline.stobe-theme { --lo-accent: #e6b76c; --lo-cta: #e6b76c; --lo-bar: #e6b76c; --lo-title: "MailartRubberstamp", "Futura Condensed Light", Arial, sans-serif; }
 .guide-outline.dialectic-theme { --lo-accent: #ffb641; --lo-cta: #ffb641; --lo-bar: #ffb641; --lo-title: "Monofonto", Arial, sans-serif; }
-.guide-outline.custom-mods-theme { --lo-accent: #8cc4ff; --lo-cta: #4da3ff; --lo-bar: #4da3ff; }
+.guide-outline.custom-mods-theme { --lo-accent: #e2cc96; --lo-cta: #b8955a; --lo-bar: #b8955a; }
 .guide-outline.stobe-theme .lo-brand b { letter-spacing: .5px; }
 .guide-outline.dialectic-theme .lo-brand b { letter-spacing: 0; }
 
