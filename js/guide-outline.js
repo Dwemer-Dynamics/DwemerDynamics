@@ -1,6 +1,6 @@
 // Reading Room: Outline guide layout (CHIM, STOBE, DIALECTIC, LORKHAN, KAGRENAC guides).
 // Runs only on pages whose body has the guide-outline class. The navigation and outline are static HTML,
-// so content and links work without JavaScript; this file adds reading progress, the outline toggle, the mobile drawer and scrollspy.
+// so content and links work without JavaScript; this file adds reading progress, sidebar icons, the outline toggle, the mobile drawer and scrollspy.
 // Copy page and Copy prompt controls still come from javascript.js on the pages that load it.
 // It is loaded at the top of <body> so the lo-js class (which turns the mobile navigation into a drawer) is set before first paint.
 (function () {
@@ -11,6 +11,46 @@
         return;
     }
     body.classList.add("lo-js");
+
+    // Sidebar icons: the same emoji for the same kind of page in every product (mostly the set the older sidebar used),
+    // keyed by link target. Cross-product links (DwemerDistro's setup list) get the product's icon.
+    var PAGE_ICONS = {
+        "index.html": "📖",
+        "installation.html": "⚙️",
+        "configuration.html": "🔧",
+        "roleplay-settings.html": "🎭",
+        "background-life.html": "🌍",
+        "ingame-settings.html": "🎮",
+        "plugins.html": "🧩",
+        "llm.html": "🧠",
+        "local-llm-guide.html": "🖥️",
+        "tts.html": "🔊",
+        "stt.html": "🎤",
+        "itt.html": "📸",
+        "plugin-guide.html": "🛠️",
+        "modders-guide.html": "📜",
+        "faq.html": "❓",
+        "remote-hosting-guide.html": "🌐",
+        "linux-setup-guide.html": "🐧",
+        "log-files-and-debugging.html": "📄",
+        "gameplay.html": "🎲",
+        "porting.html": "🔌",
+        "data-and-memory.html": "🗄️",
+        "testing.html": "🧪",
+        "updates.html": "🔄",
+        "publishing.html": "📦",
+        "kosmokrator.html": "🗺️",
+        "kenogenesis.html": "⚔️"
+    };
+    var PRODUCT_ICONS = {
+        "chim": "🐉",
+        "lorkhan": "🍄",
+        "dialectic": "☢️",
+        "stobe": "🏜️",
+        "custom-mods": "⚒️"
+    };
+    var HOME_ICON = "🏠";
+    var FALLBACK_ICON = "📑";
 
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
@@ -49,6 +89,8 @@
                 outline.hidden = !open;
             });
         }
+
+        addNavIcons();
 
         // Long command blocks scroll horizontally; make them reachable by keyboard.
         document.querySelectorAll(".lo-article pre").forEach(function (pre) {
@@ -197,5 +239,30 @@
             window.addEventListener("resize", schedule);
             update();
         }
+    }
+
+    // Each guide link gets one decorative icon in a fixed column (the CSS reserves it under lo-js, so labels do not shift).
+    // Label text, href and aria-current are untouched; the icon is aria-hidden so link names stay the same.
+    function addNavIcons() {
+        document.querySelectorAll(".lo-nav a.lo-item").forEach(function (link) {
+            if (link.querySelector(".lo-ico")) {
+                return;
+            }
+            var parts = (link.getAttribute("href") || "").split(/[?#]/)[0].split("/");
+            var file = parts[parts.length - 1] || "index.html";
+            var icon;
+            if (parts[0] === ".." && parts.length === 2 && file === "index.html") {
+                icon = HOME_ICON;
+            } else if (parts[0] === ".." && parts.length > 2) {
+                icon = PRODUCT_ICONS[parts[1]];
+            } else {
+                icon = PAGE_ICONS[file];
+            }
+            var span = document.createElement("span");
+            span.className = "lo-ico";
+            span.setAttribute("aria-hidden", "true");
+            span.textContent = icon || FALLBACK_ICON;
+            link.insertBefore(span, link.firstChild);
+        });
     }
 })();

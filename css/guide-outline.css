@@ -34,7 +34,7 @@
 }
 
 /* Product accents: links and focus (accent), primary action (cta), reading progress (bar) and title font. */
-.guide-outline.chim-theme { --lo-accent: #65cefd; --lo-cta: #e17a21; --lo-bar: #e17a21; }
+.guide-outline.chim-theme { --lo-accent: #f0a45c; --lo-cta: #e17a21; --lo-bar: #e17a21; }
 .guide-outline.stobe-theme { --lo-accent: #e6b76c; --lo-cta: #e6b76c; --lo-bar: #e6b76c; --lo-title: "MailartRubberstamp", "Futura Condensed Light", Arial, sans-serif; }
 .guide-outline.dialectic-theme { --lo-accent: #ffb641; --lo-cta: #ffb641; --lo-bar: #ffb641; --lo-title: "Monofonto", Arial, sans-serif; }
 .guide-outline.custom-mods-theme { --lo-accent: #e2cc96; --lo-cta: #b8955a; --lo-bar: #b8955a; }
@@ -70,6 +70,12 @@ html:has(> body.guide-outline) { scroll-behavior: smooth; }
 .guide-outline .lo-nav li { margin: 0; }
 .guide-outline .lo-nav a.lo-item { display: block; padding: .38rem .5rem; border-radius: 3px; color: var(--lo-muted); text-decoration: none; }
 .guide-outline .lo-nav a.lo-item:hover { color: var(--lo-text); background: var(--lo-raise); }
+/* Sidebar icons from guide-outline.js: a fixed column beside each guide link, reserved under lo-js so labels do not shift
+   when the icons arrive; wrapped labels keep a hanging indent. Without JavaScript the links stay plain text. */
+.guide-outline.lo-js .lo-nav a.lo-item { position: relative; padding-left: 2.1rem; }
+.guide-outline .lo-nav .lo-ico { position: absolute; left: .5rem; top: .38rem; width: 1.2rem; text-align: center; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; font-weight: 400; opacity: .8; user-select: none; }
+.guide-outline .lo-nav a.lo-item:hover .lo-ico,
+.guide-outline .lo-nav a.lo-item[aria-current="page"] .lo-ico { opacity: 1; }
 .guide-outline .lo-group { margin: 1rem .5rem .3rem; font-size: .75rem; font-weight: 600; color: #8c887f; }
 .guide-outline .lo-nav-close { display: none; }
 
@@ -184,6 +190,7 @@ html:has(> body.guide-outline) { scroll-padding-top: 0; }
     .guide-outline .lo-standfirst { font-size: 1.15rem; }
     .guide-outline .lo-note { padding: 1rem 1.1rem; }
     .guide-outline .lo-nav a.lo-item { padding: .55rem .5rem; }
+    .guide-outline .lo-nav .lo-ico { top: .55rem; }
     .guide-outline .lo-outline a { padding: .45rem .6rem; font-size: .875rem; }
     .guide-outline .lo-current button { width: 2.75rem; }
 
