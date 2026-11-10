@@ -1,7 +1,8 @@
 // Homepage margin art (styles in css/home-margins.css). Builds the art only once the window is
 // wide enough to have gutters, so narrow screens never download it. Each image is shown once,
 // whole; brass colour, opacity and feathering are applied here by SVG filter and mask, and the
-// art itself is unchanged. The pointer light only runs on pointer and scroll events.
+// art itself is unchanged. The pointer light only runs on pointer and scroll events. Each
+// drawing's faint pulse is a CSS animation; its period and phase are picked once here.
 (function () {
     var DIR = 'img/morrowind/';
     var BRASS = '0 0 0 0 .867  0 0 0 0 .71  0 0 0 0 .455  ';
@@ -48,7 +49,9 @@
         var cols = Object.keys(COLS).map(function (side) {
             return '<div class="mb-col mb-' + side + '">' + COLS[side].map(function (p) {
                 var filter = p[1] === 'parch' ? 'mb-' + p[0] : 'mb-a';
-                return '<svg class="mb-' + p[1] + '" viewBox="0 0 256 ' + p[2] + '" style="--s:' + p[3] + 'px;aspect-ratio:256/' + p[2] + ';align-self:' + p[4] + '" focusable="false">' +
+                var d = 12 + Math.random() * 12, o = -Math.random() * d;
+                return '<svg class="mb-' + p[1] + '" viewBox="0 0 256 ' + p[2] + '" style="--s:' + p[3] + 'px;aspect-ratio:256/' + p[2] + ';align-self:' + p[4] +
+                    ';--d:' + d.toFixed(1) + 's;--o:' + o.toFixed(1) + 's" focusable="false">' +
                     '<g class="mb-pen" mask="url(#mb-m' + p[2] + ')"><image href="' + DIR + p[0] + '.png" width="256" height="' + p[2] + '" filter="url(#' + filter + ')"/></g></svg>';
             }).join('') + '</div>';
         }).join('');

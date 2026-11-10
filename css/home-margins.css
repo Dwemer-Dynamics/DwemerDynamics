@@ -4,7 +4,9 @@
    content column: one column per gutter, running the full page height behind everything and
    scrolling with the page. Nothing sits in the header, the hero or behind a card. Where the
    gutters are too narrow (under 88rem) none show. On a fine pointer a lit copy under a soft
-   mask brings nearby drawings forward; touch and reduced motion keep the static art. */
+   mask brings nearby drawings forward; touch and reduced motion keep the static art. Unless
+   motion is reduced, each base drawing breathes very faintly (about .8x to 1.1x its strength)
+   on its own slow cycle, timed by js/home-margins.js; the lit copy does not pulse. */
 body.dd-home { position: relative; }
 .mb-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 .mb { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; display: none; }
@@ -18,6 +20,11 @@ body.dd-home { position: relative; }
 .mb-lit .mb-pen { opacity: calc(var(--a) * 2.6); }
 @media (min-width: 88rem) {
     .mb { display: block; }
+}
+@keyframes mb-pulse { 0%, 100% { opacity: .727; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+    .mb:not(.mb-lit) .mb-pen { opacity: calc(var(--a) * 1.1); }
+    .mb:not(.mb-lit) .mb-col svg { animation: mb-pulse var(--d, 18s) ease-in-out var(--o, 0s) infinite; }
 }
 .mb-lit {
     display: none; opacity: 0; transition: opacity .3s ease-out;
