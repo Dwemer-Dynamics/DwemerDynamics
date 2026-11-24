@@ -1,0 +1,33 @@
+Install and verify the base DwemerDistro on this Windows PC using the official installer, with terminal commands and no wizard clicking. Carry the work through to verification; do not stop at a plan.
+
+BEFORE CHANGING ANYTHING
+- Work in the intended Windows user's session. Get administrator access only through the normal authorized route (the Windows elevation prompt, approved by me).
+- Inventory existing WSL distributions, any existing DwemerDistro installation, whether the DwemerDistro launcher is running, and free disk space.
+- Preserve existing distro data, databases, settings, API keys, game files and all other WSL distributions. Never unregister or reset a distro.
+- If this is already a healthy, current installation, verify it instead of reinstalling.
+
+DOWNLOAD AND CHECK
+- Get the current stable DwemerDistroInstaller.exe from the official GitHub release of Dwemer-Dynamics/DwemerDistro-Launcher (https://github.com/Dwemer-Dynamics/DwemerDistro-Launcher/releases). Record the release tag.
+- Verify the file's SHA-256 against the digest in the GitHub release metadata for that asset. If it does not match, or no digest is available, stop and tell me.
+- Back up any Windows installation files that will be replaced, including the existing installer archive if it needs keeping. The installer (v3.4.14) removes its extracted TAR after the install or import-skip step.
+- After the download and any backups, at least 15 GiB must still be free on the install drive, plus headroom for temporary files. Do not delete unrelated files to make room.
+
+RUN THE INSTALLER
+- Close the launcher safely first.
+- Run the installer with: /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /DIR="<install folder>" /LOG="<log file path>"
+  Use the existing install folder for an existing installation (the default is C:\DwemerDistro) and an explicit log path.
+- Archive extraction takes several minutes; a verified v3.4.14 run took about 7.5 minutes. Monitor progress rather than killing an active installer on a short timeout.
+- When it finishes, inspect both the exit code and the logs. Do not claim success from exit code 0 alone.
+- If elevation, disabled firmware virtualization or a required reboot genuinely blocks progress, save a checkpoint of what was done and tell me the exact action needed. Do not reboot without my permission.
+
+VERIFY
+- DwemerAI4Skyrim3 is registered for this Windows user as WSL2, and Linux commands run inside it.
+- For an existing installation: the distro registration and storage path are unchanged, and the import was skipped.
+- Start the existing Apache and PostgreSQL services using the distro's supported service commands. Do not assume systemd is active.
+- Read the configured dashboard web port. Confirm PostgreSQL accepts connections with a SQL query. Require an HTTP success response from the dashboard both inside Linux and through Windows localhost on that port.
+
+SCOPE
+This covers the base distro and dashboard only. Preserve existing optional components. Do not install game plugins, choose paid providers, add voice or model downloads, or invent API keys.
+
+REPORT
+Tell me the installed version, the verified dashboard URL, the checks that passed, the log locations, and anything that still needs my input. Say clearly whether this proved an existing installation or a fresh install, and note that fresh-install and reboot-resume behaviour were not verified unless you actually exercised them.

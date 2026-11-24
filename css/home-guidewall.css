@@ -53,36 +53,48 @@
 .dd-home .headline { margin: 1.5rem 0 0; font-family: "MagicCards", serif; font-size: clamp(1.875rem, 1.3rem + 2vw, 2.75rem); line-height: 1.2; font-weight: 400; letter-spacing: .03em; word-spacing: .25em; overflow-wrap: break-word; }
 .dd-home .intro { margin: .5rem 0 1rem; color: var(--muted); max-width: 44rem; }
 /* Top-level download: the one installer every mod needs, sized above the card buttons */
-.dd-home .get { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem; margin: 0 0 1.5rem; }
+/* Hero actions: Download + Install with AI are the primary pair, About is a quiet text link */
+.dd-home .get { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem; margin: 0 0 1.75rem; }
 .dd-home .dl { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .6rem 1.5rem; border: 1px solid var(--orange); border-radius: var(--r); background: var(--orange); color: var(--bg); font-size: 1.0625rem; font-weight: 750; text-decoration: none; box-shadow: 0 6px 20px -8px rgba(242, 124, 17, .7); transition: background-color .15s, border-color .15s, box-shadow .15s; }
 .dd-home .dl:hover { background: #ff9233; border-color: #ffb066; box-shadow: 0 0 0 1px rgba(255, 176, 102, .35), 0 8px 24px -6px rgba(242, 124, 17, .75); }
 .dd-home .dl:focus-visible { outline-offset: 3px; border-radius: var(--r); box-shadow: 0 0 0 5px rgba(242, 124, 17, .22); }
 .dd-home .dl:active { background: #e06f0a; box-shadow: none; }
 /* Secondary link beside the download: explains what the installer is */
-.dd-home .about { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .6rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--s2); color: var(--ivory); font-weight: 600; text-decoration: none; transition: background-color .15s, border-color .15s; }
-.dd-home .about:hover { background: #2f2924; border-color: var(--orange); }
+.dd-home .about { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; margin-left: .25rem; padding: .25rem .4rem; color: var(--muted); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(221, 181, 116, .45); text-underline-offset: 4px; transition: color .15s, text-decoration-color .15s; }
+.dd-home .about:hover { color: var(--ivory); text-decoration-color: var(--gold); }
 .dd-home .about:focus-visible { outline-offset: 3px; border-radius: var(--r); }
+/* Agent-assisted install: a filled bronze action, secondary to the orange download but clearly
+   a button rather than a link; the terminal glyph marks it as the agent route */
+.dd-home .agent-open { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .6rem 1.1rem .6rem .95rem; border: 1px solid #a87a3c; border-radius: var(--r); background: #5c4120; color: var(--ivory); font: inherit; font-weight: 700; white-space: nowrap; cursor: pointer; box-shadow: inset 0 1px 0 rgba(240, 215, 168, .16), 0 4px 14px -8px rgba(0, 0, 0, .8); transition: background-color .15s, border-color .15s, box-shadow .15s; }
+.dd-home .agent-open[hidden] { display: none; }
+.dd-home .agent-open-icon { flex: none; width: 1.25rem; height: 1.25rem; color: #f0d7a8; }
+.dd-home .agent-open:hover { background: #6e4f27; border-color: var(--gold); box-shadow: inset 0 1px 0 rgba(240, 215, 168, .22), 0 0 0 1px rgba(221, 181, 116, .25), 0 6px 18px -8px rgba(221, 181, 116, .45); }
+.dd-home .agent-open:active { background: #4a3419; border-color: #a87a3c; box-shadow: inset 0 2px 4px rgba(0, 0, 0, .45); }
+.dd-home .agent-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: var(--r); }
+@media (prefers-reduced-motion: reduce) { .dd-home .agent-open { transition: none; } }
 /* Ploofy.ai: the Dwemer Dashboard panel (dark frame, cyan glow) kept as a deliberate brand
    exception; the whole panel is the link and sits at the end of the action row under a small label. */
-/* Community links and Ploofy share one right-hand group, bottom-aligned with the panel under its label */
-.dd-home .ext-links { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: flex-end; gap: .75rem; margin-left: auto; }
+/* Community links and Ploofy share the hero action row, pushed to its right edge; when the row
+   wraps the group keeps right alignment on its own line */
+.dd-home .hero-community { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: flex-end; gap: .75rem 1.25rem; margin-left: auto; font-size: .9375rem; }
 .dd-home .social-row { display: flex; flex-wrap: wrap; gap: .5rem; }
 /* Social buttons reuse the Ploofy panel frame so the whole group reads as one set */
 /* Each service tints its frame/glow to match its icon via --brand (RGB triplet); Ploofy keeps cyan */
-.dd-home .social { --brand: 0, 229, 255; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: 4px 14px 4px 10px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(var(--brand), .35), 0 0 24px rgba(var(--brand), .14), 0 8px 20px rgba(0, 0, 0, .4); color: #fff; font-weight: 700; line-height: 1; white-space: nowrap; text-decoration: none; transition: box-shadow .15s; }
+/* Icon-only square targets (2.75rem = 44px); the accessible name comes from aria-label */
+.dd-home .social { --brand: 0, 229, 255; display: inline-flex; flex: none; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; padding: 0; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(var(--brand), .35), 0 0 24px rgba(var(--brand), .14), 0 8px 20px rgba(0, 0, 0, .4); color: #fff; font-weight: 700; line-height: 1; white-space: nowrap; text-decoration: none; transition: box-shadow .15s; }
 .dd-home .social-discord { --brand: 88, 101, 242; }
 .dd-home .social-youtube { --brand: 255, 0, 0; }
 .dd-home .social-patreon { --brand: 249, 104, 84; }
 .dd-home .social:hover, .dd-home .social:focus-visible { box-shadow: 0 0 0 2px rgba(var(--brand), .8), 0 0 32px rgba(var(--brand), .3), 0 8px 20px rgba(0, 0, 0, .4); }
 .dd-home .social:focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 3px; border-radius: 12px; }
-.dd-home .social img { flex: none; width: 28px; height: 28px; object-fit: contain; }
+.dd-home .social img { flex: none; width: 26px; height: 26px; object-fit: contain; }
 .dd-home .ploofy-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: .3rem; }
 .dd-home .ploofy-tag { color: #fff; font-size: .75rem; font-weight: 700; line-height: 1; letter-spacing: .04em; }
-.dd-home .ploofy { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 4px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); text-decoration: none; transition: box-shadow .15s; }
+.dd-home .ploofy { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 4px; border-radius: 12px; background: #0f0e0e; box-shadow: 0 0 0 1px rgba(0, 229, 255, .25), 0 0 24px rgba(0, 229, 255, .12), 0 8px 20px rgba(0, 0, 0, .4); text-decoration: none; transition: box-shadow .15s; }
 .dd-home .ploofy:hover, .dd-home .ploofy:focus-visible { box-shadow: 0 0 0 1px rgba(0, 229, 255, .5), 0 0 32px rgba(0, 229, 255, .22), 0 8px 20px rgba(0, 0, 0, .4); }
 .dd-home .ploofy:focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; border-radius: 12px; }
 /* Native 338x104 ratio; the logo's near-black ground merges with the panel */
-.dd-home .ploofy img { flex: none; width: auto; height: 40px; mix-blend-mode: lighten; }
+.dd-home .ploofy img { flex: none; width: auto; height: 36px; mix-blend-mode: lighten; }
 
 /* Wall: one frame per mod, art inset inside it, caption straight on the frame */
 .dd-home .wall { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: .75rem; }
@@ -300,6 +312,39 @@
     .dd-home .patron-list-cycle { grid-template-columns: 1fr; gap: 0.4em; }
 }
 
+/* Agent install dialog: native modal kept inside the viewport; the panel scrolls when it can't fit */
+.agent-dialog-open { overflow: hidden; }
+.dd-home .agent-dialog { width: min(42rem, calc(100vw - 1.5rem)); max-width: none; max-height: calc(100vh - 1.5rem); max-height: calc(100dvh - 1.5rem); margin: auto; padding: 1.25rem 1.25rem 1rem; overflow-y: auto; overscroll-behavior: contain; background: var(--s1); color: var(--ivory); border: 1px solid rgba(221, 181, 116, .4); border-radius: 8px; box-shadow: 0 24px 60px rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 0, 0, .4); }
+.dd-home .agent-dialog::backdrop { background: rgba(8, 7, 6, .72); }
+.dd-home .agent-head { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem .75rem; padding-right: 2.75rem; position: relative; }
+.dd-home .agent-head h2 { margin: 0; font-family: "MagicCards", serif; font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem); font-weight: 400; line-height: 1.2; letter-spacing: .03em; word-spacing: .2em; color: #fff; }
+.dd-home .agent-tag { padding: .15rem .5rem; border: 1px solid rgba(221, 181, 116, .55); border-radius: 999px; color: var(--gold); font-size: .6875rem; font-weight: 700; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; }
+.dd-home .agent-close { position: absolute; top: -.35rem; right: -.35rem; display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; padding: 0; border: 1px solid transparent; border-radius: var(--r); background: transparent; color: var(--muted); font: inherit; font-size: 1.75rem; line-height: 1; cursor: pointer; }
+.dd-home .agent-close:hover { background: var(--s2); border-color: var(--line); color: var(--ivory); }
+.dd-home .agent-intro { margin: .75rem 0 0; }
+.dd-home .agent-note { margin: .4rem 0 0; color: var(--muted); font-size: .875rem; }
+.dd-home .agent-label { display: block; margin: 1rem 0 .35rem; font-size: .875rem; font-weight: 700; color: var(--gold); }
+.dd-home .agent-prompt { display: block; width: 100%; min-height: 9rem; max-height: 50vh; padding: .7rem .8rem; resize: vertical; border: 1px solid var(--line); border-radius: var(--r); background: #121212; color: var(--ivory); font-family: Consolas, "Cascadia Mono", ui-monospace, Menlo, monospace; font-size: .8125rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: break-word; }
+.dd-home .agent-prompt:focus-visible { outline-offset: 1px; border-color: var(--orange); border-radius: var(--r); }
+.dd-home .agent-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: .85rem; }
+.dd-home .agent-copy { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .5rem 1.25rem; border: 1px solid #b35200; border-radius: var(--r); background: #b35200; color: #fff; font: inherit; font-weight: 700; cursor: pointer; transition: background-color .15s, border-color .15s, box-shadow .15s; }
+.dd-home .agent-copy:hover:not(:disabled) { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
+.dd-home .agent-copy:active:not(:disabled) { background: #9a4600; box-shadow: none; }
+.dd-home .agent-copy:focus-visible { outline-offset: 3px; border-radius: var(--r); }
+.dd-home .agent-copy:disabled { background: var(--s2); border-color: var(--line); color: var(--muted); cursor: default; }
+.dd-home .agent-status { flex: 1 1 14rem; margin: 0; font-size: .875rem; color: var(--muted); }
+.dd-home .agent-status:empty { display: none; }
+.dd-home .agent-status.is-ok { color: #9fd49a; }
+.dd-home .agent-status.is-error { color: #f3a283; }
+.dd-home .agent-manual { margin: 1rem 0 0; padding-top: .85rem; border-top: 1px solid var(--line); font-size: .875rem; color: var(--muted); }
+.dd-home .agent-manual a { color: var(--gold); font-weight: 600; text-underline-offset: 3px; }
+.dd-home .agent-manual a:hover { color: #f0d7a8; }
+@media (max-width: 30rem) {
+    .dd-home .agent-dialog { padding: 1rem .9rem .9rem; }
+    .dd-home .agent-copy { width: 100%; }
+    .dd-home .agent-prompt { max-height: 40vh; }
+}
+
 /* Footer: social links, Other Projects and the copyright line */
 .dd-home .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; margin-top: 2.5rem; padding-block: 1rem; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
 .dd-home .site-footer a { color: var(--muted); text-underline-offset: 3px; }
@@ -313,12 +358,11 @@
 @media (max-width: 30rem) {
     .dd-home .wrap { padding-inline: .75rem; }
     /* The download spans the column; card buttons fill their row, each label kept on one line */
-    .dd-home .dl, .dd-home .about, .dd-home .ploofy-wrap, .dd-home .ploofy { display: flex; width: 100%; }
-    .dd-home .ext-links, .dd-home .social-row { width: 100%; }
-    .dd-home .ext-links { margin-left: 0; }
-    /* Tighter social frames keep all three on one row down to ~390px; narrower screens wrap */
-    .dd-home .social { flex: 1 1 auto; gap: .375rem; padding-inline: 8px 10px; }
-    .dd-home .social img { width: 24px; height: 24px; }
+    .dd-home .dl, .dd-home .agent-open { display: flex; width: 100%; }
+    .dd-home .get { gap: .6rem; }
+    .dd-home .about { width: 100%; margin-left: 0; }
+    /* Three icon squares plus the compact Ploofy panel stay on one right-aligned row down to 320px */
+    .dd-home .hero-community { column-gap: .75rem; }
     .dd-home .links li { flex: 1 1 0; display: flex; }
     .dd-home .links a { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
 }
