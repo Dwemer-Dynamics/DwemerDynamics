@@ -373,9 +373,15 @@
 
 /* Reign closes the guide wall with a wide tile, keeping the existing product pairs intact. */
 .dd-home .g-reign h2 { font-family: Georgia, serif; letter-spacing: .1em; }
-.dd-home .g-reign h2 a { display: inline-flex; align-items: center; gap: .5rem; }
-.dd-home .g-reign .reign-title-icon { width: 32px; height: 32px; object-fit: contain; }
-@media (min-width: 760px) {
+.dd-home .g-reign { --orange: #c9a227; }
+.dd-home .g-reign .links .inst { background: var(--orange); border-color: var(--orange); color: var(--bg); }
+.dd-home .g-reign .links a:hover,
+.dd-home .g-reign .links a:focus-visible { border-color: var(--orange); box-shadow: 0 0 0 2px color-mix(in srgb, var(--orange) 35%, transparent); }
+.dd-home .g-reign .links .inst:hover { background: color-mix(in srgb, var(--orange) 85%, white); }
+@media (hover: hover) and (pointer: fine) {
+    .dd-home .g-reign .tile:hover { box-shadow: 0 10px 26px -12px color-mix(in srgb, var(--orange) 35%, transparent); }
+}
+@media (min-width: 52rem) {
     .dd-home .wall > li.g-reign { grid-column: 1 / -1; grid-row: auto; display: block; }
     .dd-home .wall > li.g-reign .tile { grid-row: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: none; align-items: center; gap: .75rem; }
     .dd-home .wall > li.g-reign .cap { grid-row: auto; display: block; padding: .6rem; }
