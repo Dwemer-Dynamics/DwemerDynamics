@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/guide.css?v=20260713a">
     <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
+    <link rel="stylesheet" href="../css/guide-overview.css?v=20261124-overview">
 </head>
 <body class="guide-outline dialectic-theme">
     <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
@@ -43,7 +44,10 @@
                         <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Overview sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
                     </div>
                     <ol class="lo-outline" id="lo-outline" aria-label="On this page">
-                        <li><a href="#WhatDialecticIsFor">Overview</a></li>
+                        <li><a href="#StartHere">Choose a starting point</a></li>
+                        <li><a href="#GameSupport">Fallout: New Vegas And TTW</a></li>
+                        <li><a href="#GuidePages">Browse the guide</a></li>
+                        <li><a href="#WhatDialecticIsFor">What Dialectic does</a></li>
                         <li><a href="#WastelandCharacters">Wasteland Characters</a></li>
                         <li><a href="#WorldAwareness">World Awareness</a></li>
                         <li><a href="#LivingConversations">Living Conversations</a></li>
@@ -51,7 +55,6 @@
                         <li><a href="#ActionsAndModes">Actions, Narrator, And Modes</a></li>
                         <li><a href="#CloseAndPipVision">Close Talk And PipVision</a></li>
                         <li><a href="#MemoryAndGrowth">Memory And Growth</a></li>
-                        <li><a href="#GameSupport">Fallout: New Vegas And TTW</a></li>
                         <li><a href="#ConversationAndSaves">Direct Scenes And Keep Your History</a></li>
                     </ol>
                 </li>
@@ -90,19 +93,105 @@
         </nav>
 
         <main class="lo-main" id="lo-main" tabindex="-1">
-            <div class="lo-article content">
-            <span id="Overview" class="section">
-                <div class="card hero-card logo-container">
-                    <div>
-                        <h1>Dialectic</h1>
-                        <h2 class="magic-subtitle">Meaningful AI Gameplay In Fallout</h2>
-                        <p>Dialectic brings AI-driven characters, narration, memory, actions, and live world awareness to Fallout: New Vegas and Tale of Two Wastelands.</p>
-                        <p><b>Download Dialectic.</b> <a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Download it on Nexus Mods</a>, then follow the <a href="./installation.html">installation guide</a>.</p>
-                    </div>
-                </div>
+            <article class="lo-article lo-overview" id="Overview">
+                <header class="lo-intro">
+                    <h1>Dialectic</h1>
+                    <p class="ov-tagline">Meaningful AI Gameplay In Fallout</p>
+                    <p class="lo-standfirst">Dialectic brings AI-driven characters, narration, memory, actions, and live world awareness to Fallout: New Vegas and Tale of Two Wastelands.</p>
+                </header>
 
-                <div class="card" id="WhatDialecticIsFor">
-                    <h2>Overview</h2>
+                <nav class="ov-routes" id="StartHere" aria-label="Choose a starting point">
+                    <a href="./installation.html"><span>New to Dialectic</span><strong>Install and start&nbsp;&rarr;</strong><small>DwemerDistro, xNVSE mods, Dialectic and first launch</small></a>
+                    <a href="./configuration.html"><span>Make it yours</span><strong>Configure Dialectic&nbsp;&rarr;</strong><small>Profiles, connectors, actions and playthrough saves</small></a>
+                    <a href="./roleplay-settings.html"><span>Ready to play</span><strong>Roleplay in the wasteland&nbsp;&rarr;</strong><small>Profiles, memories, rechat and Director Scenes</small></a>
+                    <a href="./faq.html"><span>Need a hand?</span><strong>Find help&nbsp;&rarr;</strong><small>Common questions, then log files and debug order</small></a>
+                </nav>
+
+                <section class="lo-section lo-note" id="GameSupport">
+                    <h2>Fallout: New Vegas And TTW</h2>
+                    <p>Fallout: New Vegas is the base requirement. Tale of Two Wastelands is fully supported but not required, and Dialectic follows the player between the Mojave and Capital Wasteland.</p>
+                    <p><a href="https://www.nexusmods.com/newvegas/mods/99233" target="_blank" rel="noopener noreferrer">Download Dialectic on Nexus Mods</a>, then follow the <a href="./installation.html">installation guide</a> to set up the server, required xNVSE mods, Dialectic, and its separate custom settings package.</p>
+                </section>
+
+                <section class="lo-section" id="GuidePages">
+                    <h2>Browse the guide</h2>
+                    <p>Every chapter, grouped as in the side navigation, with a few sections worth knowing about.</p>
+                    <div class="ov-directory">
+                        <section aria-labelledby="dir-start">
+                            <h3 id="dir-start">Get started</h3>
+                            <ul>
+                                <li><a href="./installation.html">Installation</a>
+                                    <ul class="ov-sections" aria-label="Installation sections">
+                                        <li><a href="./installation.html#RequiredMods">Required Fallout mods</a></li>
+                                        <li><a href="./installation.html#InstallMod">Install Dialectic</a></li>
+                                        <li><a href="./installation.html#FirstLaunch">First launch</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html">Configuration</a>
+                                    <ul class="ov-sections" aria-label="Configuration sections">
+                                        <li><a href="./configuration.html#Profiles">Profiles</a></li>
+                                        <li><a href="./configuration.html#Actions">Action Editor</a></li>
+                                        <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-play">
+                            <h3 id="dir-play">Play</h3>
+                            <ul>
+                                <li><a href="./roleplay-settings.html">Roleplay Settings</a>
+                                    <ul class="ov-sections" aria-label="Roleplay Settings sections">
+                                        <li><a href="./roleplay-settings.html#Audience">Speaking range and audience</a></li>
+                                        <li><a href="./roleplay-settings.html#Rechat">Rechat</a></li>
+                                        <li><a href="./roleplay-settings.html#Memories">Memories</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./ingame-settings.html">Fallout Settings</a>
+                                    <ul class="ov-sections" aria-label="Fallout Settings sections">
+                                        <li><a href="./ingame-settings.html#Hotkeys">Hotkeys</a></li>
+                                        <li><a href="./ingame-settings.html#CloseMode">Close and Whisper</a></li>
+                                        <li><a href="./ingame-settings.html#PipVision">PipVision</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-ai">
+                            <h3 id="dir-ai">AI services</h3>
+                            <ul>
+                                <li><a href="./llm.html">Large Language Models</a>
+                                    <ul class="ov-sections" aria-label="Large Language Models sections">
+                                        <li><a href="./llm.html#Modes">In-game model presets</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./local-llm-guide.html">Local LLMs</a></li>
+                                <li><a href="./tts.html">Text-to-Speech</a>
+                                    <ul class="ov-sections" aria-label="Text-to-Speech sections">
+                                        <li><a href="./tts.html#VoiceSamples">Fallout voice samples</a></li>
+                                        <li><a href="./tts.html#VoiceTools">Voice Tools</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./stt.html">Speech-to-Text</a></li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-help">
+                            <h3 id="dir-help">Help</h3>
+                            <ul>
+                                <li><a href="./faq.html">FAQ</a></li>
+                                <li><a href="./log-files-and-debugging.html">Log Files</a>
+                                    <ul class="ov-sections" aria-label="Log Files sections">
+                                        <li><a href="./log-files-and-debugging.html#Order">Recommended debug order</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./remote-hosting-guide.html">Remote Hosting Guide</a></li>
+                                <li><a href="./linux-setup-guide.html">Linux Setup Guide</a></li>
+                                <li><a href="./modders-guide.html">Modders Guide</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="lo-section" id="WhatDialecticIsFor">
+                    <h2>What Dialectic does</h2>
                     <p>Dialectic is a Fallout AI framework built for conversations that belong in the game world instead of sitting outside it as a separate chatbot.</p>
                     <ul>
                         <li>Speak through a microphone or type through the in-game chatbox.</li>
@@ -110,66 +199,66 @@
                         <li>Give NPCs voices, lip animation, subtitles, spatial audio, memories, and evolving profiles.</li>
                         <li>Let characters react to nearby people, locations, quests, equipment, inventory, weather, time, and recent events.</li>
                     </ul>
-                </div>
 
-                <div class="card" id="WastelandCharacters">
-                    <h3>Wasteland Characters</h3>
-                    <p>Dialectic automatically brings suitable nearby humans, non-feral ghouls, super mutants, and robots into the system. Other actors can still be handled manually when broader race support is enabled.</p>
-                    <p>NPC biographies, Fallout voice types, race, gender, factions, inventory, equipment, skills, and SPECIAL data help keep each character grounded in who they are.</p>
-                </div>
+                    <section class="ov-feature" id="WastelandCharacters">
+                        <h3>Wasteland Characters</h3>
+                        <p>Dialectic automatically brings suitable nearby humans, non-feral ghouls, super mutants, and robots into the system. Other actors can still be handled manually when broader race support is enabled.</p>
+                        <p>NPC biographies, Fallout voice types, race, gender, factions, inventory, equipment, skills, and SPECIAL data help keep each character grounded in who they are.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#NPCProfiles">NPC profiles &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="WorldAwareness">
-                    <h3>World Awareness</h3>
-                    <p>Characters receive live context from the game. They can understand the current worldspace and location, active quest and objective, nearby actors, nearby items, points of interest, traveling party, weather, date, time, equipment, condition, and activity.</p>
-                    <p>Spatial hearing and scene checks control who is actually close enough to take part, helping conversations stay attached to the people who are present.</p>
-                </div>
+                    <section class="ov-feature" id="WorldAwareness">
+                        <h3>World Awareness</h3>
+                        <p>Characters receive live context from the game: the current worldspace and location, active quest and objective, nearby actors, items and points of interest, traveling party, weather, date, time, equipment, condition, and activity.</p>
+                        <p>Spatial hearing and scene checks control who is actually close enough to take part, helping conversations stay attached to the people who are present.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#WorldContext">Quests and world context &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="LivingConversations">
-                    <h3>Living Conversations</h3>
-                    <p>Rechat allows nearby NPCs to continue a conversation with one another after the first response. Player input can interrupt those exchanges immediately and take control of the scene again.</p>
-                    <p>Dialectic also captures ordinary Fallout dialogue and player choices as background context without confusing those lines with generated AI speech.</p>
-                </div>
+                    <section class="ov-feature" id="LivingConversations">
+                        <h3>Living Conversations</h3>
+                        <p>Rechat allows nearby NPCs to continue a conversation with one another after the first response. Player input can interrupt those exchanges immediately and take control of the scene again.</p>
+                        <p>Dialectic also captures ordinary Fallout dialogue and player choices as background context without confusing those lines with generated AI speech.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#Rechat">How rechat works &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="VoiceAndPresentation">
-                    <h3>Voice And Presentation</h3>
-                    <p>Dialectic can associate an NPC's Fallout voice type with an installed voice sample and use it with supported voice-cloning services. Generated dialogue plays with lip animation, speaker-labelled subtitles, actor-facing behavior, and optional positional 3D audio.</p>
-                    <p>Player speech can also use a configured player voice while keeping subtitles available when player text-to-speech is disabled.</p>
-                </div>
+                    <section class="ov-feature" id="VoiceAndPresentation">
+                        <h3>Voice And Presentation</h3>
+                        <p>Dialectic can associate an NPC's Fallout voice type with an installed voice sample and use it with supported voice-cloning services. Generated dialogue plays with lip animation, speaker-labelled subtitles, actor-facing behavior, and optional positional 3D audio.</p>
+                        <p>Player speech can also use a configured player voice while keeping subtitles available when player text-to-speech is disabled.</p>
+                        <p class="ov-more"><a href="./tts.html#VoiceSamples">Fallout voice samples &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="ActionsAndModes">
-                    <h3>Actions, Narrator, And Modes</h3>
-                    <p>NPCs can do more than answer questions. Supported actions let them follow, move, attack, trade, inspect, pick up items, wait, travel, and interact with the player or other actors.</p>
-                    <p>Standard, Close, Whisper, Shout, Narrator, Director, Inject Event, and Inject &amp; Chat modes provide different ways to speak to the world or guide a scene.</p>
-                </div>
+                    <section class="ov-feature" id="ActionsAndModes">
+                        <h3>Actions, Narrator, And Modes</h3>
+                        <p>Supported actions let NPCs follow, move, attack, trade, inspect, pick up items, wait, travel, and interact with the player or other actors.</p>
+                        <p>Standard, Close, Whisper, Shout, Narrator, Director, Inject Event, and Inject &amp; Chat modes provide different ways to speak to the world or guide a scene.</p>
+                        <p class="ov-more"><a href="./configuration.html#Actions">The Action Editor &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="CloseAndPipVision">
-                    <h3>Close Talk And PipVision</h3>
-                    <p><b>Close</b> speaks to a tight circle around you rather than to one character, and that circle is smaller while you sneak. Everyone standing inside it takes part, and that starting group remains the Close audience through rechat while normal scene checks still apply. Details are in the <a href="./roleplay-settings.html#Audience">roleplay settings</a>.</p>
-                    <p><b>PipVision</b> sends what you are looking at to Dialectic as visual context, so characters can react to the scene in front of them instead of your words alone. See the <a href="./ingame-settings.html#PipVision">Fallout settings</a> for its hotkey.</p>
-                </div>
+                    <section class="ov-feature" id="CloseAndPipVision">
+                        <h3>Close Talk And PipVision</h3>
+                        <p><b>Close</b> speaks to a tight circle around you rather than to one character, and that circle is smaller while you sneak. Everyone standing inside it takes part, and that starting group remains the Close audience through rechat while normal scene checks still apply. Details are in the <a href="./roleplay-settings.html#Audience">roleplay settings</a>.</p>
+                        <p><b>PipVision</b> sends what you are looking at to Dialectic as visual context, so characters can react to the scene in front of them instead of your words alone. See the <a href="./ingame-settings.html#PipVision">Fallout settings</a> for its hotkey.</p>
+                    </section>
 
-                <div class="card" id="MemoryAndGrowth">
-                    <h3>Memory And Growth</h3>
-                    <p>Short-term context, memory summaries, middle-term memory, individual memory banks, diaries, relationships, and dynamic profiles allow characters to remember what happened and change over a playthrough.</p>
-                    <p>Save rollback handling keeps those systems aligned with the game when an older save is loaded.</p>
-                </div>
+                    <section class="ov-feature" id="MemoryAndGrowth">
+                        <h3>Memory And Growth</h3>
+                        <p>Short-term context, memory summaries, middle-term memory, individual memory banks, diaries, relationships, and dynamic profiles allow characters to remember what happened and change over a playthrough.</p>
+                        <p>Save rollback handling keeps those systems aligned with the game when an older save is loaded.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#Memories">Memories &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="GameSupport">
-                    <h3>Fallout: New Vegas And TTW</h3>
-                    <p>Fallout: New Vegas is the base requirement. Tale of Two Wastelands is fully supported but not required, and Dialectic follows the player between the Mojave and Capital Wasteland.</p>
-                    <p>Continue with the <a href="./installation.html">installation guide</a> to set up the server, required xNVSE mods, Dialectic, and its separate custom settings package.</p>
-                </div>
-                            <div class="card" id="ConversationAndSaves">
-                    <h3>Direct Scenes And Keep Your History</h3>
-                    <p>Guide a scene or keep separate AI histories for different games.</p>
-                    <ul>
-                        <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> lets you describe a scene for nearby NPCs to perform.</li>
-                        <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> keeps AI history organized by character.</li>
-                        <li><a href="./tts.html#VoiceTools">Voice Tools</a> lets you preview effects and adjust pronunciation.</li>
-                    </ul>
-                </div>
-</span>
-        </div>
+                    <section class="ov-feature" id="ConversationAndSaves">
+                        <h3>Direct Scenes And Keep Your History</h3>
+                        <p>Guide a scene or keep separate AI histories for different games.</p>
+                        <ul>
+                            <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> lets you describe a scene for nearby NPCs to perform.</li>
+                            <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> keeps AI history organized by character.</li>
+                            <li><a href="./tts.html#VoiceTools">Voice Tools</a> lets you preview effects and adjust pronunciation.</li>
+                        </ul>
+                    </section>
+                </section>
+            </article>
             <nav class="lo-pager" aria-label="Guide pages">
                 <a class="lo-next" href="./installation.html" rel="next">Next: Installation &rarr;</a>
             </nav>

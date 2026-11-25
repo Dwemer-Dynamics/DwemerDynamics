@@ -1,0 +1,58 @@
+/* Product overview pages (CHIM, STOBE, DIALECTIC, LORKHAN): starting points, a chapter directory and short feature
+   summaries in the Reign overview pattern. Opt-in: load after guide-outline.css and add .lo-overview to the article.
+   Every rule is scoped to .lo-overview and uses the product's --lo-* tokens, so accents and title faces stay per product.
+   Selectors carry a class so they also win over the unscoped element rules in the older styles.css. */
+
+.guide-outline .lo-overview .lo-intro h1 { margin-bottom: .5rem; }
+.guide-outline .lo-overview .ov-tagline { margin: 0 0 1rem; font: 400 1.2rem/1.3 var(--lo-title); letter-spacing: 1px; color: var(--lo-accent); }
+/* MagicCards renders narrow spaces; the homepage widens them the same way. */
+.guide-outline.chim-theme .lo-overview .ov-tagline { word-spacing: .3em; }
+.guide-outline .lo-overview .lo-standfirst { margin-bottom: 2.25rem; }
+
+/* Starting points: four route cards. */
+.guide-outline .lo-overview .ov-routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.guide-outline .lo-overview .ov-routes a { display: flex; flex-direction: column; gap: .3rem; padding: 1.2rem; border: 1px solid var(--lo-line2); border-radius: 4px; background: var(--lo-raise); color: var(--lo-accent); text-decoration: none; }
+.guide-outline .lo-overview .ov-routes a:hover { border-color: var(--lo-accent); color: var(--lo-accent); }
+.guide-outline .lo-overview .ov-routes span { color: var(--lo-muted); font-size: .75rem; }
+.guide-outline .lo-overview .ov-routes strong { font: 500 1.25rem/1.3 var(--lo-serif); }
+.guide-outline .lo-overview .ov-routes small { color: var(--lo-text); font-size: .8125rem; line-height: 1.5; }
+
+/* Sections: one rhythm for the orientation note, the directory and the feature summaries. */
+.guide-outline .lo-overview > .lo-section { margin-top: 2.75rem; padding-top: 2.25rem; border-top: 1px solid var(--lo-line); }
+.guide-outline .lo-overview > .lo-note { margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-top: 0; }
+.guide-outline .lo-overview > .lo-intro + .lo-note { margin: 0 0 1.5rem; }
+.guide-outline .lo-overview .lo-section h2 { font: 600 1.375rem/1.3 var(--lo-sans); margin: 0 0 .75rem; color: var(--lo-text); cursor: auto; }
+.guide-outline .lo-overview .lo-note h2 { font-size: 1.125rem; }
+.guide-outline .lo-overview .lo-section :is(p, li) a { text-decoration: underline; }
+.guide-outline .lo-overview .lo-section li { margin: 0 0 .4rem; }
+
+/* Chapter directory: chapters grouped like the side navigation, with a few key sections under some chapters. */
+.guide-outline .lo-overview .ov-directory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; }
+.guide-outline .lo-overview .ov-directory h3 { margin: 1rem 0 .5rem; color: var(--lo-muted); font: 600 .75rem/1.4 var(--lo-sans); text-transform: uppercase; letter-spacing: .06em; }
+.guide-outline .lo-overview .ov-directory ul { list-style: none; margin: 0; padding: 0; }
+.guide-outline .lo-overview .ov-directory li { margin: 0 0 .35rem; padding: 0; }
+.guide-outline .lo-overview .ov-directory > section > ul > li > a { display: inline-block; padding: .2rem 0; font-weight: 600; text-decoration: none; }
+.guide-outline .lo-overview .ov-directory > section > ul > li > a:hover { text-decoration: underline; }
+.guide-outline .lo-overview .ov-directory .ov-sections { display: flex; flex-wrap: wrap; gap: 0 .9rem; margin: 0 0 .25rem; font-size: .8125rem; line-height: 1.6; }
+.guide-outline .lo-overview .ov-directory .ov-sections li { margin: 0; }
+.guide-outline .lo-overview .ov-directory .ov-sections a { display: inline-block; padding: .2rem 0; color: var(--lo-muted); text-decoration: underline; text-decoration-color: var(--lo-line2); }
+.guide-outline .lo-overview .ov-directory .ov-sections a:hover { color: var(--lo-text); text-decoration-color: currentColor; }
+
+/* Feature summaries: one short block per feature, each ending with a link to the chapter that covers it. */
+.guide-outline .lo-overview .ov-feature { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--lo-line); }
+.guide-outline .lo-overview .ov-feature h3 { font: 600 1.125rem/1.35 var(--lo-sans); margin: 0 0 .5rem; color: var(--lo-text); }
+.guide-outline .lo-overview .ov-feature p:last-child,
+.guide-outline .lo-overview .ov-feature ul:last-child { margin-bottom: 0; }
+.guide-outline .lo-overview .ov-more { font-size: .9375rem; }
+.guide-outline .lo-overview .ov-more a { display: inline-block; padding: .2rem 0; }
+
+@media (max-width: 520px) {
+    .guide-outline .lo-overview .ov-routes,
+    .guide-outline .lo-overview .ov-directory { grid-template-columns: 1fr; }
+    .guide-outline .lo-overview .ov-routes a { padding: 1rem; }
+    .guide-outline .lo-overview > .lo-note { padding: 1rem 1.1rem; }
+}
+
+@media print {
+    .guide-outline .lo-overview .ov-routes a { border-color: #999; background: none; }
+}

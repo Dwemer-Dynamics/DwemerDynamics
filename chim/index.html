@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/guide.css">
     <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
+    <link rel="stylesheet" href="../css/guide-overview.css?v=20261124-overview">
 </head>
 <body class="guide-outline chim-theme">
     <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
@@ -39,7 +40,9 @@
                         <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Overview sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
                     </div>
                     <ol class="lo-outline" id="lo-outline" aria-label="On this page">
-                        <li><a href="#WhatCHIMIsFor">Overview</a></li>
+                        <li><a href="#StartHere">Choose a starting point</a></li>
+                        <li><a href="#GuidePages">Browse the guide</a></li>
+                        <li><a href="#WhatCHIMIsFor">What CHIM does</a></li>
                         <li><a href="#AllNpcs">All NPCs</a></li>
                         <li><a href="#BackgroundLife">Background Life</a></li>
                         <li><a href="#RelationshipsAndGrowth">Relationships And Growth</a></li>
@@ -89,24 +92,107 @@
         </nav>
 
         <main class="lo-main" id="lo-main" tabindex="-1">
-            <div class="lo-article content">
-            <span id="Overview" class="section">
-                <div class="card hero-card logo-container">
-                    <div>
-                        <h1>CHIM</h1>
-                        <h2 class="magic-subtitle">Meaningful AI Gameplay</h2>
-                        <p>
-                            CHIM turns Skyrim NPC interaction into a broader AI gameplay layer with dynamic dialogue, world awareness,
-                            lore-aware roleplay, narration, and in-game actions.
-                        </p>
-                    </div>
-                </div>
+            <article class="lo-article lo-overview" id="Overview">
+                <header class="lo-intro">
+                    <h1>CHIM</h1>
+                    <p class="ov-tagline">Meaningful AI Gameplay</p>
+                    <p class="lo-standfirst">CHIM turns Skyrim NPC interaction into a broader AI gameplay layer with dynamic dialogue, world awareness, lore-aware roleplay, narration, and in-game actions.</p>
+                </header>
 
-                <div class="card" id="WhatCHIMIsFor">
-                    <h2>Overview</h2>
-                    <p>
-                        CHIM is a large AI framework for Skyrim built around meaningful gameplay with NPCs rather than just isolated chatbot conversations.
-                    </p>
+                <nav class="ov-routes" id="StartHere" aria-label="Choose a starting point">
+                    <a href="./installation.html"><span>New to CHIM</span><strong>Install and start&nbsp;&rarr;</strong><small>DwemerDistro, the Web Quickstart and the Skyrim mod</small></a>
+                    <a href="./configuration.html"><span>Make it yours</span><strong>Configure CHIM&nbsp;&rarr;</strong><small>Profiles, API keys, actions and playthrough saves</small></a>
+                    <a href="./roleplay-settings.html"><span>Ready to play</span><strong>Roleplay in Skyrim&nbsp;&rarr;</strong><small>NPCs, memories, diaries, quests and Director Scenes</small></a>
+                    <a href="./faq.html"><span>Need a hand?</span><strong>Find help&nbsp;&rarr;</strong><small>Common problems, log files and fixes</small></a>
+                </nav>
+
+                <section class="lo-section" id="GuidePages">
+                    <h2>Browse the guide</h2>
+                    <p>Every chapter, grouped as in the side navigation, with a few sections worth knowing about.</p>
+                    <div class="ov-directory">
+                        <section aria-labelledby="dir-start">
+                            <h3 id="dir-start">Get started</h3>
+                            <ul>
+                                <li><a href="./installation.html">Installation</a>
+                                    <ul class="ov-sections" aria-label="Installation sections">
+                                        <li><a href="./installation.html#InstallDistro">Install DwemerDistro</a></li>
+                                        <li><a href="./installation.html#ProfileSetup">Web Quickstart</a></li>
+                                        <li><a href="./installation.html#RequiredMods">Skyrim mod setup</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html">Configuration</a>
+                                    <ul class="ov-sections" aria-label="Configuration sections">
+                                        <li><a href="./configuration.html#Profiles">Profiles</a></li>
+                                        <li><a href="./configuration.html#ActionEditor">Action Editor</a></li>
+                                        <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-play">
+                            <h3 id="dir-play">Play</h3>
+                            <ul>
+                                <li><a href="./roleplay-settings.html">Roleplay Settings</a>
+                                    <ul class="ov-sections" aria-label="Roleplay Settings sections">
+                                        <li><a href="./roleplay-settings.html#ChimNpcsMenu">CHIM NPCs menu</a></li>
+                                        <li><a href="./roleplay-settings.html#VanillaQuestDialogue">Traditional Quests</a></li>
+                                        <li><a href="./roleplay-settings.html#Memories">Memories</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./background-life.html">Background Life</a>
+                                    <ul class="ov-sections" aria-label="Background Life sections">
+                                        <li><a href="./background-life.html#GettingStarted">Getting started</a></li>
+                                        <li><a href="./background-life.html#Rumors">Rumors</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./ingame-settings.html">Skyrim Settings</a>
+                                    <ul class="ov-sections" aria-label="Skyrim Settings sections">
+                                        <li><a href="./ingame-settings.html#ChimInteract">CHIM Interact</a></li>
+                                        <li><a href="./ingame-settings.html#PrismaUi">Prisma UI</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./plugins.html">Plugins</a></li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-ai">
+                            <h3 id="dir-ai">AI services</h3>
+                            <ul>
+                                <li><a href="./llm.html">Large Language Models</a></li>
+                                <li><a href="./local-llm-guide.html">Local LLMs</a></li>
+                                <li><a href="./tts.html">Text-to-Speech</a>
+                                    <ul class="ov-sections" aria-label="Text-to-Speech sections">
+                                        <li><a href="./tts.html#VoiceTools">Voice Tools</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./stt.html">Speech-to-Text</a></li>
+                                <li><a href="./itt.html">Image-to-Text</a>
+                                    <ul class="ov-sections" aria-label="Image-to-Text sections">
+                                        <li><a href="./itt.html#HowSoulgazeWorks">How Soulgaze works</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-help">
+                            <h3 id="dir-help">Help</h3>
+                            <ul>
+                                <li><a href="./faq.html">FAQ</a></li>
+                                <li><a href="./log-files-and-debugging.html">Log Files</a>
+                                    <ul class="ov-sections" aria-label="Log Files sections">
+                                        <li><a href="./log-files-and-debugging.html#GenerateLogs">Generate logs in game</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./remote-hosting-guide.html">Remote Hosting Guide</a></li>
+                                <li><a href="./linux-setup-guide.html">Linux Setup Guide</a></li>
+                                <li><a href="./plugin-guide.html">Plugin Guide</a></li>
+                                <li><a href="./modders-guide.html">Modders Guide</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="lo-section" id="WhatCHIMIsFor">
+                    <h2>What CHIM does</h2>
+                    <p>CHIM is a large AI framework for Skyrim built around meaningful gameplay with NPCs rather than isolated chatbot conversations.</p>
                     <ul>
                         <li>Talk to vanilla NPCs, modded NPCs, followers, and even stranger edge cases like creatures or horses.</li>
                         <li>Use voice or chat-box input while CHIM tracks live world context around the conversation.</li>
@@ -114,105 +200,66 @@
                         <li>Integrate your own mods into the framework with custom biographies, Oghma data, and roleplay rules.</li>
                         <li>Start and advance supported vanilla quests through natural dialogue instead of navigating quest menus.</li>
                     </ul>
-                </div>
 
-                <div class="card" id="AllNpcs">
-                    <h3>All NPCs</h3>
-                    <p>
-                        CHIM is designed so AI control is not limited to one hand-picked companion. Around the player, NPCs can be brought into the system automatically, with biographies and profile data used to keep their roleplay grounded.
-                    </p>
-                    <p>
-                        Generic NPCs also benefit from naming support like Real Names Extended and Tamrielic Names, which helps CHIM treat them more like actual characters instead of disposable background actors.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="AllNpcs">
+                        <h3>All NPCs</h3>
+                        <p>AI control is not limited to one hand-picked companion. NPCs around the player can be brought into the system automatically, with biographies and profile data keeping their roleplay grounded.</p>
+                        <p>Generic NPCs also benefit from naming support like Real Names Extended and Tamrielic Names, so CHIM can treat them as characters rather than disposable background actors.</p>
+                    </section>
 
-                <div class="card" id="BackgroundLife">
-                    <h3>Background Life</h3>
-                    <p>
-                        CHIM's Background Life systems let NPCs keep doing things when you are not directly talking to them. They can form inner thoughts, send letters, spread rumors, and move between major locations based on what is happening in the world.
-                    </p>
-                    <p>
-                        They can also work, rest, trade, spend time with other characters, and use what they carry, and when they are close by that behavior can play out in front of you instead of only appearing in the log.
-                    </p>
-                    <p>
-                        The result is that characters feel less frozen in place and more like they have a life outside the player.
-                    </p>
-                    <p>
-                        Use the web or in-game Background Life dashboard to choose who is tracked, view the map and history, send letters, trigger new actions, and manage rumors without leaving your playthrough. See the <a href="./background-life.html"><b>Background Life guide</b></a> to get started.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="BackgroundLife">
+                        <h3>Background Life</h3>
+                        <p>NPCs keep doing things when you are not talking to them. They can form inner thoughts, send letters, spread rumors, and move between major locations based on what is happening in the world. They can also work, rest, trade, spend time with other characters, and use what they carry; when they are close by, that behavior can play out in front of you instead of only appearing in the log.</p>
+                        <p>Use the web or in-game Background Life dashboard to choose who is tracked, view the map and history, send letters, trigger new actions, and manage rumors without leaving your playthrough.</p>
+                        <p class="ov-more"><a href="./background-life.html">Get started with Background Life &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="RelationshipsAndGrowth">
-                    <h3>Relationships And Growth</h3>
-                    <p>
-                        CHIM tracks more than dialogue lines. NPCs can build and lose trust, change their view of people and groups, and evolve over time through memories, roleplay systems, and ongoing interaction.
-                    </p>
-                    <p>
-                        This includes relationship tracking, diaries, memories, and the broader systems that let characters develop their own arc during a playthrough. NPC diaries can also become readable books in the game when that profile option is enabled. See <a href="./roleplay-settings.html#Diaries"><b>Diaries</b></a> for the available options.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="RelationshipsAndGrowth">
+                        <h3>Relationships And Growth</h3>
+                        <p>NPCs can build and lose trust, change their view of people and groups, and evolve over time through memories, diaries, relationship tracking, and ongoing interaction. NPC diaries can also become readable books in the game when that profile option is enabled.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#Diaries">Diary options &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="AiControl">
-                    <h3>Total AI Control</h3>
-                    <p>
-                        CHIM gives you broad control over how AI is used in your game. You can pick different service providers, tune settings deeply, and assign different rules or model behavior to different NPC groups or profiles.
-                    </p>
-                    <p>
-                        The framework is meant to support very different play styles, from grounded roleplay to faster combat-friendly setups to stranger experimental behavior.
-                    </p>
-                    <p>
-                        Most of that can be adjusted without leaving the game, through the in-game Settings hub. See <a href="./ingame-settings.html"><b>Skyrim Settings</b></a> for what it covers.
-                    </p>
-                    <p>
-                        Action permissions are configurable per action. You can allow an action to run automatically, require an in-game Prisma confirmation, or disable it entirely.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="AiControl">
+                        <h3>Total AI Control</h3>
+                        <p>Pick different service providers, tune settings deeply, and assign different rules or model behavior to different NPC groups or profiles, from grounded roleplay to faster combat-friendly setups to stranger experimental behavior. Most of it can be adjusted without leaving the game, through the in-game Settings hub.</p>
+                        <p>Action permissions are configurable per action. You can allow an action to run automatically, require an in-game Prisma confirmation, or disable it entirely.</p>
+                        <p class="ov-more"><a href="./ingame-settings.html">What the Skyrim Settings hub covers &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="LocalModels">
-                    <h3>Local Language Models</h3>
-                    <p>
-                        Use the launcher's <b>LLM Studio</b> component to run a language model inside DwemerDistro, or connect CHIM to a model app on another computer.
-                        See the <a href="./local-llm-guide.html"><b>Local LLM Guide</b></a> to connect and test one.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="LocalModels">
+                        <h3>Local Language Models</h3>
+                        <p>Use the launcher's <b>LLM Studio</b> component to run a language model inside DwemerDistro, or connect CHIM to a model app on another computer.</p>
+                        <p class="ov-more"><a href="./local-llm-guide.html">Connect and test a local model &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="DirectorMode">
-                    <h3>Director Mode And Actions</h3>
-                    <p>
-                        CHIM is not only about talking. Through actions and Director Mode, NPCs can carry out requests, react to situations, and create unscripted moments in the world.
-                    </p>
-                    <p>
-                        That can mean things like social scenes, follower behavior changes, movement requests, or broader player-directed chaos using nearby NPCs.
-                    </p>
-                    <p>
-                        NPCs can also reason from richer game state, including modded equipment slots, inventory keywords, recently collected items, and objects held in a VR player's hands.
-                    </p>
-                    <p>
-                        You can act on the world yourself with the CHIM Interact power: aim at a person or object, add an item or magic if you want, and describe what you do. See <a href="./ingame-settings.html#ChimInteract"><b>CHIM Interact</b></a> for how it works.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="DirectorMode">
+                        <h3>Director Mode And Actions</h3>
+                        <p>Through actions and Director Mode, NPCs can carry out requests, react to situations, and create unscripted moments: social scenes, follower behavior changes, movement requests, or broader player-directed chaos using nearby NPCs.</p>
+                        <p>NPCs can also reason from richer game state, including modded equipment slots, inventory keywords, recently collected items, and objects held in a VR player's hands.</p>
+                        <p>Act on the world yourself with the CHIM Interact power: aim at a person or object, add an item or magic if you want, and describe what you do.</p>
+                        <p class="ov-more"><a href="./ingame-settings.html#ChimInteract">How CHIM Interact works &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="OghmaAndNarrator">
-                    <h3>Oghma, Narrator, And Extra Systems</h3>
-                    <p>
-                        Oghma Infinium gives NPCs lore knowledge that fits their background instead of making everyone equally omniscient. The Narrator adds a separate AI presence that can recap, guide, and comment on your adventure.
-                    </p>
-                    <p>
-                        CHIM also includes support for speech, voice generation, persistent Soulgaze scene descriptions, Prisma UI, server plugins, custom Skyrim mod integrations, and tiny-model helpers like Minime-T5.
-                    </p>
-                </div>
-                <div class="card" id="ConversationAndSaves">
-                    <h3>Direct Scenes And Keep Your History</h3>
-                    <p>Guide a scene or keep separate AI histories for different games.</p>
-                    <ul>
-                        <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> lets you describe a scene for nearby NPCs to perform.</li>
-                        <li><a href="./roleplay-settings.html#SmartWait">Smart Wait</a> lets you describe what happens while you wait, then the Narrator tells the scene.</li>
-                        <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> keeps AI history organized by character.</li>
-                        <li><a href="./tts.html#VoiceTools">Voice Tools</a> lets you preview effects and adjust pronunciation.</li>
-                    </ul>
-                </div>
-            </span>
-        </div>
+                    <section class="ov-feature" id="OghmaAndNarrator">
+                        <h3>Oghma, Narrator, And Extra Systems</h3>
+                        <p>Oghma Infinium gives NPCs lore knowledge that fits their background instead of making everyone equally omniscient. The Narrator adds a separate AI presence that can recap, guide, and comment on your adventure.</p>
+                        <p>CHIM also supports speech, voice generation, persistent Soulgaze scene descriptions, Prisma UI, server plugins, custom Skyrim mod integrations, and tiny-model helpers like Minime-T5.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#OghmaInfinium">Oghma Infinium settings &rarr;</a></p>
+                    </section>
+
+                    <section class="ov-feature" id="ConversationAndSaves">
+                        <h3>Direct Scenes And Keep Your History</h3>
+                        <p>Guide a scene or keep separate AI histories for different games.</p>
+                        <ul>
+                            <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> lets you describe a scene for nearby NPCs to perform.</li>
+                            <li><a href="./roleplay-settings.html#SmartWait">Smart Wait</a> lets you describe what happens while you wait, then the Narrator tells the scene.</li>
+                            <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> keeps AI history organized by character.</li>
+                            <li><a href="./tts.html#VoiceTools">Voice Tools</a> lets you preview effects and adjust pronunciation.</li>
+                        </ul>
+                    </section>
+                </section>
+            </article>
             <nav class="lo-pager" aria-label="Guide pages">
                 <a class="lo-next" href="./installation.html" rel="next">Next: Installation &rarr;</a>
             </nav>
