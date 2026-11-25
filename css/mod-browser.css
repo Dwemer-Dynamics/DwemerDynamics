@@ -93,6 +93,7 @@
 .guide-outline .mb-button:hover { color: var(--mb-bright); border-color: rgba(226, 204, 150, 0.85); background: var(--mb-tint); }
 .guide-outline .mb-button:focus-visible { outline: 2px solid var(--mb-parchment); outline-offset: 2px; }
 .guide-outline .mb-button[hidden] { display: none; }
+.guide-outline a.mb-button { text-decoration: none; }
 .guide-outline .mb-primary { color: var(--mb-ink); background: var(--mb-brass); border-color: var(--mb-brass); }
 .guide-outline .mb-primary:hover { color: var(--mb-ink); background: var(--mb-parchment); border-color: var(--mb-parchment); }
 .guide-outline .mb-primary[aria-expanded="true"] { color: var(--mb-parchment); background: transparent; border-color: rgba(184, 149, 90, 0.5); }

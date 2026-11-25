@@ -462,8 +462,12 @@
                 else expanded.delete(mod.repository);
                 setLabel(open);
             });
+            // Same validated repository URL as the copy button; externalLink keeps target/rel safe.
+            var github = externalLink(mod.repository, "GitHub");
+            github.className = "mb-button mb-github";
+            github.setAttribute("aria-label", mod.title + " on GitHub (opens in a new tab)");
             var copy = copyButton(mod, actions);
-            actions.append(toggle, copy[0]);
+            actions.append(toggle, github, copy[0]);
             body.append(actions, copy[1], panel);
 
             article.append(art, body);
