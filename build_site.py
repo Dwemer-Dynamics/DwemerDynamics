@@ -23,6 +23,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import parse_qsl, quote, unquote, urlencode, urlsplit, urlunsplit
 
+import build_mod_catalog
+
 ROOT = Path(__file__).resolve().parent
 ENTRIES = [
     "chim", "css", "custom-mods", "data", "dialectic", "dwemerdistro", "font", "img", "js",
@@ -115,7 +117,8 @@ def rewrite_url(url, page, pages):
     target = clean_pages.get("/" + target.rstrip("/") + "/", target)
     path = clean_path(target) if target in pages else "/" + target
     query = parts.query
-    if target in ("js/guide-outline.js", "js/javascript.js", "js/reign-search.js", "css/reign.css"):
+    if target in ("js/guide-outline.js", "js/javascript.js", "js/reign-search.js", "css/reign.css",
+                  "js/mod-browser.js", "css/mod-browser.css"):
         version = hashlib.sha256((ROOT / target).read_bytes()).hexdigest()[:12]
         query = urlencode([(k, v) for k, v in parse_qsl(query, keep_blank_values=True) if k != "v"]
                           + [("v", version)])
@@ -309,6 +312,12 @@ def build_reign_search(out, pages):
         json.dumps(records, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
+def check_mod_catalog(out):
+    """The Browse mods page reads this generated snapshot; fail the build if it is malformed or its artwork is missing."""
+    path = out / "data/custom-mods.generated.json"
+    build_mod_catalog.validate_catalog(json.loads(path.read_text(encoding="utf-8")), art_root=out)
+
+
 def build(out):
     files = collect_files()
     pages = {f for f in files if f.endswith(".html")}
@@ -334,6 +343,7 @@ def build(out):
             legacy.write_text(legacy_page(rel, title.group(1).strip() if title else "Dwemer Dynamics"),
                               encoding="utf-8", newline="")
     build_reign_search(out, pages)
+    check_mod_catalog(out)
     return pages
 
 

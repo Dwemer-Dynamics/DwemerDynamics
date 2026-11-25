@@ -25,6 +25,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # Same discovery and release checks as the launcher. If GitHub is unavailable the committed snapshot is kept
+      # and the page says it could not be refreshed.
+      - name: Refresh custom mod catalog
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 build_mod_catalog.py --fallback
+
       - name: Build static site
         run: python3 build_site.py
 

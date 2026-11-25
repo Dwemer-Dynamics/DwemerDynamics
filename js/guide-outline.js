@@ -39,6 +39,7 @@
         "testing.html": "🧪",
         "updates.html": "🔄",
         "publishing.html": "📦",
+        "browse.html": "🧭",
         "kosmokrator.html": "🗺️",
         "kenogenesis.html": "⚔️"
     };
