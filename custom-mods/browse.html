@@ -74,29 +74,6 @@
                     </div>
                 </noscript>
 
-                <form class="mb-filters" id="mb-filters" role="search" aria-label="Filter mods" hidden>
-                    <div class="mb-field mb-field-search">
-                        <label for="mb-search">Search</label>
-                        <input type="search" id="mb-search" name="q" maxlength="80" autocomplete="off" spellcheck="false" placeholder="Mod, game or author">
-                    </div>
-                    <div class="mb-field">
-                        <label for="mb-game">Game</label>
-                        <select id="mb-game" name="game">
-                            <option value="">All games</option>
-                        </select>
-                    </div>
-                    <fieldset class="mb-show">
-                        <legend>Show</legend>
-                        <div class="mb-segment">
-                            <input type="radio" id="mb-show-ready" name="show" value="ready" checked>
-                            <label for="mb-show-ready">Ready to install <span class="mb-count" id="mb-count-ready"></span></label>
-                            <input type="radio" id="mb-show-all" name="show" value="all">
-                            <label for="mb-show-all">All listed <span class="mb-count" id="mb-count-all"></span></label>
-                        </div>
-                    </fieldset>
-                    <button type="reset" class="mb-button mb-clear" id="mb-clear">Clear</button>
-                </form>
-
                 <div class="mb-statusbar">
                     <p class="mb-status" id="mb-status" role="status" aria-live="polite">Loading mods…</p>
                     <p class="mb-notice" id="mb-notice" hidden></p>
@@ -109,8 +86,6 @@
                     <p id="mb-message-text"></p>
                     <p class="mb-message-actions"><button type="button" class="mb-button" id="mb-message-action" hidden></button></p>
                 </div>
-
-                <p class="mb-about mb-muted">Mods are published by their authors and aren't reviewed by Dwemer Dynamics.</p>
             </div>
             <nav class="lo-pager" aria-label="Guide pages">
                 <a class="lo-prev" href="./index.html">&larr; Overview</a>

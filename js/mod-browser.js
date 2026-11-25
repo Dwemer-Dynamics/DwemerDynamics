@@ -17,9 +17,6 @@
     else start();
 
     function start() {
-        var form = document.getElementById("mb-filters");
-        var search = document.getElementById("mb-search");
-        var game = document.getElementById("mb-game");
         var grid = document.getElementById("mb-grid");
         var status = document.getElementById("mb-status");
         var notice = document.getElementById("mb-notice");
@@ -27,17 +24,12 @@
         var messageTitle = document.getElementById("mb-message-title");
         var messageText = document.getElementById("mb-message-text");
         var messageAction = document.getElementById("mb-message-action");
-        var countReady = document.getElementById("mb-count-ready");
-        var countAll = document.getElementById("mb-count-all");
-        if (!form || !grid || !status) return;
+        if (!grid || !status) return;
 
         var mods = [];
         var actionHandler = null;
-        var timer = null;
-        var dateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
         var stampFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" });
 
-        form.hidden = false;
         messageAction.addEventListener("click", function () { if (actionHandler) actionHandler(); });
 
         // ---- Catalog loading and normalisation ----
@@ -50,10 +42,6 @@
             if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(value)) return null;
             var parsed = new Date(value);
             return isNaN(parsed.getTime()) ? null : parsed;
-        }
-
-        function normalize(value) {
-            return String(value).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
         }
 
         // Values are re-checked here so a damaged catalog can only drop entries, never inject links or paths.
@@ -86,7 +74,6 @@
                 game: str(gameInfo.name, 200),
                 artwork: Array.from(new Set(artwork))
             };
-            mod.haystack = normalize([mod.title, mod.game, mod.credit, mod.owner, mod.repo, mod.summary].join(" "));
             return mod;
         }
 
@@ -109,9 +96,8 @@
                     seen.add(mod.repository.toLowerCase());
                     return true;
                 });
-                fillGames();
                 describeFreshness(catalog);
-                restore();
+                render();
             } catch (error) {
                 mods = [];
                 grid.removeAttribute("aria-busy");
@@ -122,13 +108,6 @@
             } finally {
                 if (timeout) window.clearTimeout(timeout);
             }
-        }
-
-        function fillGames() {
-            var names = Array.from(new Set(mods.map(function (mod) { return mod.game; }).filter(Boolean)))
-                .sort(function (a, b) { return a.localeCompare(b); });
-            game.replaceChildren(new Option("All games", ""));
-            names.forEach(function (name) { game.append(new Option(name, name)); });
         }
 
         function describeFreshness(catalog) {
@@ -149,103 +128,22 @@
             }
             notice.textContent = text;
             notice.hidden = !text;
-            status.dataset.updated = generated && !text ? "Updated " + dateFormat.format(generated) + "." : "";
         }
-
-        // ---- Filtering and URL state ----
-
-        function filters() {
-            var words = normalize(search.value.trim().slice(0, 80)).split(/\s+/).filter(Boolean);
-            var chosen = form.elements.show.value === "all" ? "all" : "ready";
-            return { words: words, game: game.value, show: chosen };
-        }
-
-        function matches(mod, f) {
-            return (!f.game || mod.game === f.game) && f.words.every(function (word) { return mod.haystack.indexOf(word) !== -1; });
-        }
-
-        function restore() {
-            var params = new URL(location.href).searchParams;
-            search.value = (params.get("q") || "").slice(0, 80);
-            var wanted = params.get("game") || "";
-            game.value = Array.prototype.some.call(game.options, function (o) { return o.value === wanted; }) ? wanted : "";
-            (params.get("show") === "all" ? document.getElementById("mb-show-all") : document.getElementById("mb-show-ready")).checked = true;
-            render();
-        }
-
-        function remember() {
-            var f = filters();
-            var url = new URL(location.href);
-            [["q", search.value.trim().slice(0, 80)], ["game", f.game], ["show", f.show === "all" ? "all" : ""]].forEach(function (pair) {
-                if (pair[1]) url.searchParams.set(pair[0], pair[1]);
-                else url.searchParams.delete(pair[0]);
-            });
-            history.replaceState(null, "", url);
-        }
-
-        function update() {
-            window.clearTimeout(timer);
-            remember();
-            render();
-        }
-
-        function clearFilters(focus) {
-            search.value = "";
-            game.value = "";
-            document.getElementById("mb-show-ready").checked = true;
-            update();
-            if (focus) search.focus();
-        }
-
-        form.addEventListener("submit", function (event) { event.preventDefault(); update(); });
-        form.addEventListener("reset", function (event) { event.preventDefault(); clearFilters(true); });
-        search.addEventListener("input", function () { window.clearTimeout(timer); timer = window.setTimeout(update, 150); });
-        search.addEventListener("keydown", function (event) {
-            if (event.key === "Escape" && search.value) { event.preventDefault(); search.value = ""; update(); }
-        });
-        game.addEventListener("change", update);
-        form.addEventListener("change", function (event) { if (event.target.name === "show") update(); });
-        window.addEventListener("popstate", function () { if (mods.length) restore(); });
 
         // ---- Rendering ----
 
+        // Every listing is shown; each card's badge and reason say whether it can be installed yet.
         function render() {
-            var f = filters();
-            var base = mods.filter(function (mod) { return matches(mod, f); });
-            var ready = base.filter(function (mod) { return mod.ready; });
-            var shown = f.show === "all" ? base : ready;
-            countReady.textContent = "(" + ready.length + ")";
-            countAll.textContent = "(" + base.length + ")";
-
             var fragment = document.createDocumentFragment();
-            shown.forEach(function (mod) { fragment.append(card(mod)); });
+            mods.forEach(function (mod) { fragment.append(card(mod)); });
             grid.replaceChildren(fragment);
             grid.removeAttribute("aria-busy");
-            grid.hidden = !shown.length;
+            grid.hidden = !mods.length;
 
-            var filtered = f.words.length || f.game;
-            var noun = f.show === "all" ? " listed" : " ready to install";
-            status.textContent = shown.length
-                ? shown.length + (shown.length === 1 ? " mod" : " mods") + noun + (filtered ? " matching your filters" : "") + "." +
-                  (status.dataset.updated ? " " + status.dataset.updated : "")
-                : "";
+            status.textContent = "";
 
-            if (shown.length) {
-                showMessage(null);
-            } else if (!mods.length) {
-                showMessage("No mods are listed yet",
-                    "Published mods will appear here.");
-            } else if (base.length && f.show === "ready") {
-                showMessage(base.length === 1 ? "This mod isn't ready to install yet" : "None of these mods are ready to install yet",
-                    "Show all listed mods to see what each one still needs.",
-                    "Show all listed", function () {
-                        document.getElementById("mb-show-all").checked = true;
-                        update();
-                        document.getElementById("mb-show-all").focus();
-                    });
-            } else {
-                showMessage("No mods match your filters", "Try another name or game.", "Clear filters", function () { clearFilters(true); });
-            }
+            if (mods.length) showMessage(null);
+            else showMessage("No mods are listed yet", "Published mods will appear here.");
         }
 
         function showMessage(title, text, action, handler, focus) {

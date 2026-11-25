@@ -17,62 +17,6 @@
 /* The title face has a very narrow space; keep the two words readable. */
 .guide-outline .mb-intro h1 { word-spacing: .3em; }
 
-/* ---- Filters ---- */
-.guide-outline .mb-filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: .75rem 1rem;
-    padding: 1rem;
-    background: var(--lo-raise);
-    border: 1px solid var(--lo-line2);
-    border-radius: 6px;
-}
-.guide-outline .mb-filters[hidden] { display: none; }
-.guide-outline .mb-field { display: grid; gap: .3rem; min-width: 0; }
-.guide-outline .mb-field-search { flex: 1 1 16rem; }
-.guide-outline .mb-field label,
-.guide-outline .mb-show legend { font-size: .8125rem; font-weight: 600; color: var(--lo-muted); padding: 0; }
-.guide-outline .mb-filters input[type="search"],
-.guide-outline .mb-filters select {
-    width: 100%;
-    min-height: 2.6rem;
-    padding: .45rem .7rem;
-    font: inherit;
-    font-size: 1rem;
-    color: var(--lo-text);
-    background: var(--mb-ink);
-    border: 1px solid var(--lo-line2);
-    border-radius: 4px;
-}
-.guide-outline .mb-filters select { max-width: 18rem; }
-.guide-outline .mb-filters input[type="search"]:hover,
-.guide-outline .mb-filters select:hover { border-color: var(--mb-edge); }
-.guide-outline .mb-filters input[type="search"]::placeholder { color: #8c887f; }
-
-.guide-outline .mb-show { margin: 0; padding: 0; border: 0; min-width: 0; }
-.guide-outline .mb-show legend { margin-bottom: .3rem; }
-.guide-outline .mb-segment { display: inline-flex; border: 1px solid var(--lo-line2); border-radius: 4px; overflow: hidden; }
-.guide-outline .mb-segment input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
-.guide-outline .mb-segment label {
-    display: inline-flex;
-    align-items: center;
-    gap: .3rem;
-    min-height: 2.5rem;
-    padding: .4rem .85rem;
-    font-size: .9375rem;
-    color: var(--lo-muted);
-    background: var(--mb-ink);
-    cursor: pointer;
-    white-space: nowrap;
-}
-.guide-outline .mb-segment label + input + label { border-left: 1px solid var(--lo-line2); }
-.guide-outline .mb-segment label:hover { color: var(--lo-text); }
-.guide-outline .mb-segment input:checked + label { background: var(--mb-tint); color: var(--mb-bright); box-shadow: inset 0 -2px 0 var(--mb-brass); }
-.guide-outline .mb-segment input:focus-visible + label { outline: 2px solid var(--mb-parchment); outline-offset: -2px; }
-.guide-outline .mb-count { font-size: .8125rem; color: #8c887f; font-variant-numeric: tabular-nums; }
-.guide-outline .mb-segment input:checked + label .mb-count { color: var(--mb-parchment); }
-
 /* ---- Buttons ---- */
 .guide-outline .mb-button {
     display: inline-flex;
@@ -96,10 +40,9 @@
 .guide-outline a.mb-button { text-decoration: none; }
 .guide-outline .mb-primary { color: var(--mb-ink); background: var(--mb-brass); border-color: var(--mb-brass); }
 .guide-outline .mb-primary:hover { color: var(--mb-ink); background: var(--mb-parchment); border-color: var(--mb-parchment); }
-.guide-outline .mb-clear { color: var(--lo-muted); border-color: var(--lo-line2); }
 
 /* ---- Status and messages ---- */
-.guide-outline .mb-statusbar { margin: 1.25rem 0 1rem; }
+.guide-outline .mb-statusbar { margin: 0 0 1rem; }
 .guide-outline .mb-status { margin: 0; font-size: .9375rem; color: var(--lo-muted); min-height: 1.6em; }
 .guide-outline .mb-status:empty { min-height: 0; }
 .guide-outline .mb-notice {
@@ -262,24 +205,10 @@
 .guide-outline .mb-about b { color: var(--lo-text); font-weight: 600; }
 .guide-outline .mb-about code { font: .875em/1.5 var(--lo-mono); padding: .1em .35em; background: var(--lo-raise); border: 1px solid var(--lo-line2); border-radius: 3px; }
 
-@media (max-width: 820px) {
-    .guide-outline .mb-filters { padding: .85rem; }
-    .guide-outline .mb-filters select { max-width: none; }
-    .guide-outline .mb-field:not(.mb-field-search) { flex: 1 1 12rem; }
-}
-
 @media (max-width: 520px) {
-    .guide-outline .mb-filters { flex-direction: column; align-items: stretch; }
-    .guide-outline .mb-field,
-    .guide-outline .mb-field-search,
-    .guide-outline .mb-field:not(.mb-field-search) { flex: none; }
-    .guide-outline .mb-segment { display: flex; }
-    .guide-outline .mb-segment label { flex: 1; justify-content: center; padding: .4rem .5rem; }
-    .guide-outline .mb-clear { align-self: flex-start; }
     .guide-outline .mb-actions .mb-button { flex: 1 1 auto; }
 }
 
 @media (forced-colors: active) {
-    .guide-outline .mb-segment input:checked + label { outline: 2px solid CanvasText; outline-offset: -4px; }
     .guide-outline .mb-badge { border-color: CanvasText; }
 }
