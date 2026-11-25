@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Saving, loading, and backups | REIGN | Dwemer Dynamics</title>
+    <meta name="description" content="Keep your Bannerlord save and Reign history together. Back up before major changes.">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/guide-outline.css">
+    <link rel="stylesheet" href="../css/reign.css">
+</head>
+<body class="guide-outline reign-theme">
+    <script src="../js/guide-outline.js"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
+        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-install" href="./getting-started.html">Start here</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
+            </div>
+            <p class="reign-companion">The Player’s Companion</p>
+            <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
+<li><a class="lo-item" href="./index.html">Overview</a></li>
+</ul>
+<p class="lo-group">Start here</p>
+<ul>
+<li><a class="lo-item" href="./requirements.html">Requirements</a></li>
+<li><a class="lo-item" href="./getting-started.html">First session</a></li>
+<li><a class="lo-item" href="./conversations.html">Conversations</a></li>
+</ul>
+<p class="lo-group">Actions</p>
+<ul>
+<li><a class="lo-item" href="./actions.html">Action sentences</a></li>
+</ul>
+<p class="lo-group">People and daily life</p>
+<ul>
+<li><a class="lo-item" href="./characters.html">Characters</a></li>
+<li><a class="lo-item" href="./communication.html">Chat and letters</a></li>
+<li><a class="lo-item" href="./events.html">Events and personal lives</a></li>
+<li><a class="lo-item" href="./town-life.html">Town life</a></li>
+</ul>
+<p class="lo-group">Relationships and households</p>
+<ul>
+<li><a class="lo-item" href="./relationships.html">Relationships and family</a></li>
+<li><a class="lo-item" href="./reputation.html">Reputation</a></li>
+<li><a class="lo-item" href="./households.html">Keeps and households</a></li>
+</ul>
+<p class="lo-group">Rule and politics</p>
+<ul>
+<li><a class="lo-item" href="./ruling.html">Ruling a kingdom</a></li>
+<li><a class="lo-item" href="./government.html">Government</a></li>
+<li><a class="lo-item" href="./diplomacy.html">Diplomacy</a></li>
+<li><a class="lo-item" href="./spymaster.html">Spymaster</a></li>
+</ul>
+<p class="lo-group">War and the world</p>
+<ul>
+<li><a class="lo-item" href="./warfare.html">War and armies</a></li>
+<li><a class="lo-item" href="./justice-and-rebellion.html">Justice and rebellion</a></li>
+<li><a class="lo-item" href="./economy.html">Economy</a></li>
+<li><a class="lo-item" href="./world-events.html">Time and world events</a></li>
+<li><a class="lo-item" href="./arenas.html">Arenas and tournaments</a></li>
+</ul>
+<p class="lo-group">Settings and help</p>
+<ul>
+<li><a class="lo-item" href="./pictures-and-memories.html">Pictures and memories</a></li>
+<li><div class="lo-current"><a class="lo-item" href="./saves-and-backups.html" aria-current="page">Saves and backups</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+<ol class="lo-outline" id="lo-outline" aria-label="On this page">
+<li><a href="#a-bannerlord-save-and-reign-memory-belong-together">A Bannerlord save and Reign memory belong together</a></li>
+<li><a href="#capacity-and-safe-housekeeping">Capacity and safe housekeeping</a></li>
+<li><a href="#exporting-and-restoring-a-campaign">Exporting and restoring a campaign</a></li>
+<li><a href="#updating-moving-computers-and-removing-the-mod">Updating, moving computers, and removing the mod</a></li>
+</ol></li>
+<li><a class="lo-item" href="./configuration.html">Settings and providers</a></li>
+<li><a class="lo-item" href="./help.html">Troubleshooting</a></li>
+</ul>
+<p class="lo-group">Reference</p>
+<ul>
+<li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
+<li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
+</ul>
+        </nav>
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <article class="lo-article">
+                <header class="lo-intro">
+                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
+                    <h1>Saving, loading, and backups</h1>
+                    <p class="lo-standfirst">Keep your Bannerlord save and Reign history together. Back up before major changes.</p>
+                </header>
+                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <section class="chapter" id="saving-loading-and-backups" tabindex="-1"><section class="topic lo-section" id="a-bannerlord-save-and-reign-memory-belong-together" tabindex="-1"><header><h2>A Bannerlord save and Reign memory belong together</h2><a aria-label="Link to A Bannerlord save and Reign memory belong together" class="permalink" href="#a-bannerlord-save-and-reign-memory-belong-together">#</a></header>
+<p>Your native save holds Bannerlord's campaign. Reign also stores memories, relationships, history, images, and other campaign state in its local server. <strong>Save Sync</strong> pairs a protected native save with the matching Reign snapshot.</p>
+
+<p>Save with the server running. Reign prepares the matching snapshot and warns if the native save succeeds but server protection fails. An unprotected save is still a native save, but it is not proof that the matching Reign state is safely aligned. Restore service and make a new protected save rather than ignoring the warning.</p>
+
+<p>Copying or renaming a native save does not invent a fresh Save Sync identity. Loading an older protected point restores the associated Reign timeline; later memories should not bleed into an earlier world.</p>
+
+<p>The protected point also restores the campaign's saved calendar reference, which keeps the date and aging aligned. A legacy save that predates a verified calendar reference can show a different preparation status. Inspect <strong>Campaign Backups</strong> to see whether your save has a registered matching snapshot. Previewing a legacy point leaves the campaign as it was.</p>
+
+<figure class="guide-figure"><a aria-label="Open larger: Diagram — A protected save links Bannerlord state and Reign state; restoring an old point restores that matching pair. (opens in a new tab)" href="../img/reign/31-a-bannerlord-save-and-reign-memory-belong-together.svg" rel="noopener" target="_blank"><img alt="Diagram — A protected save links Bannerlord state and Reign state; restoring an old point restores that matching pair." decoding="async" height="300" loading="lazy" src="../img/reign/31-a-bannerlord-save-and-reign-memory-belong-together.svg" width="1120"/></a><figcaption>Diagram — A protected save links Bannerlord state and Reign state; restoring an old point restores that matching pair.</figcaption></figure>
+</section>
+
+<section class="topic lo-section" id="capacity-and-safe-housekeeping" tabindex="-1"><header><h2>Capacity and safe housekeeping</h2><a aria-label="Link to Capacity and safe housekeeping" class="permalink" href="#capacity-and-safe-housekeeping">#</a></header>
+<p>There is a limited pool of unique protected Save Sync states. Watch the warning and capacity display instead of keeping unlimited one-off saves and assuming every one is protected. Overwriting an ordinary rolling save can retire its older point where safe. Use the native save UI's supported deletion flow when removing a save you no longer need.</p>
+
+<p>Capacity reflects registered protected points. A stale display, an unprotected save, or several copies of one native save can make the numbers look different from your file list. A removed registration and a registered snapshot whose data is missing are different statuses. Check the exact save point before deleting any backups.</p>
+
+<p>Do not manually delete server database folders to make space. A native save can exist without its matching protected Reign point, and a renamed copy can still share the old identity. Keep intentional backups outside routine cleanup.</p>
+
+<p>Close Bannerlord before using the Control Center's <strong>Campaign Backups</strong> cleanup controls. Choose the individual campaign, campaigns with no matching saves, or the full cleanup option, then answer the <strong>Are you sure?</strong> prompt. The no-save cleanup preserves campaigns with matching physical saves, imports awaiting their first load, and the shared portrait library. Full cleanup removes Reign histories, backups, campaign portraits, and related queued work. The native save files and installed shared portraits remain. An already scheduled cleanup can finish after the server starts.</p>
+</section>
+
+<section class="topic lo-section" id="exporting-and-restoring-a-campaign" tabindex="-1"><header><h2>Exporting and restoring a campaign</h2><a aria-label="Link to Exporting and restoring a campaign" class="permalink" href="#exporting-and-restoring-a-campaign">#</a></header>
+<p>In <strong>Campaign Backups</strong>, select the correct campaign and export its archive. Keep the matching native Bannerlord save with it. The Reign archive preserves campaign-side memory and supporting data; it does not contain your global provider API keys.</p>
+
+<p>On restore, select the intended archive and inspect any replace-existing-campaign warning before confirming. Loading a native save from one point with unrelated server data is not a complete restoration. Keep a separate copy of the current pair before replacing anything valuable.</p>
+
+<p>If <strong>Campaign Backups</strong> reports a failed restore and recovery of the previous state, check the campaign and save identity before retrying. While recovery is pending, keep the original native save, its Reign backup, and the archive you were importing. Reign checks the archive and the restored state before treating the replacement as complete.</p>
+
+<p>Deleting a Reign campaign is destructive even if it leaves the native save file behind. Deleting all campaigns is broader still. A backup, a protected snapshot, an older native save, and a new campaign are four different things.</p>
+</section>
+
+<section class="topic lo-section" id="updating-moving-computers-and-removing-the-mod" tabindex="-1"><header><h2>Updating, moving computers, and removing the mod</h2><a aria-label="Link to Updating, moving computers, and removing the mod" class="permalink" href="#updating-moving-computers-and-removing-the-mod">#</a></header>
+<p>Before a major update or move, export Reign campaign data and retain the matching native save and package/version information. The installation's module, writable cache, selected server environment, and shared portrait library have deliberate locations; copying only a DLL is not a complete installation.</p>
+
+<p>Existing campaigns keep established identities and profiles unless an explicit supported migration changes them. Do not assume a new-campaign feature will be retrofitted. Likewise, do not assume removing a mod with saved campaign behaviors mid-campaign is supported. This guide does not claim a tested universal uninstall or cross-version save-conversion path.</p>
+</section>
+</section>
+
+                <nav class="lo-pager" aria-label="Continue reading"><a href="./pictures-and-memories.html">← Pictures and memories</a><a class="lo-next" href="./configuration.html">Settings and providers →</a></nav>
+                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+            </article>
+        </main>
+    </div>
+</body>
+</html>

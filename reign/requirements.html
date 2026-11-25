@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Requirements and resource use | REIGN | Dwemer Dynamics</title>
+    <meta name="description" content="What you need, how the local server and cloud providers fit together, and how to plan for resource use.">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/guide-outline.css">
+    <link rel="stylesheet" href="../css/reign.css">
+</head>
+<body class="guide-outline reign-theme">
+    <script src="../js/guide-outline.js"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
+        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-install" href="./getting-started.html">Start here</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
+            </div>
+            <p class="reign-companion">The Player’s Companion</p>
+            <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
+<li><a class="lo-item" href="./index.html">Overview</a></li>
+</ul>
+<p class="lo-group">Start here</p>
+<ul>
+<li><div class="lo-current"><a class="lo-item" href="./requirements.html" aria-current="page">Requirements</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+<ol class="lo-outline" id="lo-outline" aria-label="On this page">
+<li><a href="#what-you-need-before-playing">What you need before playing</a></li>
+<li><a href="#ram-plan-for-the-game-and-the-server-together">RAM: plan for the game and the server together</a></li>
+<li><a href="#processor-graphics-storage-and-connection">Processor, graphics, storage, and connection</a></li>
+</ol></li>
+<li><a class="lo-item" href="./getting-started.html">First session</a></li>
+<li><a class="lo-item" href="./conversations.html">Conversations</a></li>
+</ul>
+<p class="lo-group">Actions</p>
+<ul>
+<li><a class="lo-item" href="./actions.html">Action sentences</a></li>
+</ul>
+<p class="lo-group">People and daily life</p>
+<ul>
+<li><a class="lo-item" href="./characters.html">Characters</a></li>
+<li><a class="lo-item" href="./communication.html">Chat and letters</a></li>
+<li><a class="lo-item" href="./events.html">Events and personal lives</a></li>
+<li><a class="lo-item" href="./town-life.html">Town life</a></li>
+</ul>
+<p class="lo-group">Relationships and households</p>
+<ul>
+<li><a class="lo-item" href="./relationships.html">Relationships and family</a></li>
+<li><a class="lo-item" href="./reputation.html">Reputation</a></li>
+<li><a class="lo-item" href="./households.html">Keeps and households</a></li>
+</ul>
+<p class="lo-group">Rule and politics</p>
+<ul>
+<li><a class="lo-item" href="./ruling.html">Ruling a kingdom</a></li>
+<li><a class="lo-item" href="./government.html">Government</a></li>
+<li><a class="lo-item" href="./diplomacy.html">Diplomacy</a></li>
+<li><a class="lo-item" href="./spymaster.html">Spymaster</a></li>
+</ul>
+<p class="lo-group">War and the world</p>
+<ul>
+<li><a class="lo-item" href="./warfare.html">War and armies</a></li>
+<li><a class="lo-item" href="./justice-and-rebellion.html">Justice and rebellion</a></li>
+<li><a class="lo-item" href="./economy.html">Economy</a></li>
+<li><a class="lo-item" href="./world-events.html">Time and world events</a></li>
+<li><a class="lo-item" href="./arenas.html">Arenas and tournaments</a></li>
+</ul>
+<p class="lo-group">Settings and help</p>
+<ul>
+<li><a class="lo-item" href="./pictures-and-memories.html">Pictures and memories</a></li>
+<li><a class="lo-item" href="./saves-and-backups.html">Saves and backups</a></li>
+<li><a class="lo-item" href="./configuration.html">Settings and providers</a></li>
+<li><a class="lo-item" href="./help.html">Troubleshooting</a></li>
+</ul>
+<p class="lo-group">Reference</p>
+<ul>
+<li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
+<li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
+</ul>
+        </nav>
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <article class="lo-article">
+                <header class="lo-intro">
+                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
+                    <h1>Requirements and resource use</h1>
+                    <p class="lo-standfirst">What you need, how the local server and cloud providers fit together, and how to plan for resource use.</p>
+                </header>
+                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <section class="chapter" id="requirements-and-resource-use" tabindex="-1"><section class="topic lo-section" id="what-you-need-before-playing" tabindex="-1"><header><h2>What you need before playing</h2><a aria-label="Link to What you need before playing" class="permalink" href="#what-you-need-before-playing">#</a></header>
+<p>Reign is a Windows PC single-player mod with a local companion server. You need a licensed Bannerlord installation compatible with your Reign package, its required native modules and installed dependencies, and the launcher's dedicated <strong>ReignServer WSL</strong> environment. Use a current supported 64-bit Windows installation with WSL 2 and virtualization available. Check the package's supported game version before updating Bannerlord; this guide is not a promise of compatibility with every future release or other mod.</p>
+
+<p><strong>A cloud LLM provider is required for Reign's AI dialogue and generated character responses.</strong> Configure a supported provider/account and its credentials in the Control Center, with internet access and sufficient provider allowance or credit. The local Reign server manages the game connection, data, memory, and requests; it is not a replacement for the cloud language model. Some background rules run locally, but that does not make the full AI experience offline.</p>
+
+<p><strong>Ollama Cloud</strong> is a cloud text option and uses its own cloud account key. See <a href="./configuration.html#provider-choices-costs-and-privacy">Provider choices, costs, and privacy</a> for key setup and what to do when a reply contains dialogue only.</p>
+
+<p><strong>A cloud image provider is also required if you enable optional AI-generated portraits or scene images.</strong> It is configured separately from dialogue. Working chat does not prove image generation is configured. Existing bundled or cached images can display without generating a new one; new image requests need the selected image route to be available. You can play with optional image generation disabled.</p>
+
+<p>Provider charges and subscription limits belong to the selected service. More conversations, longer exchanges, events, and new images can use more allowance. Never put an API key into NPC chat; save credentials only in the provider settings intended for them.</p>
+
+<figure class="guide-figure"><a aria-label="Open larger: Diagram — Your PC runs Bannerlord, the Reign server, and memory services; dialogue and optional new images use separately configured cloud providers. (opens in a new tab)" href="../img/reign/01-what-you-need-before-playing.svg" rel="noopener" target="_blank"><img alt="Diagram — Your PC runs Bannerlord, the Reign server, and memory services; dialogue and optional new images use separately configured cloud providers." decoding="async" height="400" loading="lazy" src="../img/reign/01-what-you-need-before-playing.svg" width="1120"/></a><figcaption>Diagram — Your PC runs Bannerlord, the Reign server, and memory services; dialogue and optional new images use separately configured cloud providers.</figcaption></figure>
+</section>
+
+<section class="topic lo-section" id="ram-plan-for-the-game-and-the-server-together" tabindex="-1"><header><h2>RAM: plan for the game and the server together</h2><a aria-label="Link to RAM: plan for the game and the server together" class="permalink" href="#ram-plan-for-the-game-and-the-server-together">#</a></header>
+<p><strong>Reign does not have a verified RAM minimum or typical-use range yet.</strong> Use the published base-game requirements below as base-game figures, leave room for the local Reign services, and assess memory pressure during your actual session. A single development session's allocated memory cannot establish a hardware requirement.</p>
+
+<div aria-label="Scrollable reference table" class="table-wrap" role="region" tabindex="0"><table><thead><tr><th scope="col">Component</th><th scope="col">What we can currently say</th></tr>
+</thead><tbody><tr><td>Base Bannerlord, published requirement</td><td>The Steam listing gives 6 GB minimum and 8 GB recommended for the base game. These are system requirements, not measured process usage.</td></tr>
+<tr><td>Reign alongside the game</td><td>The local server, database and memory worker need additional resources. Their ordinary and peak usage has not been measured well enough to publish a reliable extra-RAM figure.</td></tr>
+<tr><td>Your actual session</td><td>Campaign age, battle size, settings, other mods and background applications affect memory use. Judge the complete session, including Reign's local services, rather than one process in isolation.</td></tr>
+</tbody></table></div>
+
+<p>We will add a typical-use range only after representative measurements during ordinary play, loading, saving and battles. Until then, the base game's figures are identified as base-game figures, and there is no separately certified Reign RAM requirement in this guide.</p>
+
+<p>If you check Task Manager, remember that committed memory is not the same as RAM currently resident in use. Do not count the Windows WSL process and Linux's own memory as two separate copies. If play stutters, inspect actual memory pressure and paging as well as CPU and graphics load.</p>
+</section>
+
+<section class="topic lo-section" id="processor-graphics-storage-and-connection" tabindex="-1"><header><h2>Processor, graphics, storage, and connection</h2><a aria-label="Link to Processor, graphics, storage, and connection" class="permalink" href="#processor-graphics-storage-and-connection">#</a></header>
+<div aria-label="Scrollable reference table" class="table-wrap" role="region" tabindex="0"><table><thead><tr><th scope="col">Requirement</th><th scope="col">Practical guidance</th></tr>
+</thead><tbody><tr><td>CPU</td><td>Start with hardware that comfortably runs your intended Bannerlord battles. The published recommended base-game CPUs are Core i5-9600K or Ryzen 5 3600X. Reign adds local simulation and services; no separate Reign minimum CPU has been benchmark-certified.</td></tr>
+<tr><td>GPU and VRAM</td><td>Meet the game/DLC requirements for your chosen settings. The base-game listing recommends GTX 1060 3 GB or Radeon RX 580. Cloud AI generation does not require you to load a large language or image model onto your own GPU, but the game and native portrait rendering still use it.</td></tr>
+<tr><td>Game storage</td><td>Steam lists 60 GB available for base Bannerlord. DLC and other mods can add to this.</td></tr>
+<tr><td>Reign storage</td><td>Keep additional SSD space for the module, shipped portraits, dedicated server environment, database, generated images, saves, backups, and updates. Their size grows with use; a fixed small download size is not the full installed budget.</td></tr>
+<tr><td>Update and backup headroom</td><td>Keep several tens of gigabytes free beyond the installed game as a planning allowance, then monitor actual growth. This is headroom advice, not a measured Reign install-size requirement. A full drive can interrupt saving, database work, or updates.</td></tr>
+<tr><td>Internet</td><td>Required while cloud dialogue or new cloud images are requested. Cloud latency, service outages, and provider limits affect response time even on a fast PC.</td></tr>
+<tr><td>Local services</td><td>Keep the launcher-managed server, database, and memory worker healthy. WSL must have enough memory available; giving all system RAM to the game leaves no room for Reign's services.</td></tr>
+</tbody></table></div>
+
+<p>Base-game figures were checked against the <a href="https://store.steampowered.com/app/261550/Mount__Blade_II_Bannerlord/">official Steam system requirements</a> on November 6, 2026. They do not include Reign or replace the requirements of any DLC you use. Reign-specific RAM measurements remain a follow-up; no new hardware requirement is inferred from a single development snapshot.</p>
+</section>
+</section>
+
+                <nav class="lo-pager" aria-label="Continue reading"><a href="./index.html">← Overview</a><a class="lo-next" href="./getting-started.html">First session →</a></nav>
+                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+            </article>
+        </main>
+    </div>
+</body>
+</html>

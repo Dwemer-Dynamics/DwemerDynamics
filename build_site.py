@@ -25,7 +25,7 @@ from urllib.parse import parse_qsl, unquote, urlencode, urlsplit, urlunsplit
 ROOT = Path(__file__).resolve().parent
 ENTRIES = [
     "chim", "css", "custom-mods", "data", "dialectic", "dwemerdistro", "font", "img", "js",
-    "lorkhan", "other-projects", "stobe",
+    "lorkhan", "other-projects", "reign", "stobe",
     "index.html", "styles.css", "CNAME", ".nojekyll", "THIRD_PARTY_NOTICES.md",
 ]
 MARKER = ".dwemer-site-build"
