@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -82,6 +83,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -94,6 +96,11 @@
                     <p class="lo-standfirst">Understand duels, accusations, custody, ruler judgments and civil war.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="duels-arrests-rulers-and-civil-war" tabindex="-1"><section class="topic lo-section" data-preview="true" id="choosing-a-duel" tabindex="-1"><header><h2>Choosing a duel</h2><span class="badge">Preview included</span><a aria-label="Link to Choosing a duel" class="permalink" href="#choosing-a-duel">#</a></header>
 <p>An eligible NPC can agree to a duel in individual conversation. Read the <strong>Bannerlord Reign Duel</strong> prompt before starting; cancelling the start is different from losing a fight.</p>
 

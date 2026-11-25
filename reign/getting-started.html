@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -82,6 +83,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -94,10 +96,15 @@
                     <p class="lo-standfirst">Start the server, prepare your campaign, and learn the controls you will use first.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="start-here" tabindex="-1"><section class="topic lo-section" id="how-to-use-this-guide" tabindex="-1"><header><h2>How to use this guide</h2><a aria-label="Link to How to use this guide" class="permalink" href="#how-to-use-this-guide">#</a></header>
 <p>New to Reign? Read <strong>Your first session</strong>, then <strong>Your first conversation</strong>. After that, follow whatever interests you: ordinary adventuring, relationships, running a household, or ruling a kingdom. You do not need a crown to enjoy most social features.</p>
 
-<p>Use the contents to browse or the A–Z index to find a topic. Your browser’s Find command searches the page you are reading.</p>
+<p>Use the contents to browse, the A–Z index to find a topic, or search the whole guide in your own words: wife, have a baby, NPC won’t leave, troops expensive, letters, save warning, or become senator. Your browser’s Find command searches the page you are reading.</p>
 
 <p>This guide describes effects rather than balance formulas. Where the game asks you to choose an amount, duration, price, or setting, read the current terms on screen. An example sentence is a suggestion for what to ask, never a guaranteed answer or a cheat code.</p>
 

@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -83,6 +84,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -95,6 +97,11 @@
                     <p class="lo-standfirst">Join celebrations and encounters, follow personal stories, and respond to changing plans.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="events-and-npc-personal-lives" tabindex="-1"><section class="topic lo-section" data-preview="true" id="town-events-and-tournament-celebrations" tabindex="-1"><header><h2>Town events and tournament celebrations</h2><span class="badge">Preview included</span><a aria-label="Link to Town events and tournament celebrations" class="permalink" href="#town-events-and-tournament-celebrations">#</a></header>
 <p>When a social event is announced, visit the named town and use <strong>Attend the announced Bannerlord Reign social event</strong>. If you leave an active event, its <strong>Return</strong> option can reopen it while available. These are opportunities with closing windows; an announcement is not a permanent quest marker.</p>
 

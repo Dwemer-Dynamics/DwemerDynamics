@@ -13,6 +13,7 @@ forwards to the clean URL with its query and hash. Standard library only.
 import argparse
 import html
 import hashlib
+import json
 import os
 import posixpath
 import re
@@ -20,7 +21,7 @@ import shutil
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import parse_qsl, unquote, urlencode, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, quote, unquote, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parent
 ENTRIES = [
@@ -31,7 +32,7 @@ ENTRIES = [
 MARKER = ".dwemer-site-build"
 ORIGIN = "https://" + (ROOT / "CNAME").read_text(encoding="utf-8").strip()
 
-URL_ATTR = re.compile(r'(\s(?:href|src)\s*=\s*)"([^"]*)"', re.IGNORECASE)
+URL_ATTR = re.compile(r'(\s(?:href|src|action)\s*=\s*)"([^"]*)"', re.IGNORECASE)
 SCHEME = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
 
 # Explicit index.html visits share the clean directory's file; tidy the address bar in place (no reload, so no loop).
@@ -114,7 +115,7 @@ def rewrite_url(url, page, pages):
     target = clean_pages.get("/" + target.rstrip("/") + "/", target)
     path = clean_path(target) if target in pages else "/" + target
     query = parts.query
-    if target in ("js/guide-outline.js", "js/javascript.js"):
+    if target in ("js/guide-outline.js", "js/javascript.js", "js/reign-search.js", "css/reign.css"):
         version = hashlib.sha256((ROOT / target).read_bytes()).hexdigest()[:12]
         query = urlencode([(k, v) for k, v in parse_qsl(query, keep_blank_values=True) if k != "v"]
                           + [("v", version)])
@@ -195,7 +196,7 @@ def collect_files():
 
 
 def validate(out):
-    """Every internal href/src in the built pages must be a clean root-relative path to a built file."""
+    """Internal links, assets and form actions must resolve in the built site."""
     ids, links = {}, []
     for built in sorted(out.rglob("*.html")):
         rel = built.relative_to(out).as_posix()
@@ -203,7 +204,7 @@ def validate(out):
         ids[rel] = scanner.ids
         for _, _, attrs in scanner.tags:
             for name, value in attrs:
-                if name in ("href", "src") and value:
+                if name in ("href", "src", "action") and value:
                     links.append((rel, value))
 
     errors, missing_anchors = [], []
@@ -224,6 +225,88 @@ def validate(out):
         elif parts.fragment and target in ids and unquote(parts.fragment) not in ids[target]:
             missing_anchors.append("{} -> {}".format(rel, value))
     return errors, missing_anchors
+
+
+class ReignTopics(HTMLParser):
+    """Read searchable topic text from the same HTML players read, without a second prose source."""
+
+    def __init__(self):
+        super().__init__()
+        self.topics = []
+        self.topic = None
+        self.section_depth = 0
+        self.title_tag = None
+        self.chapter = []
+        self.ids = set()
+        self.topic_header = False
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if attrs.get("id"):
+            if attrs["id"] in self.ids:
+                raise ValueError("Duplicate Reign ID: " + attrs["id"])
+            self.ids.add(attrs["id"])
+        if tag == "h1":
+            self.title_tag = "h1"
+        if tag == "section":
+            if self.topic is not None:
+                self.section_depth += 1
+            elif "topic" in attrs.get("class", "").split():
+                self.topic = {"id": attrs["id"], "title": [], "text": [],
+                              "preview": attrs.get("data-preview") == "true"}
+                self.section_depth = 1
+        if self.topic is not None and tag == "h2":
+            self.title_tag = "h2"
+        if self.topic is not None and tag == "header":
+            self.topic_header = True
+
+    def handle_data(self, data):
+        if self.title_tag == "h1":
+            self.chapter.append(data)
+        if self.topic is not None:
+            if not self.topic_header:
+                self.topic["text"].append(data)
+            if self.title_tag == "h2":
+                self.topic["title"].append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "header":
+            self.topic_header = False
+        if tag == self.title_tag:
+            self.title_tag = None
+        if tag == "section" and self.topic is not None:
+            self.section_depth -= 1
+            if self.section_depth == 0:
+                self.topics.append(self.topic)
+                self.topic = None
+
+
+def build_reign_search(out, pages):
+    """Generate clean topic URLs and fail the build if aliases or topic IDs have drifted."""
+    aliases = json.loads((ROOT / "data/reign-aliases.json").read_text(encoding="utf-8"))
+    records, seen = [], set()
+    for page in sorted(p for p in pages if p.startswith("reign/")):
+        parser = ReignTopics()
+        parser.feed((ROOT / page).read_text(encoding="utf-8"))
+        for topic in parser.topics:
+            ident = topic["id"]
+            if ident in seen:
+                raise ValueError("Duplicate Reign topic: " + ident)
+            seen.add(ident)
+            names = aliases.get(ident)
+            if not isinstance(names, list) or not all(isinstance(name, str) for name in names):
+                raise ValueError("Missing or invalid Reign aliases: " + ident)
+            records.append({
+                "id": ident, "url": clean_path(page) + "#" + quote(ident),
+                "title": " ".join(topic["title"]).strip(),
+                "chapter": " ".join(parser.chapter).strip(),
+                "text": " ".join(" ".join(topic["text"]).split()),
+                "aliases": names, "preview": topic["preview"],
+            })
+    if seen != set(aliases):
+        raise ValueError("Reign alias/topic mismatch: " + ", ".join(sorted(set(aliases) ^ seen)))
+    (out / "data/reign-search.json").write_text(
+        json.dumps(records, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
 def build(out):
@@ -250,6 +333,7 @@ def build(out):
             legacy = out / rel
             legacy.write_text(legacy_page(rel, title.group(1).strip() if title else "Dwemer Dynamics"),
                               encoding="utf-8", newline="")
+    build_reign_search(out, pages)
     return pages
 
 

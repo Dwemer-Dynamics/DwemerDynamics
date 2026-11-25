@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -82,6 +83,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -94,6 +96,11 @@
                     <p class="lo-standfirst">Use portraits, scene pictures, outfit previews and the Memory Book.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="pictures-appearance-and-memories" tabindex="-1"><section class="topic lo-section" id="portraits-and-look-at-them" tabindex="-1"><header><h2>Portraits and Look at them</h2><a aria-label="Link to Portraits and Look at them" class="permalink" href="#portraits-and-look-at-them">#</a></header>
 <p>Reign can display persistent portraits across its own screens and supported native surfaces. Shipped characters can use the shared library; dynamic people and changed appearances can use campaign-specific pictures. A missing picture does not mean the person has no identity or history.</p>
 

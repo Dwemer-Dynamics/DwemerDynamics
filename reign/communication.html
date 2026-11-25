@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -83,6 +84,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -95,6 +97,11 @@
                     <p class="lo-standfirst">Talk to your party, exchange letters, and keep in touch across the campaign.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="group-chat-letters-and-everyday-communication" tabindex="-1"><section class="topic lo-section" data-preview="true" id="party-chat-and-private-audiences" tabindex="-1"><header><h2>Party Chat and private audiences</h2><span class="badge">Preview included</span><a aria-label="Link to Party Chat and private audiences" class="permalink" href="#party-chat-and-private-audiences">#</a></header>
 <p>Press <strong>backslash (\)</strong> or use <strong>MCM → Utilities → Open Party Chat</strong>, select the people you want, then send your contribution to that audience. <strong>Enter</strong> or <strong>Numpad Enter</strong> sends a ready contribution. <strong>Alt+A</strong> opens the action builder for eligible selected participants. <strong>Escape</strong> closes an open image/portrait layer first or leaves Party Chat. <strong>All</strong> selects the available group and <strong>Clear</strong> clears selection. Eligible people depend on your party and safe location; availability is not permission to speak to someone across the world.</p>
 

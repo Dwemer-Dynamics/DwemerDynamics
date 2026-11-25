@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -84,6 +85,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -96,6 +98,11 @@
                     <p class="lo-standfirst">Hold court, hear petitions, appoint officers, and review your kingdom.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="ruling-a-kingdom" tabindex="-1"><section class="topic lo-section" data-preview="true" id="capitals-and-rule-mode" tabindex="-1"><header><h2>Capitals and Rule Mode</h2><span class="badge">Preview included</span><a aria-label="Link to Capitals and Rule Mode" class="permalink" href="#capitals-and-rule-mode">#</a></header>
 <p>As ruler, use <strong>Designate Capital</strong> in an eligible town of your kingdom. At a safe kingdom town or castle, <strong>Enter Rule Mode</strong> opens court business. The capital provides <strong>Royal Court</strong> with full royal scope; another eligible holding provides a reduced <strong>Local Docket</strong>. Captivity, siege, and unsafe conditions can interrupt access.</p>
 

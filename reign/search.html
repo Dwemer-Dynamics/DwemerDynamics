@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search the guide | REIGN | Dwemer Dynamics</title>
+    <meta name="description" content="Find a topic using everyday words, exact screen names or a short question.">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/guide-outline.css">
+    <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
+</head>
+<body class="guide-outline reign-theme">
+    <script src="../js/guide-outline.js"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
+        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-install" href="./getting-started.html">Start here</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
+            </div>
+            <p class="reign-companion">The Player’s Companion</p>
+            <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
+<li><a class="lo-item" href="./index.html">Overview</a></li>
+</ul>
+<p class="lo-group">Start here</p>
+<ul>
+<li><a class="lo-item" href="./requirements.html">Requirements</a></li>
+<li><a class="lo-item" href="./getting-started.html">First session</a></li>
+<li><a class="lo-item" href="./conversations.html">Conversations</a></li>
+</ul>
+<p class="lo-group">Actions</p>
+<ul>
+<li><a class="lo-item" href="./actions.html">Action sentences</a></li>
+</ul>
+<p class="lo-group">People and daily life</p>
+<ul>
+<li><a class="lo-item" href="./characters.html">Characters</a></li>
+<li><a class="lo-item" href="./communication.html">Chat and letters</a></li>
+<li><a class="lo-item" href="./events.html">Events and personal lives</a></li>
+<li><a class="lo-item" href="./town-life.html">Town life</a></li>
+</ul>
+<p class="lo-group">Relationships and households</p>
+<ul>
+<li><a class="lo-item" href="./relationships.html">Relationships and family</a></li>
+<li><a class="lo-item" href="./reputation.html">Reputation</a></li>
+<li><a class="lo-item" href="./households.html">Keeps and households</a></li>
+</ul>
+<p class="lo-group">Rule and politics</p>
+<ul>
+<li><a class="lo-item" href="./ruling.html">Ruling a kingdom</a></li>
+<li><a class="lo-item" href="./government.html">Government</a></li>
+<li><a class="lo-item" href="./diplomacy.html">Diplomacy</a></li>
+<li><a class="lo-item" href="./spymaster.html">Spymaster</a></li>
+</ul>
+<p class="lo-group">War and the world</p>
+<ul>
+<li><a class="lo-item" href="./warfare.html">War and armies</a></li>
+<li><a class="lo-item" href="./justice-and-rebellion.html">Justice and rebellion</a></li>
+<li><a class="lo-item" href="./economy.html">Economy</a></li>
+<li><a class="lo-item" href="./world-events.html">Time and world events</a></li>
+<li><a class="lo-item" href="./arenas.html">Arenas and tournaments</a></li>
+</ul>
+<p class="lo-group">Settings and help</p>
+<ul>
+<li><a class="lo-item" href="./pictures-and-memories.html">Pictures and memories</a></li>
+<li><a class="lo-item" href="./saves-and-backups.html">Saves and backups</a></li>
+<li><a class="lo-item" href="./configuration.html">Settings and providers</a></li>
+<li><a class="lo-item" href="./help.html">Troubleshooting</a></li>
+</ul>
+<p class="lo-group">Reference</p>
+<ul>
+<li><a class="lo-item" href="./search.html" aria-current="page">Search the guide</a></li>
+<li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
+<li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
+</ul>
+        </nav>
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <article class="lo-article">
+                <header class="lo-intro">
+                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
+                    <h1>Search the guide</h1>
+                    <p class="lo-standfirst">Find a topic using everyday words, exact screen names or a short question.</p>
+                </header>
+                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
+                <section aria-label="Search results">
+                    <p id="reign-search-status" role="status" aria-live="polite" aria-atomic="true">Enter a topic above to search the whole guide.</p>
+                    <ol id="reign-results"></ol>
+                    <noscript><p>Keyword search needs JavaScript. <a href="./topics.html">Browse the complete A–Z directory</a>, or open a chapter and use your browser’s Find command.</p></noscript>
+                    <p><a href="./topics.html">Browse A–Z topics and the glossary →</a></p>
+                </section>
+                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+            </article>
+        </main>
+    </div>
+</body>
+</html>

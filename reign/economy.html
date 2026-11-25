@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -86,6 +87,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -98,6 +100,11 @@
                     <p class="lo-standfirst">Plan for troop costs, population, food, supply and recovery.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="economy-and-survival" tabindex="-1"><section class="topic lo-section" data-preview="true" id="troops-cost-more-than-in-native-bannerlord" tabindex="-1"><header><h2>Troops cost more than in native Bannerlord</h2><span class="badge">Preview included</span><a aria-label="Link to Troops cost more than in native Bannerlord" class="permalink" href="#troops-cost-more-than-in-native-bannerlord">#</a></header>
 <p>Recruiting, upgrading, and maintaining a strong army is more expensive in Reign, especially as troops become more advanced. A field army that you can buy today may still be unaffordable to keep supplied. Native perks and discounts still matter; negotiated hero or guest pay follows its own agreement.</p>
 

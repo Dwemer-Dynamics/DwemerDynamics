@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -76,6 +77,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><div class="lo-current"><a class="lo-item" href="./edition-notes.html" aria-current="page">Edition notes</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
 <ol class="lo-outline" id="lo-outline" aria-label="On this page">
@@ -91,6 +93,11 @@
                     <p class="lo-standfirst">This guide follows the November 24, 2026 development edition. Your installed package may differ.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="edition-notes"><section class="topic lo-section" id="what-is-still-being-verified" tabindex="-1"><header><h2>What is still being verified</h2><a aria-label="Link to What is still being verified" class="permalink" href="#what-is-still-being-verified">#</a></header>
 <p>The guide covers the reviewed code and documented behavior, not a claim that every feature has passed release acceptance. Significant open areas include Royal Council, expanded Government participation and hearings, broader court-life work, NPC Lives journeys and missions, residents/Homes recruitment, personal gossip/communications, Clan Accords, Tavern House, ruler judgments, arena integration, and recent military/economic balance.</p>
 

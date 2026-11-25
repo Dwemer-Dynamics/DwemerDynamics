@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/guide-outline.css">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -81,6 +82,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
 <li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
 </ul>
@@ -93,6 +95,11 @@
                     <p class="lo-standfirst">What you need, how the local server and cloud providers fit together, and how to plan for resource use.</p>
                 </header>
                 <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="requirements-and-resource-use" tabindex="-1"><section class="topic lo-section" id="what-you-need-before-playing" tabindex="-1"><header><h2>What you need before playing</h2><a aria-label="Link to What you need before playing" class="permalink" href="#what-you-need-before-playing">#</a></header>
 <p>Reign is a Windows PC single-player mod with a local companion server. You need a licensed Bannerlord installation compatible with your Reign package, its required native modules and installed dependencies, and the launcher's dedicated <strong>ReignServer WSL</strong> environment. Use a current supported 64-bit Windows installation with WSL 2 and virtualization available. Check the package's supported game version before updating Bannerlord; this guide is not a promise of compatibility with every future release or other mod.</p>
 

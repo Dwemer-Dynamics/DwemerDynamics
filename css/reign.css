@@ -45,6 +45,21 @@
 .reign-theme .index-letter ul { columns: 2; column-gap: 2rem; list-style: none; padding: 0; }
 .reign-theme .index-letter li { break-inside: avoid; margin: 0 0 .6rem; font-size: .9rem; }
 .reign-theme :focus-visible { outline: 2px solid var(--lo-accent); outline-offset: 4px; }
+.reign-theme .reign-search { margin: 0 0 2rem; }
+.reign-theme .reign-search label { display: block; margin-bottom: .4rem; color: var(--lo-muted); font-size: .8rem; }
+.reign-theme .reign-search-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.reign-theme .reign-search input { flex: 1 1 10rem; min-width: 0; padding: .65rem .85rem; border: 1px solid #72654e; border-radius: 4px; background: #111110; color: var(--lo-text); font: 1rem var(--lo-sans); }
+.reign-theme .reign-search button { min-height: 2.75rem; padding: .55rem .9rem; border: 1px solid var(--lo-accent); border-radius: 4px; background: var(--lo-accent); color: #171716; font: 600 .88rem var(--lo-sans); cursor: pointer; }
+.reign-theme .reign-search button:hover { background: #ead3a7; }
+.reign-theme #reign-search-clear { background: transparent; color: var(--lo-accent); border-color: var(--lo-line2); }
+.reign-theme .reign-search-help { margin: .5rem 0 0; font-size: .75rem; color: var(--lo-muted); }
+.reign-theme #reign-search-status { color: var(--lo-muted); }
+.reign-theme #reign-results { list-style: none; padding: 0; }
+.reign-theme #reign-results li { padding: 1.25rem 0; border-bottom: 1px solid var(--lo-line2); }
+.reign-theme #reign-results h2 { font: 500 1.35rem/1.35 var(--lo-serif); margin: .3rem 0 .6rem; }
+.reign-theme #reign-results p { margin: .4rem 0; font-size: .9rem; }
+.reign-theme #reign-results .reign-result-meta { color: var(--lo-muted); font-size: .75rem; }
+.reign-theme mark { background: #4b402a; color: #fff2d5; padding: 0 .06em; }
 @media (max-width: 520px) {
     .reign-theme .reign-routes, .reign-theme .reign-directory { grid-template-columns: 1fr; }
     .reign-theme .index-letter ul { columns: 1; }
@@ -56,5 +71,8 @@
     .reign-theme .lo-article :is(p, li, h1, h2, h3, a, figcaption, strong) { color: black; }
     .reign-theme .callout, .reign-theme th { background: #eee; }
     .reign-theme .permalink { display: none; }
+    .reign-theme .reign-search { display: none; }
+    .reign-theme .table-wrap { overflow: visible; }
+    .reign-theme :is(th, td) { min-width: 0; }
     .reign-theme figure { break-inside: avoid; }
 }
