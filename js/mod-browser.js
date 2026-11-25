@@ -12,6 +12,14 @@
     var REPOSITORY = /^https:\/\/github\.com\/([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)$/;
     var TAG = /^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/;
     var ART = /^img\/custom-mods\/[a-f0-9]{16}\.(png|jpg)$/;
+    // Stricter GitHub name rules for the launcher link only; anything else simply gets no Open button.
+    var OWNER = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/;
+    var REPO_NAME = /^(?!\.\.?$)[A-Za-z0-9_.-]{1,100}$/;
+    var OPEN_SCHEME = "dwemerdistro-mod:open?repo=";
+    var IS_WINDOWS = (function () {
+        var platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+        return /^win/i.test(platform) || /Windows NT/.test(navigator.userAgent || "");
+    })();
 
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
     else start();
@@ -331,6 +339,20 @@
             return mod.repo.replace(/[^A-Za-z0-9 _-]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || mod.title;
         }
 
+        // Plain link the user must click; the page never navigates to it on its own or checks whether it worked.
+        function launcherLink(mod) {
+            if (!IS_WINDOWS || !OWNER.test(mod.owner) || !REPO_NAME.test(mod.repo) || /\.git$/i.test(mod.repo)) return null;
+            var wrap = el("div", "mb-open");
+            var link = el("a", "mb-button mb-primary", "Open in DwemerDistro");
+            link.href = OPEN_SCHEME + mod.owner + "/" + mod.repo;
+            link.setAttribute("aria-label", "Open in DwemerDistro: " + mod.title);
+            var hint = el("p", "mb-open-hint", "Needs a current DwemerDistro launcher. If nothing opens, use the steps below.");
+            hint.id = "mb-open-hint-" + mods.indexOf(mod);
+            link.setAttribute("aria-describedby", hint.id);
+            wrap.append(link, hint);
+            return wrap;
+        }
+
         function step(parts) {
             var li = el("li");
             parts.forEach(function (part) {
@@ -356,6 +378,8 @@
                 panel.append(list);
 
                 panel.append(el("h3", "mb-subhead", "Install"));
+                var open = launcherLink(mod);
+                if (open) panel.append(open);
                 var steps = el("ol", "mb-steps");
                 steps.append(
                     step(["In DwemerDistro, run ", el("b", "", "Update Distro"), "."]),
