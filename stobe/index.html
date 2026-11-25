@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/guide.css">
     <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
+    <link rel="stylesheet" href="../css/guide-overview.css?v=20261124-overview">
 </head>
 <body class="guide-outline stobe-theme">
     <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
@@ -39,15 +40,16 @@
                         <button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Overview sections"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
                     </div>
                     <ol class="lo-outline" id="lo-outline" aria-label="On this page">
-                        <li><a href="#WhatStobeIsFor">Overview</a></li>
+                        <li><a href="#StartHere">Choose a starting point</a></li>
+                        <li><a href="#RecommendedStart">Recommended Start</a></li>
+                        <li><a href="#GuidePages">Browse the guide</a></li>
+                        <li><a href="#WhatStobeIsFor">What STOBE does</a></li>
                         <li><a href="#AgenticCharacters">Living Characters</a></li>
                         <li><a href="#NarratorAndTone">Narrator And World Tone</a></li>
                         <li><a href="#WorldAwareness">World Awareness</a></li>
                         <li><a href="#CharacterVoices">Character Voices</a></li>
                         <li><a href="#SharedAiStack">Shared DwemerDistro Stack</a></li>
                         <li><a href="#ConfigurationDepth">Configuration Depth</a></li>
-                        <li><a href="#RecommendedStart">Recommended Start</a></li>
-                        <li><a href="#GuidePages">Guide Pages</a></li>
                         <li><a href="#ConversationAndSaves">Direct Scenes And Keep Your History</a></li>
                     </ol>
                 </li>
@@ -86,107 +88,159 @@
         </nav>
 
         <main class="lo-main" id="lo-main" tabindex="-1">
-            <div class="lo-article content">
-            <span id="Overview" class="section">
-                <div class="card hero-card logo-container">
-                    <div>
-                        <h1>STOBE</h1>
-                        <p>
-                            STOBE is the Kenshi-side Dwemer Dynamics framework.
-                            It adds AI dialogue, voiced characters, narrator support, memories, and world-aware roleplay to Kenshi.
-                        </p>
-                    </div>
-                </div>
+            <article class="lo-article lo-overview" id="Overview">
+                <header class="lo-intro">
+                    <h1>STOBE</h1>
+                    <p class="lo-standfirst">STOBE is the Kenshi-side Dwemer Dynamics framework. It adds AI dialogue, voiced characters, narrator support, memories, and world-aware roleplay to Kenshi.</p>
+                </header>
 
-                <div class="card" id="WhatStobeIsFor">
-                    <h2>Overview</h2>
-                    <h3>What STOBE Is For</h3>
-                    <p>
-                        STOBE is built for Kenshi players who want AI characters to feel more present in the world instead of behaving like isolated chatbot windows.
-                    </p>
+                <nav class="ov-routes" id="StartHere" aria-label="Choose a starting point">
+                    <a href="./installation.html"><span>New to STOBE</span><strong>Install and start&nbsp;&rarr;</strong><small>DwemerDistro, the Web Quickstart and the Kenshi mods</small></a>
+                    <a href="./configuration.html"><span>Make it yours</span><strong>Configure STOBE&nbsp;&rarr;</strong><small>Profiles, narrator, voices and playthrough saves</small></a>
+                    <a href="./roleplay-settings.html"><span>Ready to play</span><strong>Roleplay in Kenshi&nbsp;&rarr;</strong><small>NPCs, diaries, relationships and player bases</small></a>
+                    <a href="./faq.html"><span>Need a hand?</span><strong>Find help&nbsp;&rarr;</strong><small>Server, voice and import problems</small></a>
+                </nav>
+
+                <section class="lo-section lo-note" id="RecommendedStart">
+                    <h2>Recommended Start</h2>
+                    <p>For most users, the right path is still:</p>
+                    <ol>
+                        <li>Install DwemerDistro.</li>
+                        <li>Use OpenRouter first.</li>
+                        <li>Set up the required Kenshi-side mods.</li>
+                        <li>Get base conversations working before you expand into deeper tuning.</li>
+                    </ol>
+                </section>
+
+                <section class="lo-section" id="GuidePages">
+                    <h2>Browse the guide</h2>
+                    <p>Start with <a href="./installation.html">Installation</a>. Use <a href="./configuration.html">Configuration</a> for the web menus, <a href="./ingame-settings.html">Kenshi Settings</a> for the in-game windows, and the <a href="./faq.html">FAQ</a> when something is not working.</p>
+                    <div class="ov-directory">
+                        <section aria-labelledby="dir-start">
+                            <h3 id="dir-start">Get started</h3>
+                            <ul>
+                                <li><a href="./installation.html">Installation</a>
+                                    <ul class="ov-sections" aria-label="Installation sections">
+                                        <li><a href="./installation.html#InstallDistro">Install DwemerDistro</a></li>
+                                        <li><a href="./installation.html#ProfileSetup">Web Quickstart</a></li>
+                                        <li><a href="./installation.html#RequiredMods">Mod setup</a></li>
+                                        <li><a href="./installation.html#LaunchRuntime">In-game setup</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html">Configuration</a>
+                                    <ul class="ov-sections" aria-label="Configuration sections">
+                                        <li><a href="./configuration.html#Profiles">Profiles</a></li>
+                                        <li><a href="./configuration.html#Narrator">Narrator</a></li>
+                                        <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-play">
+                            <h3 id="dir-play">Play</h3>
+                            <ul>
+                                <li><a href="./roleplay-settings.html">Roleplay Settings</a>
+                                    <ul class="ov-sections" aria-label="Roleplay Settings sections">
+                                        <li><a href="./roleplay-settings.html#StobeNpcs">Stobe NPCs</a></li>
+                                        <li><a href="./roleplay-settings.html#PlayerBases">Player base awareness</a></li>
+                                        <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./ingame-settings.html">Kenshi Settings</a>
+                                    <ul class="ov-sections" aria-label="Kenshi Settings sections">
+                                        <li><a href="./ingame-settings.html#AiPanel">AI Panel</a></li>
+                                        <li><a href="./ingame-settings.html#ChatBox">Chat Box</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-ai">
+                            <h3 id="dir-ai">AI services</h3>
+                            <ul>
+                                <li><a href="./llm.html">Large Language Models</a>
+                                    <ul class="ov-sections" aria-label="Large Language Models sections">
+                                        <li><a href="./llm.html#ResponseModes">Response modes</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./local-llm-guide.html">Local LLMs</a></li>
+                                <li><a href="./tts.html">Text-to-Speech</a>
+                                    <ul class="ov-sections" aria-label="Text-to-Speech sections">
+                                        <li><a href="./tts.html#VoiceLibrary">STOBE voice library</a></li>
+                                        <li><a href="./tts.html#VoiceTools">Voice Tools</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./stt.html">Speech-to-Text</a></li>
+                            </ul>
+                        </section>
+                        <section aria-labelledby="dir-help">
+                            <h3 id="dir-help">Help</h3>
+                            <ul>
+                                <li><a href="./faq.html">FAQ</a></li>
+                                <li><a href="./log-files-and-debugging.html">Log Files</a></li>
+                                <li><a href="./remote-hosting-guide.html">Remote Hosting Guide</a></li>
+                                <li><a href="./linux-setup-guide.html">Linux Setup Guide</a></li>
+                                <li><a href="./modders-guide.html">Modders Guide</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="lo-section" id="WhatStobeIsFor">
+                    <h2>What STOBE does</h2>
+                    <p>STOBE is built for Kenshi players who want AI characters to feel present in the world instead of behaving like isolated chatbot windows.</p>
                     <ul>
                         <li>Bring AI dialogue and voice into Kenshi scenes.</li>
                         <li>Give characters distinct profiles, memories, diaries, relationships, and voices.</li>
                         <li>Let conversations reflect nearby people, inventories, locations, world events, and player bases.</li>
                         <li>Use simple in-game menus for chat, recent history, NPC details, and response modes.</li>
                     </ul>
-                </div>
 
-                <div class="card" id="AgenticCharacters">
-                    <h3>Living Characters</h3>
-                    <p>
-                        STOBE supports your whole playthrough instead of one special companion. Characters can keep their own identity, remember important events, write diaries, and change how they feel about others over time.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="AgenticCharacters">
+                        <h3>Living Characters</h3>
+                        <p>STOBE supports your whole playthrough instead of one special companion. Characters can keep their own identity, remember important events, write diaries, and change how they feel about others over time.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html">Characters, diaries and relationships &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="NarratorAndTone">
-                    <h3>Narrator And World Tone</h3>
-                    <p>
-                        The narrator can introduce a playthrough, describe scenes, keep its own diary, and use a custom name and voice. Inline narration can be spoken by the narrator, spoken by the NPC, or shown as text only.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="NarratorAndTone">
+                        <h3>Narrator And World Tone</h3>
+                        <p>The narrator can introduce a playthrough, describe scenes, keep its own diary, and use a custom name and voice. Inline narration can be spoken by the narrator, spoken by the NPC, or shown as text only.</p>
+                        <p class="ov-more"><a href="./configuration.html#Narrator">Narrator settings &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="WorldAwareness">
-                    <h3>World Awareness</h3>
-                    <p>
-                        STOBE follows more than dialogue. Characters can react to travel, injuries, death, limb loss, slavery, trade, world-state changes, and the condition of a player base while they are inside it.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="WorldAwareness">
+                        <h3>World Awareness</h3>
+                        <p>Characters can react to travel, injuries, death, limb loss, slavery, trade, world-state changes, and the condition of a player base while they are inside it.</p>
+                        <p class="ov-more"><a href="./roleplay-settings.html#WorldKnowledge">World knowledge and world state &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="CharacterVoices">
-                    <h3>Character Voices</h3>
-                    <p>
-                        STOBE includes voices selected for Kenshi races and unique characters. Greenlanders, Scorchlanders, Shek, Hivers, Skeletons, Cannibals, and named NPCs can sound more distinct, with general voices used when no closer match is available.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="CharacterVoices">
+                        <h3>Character Voices</h3>
+                        <p>STOBE includes voices selected for Kenshi races and unique characters. Greenlanders, Scorchlanders, Shek, Hivers, Skeletons, Cannibals, and named NPCs can sound more distinct, with general voices used when no closer match is available.</p>
+                        <p class="ov-more"><a href="./tts.html#VoiceLibrary">The STOBE voice library &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="SharedAiStack">
-                    <h3>Shared DwemerDistro Stack</h3>
-                    <p>
-                        STOBE uses the same DwemerDistro backbone as the rest of Dwemer Dynamics. That means the same general model, voice, and service setup ideas carry over here, but the runtime and guide flow are aimed at Kenshi.
-                    </p>
-                    <p>
-                        If you already understand the DwemerDistro workflow from other Dwemer Dynamics projects, STOBE will feel familiar.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="SharedAiStack">
+                        <h3>Shared DwemerDistro Stack</h3>
+                        <p>STOBE uses the same DwemerDistro backbone as the rest of Dwemer Dynamics, so the same model, voice, and service setup ideas carry over, but the runtime and guide flow are aimed at Kenshi. If you already know the DwemerDistro workflow from other Dwemer Dynamics projects, STOBE will feel familiar.</p>
+                    </section>
 
-                <div class="card" id="ConfigurationDepth">
-                    <h3>Configuration Depth</h3>
-                    <p>
-                        STOBE is not locked to one service combination. Profiles have Standard, Fast, Powerful, and Experimental response choices, while QuickStart provides a ready-to-use default setup.
-                    </p>
-                </div>
+                    <section class="ov-feature" id="ConfigurationDepth">
+                        <h3>Configuration Depth</h3>
+                        <p>STOBE is not locked to one service combination. Profiles have Standard, Fast, Powerful, and Experimental response choices, while QuickStart provides a ready-to-use default setup.</p>
+                        <p class="ov-more"><a href="./llm.html#ResponseModes">Response modes &rarr;</a></p>
+                    </section>
 
-                <div class="card" id="RecommendedStart">
-                    <h3>Recommended Start</h3>
-                    <p>
-                        For most users, the right path is still:
-                    </p>
-                    <ul>
-                        <li>Install DwemerDistro.</li>
-                        <li>Use OpenRouter first.</li>
-                        <li>Set up the required Kenshi-side mods.</li>
-                        <li>Get base conversations working before you expand into deeper tuning.</li>
-                    </ul>
-                </div>
-
-                <div class="card" id="GuidePages">
-                    <h3>Guide Pages</h3>
-                    <p>
-                        Start with <a href="./installation.html">Installation</a>. Use <a href="./configuration.html">Configuration</a> for the web menus, <a href="./ingame-settings.html">Kenshi Settings</a> for the in-game windows, and <a href="./faq.html">FAQ</a> when something is not working.
-                    </p>
-                </div>
-                <div class="card" id="ConversationAndSaves">
-                    <h3>Direct Scenes And Keep Your History</h3>
-                    <p>Guide a scene or keep separate AI histories for different games.</p>
-                    <ul>
-                        <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> lets you describe a scene for nearby NPCs to perform.</li>
-                        <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> keeps AI history organized by campaign.</li>
-                        <li><a href="./tts.html#VoiceTools">Voice Tools</a> lets you preview effects and adjust pronunciation.</li>
-                    </ul>
-                </div>
-            </span>
-        </div>
+                    <section class="ov-feature" id="ConversationAndSaves">
+                        <h3>Direct Scenes And Keep Your History</h3>
+                        <p>Guide a scene or keep separate AI histories for different games.</p>
+                        <ul>
+                            <li><a href="./roleplay-settings.html#DirectorScenes">Director Scenes</a> lets you describe a scene for nearby NPCs to perform.</li>
+                            <li><a href="./configuration.html#PlaythroughSaves">Playthrough Saves</a> keeps AI history organized by campaign.</li>
+                            <li><a href="./tts.html#VoiceTools">Voice Tools</a> lets you preview effects and adjust pronunciation.</li>
+                        </ul>
+                    </section>
+                </section>
+            </article>
             <nav class="lo-pager" aria-label="Guide pages">
                 <a class="lo-next" href="./installation.html" rel="next">Next: Installation &rarr;</a>
             </nav>
