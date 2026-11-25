@@ -147,11 +147,12 @@
 @media (min-width: 52rem) {
     .dd-home .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0; }
     .dd-home .wall > li + li { margin-top: .75rem; }
-    .dd-home .wall > li:not(.g-kagrenac) { grid-row: span 4; display: grid; grid-template-rows: subgrid; }
-    .dd-home .wall > li:not(.g-kagrenac) .tile { grid-row: span 4; display: grid; grid-template-rows: subgrid; align-items: start; }
-    .dd-home .wall > li:not(.g-kagrenac) .cap { grid-row: span 3; display: grid; grid-template-rows: subgrid; align-content: start; }
-    /* KAGRENAC spans both columns: art at 7/12 of the row, caption beside it */
-    .dd-home .g-kagrenac { grid-column: 1 / -1; }
+    /* :not() with a selector list keeps one-class specificity, so the later REIGN overrides still win */
+    .dd-home .wall > li:not(.g-kagrenac, .g-cmods) { grid-row: span 4; display: grid; grid-template-rows: subgrid; }
+    .dd-home .wall > li:not(.g-kagrenac, .g-cmods) .tile { grid-row: span 4; display: grid; grid-template-rows: subgrid; align-items: start; }
+    .dd-home .wall > li:not(.g-kagrenac, .g-cmods) .cap { grid-row: span 3; display: grid; grid-template-rows: subgrid; align-content: start; }
+    /* KAGRENAC and the Custom Mods band under it span both columns: art at 7/12 of the row, caption beside it */
+    .dd-home .g-kagrenac, .dd-home .g-cmods { grid-column: 1 / -1; }
     .dd-home .g-kagrenac .tile { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; column-gap: .75rem; }
     .dd-home .g-kagrenac .cap { padding: .6rem .6rem .6rem .25rem; }
 }
@@ -390,9 +391,10 @@
     .dd-home .wall > li.g-reign .cap { grid-row: auto; display: block; padding: .6rem; }
 }
 
-/* Custom Mods: a compact band under the wall pointing to the community mod browser. Bronze edge and
-   the KAGRENAC medallion tie it to the KAGRENAC tile; the action reuses the orange card button. */
-.dd-home .cmods { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .9rem 1.25rem; margin: -.75rem 0 2rem; padding: .9rem 1.1rem; border: 1px solid rgba(221, 181, 116, .32); border-radius: 8px; background: linear-gradient(100deg, rgba(221, 181, 116, .09), rgba(221, 181, 116, 0) 55%), var(--s1); }
+/* Custom Mods: a compact full-width wall item directly under KAGRENAC, pointing to the community mod
+   browser and spaced by the wall gap. Bronze edge and the KAGRENAC medallion tie it to the KAGRENAC
+   tile; the action reuses the orange card button. */
+.dd-home .cmods { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .9rem 1.25rem; flex: 1; margin: 0; padding: .9rem 1.1rem; border: 1px solid rgba(221, 181, 116, .32); border-radius: 8px; background: linear-gradient(100deg, rgba(221, 181, 116, .09), rgba(221, 181, 116, 0) 55%), var(--s1); }
 .dd-home .cmods-mark { width: 3.5rem; height: 3.5rem; border-radius: 50%; box-shadow: 0 0 0 1px rgba(221, 181, 116, .45), 0 6px 16px -6px rgba(0, 0, 0, .7); }
 .dd-home .cmods h2 { margin: 0; font-family: "MagicCards", serif; font-size: 1.5rem; font-weight: 400; line-height: 1.15; letter-spacing: 1.2px; word-spacing: 6px; color: #fff; }
 .dd-home .cmods p { margin: .2rem 0 0; color: var(--muted); font-size: .9375rem; }
