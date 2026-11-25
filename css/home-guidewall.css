@@ -373,6 +373,8 @@
 
 /* Reign closes the guide wall with a wide tile, keeping the existing product pairs intact. */
 .dd-home .g-reign h2 { font-family: Georgia, serif; letter-spacing: .1em; }
+.dd-home .g-reign h2 a { display: inline-flex; align-items: center; gap: .5rem; }
+.dd-home .g-reign .reign-title-icon { width: 32px; height: 32px; object-fit: contain; }
 @media (min-width: 760px) {
     .dd-home .wall > li.g-reign { grid-column: 1 / -1; grid-row: auto; display: block; }
     .dd-home .wall > li.g-reign .tile { grid-row: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: none; align-items: center; gap: .75rem; }
