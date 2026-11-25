@@ -389,3 +389,19 @@
     .dd-home .wall > li.g-reign .tile { grid-row: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: none; align-items: center; gap: .75rem; }
     .dd-home .wall > li.g-reign .cap { grid-row: auto; display: block; padding: .6rem; }
 }
+
+/* Custom Mods: a compact band under the wall pointing to the community mod browser. Bronze edge and
+   the KAGRENAC medallion tie it to the KAGRENAC tile; the action reuses the orange card button. */
+.dd-home .cmods { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .9rem 1.25rem; margin: -.75rem 0 2rem; padding: .9rem 1.1rem; border: 1px solid rgba(221, 181, 116, .32); border-radius: 8px; background: linear-gradient(100deg, rgba(221, 181, 116, .09), rgba(221, 181, 116, 0) 55%), var(--s1); }
+.dd-home .cmods-mark { width: 3.5rem; height: 3.5rem; border-radius: 50%; box-shadow: 0 0 0 1px rgba(221, 181, 116, .45), 0 6px 16px -6px rgba(0, 0, 0, .7); }
+.dd-home .cmods h2 { margin: 0; font-family: "MagicCards", serif; font-size: 1.5rem; font-weight: 400; line-height: 1.15; letter-spacing: 1.2px; word-spacing: 6px; color: #fff; }
+.dd-home .cmods p { margin: .2rem 0 0; color: var(--muted); font-size: .9375rem; }
+.dd-home .cmods-go { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .4rem 1.25rem; border: 1px solid #b35200; border-radius: var(--r); background: #b35200; color: #fff; font-weight: 700; white-space: nowrap; text-decoration: none; transition: background-color .15s, border-color .15s, box-shadow .15s; }
+.dd-home .cmods-go:hover { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
+.dd-home .cmods-go:active { background: #9a4600; box-shadow: none; }
+.dd-home .cmods-go:focus-visible { outline-offset: 3px; border-radius: var(--r); box-shadow: 0 0 0 5px rgba(242, 124, 17, .22); }
+@media (max-width: 36rem) {
+    .dd-home .cmods { grid-template-columns: auto minmax(0, 1fr); padding: .85rem; }
+    .dd-home .cmods-mark { width: 3rem; height: 3rem; }
+    .dd-home .cmods-go { grid-column: 1 / -1; width: 100%; }
+}
