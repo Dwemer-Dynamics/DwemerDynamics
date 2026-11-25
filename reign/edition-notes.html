@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>About this guide | REIGN | Dwemer Dynamics</title>
-    <meta name="description" content="This guide follows the November 24, 2026 development edition. Your installed package may differ.">
-    <link rel="icon" href="../img/favicon.ico">
-    <link rel="stylesheet" href="../css/guide-outline.css">
+    <meta name="description" content="How to use the pictures, feature notes and version-specific guidance in this guide.">
+    <link rel="icon" type="image/png" href="../img/reign/icon.png">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261124-reign-gold">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -15,17 +16,18 @@
     <a class="lo-skip" href="#lo-main">Skip to article</a>
     <header class="lo-topbar">
         <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
-        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-brand" href="./index.html"><img src="../img/reign/icon.png" alt="" width="32" height="32"><b>REIGN</b></a>
         <a class="lo-install" href="./getting-started.html">Start here</a>
     </header>
     <div class="lo-scrim" id="lo-scrim"></div>
     <div class="lo-shell">
         <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
             <div class="lo-nav-head">
-                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <a class="lo-brand" href="./index.html"><img src="../img/reign/icon.png" alt="" width="32" height="32"><b>REIGN</b></a>
+                <a class="lo-install" href="./getting-started.html">Start here</a>
                 <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
             </div>
-            <p class="reign-companion">The Player’s Companion</p>
+            <p class="reign-companion">Mount &amp; Blade II: Bannerlord</p>
             <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
 <li><a class="lo-item" href="./index.html">Overview</a></li>
 </ul>
@@ -76,8 +78,9 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
-<li><div class="lo-current"><a class="lo-item" href="./edition-notes.html" aria-current="page">Edition notes</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+<li><div class="lo-current"><a class="lo-item" href="./edition-notes.html" aria-current="page">Guide notes</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
 <ol class="lo-outline" id="lo-outline" aria-label="On this page">
 <li><a href="#what-is-still-being-verified">What is still being verified</a></li>
 </ol></li>
@@ -86,26 +89,25 @@
         <main class="lo-main" id="lo-main" tabindex="-1">
             <article class="lo-article">
                 <header class="lo-intro">
-                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
                     <h1>About this guide</h1>
-                    <p class="lo-standfirst">This guide follows the November 24, 2026 development edition. Your installed package may differ.</p>
+                    <p class="lo-standfirst">How to use the pictures, feature notes and version-specific guidance in this guide.</p>
                 </header>
-                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="edition-notes"><section class="topic lo-section" id="what-is-still-being-verified" tabindex="-1"><header><h2>What is still being verified</h2><a aria-label="Link to What is still being verified" class="permalink" href="#what-is-still-being-verified">#</a></header>
-<p>The guide covers the reviewed code and documented behavior, not a claim that every feature has passed release acceptance. Significant open areas include Royal Council, expanded Government participation and hearings, broader court-life work, NPC Lives journeys and missions, residents/Homes recruitment, personal gossip/communications, Clan Accords, Tavern House, ruler judgments, arena integration, and recent military/economic balance.</p>
-
-<p>This November 24 edition incorporates changes in the paired Reign and ReignServer development sources. Your installed release may show older controls. The guide calls out the earlier clan caravan pilot where that difference matters.</p>
-
-<p>Descriptions of these areas explain what their implemented routes are for, while Preview notices flag their limits. A roadmap checkbox, a successful build, a picture, and a natural-sounding reply are each different from final native acceptance. Your installed edition can also lag behind current development source.</p>
-
-<p>Hardware planning figures remain provisional until representative campaign measurements are available.</p>
-
-<p>This edition covers the reviewed action sentence catalog and the marriage and economy changes through November 9. The local installation includes the revised NPC matchmaking, Nord households, medical discharge, and war economy rules. The wedding evidence covers one complete Aserai route. The controlled war economy observations cover specific routes, with broader campaign balance still being tested. Preview notices indicate an edition difference or an open acceptance check. The <strong>NPC Clan Trade</strong> notice states its current deployment status.</p>
+<p>Your installed version may have different controls or feature availability. Preview notices explain where a feature still needs broader gameplay testing or behaves differently between versions.</p>
+<p>Areas with open testing include Royal Council, Government participation and hearings, court life, NPC Lives journeys and missions, Homes recruitment, personal gossip and communications, Clan Accords, Tavern House, ruler judgments, arena integration, and military and economic balance.</p>
+<p>Marriage and economy coverage includes specific tested routes; it does not establish every wedding route or long-term campaign balance. Read the <strong>NPC Clan Trade</strong> feature note for its availability in your version.</p>
+<p>Hardware guidance remains provisional until representative campaigns have been measured. See <a href="./requirements.html">Requirements</a> before planning your setup.</p>
+<p>Pictures marked <strong>In-game screenshot</strong> are player captures. <strong>Layout examples</strong> are illustrative references and may differ from the installed interface. <strong>Diagrams</strong> explain a process. Use the written steps and the controls in your game when an image differs.</p>
 </section>
 </section>
 
                 <nav class="lo-pager" aria-label="Continue reading"><a href="./topics.html">← A–Z topics</a></nav>
-                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+                <footer class="lo-footer">REIGN · Mount &amp; Blade II: Bannerlord<br><a href="../index.html">Dwemer Dynamics</a></footer>
             </article>
         </main>
     </div>

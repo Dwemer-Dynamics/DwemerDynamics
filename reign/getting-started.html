@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Start here | REIGN | Dwemer Dynamics</title>
     <meta name="description" content="Start the server, prepare your campaign, and learn the controls you will use first.">
-    <link rel="icon" href="../img/favicon.ico">
-    <link rel="stylesheet" href="../css/guide-outline.css">
+    <link rel="icon" type="image/png" href="../img/reign/icon.png">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261124-reign-gold">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -15,17 +16,18 @@
     <a class="lo-skip" href="#lo-main">Skip to article</a>
     <header class="lo-topbar">
         <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
-        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-brand" href="./index.html"><img src="../img/reign/icon.png" alt="" width="32" height="32"><b>REIGN</b></a>
         <a class="lo-install" href="./getting-started.html">Start here</a>
     </header>
     <div class="lo-scrim" id="lo-scrim"></div>
     <div class="lo-shell">
         <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
             <div class="lo-nav-head">
-                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <a class="lo-brand" href="./index.html"><img src="../img/reign/icon.png" alt="" width="32" height="32"><b>REIGN</b></a>
+                <a class="lo-install" href="./getting-started.html">Start here</a>
                 <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
             </div>
-            <p class="reign-companion">The Player’s Companion</p>
+            <p class="reign-companion">Mount &amp; Blade II: Bannerlord</p>
             <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
 <li><a class="lo-item" href="./index.html">Overview</a></li>
 </ul>
@@ -82,28 +84,32 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
-<li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
+<li><a class="lo-item" href="./edition-notes.html">Guide notes</a></li>
 </ul>
         </nav>
         <main class="lo-main" id="lo-main" tabindex="-1">
             <article class="lo-article">
                 <header class="lo-intro">
-                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
                     <h1>Start here</h1>
                     <p class="lo-standfirst">Start the server, prepare your campaign, and learn the controls you will use first.</p>
                 </header>
-                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="start-here" tabindex="-1"><section class="topic lo-section" id="how-to-use-this-guide" tabindex="-1"><header><h2>How to use this guide</h2><a aria-label="Link to How to use this guide" class="permalink" href="#how-to-use-this-guide">#</a></header>
 <p>New to Reign? Read <strong>Your first session</strong>, then <strong>Your first conversation</strong>. After that, follow whatever interests you: ordinary adventuring, relationships, running a household, or ruling a kingdom. You do not need a crown to enjoy most social features.</p>
 
-<p>Use the contents to browse or the A–Z index to find a topic. Your browser’s Find command searches the page you are reading.</p>
+<p>Use the contents to browse, the A–Z index to find a topic, or search the whole guide in your own words: wife, have a baby, NPC won’t leave, troops expensive, letters, save warning, or become senator. Your browser’s Find command searches the page you are reading.</p>
 
 <p>This guide describes effects rather than balance formulas. Where the game asks you to choose an amount, duration, price, or setting, read the current terms on screen. An example sentence is a suggestion for what to ask, never a guaranteed answer or a cheat code.</p>
 
 <p>Pictures marked In-game screenshot are actual player captures. Open a picture to view its larger version in a new tab. Pictures marked Layout example are temporary Reign design references with illustrative people, text, and values. Pictures marked Diagram explain a process. Text instructions describe current source behavior where an older reference differs.</p>
 
-<aside class="callout note"><p>Edition note: This is a guide to the reviewed development checkout, including implemented previews. A Preview notice means native or final release acceptance remains open, or the installed edition may differ. It does not mean every part is broken. See <strong>What is still being verified</strong> for the main areas. This guide itself does not certify the mod's gameplay.</p>
+<aside class="callout note"><p>Version differences: Preview notices identify features that may differ in your installed version or still need broader gameplay testing. See <a href="./edition-notes.html">Guide notes</a> for details.</p>
 </aside>
 </section>
 
@@ -151,7 +157,7 @@
 </section>
 
                 <nav class="lo-pager" aria-label="Continue reading"><a href="./requirements.html">← Requirements</a><a class="lo-next" href="./conversations.html">Conversations →</a></nav>
-                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+                <footer class="lo-footer">REIGN · Mount &amp; Blade II: Bannerlord<br><a href="../index.html">Dwemer Dynamics</a></footer>
             </article>
         </main>
     </div>

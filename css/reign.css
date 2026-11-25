@@ -1,28 +1,12 @@
 /* Reign extends the shared reading layout; other product guides keep their styles. */
-.guide-outline.reign-theme {
-    --lo-bg: #171716;
-    --lo-raise: #23221f;
-    --lo-line: #343129;
-    --lo-accent: #d8bc85;
-    --lo-cta: #d8bc85;
-    --lo-bar: #b99a61;
-    --lo-title: var(--lo-serif);
-}
-.reign-theme .lo-intro h1 { letter-spacing: -.035em; line-height: 1.12; }
-.reign-theme .lo-standfirst { margin-bottom: 1.5rem; font-size: 1.15rem; }
-.reign-theme .lo-brand b { font-family: var(--lo-serif); letter-spacing: .16em; }
 .reign-theme .reign-companion { margin: -.4rem .5rem 1.2rem; color: var(--lo-muted); font-size: .75rem; }
-.reign-theme .reign-eyebrow { color: var(--lo-accent); text-transform: uppercase; letter-spacing: .12em; font-size: .7rem; font-weight: 600; margin: 0 0 1rem; }
-.reign-theme .reign-edition { color: var(--lo-muted); font-size: .75rem; margin: 0 0 2rem; }
-.reign-theme .lo-section h2 { font: 500 1.65rem/1.25 var(--lo-serif); margin: 0 0 1rem; }
+.reign-theme .lo-section h2 { font: 600 1.375rem/1.3 var(--lo-sans); margin: 0 0 .75rem; }
 .reign-theme .topic > header { display: flex; gap: .75rem; align-items: baseline; }
 .reign-theme .permalink { font-size: .85rem; color: var(--lo-muted); text-decoration: none; }
 .reign-theme .topic > header h2 { flex: 1; }
 .reign-theme .callout { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 2px solid var(--lo-accent); background: var(--lo-raise); font-size: .94rem; }
 .reign-theme .callout p:last-child { margin-bottom: 0; }
-.reign-theme .preview { border-left-color: #cfaa6d; }
 .reign-theme .badge { color: var(--lo-accent); font: 400 .68rem/1.4 var(--lo-sans); white-space: nowrap; }
-.reign-theme kbd { font: .82em var(--lo-mono); padding: .1em .35em; border: 1px solid var(--lo-line2); border-radius: 3px; white-space: nowrap; }
 .reign-theme .table-wrap { overflow-x: auto; margin: 1.2rem 0; }
 .reign-theme table { width: 100%; border-collapse: collapse; font-size: .88rem; }
 .reign-theme :is(th, td) { padding: .7rem .8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--lo-line2); }
@@ -44,11 +28,24 @@
 .reign-theme .index-letter h2 { font: 400 1.8rem var(--lo-serif); color: var(--lo-accent); }
 .reign-theme .index-letter ul { columns: 2; column-gap: 2rem; list-style: none; padding: 0; }
 .reign-theme .index-letter li { break-inside: avoid; margin: 0 0 .6rem; font-size: .9rem; }
-.reign-theme :focus-visible { outline: 2px solid var(--lo-accent); outline-offset: 4px; }
+.reign-theme .reign-search { margin: 0 0 2rem; }
+.reign-theme .reign-search label { display: block; margin-bottom: .4rem; color: var(--lo-muted); font-size: .8rem; }
+.reign-theme .reign-search-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.reign-theme .reign-search input { flex: 1 1 10rem; min-width: 0; padding: .65rem .85rem; border: 1px solid var(--lo-line2); border-radius: 4px; background: var(--lo-bg); color: var(--lo-text); font: 1rem var(--lo-sans); }
+.reign-theme .reign-search button { min-height: 2.75rem; padding: .55rem .9rem; border: 1px solid var(--lo-accent); border-radius: 4px; background: var(--lo-accent); color: var(--lo-bg); font: 600 .88rem var(--lo-sans); cursor: pointer; }
+.reign-theme .reign-search button:hover { background: color-mix(in srgb, var(--lo-accent) 85%, white); }
+.reign-theme #reign-search-clear { background: transparent; color: var(--lo-accent); border-color: var(--lo-line2); }
+.reign-theme .reign-search-help { margin: .5rem 0 0; font-size: .75rem; color: var(--lo-muted); }
+.reign-theme #reign-search-status { color: var(--lo-muted); }
+.reign-theme #reign-results { list-style: none; padding: 0; }
+.reign-theme #reign-results li { padding: 1.25rem 0; border-bottom: 1px solid var(--lo-line2); }
+.reign-theme #reign-results h2 { font: 500 1.35rem/1.35 var(--lo-serif); margin: .3rem 0 .6rem; }
+.reign-theme #reign-results p { margin: .4rem 0; font-size: .9rem; }
+.reign-theme #reign-results .reign-result-meta { color: var(--lo-muted); font-size: .75rem; }
+.reign-theme mark { background: color-mix(in srgb, var(--lo-accent) 25%, var(--lo-bg)); color: var(--lo-text); padding: 0 .06em; }
 @media (max-width: 520px) {
     .reign-theme .reign-routes, .reign-theme .reign-directory { grid-template-columns: 1fr; }
     .reign-theme .index-letter ul { columns: 1; }
-    .reign-theme .lo-pager { flex-direction: column; }
     .reign-theme :is(th, td) { min-width: 9rem; }
 }
 @media print {
@@ -56,5 +53,8 @@
     .reign-theme .lo-article :is(p, li, h1, h2, h3, a, figcaption, strong) { color: black; }
     .reign-theme .callout, .reign-theme th { background: #eee; }
     .reign-theme .permalink { display: none; }
+    .reign-theme .reign-search { display: none; }
+    .reign-theme .table-wrap { overflow: visible; }
+    .reign-theme :is(th, td) { min-width: 0; }
     .reign-theme figure { break-inside: avoid; }
 }

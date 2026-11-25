@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>A–Z topics and glossary | REIGN | Dwemer Dynamics</title>
     <meta name="description" content="Find the name you know. Everyday terms and exact screen names lead to the same practical guidance.">
-    <link rel="icon" href="../img/favicon.ico">
-    <link rel="stylesheet" href="../css/guide-outline.css">
+    <link rel="icon" type="image/png" href="../img/reign/icon.png">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261124-reign-gold">
     <link rel="stylesheet" href="../css/reign.css">
+    <script src="../js/reign-search.js" defer></script>
 </head>
 <body class="guide-outline reign-theme">
     <script src="../js/guide-outline.js"></script>
@@ -15,17 +16,18 @@
     <a class="lo-skip" href="#lo-main">Skip to article</a>
     <header class="lo-topbar">
         <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
-        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-brand" href="./index.html"><img src="../img/reign/icon.png" alt="" width="32" height="32"><b>REIGN</b></a>
         <a class="lo-install" href="./getting-started.html">Start here</a>
     </header>
     <div class="lo-scrim" id="lo-scrim"></div>
     <div class="lo-shell">
         <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
             <div class="lo-nav-head">
-                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <a class="lo-brand" href="./index.html"><img src="../img/reign/icon.png" alt="" width="32" height="32"><b>REIGN</b></a>
+                <a class="lo-install" href="./getting-started.html">Start here</a>
                 <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
             </div>
-            <p class="reign-companion">The Player’s Companion</p>
+            <p class="reign-companion">Mount &amp; Blade II: Bannerlord</p>
             <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
 <li><a class="lo-item" href="./index.html">Overview</a></li>
 </ul>
@@ -76,6 +78,7 @@
 </ul>
 <p class="lo-group">Reference</p>
 <ul>
+<li><a class="lo-item" href="./search.html">Search the guide</a></li>
 <li><div class="lo-current"><a class="lo-item" href="./topics.html" aria-current="page">A–Z topics</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
 <ol class="lo-outline" id="lo-outline" aria-label="On this page">
 <li><a href="#index-%23">#</a></li>
@@ -107,17 +110,20 @@
 <li><a href="#index-Z">Z</a></li>
 <li><a href="#quick-glossary">Quick glossary</a></li>
 </ol></li>
-<li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
+<li><a class="lo-item" href="./edition-notes.html">Guide notes</a></li>
 </ul>
         </nav>
         <main class="lo-main" id="lo-main" tabindex="-1">
             <article class="lo-article">
                 <header class="lo-intro">
-                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
                     <h1>A–Z topics and glossary</h1>
                     <p class="lo-standfirst">Find the name you know. Everyday terms and exact screen names lead to the same practical guidance.</p>
                 </header>
-                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <form class="reign-search" id="reign-search-form" action="./search.html" method="get" role="search">
+                    <label for="reign-query">Search the Reign guide</label>
+                    <div class="reign-search-row"><input id="reign-query" name="q" type="search" maxlength="160" placeholder="Topic, screen name or question…" autocomplete="off"><button type="submit">Search</button><button type="button" id="reign-search-clear" hidden>Clear</button></div>
+                    <p class="reign-search-help"><a href="./topics.html">Browse A–Z</a> · <span>Search shortcut: Ctrl/⌘ K</span></p>
+                </form>
                 <section class="chapter" id="topic-index" tabindex="-1"><nav aria-label="Index letters" class="alphabet"><a href="#index-%23">#</a><a href="#index-A">A</a><a href="#index-B">B</a><a href="#index-C">C</a><a href="#index-D">D</a><a href="#index-E">E</a><a href="#index-F">F</a><a href="#index-G">G</a><a href="#index-H">H</a><a href="#index-I">I</a><a href="#index-J">J</a><a href="#index-K">K</a><a href="#index-L">L</a><a href="#index-M">M</a><a href="#index-N">N</a><a href="#index-O">O</a><a href="#index-P">P</a><a href="#index-Q">Q</a><a href="#index-R">R</a><a href="#index-S">S</a><a href="#index-T">T</a><a href="#index-U">U</a><a href="#index-V">V</a><a href="#index-W">W</a><a href="#index-X">X</a><a href="#index-Y">Y</a><a href="#index-Z">Z</a></nav>
 <section class="index-letter" id="index-#"><h2>#</h2><ul><li><a href="./requirements.html#ram-plan-for-the-game-and-the-server-together">16 GB</a></li>
 <li><a href="./requirements.html#ram-plan-for-the-game-and-the-server-together">32 GB</a></li>
@@ -1241,8 +1247,8 @@
 </section>
 </section>
 
-                <nav class="lo-pager" aria-label="Continue reading"><a href="./help.html">← Troubleshooting</a><a class="lo-next" href="./edition-notes.html">Edition notes →</a></nav>
-                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+                <nav class="lo-pager" aria-label="Continue reading"><a href="./help.html">← Troubleshooting</a><a class="lo-next" href="./edition-notes.html">Guide notes →</a></nav>
+                <footer class="lo-footer">REIGN · Mount &amp; Blade II: Bannerlord<br><a href="../index.html">Dwemer Dynamics</a></footer>
             </article>
         </main>
     </div>
