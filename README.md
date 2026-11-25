@@ -2,6 +2,12 @@
 
 Guide-first website for Dwemer Dynamics projects, covering CHIM, STOBE, and Dialectic.
 
+## Reign guide
+
+`reign/` contains The Player's Companion for Reign in Bannerlord, migrated from the supplied November 24, 2026 development guide. The pages use the shared `guide-outline` layout and scoped `css/reign.css`. This is a development-edition guide, not certification of a released package; preserve topic-level Preview notices and the qualifications in `reign/edition-notes.html`.
+
+The 24 source chapters are split into reading pages, with the glossary on `topics.html` and acceptance notes on `edition-notes.html`. Topic IDs remain stable across page moves. Keep the static chapter navigation and A–Z links aligned when adding a topic. Screenshots and diagrams live in `img/reign/`; reading-size images link to larger versions. Preserve the distinction between actual game screenshots, layout examples and diagrams. No Reign download or fresh-install route is inferred from another product.
+
 ## KAGRENAC AI Mod Maker Guide
 
 `custom-mods/` is the author guide for KAGRENAC AI Mod Maker, a toolkit for authoring AI NPC mods from the public [Kagrenac](https://github.com/Dwemer-Dynamics/Kagrenac) repository: the KagrenacServer component at the repository root and the KagrenacClient console client in `client/`. The folder name stays `custom-mods/` so existing links keep working. Its pages share `css/custom-mods.css` and the `customMods` sidebar in `js/javascript.js`, selected by the `custom-mods-theme` body class. The repository holds the canonical reference docs, including `docs/getting-started.md` and the staged porting kit (`docs/agent-playbook.md`, `docs/engine-packs/ENGINE_PACK.md`, `docs/feature-recipes/PORT_RECIPES.md`); keep these pages task-focused and link to them.

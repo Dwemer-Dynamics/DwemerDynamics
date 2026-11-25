@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Economy and survival | REIGN | Dwemer Dynamics</title>
+    <meta name="description" content="Plan for troop costs, population, food, supply and recovery.">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/guide-outline.css">
+    <link rel="stylesheet" href="../css/reign.css">
+</head>
+<body class="guide-outline reign-theme">
+    <script src="../js/guide-outline.js"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to article</a>
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">☰</button>
+        <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+        <a class="lo-install" href="./getting-started.html">Start here</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="Reign guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><b>REIGN</b></a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">×</button>
+            </div>
+            <p class="reign-companion">The Player’s Companion</p>
+            <ul><li><a class="lo-item" href="../index.html">Dwemer Dynamics</a></li>
+<li><a class="lo-item" href="./index.html">Overview</a></li>
+</ul>
+<p class="lo-group">Start here</p>
+<ul>
+<li><a class="lo-item" href="./requirements.html">Requirements</a></li>
+<li><a class="lo-item" href="./getting-started.html">First session</a></li>
+<li><a class="lo-item" href="./conversations.html">Conversations</a></li>
+</ul>
+<p class="lo-group">Actions</p>
+<ul>
+<li><a class="lo-item" href="./actions.html">Action sentences</a></li>
+</ul>
+<p class="lo-group">People and daily life</p>
+<ul>
+<li><a class="lo-item" href="./characters.html">Characters</a></li>
+<li><a class="lo-item" href="./communication.html">Chat and letters</a></li>
+<li><a class="lo-item" href="./events.html">Events and personal lives</a></li>
+<li><a class="lo-item" href="./town-life.html">Town life</a></li>
+</ul>
+<p class="lo-group">Relationships and households</p>
+<ul>
+<li><a class="lo-item" href="./relationships.html">Relationships and family</a></li>
+<li><a class="lo-item" href="./reputation.html">Reputation</a></li>
+<li><a class="lo-item" href="./households.html">Keeps and households</a></li>
+</ul>
+<p class="lo-group">Rule and politics</p>
+<ul>
+<li><a class="lo-item" href="./ruling.html">Ruling a kingdom</a></li>
+<li><a class="lo-item" href="./government.html">Government</a></li>
+<li><a class="lo-item" href="./diplomacy.html">Diplomacy</a></li>
+<li><a class="lo-item" href="./spymaster.html">Spymaster</a></li>
+</ul>
+<p class="lo-group">War and the world</p>
+<ul>
+<li><a class="lo-item" href="./warfare.html">War and armies</a></li>
+<li><a class="lo-item" href="./justice-and-rebellion.html">Justice and rebellion</a></li>
+<li><div class="lo-current"><a class="lo-item" href="./economy.html" aria-current="page">Economy</a><button type="button" id="lo-outline-toggle" aria-expanded="true" aria-controls="lo-outline" aria-label="Sections on this page"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+<ol class="lo-outline" id="lo-outline" aria-label="On this page">
+<li><a href="#troops-cost-more-than-in-native-bannerlord">Troops cost more than in native Bannerlord</a></li>
+<li><a href="#recruitment-uses-people-not-an-endless-pool">Recruitment uses people, not an endless pool</a></li>
+<li><a href="#household-stipends-and-npc-trade">Household stipends and NPC trade</a></li>
+<li><a href="#raids-population-and-recovery">Raids, population, and recovery</a></li>
+<li><a href="#food-markets-settlement-stocks-and-relief">Food markets, settlement stocks, and relief</a></li>
+<li><a href="#garrisons-patrols-and-demobilization">Garrisons, patrols, and demobilization</a></li>
+<li><a href="#battle-medical-discharge">Battle medical discharge</a></li>
+<li><a href="#ships-ports-and-military-purchases">Ships, ports, and military purchases</a></li>
+</ol></li>
+<li><a class="lo-item" href="./world-events.html">Time and world events</a></li>
+<li><a class="lo-item" href="./arenas.html">Arenas and tournaments</a></li>
+</ul>
+<p class="lo-group">Settings and help</p>
+<ul>
+<li><a class="lo-item" href="./pictures-and-memories.html">Pictures and memories</a></li>
+<li><a class="lo-item" href="./saves-and-backups.html">Saves and backups</a></li>
+<li><a class="lo-item" href="./configuration.html">Settings and providers</a></li>
+<li><a class="lo-item" href="./help.html">Troubleshooting</a></li>
+</ul>
+<p class="lo-group">Reference</p>
+<ul>
+<li><a class="lo-item" href="./topics.html">A–Z topics</a></li>
+<li><a class="lo-item" href="./edition-notes.html">Edition notes</a></li>
+</ul>
+        </nav>
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <article class="lo-article">
+                <header class="lo-intro">
+                    <p class="reign-eyebrow">Mount &amp; Blade II: Bannerlord · Reign</p>
+                    <h1>Economy and survival</h1>
+                    <p class="lo-standfirst">Plan for troop costs, population, food, supply and recovery.</p>
+                </header>
+                <p class="reign-edition">Development guide · November 24, 2026 · <a href="./edition-notes.html">Edition notes</a></p>
+                <section class="chapter" id="economy-and-survival" tabindex="-1"><section class="topic lo-section" data-preview="true" id="troops-cost-more-than-in-native-bannerlord" tabindex="-1"><header><h2>Troops cost more than in native Bannerlord</h2><span class="badge">Preview included</span><a aria-label="Link to Troops cost more than in native Bannerlord" class="permalink" href="#troops-cost-more-than-in-native-bannerlord">#</a></header>
+<p>Recruiting, upgrading, and maintaining a strong army is more expensive in Reign, especially as troops become more advanced. A field army that you can buy today may still be unaffordable to keep supplied. Native perks and discounts still matter; negotiated hero or guest pay follows its own agreement.</p>
+
+<p>Automatic recruitment and upgrading consider the actual payer's funds and future military obligations. Having spare kingdom wealth does not necessarily mean every clan can replenish. Manual player purchases still require real resources, without implying that every automatic safety buffer is a new player spending rule.</p>
+
+<p>Prisoner ransoms follow native valuation rather than inheriting the increased enlistment price. Releasing or selling prisoners is not a way to recover the full cost of building an elite force.</p>
+
+<aside class="callout preview"><p>Preview: current war-economy revisions have controlled and persistence evidence, but long-run balance and human acceptance remain open. Descriptions here explain the reviewed rules, not guaranteed outcomes for every kingdom.</p>
+</aside>
+
+<p>The higher wage base applies to regular troops in field parties and garrisons. The owned-party wage display accounts for that party's actual modifiers and discounts. Recruitment previews use the receiving party's forecast where available.</p>
+
+<p>Kingdom regulars cost a little more while their realm is at war with another kingdom and a little less at peace. This applies to both field and garrison wages after existing modifiers. Hero salaries, mercenary troops and companies, and independent clans are outside this particular adjustment. See <a href="./configuration.html#war-economy-and-clan-trade-settings">War economy and clan trade settings</a> to adjust the available cost rules.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="recruitment-uses-people-not-an-endless-pool" tabindex="-1"><header><h2>Recruitment uses people, not an endless pool</h2><span class="badge">Preview included</span><a aria-label="Link to Recruitment uses people, not an endless pool" class="permalink" href="#recruitment-uses-people-not-an-endless-pool">#</a></header>
+<p>New regular military recruits draw from eligible village households. Heavy recruitment leaves fewer people available and slows natural household growth for a while. A depleted or badly damaged village may be unable to supply more soldiers even when you have gold.</p>
+
+<p>This applies to player and AI recruitment and to supported automatic garrison and replacement-retinue routes. Existing soldiers are not retrospectively charged when the economy update arrives. Creating a new lord party does not grant a free fully funded army: its household troops depend on local people and actual money.</p>
+
+<p>Transferring soldiers, returning an expedition, upgrading an existing troop, or recruiting a prisoner is different from a new enlistment. Native mercenaries and special quest routes have their own handling. Civilian caravan and fishing crews do not consume village military manpower merely by being created or replenished.</p>
+
+<figure class="guide-figure"><a aria-label="Open larger: Diagram — Healthy villages support recruits and food; war losses, raids, and heavy enlistment strain that recovery. (opens in a new tab)" href="../img/reign/28-recruitment-uses-people-not-an-endless-pool.svg" rel="noopener" target="_blank"><img alt="Diagram — Healthy villages support recruits and food; war losses, raids, and heavy enlistment strain that recovery." decoding="async" height="300" loading="lazy" src="../img/reign/28-recruitment-uses-people-not-an-endless-pool.svg" width="1120"/></a><figcaption>Diagram — Healthy villages support recruits and food; war losses, raids, and heavy enlistment strain that recovery.</figcaption></figure>
+
+<p>For automatic lord-party creation in NPC-ruled kingdoms, a noble clan generally needs land. Hired mercenaries can establish a party without land. Kingdom military support requires both land and an active serving lord party. Player-directed establishment and native initial or quest routes have their own rules. A landless household can still qualify for local stipends or civilian trade under <a href="#household-stipends-and-npc-trade">Household stipends and NPC trade</a>.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="household-stipends-and-npc-trade" tabindex="-1"><header><h2>Household stipends and NPC trade</h2><span class="badge">Preview included</span><a aria-label="Link to Household stipends and NPC trade" class="permalink" href="#household-stipends-and-npc-trade">#</a></header>
+<p>A landless NPC noble household with a verified permanent home may receive a small weekly stipend from the clan leader who owns that holding. Eligibility looks at the family's finances, the current owner, shared kingdom, and the payer's ability to keep a military reserve. To let your own clan participate, enable <strong>Fund Local Household Stipends</strong> in Reign's in-game settings. Payments use your personal gold.</p>
+
+<p>Eligible landed and landless NPC noble clans can sponsor land caravans. With <strong>War Sails</strong>, they can also sponsor sea convoys from suitable ports. Both start off. Follow <a href="./configuration.html#war-economy-and-clan-trade-settings">War economy and clan trade settings</a> to enable them.</p>
+
+<p>The sponsoring clan pays the town one formation fee, with applicable native cultural discounts. Bannerlord supplies the starting trade purse separately. Merchant crews run new parties without taking a noble away from other duties. The clan owns the party and receives its trade remittances. Older pilot caravans can keep their existing named captains and records.</p>
+
+<p>Clans need enough cash for the fee and their military reserve. Chance, per-clan limits, the shared world limit, and a suitable departure location affect whether a launch happens. Turning a mode off or lowering its limit changes future launches. Existing parties continue trading. See <a href="./configuration.html#war-economy-and-clan-trade-settings">War economy and clan trade settings</a>.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="raids-population-and-recovery" tabindex="-1"><header><h2>Raids, population, and recovery</h2><span class="badge">Preview included</span><a aria-label="Link to Raids, population, and recovery" class="permalink" href="#raids-population-and-recovery">#</a></header>
+<p>Village households support production. Healthy larger villages contribute more, while devastation reduces actual output. A completed raid resets agricultural recovery; normal functioning and safer, better-fed conditions allow it to recover gradually.</p>
+
+<p>A raid's damage does not end when the smoke disappears. Several damaged villages can place separate security burdens on their linked town. Recruiting may remain restricted during early recovery. A village that is not functioning cannot be assumed to produce food or recover normally.</p>
+
+<p>Siege aftermath matters too. Mercy is less damaging to security than pillage or devastation. Choosing the harsher option has a continuing cost, not just a different line in the victory report.</p>
+
+<p>Raid damage now has its own <strong>food capacity</strong> measure alongside household recovery. Severe or repeated raids can shut down new food production. A functioning village recovers gradually, and low food or security slows that recovery. Open the <strong>Economic Report</strong> from Court to compare food capacity, household recovery, actual output, and healthy potential for the current population.</p>
+
+<p>In fishing villages, disruption reduces new catches from boats and shore facilities. Fish already carried remain in cargo. A working voyage can finish and unload. When the village's fishing capacity shuts down, boats unload before waiting ashore. Recovery allows another departure. Food shipments and relief use their own rules. <strong>Control Center → Options → War economy → Raid food disruption</strong> keeps recorded damage available for when you turn the rule back on.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="food-markets-settlement-stocks-and-relief" tabindex="-1"><header><h2>Food markets, settlement stocks, and relief</h2><span class="badge">Preview included</span><a aria-label="Link to Food markets, settlement stocks, and relief" class="permalink" href="#food-markets-settlement-stocks-and-relief">#</a></header>
+<p>Distinguish food offered in a market, food held by a settlement, food carried by an army, and cargo in transit. They are not the same stockpile.</p>
+
+<p>Threatened unsieged towns prioritize buying available food within their civilian budget. They cannot buy food that does not exist or spend unlimited money. Realm relief moves real food from eligible better-supplied holdings toward shortages while protecting donor reserves. It prioritizes serious projected need and loses some food along the route.</p>
+
+<p>Sieges can block purchases and deliveries. A manual shipment deducts stock when dispatched, takes time, and can be held outside a newly besieged destination while cargo deteriorates. Food traveling between holdings is not immediately available at both ends.</p>
+
+<p>Granary actions, normal market buying, automatic relief, and a court grant are separate mechanisms. Inspect the Economic Report's current reserve and projected trend before assuming a shipment solved a deficit. Relief can ease hunger without making a besieged or devastated realm self-sufficient.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="garrisons-patrols-and-demobilization" tabindex="-1"><header><h2>Garrisons, patrols, and demobilization</h2><span class="badge">Preview included</span><a aria-label="Link to Garrisons, patrols, and demobilization" class="permalink" href="#garrisons-patrols-and-demobilization">#</a></header>
+<p>Stationary garrison regulars have lower wage and food burdens than equivalent field troops. Native governor, culture, building, Billeting, and Clan Accord effects retain their own benefits and costs. A patrol or visiting army does not receive the new garrison reduction just for being nearby.</p>
+
+<p>Patrols use troops transferred from the home garrison. Replenishing them returns survivors before issuing another detachment. Removing a patrol outside combat returns its soldiers where supported; it does not create a fresh free roster.</p>
+
+<p>Peace drawdown can return some released manpower to functioning villages, while raids and mobilization strain still matter. It provides no automatic gold payout or instant prosperity. Keep defensive needs and actual household recovery in view when changing standing.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="battle-medical-discharge" tabindex="-1"><header><h2>Battle medical discharge</h2><span class="badge">Preview included</span><a aria-label="Link to Battle medical discharge" class="permalink" href="#battle-medical-discharge">#</a></header>
+<p>Some regular soldiers newly wounded in battle can retire if they survive the battle without being captured and remain with the force they fought in. The result varies each battle. Better surgeon <strong>Medicine</strong> lowers the maximum possible loss. Previously wounded troops, captured soldiers, heroes, and civilian crews are outside this discharge rule. Rescue or release does not make a captured soldier eligible from the earlier battle.</p>
+
+<p>Eligible retired soldiers can contribute back to functioning village households. This is separate from peacetime release of healthy soldiers. See <a href="./warfare.html#peace-standing-war-standing-and-garrisons">Peace Standing, War Standing, and garrisons</a> for peacetime release. Medical discharge is installed. Individual battle and reload edge cases remain under review.</p>
+</section>
+
+<section class="topic lo-section" data-preview="true" id="ships-ports-and-military-purchases" tabindex="-1"><header><h2>Ships, ports, and military purchases</h2><span class="badge">Preview included</span><a aria-label="Link to Ships, ports, and military purchases" class="permalink" href="#ships-ports-and-military-purchases">#</a></header>
+<p>Where War Sails is present, player ship purchases, repairs, and upgrades retain native pricing. NPCs retain their native discounted ship procurement. A cheaply procured NPC ship does not become a full-value resale windfall simply because it was transferred to a friend. Captured ships retain their separate normal native resale handling.</p>
+
+<p>Selling needs actual port funds. A sinking, discarded hull, or cleanup removal does not pay compensation. Governor commissions come from real eligible port business and cannot exceed the transaction. Existing ships without a known acquisition history use the documented migration handling instead of an invented past battle or purchase.</p>
+
+<p>Automatic military food and mount purchases in the payer clan's own realm still pay the market, but do not create an extra tariff payment back into that realm through the old loop. Ordinary trading and foreign purchases retain their own rules. This is a targeted accounting change, not a general abolition of tariffs.</p>
+</section>
+</section>
+
+                <nav class="lo-pager" aria-label="Continue reading"><a href="./justice-and-rebellion.html">← Justice and rebellion</a><a class="lo-next" href="./world-events.html">Time and world events →</a></nav>
+                <footer class="lo-footer">REIGN · The Player’s Companion<br><a href="../index.html">Dwemer Dynamics</a></footer>
+            </article>
+        </main>
+    </div>
+</body>
+</html>
