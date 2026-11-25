@@ -136,6 +136,11 @@
 /* Darker orange keeps white text above 4.5:1 in every state (5.1 rest, 4.8 hover, 6.5 active) */
 .dd-home .links .inst:hover { background: #b85600; border-color: var(--orange); box-shadow: 0 0 0 1px rgba(242, 124, 17, .35), 0 6px 18px -4px rgba(242, 124, 17, .65); }
 .dd-home .links .inst:active { background: #9a4600; box-shadow: none; }
+/* Unreleased download: same box as a link button, visibly muted with a dashed edge; stays focusable
+   so keyboard and screen reader users hear that it is unavailable */
+.dd-home .links .off { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .8rem; border: 1px dashed var(--line); border-radius: var(--r); background: transparent; color: var(--muted); font: inherit; font-weight: 600; line-height: inherit; cursor: not-allowed; }
+.dd-home .links .off:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.dd-home .links .sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Two equal columns: CHIM + LORKHAN, then STOBE + DIALECTIC. Each card subgrids four shared
    rows (art, game, title, buttons) so a pair's captions line up however they wrap. */
@@ -364,7 +369,7 @@
     /* Three icon squares plus the compact Ploofy panel stay on one right-aligned row down to 320px */
     .dd-home .hero-community { column-gap: .75rem; }
     .dd-home .links li { flex: 1 1 0; display: flex; }
-    .dd-home .links a { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
+    .dd-home .links a, .dd-home .links .off { flex: 1; justify-content: center; text-align: center; white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
     .dd-home *, .dd-home *::before, .dd-home *::after { transition: none !important; }
@@ -374,10 +379,8 @@
 /* Reign closes the guide wall with a wide tile, keeping the existing product pairs intact. */
 .dd-home .g-reign h2 { font-family: Georgia, serif; letter-spacing: .1em; }
 .dd-home .g-reign { --orange: #c9a227; }
-.dd-home .g-reign .links .inst { background: var(--orange); border-color: var(--orange); color: var(--bg); }
-.dd-home .g-reign .links a:hover,
-.dd-home .g-reign .links a:focus-visible { border-color: var(--orange); box-shadow: 0 0 0 2px color-mix(in srgb, var(--orange) 35%, transparent); }
-.dd-home .g-reign .links .inst:hover { background: color-mix(in srgb, var(--orange) 85%, white); }
+/* Card buttons keep the shared orange so Install, Overview and Mod Download match the other tiles */
+.dd-home .g-reign .links { --orange: #f27c11; }
 @media (hover: hover) and (pointer: fine) {
     .dd-home .g-reign .tile:hover { box-shadow: 0 10px 26px -12px color-mix(in srgb, var(--orange) 35%, transparent); }
 }

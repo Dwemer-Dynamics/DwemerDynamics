@@ -24,7 +24,7 @@
         if (state === 'loading' || state === 'ready') return;
         state = 'loading';
         copyBtn.disabled = true;
-        copyBtn.textContent = 'Copy setup prompt';
+        copyBtn.textContent = 'Copy';
         field.value = 'Loading prompt…';
         field.setAttribute('aria-busy', 'true');
         setStatus('Loading the setup prompt…');

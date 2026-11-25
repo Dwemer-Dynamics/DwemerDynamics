@@ -7,7 +7,7 @@
     <title>Dwemer Dynamics</title>
     <meta name="description" content="AI mods for Skyrim, Morrowind, Kenshi, Fallout: New Vegas and Bannerlord, and KAGRENAC for building your own.">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="css/home-guidewall.css?v=20261124-reign-gold">
+    <link rel="stylesheet" href="css/home-guidewall.css?v=20261125-reign-buttons">
     <link rel="stylesheet" href="css/home-margins.css?v=20261109-pulse">
 </head>
 <body class="dd-home">
@@ -112,8 +112,9 @@
                             <p class="game">Mount &amp; Blade II: Bannerlord</p>
                             <h2 id="h-reign"><a href="./reign/index.html">REIGN</a></h2>
                             <ul class="links" aria-label="REIGN guides">
-                                <li><a class="inst" href="./reign/getting-started.html">Start here</a></li>
-                                <li><a href="./reign/index.html">Guide</a></li>
+                                <li><a class="inst" href="./reign/getting-started.html">Install</a></li>
+                                <li><a href="./reign/index.html">Overview</a></li>
+                                <li><button class="off" type="button" aria-disabled="true" title="Not yet released">Mod Download<span class="sr"> (not yet released)</span></button></li>
                             </ul>
                         </div>
                     </article>
@@ -135,12 +136,12 @@
             <span class="agent-tag">Experimental</span>
             <button type="button" class="agent-close" id="agentInstallClose" aria-label="Close">&times;</button>
         </div>
-        <p class="agent-intro" id="agentInstallIntro">Copy this prompt and paste it into Codex or Claude running on your Windows PC. The agent installs and checks the base DwemerDistro and its dashboard. You approve the administrator prompt, and it asks before any reboot.</p>
-        <p class="agent-note">Tested on an existing install. Fresh installs, reboot recovery and game mod setup are not verified yet.</p>
+        <p class="agent-intro" id="agentInstallIntro">Paste this into Codex or Claude on your Windows PC to set up DwemerDistro. Approve the administrator prompt, and confirm the reboot when asked.</p>
+        <p class="agent-note">Only tested on an existing install. Fresh installs, reboot recovery and mods are not tested yet.</p>
         <label class="agent-label" for="agentInstallPrompt">Setup prompt</label>
         <textarea class="agent-prompt" id="agentInstallPrompt" rows="12" readonly spellcheck="false" aria-describedby="agentInstallStatus">Loading prompt…</textarea>
         <div class="agent-actions">
-            <button type="button" class="agent-copy" id="agentInstallCopy" disabled>Copy setup prompt</button>
+            <button type="button" class="agent-copy" id="agentInstallCopy" disabled>Copy</button>
             <p class="agent-status" id="agentInstallStatus" role="status" aria-live="polite"></p>
         </div>
         <p class="agent-manual">Prefer to do it yourself? <a href="./dwemerdistro/index.html#Install">Manual setup guide</a><span class="agent-raw" id="agentInstallRawWrap" hidden> · <a id="agentInstallRaw" href="./dwemerdistro/agent-install-prompt.txt" target="_blank" rel="noopener">Open the prompt as text</a></span></p>
@@ -164,7 +165,7 @@
     </footer>
     <script src="js/patron-list.js?v=20260812a" defer></script>
     <script src="js/home-margins.js?v=20261109-pulse" defer></script>
-    <script src="js/home-agent-install.js?v=20261123-agent-final" defer></script>
+    <script src="js/home-agent-install.js?v=20261125-agent-copy" defer></script>
     <script>
         // Projects menu: close on Escape, outside click, or when focus leaves it
         (function () {
