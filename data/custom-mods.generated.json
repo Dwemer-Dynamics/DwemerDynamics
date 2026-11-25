@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-25T18:50:52Z",
+  "refresh": {
+    "status": "ok",
+    "attempted_at": "2026-11-25T18:50:52Z"
+  },
+  "source": {
+    "query": "topic:kagrenac-mod archived:false fork:true",
+    "total_count": 1,
+    "truncated": false
+  },
+  "mods": [
+    {
+      "repository": "https://github.com/yucktheslime/toi-kagrenac-server",
+      "name": "yucktheslime/toi-kagrenac-server",
+      "title": "A Trade of Immersion",
+      "credit": "By yucktheslime",
+      "summary": "CHIM-style AI server for the A Trade of Immersion Minecraft mod (MCA Reborn companions and villagers): dialogue, memory, 13 allowlisted actions, game events, NPC bios and optional voice. Based on the Kagrenac template.",
+      "ready": true,
+      "reason": "",
+      "release": {
+        "tag": "v0.3.8",
+        "commit": "164125f5758ce14d86fac04d335573bb989e5a70",
+        "published_at": "2026-11-24T21:41:14Z",
+        "url": "https://github.com/yucktheslime/toi-kagrenac-server/releases/tag/v0.3.8"
+      },
+      "game": {
+        "name": "Minecraft 1.21.1 (NeoForge, MCA Reborn)",
+        "version": "Minecraft 1.21.1, NeoForge 21.1.267, MCA Reborn 7.7.36, Architectury API 13.0.8",
+        "loader": "A NeoForge 1.21.1 modpack with MCA Reborn and Architectury API (for example a CurseForge profile). Select the profile's folder (CurseForge: right-click the profile > Open Folder); start it once first so options.txt exists.",
+        "enable_in_game": "Close Minecraft first. Remove any older a-trade-of-immersion jar from the mods folder, then start the modpack and run /npc ai status in game."
+      },
+      "features": [
+        "Talk to your companions and MCA villagers in normal chat; they answer in character",
+        "Companions follow, fight, ride, equip, eat, give, pick up and inspect items on request",
+        "Deaths, fights, gifts and MCA family changes are remembered and reacted to",
+        "Edit NPC bios, read conversations and pick the AI model on the dashboard",
+        "Optional voice (PocketTTS) played from the NPC's position",
+        "Optional: a hosted Minecraft server can use the AI on your PC through a tunnel",
+        "Optional server plugins: add prompt facts, extra actions and event hooks from the dashboard"
+      ],
+      "artwork": {
+        "banner": "img/custom-mods/14a8e7541e425724.png",
+        "icon": "img/custom-mods/14a8e7541e425724.png"
+      },
+      "id": "trade-of-immersion"
+    }
+  ]
+}

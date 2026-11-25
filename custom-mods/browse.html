@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Browse mods | KAGRENAC AI Mod Maker Guide | Dwemer Dynamics</title>
+    <meta name="description" content="Published KAGRENAC mods that the DwemerDistro launcher can install, with each mod's game, requirements and install steps.">
+    <link rel="icon" type="image/png" href="./images/kagrenac.png">
+    <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
+    <link rel="stylesheet" href="../css/mod-browser.css">
+    <script src="../js/mod-browser.js" defer></script>
+</head>
+<body class="guide-outline custom-mods-theme">
+    <script src="../js/guide-outline.js?v=20261109-nav-icons"></script>
+    <div class="lo-progress" aria-hidden="true"></div>
+    <a class="lo-skip" href="#lo-main">Skip to mod list</a>
+
+    <header class="lo-topbar">
+        <button type="button" id="lo-nav-toggle" aria-expanded="false" aria-controls="lo-nav" aria-label="Open navigation">&#9776;</button>
+        <a class="lo-brand" href="./index.html"><img src="./images/kagrenac.png" alt=""><b>KAGRENAC</b></a>
+        <a class="lo-install" href="./installation.html">Get started</a>
+    </header>
+    <div class="lo-scrim" id="lo-scrim"></div>
+
+    <div class="lo-shell">
+        <nav class="lo-nav" id="lo-nav" aria-label="KAGRENAC guides">
+            <div class="lo-nav-head">
+                <a class="lo-brand" href="./index.html"><img src="./images/kagrenac.png" alt=""><b>KAGRENAC</b></a>
+                <a class="lo-install" href="./installation.html">Get started</a>
+                <button type="button" class="lo-nav-close" id="lo-nav-close" aria-label="Close navigation">&times;</button>
+            </div>
+            <ul>
+                <li><a class="lo-item" href="../index.html">Home</a></li>
+                <li><a class="lo-item" href="./index.html">Overview</a></li>
+                <li><a class="lo-item" href="./installation.html">Get started</a></li>
+                <li>
+                    <div class="lo-current">
+                        <a class="lo-item" href="./browse.html" aria-current="page">Browse mods</a>
+                    </div>
+                </li>
+            </ul>
+            <p class="lo-group" id="lo-g-build">Build</p>
+            <ul aria-labelledby="lo-g-build">
+                <li><a class="lo-item" href="./gameplay.html">Gameplay design</a></li>
+                <li><a class="lo-item" href="./porting.html">Game integration</a></li>
+                <li><a class="lo-item" href="./configuration.html">Providers &amp; voice</a></li>
+                <li><a class="lo-item" href="./data-and-memory.html">Characters &amp; memory</a></li>
+            </ul>
+            <p class="lo-group" id="lo-g-ship">Ship</p>
+            <ul aria-labelledby="lo-g-ship">
+                <li><a class="lo-item" href="./testing.html">Testing</a></li>
+                <li><a class="lo-item" href="./updates.html">Updates &amp; recovery</a></li>
+                <li><a class="lo-item" href="./publishing.html">Publishing</a></li>
+            </ul>
+            <ul class="lo-ext" aria-label="Links">
+                <li><a href="https://github.com/Dwemer-Dynamics/Kagrenac" target="_blank" rel="noopener noreferrer">Source Code</a></li>
+                <li><a href="https://discord.gg/NDn9qud2ug" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                <li><a href="https://www.patreon.com/DwemerDynamics" target="_blank" rel="noopener noreferrer">Patreon</a></li>
+            </ul>
+        </nav>
+
+        <main class="lo-main" id="lo-main" tabindex="-1">
+            <div class="lo-article mb-page">
+                <header class="lo-intro mb-intro">
+                    <h1>Browse mods</h1>
+                    <p class="lo-standfirst">Find a mod here, then install it from the DwemerDistro launcher.</p>
+                </header>
+
+                <noscript>
+                    <div class="mb-message">
+                        <h2>The mod list needs JavaScript</h2>
+                        <p>Use <b>Mods &gt; Custom mods &gt; Browse mods</b> in the DwemerDistro launcher, or see the <a href="https://github.com/topics/kagrenac-mod">kagrenac-mod topic on GitHub</a>.</p>
+                    </div>
+                </noscript>
+
+                <form class="mb-filters" id="mb-filters" role="search" aria-label="Filter mods" hidden>
+                    <div class="mb-field mb-field-search">
+                        <label for="mb-search">Search</label>
+                        <input type="search" id="mb-search" name="q" maxlength="80" autocomplete="off" spellcheck="false" placeholder="Mod, game or author">
+                    </div>
+                    <div class="mb-field">
+                        <label for="mb-game">Game</label>
+                        <select id="mb-game" name="game">
+                            <option value="">All games</option>
+                        </select>
+                    </div>
+                    <fieldset class="mb-show">
+                        <legend>Show</legend>
+                        <div class="mb-segment">
+                            <input type="radio" id="mb-show-ready" name="show" value="ready" checked>
+                            <label for="mb-show-ready">Ready to install <span class="mb-count" id="mb-count-ready"></span></label>
+                            <input type="radio" id="mb-show-all" name="show" value="all">
+                            <label for="mb-show-all">All listed <span class="mb-count" id="mb-count-all"></span></label>
+                        </div>
+                    </fieldset>
+                    <button type="reset" class="mb-button mb-clear" id="mb-clear">Clear</button>
+                </form>
+
+                <div class="mb-statusbar">
+                    <p class="mb-status" id="mb-status" role="status" aria-live="polite">Loading mods…</p>
+                    <p class="mb-notice" id="mb-notice" hidden></p>
+                </div>
+
+                <ul class="mb-grid" id="mb-grid" aria-label="Mods" aria-busy="true"></ul>
+
+                <div class="mb-message" id="mb-message" hidden>
+                    <h2 id="mb-message-title" tabindex="-1"></h2>
+                    <p id="mb-message-text"></p>
+                    <p class="mb-message-actions"><button type="button" class="mb-button" id="mb-message-action" hidden></button></p>
+                </div>
+
+                <p class="mb-about mb-muted">Mods are published by their authors and aren't reviewed by Dwemer Dynamics.</p>
+            </div>
+            <nav class="lo-pager" aria-label="Guide pages">
+                <a class="lo-prev" href="./index.html">&larr; Overview</a>
+                <a class="lo-next" href="./publishing.html">Publish your own mod &rarr;</a>
+            </nav>
+            <footer class="lo-footer">Dwemer Dynamics 2026</footer>
+        </main>
+    </div>
+</body>
+</html>
