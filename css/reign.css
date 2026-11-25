@@ -1,5 +1,8 @@
 /* Reign extends the shared reading layout; other product guides keep their styles. */
 .reign-theme .reign-companion { margin: -.4rem .5rem 1.2rem; color: var(--lo-muted); font-size: .75rem; }
+/* Reign authors its topic icons in the HTML (shared JS skips links that already have one). The shared CSS only reserves
+   the icon column under lo-js, so hide them without JavaScript to keep plain-text links like the other guides. */
+.reign-theme:not(.lo-js) .lo-nav .lo-ico { display: none; }
 .reign-theme .lo-section h2 { font: 600 1.375rem/1.3 var(--lo-sans); margin: 0 0 .75rem; }
 .reign-theme .topic > header { display: flex; gap: .75rem; align-items: baseline; }
 .reign-theme .permalink { font-size: .85rem; color: var(--lo-muted); text-decoration: none; }
