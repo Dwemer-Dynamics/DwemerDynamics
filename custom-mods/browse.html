@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Browse mods | KAGRENAC AI Mod Maker Guide | Dwemer Dynamics</title>
-    <meta name="description" content="Published KAGRENAC mods that the DwemerDistro launcher can install, with each mod's game, requirements and install steps.">
+    <meta name="description" content="Published KAGRENAC mods that the DwemerDistro launcher can install, with a link to each mod on GitHub.">
     <link rel="icon" type="image/png" href="./images/kagrenac.png">
     <link rel="stylesheet" href="../css/guide-outline.css?v=20261109-nav-icons">
     <link rel="stylesheet" href="../css/mod-browser.css">
@@ -64,7 +64,7 @@
             <div class="lo-article mb-page">
                 <header class="lo-intro mb-intro">
                     <h1>Browse mods</h1>
-                    <p class="lo-standfirst">Find a mod here, then install it from the DwemerDistro launcher.</p>
+                    <p class="lo-standfirst">You can install mods in the DwemerDistro launcher.</p>
                 </header>
 
                 <noscript>
@@ -73,29 +73,6 @@
                         <p>Use <b>Mods &gt; Custom mods &gt; Browse mods</b> in the DwemerDistro launcher, or see the <a href="https://github.com/topics/kagrenac-mod">kagrenac-mod topic on GitHub</a>.</p>
                     </div>
                 </noscript>
-
-                <form class="mb-filters" id="mb-filters" role="search" aria-label="Filter mods" hidden>
-                    <div class="mb-field mb-field-search">
-                        <label for="mb-search">Search</label>
-                        <input type="search" id="mb-search" name="q" maxlength="80" autocomplete="off" spellcheck="false" placeholder="Mod, game or author">
-                    </div>
-                    <div class="mb-field">
-                        <label for="mb-game">Game</label>
-                        <select id="mb-game" name="game">
-                            <option value="">All games</option>
-                        </select>
-                    </div>
-                    <fieldset class="mb-show">
-                        <legend>Show</legend>
-                        <div class="mb-segment">
-                            <input type="radio" id="mb-show-ready" name="show" value="ready" checked>
-                            <label for="mb-show-ready">Ready to install <span class="mb-count" id="mb-count-ready"></span></label>
-                            <input type="radio" id="mb-show-all" name="show" value="all">
-                            <label for="mb-show-all">All listed <span class="mb-count" id="mb-count-all"></span></label>
-                        </div>
-                    </fieldset>
-                    <button type="reset" class="mb-button mb-clear" id="mb-clear">Clear</button>
-                </form>
 
                 <div class="mb-statusbar">
                     <p class="mb-status" id="mb-status" role="status" aria-live="polite">Loading mods…</p>
@@ -109,8 +86,6 @@
                     <p id="mb-message-text"></p>
                     <p class="mb-message-actions"><button type="button" class="mb-button" id="mb-message-action" hidden></button></p>
                 </div>
-
-                <p class="mb-about mb-muted">Mods are published by their authors and aren't reviewed by Dwemer Dynamics.</p>
             </div>
             <nav class="lo-pager" aria-label="Guide pages">
                 <a class="lo-prev" href="./index.html">&larr; Overview</a>

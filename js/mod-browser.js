@@ -17,9 +17,6 @@
     else start();
 
     function start() {
-        var form = document.getElementById("mb-filters");
-        var search = document.getElementById("mb-search");
-        var game = document.getElementById("mb-game");
         var grid = document.getElementById("mb-grid");
         var status = document.getElementById("mb-status");
         var notice = document.getElementById("mb-notice");
@@ -27,18 +24,12 @@
         var messageTitle = document.getElementById("mb-message-title");
         var messageText = document.getElementById("mb-message-text");
         var messageAction = document.getElementById("mb-message-action");
-        var countReady = document.getElementById("mb-count-ready");
-        var countAll = document.getElementById("mb-count-all");
-        if (!form || !grid || !status) return;
+        if (!grid || !status) return;
 
         var mods = [];
-        var expanded = new Set();
         var actionHandler = null;
-        var timer = null;
-        var dateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
         var stampFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" });
 
-        form.hidden = false;
         messageAction.addEventListener("click", function () { if (actionHandler) actionHandler(); });
 
         // ---- Catalog loading and normalisation ----
@@ -53,10 +44,6 @@
             return isNaN(parsed.getTime()) ? null : parsed;
         }
 
-        function normalize(value) {
-            return String(value).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
-        }
-
         // Values are re-checked here so a damaged catalog can only drop entries, never inject links or paths.
         function prepare(raw) {
             if (!raw || typeof raw !== "object") return null;
@@ -66,11 +53,7 @@
             var release = null;
             if (raw.release && typeof raw.release === "object" && TAG.test(str(raw.release.tag, 80))) {
                 var tag = str(raw.release.tag, 80);
-                release = {
-                    tag: tag,
-                    published: date(raw.release.published_at),
-                    url: repository + "/releases/tag/" + encodeURIComponent(tag)
-                };
+                release = { tag: tag };
             }
             var ready = raw.ready === true && release !== null;
             var gameInfo = raw.game && typeof raw.game === "object" ? raw.game : {};
@@ -89,14 +72,8 @@
                 reason: str(raw.reason, 200),
                 release: release,
                 game: str(gameInfo.name, 200),
-                version: str(gameInfo.version, 300),
-                loader: str(gameInfo.loader, 600),
-                enable: str(gameInfo.enable_in_game, 600),
-                features: Array.isArray(raw.features) ? raw.features.map(function (f) { return str(f, 200); })
-                    .filter(Boolean).slice(0, 8) : [],
                 artwork: Array.from(new Set(artwork))
             };
-            mod.haystack = normalize([mod.title, mod.game, mod.credit, mod.owner, mod.repo, mod.summary].join(" "));
             return mod;
         }
 
@@ -119,9 +96,8 @@
                     seen.add(mod.repository.toLowerCase());
                     return true;
                 });
-                fillGames();
                 describeFreshness(catalog);
-                restore();
+                render();
             } catch (error) {
                 mods = [];
                 grid.removeAttribute("aria-busy");
@@ -132,13 +108,6 @@
             } finally {
                 if (timeout) window.clearTimeout(timeout);
             }
-        }
-
-        function fillGames() {
-            var names = Array.from(new Set(mods.map(function (mod) { return mod.game; }).filter(Boolean)))
-                .sort(function (a, b) { return a.localeCompare(b); });
-            game.replaceChildren(new Option("All games", ""));
-            names.forEach(function (name) { game.append(new Option(name, name)); });
         }
 
         function describeFreshness(catalog) {
@@ -159,103 +128,22 @@
             }
             notice.textContent = text;
             notice.hidden = !text;
-            status.dataset.updated = generated && !text ? "Updated " + dateFormat.format(generated) + "." : "";
         }
-
-        // ---- Filtering and URL state ----
-
-        function filters() {
-            var words = normalize(search.value.trim().slice(0, 80)).split(/\s+/).filter(Boolean);
-            var chosen = form.elements.show.value === "all" ? "all" : "ready";
-            return { words: words, game: game.value, show: chosen };
-        }
-
-        function matches(mod, f) {
-            return (!f.game || mod.game === f.game) && f.words.every(function (word) { return mod.haystack.indexOf(word) !== -1; });
-        }
-
-        function restore() {
-            var params = new URL(location.href).searchParams;
-            search.value = (params.get("q") || "").slice(0, 80);
-            var wanted = params.get("game") || "";
-            game.value = Array.prototype.some.call(game.options, function (o) { return o.value === wanted; }) ? wanted : "";
-            (params.get("show") === "all" ? document.getElementById("mb-show-all") : document.getElementById("mb-show-ready")).checked = true;
-            render();
-        }
-
-        function remember() {
-            var f = filters();
-            var url = new URL(location.href);
-            [["q", search.value.trim().slice(0, 80)], ["game", f.game], ["show", f.show === "all" ? "all" : ""]].forEach(function (pair) {
-                if (pair[1]) url.searchParams.set(pair[0], pair[1]);
-                else url.searchParams.delete(pair[0]);
-            });
-            history.replaceState(null, "", url);
-        }
-
-        function update() {
-            window.clearTimeout(timer);
-            remember();
-            render();
-        }
-
-        function clearFilters(focus) {
-            search.value = "";
-            game.value = "";
-            document.getElementById("mb-show-ready").checked = true;
-            update();
-            if (focus) search.focus();
-        }
-
-        form.addEventListener("submit", function (event) { event.preventDefault(); update(); });
-        form.addEventListener("reset", function (event) { event.preventDefault(); clearFilters(true); });
-        search.addEventListener("input", function () { window.clearTimeout(timer); timer = window.setTimeout(update, 150); });
-        search.addEventListener("keydown", function (event) {
-            if (event.key === "Escape" && search.value) { event.preventDefault(); search.value = ""; update(); }
-        });
-        game.addEventListener("change", update);
-        form.addEventListener("change", function (event) { if (event.target.name === "show") update(); });
-        window.addEventListener("popstate", function () { if (mods.length) restore(); });
 
         // ---- Rendering ----
 
+        // Every listing is shown; each card's badge and reason say whether it can be installed yet.
         function render() {
-            var f = filters();
-            var base = mods.filter(function (mod) { return matches(mod, f); });
-            var ready = base.filter(function (mod) { return mod.ready; });
-            var shown = f.show === "all" ? base : ready;
-            countReady.textContent = "(" + ready.length + ")";
-            countAll.textContent = "(" + base.length + ")";
-
             var fragment = document.createDocumentFragment();
-            shown.forEach(function (mod) { fragment.append(card(mod)); });
+            mods.forEach(function (mod) { fragment.append(card(mod)); });
             grid.replaceChildren(fragment);
             grid.removeAttribute("aria-busy");
-            grid.hidden = !shown.length;
+            grid.hidden = !mods.length;
 
-            var filtered = f.words.length || f.game;
-            var noun = f.show === "all" ? " listed" : " ready to install";
-            status.textContent = shown.length
-                ? shown.length + (shown.length === 1 ? " mod" : " mods") + noun + (filtered ? " matching your filters" : "") + "." +
-                  (status.dataset.updated ? " " + status.dataset.updated : "")
-                : "";
+            status.textContent = "";
 
-            if (shown.length) {
-                showMessage(null);
-            } else if (!mods.length) {
-                showMessage("No mods are listed yet",
-                    "Published mods will appear here.");
-            } else if (base.length && f.show === "ready") {
-                showMessage(base.length === 1 ? "This mod isn't ready to install yet" : "None of these mods are ready to install yet",
-                    "Show all listed mods to see what each one still needs.",
-                    "Show all listed", function () {
-                        document.getElementById("mb-show-all").checked = true;
-                        update();
-                        document.getElementById("mb-show-all").focus();
-                    });
-            } else {
-                showMessage("No mods match your filters", "Try another name or game.", "Clear filters", function () { clearFilters(true); });
-            }
+            if (mods.length) showMessage(null);
+            else showMessage("No mods are listed yet", "Published mods will appear here.");
         }
 
         function showMessage(title, text, action, handler, focus) {
@@ -277,7 +165,7 @@
         }
 
         function externalLink(href, label) {
-            var link = el("a", "mb-link", label);
+            var link = el("a", "mb-button mb-primary", label);
             link.href = href;
             link.target = "_blank";
             link.rel = "noopener noreferrer";
@@ -327,102 +215,9 @@
             return frame;
         }
 
-        function launcherSearch(mod) {
-            return mod.repo.replace(/[^A-Za-z0-9 _-]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || mod.title;
-        }
-
-        function step(parts) {
-            var li = el("li");
-            parts.forEach(function (part) {
-                li.append(typeof part === "string" ? document.createTextNode(part) : part);
-            });
-            return li;
-        }
-
-        function details(mod, id) {
-            var panel = el("div", "mb-details");
-            panel.id = id;
-            panel.hidden = !expanded.has(mod.repository);
-
-            if (mod.ready) {
-                var needs = [["Game", mod.game], ["Tested with", mod.version], ["You need", mod.loader]].filter(function (row) { return row[1]; });
-                panel.append(el("h3", "mb-subhead", "Requirements"));
-                var list = el("dl", "mb-reqs");
-                [["Launcher", "DwemerDistro"]].concat(needs).forEach(function (row) {
-                    var item = el("div");
-                    item.append(el("dt", "", row[0]), el("dd", "", row[1]));
-                    list.append(item);
-                });
-                panel.append(list);
-
-                panel.append(el("h3", "mb-subhead", "Install"));
-                var steps = el("ol", "mb-steps");
-                steps.append(
-                    step(["In DwemerDistro, run ", el("b", "", "Update Distro"), "."]),
-                    step(["Open ", el("b", "", "Mods > Custom mods > Browse mods"), " and search for ", el("code", "", launcherSearch(mod)), "."]),
-                    step(["Press ", el("b", "", "Install server"), "."]),
-                    step(["Press ", el("b", "", "Download mod release"), " and add it to your game as the author describes."])
-                );
-                panel.append(steps);
-                if (mod.enable) {
-                    var note = el("div", "mb-note");
-                    note.append(el("p", "mb-note-label", "Author's setup note"), el("p", "", mod.enable));
-                    panel.append(note);
-                }
-                if (mod.features.length) {
-                    panel.append(el("h3", "mb-subhead", "Features"));
-                    var features = el("ul", "mb-features");
-                    mod.features.forEach(function (feature) { features.append(el("li", "", feature)); });
-                    panel.append(features);
-                }
-            } else {
-                if (!mod.reason) panel.append(el("p", "", "Its latest release could not be checked."));
-            }
-
-            var links = el("p", "mb-links");
-            links.append(externalLink(mod.repository, "Mod page"));
-            if (mod.ready && mod.release) links.append(externalLink(mod.release.url, "What's new"));
-            panel.append(links);
-            return panel;
-        }
-
-        function copyButton(mod, holder) {
-            var button = el("button", "mb-button mb-copy", "Copy repo URL");
-            button.type = "button";
-            var feedback = el("p", "mb-copy-status");
-            feedback.setAttribute("role", "status");
-            var reset = null;
-            button.addEventListener("click", function () {
-                var done = function () {
-                    window.clearTimeout(reset);
-                    button.textContent = "Copied";
-                    feedback.textContent = "URL copied.";
-                    reset = window.setTimeout(function () { button.textContent = "Copy repo URL"; feedback.textContent = ""; }, 2500);
-                };
-                var manual = function () {
-                    var existing = holder.querySelector(".mb-manual");
-                    var field = existing || el("input", "mb-manual");
-                    if (!existing) {
-                        field.type = "text";
-                        field.readOnly = true;
-                        field.setAttribute("aria-label", "Repository URL for " + mod.title);
-                        holder.append(field);
-                    }
-                    field.value = mod.repository;
-                    field.focus();
-                    field.select();
-                    feedback.textContent = "Copy the selected URL (Ctrl+C or long-press).";
-                };
-                if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(mod.repository).then(done, manual);
-                else manual();
-            });
-            return [button, feedback];
-        }
-
         function card(mod) {
             var index = mods.indexOf(mod);
             var titleId = "mb-title-" + index;
-            var detailId = "mb-details-" + index;
             var li = el("li", "mb-item");
             var article = el("article", "mb-card" + (mod.ready ? "" : " mb-card-pending"));
             article.setAttribute("aria-labelledby", titleId);
@@ -442,29 +237,14 @@
             if (mod.release) meta.push(mod.release.tag);
             body.append(el("p", "mb-meta", meta.filter(Boolean).join(" · ")));
             if (mod.summary) body.append(el("p", "mb-summary", mod.summary));
-            if (!mod.ready && mod.reason) body.append(el("p", "mb-reason", mod.reason));
+            if (!mod.ready) body.append(el("p", "mb-reason", mod.reason || "Its latest release could not be checked."));
 
+            // The card's only action: the repository URL already validated against REPOSITORY in prepare().
             var actions = el("div", "mb-actions");
-            var toggle = el("button", "mb-button mb-primary");
-            toggle.type = "button";
-            toggle.setAttribute("aria-controls", detailId);
-            var label = mod.ready ? "Install steps" : "Details";
-            var setLabel = function (open) {
-                toggle.setAttribute("aria-expanded", String(open));
-                toggle.textContent = open ? "Hide " + label.toLowerCase() : label;
-            };
-            var panel = details(mod, detailId);
-            setLabel(!panel.hidden);
-            toggle.addEventListener("click", function () {
-                var open = panel.hidden;
-                panel.hidden = !open;
-                if (open) expanded.add(mod.repository);
-                else expanded.delete(mod.repository);
-                setLabel(open);
-            });
-            var copy = copyButton(mod, actions);
-            actions.append(toggle, copy[0]);
-            body.append(actions, copy[1], panel);
+            var github = externalLink(mod.repository, "View on GitHub");
+            github.setAttribute("aria-label", "View on GitHub: " + mod.title + " (opens in a new tab)");
+            actions.append(github);
+            body.append(actions);
 
             article.append(art, body);
             li.append(article);
