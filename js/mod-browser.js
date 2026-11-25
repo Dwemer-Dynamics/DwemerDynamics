@@ -127,7 +127,7 @@
                 grid.removeAttribute("aria-busy");
                 status.textContent = "";
                 showMessage("The mod list couldn't load",
-                    "Check your connection and try again. The launcher's Browse mods list works on its own.",
+                    "Check your connection and try again, or browse mods in the launcher.",
                     "Try again", load, true);
             } finally {
                 if (timeout) window.clearTimeout(timeout);
@@ -147,16 +147,15 @@
             var attempted = date(refresh.attempted_at);
             var text = "";
             if (refresh.status === "failed") {
-                text = generated
-                    ? "GitHub couldn't be checked when this site was last updated" + (attempted ? " (" + stampFormat.format(attempted) + ")" : "") +
-                      ", so this is the list from " + stampFormat.format(generated) + ". The launcher shows the current list."
-                    : "GitHub couldn't be checked when this site was last updated, so no list is available here yet. The launcher shows the current list.";
+                text = (generated
+                    ? "Couldn't refresh" + (attempted ? " on " + stampFormat.format(attempted) : "") +
+                      ". Showing the list from " + stampFormat.format(generated) + "."
+                    : "Couldn't load the list here yet.") + " Check the launcher for newer listings.";
             } else if (generated && Date.now() - generated.getTime() > STALE_HOURS * 3600 * 1000) {
-                text = "This list was last refreshed " + stampFormat.format(generated) +
-                    ". Newer mods or releases may be missing; the launcher shows the current list.";
+                text = "Last refreshed " + stampFormat.format(generated) + ". Check the launcher for newer listings.";
             }
             if (catalog.source && catalog.source.truncated === true) {
-                text = (text ? text + " " : "") + "Only the first " + mods.length + " repositories are shown.";
+                text = (text ? text + " " : "") + "Showing the first " + mods.length + " mods.";
             }
             notice.textContent = text;
             notice.hidden = !text;
@@ -245,17 +244,17 @@
                 showMessage(null);
             } else if (!mods.length) {
                 showMessage("No mods are listed yet",
-                    "When authors publish KAGRENAC mods with the kagrenac-mod topic, they appear here. Building your own? See Publishing below.");
+                    "Published mods will appear here.");
             } else if (base.length && f.show === "ready") {
                 showMessage(base.length === 1 ? "This mod isn't ready to install yet" : "None of these mods are ready to install yet",
-                    "Listed mods without an installable stable release are hidden. Show them to see what each one still needs.",
+                    "Show all listed mods to see what each one still needs.",
                     "Show all listed", function () {
                         document.getElementById("mb-show-all").checked = true;
                         update();
                         document.getElementById("mb-show-all").focus();
                     });
             } else {
-                showMessage("No mods match your filters", "Try another mod, game or author name.", "Clear filters", function () { clearFilters(true); });
+                showMessage("No mods match your filters", "Try another name or game.", "Clear filters", function () { clearFilters(true); });
             }
         }
 
@@ -349,21 +348,20 @@
                 var needs = [["Game", mod.game], ["Tested with", mod.version], ["You need", mod.loader]].filter(function (row) { return row[1]; });
                 panel.append(el("h3", "mb-subhead", "Requirements"));
                 var list = el("dl", "mb-reqs");
-                [["Launcher", "DwemerDistro launcher with an up-to-date distro"]].concat(needs).forEach(function (row) {
+                [["Launcher", "DwemerDistro"]].concat(needs).forEach(function (row) {
                     var item = el("div");
                     item.append(el("dt", "", row[0]), el("dd", "", row[1]));
                     list.append(item);
                 });
                 panel.append(list);
 
-                panel.append(el("h3", "mb-subhead", "Install with DwemerDistro"));
+                panel.append(el("h3", "mb-subhead", "Install"));
                 var steps = el("ol", "mb-steps");
                 steps.append(
-                    step(["Run ", el("b", "", "Update Distro"), " in the DwemerDistro launcher."]),
-                    step(["Open ", el("b", "", "Mods > Custom mods > Browse mods"), " and choose the ", el("b", "", mod.title),
-                        " card. To find it, search for ", el("code", "", launcherSearch(mod)), "."]),
-                    step(["Press ", el("b", "", "Install server"), ". This installs the mod's server in your DwemerDistro."]),
-                    step(["Press ", el("b", "", "Download mod release"), ", then add the download to your game the way the author describes."])
+                    step(["In DwemerDistro, run ", el("b", "", "Update Distro"), "."]),
+                    step(["Open ", el("b", "", "Mods > Custom mods > Browse mods"), " and search for ", el("code", "", launcherSearch(mod)), "."]),
+                    step(["Press ", el("b", "", "Install server"), "."]),
+                    step(["Press ", el("b", "", "Download mod release"), " and add it to your game as the author describes."])
                 );
                 panel.append(steps);
                 if (mod.enable) {
@@ -378,9 +376,7 @@
                     panel.append(features);
                 }
             } else {
-                panel.append(el("h3", "mb-subhead", "Why it isn't ready"));
-                panel.append(el("p", "", mod.reason || "Its latest release could not be checked."));
-                panel.append(el("p", "mb-muted", "The author needs to publish a stable release the launcher supports. Check the mod's page for news."));
+                if (!mod.reason) panel.append(el("p", "", "Its latest release could not be checked."));
             }
 
             var links = el("p", "mb-links");
@@ -400,7 +396,7 @@
                 var done = function () {
                     window.clearTimeout(reset);
                     button.textContent = "Copied";
-                    feedback.textContent = "Repository URL copied.";
+                    feedback.textContent = "URL copied.";
                     reset = window.setTimeout(function () { button.textContent = "Copy repo URL"; feedback.textContent = ""; }, 2500);
                 };
                 var manual = function () {
@@ -415,7 +411,7 @@
                     field.value = mod.repository;
                     field.focus();
                     field.select();
-                    feedback.textContent = "Copy the selected repository URL (Ctrl+C or long-press).";
+                    feedback.textContent = "Copy the selected URL (Ctrl+C or long-press).";
                 };
                 if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(mod.repository).then(done, manual);
                 else manual();
@@ -444,7 +440,6 @@
 
             var meta = [mod.credit];
             if (mod.release) meta.push(mod.release.tag);
-            if (mod.release && mod.release.published) meta.push(dateFormat.format(mod.release.published));
             body.append(el("p", "mb-meta", meta.filter(Boolean).join(" · ")));
             if (mod.summary) body.append(el("p", "mb-summary", mod.summary));
             if (!mod.ready && mod.reason) body.append(el("p", "mb-reason", mod.reason));
