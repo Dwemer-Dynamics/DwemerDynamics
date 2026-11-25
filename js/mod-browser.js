@@ -32,7 +32,6 @@
         if (!form || !grid || !status) return;
 
         var mods = [];
-        var expanded = new Set();
         var actionHandler = null;
         var timer = null;
         var dateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
@@ -66,11 +65,7 @@
             var release = null;
             if (raw.release && typeof raw.release === "object" && TAG.test(str(raw.release.tag, 80))) {
                 var tag = str(raw.release.tag, 80);
-                release = {
-                    tag: tag,
-                    published: date(raw.release.published_at),
-                    url: repository + "/releases/tag/" + encodeURIComponent(tag)
-                };
+                release = { tag: tag };
             }
             var ready = raw.ready === true && release !== null;
             var gameInfo = raw.game && typeof raw.game === "object" ? raw.game : {};
@@ -89,11 +84,6 @@
                 reason: str(raw.reason, 200),
                 release: release,
                 game: str(gameInfo.name, 200),
-                version: str(gameInfo.version, 300),
-                loader: str(gameInfo.loader, 600),
-                enable: str(gameInfo.enable_in_game, 600),
-                features: Array.isArray(raw.features) ? raw.features.map(function (f) { return str(f, 200); })
-                    .filter(Boolean).slice(0, 8) : [],
                 artwork: Array.from(new Set(artwork))
             };
             mod.haystack = normalize([mod.title, mod.game, mod.credit, mod.owner, mod.repo, mod.summary].join(" "));
@@ -277,7 +267,7 @@
         }
 
         function externalLink(href, label) {
-            var link = el("a", "mb-link", label);
+            var link = el("a", "mb-button mb-primary", label);
             link.href = href;
             link.target = "_blank";
             link.rel = "noopener noreferrer";
@@ -327,102 +317,9 @@
             return frame;
         }
 
-        function launcherSearch(mod) {
-            return mod.repo.replace(/[^A-Za-z0-9 _-]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || mod.title;
-        }
-
-        function step(parts) {
-            var li = el("li");
-            parts.forEach(function (part) {
-                li.append(typeof part === "string" ? document.createTextNode(part) : part);
-            });
-            return li;
-        }
-
-        function details(mod, id) {
-            var panel = el("div", "mb-details");
-            panel.id = id;
-            panel.hidden = !expanded.has(mod.repository);
-
-            if (mod.ready) {
-                var needs = [["Game", mod.game], ["Tested with", mod.version], ["You need", mod.loader]].filter(function (row) { return row[1]; });
-                panel.append(el("h3", "mb-subhead", "Requirements"));
-                var list = el("dl", "mb-reqs");
-                [["Launcher", "DwemerDistro"]].concat(needs).forEach(function (row) {
-                    var item = el("div");
-                    item.append(el("dt", "", row[0]), el("dd", "", row[1]));
-                    list.append(item);
-                });
-                panel.append(list);
-
-                panel.append(el("h3", "mb-subhead", "Install"));
-                var steps = el("ol", "mb-steps");
-                steps.append(
-                    step(["In DwemerDistro, run ", el("b", "", "Update Distro"), "."]),
-                    step(["Open ", el("b", "", "Mods > Custom mods > Browse mods"), " and search for ", el("code", "", launcherSearch(mod)), "."]),
-                    step(["Press ", el("b", "", "Install server"), "."]),
-                    step(["Press ", el("b", "", "Download mod release"), " and add it to your game as the author describes."])
-                );
-                panel.append(steps);
-                if (mod.enable) {
-                    var note = el("div", "mb-note");
-                    note.append(el("p", "mb-note-label", "Author's setup note"), el("p", "", mod.enable));
-                    panel.append(note);
-                }
-                if (mod.features.length) {
-                    panel.append(el("h3", "mb-subhead", "Features"));
-                    var features = el("ul", "mb-features");
-                    mod.features.forEach(function (feature) { features.append(el("li", "", feature)); });
-                    panel.append(features);
-                }
-            } else {
-                if (!mod.reason) panel.append(el("p", "", "Its latest release could not be checked."));
-            }
-
-            var links = el("p", "mb-links");
-            links.append(externalLink(mod.repository, "Mod page"));
-            if (mod.ready && mod.release) links.append(externalLink(mod.release.url, "What's new"));
-            panel.append(links);
-            return panel;
-        }
-
-        function copyButton(mod, holder) {
-            var button = el("button", "mb-button mb-copy", "Copy repo URL");
-            button.type = "button";
-            var feedback = el("p", "mb-copy-status");
-            feedback.setAttribute("role", "status");
-            var reset = null;
-            button.addEventListener("click", function () {
-                var done = function () {
-                    window.clearTimeout(reset);
-                    button.textContent = "Copied";
-                    feedback.textContent = "URL copied.";
-                    reset = window.setTimeout(function () { button.textContent = "Copy repo URL"; feedback.textContent = ""; }, 2500);
-                };
-                var manual = function () {
-                    var existing = holder.querySelector(".mb-manual");
-                    var field = existing || el("input", "mb-manual");
-                    if (!existing) {
-                        field.type = "text";
-                        field.readOnly = true;
-                        field.setAttribute("aria-label", "Repository URL for " + mod.title);
-                        holder.append(field);
-                    }
-                    field.value = mod.repository;
-                    field.focus();
-                    field.select();
-                    feedback.textContent = "Copy the selected URL (Ctrl+C or long-press).";
-                };
-                if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(mod.repository).then(done, manual);
-                else manual();
-            });
-            return [button, feedback];
-        }
-
         function card(mod) {
             var index = mods.indexOf(mod);
             var titleId = "mb-title-" + index;
-            var detailId = "mb-details-" + index;
             var li = el("li", "mb-item");
             var article = el("article", "mb-card" + (mod.ready ? "" : " mb-card-pending"));
             article.setAttribute("aria-labelledby", titleId);
@@ -442,33 +339,14 @@
             if (mod.release) meta.push(mod.release.tag);
             body.append(el("p", "mb-meta", meta.filter(Boolean).join(" · ")));
             if (mod.summary) body.append(el("p", "mb-summary", mod.summary));
-            if (!mod.ready && mod.reason) body.append(el("p", "mb-reason", mod.reason));
+            if (!mod.ready) body.append(el("p", "mb-reason", mod.reason || "Its latest release could not be checked."));
 
+            // The card's only action: the repository URL already validated against REPOSITORY in prepare().
             var actions = el("div", "mb-actions");
-            var toggle = el("button", "mb-button mb-primary");
-            toggle.type = "button";
-            toggle.setAttribute("aria-controls", detailId);
-            var label = mod.ready ? "Install steps" : "Details";
-            var setLabel = function (open) {
-                toggle.setAttribute("aria-expanded", String(open));
-                toggle.textContent = open ? "Hide " + label.toLowerCase() : label;
-            };
-            var panel = details(mod, detailId);
-            setLabel(!panel.hidden);
-            toggle.addEventListener("click", function () {
-                var open = panel.hidden;
-                panel.hidden = !open;
-                if (open) expanded.add(mod.repository);
-                else expanded.delete(mod.repository);
-                setLabel(open);
-            });
-            // Same validated repository URL as the copy button; externalLink keeps target/rel safe.
-            var github = externalLink(mod.repository, "GitHub");
-            github.className = "mb-button mb-github";
-            github.setAttribute("aria-label", mod.title + " on GitHub (opens in a new tab)");
-            var copy = copyButton(mod, actions);
-            actions.append(toggle, github, copy[0]);
-            body.append(actions, copy[1], panel);
+            var github = externalLink(mod.repository, "View on GitHub");
+            github.setAttribute("aria-label", "View on GitHub: " + mod.title + " (opens in a new tab)");
+            actions.append(github);
+            body.append(actions);
 
             article.append(art, body);
             li.append(article);
